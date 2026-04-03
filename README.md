@@ -80,10 +80,14 @@ The official Cerb documentation is at https://cerb.ai/docs/.
 
 An MCP server is available at `https://api.cerb.cloud/docs/mcp` for searching and fetching docs from Claude Desktop or Claude Code.
 
-A public search API is also available (no auth required):
+A public docs API is also available (no auth required):
 
-```
+```bash
+# Semantic search
 curl --silent -X POST "https://api.cerb.cloud/docs/search" \
   -H "Content-Type: application/json" \
   -d '{"query":"your search query here"}'
+
+# Fetch pages as LLM-friendly Markdown (comma-separated doc IDs from search results)
+curl --silent "https://api.cerb.cloud/docs/fetch/index,pricing"
 ```

@@ -68,12 +68,16 @@ Search and fetch Cerb docs using one of these methods (in order of preference):
 
 1. **MCP tools** (`mcp__claude_ai_Cerb__search_documents`, `mcp__claude_ai_Cerb__fetch_documents`): Use when available. Users can add the MCP server URL `https://api.cerb.cloud/docs/mcp` in Claude Desktop or Claude Code settings.
 
-2. **Docs search API** (no auth required, fallback when MCP is unavailable):
-   ```
+2. **Docs API** (no auth required, fallback when MCP is unavailable):
+   ```bash
+   # Semantic search
    curl --silent -X POST "https://api.cerb.cloud/docs/search" -H "Content-Type: application/json" -d '{"query":"your search query here"}'
+
+   # Fetch pages as LLM-friendly Markdown (comma-separated doc IDs from search results)
+   curl --silent "https://api.cerb.cloud/docs/fetch/index,pricing"
    ```
 
-3. **WebFetch**: Fetch individual pages directly (e.g. `https://cerb.ai/docs/records/types/draft`).
+3. **WebFetch**: Fetch individual HTML pages directly (e.g. `https://cerb.ai/docs/records/types/draft`).
 
 Use these when the local reference files don't cover a topic or you need to verify current behavior.
 
