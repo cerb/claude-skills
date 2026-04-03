@@ -2,6 +2,45 @@
 
 Claude Code skills for working with [Cerb](https://cerb.ai/), the automation and workflow platform for teams.
 
+## Installation
+
+Skills are installed by placing them in the `.claude/skills/` directory of your project.
+
+### Claude Code (CLI / Web)
+
+From your project root:
+
+```bash
+# Clone into your project's skills directory
+git clone https://github.com/cerb/claude-skills.git .claude/skills
+
+# Or, if .claude/skills/ already exists, clone and copy the skill directories
+git clone https://github.com/cerb/claude-skills.git /tmp/cerb-skills
+cp -r /tmp/cerb-skills/cerb-automations .claude/skills/cerb-automations
+```
+
+Restart Claude Code or start a new session. The skills will be automatically discovered.
+
+Verify the skill is available by typing `/cerb-automations` or checking:
+
+```bash
+ls .claude/skills/cerb-automations/SKILL.md
+```
+
+### Claude Desktop
+
+1. Click **Customize** in the left sidebar.
+2. Select **Skills** from the menu.
+3. Click the **+** button.
+4. Upload the skill as a ZIP file (download from [releases](https://github.com/cerb/claude-skills/releases) or create from the repository).
+
+### Optional: Cerb Docs MCP Server
+
+For live access to Cerb documentation, add the MCP server in your Claude Code or Claude Desktop settings:
+
+- **URL:** `https://api.cerb.cloud/docs/mcp`
+- No authentication required
+
 ## Skills
 
 ### cerb-automations
