@@ -96,3 +96,4 @@ Use these when the local reference files don't cover a topic or you need to veri
 - `references/guide-record-dictionaries.md` -- record dictionaries, key expansion, event placeholders vs command output, profile URLs, record type checking
 - `references/guide-drafts.md` -- creating draft records to send email (transactional, compose, reply, forward)
 - `references/guide-record-changed.md` -- record.changed event automations (filtering, detecting field changes, complete workflow example)
+- `references/guide-custom-fields.md` -- setting and reading custom field values in automations

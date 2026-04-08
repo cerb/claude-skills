@@ -518,7 +518,7 @@ start:
 | Input | Required | Description |
 |-|-|-|
 | `record_type:` | Yes | Record type to create |
-| `fields:` | Yes | Fields to set (varies by record type) |
+| `fields:` | Yes | Fields to set (varies by record type). For custom fields, use the field URI directly as the key (no prefix). See `guide-custom-fields.md`. |
 | `expand:` | No | Keys to expand in output dictionary |
 | `disable_events@bool:` | No | Skip triggering events (useful for imports) |
 
@@ -599,7 +599,7 @@ start:
 |-|-|-|
 | `record_type:` | Yes | Record type |
 | `record_id:` | Yes | Record ID |
-| `fields:` | Yes | Fields to update |
+| `fields:` | Yes | Fields to update. For custom fields, use the field URI directly as the key (no prefix). See `guide-custom-fields.md`. |
 | `disable_events@bool:` | No | Skip triggering events |
 
 Output: Updated record dictionary. Handlers: `on_simulate:`, `on_success:`, `on_error:`.
@@ -624,7 +624,7 @@ start:
 | `record_type:` | Yes | Record type |
 | `record_query:` | Yes | Search query for matching  |
 | `record_query_params:` | No | Sanitized query parameters |
-| `fields:` | Yes | Fields to set |
+| `fields:` | Yes | Fields to set. For custom fields, use the field URI directly as the key (no prefix). See `guide-custom-fields.md`. |
 | `disable_events@bool:` | No | Skip triggering events |
 
 Output: Record dictionary. Handlers: `on_simulate:`, `on_success:`, `on_error:`.
