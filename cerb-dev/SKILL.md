@@ -171,13 +171,21 @@ Common locations:
 
 ## Creating a New Record Type
 
-1. Add table schema in a migration patch (`patches/11.x/11.2.0.php`)
-2. Generate boilerplate with SDK: `php install/extras/sdk/devblocks-dao.php`
-3. Create DAO class with standard methods in `api/dao/`
-4. Create Context class implementing `IDevblocksContextProfile`, `IDevblocksContextPeek`
-5. Register in `plugin.xml` under `devblocks.context`
-6. Create templates for view and peek_edit
-7. Add profile section class if a profile page is needed
+See `references/new-record-type.md` for the complete step-by-step guide.
+
+Quick summary:
+1. Add `CREATE TABLE` migration in `patches/11.x/11.2.0.php`
+2. Run the generator — writes PHP + template files directly, prints only XML snippets:
+   ```bash
+   python3 .claude/skills/cerb-dev/tools/gen-dao.py \
+       --plugin-id cerberusweb.core \
+       --table my_record \
+       --fields "id bigint unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL DEFAULT '', created_at int unsigned NOT NULL DEFAULT 0, updated_at int unsigned NOT NULL DEFAULT 0" \
+       --output-dir features/cerberusweb.core
+   ```
+3. Insert the printed `plugin.xml` snippets (class loader + two extensions)
+4. Insert the printed `strings.xml` i18n entries
+5. Customize `// [TODO]` sections in the generated PHP for non-standard fields
 
 ## Form Handling Pattern
 
@@ -324,3 +332,8 @@ Use these when the local reference files don't cover a topic or you need to veri
 ## Reference Files
 
 - `references/plugin-xml.md` — plugin.xml manifest structure, extension points, class loaders
+- `references/new-record-type.md` — complete guide for creating a new record type (files, migration, plugin.xml, strings.xml, customization checklist)
+
+## Tools
+
+- `tools/gen-dao.py` — Python generator that produces all boilerplate for a new record type from a table name + field list
