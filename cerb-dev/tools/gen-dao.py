@@ -22,6 +22,17 @@ from textwrap import dedent
 
 _INT_TYPES = {'bigint', 'int', 'mediumint', 'smallint', 'tinyint'}
 
+_COMMON_TRANSLATIONS = {
+    'context':      'common.record.type',
+    'created_at':   'common.created',
+    'description':  'common.description',
+    'extension_id': 'common.extension',
+    'id':           'common.id',
+    'name':         'common.name',
+    'record_type':  'common.record.type',
+    'updated_at':   'common.updated',
+}
+
 
 def is_int_field(sql_type: str) -> bool:
     return sql_type.lower().split('(')[0] in _INT_TYPES
@@ -367,7 +378,7 @@ def gen_search_fields(table: str, fields: dict) -> str:
     )
 
     search_field_entries = '\n'.join(
-        f"\t\t\tself::{f.upper()} => new DevblocksSearchField(self::{f.upper()}, '{table}', '{f}', $translate->_('{translate_key}.{f}'), null, true),"
+        f"\t\t\tself::{f.upper()} => new DevblocksSearchField(self::{f.upper()}, '{table}', '{f}', $translate->_('{_COMMON_TRANSLATIONS.get(f, f'{translate_key}.{f}')}'), null, true),"
         for f in fields
     )
 
