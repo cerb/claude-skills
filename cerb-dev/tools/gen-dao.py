@@ -225,7 +225,7 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     \t * @return Model_{cls}[]
     \t */
     \tstatic function getAll($nocache=false) {{
-    \t\t$objects = self::getWhere(null, DAO_{cls}::NAME, true, null, DevblocksORMHelper::OPT_GET_MASTER_ONLY);
+    \t\t$objects = self::getWhere(null, self::NAME, true, null, DevblocksORMHelper::OPT_GET_MASTER_ONLY);
     \t\treturn $objects;
     \t}}
 
@@ -415,7 +415,7 @@ def gen_search_fields(table: str, fields: dict) -> str:
 
     \tstatic function getLabelsForKeyValues($key, $values) {{
     \t\tswitch($key) {{
-    \t\t\tcase SearchFields_{cls}::ID:
+    \t\t\tcase self::ID:
     \t\t\t\t$models = DAO_{cls}::getIds($values);
     \t\t\t\treturn array_column(DevblocksPlatform::objectsToArrays($models), 'name', 'id');
     \t\t}}
