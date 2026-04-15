@@ -133,6 +133,15 @@ Read workflow config at runtime from automations, snippets, etc:
 {{cerb_workflow_config('workflow_name','hashSecret','default')}}
 ```
 
+Runtime config uses the original key names from the config definition. For a `chooser/llmAccount`, the value is accessed as `config.llmAccount` (the stored record ID), not `config.llmAccount_id`. The `_id` and `__label` suffixes are only available at template-time.
+
+A common pattern in `interaction.worker` automations is to load config once at the start:
+```
+set/config:
+  config@json: {{cerb_workflow_config('my.workflow')|json_encode}}
+```
+Then reference values as `{{config.keyName}}` throughout the automation.
+
 Look up workflow resources and their local record IDs:
 ```
 {{cerb_workflow_resources('workflow_name')}}
