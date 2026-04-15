@@ -14,6 +14,7 @@ Output files are printed to stdout as a manifest with file paths and content.
 """
 
 import argparse
+from collections import defaultdict
 import json
 import re
 import sys
@@ -36,6 +37,15 @@ _COMMON_TRANSLATIONS = {
 
 def is_int_field(sql_type: str) -> bool:
     return sql_type.lower().split('(')[0] in _INT_TYPES
+
+
+def criteria_type(fname: str, sql_type: str) -> str:
+    """Return 'date', 'number', or 'string' for use in doSetCriteria() cases."""
+    if fname.endswith('_at'):
+        return 'date'
+    if is_int_field(sql_type):
+        return 'number'
+    return 'string'
 
 
 def validation_chain(fname: str, sql_type: str) -> str:
@@ -495,9 +505,25 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
         f"\t\t\tSearchFields_{cls}::{f.upper()}," for f in fields
     )
 
-    set_criteria_cases = '\n'.join(
-        f"\t\t\tcase SearchFields_{cls}::{f.upper()}:" for f in fields
-    )
+    # Group fields by criteria type for doSetCriteria()
+    _by_ctype = defaultdict(list)
+    for f, t in fields.items():
+        _by_ctype[criteria_type(f, t)].append(f)
+
+    _criteria_blocks = []
+    for ctype in ('date', 'number', 'string'):
+        fnames = _by_ctype.get(ctype, [])
+        if not fnames:
+            continue
+        cases = '\n'.join(f"\t\t\tcase SearchFields_{cls}::{f.upper()}:" for f in fnames)
+        if ctype == 'date':
+            body = "\t\t\t\t$criteria = $this->_doSetCriteriaDate($field, $oper);"
+        elif ctype == 'number':
+            body = "\t\t\t\t$criteria = new DevblocksSearchCriteria($field,$oper,$value);"
+        else:
+            body = "\t\t\t\t$criteria = $this->_doSetCriteriaString($field, $oper, $value);"
+        _criteria_blocks.append(f"{cases}\n{body}\n\t\t\t\tbreak;")
+    do_set_criteria_cases = "\n\n".join(_criteria_blocks)
 
     created_qs = (
         f"\t\t\t'created' => [\n"
@@ -706,23 +732,7 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
     \t\t$criteria = null;
 
     \t\tswitch($field) {{
-    {set_criteria_cases}
-    \t\t\tcase 'placeholder_string':
-    \t\t\t\t$criteria = $this->_doSetCriteriaString($field, $oper, $value);
-    \t\t\t\tbreak;
-
-    \t\t\tcase 'placeholder_number':
-    \t\t\t\t$criteria = new DevblocksSearchCriteria($field,$oper,$value);
-    \t\t\t\tbreak;
-
-    \t\t\tcase 'placeholder_date':
-    \t\t\t\t$criteria = $this->_doSetCriteriaDate($field, $oper);
-    \t\t\t\tbreak;
-
-    \t\t\tcase 'placeholder_bool':
-    \t\t\t\t$bool = DevblocksPlatform::importGPC($_POST['bool'] ?? null, 'integer', 1);
-    \t\t\t\t$criteria = new DevblocksSearchCriteria($field,$oper,$bool);
-    \t\t\t\tbreak;
+    {do_set_criteria_cases}
 
     \t\t\tdefault:
     \t\t\t\tif(str_starts_with($field, 'cf_')) {{
