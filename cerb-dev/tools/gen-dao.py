@@ -60,6 +60,8 @@ def parse_fields_from_sql(sql: str) -> dict:
 def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     cls = to_class_name(table)
     fp = field_prefix(table)
+    has_created_at = 'created_at' in fields
+    has_updated_at = 'updated_at' in fields
 
     field_consts = '\n'.join(
         f"\tconst {f.upper()} = '{f}';" for f in fields
@@ -77,6 +79,22 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
 
     object_from_result = '\n'.join(
         f"\t\t\t$object->{f} = $row['{f}'];" for f in fields
+    )
+
+    _ts_validations = []
+    if has_updated_at:
+        _ts_validations.append("\t\t$validation\n\t\t\t->addField(self::UPDATED_AT)\n\t\t\t->timestamp()\n\t\t\t;")
+    if has_created_at:
+        _ts_validations.append("\t\t$validation\n\t\t\t->addField(self::CREATED_AT)\n\t\t\t->timestamp()\n\t\t\t;")
+    timestamp_validations = "\n".join(_ts_validations)
+
+    created_at_create_set = (
+        "\t\tif(!isset($fields[self::CREATED_AT]))\n\t\t\t$fields[self::CREATED_AT] = time();"
+        if has_created_at else ""
+    )
+    updated_at_update_set = (
+        "\t\tif(!isset($fields[self::UPDATED_AT]))\n\t\t\t$fields[self::UPDATED_AT] = time();"
+        if has_updated_at else ""
     )
 
     return dedent(f"""\
@@ -98,10 +116,7 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     \t\t\t->string()
     \t\t\t->setRequired(true)
     \t\t\t;
-    \t\t$validation
-    \t\t\t->addField(self::UPDATED_AT)
-    \t\t\t->timestamp()
-    \t\t\t;
+    {timestamp_validations}
     \t\t$validation
     \t\t\t->addField('_fieldsets')
     \t\t\t->string()
@@ -123,6 +138,8 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     \t\t$db->ExecuteMaster($sql);
     \t\t$id = $db->LastInsertId();
 
+    {created_at_create_set}
+
     \t\tCerberusContexts::checkpointCreations(Context_{cls}::ID, $id);
 
     \t\tself::update($id, $fields);
@@ -134,8 +151,7 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     \t\tif(!is_array($ids))
     \t\t\t$ids = [$ids];
 
-    \t\tif(!isset($fields[self::UPDATED_AT]))
-    \t\t\t$fields[self::UPDATED_AT] = time();
+    {updated_at_update_set}
 
     \t\t$context = Context_{cls}::ID;
     \t\tself::_updateAbstract($context, $ids, $fields);
@@ -334,6 +350,8 @@ def gen_search_fields(table: str, fields: dict) -> str:
     cls = to_class_name(table)
     fp = field_prefix(table)
     translate_key = table
+    has_created_at = 'created_at' in fields
+    has_updated_at = 'updated_at' in fields
 
     field_consts = '\n'.join(
         f"\tconst {f.upper()} = '{fp}_{f}';" for f in fields
@@ -343,6 +361,21 @@ def gen_search_fields(table: str, fields: dict) -> str:
         f"\t\t\tself::{f.upper()} => new DevblocksSearchField(self::{f.upper()}, '{table}', '{f}', $translate->_('{translate_key}.{f}'), null, true),"
         for f in fields
     )
+
+    _key_methods = []
+    if has_updated_at:
+        _key_methods.append(
+            f"\tstatic function getUpdatedKey() : string {{\n"
+            f"\t\treturn sprintf('%s.%s', self::getTableName(), DAO_{cls}::UPDATED_AT);\n"
+            f"\t}}"
+        )
+    if has_created_at:
+        _key_methods.append(
+            f"\tstatic function getCreatedKey() : string {{\n"
+            f"\t\treturn sprintf('%s.%s', self::getTableName(), DAO_{cls}::CREATED_AT);\n"
+            f"\t}}"
+        )
+    key_methods = "\n\n".join(_key_methods)
 
     return dedent(f"""\
     class SearchFields_{cls} extends DevblocksSearchFields {{
@@ -358,9 +391,7 @@ def gen_search_fields(table: str, fields: dict) -> str:
     \t\treturn sprintf('%s.%s', self::getTableName(), DAO_{cls}::ID);
     \t}}
 
-    \tstatic function getUpdatedKey() : string {{
-    \t\treturn sprintf('%s.%s', self::getTableName(), DAO_{cls}::UPDATED_AT);
-    \t}}
+    {key_methods}
 
     \tstatic function getCustomFieldContextKeys() {{
     \t\treturn [
@@ -437,6 +468,8 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
     obj = to_object_name(table)
     fp = field_prefix(table)
     ctx = ctx_ext_id(table)
+    has_created_at = 'created_at' in fields
+    has_updated_at = 'updated_at' in fields
 
     view_columns = '\n'.join(
         f"\t\t\tSearchFields_{cls}::{f.upper()}," for f in fields
@@ -445,6 +478,23 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
     set_criteria_cases = '\n'.join(
         f"\t\t\tcase SearchFields_{cls}::{f.upper()}:" for f in fields
     )
+
+    _date_qs = []
+    if has_created_at:
+        _date_qs.append(
+            f"\t\t\t'created' => [\n"
+            f"\t\t\t\t'type' => DevblocksSearchCriteria::TYPE_DATE,\n"
+            f"\t\t\t\t'options' => ['param_key' => SearchFields_{cls}::CREATED_AT],\n"
+            f"\t\t\t],"
+        )
+    if has_updated_at:
+        _date_qs.append(
+            f"\t\t\t'updated' => [\n"
+            f"\t\t\t\t'type' => DevblocksSearchCriteria::TYPE_DATE,\n"
+            f"\t\t\t\t'options' => ['param_key' => SearchFields_{cls}::UPDATED_AT],\n"
+            f"\t\t\t],"
+        )
+    date_quick_search_fields = "\n".join(_date_qs)
 
     return dedent(f"""\
     class View_{cls} extends C4_AbstractView implements IAbstractView_Subtotals, IAbstractView_QuickSearch {{
@@ -564,10 +614,7 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
     \t\t\t\t'type' => DevblocksSearchCriteria::TYPE_TEXT,
     \t\t\t\t'options' => ['param_key' => SearchFields_{cls}::NAME, 'match' => DevblocksSearchCriteria::OPTION_TEXT_PARTIAL],
     \t\t\t],
-    \t\t\t'updated' => [
-    \t\t\t\t'type' => DevblocksSearchCriteria::TYPE_DATE,
-    \t\t\t\t'options' => ['param_key' => SearchFields_{cls}::UPDATED_AT],
-    \t\t\t],
+    {date_quick_search_fields}
     \t\t\t'watchers' => [
     \t\t\t\t'type' => DevblocksSearchCriteria::TYPE_VIRTUAL,
     \t\t\t\t'options' => ['param_key' => DevblocksSearchField::VIRTUAL_WATCHERS],
@@ -682,6 +729,10 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
     obj = to_object_name(table)
     ctx = ctx_ext_id(table)
     var = table  # variable name for model
+    has_created_at = 'created_at' in fields
+    has_updated_at = 'updated_at' in fields
+
+    _standard_fields = {'id', 'name', 'updated_at', 'created_at'}
 
     field_key_map = '\n'.join(
         f"\t\t\t'{f}' => DAO_{cls}::{f.upper()}," for f in fields
@@ -689,18 +740,54 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
 
     token_labels = '\n'.join(
         f"\t\t\t'{f}' => $prefix.$translate->_('{table}.{f}')," for f in fields
-        if f not in ('id', 'name', 'updated_at')
+        if f not in _standard_fields
     )
 
     token_types_extra = '\n'.join(
         f"\t\t\t'{f}' => Model_CustomField::TYPE_SINGLE_LINE," for f in fields
-        if f not in ('id', 'name', 'updated_at')
+        if f not in _standard_fields
     )
 
     token_values_extra = '\n'.join(
         f"\t\t\t$token_values['{f}'] = ${var}->{f};" for f in fields
-        if f not in ('id', 'name', 'updated_at')
+        if f not in _standard_fields
     )
+
+    created_at_meta_field = (
+        f"\t\t\t'created' => ${var}->created_at,"
+        if has_created_at else ""
+    )
+    created_at_token_label = (
+        f"\t\t\t'created_at' => $prefix.$translate->_('common.created'),"
+        if has_created_at else ""
+    )
+    created_at_token_type = (
+        f"\t\t\t'created_at' => Model_CustomField::TYPE_DATE,"
+        if has_created_at else ""
+    )
+    created_at_token_value = (
+        f"\t\t\t$token_values['created_at'] = ${var}->created_at;"
+        if has_created_at else ""
+    )
+    updated_at_token_label = (
+        f"\t\t\t'updated_at' => $prefix.$translate->_('common.updated'),"
+        if has_updated_at else ""
+    )
+    updated_at_token_type = (
+        f"\t\t\t'updated_at' => Model_CustomField::TYPE_DATE,"
+        if has_updated_at else ""
+    )
+    updated_at_token_value = (
+        f"\t\t\t$token_values['updated_at'] = ${var}->updated_at;"
+        if has_updated_at else ""
+    )
+
+    _default_props = []
+    if has_created_at:
+        _default_props.append("\t\t\t'created_at',")
+    if has_updated_at:
+        _default_props.append("\t\t\t'updated_at',")
+    default_properties = "\n".join(_default_props)
 
     return dedent(f"""\
     class Context_{cls} extends Extension_DevblocksContext implements IDevblocksContextProfile, IDevblocksContextPeek {{
@@ -775,12 +862,13 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
     \t\t\t'name' => ${var}->name,
     \t\t\t'permalink' => $url,
     \t\t\t'updated' => ${var}->updated_at,
+    {created_at_meta_field}
     \t\t];
     \t}}
 
     \tfunction getDefaultProperties() : array {{
     \t\treturn [
-    \t\t\t'updated_at',
+    {default_properties}
     \t\t];
     \t}}
 
@@ -805,7 +893,8 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
     \t\t\t'_label' => $prefix,
     \t\t\t'id' => $prefix.$translate->_('common.id'),
     \t\t\t'name' => $prefix.$translate->_('common.name'),
-    \t\t\t'updated_at' => $prefix.$translate->_('common.updated'),
+    {created_at_token_label}
+    {updated_at_token_label}
     \t\t\t'record_url' => $prefix.$translate->_('common.url.record'),
     {token_labels}
     \t\t];
@@ -814,7 +903,8 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
     \t\t\t'_label' => 'context_url',
     \t\t\t'id' => Model_CustomField::TYPE_NUMBER,
     \t\t\t'name' => Model_CustomField::TYPE_SINGLE_LINE,
-    \t\t\t'updated_at' => Model_CustomField::TYPE_DATE,
+    {created_at_token_type}
+    {updated_at_token_type}
     \t\t\t'record_url' => Model_CustomField::TYPE_URL,
     {token_types_extra}
     \t\t];
@@ -835,7 +925,8 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
     \t\t\t$token_values['_label'] = ${var}->name;
     \t\t\t$token_values['id'] = ${var}->id;
     \t\t\t$token_values['name'] = ${var}->name;
-    \t\t\t$token_values['updated_at'] = ${var}->updated_at;
+    {created_at_token_value}
+    {updated_at_token_value}
     {token_values_extra}
     \t\t\t$token_values = $this->_importModelCustomFieldsAsValues(${var}, $token_values);
 
@@ -1147,7 +1238,7 @@ def gen_view_tpl(table: str, plugin_id: str) -> str:
     \t\t\t\t<a href="{{devblocks_url}}c=profiles&type={table}&id={{$result.{fp}_id}}-{{$result.{fp}_name|devblocks_permalink}}{{/devblocks_url}}" class="subject">{{$result.{fp}_name}}</a>
     \t\t\t\t<button type="button" class="peek cerb-peek-trigger" data-context="{{$view_context}}" data-context-id="{{$result.{fp}_id}}"><span class="glyphicons glyphicons-new-window-alt"></span></button>
     \t\t\t</td>
-    \t\t\t{{elseif in_array($column, ["{fp}_updated_at"])}}
+    \t\t\t{{elseif in_array($column, ["{fp}_created_at", "{fp}_updated_at"])}}
     \t\t\t\t<td>
     \t\t\t\t\t{{if !empty($result.$column)}}
     \t\t\t\t\t\t<abbr title="{{$result.$column|devblocks_date}}">{{$result.$column|devblocks_prettytime}}</abbr>
