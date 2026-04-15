@@ -39,6 +39,33 @@ def is_int_field(sql_type: str) -> bool:
     return sql_type.lower().split('(')[0] in _INT_TYPES
 
 
+def profile_property(fname: str, sql_type: str, table: str) -> str:
+    """Return a $properties['key'] = [...]; block for profileGetFields()."""
+    key = fname[:-3] if fname.endswith('_at') else fname
+
+    if fname == 'id':
+        label = f"DevblocksPlatform::translate('common.id')"
+    elif fname in _COMMON_TRANSLATIONS:
+        label = f"DevblocksPlatform::translateCapitalized('{_COMMON_TRANSLATIONS[fname]}')"
+    else:
+        label = f"mb_ucfirst($translate->_('{table}.{fname}'))"
+
+    if fname.endswith('_at'):
+        ptype = 'Model_CustomField::TYPE_DATE'
+    elif is_int_field(sql_type):
+        ptype = 'Model_CustomField::TYPE_NUMBER'
+    else:
+        ptype = 'Model_CustomField::TYPE_SINGLE_LINE'
+
+    return (
+        f"\t\t$properties['{key}'] = [\n"
+        f"\t\t\t'label' => {label},\n"
+        f"\t\t\t'type' => {ptype},\n"
+        f"\t\t\t'value' => $model->{fname},\n"
+        f"\t\t];"
+    )
+
+
 def criteria_type(fname: str, sql_type: str) -> str:
     """Return 'date', 'number', or 'string' for use in doSetCriteria() cases."""
     if fname.endswith('_at'):
@@ -818,6 +845,12 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
         _default_props.append("\t\t\t'updated_at',")
     default_properties = "\n".join(_default_props)
 
+    profile_properties = "\n\n".join(
+        profile_property(f, t, table)
+        for f, t in fields.items()
+        if f != 'name'  # name stays hardcoded as TYPE_LINK
+    )
+
     return dedent(f"""\
     class Context_{cls} extends Extension_DevblocksContext implements IDevblocksContextProfile, IDevblocksContextPeek {{
     \tconst ID = '{ctx}';
@@ -861,17 +894,7 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
     \t\t\t'params' => ['context' => self::ID],
     \t\t];
 
-    \t\t$properties['updated'] = [
-    \t\t\t'label' => DevblocksPlatform::translateCapitalized('common.updated'),
-    \t\t\t'type' => Model_CustomField::TYPE_DATE,
-    \t\t\t'value' => $model->updated_at,
-    \t\t];
-
-    \t\t$properties['id'] = [
-    \t\t\t'label' => DevblocksPlatform::translate('common.id'),
-    \t\t\t'type' => Model_CustomField::TYPE_NUMBER,
-    \t\t\t'value' => $model->id,
-    \t\t];
+    {profile_properties}
 
     \t\treturn $properties;
     \t}}
