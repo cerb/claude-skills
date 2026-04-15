@@ -1423,6 +1423,7 @@ def gen_strings_xml(table: str, fields: dict) -> str:
     entries = '\n'.join(
         f"<tu tuid='dao.{table}.{f}'>\n\t<tuv xml:lang=\"en_US\">\n\t\t<seg>{' '.join(w.capitalize() for w in f.split('_'))}</seg>\n\t</tuv>\n</tu>"
         for f in fields
+        if f not in _COMMON_TRANSLATIONS
     )
     return f"<!-- {cls} -->\n\n{entries}\n"
 
