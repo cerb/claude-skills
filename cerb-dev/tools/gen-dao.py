@@ -1530,7 +1530,7 @@ def main():
 
     # Collect all generated files as (rel_path, content) pairs.
     # The DAO file gets all five PHP classes concatenated.
-    php_classes = '\n'.join([
+    php_classes = '<?php\n' + '\n'.join([
         gen_dao(table, fields, plugin_id),
         gen_search_fields(table, fields),
         gen_model(table, fields),
