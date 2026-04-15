@@ -780,7 +780,7 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
     """)
 
 
-def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -> str:
+def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core', acl_write: str = 'all') -> str:
     cls = to_class_name(table)
     obj = to_object_name(table)
     ctx = ctx_ext_id(table)
@@ -851,6 +851,13 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
         if f != 'name'  # name stays hardcoded as TYPE_LINK
     )
 
+    if acl_write == 'admin':
+        is_writeable_body = "\t\treturn self::_isWriteableOnlyByAdmin($models, $actor);"
+        is_writeable_sig  = "static function isWriteableByActor($models, $actor) : bool {"
+    else:
+        is_writeable_body = "\t\treturn CerberusContexts::allowEverything($models);"
+        is_writeable_sig  = "static function isWriteableByActor($models, $actor) {"
+
     return dedent(f"""\
     class Context_{cls} extends Extension_DevblocksContext implements IDevblocksContextProfile, IDevblocksContextPeek {{
     \tconst ID = '{ctx}';
@@ -860,8 +867,8 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core') -
     \t\treturn CerberusContexts::allowEverything($models);
     \t}}
 
-    \tstatic function isWriteableByActor($models, $actor) {{
-    \t\treturn CerberusContexts::allowEverything($models);
+    \t{is_writeable_sig}
+    {is_writeable_body}
     \t}}
 
     \tstatic function isDeletableByActor($models, $actor) {{
@@ -1474,6 +1481,8 @@ def main():
                         help='Comma-separated SQL field definitions')
     parser.add_argument('--dao-file', default=None, help='Path to DAO file relative to plugin root (default: api/dao/{table}.php)')
     parser.add_argument('--profile-file', default=None, help='Path to profile file relative to plugin root (default: api/profiles/{table}.php)')
+    parser.add_argument('--acl-write', default='all', choices=['all', 'admin'],
+                        help='Who can write this record type: all (default) or admin')
     parser.add_argument('--output-dir', default=None,
                         help='Plugin root directory to write files into (e.g. features/cerberusweb.core). '
                              'When set, files are written directly and only a manifest is printed. '
@@ -1506,6 +1515,7 @@ def main():
     dao_file = args.dao_file or f'api/dao/{table}.php'
     profile_file = args.profile_file or f'api/profiles/{table}.php'
     output_dir = args.output_dir
+    acl_write = args.acl_write
 
     if fields is None:
         fields = parse_fields_from_sql(args.fields)
@@ -1521,7 +1531,7 @@ def main():
         gen_search_fields(table, fields),
         gen_model(table, fields),
         gen_view(table, fields, plugin_id),
-        gen_context(table, fields, plugin_id),
+        gen_context(table, fields, plugin_id, acl_write=acl_write),
     ])
 
     generated = [
