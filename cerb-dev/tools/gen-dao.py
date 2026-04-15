@@ -1457,6 +1457,8 @@ def main():
     if fields is None:
         fields = parse_fields_from_sql(args.fields)
 
+    fields = dict(sorted(fields.items()))
+
     cls = to_class_name(table)
 
     # Collect all generated files as (rel_path, content) pairs.
