@@ -20,6 +20,13 @@ import sys
 from textwrap import dedent
 
 
+_INT_TYPES = {'bigint', 'int', 'mediumint', 'smallint', 'tinyint'}
+
+
+def is_int_field(sql_type: str) -> bool:
+    return sql_type.lower().split('(')[0] in _INT_TYPES
+
+
 def to_class_name(table_name: str) -> str:
     """knowledge_source -> KnowledgeSource"""
     return ''.join(w.capitalize() for w in table_name.split('_'))
@@ -78,7 +85,8 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     select_sql_str = '\n'.join(select_sql_parts)
 
     object_from_result = '\n'.join(
-        f"\t\t\t$object->{f} = $row['{f}'];" for f in fields
+        f"\t\t\t$object->{f} = intval($row['{f}']);" if is_int_field(t) else f"\t\t\t$object->{f} = $row['{f}'];"
+        for f, t in fields.items()
     )
 
     _ts_validations = []
