@@ -499,22 +499,20 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
         f"\t\t\tcase SearchFields_{cls}::{f.upper()}:" for f in fields
     )
 
-    _date_qs = []
-    if has_created_at:
-        _date_qs.append(
-            f"\t\t\t'created' => [\n"
-            f"\t\t\t\t'type' => DevblocksSearchCriteria::TYPE_DATE,\n"
-            f"\t\t\t\t'options' => ['param_key' => SearchFields_{cls}::CREATED_AT],\n"
-            f"\t\t\t],"
-        )
-    if has_updated_at:
-        _date_qs.append(
-            f"\t\t\t'updated' => [\n"
-            f"\t\t\t\t'type' => DevblocksSearchCriteria::TYPE_DATE,\n"
-            f"\t\t\t\t'options' => ['param_key' => SearchFields_{cls}::UPDATED_AT],\n"
-            f"\t\t\t],"
-        )
-    date_quick_search_fields = "\n".join(_date_qs)
+    created_qs = (
+        f"\t\t\t'created' => [\n"
+        f"\t\t\t\t'type' => DevblocksSearchCriteria::TYPE_DATE,\n"
+        f"\t\t\t\t'options' => ['param_key' => SearchFields_{cls}::CREATED_AT],\n"
+        f"\t\t\t],"
+        if has_created_at else ""
+    )
+    updated_qs = (
+        f"\t\t\t'updated' => [\n"
+        f"\t\t\t\t'type' => DevblocksSearchCriteria::TYPE_DATE,\n"
+        f"\t\t\t\t'options' => ['param_key' => SearchFields_{cls}::UPDATED_AT],\n"
+        f"\t\t\t],"
+        if has_updated_at else ""
+    )
 
     return dedent(f"""\
     class View_{cls} extends C4_AbstractView implements IAbstractView_Subtotals, IAbstractView_QuickSearch {{
@@ -616,6 +614,7 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
     \t\t$search_fields = SearchFields_{cls}::getFields();
 
     \t\t$fields = [
+    {created_qs}
     \t\t\t'fieldset' => [
     \t\t\t\t'type' => DevblocksSearchCriteria::TYPE_VIRTUAL,
     \t\t\t\t'options' => ['param_key' => DevblocksSearchField::VIRTUAL_HAS_FIELDSET],
@@ -634,7 +633,7 @@ def gen_view(table: str, fields: dict, plugin_id: str) -> str:
     \t\t\t\t'type' => DevblocksSearchCriteria::TYPE_TEXT,
     \t\t\t\t'options' => ['param_key' => SearchFields_{cls}::NAME, 'match' => DevblocksSearchCriteria::OPTION_TEXT_PARTIAL],
     \t\t\t],
-    {date_quick_search_fields}
+    {updated_qs}
     \t\t\t'watchers' => [
     \t\t\t\t'type' => DevblocksSearchCriteria::TYPE_VIRTUAL,
     \t\t\t\t'options' => ['param_key' => DevblocksSearchField::VIRTUAL_WATCHERS],
