@@ -181,8 +181,10 @@ Quick summary:
        --plugin-id cerberusweb.core \
        --table my_record \
        --fields "id bigint unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL DEFAULT '', created_at int unsigned NOT NULL DEFAULT 0, updated_at int unsigned NOT NULL DEFAULT 0" \
+       --acl-write all \
        --output-dir features/cerberusweb.core
    ```
+   `--acl-write` accepts `all` (default, anyone) or `admin` (admins only); controls the generated `isWriteableByActor()` implementation.
 3. Insert the printed `plugin.xml` snippets (class loader + two extensions)
 4. Insert the printed `strings.xml` i18n entries
 5. Customize `// [TODO]` sections in the generated PHP for non-standard fields
@@ -336,4 +338,4 @@ Use these when the local reference files don't cover a topic or you need to veri
 
 ## Tools
 
-- `tools/gen-dao.py` — Python generator that produces all boilerplate for a new record type from a table name + field list
+- `tools/gen-dao.py` — Python generator that produces all boilerplate for a new record type from a table name + field list. Key options: `--table`, `--fields` (SQL column definitions), `--plugin-id`, `--acl-write all|admin`, `--output-dir`. Fields are alphabetized automatically; standard fields (`id`, `name`, `created_at`, `updated_at`) get common translation keys.
