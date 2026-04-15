@@ -141,9 +141,12 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     )
 
     select_sql_parts = []
+    last_idx = len(fields) - 1
     for i, f in enumerate(fields):
-        sep = '' if i == len(fields) - 1 else ", "
-        select_sql_parts.append(f'\t\t\t"{table}.{f} as %s{sep}".')
+        if i < last_idx:
+            select_sql_parts.append(f'\t\t\t"{table}.{f} as %s, ".')
+        else:
+            select_sql_parts.append(f'\t\t\t"{table}.{f} as %s",')
     select_sql_str = '\n'.join(select_sql_parts)
 
     object_from_result = '\n'.join(
