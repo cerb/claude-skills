@@ -27,6 +27,19 @@ def is_int_field(sql_type: str) -> bool:
     return sql_type.lower().split('(')[0] in _INT_TYPES
 
 
+def validation_chain(fname: str, sql_type: str) -> str:
+    """Return the ->method()->chain() suffix for a field's $validation block."""
+    if fname == 'id':
+        return "->id()\n\t\t\t->setEditable(false)"
+    if fname == 'name':
+        return "->string()\n\t\t\t->setRequired(true)"
+    if fname.endswith('_at'):
+        return "->timestamp()"
+    if is_int_field(sql_type):
+        return "->uint()"
+    return "->string()"
+
+
 def to_class_name(table_name: str) -> str:
     """knowledge_source -> KnowledgeSource"""
     return ''.join(w.capitalize() for w in table_name.split('_'))
@@ -89,12 +102,10 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
         for f, t in fields.items()
     )
 
-    _ts_validations = []
-    if has_updated_at:
-        _ts_validations.append("\t\t$validation\n\t\t\t->addField(self::UPDATED_AT)\n\t\t\t->timestamp()\n\t\t\t;")
-    if has_created_at:
-        _ts_validations.append("\t\t$validation\n\t\t\t->addField(self::CREATED_AT)\n\t\t\t->timestamp()\n\t\t\t;")
-    timestamp_validations = "\n".join(_ts_validations)
+    field_validations = "\n".join(
+        f"\t\t$validation\n\t\t\t->addField(self::{f.upper()})\n\t\t\t{validation_chain(f, t)}\n\t\t\t;"
+        for f, t in fields.items()
+    )
 
     created_at_create_set = (
         "\t\tif(!isset($fields[self::CREATED_AT]))\n\t\t\t$fields[self::CREATED_AT] = time();"
@@ -114,17 +125,7 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     \tstatic function getFields() {{
     \t\t$validation = DevblocksPlatform::services()->validation();
 
-    \t\t$validation
-    \t\t\t->addField(self::ID)
-    \t\t\t->id()
-    \t\t\t->setEditable(false)
-    \t\t\t;
-    \t\t$validation
-    \t\t\t->addField(self::NAME)
-    \t\t\t->string()
-    \t\t\t->setRequired(true)
-    \t\t\t;
-    {timestamp_validations}
+    {field_validations}
     \t\t$validation
     \t\t\t->addField('_fieldsets')
     \t\t\t->string()
