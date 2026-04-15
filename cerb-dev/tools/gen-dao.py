@@ -31,6 +31,7 @@ _COMMON_TRANSLATIONS = {
     'id':           'common.id',
     'name':         'common.name',
     'record_type':  'common.record.type',
+    'token':        'common.token',
     'updated_at':   'common.updated',
 }
 
