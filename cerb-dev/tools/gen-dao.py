@@ -1435,8 +1435,14 @@ def gen_plugin_xml_profile_section(table: str, plugin_namespace: str, profile_fi
     """)
 
 
-def gen_profile_section(table: str) -> str:
+def gen_profile_section(table: str, acl_write: str = 'all') -> str:
     cls = to_class_name(table)
+
+    superuser_check = (
+        "\n\t\t\tif(!$active_worker->is_superuser)\n"
+        "\t\t\t\tthrow new Exception_DevblocksAjaxValidationError(DevblocksPlatform::translate('error.core.no_acl.admin'));\n"
+        if acl_write == 'admin' else ""
+    )
 
     return dedent(f"""\
     <?php
@@ -1480,7 +1486,7 @@ def gen_profile_section(table: str) -> str:
 
     \t\tDevblocksPlatform::services()->http()->setHeader('Content-Type', 'application/json; charset=utf-8');
 
-    \t\ttry {{
+    \t\ttry {{{superuser_check}
     \t\t\tif(!empty($id) && !empty($do_delete)) {{ // Delete
     \t\t\t\tif(!$active_worker->hasPriv(sprintf("contexts.%s.delete", $context)))
     \t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError(DevblocksPlatform::translate('error.core.no_acl.delete'));
@@ -1697,7 +1703,7 @@ def main():
 
     generated = [
         (dao_file,                                          php_classes),
-        (profile_file,                                      gen_profile_section(table)),
+        (profile_file,                                      gen_profile_section(table, acl_write=acl_write)),
         (f'templates/records/types/{table}/peek_edit.tpl', gen_peek_edit_tpl(table, plugin_id)),
         (f'templates/records/types/{table}/view.tpl',       gen_view_tpl(table, plugin_id, acl_write=acl_write)),
     ]
