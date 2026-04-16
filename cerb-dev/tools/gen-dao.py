@@ -858,9 +858,15 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core', a
     if acl_write == 'admin':
         is_writeable_body = "\t\treturn self::_isWriteableOnlyByAdmin($models, $actor);"
         is_writeable_sig  = "static function isWriteableByActor($models, $actor) : bool {"
+        peek_acl_check = (
+            "\n\t\t\t// ACL\n"
+            "\t\t\tif(!$active_worker->is_superuser)\n"
+            "\t\t\t\tDevblocksPlatform::dieWithHttpError(null, 403);\n"
+        )
     else:
         is_writeable_body = "\t\treturn CerberusContexts::allowEverything($models);"
         is_writeable_sig  = "static function isWriteableByActor($models, $actor) {"
+        peek_acl_check = ""
 
     return dedent(f"""\
     class Context_{cls} extends Extension_DevblocksContext implements IDevblocksContextProfile, IDevblocksContextPeek {{
@@ -1102,7 +1108,7 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core', a
     \t\t\t\tDevblocksPlatform::dieWithHttpError(null, 403);
     \t\t}}
 
-    \t\tif(empty($context_id) || $edit) {{
+    \t\tif(empty($context_id) || $edit) {{{peek_acl_check}
     \t\t\tif($model) {{
     \t\t\t\tif(!CerberusContexts::isWriteableByActor($context, $model, $active_worker))
     \t\t\t\t\tDevblocksPlatform::dieWithHttpError(null, 403);
