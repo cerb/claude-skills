@@ -1214,10 +1214,16 @@ def gen_peek_edit_tpl(table: str, plugin_id: str) -> str:
     """)
 
 
-def gen_view_tpl(table: str, plugin_id: str) -> str:
+def gen_view_tpl(table: str, plugin_id: str, acl_write: str = 'all') -> str:
     cls = to_class_name(table)
     ctx = ctx_ext_id(table)
     fp = field_prefix(table)
+
+    add_button_guard = (
+        '{{if $active_worker->is_superuser}}'
+        if acl_write == 'admin' else
+        '{{if $active_worker->hasPriv("contexts.{{$view_context}}.create")}}'
+    )
 
     return dedent(f"""\
     {{$view_context = '{ctx}'}}
@@ -1232,7 +1238,7 @@ def gen_view_tpl(table: str, plugin_id: str) -> str:
     \t<tr>
     \t\t<td nowrap="nowrap"><span class="title">{{$view->name}}</span></td>
     \t\t<td nowrap="nowrap" align="right" class="title-toolbar">
-    \t\t\t{{if $active_worker->hasPriv("contexts.{{$view_context}}.create")}}<a title="{{'common.add'|devblocks_translate|capitalize}}" class="minimal peek cerb-peek-trigger" data-context="{{$view_context}}" data-context-id="0"><span class="glyphicons glyphicons-circle-plus"></span></a>{{/if}}
+    \t\t\t{add_button_guard}<a title="{{'common.add'|devblocks_translate|capitalize}}" class="minimal peek cerb-peek-trigger" data-context="{{$view_context}}" data-context-id="0"><span class="glyphicons glyphicons-circle-plus"></span></a>{{/if}}
     \t\t\t<a data-cerb-worklist-icon-search title="{{'common.search'|devblocks_translate|capitalize}}" class="minimal"><span class="glyphicons glyphicons-search"></span></a>
     \t\t\t<a data-cerb-worklist-icon-customize title="{{'common.customize'|devblocks_translate|capitalize}}" class="minimal"><span class="glyphicons glyphicons-cogwheel"></span></a>
     \t\t\t<a data-cerb-worklist-icon-subtotals title="{{'common.subtotals'|devblocks_translate|capitalize}}" class="minimal"><span class="glyphicons glyphicons-signal"></span></a>
@@ -1541,7 +1547,7 @@ def main():
     generated = [
         (dao_file,                                          php_classes),
         (f'templates/records/types/{table}/peek_edit.tpl', gen_peek_edit_tpl(table, plugin_id)),
-        (f'templates/records/types/{table}/view.tpl',       gen_view_tpl(table, plugin_id)),
+        (f'templates/records/types/{table}/view.tpl',       gen_view_tpl(table, plugin_id, acl_write=acl_write)),
     ]
 
     # plugin.xml and strings.xml are snippets only — printed as instructions either way
