@@ -126,7 +126,7 @@ def parse_fields_from_sql(sql: str) -> dict:
 # Generators
 # ---------------------------------------------------------------------------
 
-def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
+def gen_dao(table: str, fields: dict, plugin_id: str, acl_write: str = 'all') -> str:
     cls = to_class_name(table)
     fp = field_prefix(table)
     has_created_at = 'created_at' in fields
@@ -167,6 +167,20 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
         "\t\tif(!isset($fields[self::UPDATED_AT]))\n\t\t\t$fields[self::UPDATED_AT] = time();"
         if has_updated_at else ""
     )
+
+    if acl_write == 'admin':
+        on_before_update_body = (
+            "\t\tif(!CerberusContexts::isActorAnAdmin($actor)) {\n"
+            "\t\t\t$error = DevblocksPlatform::translate('error.core.no_acl.admin');\n"
+            "\t\t\treturn false;\n"
+            "\t\t}"
+        )
+    else:
+        on_before_update_body = (
+            f"\t\t$context = Context_{cls}::ID;\n\n"
+            "\t\tif(!self::_onBeforeUpdateByActorCheckContextPrivs($actor, $context, $id, $error))\n"
+            "\t\t\treturn false;"
+        )
 
     return dedent(f"""\
     class DAO_{cls} extends Cerb_ORMHelper {{
@@ -249,10 +263,7 @@ def gen_dao(table: str, fields: dict, plugin_id: str) -> str:
     \t}}
 
     \tstatic public function onBeforeUpdateByActor($actor, &$fields, $id=null, &$error=null) {{
-    \t\t$context = Context_{cls}::ID;
-
-    \t\tif(!self::_onBeforeUpdateByActorCheckContextPrivs($actor, $context, $id, $error))
-    \t\t\treturn false;
+    {on_before_update_body}
 
     \t\treturn true;
     \t}}
@@ -1700,7 +1711,7 @@ def main():
     # Collect all generated files as (rel_path, content) pairs.
     # The DAO file gets all five PHP classes concatenated.
     php_classes = '<?php\n' + '\n'.join([
-        gen_dao(table, fields, plugin_id),
+        gen_dao(table, fields, plugin_id, acl_write=acl_write),
         gen_search_fields(table, fields),
         gen_model(table, fields),
         gen_view(table, fields, plugin_id),
