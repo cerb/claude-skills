@@ -1435,6 +1435,157 @@ def gen_plugin_xml_profile_section(table: str, plugin_namespace: str, profile_fi
     """)
 
 
+def gen_profile_section(table: str) -> str:
+    cls = to_class_name(table)
+
+    return dedent(f"""\
+    <?php
+    class PageSection_Profiles{cls} extends Extension_PageSection {{
+    \tfunction render() {{
+    \t\t$response = DevblocksPlatform::getHttpResponse();
+    \t\t$stack = $response->path;
+    \t\t@array_shift($stack); // profiles
+    \t\t@array_shift($stack); // {table}
+    \t\t@$context_id = intval(array_shift($stack)); // 123
+
+    \t\t$context = Context_{cls}::ID;
+
+    \t\tPage_Profiles::renderProfile($context, $context_id, $stack);
+    \t}}
+
+    \tfunction handleActionForPage(string $action, string $scope=null) {{
+    \t\tif('profileAction' == $scope) {{
+    \t\t\tswitch($action) {{
+    \t\t\t\tcase 'savePeekJson':
+    \t\t\t\t\treturn $this->_profileAction_savePeekJson();
+    \t\t\t\tcase 'viewExplore':
+    \t\t\t\t\treturn $this->_profileAction_viewExplore();
+    \t\t\t}}
+    \t\t}}
+    \t\treturn false;
+    \t}}
+
+    \tprivate function _profileAction_savePeekJson() {{
+    \t\t$view_id = DevblocksPlatform::importGPC($_POST['view_id'] ?? null, 'string', '');
+
+    \t\t$id = DevblocksPlatform::importGPC($_POST['id'] ?? null, 'integer', 0);
+    \t\t$do_delete = DevblocksPlatform::importGPC($_POST['do_delete'] ?? null, 'string', '');
+
+    \t\t$active_worker = CerberusApplication::getActiveWorker();
+
+    \t\t$context = Context_{cls}::ID;
+
+    \t\tif('POST' != DevblocksPlatform::getHttpMethod())
+    \t\t\tDevblocksPlatform::dieWithHttpError(null, 405);
+
+    \t\tDevblocksPlatform::services()->http()->setHeader('Content-Type', 'application/json; charset=utf-8');
+
+    \t\ttry {{
+    \t\t\tif(!empty($id) && !empty($do_delete)) {{ // Delete
+    \t\t\t\tif(!$active_worker->hasPriv(sprintf("contexts.%s.delete", $context)))
+    \t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError(DevblocksPlatform::translate('error.core.no_acl.delete'));
+
+    \t\t\t\tif(!($model = DAO_{cls}::get($id)))
+    \t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError(DevblocksPlatform::translate('error.core.record.not_found'));
+
+    \t\t\t\tif(!Context_{cls}::isDeletableByActor($model, $active_worker))
+    \t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError(DevblocksPlatform::translate('error.core.no_acl.delete'));
+
+    \t\t\t\tCerberusContexts::logActivityRecordDelete($context, $model->id, $model->name);
+
+    \t\t\t\tDAO_{cls}::delete($id);
+
+    \t\t\t\techo json_encode([
+    \t\t\t\t\t'status' => true,
+    \t\t\t\t\t'id' => $id,
+    \t\t\t\t\t'view_id' => $view_id,
+    \t\t\t\t]);
+    \t\t\t\treturn;
+
+    \t\t\t}} else {{
+    \t\t\t\t$name = DevblocksPlatform::importGPC($_POST['name'] ?? null, 'string', '');
+
+    \t\t\t\t$error = null;
+
+    \t\t\t\tif(empty($id)) {{ // New
+    \t\t\t\t\t$fields = [
+    \t\t\t\t\t\tDAO_{cls}::UPDATED_AT => time(),
+    \t\t\t\t\t\tDAO_{cls}::NAME => $name,
+    \t\t\t\t\t];
+
+    \t\t\t\t\tif(!DAO_{cls}::validate($fields, $error))
+    \t\t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError($error);
+
+    \t\t\t\t\tif(!DAO_{cls}::onBeforeUpdateByActor($active_worker, $fields, null, $error))
+    \t\t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError($error);
+
+    \t\t\t\t\t$id = DAO_{cls}::create($fields);
+    \t\t\t\t\tDAO_{cls}::onUpdateByActor($active_worker, $fields, $id);
+
+    \t\t\t\t\tif(!empty($view_id) && !empty($id))
+    \t\t\t\t\t\tC4_AbstractView::setMarqueeContextCreated($view_id, $context, $id);
+
+    \t\t\t\t}} else {{ // Edit
+    \t\t\t\t\t$fields = [
+    \t\t\t\t\t\tDAO_{cls}::UPDATED_AT => time(),
+    \t\t\t\t\t\tDAO_{cls}::NAME => $name,
+    \t\t\t\t\t];
+
+    \t\t\t\t\tif(!DAO_{cls}::validate($fields, $error, $id))
+    \t\t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError($error);
+
+    \t\t\t\t\tif(!DAO_{cls}::onBeforeUpdateByActor($active_worker, $fields, $id, $error))
+    \t\t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError($error);
+
+    \t\t\t\t\tDAO_{cls}::update($id, $fields);
+    \t\t\t\t\tDAO_{cls}::onUpdateByActor($active_worker, $fields, $id);
+    \t\t\t\t}}
+
+    \t\t\t\tif($id) {{
+    \t\t\t\t\t// Custom field saves
+    \t\t\t\t\t$field_ids = DevblocksPlatform::importGPC($_POST['field_ids'] ?? null, 'array', []);
+    \t\t\t\t\tif(!DAO_CustomFieldValue::handleFormPost($context, $id, $field_ids, $error))
+    \t\t\t\t\t\tthrow new Exception_DevblocksAjaxValidationError($error);
+    \t\t\t\t}}
+
+    \t\t\t\techo json_encode([
+    \t\t\t\t\t'status' => true,
+    \t\t\t\t\t'context' => $context,
+    \t\t\t\t\t'id' => $id,
+    \t\t\t\t\t'label' => $name,
+    \t\t\t\t\t'view_id' => $view_id,
+    \t\t\t\t]);
+    \t\t\t\treturn;
+    \t\t\t}}
+
+    \t\t}} catch (Exception_DevblocksAjaxValidationError $e) {{
+    \t\t\techo json_encode([
+    \t\t\t\t'status' => false,
+    \t\t\t\t'error' => $e->getMessage(),
+    \t\t\t\t'field' => $e->getFieldName(),
+    \t\t\t]);
+    \t\t\treturn;
+
+    \t\t}} catch (Exception $e) {{
+    \t\t\techo json_encode([
+    \t\t\t\t'status' => false,
+    \t\t\t\t'error' => 'An error occurred.',
+    \t\t\t]);
+    \t\t\treturn;
+    \t\t}}
+    \t}}
+
+    \tprivate function _profileAction_viewExplore() {{
+    \t\t$view_id = DevblocksPlatform::importGPC($_POST['view_id'] ?? null, 'string', '');
+    \t\t$explore_from = DevblocksPlatform::importGPC($_POST['explore_from'] ?? null, 'int', 0);
+
+    \t\t$http_response = Cerb_ORMHelper::generateRecordExploreSet($view_id, $explore_from);
+    \t\tDevblocksPlatform::redirect($http_response);
+    \t}}
+    }};
+    """)
+
+
 def gen_strings_xml(table: str, fields: dict) -> str:
     cls = to_class_name(table)
     entries = '\n'.join(
@@ -1546,6 +1697,7 @@ def main():
 
     generated = [
         (dao_file,                                          php_classes),
+        (profile_file,                                      gen_profile_section(table)),
         (f'templates/records/types/{table}/peek_edit.tpl', gen_peek_edit_tpl(table, plugin_id)),
         (f'templates/records/types/{table}/view.tpl',       gen_view_tpl(table, plugin_id, acl_write=acl_write)),
     ]
