@@ -335,6 +335,7 @@ Use these when the local reference files don't cover a topic or you need to veri
 
 - `references/plugin-xml.md` — plugin.xml manifest structure, extension points, class loaders
 - `references/new-record-type.md` — complete guide for creating a new record type (files, migration, plugin.xml, strings.xml, customization checklist)
+- `references/peek-edit-patterns.md` — Smarty gotchas, checkbox parent/child groups, dynamic rows from extension points, flat lookup sets, space-delimited value lists
 
 ## Tools
 
