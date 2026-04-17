@@ -17,6 +17,7 @@ git clone https://github.com/cerb/claude-skills.git .claude/skills
 # Or, if .claude/skills/ already exists, clone and copy the skill directories
 git clone https://github.com/cerb/claude-skills.git /tmp/cerb-skills
 cp -r /tmp/cerb-skills/cerb-automations .claude/skills/cerb-automations
+cp -r /tmp/cerb-skills/cerb-dev .claude/skills/cerb-dev
 ```
 
 Restart Claude Code or start a new session. The skills will be automatically discovered.
@@ -51,28 +52,67 @@ Create and modify Cerb automations, workflows, and event listeners using KATA sy
 
 **Capabilities:**
 
-- Write automations with any trigger type (automation.function, interaction.worker, webhook.respond, etc.)
-- React to events (record.changed, mail.received, mail.route, etc.)
+- Write automations with any trigger type (`automation.function`, `interaction.worker`, `webhook.respond`, etc.)
+- React to events (`record.changed`, `mail.received`, `mail.route`, etc.)
+- Use all automation commands: `set:`, `decision:`, `repeat:`, `while:`, `http.request:`, `record.create/get/search/update/delete:`, `llm.chat/agent:`, `queue.push/pop:`, `metric.increment:`, and more
 - Build workflows that package automations, event listeners, and configuration together
 - Create and send email via draft records (transactional, compose, reply, forward)
 - Work with all Cerb record types and their field schemas
 - Construct search queries with filters, deep search, and boolean groups
 - Configure toolbar interactions and form elements
-- Apply automation policies (callers, commands)
+- Apply automation policies (callers, commands, time limits)
 
 **Reference files included:**
 
-- KATA language syntax, annotations, scripting functions, and filters
-- All automation commands, triggers, and events
-- Record type field schemas and search query fields
-- Toolbar and form element configuration
-- Workflow KATA schema
+- `kata.md` — KATA language syntax, annotations, Twig scripting functions and filters
+- `automations.md` — all commands, triggers, events, policies, and structure
+- `record-types.md` — record type field schemas
+- `search-queries.md` — search query syntax and per-record-type filter fields
+- `toolbars.md` — toolbar and form element configuration
+- `workflows.md` — workflow KATA schema
+- `icons.md` — available icon names
 
 **Guides included:**
 
-- Record dictionaries and key expansion
-- Creating draft records to send email
-- Building record.changed event automations
+- `guide-record-dictionaries.md` — record dictionaries and key expansion
+- `guide-drafts.md` — creating draft records to send email
+- `guide-record-changed.md` — building `record.changed` event automations
+- `guide-custom-fields.md` — working with custom fields in automations
+
+---
+
+### cerb-dev
+
+Work on Cerb core and plugin code using the Devblocks PHP framework.
+
+**Trigger:** `/cerb-dev` or when the user asks to add record types, write migrations, create extensions, or debug platform internals.
+
+**Capabilities:**
+
+- Add new record types with full DAO/Model/Context/View/SearchFields boilerplate (via code generator)
+- Write database migration patches
+- Add fields to existing DAOs and models
+- Implement card widgets, cron jobs, and search index backends
+- Register extensions in `plugin.xml` and translations in `strings.xml`
+- Work with worklist subtotals, peek/edit templates, and form handling patterns
+- Register and increment platform metrics
+
+**Reference files included:**
+
+- `architecture.md` — directory layout, plugin structure, naming conventions, context system, extension points, template paths
+- `dao-pattern.md` — DAO class structure, database operations, events/deltas, form handling, migration patch authoring
+- `extensions.md` — card widget, cron job, and search index extension patterns
+- `plugin-xml.md` — plugin.xml manifest structure, extension points, class loaders
+- `new-record-type.md` — complete step-by-step guide for creating a new record type
+- `adding-dao-fields.md` — adding fields to an existing DAO/model/context
+- `peek-edit-patterns.md` — Smarty gotchas, checkbox groups, dynamic rows, flat lookup sets
+- `worklist-subtotals.md` — adding subtotals to View_ classes
+- `metrics.md` — registering and incrementing metrics
+- `rerun-patch.md` — forcing a database patch to re-run in development
+
+**Tools included:**
+
+- `tools/gen-dao.py` — Python generator that writes all PHP and Smarty boilerplate for a new record type from a table name and field list
 
 ## Cerb Documentation
 
