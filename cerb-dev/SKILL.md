@@ -340,6 +340,7 @@ Use these when the local reference files don't cover a topic or you need to veri
 - `references/peek-edit-patterns.md` — Smarty gotchas, checkbox parent/child groups, dynamic rows from extension points, flat lookup sets, space-delimited value lists
 - `references/worklist-subtotals.md` — adding IAbstractView_Subtotals to View_ classes: getSubtotalFields() whitelisting, getSubtotalCounts() dispatch, count helper reference, label map patterns, field selection guidelines
 - `references/rerun-patch.md` — how to force a database patch to re-run in development
+- `references/metrics.md` — registering and incrementing metrics: singleton, counter increment, dimensions_kata syntax, metric types
 
 ## Tools
 
