@@ -159,6 +159,8 @@ function patch_11_2_0_YYYY_MM_DD_HHMMSS() {
 
 Register new patch functions in the patch file's dispatch array.
 
+To re-run a patch during development, see `references/rerun-patch.md`.
+
 ## Templates
 
 Uses Smarty 4.x. Templates stored in `templates/` subdirectories.
@@ -337,6 +339,7 @@ Use these when the local reference files don't cover a topic or you need to veri
 - `references/new-record-type.md` — complete guide for creating a new record type (files, migration, plugin.xml, strings.xml, customization checklist)
 - `references/peek-edit-patterns.md` — Smarty gotchas, checkbox parent/child groups, dynamic rows from extension points, flat lookup sets, space-delimited value lists
 - `references/worklist-subtotals.md` — adding IAbstractView_Subtotals to View_ classes: getSubtotalFields() whitelisting, getSubtotalCounts() dispatch, count helper reference, label map patterns, field selection guidelines
+- `references/rerun-patch.md` — how to force a database patch to re-run in development
 
 ## Tools
 
