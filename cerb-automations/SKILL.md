@@ -34,14 +34,9 @@ Fields marked with a `*` are required when creating a new record.
 
 ## Search Queries
 
-See `references/search-queries.md` for the complete search query reference including:
-- Filter types (text, fulltext, numeric, boolean, date, chooser, links, watchers, null)
-- All operators and syntax (wildcards, negation, ranges, sets, date expressions)
-- Deep search syntax for filtering on related records
-- Boolean groups (AND/OR/NOT with parentheses)
-- Sorting and limiting
-- Query parameters for safe user input injection
-- Search query fields for every record type
+For search query construction, invoke the `/cerb-search` skill if installed — it is a dedicated specialist with the full field reference for every record type.
+
+If `/cerb-search` is not available, fall back to `references/search-queries.md` for filter types, operators, deep search syntax, boolean groups, sorting, query parameters, and per-record-type field listings.
 
 ## Toolbars
 

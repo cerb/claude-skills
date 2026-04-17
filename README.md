@@ -18,6 +18,7 @@ git clone https://github.com/cerb/claude-skills.git .claude/skills
 git clone https://github.com/cerb/claude-skills.git /tmp/cerb-skills
 cp -r /tmp/cerb-skills/cerb-automations .claude/skills/cerb-automations
 cp -r /tmp/cerb-skills/cerb-dev .claude/skills/cerb-dev
+cp -r /tmp/cerb-skills/cerb-search .claude/skills/cerb-search
 ```
 
 Restart Claude Code or start a new session. The skills will be automatically discovered.
@@ -113,6 +114,29 @@ Work on Cerb core and plugin code using the Devblocks PHP framework.
 **Tools included:**
 
 - `tools/gen-dao.py` — Python generator that writes all PHP and Smarty boilerplate for a new record type from a table name and field list
+
+---
+
+### cerb-search
+
+Construct Cerb search queries for any record type.
+
+**Trigger:** `/cerb-search` or when the user asks to filter records by field values in a search bar, worklist, automation, or saved search.
+
+**Capabilities:**
+
+- Build search queries for any Cerb record type (tickets, messages, workers, orgs, contacts, tasks, etc.)
+- All filter types: text, fulltext, numeric, boolean, date, chooser, record/deep search, links, watchers, null
+- Deep search across related records to any depth
+- Boolean groups (AND, OR, NOT with parentheses)
+- Sorting and result limiting
+- Safe query parameter injection for automation use (`record_query_params:`)
+
+**Reference files included:**
+
+- `search-queries.md` — complete search query syntax, all operators, and filter fields for every record type
+
+> **Note:** `cerb-search` shares its reference data with `cerb-automations`. If installing skills individually rather than cloning the full repo, install both together to avoid duplication drift.
 
 ## Cerb Documentation
 
