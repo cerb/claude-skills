@@ -1480,7 +1480,7 @@ def main():
     parser = argparse.ArgumentParser(description='Generate Cerb record type boilerplate')
     parser.add_argument('--plugin-id', default='cerberusweb.core', help='Plugin ID (e.g. cerberusweb.core)')
     parser.add_argument('--plugin-namespace', default=None, help='Plugin namespace for extension IDs (defaults to first segment of plugin-id)')
-    parser.add_argument('--table', required=True, help='Table/record name in snake_case (e.g. knowledge_source)')
+    parser.add_argument('--table', required=True, help='Singular table/record name in snake_case (e.g. service_token, not service_tokens)')
     parser.add_argument('--fields', default="id bigint unsigned NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL DEFAULT '', created_at int unsigned NOT NULL DEFAULT 0, updated_at int unsigned NOT NULL DEFAULT 0",
                         help='Comma-separated SQL field definitions')
     parser.add_argument('--dao-file', default=None, help='Path to DAO file relative to plugin root (default: api/dao/{table}.php)')
