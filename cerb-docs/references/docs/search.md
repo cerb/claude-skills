@@ -1,0 +1,561 @@
+---
+id: "docs-search"
+title: "Search queries"
+url: "https://cerb.ai/docs/search/"
+summary: "This page provides a comprehensive guide to using search queries in Cerb, a text-based language designed for filtering records efficiently and expressively. It covers various types of filters, including text, full-text, numbers, booleans, dates, nullness, choosers, links, and watchers, each with specific expressions and examples. The page also explains advanced search functionalities such as autocompletion, deep search, and boolean groups (AND, OR, NOT), allowing users to perform complex queries and automate tasks. Additionally, it details sorting options, including ascending, descending, and nested sorting, to organize search results effectively. The guide emphasizes the flexibility and power of search queries in automating and simplifying complex operations within Cerb."
+tags: ["docs"]
+---
+ 
+
+**Search queries** are a text-based language for filtering records. They are efficient, expressive, and automation-friendly.
+
+- Searching records
+- Filters
+  - Text
+  - Fulltext
+  - Numbers
+  - Booleans
+  - Dates
+    - Advanced
+
+  - Nullness
+  - Choosers
+  - Links
+  - Watchers
+
+- Autocompletion
+- Deep Search
+  - Deep search
+  - Multiple deep searches
+  - Deeper search
+  - Negation
+
+- Boolean Groups
+  - AND
+  - OR
+  - NOT
+  - Multiple boolean filter groups
+
+- Sorting
+  - Sort ascending
+  - Sort descending
+  - Nested sorting
+
+Using queries, search functionality is consistent between automations, worklists, data queries, and API requests.
+
+As text, queries can be built dynamically using automation scripting syntax. They also simplify many complex operations that would otherwise be tedious (or impossible) to automate or represent with web-based forms.
+
+To give you an idea of what you can do with queries, here's an example query that returns open tickets in the Sales or Support group that are less than a month old:
+
+```
+status: open created:"-1 month" group:(sales OR support)
+```
+
+In the following sections we'll cover query syntax and advanced functionality.
+
+### Searching records
+
+You can use the global search menu to filter any record type:
+
+ 
+
+# Filters
+
+A query is a list of **filters** separated by a space. Each filter uses the format:
+
+```
+filter: expression
+```
+
+The possible **expressions** depend on the type of filter:
+
+## Text
+
+These expressions can be used on text-based filters.
+
+#### Term
+
+Simple text (without spaces) can be used as the entire expression:
+
+```
+firstName: Kina
+```
+
+#### Phrases
+
+Enclose phrases in double quotes (`"`):
+
+```
+subject: "This phrase contains spaces"
+```
+
+#### Wildcards
+
+Use asterisks (`*`) to denote wildcards:
+
+```
+mask: abc*
+```
+
+#### Sets
+
+Find records that match _any_ of the given values:
+
+```
+color: [red,green,blue]
+```
+
+#### Negation
+
+Prefix an expression with an exclamation point (`!`) to negate it. This returns any records that don't match.
+
+```
+status: !open
+```
+
+## Fulltext
+
+Many records provide a default **full-text** filter that's used when you type an expression without specifying a filter.
+
+This is a more efficient way to search records with a large amount of text (e.g. email messages, comments).
+
+#### Terms
+
+By default, records will be returned if they match all of the given terms.
+
+```
+bug bluetooth report
+```
+
+#### Phrases
+
+Enter text within quotes to search for exact phrases:
+
+```
+"bug report"
+```
+
+#### Mixing terms and phrases
+
+(Added in 10.1)
+
+```
+content: ("an exact phrase" other terms)
+```
+
+#### Negation
+
+(Added in 10.1)
+
+```
+text: !(not these words)
+```
+
+## Numbers
+
+These expressions can be used on numeric filters.
+
+#### Equal
+
+To filter by records with an exact numeric value, use a number as the expression:
+
+```
+age: 35
+```
+
+#### Not Equal
+
+Find all records that don't match a value by prefixing the expression with an exclamation point (`!`):
+
+```
+priority: !1
+```
+
+#### Greater than
+
+To filter by records with a value greater than the expression, use `>` or `>=`:
+
+```
+age: >21
+```
+
+#### Less than
+
+To filter by records with a value less than the expression, use `<` or `<=`:
+
+```
+order: <=100
+```
+
+#### Between
+
+Find records with a value within a range by using `...`:
+
+```
+importance: 25...75
+```
+
+#### Sets
+
+Find records that match _any_ of the given values:
+
+```
+importance: [0,50,75]
+```
+
+## Booleans
+
+These expressions can be used on boolean filters.
+
+#### True
+
+To filter for records with a `true` boolean value, you can use the expressions:
+
+- `yes`
+- `y`
+- `true`
+
+```
+checkbox: y
+```
+
+#### False
+
+To filter for records with a `false` boolean value, you can use the expressions:
+
+- `no`
+- `n`
+- `false`
+
+```
+isAdmin: n
+```
+
+## Dates
+
+These expressions can be used on date-based filters.
+
+#### Since
+
+To filter by records with a date after a given point in time:
+
+```
+created: today
+```
+
+```
+created: "-1 month"
+```
+
+```
+created: "2018-01-01"
+```
+
+```
+created: "January 1 2018"
+```
+
+```
+created: "first day of this month"
+```
+
+#### Between
+
+To filter by records with a date within a given range, provide two dates separated by the word `to`:
+
+```
+created: "today to now"
+```
+
+```
+created: "January 1 to June 30"
+```
+
+```
+created: "-1 year to -6 months"
+```
+
+```
+created: "big bang to first day of this month"
+```
+
+#### Advanced
+
+Since: 9.6
+
+Date-based filters may use an optional advanced parameterized expression, with the format:
+
+```
+created: (since:"-1 week" until:now months:Jan,Feb,Mar days:Weekdays times:9a-5p)
+```
+
+The `since:` option sets the beginning of the date range (default `big bang`).
+
+The `until:` option sets the end of the date range (default `now`).
+
+The `months:` option accepts a comma-delimited list of months to include within in the range (default everything). You can use any unique prefix on English months of the year (e.g. `Ja,F,Mar`, `o,n,d`, `Jun,Jul`).
+
+The `weeks:` option accepts a comma-delimited list of weeks to include within in the range (default everything). Where Sunday is the first day of the week (e.g. `00` to `53`).
+
+The `days:` option accepts a comma-delimited list of days to include within in the range (default everything). You can use aliases for `weekdays` and `weekends`, and any unique prefix on English days of the week (e.g. `Mon,Wed,Fri`, `m,w,f`, `thu,f`).
+
+The `dom:` option accepts a comma-delimited list of days of the month to include within in the range (default everything), from `1` to `31`.
+
+The `times:` option accepts a comma-delimited list of time ranges to include for the given days (e.g. `8a-noon,1-6p`). For instance, this makes it much easier to query only working hours within a date range.
+
+## Nullness
+
+You can match records by having, or not having, any value for a particular filter.
+
+This is particularly useful for custom fields.
+
+#### Null
+
+Use the expression `null` to find records _without_ any value set:
+
+```
+sla.level: null
+```
+
+#### Not null
+
+Use the expression `!null` to find records _with_ any value set:
+
+```
+checkbox: !null
+```
+
+## Choosers
+
+**Chooser** filters match fields that contain record IDs.
+
+By convention, these filter names usually have an `.id` suffix (e.g. `bucket.id:`).
+
+Chooser filters support all numeric expressions.
+
+#### ID
+
+To find records with a single matching record ID:
+
+```
+group.id: 1
+```
+
+#### IDs
+
+To find records matching any of a list of record IDs:
+
+```
+group.id: [1,2,3]
+```
+
+## Links
+
+These expressions can be used on link filters.
+
+#### Link to record type
+
+To filter by records with a link to a specific other record type, use its alias as the expression:
+
+```
+links: ticket
+```
+
+#### Deep search by links
+
+You can also use deep search to filter records based on any property of linked records.
+
+Append the record type alias to `links` following a period (`.`), then the expression can be any search query for that record type:
+
+```
+links.ticket: (mask:a*)
+```
+
+## Watchers
+
+These expressions can be used on watcher filters.
+
+#### Names
+
+To filter for records watched by specific workers, enter partial names:
+
+```
+watchers: kina,karl
+```
+
+#### Me
+
+To filter for records you're watching, use the `me` expression:
+
+```
+watchers: me
+```
+
+#### Any
+
+To filter for records watched by any workers, use the `any` expression:
+
+```
+watchers: any
+```
+
+#### None
+
+To filter for records **not** watched by any workers, use the `none` expression:
+
+```
+watchers: none
+```
+
+#### IDs
+
+To filter for records watched by specific worker IDs, enter a comma-separated list of IDs:
+
+```
+watchers: 1,2,3
+```
+
+# Autocompletion
+
+As you type a query in the browser, **autocomplete suggestions** will assist you:
+
+ 
+
+You can also manually open the suggestion menu with the `<Control> + <Space>` keyboard shortcut.
+
+# Deep Search
+
+Some filters represent links between related records.
+
+The expression for these filters is another search query based on the linked record type.
+
+We refer to this as **deep searching** because you can chain these searches to any depth.
+
+For instance, you can build a worklist of email messages sent by organizations in the health care industry, in Europe, and who also have at least one female contact with a name that starts with the letter 'M'.
+
+This is one of the most powerful features in Cerb.
+
+### Deep search
+
+When performing a deep search, your expression is another search query:
+
+```
+status: open group:(name:S*)
+```
+
+The above example returns records that are open and in a group that begin with the letter _'S'_.
+
+### Multiple deep searches
+
+You can perform multiple deep searches at once:
+
+```
+owner: (gender:f) group: (name:[support,sales]) org: (sla.plan:!null)
+```
+
+The above example returns records owned by a female worker, in the _Support_ or _Sales_ group, from an organization with any service level agreement (a custom fieldset picklist).
+
+### Deeper search
+
+You can perform a deep search, within a deep search, within a deep search (ad nauseam):
+
+```
+messages.first: ( sender: ( org: ( company.industries: "Health Care" region: Europe sla.plan: Priority )
+  )
+)
+```
+
+The above example returns records where the sender of the first message is a member of an organization in the health care industry in Europe with a "Priority" service level agreement.
+
+### Negation
+
+You can also negate a deep search by prefixing an exclamation mark (`!`). This returns all records that **don't match**:
+
+```
+group: !(name:S*)
+```
+
+The above example returns records that are in a group whose name **doesn't** start with the letter _'S'_.
+
+# Boolean Groups
+
+You can group filters into `AND` and `OR` (boolean) sets.
+
+### AND
+
+Return records that match **all** of the given filters:
+
+```
+status: open AND created:today AND group:support
+```
+
+```
+status: open created:today group:support
+```
+
+A query automatically uses `AND` by default if you specify multiple filters and separate them with a space.
+
+### OR
+
+Return records that match **any** of the given filters:
+
+```
+owner.id: me OR owner.id:none
+```
+
+The above example will return records that are "owned by the current worker" or "have no owner". It will exclude records owned by any other worker.
+
+### NOT
+
+You can prefix a boolean filter group with an exclamation mark (`!`) to negate it:
+
+```
+!( mimetype: image/png size:<100KB)
+```
+
+The above example will return everything **except**"PNGs smaller than 100KB".
+
+### Multiple boolean filter groups
+
+You can mix boolean filter groups by using parentheses (`()`):
+
+```
+( mimetype: image/png size:>100KB) OR (mimetype:image/jpeg size:<100KB)
+```
+
+The above example will return **both**"PNGs larger than 100KB" and "JPEGs smaller than 100KB".
+
+A special `sort:` filter is available on every record type.
+
+# Sorting
+
+### Sort ascending
+
+To sort matching records in ascending order (e.g. A-Z, oldest-newest), specify a filter name:
+
+```
+sort: subject
+```
+
+### Sort descending
+
+To sort matching records in descending order (e.g. Z-A, newest-oldest), prefix the filter name with a dash (`-`):
+
+```
+sort: -updated
+```
+
+### Nested sorting
+
+You can also sort by multiple fields by separating filter names with a comma (`,`).
+
+For example, to return the most important and oldest issues first:
+
+```
+sort: -importance,created
+```
+
+If multiple records shared `importance:90`, they would be sub-sorted by `created` so the oldest record is first and newest is last.
+
+You can perform nested sorting to any depth, but results will take longer to return the deeper you go.
+

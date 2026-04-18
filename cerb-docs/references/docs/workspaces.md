@@ -1,0 +1,16 @@
+---
+id: "docs-workspaces"
+title: "Workspaces"
+url: "https://cerb.ai/docs/workspaces/"
+summary: "This page explains the concept of workspaces in Cerb, which are customizable pages designed to enhance specific workflows. Workspaces can be shared with everyone, restricted to a group or role, or kept private for individual use. Users can add multiple workspace pages to their navigation bar, effectively turning Cerb into a personalized mission control. These workspaces utilize tabs to organize content into sections, similar to dividers in a binder. The default type of workspace is a dashboard, which is a flexible and responsive collection of visualization widgets."
+tags: ["docs"]
+---
+A **workspace** is a page designed to optimize a particular workflow. Workspaces can be shared by everyone, shared within a group or role, or private to a specific worker.
+
+You can add any number of workspace pages to your navigation bar and personalize Cerb into your own mission control.
+
+Workspaces use **tabs** to organize their content into sections; much like dividers are used to partition pages in a large binder.
+
+The default workspace type is a dashboard – a customizable and responsive collection of visualization widgets.
+
+ 

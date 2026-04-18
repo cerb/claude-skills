@@ -1,0 +1,93 @@
+---
+id: "docs-worklists"
+title: "Worklists"
+url: "https://cerb.ai/docs/worklists/"
+summary: "This page provides a comprehensive overview of worklists in Cerb, highlighting their functionality as customizable, searchable, pageable, and sortable sets of records. Key features include the ability to search and filter records, sort them by specific fields, and view detailed information through the peek function. Worklists support pagination for managing large sets of data and allow for subtotals to group records by similar values. Users can perform bulk updates on selected records, import and export data in various formats, and utilize explore mode for sequentially viewing record profiles. These features enable efficient data management and streamlined workflows within Cerb."
+tags: ["docs"]
+---
+A **worklist** is a searchable, pageable, sortable, and customizable set of records displayed using rows and columns.
+
+Each row of a worklist is a matching record, and each column is a particular field from that record. The displayed columns can be customized for each worklist based on your needs.
+
+ 
+
+By saving a worklist, you'll always have an up-to-date view of matching records without wasting any time searching.
+
+For instance, a worklist can display new customer messages that need a response, client organizations in a specific industry, tasks that are overdue, etc.
+
+- Search
+- Sorting
+- Peek
+- Pagination
+- Subtotals
+- Bulk Update
+- Import/Export
+- Explore Mode
+
+# Search
+
+The most useful feature of worklists is their ability to pull out interesting sets of records from your data using search queries.
+
+For instance, you can build a worklist of email messages sent by organizations in the health care industry who have an enterprise SLA and also have at least one female contact whose name starts with the letter 'M'.
+
+ 
+
+# Sorting
+
+In conjunction with filtering, **sorting** highlights the records of most interest by ordering a worklist by a particular field.
+
+For example, you may be interested in the oldest messages in a list, or the opportunities with the highest potential value.
+
+You can click on the column label to toggle sorting between ascending and descending order.
+
+ 
+
+# Peek
+
+When records are displayed in a worklist, you can hover over any row and click the **peek** icon to open its card without leaving the list.
+
+ 
+
+# Pagination
+
+When a worklist has many results, it's automatically divided into smaller chunks called **pages**.
+
+You can navigate through the pages using **Next** and **Prev** links, or quickly jump to the first or last page.
+
+ 
+
+# Subtotals
+
+Another useful feature in Cerb is the ability to **subtotal** worklists by grouping records with similar values for a given field.
+
+Perhaps you want to subtotal organizations by country, email conversations by group, tasks by owner, etc.
+
+ 
+
+Once you've subtotaled a list, you can click on a particular category to automatically add a new filter to the worklist.
+
+# Bulk Update
+
+You can perform actions on an entire worklist, on selected records, or on a random sample of matching records of any size.
+
+For instance, when looking at a long list of indistinguishable leads that need a followup, you can bulk assign a random set of 25 records to yourself.
+
+You can also use random samples to run A/B tests.
+
+ 
+
+# Import/Export
+
+Once you have a worklist filtered the way you want it, you can **export** data in CSV (comma-separated), JSON, or XML formats. You also aren't limited to the fields displayed by the worklist; you can choose any fields, including those from related records.
+
+Similarly, you can also **import** records on most worklists in CSV format. You'll be given the opportunity to map columns in your import file to record fields.
+
+ 
+
+# Explore Mode
+
+When you need to view the profile page of each matching record in sequence, click the **explore** button below a worklist. This will create a consistent snapshot of the worklist at the current point-in-time and allow you to navigate through it. You can even send an explore set to another worker using its permalink.
+
+You can use the `[` and `]` keyboard shortcuts to navigate backward and forward through the list, respectively.
+
+ 
