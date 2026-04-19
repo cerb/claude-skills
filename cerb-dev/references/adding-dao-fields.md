@@ -65,6 +65,21 @@ Add a `DevblocksSearchField` entry. Fourth argument is the i18n label key.
 self::EXPIRES_AT => new DevblocksSearchField(self::EXPIRES_AT, 'service_token', 'expires_at', $translate->_('common.expires'), null, true),
 ```
 
+**i18n for field labels:** Reuse an existing `common.*` key if one fits. For field-specific labels, add a `dao.{record_type}.{field_name}` key to `strings.xml` (alphabetically under a `<!-- RecordType -->` comment in the `dao.*` section) and reference it with `$translate->_('dao.record_type.field_name')`. Never hard-code English strings as the fourth argument.
+
+```xml
+<!-- Group -->
+<tu tuid="dao.group.subject_has_mask">
+    <tuv xml:lang="en_US">
+        <seg>Subject Has Mask</seg>
+    </tuv>
+</tu>
+```
+
+```php
+self::SUBJECT_HAS_MASK => new DevblocksSearchField(self::SUBJECT_HAS_MASK, 'worker_group', 'subject_has_mask', $translate->_('dao.group.subject_has_mask'), Model_CustomField::TYPE_CHECKBOX, true),
+```
+
 ### 9. `Model_{RecordType}` — public properties
 Add properties alphabetically.
 
@@ -122,7 +137,21 @@ Add to both `$token_labels` and `$token_types`, then assign in the `if($record)`
 $token_values['expires_at'] = $service_token->expires_at;
 ```
 
-### 14. `Context_{RecordType}::getKeyToDaoFieldMap()` — API key mapping
+### 14. `templates/{record_type}/view.tpl` — worklist cell renderer
+For timestamp fields, add the search field constant value (e.g. `w_created_at`) to the existing date `in_array` check so it renders with `devblocks_prettytime`:
+
+```smarty
+{elseif in_array($column, ['w_created_at', 'w_updated'])}
+    {if !empty($result.$column)}
+    <td data-column="{$column}" title="{$result.$column|devblocks_date}">{$result.$column|devblocks_prettytime}</td>
+    {else}
+    <td data-column="{$column}">{'common.never'|devblocks_translate|lower}</td>
+    {/if}
+```
+
+Without this, the raw Unix timestamp integer is displayed instead of a human-readable relative time.
+
+### 15. `Context_{RecordType}::getKeyToDaoFieldMap()` — API key mapping
 Add entries so the record API and automations can set the field by key.
 
 ```php
@@ -134,5 +163,5 @@ Add entries so the record API and automations can set the field by key.
 
 - **Quick search keys**: use camelCaps (`lastAccessed`, not `last_accessed`).
 - **Internal-only fields** (e.g. a hash used only for lookup): add to DAO constants + `getFields()` validation, but omit from `getWhere()` SELECT, `_getObjectsFromResult()`, `SearchFields`, and `Context` — they don't surface to users.
-- **i18n keys**: reuse existing `common.*` keys where possible; add new ones to `strings.xml` when needed.
+- **i18n keys**: reuse existing `common.*` keys where possible; otherwise add `dao.{record_type}.{field_name}` entries to `strings.xml`. Never pass a bare English string as the label argument to `DevblocksSearchField`.
 - **`TEXT` columns in MySQL cannot have a `DEFAULT` value.** Use `text NOT NULL` — never `text NOT NULL DEFAULT ''`. The DB engine rejects a default on any `TEXT`/`BLOB` type. Use `varchar(255)` instead if a default is needed.
