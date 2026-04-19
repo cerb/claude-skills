@@ -59,6 +59,7 @@ Search and fetch Cerb docs using one of these methods (in order of preference):
 - `references/new-record-type.md` — complete guide for creating a new record type
 - `references/adding-dao-fields.md` — adding fields to an existing DAO/model/context
 - `references/peek-edit-patterns.md` — Smarty gotchas, checkbox groups, dynamic rows, flat lookup sets
+- `references/ui-conventions.md` — JS/UI rules: confirmation dialogs (use `confirmPopup()`, never `confirm()`)
 - `references/worklist-subtotals.md` — adding IAbstractView_Subtotals to View_ classes
 - `references/rerun-patch.md` — how to force a database patch to re-run in development
 - `references/metrics.md` — registering and incrementing metrics
