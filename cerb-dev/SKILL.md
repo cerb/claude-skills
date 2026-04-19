@@ -62,6 +62,7 @@ Search and fetch Cerb docs using one of these methods (in order of preference):
 - `references/worklist-subtotals.md` — adding IAbstractView_Subtotals to View_ classes
 - `references/rerun-patch.md` — how to force a database patch to re-run in development
 - `references/metrics.md` — registering and incrementing metrics
+- `references/database-schema.md` — canonical schema reference (`cerb.schema.kata`), column name lookups, common table timestamp columns
 
 ## Tools
 
