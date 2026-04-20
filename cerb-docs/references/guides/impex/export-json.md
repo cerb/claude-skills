@@ -42,19 +42,19 @@ curl -O "https://raw.githubusercontent.com/cerb/cerb-release/v11.0/install/extra
 In the same directory, create a `config.json` file:
 
 ```
-{ 
-	 "exporter" : { 
-		 "source" : "Cerb10" , 
-		 "options" : { 
-			 "db_host" : "localhost" , 
-			 "db_name" : "cerb" , 
-			 "db_user" : "root" , 
-			 "db_pass" : "" , 
-			 "mask_prefix" : "" , 
-			 "storage_path" : "/path/to/cerb/storage/" 
-		 } 
-	 } 
- }
+{
+	"exporter": {
+		"source": "Cerb10",
+		"options": {
+			"db_host": "localhost",
+			"db_name": "cerb",
+			"db_user": "root",
+			"db_pass": "",
+			"mask_prefix": "",
+			"storage_path": "/path/to/cerb/storage/"
+		}
+	}
+}
 ```
 
 - `exporter.options.db_host` is the server (IP or hostname) containing your Cerb database
@@ -101,63 +101,63 @@ You will see output as your data exports. A large dataset will be broken up into
 **03-tickets-000001/000000001.json:**
 
 ```
-{ 
-     "package" : { 
-         "name" : "Ticket #1" , 
-         "revision" : 1 , 
-         "requires" : { 
-             "cerb_version" : "10.4.9" , 
-             "plugins" : [] 
-         }, 
-         "configure" : { 
-             "prompts" : [], 
-             "placeholders" : [], 
-             "options" : { 
-                 "disable_events" : true 
-             } 
-         } 
-     }, 
-     "records" : [ 
-         { 
-             "uid" : "ticket_1" , 
-             "_context" : "ticket" , 
-             "mask" : "DEMO-001" , 
-             "subject" : "What is Cerb?" , 
-             "importance" : 50 , 
-             "status" : "open" , 
-             "created" : 1591945350 , 
-             "updated" : 1591950726 , 
-             "participants" : "a.costa@fiaflux.example" , 
-             "group_id" : 1 , 
-             "bucket_id" : 4 , 
-             "owner_id" : 2 , 
-             "org" : "Fiaflux Software" 
-         }, 
-         { 
-             "uid" : "message_1" , 
-             "_context" : "message" , 
-             "ticket_id" : "{{{uid.ticket_1}}}" , 
-             "created" : 1591945350 , 
-             "is_outgoing" : 0 , 
-             "sender" : "a.costa@fiaflux.example" , 
-             "response_time" : 0 , 
-             "hash_header_message_id" : "3eda2ef8f4f0459c8e24b909e3068a8c54a2bfe6" , 
-             "headers" : "To: noreply@cerb.example \n From: a.costa@fiaflux.example \n Subject: What is Cerb? \n Date: Fri, 12 Jun 2020 07:02:30 +0000 \n Content-Type: text \/ plain; charset=utf-8 \n Message-Id: <demo1.msg1@cerb.example> \n " , 
-             "content" : "My team needs something like Cerb. How should I pitch it to our management team? \n\n - Alessio \n " 
-         }, 
-         { 
-             "uid" : "message_2" , 
-             "_context" : "message" , 
-             "ticket_id" : "{{{uid.ticket_1}}}" , 
-             "created" : 1591950726 , 
-             "is_outgoing" : 1 , 
-             "sender" : "noreply@cerb.example" , 
-             "response_time" : 5376 , 
-             "hash_header_message_id" : "b45e8e5fd1f07457d4c188bb4ae9bad421b27ff3" , 
-             "headers" : "To: a.costa@fiaflux.example \n From: noreply@cerb.example \n Subject: Re: What is Cerb? \n Date: Fri, 12 Jun 2020 08:32:06 +0000 \n Content-Type: text \/ plain; charset=utf-8 \n Message-Id: <demo1.msg2@cerb.example> \n " , 
-             "content" : "> How should I pitch [Cerb] to our management team? \n\n Hi Alessio, \n\n Cerb helps you build and automate workflows; it improves team collaboration; and it can replace several other apps and services to reduce your costs. \n\n Your team only needs a web browser to use it, and they have the freedom to work from anywhere. \n\n You have the flexibility to run Cerb on your own servers or as a fully managed service in the cloud. \n " , 
-             "worker_id" : 2 
-         } 
-     ] 
- }
+{
+    "package": {
+        "name": "Ticket #1",
+        "revision": 1,
+        "requires": {
+            "cerb_version": "10.4.9",
+            "plugins": []
+        },
+        "configure": {
+            "prompts": [],
+            "placeholders": [],
+            "options": {
+                "disable_events": true
+            }
+        }
+    },
+    "records": [
+        {
+            "uid": "ticket_1",
+            "_context": "ticket",
+            "mask": "DEMO-001",
+            "subject": "What is Cerb?",
+            "importance": 50,
+            "status": "open",
+            "created": 1591945350,
+            "updated": 1591950726,
+            "participants": "a.costa@fiaflux.example",
+            "group_id": 1,
+            "bucket_id": 4,
+            "owner_id": 2,
+            "org": "Fiaflux Software"
+        },
+        {
+            "uid": "message_1",
+            "_context": "message",
+            "ticket_id": "{{{uid.ticket_1}}}",
+            "created": 1591945350,
+            "is_outgoing": 0,
+            "sender": "a.costa@fiaflux.example",
+            "response_time": 0,
+            "hash_header_message_id": "3eda2ef8f4f0459c8e24b909e3068a8c54a2bfe6",
+            "headers": "To: noreply@cerb.example\nFrom: a.costa@fiaflux.example\nSubject: What is Cerb?\nDate: Fri, 12 Jun 2020 07:02:30 +0000\nContent-Type: text\/plain; charset=utf-8\nMessage-Id: <demo1.msg1@cerb.example>\n",
+            "content": "My team needs something like Cerb. How should I pitch it to our management team?\n\n- Alessio\n"
+        },
+        {
+            "uid": "message_2",
+            "_context": "message",
+            "ticket_id": "{{{uid.ticket_1}}}",
+            "created": 1591950726,
+            "is_outgoing": 1,
+            "sender": "noreply@cerb.example",
+            "response_time": 5376,
+            "hash_header_message_id": "b45e8e5fd1f07457d4c188bb4ae9bad421b27ff3",
+            "headers": "To: a.costa@fiaflux.example\nFrom: noreply@cerb.example\nSubject: Re: What is Cerb?\nDate: Fri, 12 Jun 2020 08:32:06 +0000\nContent-Type: text\/plain; charset=utf-8\nMessage-Id: <demo1.msg2@cerb.example>\n",
+            "content": "> How should I pitch [Cerb] to our management team?\n\nHi Alessio,\n\nCerb helps you build and automate workflows; it improves team collaboration; and it can replace several other apps and services to reduce your costs.\n\nYour team only needs a web browser to use it, and they have the freedom to work from anywhere.\n\nYou have the flexibility to run Cerb on your own servers or as a fully managed service in the cloud.\n",
+            "worker_id": 2
+        }
+    ]
+}
 ```

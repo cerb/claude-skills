@@ -18,7 +18,9 @@ Edit the record for `global.menu`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/hello: label: Hello uri: cerb:automation:example.hello
+interaction/hello:
+  label: Hello
+  uri: cerb:automation:example.hello
 ```
 
 The following **placeholders** are available in KATA:

@@ -31,33 +31,33 @@ Navigate to **Setup&nbsp;» Packages&nbsp;» Import**.
 Copy and paste the following package into the **JSON:** section:
 
 ```
-{ 
-   "package" : { 
-     "requires" : { 
-       "cerb_version" : "10.3" 
-     } 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "automation_createTasks" , 
-       "_context" : "automation" , 
-       "name" : "example.automationTimer.createDailyTasks" , 
-       "extension_id" : "cerb.trigger.automation.timer" , 
-       "description" : "An example of creating daily tasks from an automation timer" , 
-       "script" : "start: \r\n record.create/coffee: \r\n output: new_task \r\n inputs: \r\n record_type: task \r\n fields: \r\n title: Get coffee \r\n due@date: today 8:30am \r\n importance: 90 \r\n owner_id@int: 0 \r\n record.create/replyToAll: \r\n output: new_task \r\n inputs: \r\n record_type: task \r\n fields: \r\n title: Reply to all unread email \r\n due@date: today 4pm \r\n importance: 50 \r\n owner_id@int: 0 \r\n decision/dayOfWeek: \r\n outcome/mon: \r\n if@bool: {{'Mon' == 'now'|date('D')}} \r\n then: \r\n record.create/status: \r\n output: new_task \r\n inputs: \r\n record_type: task \r\n fields: \r\n title: Send weekly status report \r\n due@date: today 10am \r\n importance: 100 \r\n owner_id@int: 0" , 
-       "policy_kata" : "commands: \r\n record.create: \r\n deny/type@bool: {{inputs.record_type is not record type ('task')}} \r\n allow@bool: yes" 
-     }, 
-     { 
-       "uid" : "automation_timer" , 
-       "_context" : "automation_timer" , 
-       "name" : "Create daily tasks" , 
-       "is_recurring" : 1 , 
-       "recurring_patterns" : "# https://en.wikipedia.org/wiki/Cron#CRON_expression \n # [min] [hour] [dom] [month] [dow] \n 0 8 * * 1-5" , 
-       "recurring_timezone" : "America/Los_Angeles" , 
-       "automations_kata" : "automation/dailyTasks: \n uri: cerb:automation:example.automationTimer.createDailyTasks \n disabled@bool: no" 
-     } 
-   ] 
- }
+{
+  "package": {
+    "requires": {
+      "cerb_version": "10.3"
+    }
+  },
+  "records": [
+    {
+      "uid": "automation_createTasks",
+      "_context": "automation",
+      "name": "example.automationTimer.createDailyTasks",
+      "extension_id": "cerb.trigger.automation.timer",
+      "description": "An example of creating daily tasks from an automation timer",
+      "script": "start:\r\n record.create/coffee:\r\n output: new_task\r\n inputs:\r\n record_type: task\r\n fields:\r\n title: Get coffee\r\n due@date: today 8:30am\r\n importance: 90\r\n owner_id@int: 0\r\n record.create/replyToAll:\r\n output: new_task\r\n inputs:\r\n record_type: task\r\n fields:\r\n title: Reply to all unread email\r\n due@date: today 4pm\r\n importance: 50\r\n owner_id@int: 0\r\n decision/dayOfWeek:\r\n outcome/mon:\r\n if@bool: {{'Mon' == 'now'|date('D')}}\r\n then:\r\n record.create/status:\r\n output: new_task\r\n inputs:\r\n record_type: task\r\n fields:\r\n title: Send weekly status report\r\n due@date: today 10am\r\n importance: 100\r\n owner_id@int: 0",
+      "policy_kata": "commands:\r\n record.create:\r\n deny/type@bool: {{inputs.record_type is not record type ('task')}}\r\n allow@bool: yes"
+    },
+    {
+      "uid": "automation_timer",
+      "_context": "automation_timer",
+      "name": "Create daily tasks",
+      "is_recurring": 1,
+      "recurring_patterns": "# https://en.wikipedia.org/wiki/Cron#CRON_expression\n# [min] [hour] [dom] [month] [dow]\n0 8 * * 1-5",
+      "recurring_timezone": "America/Los_Angeles",
+      "automations_kata": "automation/dailyTasks:\n uri: cerb:automation:example.automationTimer.createDailyTasks\n disabled@bool: no"
+    }
+  ]
+}
 ```
 
 Click the **Import** button.
@@ -115,7 +115,16 @@ Now click on the **example.automationTimer.createDailyTasks** automation in the 
 The automation uses the [record.create](/docs/automations/commands/record.create/) command to create tasks records.
 
 ```
-start: record.create/coffee: output: new_task inputs: record_type: task fields: title: Get coffee due@date: today 8:30am importance: 90 owner_id@int: 0
+start:
+  record.create/coffee:
+    output: new_task
+    inputs:
+      record_type: task
+      fields:
+        title: Get coffee
+        due@date: today 8:30am
+        importance: 90
+        owner_id@int: 0
 ```
 
 The first two tasks are created every day at 8:30am and 4pm.

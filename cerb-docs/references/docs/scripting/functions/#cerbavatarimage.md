@@ -12,7 +12,7 @@ Retrieve the avatar image for a given record type and ID.
 `cerb_avatar_image(record_type, id, updated)`
 
 ```
-{{ cerb_avatar_image ( 'worker' , '1' , 'now' | date ( 'U' )) }}
+{{cerb_avatar_image('worker','1','now'|date('U'))}}
 ```
 
 ```

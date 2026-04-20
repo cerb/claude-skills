@@ -18,7 +18,10 @@ Edit the record for `draft.read`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/example: uri: cerb:automation:example.draft.delete label: Delete icon: circle-remove
+interaction/example:
+  uri: cerb:automation:example.draft.delete
+  label: Delete
+  icon: circle-remove
 ```
 
 The following **placeholders** are available in KATA:

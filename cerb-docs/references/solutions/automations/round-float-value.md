@@ -14,10 +14,21 @@ Here are examples of rounding methods (round, ceil, floor, and precision control
 
 - 
 ```
-start: set: number@float: 3.1415926535897932384626433832795028841971693993751 return: round@int: {{ number|round }} ceil@int: {{ number|round(0, 'ceil') }} floor@int: {{ number|round(0, 'floor') }} precision@float: {{ number|round(5) }}
+start:
+  set:
+    number@float: 3.1415926535897932384626433832795028841971693993751
+  return:
+    round@int: {{number|round}}
+    ceil@int: {{number|round(0, 'ceil')}}
+    floor@int: {{number|round(0, 'floor')}}
+    precision@float: {{number|round(5)}}
 ```
 - 
 ```
-__return: round: 3 ceil: 4 floor: 3 precision: 3.14159
+__return:
+  round: 3
+  ceil: 4
+  floor: 3
+  precision: 3.14159
 ```
 

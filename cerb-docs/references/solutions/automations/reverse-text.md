@@ -12,10 +12,20 @@ You can use [|reverse](/docs/scripting/filters/#reverse) in scripting to reverse
 
 - 
 ```
-start: return: reversed_list@csv: {{ [1,2,3,4,5]|reverse|join(',') }} reversed_text: {{ "This is text to reverse."|reverse }}
+start:
+  return:
+    reversed_list@csv: {{[1,2,3,4,5]|reverse|join(',')}}
+    reversed_text: {{"This is text to reverse."|reverse}}
 ```
 - 
 ```
-__return : reversed_list : - " 5" - " 4" - " 3" - " 2" - " 1" reversed_text : .esrever ot txet si sihT
+__return:
+  reversed_list:
+  - "5"
+  - "4"
+  - "3"
+  - "2"
+  - "1"
+  reversed_text: .esrever ot txet si sihT
 ```
 

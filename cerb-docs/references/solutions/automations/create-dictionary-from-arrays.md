@@ -14,10 +14,28 @@ Here's an example of using `array_combine()` to create a dictionary from separat
 
 - 
 ```
-start: set: keys@csv: Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec values@csv: 88,45,8,88,76,82,31,100,30,91,19,54 return: report@json: {{ array_combine(keys,values)|json_encode }}
+start:
+  set:
+    keys@csv: Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
+    values@csv: 88,45,8,88,76,82,31,100,30,91,19,54
+  return:
+    report@json: {{array_combine(keys,values)|json_encode}}
 ```
 - 
 ```
-__return: report: Jan: 88 Feb: 45 Mar: 8 Apr: 88 May: 76 Jun: 82 Jul: 31 Aug: 100 Sep: 30 Oct: 91 Nov: 19 Dec: 54
+__return:
+  report:
+    Jan: 88
+    Feb: 45
+    Mar: 8
+    Apr: 88
+    May: 76
+    Jun: 82
+    Jul: 31
+    Aug: 100
+    Sep: 30
+    Oct: 91
+    Nov: 19
+    Dec: 54
 ```
 

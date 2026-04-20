@@ -8,7 +8,17 @@ tags: ["docs", "docs-automations"]
 The **data.query:** command executes a [data query](/docs/data-queries/) and returns the response.
 
 ```
-start: data.query: output: results inputs: query@text: type:worklist.records of:ticket format:dictionaries on_success: return: records@key: results:data
+start:
+  data.query:
+    output: results
+    inputs:
+      query@text:
+        type:worklist.records
+        of:ticket
+        format:dictionaries
+    on_success:
+      return:
+        records@key: results:data
 ```
 
 - [Syntax](#syntax)

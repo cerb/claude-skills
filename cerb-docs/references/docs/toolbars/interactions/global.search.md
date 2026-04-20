@@ -18,7 +18,10 @@ Edit the record for `global.search`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/ticketSearch: uri: cerb:automation:wgm.example.ticketSearchInteraction label: Ticket search icon: search
+interaction/ticketSearch:
+  uri: cerb:automation:wgm.example.ticketSearchInteraction
+  label: Ticket search
+  icon: search
 ```
 
 The following **placeholders** are available in KATA:

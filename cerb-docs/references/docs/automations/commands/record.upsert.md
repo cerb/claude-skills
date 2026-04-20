@@ -8,8 +8,15 @@ tags: ["docs", "docs-automations"]
 The **record.upsert:** command creates or updates a record with the given fields.
 
 ```
-start: record.upsert: output: record inputs: record_type: task record_query: name:"This is a new task" status:open # See: https://cerb.ai/docs/records/types/task/#records-api
-        fields: importance: 75
+start:
+  record.upsert:
+    output: record
+    inputs:
+      record_type: task
+      record_query: name:"This is a new task" status:open
+      # See: https://cerb.ai/docs/records/types/task/#records-api
+      fields:
+        importance: 75
 ```
 
 - [Syntax](#syntax)

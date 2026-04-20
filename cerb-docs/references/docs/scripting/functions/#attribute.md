@@ -10,7 +10,9 @@ tags: ["docs", "docs-scripting"]
 Access the values of an object with a variable key:
 
 ```
-{% set person = { "first_name" : "Kina" , "last_name" : "Halpue" , "title" : "Customer Support Supervisor" } %} {% set key = 'title' %} {{ attribute ( person , key ) }}
+{% set person = {"first_name": "Kina", "last_name": "Halpue", "title": "Customer Support Supervisor"} %}
+{% set key = 'title' %}
+{{attribute(person, key)}}
 ```
 
 ```

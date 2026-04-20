@@ -48,7 +48,7 @@ As text, queries can be built dynamically using [automation scripting](/docs/scr
 To give you an idea of what you can do with queries, here's an example query that returns open tickets in the Sales or Support group that are less than a month old:
 
 ```
-status: open created:"-1 month" group:(sales OR support)
+status:open created:"-1 month" group:(sales OR support)
 ```
 
 In the following sections we'll cover query syntax and advanced functionality.
@@ -64,7 +64,7 @@ You can use the global search menu to filter any [record type](/docs/records/typ
 A query is a list of **filters** separated by a space. Each filter uses the format:
 
 ```
-filter: expression
+filter:expression
 ```
 
 The possible **expressions** depend on the type of filter:
@@ -78,7 +78,7 @@ These expressions can be used on text-based [filters](/docs/search/#filters).
 Simple text (without spaces) can be used as the entire expression:
 
 ```
-firstName: Kina
+firstName:Kina
 ```
 
 #### Phrases
@@ -86,7 +86,7 @@ firstName: Kina
 Enclose phrases in double quotes (`"`):
 
 ```
-subject: "This phrase contains spaces"
+subject:"This phrase contains spaces"
 ```
 
 #### Wildcards
@@ -94,7 +94,7 @@ subject: "This phrase contains spaces"
 Use asterisks (`*`) to denote wildcards:
 
 ```
-mask: abc*
+mask:abc*
 ```
 
 #### Sets
@@ -102,7 +102,7 @@ mask: abc*
 Find records that match _any_ of the given values:
 
 ```
-color: [red,green,blue]
+color:[red,green,blue]
 ```
 
 #### Negation
@@ -110,7 +110,7 @@ color: [red,green,blue]
 Prefix an expression with an exclamation point (`!`) to negate it. This returns any records that don't match.
 
 ```
-status: !open
+status:!open
 ```
 
 ## Fulltext
@@ -140,7 +140,7 @@ Enter text within quotes to search for exact phrases:
 (Added in [10.1](/releases/10.1/))
 
 ```
-content: ("an exact phrase" other terms)
+content:("an exact phrase" other terms)
 ```
 
 #### Negation
@@ -148,7 +148,7 @@ content: ("an exact phrase" other terms)
 (Added in [10.1](/releases/10.1/))
 
 ```
-text: !(not these words)
+text:!(not these words)
 ```
 
 ## Numbers
@@ -160,7 +160,7 @@ These expressions can be used on numeric [filters](/docs/search/#filters).
 To filter by records with an exact numeric value, use a number as the expression:
 
 ```
-age: 35
+age:35
 ```
 
 #### Not Equal
@@ -168,7 +168,7 @@ age: 35
 Find all records that don't match a value by prefixing the expression with an exclamation point (`!`):
 
 ```
-priority: !1
+priority:!1
 ```
 
 #### Greater than
@@ -176,7 +176,7 @@ priority: !1
 To filter by records with a value greater than the expression, use `>` or `>=`:
 
 ```
-age: >21
+age:>21
 ```
 
 #### Less than
@@ -184,7 +184,7 @@ age: >21
 To filter by records with a value less than the expression, use `<` or `<=`:
 
 ```
-order: <=100
+order:<=100
 ```
 
 #### Between
@@ -192,7 +192,7 @@ order: <=100
 Find records with a value within a range by using `...`:
 
 ```
-importance: 25...75
+importance:25...75
 ```
 
 #### Sets
@@ -200,7 +200,7 @@ importance: 25...75
 Find records that match _any_ of the given values:
 
 ```
-importance: [0,50,75]
+importance:[0,50,75]
 ```
 
 ## Booleans
@@ -216,7 +216,7 @@ To filter for records with a `true` boolean value, you can use the expressions:
 - `true`
 
 ```
-checkbox: y
+checkbox:y
 ```
 
 #### False
@@ -228,7 +228,7 @@ To filter for records with a `false` boolean value, you can use the expressions:
 - `false`
 
 ```
-isAdmin: n
+isAdmin:n
 ```
 
 ## Dates
@@ -240,23 +240,23 @@ These expressions can be used on date-based [filters](/docs/search/#filters).
 To filter by records with a date after a given point in time:
 
 ```
-created: today
+created:today
 ```
 
 ```
-created: "-1 month"
+created:"-1 month"
 ```
 
 ```
-created: "2018-01-01"
+created:"2018-01-01"
 ```
 
 ```
-created: "January 1 2018"
+created:"January 1 2018"
 ```
 
 ```
-created: "first day of this month"
+created:"first day of this month"
 ```
 
 #### Between
@@ -264,19 +264,19 @@ created: "first day of this month"
 To filter by records with a date within a given range, provide two dates separated by the word `to`:
 
 ```
-created: "today to now"
+created:"today to now"
 ```
 
 ```
-created: "January 1 to June 30"
+created:"January 1 to June 30"
 ```
 
 ```
-created: "-1 year to -6 months"
+created:"-1 year to -6 months"
 ```
 
 ```
-created: "big bang to first day of this month"
+created:"big bang to first day of this month"
 ```
 
 #### Advanced
@@ -286,7 +286,7 @@ Since: [9.6](/releases/9.6/)
 Date-based filters may use an optional advanced parameterized expression, with the format:
 
 ```
-created: (since:"-1 week" until:now months:Jan,Feb,Mar days:Weekdays times:9a-5p)
+created:(since:"-1 week" until:now months:Jan,Feb,Mar days:Weekdays times:9a-5p)
 ```
 
 The `since:` option sets the beginning of the date range (default `big bang`).
@@ -314,7 +314,7 @@ This is particularly useful for [custom fields](/docs/custom-fields/).
 Use the expression `null` to find records _without_ any value set:
 
 ```
-sla.level: null
+sla.level:null
 ```
 
 #### Not null
@@ -322,7 +322,7 @@ sla.level: null
 Use the expression `!null` to find records _with_ any value set:
 
 ```
-checkbox: !null
+checkbox:!null
 ```
 
 ## Choosers
@@ -338,7 +338,7 @@ Chooser filters support all [numeric](/docs/search/#numbers) expressions.
 To find records with a single matching record ID:
 
 ```
-group.id: 1
+group.id:1
 ```
 
 #### IDs
@@ -346,7 +346,7 @@ group.id: 1
 To find records matching any of a list of record IDs:
 
 ```
-group.id: [1,2,3]
+group.id:[1,2,3]
 ```
 
 ## Links
@@ -358,7 +358,7 @@ These expressions can be used on link [filters](/docs/search/#filters).
 To filter by records with a link to a specific other [record type](/docs/records/types/), use its alias as the expression:
 
 ```
-links: ticket
+links:ticket
 ```
 
 #### Deep search by links
@@ -368,7 +368,7 @@ You can also use [deep search](/docs/search/#deep-search) to filter records base
 Append the [record type alias](/docs/records/types/) to `links` following a period (`.`), then the expression can be any [search query](/docs/search/) for that record type:
 
 ```
-links.ticket: (mask:a*)
+links.ticket:(mask:a*)
 ```
 
 ## Watchers
@@ -380,7 +380,7 @@ These expressions can be used on watcher [filters](/docs/search/#filters).
 To filter for records watched by specific workers, enter partial names:
 
 ```
-watchers: kina,karl
+watchers:kina,karl
 ```
 
 #### Me
@@ -388,7 +388,7 @@ watchers: kina,karl
 To filter for records you're watching, use the `me` expression:
 
 ```
-watchers: me
+watchers:me
 ```
 
 #### Any
@@ -396,7 +396,7 @@ watchers: me
 To filter for records watched by any workers, use the `any` expression:
 
 ```
-watchers: any
+watchers:any
 ```
 
 #### None
@@ -404,7 +404,7 @@ watchers: any
 To filter for records **not** watched by any workers, use the `none` expression:
 
 ```
-watchers: none
+watchers:none
 ```
 
 #### IDs
@@ -412,7 +412,7 @@ watchers: none
 To filter for records watched by specific worker IDs, enter a comma-separated list of IDs:
 
 ```
-watchers: 1,2,3
+watchers:1,2,3
 ```
 
 # Autocompletion
@@ -440,7 +440,7 @@ This is one of the most powerful features in Cerb.
 When performing a deep search, your expression is another search query:
 
 ```
-status: open group:(name:S*)
+status:open group:(name:S*)
 ```
 
 The above example returns records that are open and in a group that begin with the letter _'S'_.
@@ -450,7 +450,9 @@ The above example returns records that are open and in a group that begin with t
 You can perform multiple deep searches at once:
 
 ```
-owner: (gender:f) group: (name:[support,sales]) org: (sla.plan:!null)
+owner:(gender:f) 
+group:(name:[support,sales]) 
+org:(sla.plan:!null)
 ```
 
 The above example returns records owned by a female worker, in the _Support_ or _Sales_ group, from an organization with any service level agreement (a [custom fieldset](/docs/custom-fieldsets/) picklist).
@@ -460,7 +462,13 @@ The above example returns records owned by a female worker, in the _Support_ or 
 You can perform a deep search, within a deep search, within a deep search (ad nauseam):
 
 ```
-messages.first: ( sender: ( org: ( company.industries: "Health Care" region: Europe sla.plan: Priority )
+messages.first:(
+  sender:(
+    org:(
+      company.industries:"Health Care" 
+      region:Europe 
+      sla.plan:Priority
+    )
   )
 )
 ```
@@ -472,7 +480,7 @@ The above example returns records where the sender of the first message is a mem
 You can also negate a deep search by prefixing an exclamation mark (`!`). This returns all records that **don't match**:
 
 ```
-group: !(name:S*)
+group:!(name:S*)
 ```
 
 The above example returns records that are in a group whose name **doesn't** start with the letter _'S'_.
@@ -486,11 +494,11 @@ You can group [filters](/docs/search/#filters) into `AND` and `OR` (boolean) set
 Return records that match **all** of the given filters:
 
 ```
-status: open AND created:today AND group:support
+status:open AND created:today AND group:support
 ```
 
 ```
-status: open created:today group:support
+status:open created:today group:support
 ```
 
 A query automatically uses `AND` by default if you specify multiple filters and separate them with a space.
@@ -500,7 +508,7 @@ A query automatically uses `AND` by default if you specify multiple filters and 
 Return records that match **any** of the given filters:
 
 ```
-owner.id: me OR owner.id:none
+owner.id:me OR owner.id:none
 ```
 
 The above example will return records that are "owned by the current worker" or "have no owner". It will exclude records owned by any other worker.
@@ -510,7 +518,7 @@ The above example will return records that are "owned by the current worker" or 
 You can prefix a boolean filter group with an exclamation mark (`!`) to negate it:
 
 ```
-!( mimetype: image/png size:<100KB)
+!(mimetype:image/png size:<100KB)
 ```
 
 The above example will return everything **except**"PNGs smaller than 100KB".
@@ -520,7 +528,7 @@ The above example will return everything **except**"PNGs smaller than 100KB".
 You can mix boolean filter groups by using parentheses (`()`):
 
 ```
-( mimetype: image/png size:>100KB) OR (mimetype:image/jpeg size:<100KB)
+(mimetype:image/png size:>100KB) OR (mimetype:image/jpeg size:<100KB)
 ```
 
 The above example will return **both**"PNGs larger than 100KB" and "JPEGs smaller than 100KB".
@@ -534,7 +542,7 @@ A special `sort:` [filter](/docs/search/#filters) is available on every record t
 To sort matching records in ascending order (e.g. A-Z, oldest-newest), specify a filter name:
 
 ```
-sort: subject
+sort:subject
 ```
 
 ### Sort descending
@@ -542,7 +550,7 @@ sort: subject
 To sort matching records in descending order (e.g. Z-A, newest-oldest), prefix the filter name with a dash (`-`):
 
 ```
-sort: -updated
+sort:-updated
 ```
 
 ### Nested sorting
@@ -552,7 +560,7 @@ You can also sort by multiple fields by separating filter names with a comma (`,
 For example, to return the most important and oldest issues first:
 
 ```
-sort: -importance,created
+sort:-importance,created
 ```
 
 If multiple records shared `importance:90`, they would be sub-sorted by `created` so the oldest record is first and newest is last.

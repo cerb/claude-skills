@@ -44,6 +44,19 @@ Copy the token for use later.
 https://huggingface.co/docs/hub/api#get-apimodels
 
 ```
-start: set: params: search: whisper   
-   http.request/models: output: http_response inputs: method: GET url: https://huggingface.co/api/models/? {{ params|url_encode }} authentication: cerb:connected_account:huggingface on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  set:
+    params:
+      search: whisper
+  
+  http.request/models:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://huggingface.co/api/models/?{{params|url_encode}}
+      authentication: cerb:connected_account:huggingface
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

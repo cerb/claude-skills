@@ -67,7 +67,58 @@ In **Configure function**:
 In **Lambda function code**, paste the following:
 
 ```
-' use strict ' ; const dns = require ( ' dns ' ); exports . handler = ( event , context , callback ) => { if ( undefined === event . mode || 0 === event . mode . length ) { callback ( " The 'mode' parameter is required. " ); return ; } if ( undefined === event . value || 0 === event . value . length ) { callback ( " The 'value' parameter is required. " ); return ; } switch ( event . mode ) { // Reverse case ' reverse ' : dns . reverse ( event . value , function ( err , hostnames ) { if ( err ) { callback ( err ); return ; } callback ( null , hostnames ); }); break ; // MX case ' mx ' : dns . resolveMx ( event . value , function ( err , exchanges ) { if ( err ) { callback ( err ); return ; } callback ( null , exchanges ); }); break ; // Resolve default : dns . resolve ( event . value , function ( err , addresses ) { if ( err ) { callback ( err ); return ; } callback ( null , addresses ); }); break ; } };
+'use strict';
+const dns = require('dns');
+
+exports.handler = (event, context, callback) => {
+  if(undefined === event.mode || 0 === event.mode.length) {
+    callback("The 'mode' parameter is required.");
+    return;
+  }
+
+  if(undefined === event.value || 0 === event.value.length) {
+    callback("The 'value' parameter is required.");
+    return;
+  }
+
+  switch(event.mode) {
+    // Reverse
+    case 'reverse':
+      dns.reverse(event.value, function(err, hostnames) {
+        if(err) {
+          callback(err);
+          return;
+        }
+
+        callback(null, hostnames);
+      });
+      break;
+
+    // MX
+    case 'mx':
+      dns.resolveMx(event.value, function(err, exchanges) {
+        if(err) {
+          callback(err);
+          return;
+        }
+
+        callback(null, exchanges);
+      });
+      break;
+
+    // Resolve
+    default:
+      dns.resolve(event.value, function(err, addresses) {
+        if(err) {
+          callback(err);
+          return;
+        }
+
+        callback(null, addresses);
+      });
+      break;
+  }
+};
 ```
 
 In **Lambda function handler and role**:
@@ -101,17 +152,17 @@ Select the **JSON** tab.
 Add the following block to the `Statement` list:
 
 ```
-{ 
-     "Sid" : "CerbLambdaInvoke" , 
-     "Effect" : "Allow" , 
-     "Action" : [ 
-         "lambda:InvokeAsync" , 
-         "lambda:InvokeFunction" 
-     ], 
-     "Resource" : [ 
-         "arn:aws:lambda:*:*:function:Cerb*" 
-     ] 
- }
+{
+    "Sid": "CerbLambdaInvoke",
+    "Effect": "Allow",
+    "Action": [
+        "lambda:InvokeAsync",
+        "lambda:InvokeFunction"
+    ],
+    "Resource": [
+        "arn:aws:lambda:*:*:function:Cerb*"
+    ]
+}
 ```
 
 Click the blue **Review policy** button in the bottom right.
@@ -127,748 +178,748 @@ Navigate to **Setup&nbsp;» Packages&nbsp;» Import**.
 Copy and paste the following behavior into the large text box:
 
 ```
-{ 
-   "package" : { 
-   "name" : "AWS Lambda Bot" , 
-   "cerb_version" : "9.1.0" , 
-   "revision" : 1 , 
-   "requires" : { 
-     "cerb_version" : "9.1.0" 
-   }, 
-   "configure" : { 
-     "prompts" : [ 
-       { 
-         "type" : "chooser" , 
-         "label" : "AWS Account:" , 
-         "key" : "aws_account_id" , 
-         "params" : { 
-           "context" : "cerberusweb.contexts.connected_account" , 
-           "query" : "aws OR amazon" , 
-           "single" : true 
-         } 
-       }, 
-       { 
-         "type" : "text" , 
-         "label" : "AWS Region:" , 
-         "key" : "aws_region" , 
-         "params" : { 
-           "default" : "us-west-2" 
-         } 
-       } 
-     ], 
-     "placeholders" : [ 
-     ] 
-   } 
-   }, 
-   "bots" : [ 
-     { 
-       "uid" : "bot_33" , 
-       "name" : "AWS Lambda Bot" , 
-       "owner" : { 
-         "context" : "cerberusweb.contexts.app" , 
-         "id" : 0 
-       }, 
-       "is_disabled" : false , 
-       "params" : { 
-         "config" : null , 
-         "events" : { 
-           "mode" : "all" , 
-           "items" : [] 
-         }, 
-         "actions" : { 
-           "mode" : "all" , 
-           "items" : [] 
-         } 
-       }, 
-       "image" : "data:image/png;base64,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" , 
-       "behaviors" : [ 
-         { 
-           "uid" : "behavior_180" , 
-           "title" : "DNS conversational behavior" , 
-           "is_disabled" : false , 
-           "is_private" : true , 
-           "priority" : 50 , 
-           "event" : { 
-             "key" : "event.message.chat.worker" , 
-             "label" : "Conversation with worker" 
-           }, 
-           "nodes" : [ 
-             { 
-               "type" : "action" , 
-               "title" : "Hi!" , 
-               "status" : "live" , 
-               "params" : { 
-                 "actions" : [ 
-                   { 
-                     "action" : "send_message" , 
-                     "message" : "Hi, {{worker_first_name}}!" , 
-                     "format" : "" , 
-                     "delay_ms" : "250" 
-                   }, 
-                   { 
-                     "action" : "send_message" , 
-                     "message" : "I can perform DNS lookups for you." , 
-                     "format" : "" , 
-                     "delay_ms" : "1000" 
-                   } 
-                 ] 
-               } 
-             }, 
-             { 
-               "type" : "loop" , 
-               "title" : "Menu" , 
-               "status" : "live" , 
-               "params" : { 
-                 "foreach_json" : "[\" * \"]" , 
-                 "as_placeholder" : "iterations" 
-               }, 
-               "nodes" : [ 
-                 { 
-                   "type" : "action" , 
-                   "title" : "What would you like to look up?" , 
-                   "status" : "live" , 
-                   "params" : { 
-                     "actions" : [ 
-                       { 
-                         "action" : "send_message" , 
-                         "message" : "What would you like to look up?" , 
-                         "format" : "" , 
-                         "delay_ms" : "500" 
-                       }, 
-                       { 
-                         "action" : "prompt_buttons" , 
-                         "options" : "Hostname \r\n IP \r\n MX \r\n Bye" , 
-                         "color_from" : "#4795f7" , 
-                         "color_mid" : "#4795f7" , 
-                         "color_to" : "#4795f7" , 
-                         "style" : "" 
-                       } 
-                     ] 
-                   } 
-                 }, 
-                 { 
-                   "type" : "action" , 
-                   "title" : "Save mode" , 
-                   "status" : "live" , 
-                   "params" : { 
-                     "actions" : [ 
-                       { 
-                         "action" : "_set_custom_var" , 
-                         "value" : "{{message}}" , 
-                         "format" : "" , 
-                         "is_simulator_only" : "0" , 
-                         "var" : "dns_mode" 
-                       } 
-                     ] 
-                   } 
-                 }, 
-                 { 
-                   "type" : "switch" , 
-                   "title" : "Action:" , 
-                   "status" : "live" , 
-                   "nodes" : [ 
-                     { 
-                       "type" : "outcome" , 
-                       "title" : "Hostname" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "groups" : [ 
-                           { 
-                             "any" : 0 , 
-                             "conditions" : [ 
-                               { 
-                                 "condition" : "message" , 
-                                 "oper" : "is" , 
-                                 "value" : "Hostname" 
-                               } 
-                             ] 
-                           } 
-                         ] 
-                       }, 
-                       "nodes" : [ 
-                         { 
-                           "type" : "action" , 
-                           "title" : "What hostname?" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "send_message" , 
-                                 "message" : "What hostname would you like to find an IP for?" , 
-                                 "format" : "" , 
-                                 "delay_ms" : "1000" 
-                               }, 
-                               { 
-                                 "action" : "prompt_text" , 
-                                 "placeholder" : "e.g. cerb.ai" 
-                               } 
-                             ] 
-                           } 
-                         }, 
-                         { 
-                           "type" : "action" , 
-                           "title" : "Run behavior" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "_run_behavior" , 
-                                 "on" : "_trigger_va_id" , 
-                                 "behavior_id" : "{{{uid.behavior_181}}}" , 
-                                 "var_mode" : "resolve" , 
-                                 "var_value" : "{{message}}" , 
-                                 "run_in_simulator" : "0" , 
-                                 "var" : "_behavior" 
-                               } 
-                             ] 
-                           } 
-                         }, 
-                         { 
-                           "type" : "action" , 
-                           "title" : "parseResponse()" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "_run_subroutine" , 
-                                 "subroutine" : "parseResponse()" 
-                               } 
-                             ] 
-                           } 
-                         } 
-                       ] 
-                     }, 
-                     { 
-                       "type" : "outcome" , 
-                       "title" : "IP" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "groups" : [ 
-                           { 
-                             "any" : 0 , 
-                             "conditions" : [ 
-                               { 
-                                 "condition" : "message" , 
-                                 "oper" : "is" , 
-                                 "value" : "IP" 
-                               } 
-                             ] 
-                           } 
-                         ] 
-                       }, 
-                       "nodes" : [ 
-                         { 
-                           "type" : "action" , 
-                           "title" : "What IP?" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "send_message" , 
-                                 "message" : "What IP would you like to find a hostname for?" , 
-                                 "format" : "" , 
-                                 "delay_ms" : "1000" 
-                               }, 
-                               { 
-                                 "action" : "prompt_text" , 
-                                 "placeholder" : "e.g. 8.8.8.8" 
-                               } 
-                             ] 
-                           } 
-                         }, 
-                         { 
-                           "type" : "action" , 
-                           "title" : "Run behavior" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "_run_behavior" , 
-                                 "on" : "_trigger_va_id" , 
-                                 "behavior_id" : "{{{uid.behavior_181}}}" , 
-                                 "var_mode" : "reverse" , 
-                                 "var_value" : "{{message}}" , 
-                                 "run_in_simulator" : "0" , 
-                                 "var" : "_behavior" 
-                               } 
-                             ] 
-                           } 
-                         }, 
-                         { 
-                           "type" : "action" , 
-                           "title" : "parseResponse()" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "_run_subroutine" , 
-                                 "subroutine" : "parseResponse()" 
-                               } 
-                             ] 
-                           } 
-                         } 
-                       ] 
-                     }, 
-                     { 
-                       "type" : "outcome" , 
-                       "title" : "MX" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "groups" : [ 
-                           { 
-                             "any" : 0 , 
-                             "conditions" : [ 
-                               { 
-                                 "condition" : "message" , 
-                                 "oper" : "is" , 
-                                 "value" : "MX" 
-                               } 
-                             ] 
-                           } 
-                         ] 
-                       }, 
-                       "nodes" : [ 
-                         { 
-                           "type" : "action" , 
-                           "title" : "What hostname?" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "send_message" , 
-                                 "message" : "What hostname would you like to find mail servers for?" , 
-                                 "format" : "" , 
-                                 "delay_ms" : "1000" 
-                               }, 
-                               { 
-                                 "action" : "prompt_text" , 
-                                 "placeholder" : "e.g. cerb.email" 
-                               } 
-                             ] 
-                           } 
-                         }, 
-                         { 
-                           "type" : "action" , 
-                           "title" : "Run behavior" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "_run_behavior" , 
-                                 "on" : "_trigger_va_id" , 
-                                 "behavior_id" : "{{{uid.behavior_181}}}" , 
-                                 "var_mode" : "mx" , 
-                                 "var_value" : "{{message}}" , 
-                                 "run_in_simulator" : "0" , 
-                                 "var" : "_behavior" 
-                               } 
-                             ] 
-                           } 
-                         }, 
-                         { 
-                           "type" : "action" , 
-                           "title" : "parseResponse()" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "_run_subroutine" , 
-                                 "subroutine" : "parseResponse()" 
-                               } 
-                             ] 
-                           } 
-                         } 
-                       ] 
-                     }, 
-                     { 
-                       "type" : "outcome" , 
-                       "title" : "Bye" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "groups" : [ 
-                           { 
-                             "any" : 0 , 
-                             "conditions" : [] 
-                           } 
-                         ] 
-                       }, 
-                       "nodes" : [ 
-                         { 
-                           "type" : "action" , 
-                           "title" : "Bye!" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "send_message" , 
-                                 "message" : "Bye!" , 
-                                 "format" : "" , 
-                                 "delay_ms" : "1000" 
-                               }, 
-                               { 
-                                 "action" : "window_close" 
-                               } 
-                             ] 
-                           } 
-                         } 
-                       ] 
-                     } 
-                   ] 
-                 } 
-               ] 
-             }, 
-             { 
-               "type" : "subroutine" , 
-               "title" : "parseResponse()" , 
-               "status" : "live" , 
-               "nodes" : [ 
-                 { 
-                   "type" : "switch" , 
-                   "title" : "Have a response?" , 
-                   "status" : "live" , 
-                   "nodes" : [ 
-                     { 
-                       "type" : "outcome" , 
-                       "title" : "No, error" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "groups" : [ 
-                           { 
-                             "any" : 0 , 
-                             "conditions" : [ 
-                               { 
-                                 "condition" : "_custom_script" , 
-                                 "tpl" : "{% if _behavior.response_json is iterable and _behavior.response_json.errorMessage is not empty %}true{% endif %}" , 
-                                 "oper" : "is" , 
-                                 "value" : "true" 
-                               } 
-                             ] 
-                           } 
-                         ] 
-                       }, 
-                       "nodes" : [ 
-                         { 
-                           "type" : "action" , 
-                           "title" : "Error!" , 
-                           "status" : "live" , 
-                           "params" : { 
-                             "actions" : [ 
-                               { 
-                                 "action" : "send_message" , 
-                                 "message" : "I had trouble: {{_behavior.response_json.errorMessage}}" , 
-                                 "format" : "" , 
-                                 "delay_ms" : "1000" 
-                               } 
-                             ] 
-                           } 
-                         } 
-                       ] 
-                     }, 
-                     { 
-                       "type" : "outcome" , 
-                       "title" : "Yes" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "groups" : [ 
-                           { 
-                             "any" : 0 , 
-                             "conditions" : [ 
-                               { 
-                                 "condition" : "_custom_script" , 
-                                 "tpl" : "{{_behavior.response_json}}" , 
-                                 "oper" : "!is" , 
-                                 "value" : "" 
-                               } 
-                             ] 
-                           } 
-                         ] 
-                       }, 
-                       "nodes" : [ 
-                         { 
-                           "type" : "switch" , 
-                           "title" : "Type:" , 
-                           "status" : "live" , 
-                           "nodes" : [ 
-                             { 
-                               "type" : "outcome" , 
-                               "title" : "MX" , 
-                               "status" : "live" , 
-                               "params" : { 
-                                 "groups" : [ 
-                                   { 
-                                     "any" : 0 , 
-                                     "conditions" : [ 
-                                       { 
-                                         "condition" : "_custom_script" , 
-                                         "tpl" : "{{dns_mode}}" , 
-                                         "oper" : "is" , 
-                                         "value" : "MX" 
-                                       } 
-                                     ] 
-                                   } 
-                                 ] 
-                               }, 
-                               "nodes" : [ 
-                                 { 
-                                   "type" : "action" , 
-                                   "title" : "Respond" , 
-                                   "status" : "live" , 
-                                   "params" : { 
-                                     "actions" : [ 
-                                       { 
-                                         "action" : "send_message" , 
-                                         "message" : "{% if _behavior.response_json is iterable %} \r\n {% set exchanges = _behavior.response_json|sort %} \r\n {% for value in exchanges %} \r\n * [{{value.priority}}] {{value.exchange}} \r\n {% endfor %} \r\n {% endif %}" , 
-                                         "format" : "markdown" , 
-                                         "delay_ms" : "500" 
-                                       } 
-                                     ] 
-                                   } 
-                                 } 
-                               ] 
-                             }, 
-                             { 
-                               "type" : "outcome" , 
-                               "title" : "(Other)" , 
-                               "status" : "live" , 
-                               "params" : { 
-                                 "groups" : [ 
-                                   { 
-                                     "any" : 0 , 
-                                     "conditions" : [] 
-                                   } 
-                                 ] 
-                               }, 
-                               "nodes" : [ 
-                                 { 
-                                   "type" : "action" , 
-                                   "title" : "Respond" , 
-                                   "status" : "live" , 
-                                   "params" : { 
-                                     "actions" : [ 
-                                       { 
-                                         "action" : "send_message" , 
-                                         "message" : "{% if _behavior.response_json is iterable %} \r\n {% for value in _behavior.response_json %} \r\n * {{value}} \r\n {% endfor %} \r\n {% else %} \r\n {{_behavior.response_json}} \r\n {% endif %}" , 
-                                         "format" : "markdown" , 
-                                         "delay_ms" : "500" 
-                                       } 
-                                     ] 
-                                   } 
-                                 } 
-                               ] 
-                             } 
-                           ] 
-                         } 
-                       ] 
-                     }, 
-                     { 
-                       "type" : "outcome" , 
-                       "title" : "No" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "groups" : [ 
-                           { 
-                             "any" : 0 , 
-                             "conditions" : [] 
-                           } 
-                         ] 
-                       } 
-                     } 
-                   ] 
-                 } 
-               ] 
-             } 
-           ] 
-         }, 
-         { 
-           "uid" : "behavior_178" , 
-           "title" : "Get interactions for worker" , 
-           "is_disabled" : false , 
-           "is_private" : false , 
-           "priority" : 50 , 
-           "event" : { 
-             "key" : "event.interactions.get.worker" , 
-             "label" : "Conversation get interactions for worker" , 
-             "params" : { 
-               "listen_points" : "global \r\n " 
-             } 
-           }, 
-           "nodes" : [ 
-             { 
-               "type" : "switch" , 
-               "title" : "Point:" , 
-               "status" : "live" , 
-               "nodes" : [ 
-                 { 
-                   "type" : "outcome" , 
-                   "title" : "global" , 
-                   "status" : "live" , 
-                   "params" : { 
-                     "groups" : [ 
-                       { 
-                         "any" : 0 , 
-                         "conditions" : [ 
-                           { 
-                             "condition" : "point" , 
-                             "oper" : "is" , 
-                             "value" : "global" 
-                           } 
-                         ] 
-                       } 
-                     ] 
-                   }, 
-                   "nodes" : [ 
-                     { 
-                       "type" : "action" , 
-                       "title" : "Return interactions" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "actions" : [ 
-                           { 
-                             "action" : "return_interaction" , 
-                             "behavior_id" : "{{{uid.behavior_179}}}" , 
-                             "name" : "DNS lookup" , 
-                             "interaction" : "dns.lookup" , 
-                             "interaction_params_json" : "" 
-                           } 
-                         ] 
-                       } 
-                     } 
-                   ] 
-                 } 
-               ] 
-             } 
-           ] 
-         }, 
-         { 
-           "uid" : "behavior_179" , 
-           "title" : "Handle interaction with worker" , 
-           "is_disabled" : false , 
-           "is_private" : false , 
-           "priority" : 50 , 
-           "event" : { 
-             "key" : "event.interaction.chat.worker" , 
-             "label" : "Conversation handle interaction with worker" 
-           }, 
-           "nodes" : [ 
-             { 
-               "type" : "switch" , 
-               "title" : "Interaction:" , 
-               "status" : "live" , 
-               "nodes" : [ 
-                 { 
-                   "type" : "outcome" , 
-                   "title" : "dns.lookup" , 
-                   "status" : "live" , 
-                   "params" : { 
-                     "groups" : [ 
-                       { 
-                         "any" : 0 , 
-                         "conditions" : [ 
-                           { 
-                             "condition" : "interaction" , 
-                             "oper" : "is" , 
-                             "value" : "dns.lookup" 
-                           } 
-                         ] 
-                       } 
-                     ] 
-                   }, 
-                   "nodes" : [ 
-                     { 
-                       "type" : "action" , 
-                       "title" : "Run behavior" , 
-                       "status" : "live" , 
-                       "params" : { 
-                         "actions" : [ 
-                           { 
-                             "action" : "switch_behavior" , 
-                             "return" : "0" , 
-                             "behavior_id" : "{{{uid.behavior_180}}}" , 
-                             "var" : "_behavior" 
-                           } 
-                         ] 
-                       } 
-                     } 
-                   ] 
-                 } 
-               ] 
-             } 
-           ] 
-         }, 
-         { 
-           "uid" : "behavior_181" , 
-           "title" : "Invoke CerbDnsLookup Lambda function" , 
-           "is_disabled" : false , 
-           "is_private" : true , 
-           "priority" : 50 , 
-           "event" : { 
-             "key" : "event.macro.bot" , 
-             "label" : "Custom behavior on bot" 
-           }, 
-           "variables" : { 
-             "var_mode" : { 
-               "key" : "var_mode" , 
-               "label" : "Mode" , 
-               "type" : "D" , 
-               "is_private" : "0" , 
-               "params" : { 
-                 "options" : "resolve \r\n reverse \r\n mx" 
-               } 
-             }, 
-             "var_value" : { 
-               "key" : "var_value" , 
-               "label" : "Value" , 
-               "type" : "S" , 
-               "is_private" : "0" , 
-               "params" : { 
-                 "widget" : "single" 
-               } 
-             } 
-           }, 
-           "nodes" : [ 
-             { 
-               "type" : "action" , 
-               "title" : "Invoke CerbDnsLookup Lambda function" , 
-               "status" : "live" , 
-               "params" : { 
-                 "actions" : [ 
-                   { 
-                     "action" : "_set_custom_var" , 
-                     "value" : "{% set json = {} %} \r\n {% set json = dict_set(json, 'mode', var_mode) %} \r\n {% set json = dict_set(json, 'value', var_value) %} \r\n {{json|json_encode}}" , 
-                     "format" : "json" , 
-                     "is_simulator_only" : "0" , 
-                     "var" : "request_json" 
-                   }, 
-                   { 
-                     "action" : "core.va.action.http_request" , 
-                     "http_verb" : "post" , 
-                     "http_url" : "https://lambda.{{{aws_region}}}.amazonaws.com/2015-03-31/functions/CerbDnsLookup/invocations" , 
-                     "http_headers" : "Date: {{'now'|date('r', 'UTC')}} \r\n X-AMZ-Client-Context: {{ \" {} \" |base64_encode}} \r\n X-AMZ-Date: {{'now'|date('Ymd \\\\ THis \\\\ Z', 'UTC')}}" , 
-                     "http_body" : "{{request_json|json_encode}}" , 
-                     "auth" : "connected_account" , 
-                     "auth_connected_account_id" : "{{{aws_account_id}}}" , 
-                     "options" : { 
-                       "raw_response_body" : "1" 
-                     }, 
-                     "run_in_simulator" : "1" , 
-                     "response_placeholder" : "_http_response" 
-                   }, 
-                   { 
-                     "action" : "_set_custom_var" , 
-                     "value" : "{{_http_response.body|json_pretty}}" , 
-                     "format" : "json" , 
-                     "is_simulator_only" : "0" , 
-                     "var" : "response_json" 
-                   } 
-                 ] 
-               } 
-             } 
-           ] 
-         } 
-       ] 
-     } 
-   ] 
- }
+{
+  "package": {
+  "name": "AWS Lambda Bot",
+  "cerb_version": "9.1.0",
+  "revision": 1,
+  "requires": {
+    "cerb_version": "9.1.0"
+  },
+  "configure": {
+    "prompts": [
+      {
+        "type": "chooser",
+        "label": "AWS Account:",
+        "key": "aws_account_id",
+        "params": {
+          "context": "cerberusweb.contexts.connected_account",
+          "query": "aws OR amazon",
+          "single": true
+        }
+      },
+      {
+        "type": "text",
+        "label": "AWS Region:",
+        "key": "aws_region",
+        "params": {
+          "default": "us-west-2"
+        }
+      }
+    ],
+    "placeholders": [
+    ]
+  }
+  },
+  "bots": [
+    {
+      "uid": "bot_33",
+      "name": "AWS Lambda Bot",
+      "owner": {
+        "context": "cerberusweb.contexts.app",
+        "id": 0
+      },
+      "is_disabled": false,
+      "params": {
+        "config": null,
+        "events": {
+          "mode": "all",
+          "items": []
+        },
+        "actions": {
+          "mode": "all",
+          "items": []
+        }
+      },
+      "image": "data:image/png;base64,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",
+      "behaviors": [
+        {
+          "uid": "behavior_180",
+          "title": "DNS conversational behavior",
+          "is_disabled": false,
+          "is_private": true,
+          "priority": 50,
+          "event": {
+            "key": "event.message.chat.worker",
+            "label": "Conversation with worker"
+          },
+          "nodes": [
+            {
+              "type": "action",
+              "title": "Hi!",
+              "status": "live",
+              "params": {
+                "actions": [
+                  {
+                    "action": "send_message",
+                    "message": "Hi, {{worker_first_name}}!",
+                    "format": "",
+                    "delay_ms": "250"
+                  },
+                  {
+                    "action": "send_message",
+                    "message": "I can perform DNS lookups for you.",
+                    "format": "",
+                    "delay_ms": "1000"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "loop",
+              "title": "Menu",
+              "status": "live",
+              "params": {
+                "foreach_json": "[\"*\"]",
+                "as_placeholder": "iterations"
+              },
+              "nodes": [
+                {
+                  "type": "action",
+                  "title": "What would you like to look up?",
+                  "status": "live",
+                  "params": {
+                    "actions": [
+                      {
+                        "action": "send_message",
+                        "message": "What would you like to look up?",
+                        "format": "",
+                        "delay_ms": "500"
+                      },
+                      {
+                        "action": "prompt_buttons",
+                        "options": "Hostname\r\nIP\r\nMX\r\nBye",
+                        "color_from": "#4795f7",
+                        "color_mid": "#4795f7",
+                        "color_to": "#4795f7",
+                        "style": ""
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "action",
+                  "title": "Save mode",
+                  "status": "live",
+                  "params": {
+                    "actions": [
+                      {
+                        "action": "_set_custom_var",
+                        "value": "{{message}}",
+                        "format": "",
+                        "is_simulator_only": "0",
+                        "var": "dns_mode"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "switch",
+                  "title": "Action:",
+                  "status": "live",
+                  "nodes": [
+                    {
+                      "type": "outcome",
+                      "title": "Hostname",
+                      "status": "live",
+                      "params": {
+                        "groups": [
+                          {
+                            "any": 0,
+                            "conditions": [
+                              {
+                                "condition": "message",
+                                "oper": "is",
+                                "value": "Hostname"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "nodes": [
+                        {
+                          "type": "action",
+                          "title": "What hostname?",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "send_message",
+                                "message": "What hostname would you like to find an IP for?",
+                                "format": "",
+                                "delay_ms": "1000"
+                              },
+                              {
+                                "action": "prompt_text",
+                                "placeholder": "e.g. cerb.ai"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "action",
+                          "title": "Run behavior",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "_run_behavior",
+                                "on": "_trigger_va_id",
+                                "behavior_id": "{{{uid.behavior_181}}}",
+                                "var_mode": "resolve",
+                                "var_value": "{{message}}",
+                                "run_in_simulator": "0",
+                                "var": "_behavior"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "action",
+                          "title": "parseResponse()",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "_run_subroutine",
+                                "subroutine": "parseResponse()"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "outcome",
+                      "title": "IP",
+                      "status": "live",
+                      "params": {
+                        "groups": [
+                          {
+                            "any": 0,
+                            "conditions": [
+                              {
+                                "condition": "message",
+                                "oper": "is",
+                                "value": "IP"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "nodes": [
+                        {
+                          "type": "action",
+                          "title": "What IP?",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "send_message",
+                                "message": "What IP would you like to find a hostname for?",
+                                "format": "",
+                                "delay_ms": "1000"
+                              },
+                              {
+                                "action": "prompt_text",
+                                "placeholder": "e.g. 8.8.8.8"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "action",
+                          "title": "Run behavior",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "_run_behavior",
+                                "on": "_trigger_va_id",
+                                "behavior_id": "{{{uid.behavior_181}}}",
+                                "var_mode": "reverse",
+                                "var_value": "{{message}}",
+                                "run_in_simulator": "0",
+                                "var": "_behavior"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "action",
+                          "title": "parseResponse()",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "_run_subroutine",
+                                "subroutine": "parseResponse()"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "outcome",
+                      "title": "MX",
+                      "status": "live",
+                      "params": {
+                        "groups": [
+                          {
+                            "any": 0,
+                            "conditions": [
+                              {
+                                "condition": "message",
+                                "oper": "is",
+                                "value": "MX"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "nodes": [
+                        {
+                          "type": "action",
+                          "title": "What hostname?",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "send_message",
+                                "message": "What hostname would you like to find mail servers for?",
+                                "format": "",
+                                "delay_ms": "1000"
+                              },
+                              {
+                                "action": "prompt_text",
+                                "placeholder": "e.g. cerb.email"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "action",
+                          "title": "Run behavior",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "_run_behavior",
+                                "on": "_trigger_va_id",
+                                "behavior_id": "{{{uid.behavior_181}}}",
+                                "var_mode": "mx",
+                                "var_value": "{{message}}",
+                                "run_in_simulator": "0",
+                                "var": "_behavior"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "type": "action",
+                          "title": "parseResponse()",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "_run_subroutine",
+                                "subroutine": "parseResponse()"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "outcome",
+                      "title": "Bye",
+                      "status": "live",
+                      "params": {
+                        "groups": [
+                          {
+                            "any": 0,
+                            "conditions": []
+                          }
+                        ]
+                      },
+                      "nodes": [
+                        {
+                          "type": "action",
+                          "title": "Bye!",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "send_message",
+                                "message": "Bye!",
+                                "format": "",
+                                "delay_ms": "1000"
+                              },
+                              {
+                                "action": "window_close"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "subroutine",
+              "title": "parseResponse()",
+              "status": "live",
+              "nodes": [
+                {
+                  "type": "switch",
+                  "title": "Have a response?",
+                  "status": "live",
+                  "nodes": [
+                    {
+                      "type": "outcome",
+                      "title": "No, error",
+                      "status": "live",
+                      "params": {
+                        "groups": [
+                          {
+                            "any": 0,
+                            "conditions": [
+                              {
+                                "condition": "_custom_script",
+                                "tpl": "{% if _behavior.response_json is iterable and _behavior.response_json.errorMessage is not empty %}true{% endif %}",
+                                "oper": "is",
+                                "value": "true"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "nodes": [
+                        {
+                          "type": "action",
+                          "title": "Error!",
+                          "status": "live",
+                          "params": {
+                            "actions": [
+                              {
+                                "action": "send_message",
+                                "message": "I had trouble: {{_behavior.response_json.errorMessage}}",
+                                "format": "",
+                                "delay_ms": "1000"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "outcome",
+                      "title": "Yes",
+                      "status": "live",
+                      "params": {
+                        "groups": [
+                          {
+                            "any": 0,
+                            "conditions": [
+                              {
+                                "condition": "_custom_script",
+                                "tpl": "{{_behavior.response_json}}",
+                                "oper": "!is",
+                                "value": ""
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      "nodes": [
+                        {
+                          "type": "switch",
+                          "title": "Type:",
+                          "status": "live",
+                          "nodes": [
+                            {
+                              "type": "outcome",
+                              "title": "MX",
+                              "status": "live",
+                              "params": {
+                                "groups": [
+                                  {
+                                    "any": 0,
+                                    "conditions": [
+                                      {
+                                        "condition": "_custom_script",
+                                        "tpl": "{{dns_mode}}",
+                                        "oper": "is",
+                                        "value": "MX"
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              "nodes": [
+                                {
+                                  "type": "action",
+                                  "title": "Respond",
+                                  "status": "live",
+                                  "params": {
+                                    "actions": [
+                                      {
+                                        "action": "send_message",
+                                        "message": "{% if _behavior.response_json is iterable %}\r\n{% set exchanges = _behavior.response_json|sort %}\r\n{% for value in exchanges %}\r\n* [{{value.priority}}] {{value.exchange}}\r\n{% endfor %}\r\n{% endif %}",
+                                        "format": "markdown",
+                                        "delay_ms": "500"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "type": "outcome",
+                              "title": "(Other)",
+                              "status": "live",
+                              "params": {
+                                "groups": [
+                                  {
+                                    "any": 0,
+                                    "conditions": []
+                                  }
+                                ]
+                              },
+                              "nodes": [
+                                {
+                                  "type": "action",
+                                  "title": "Respond",
+                                  "status": "live",
+                                  "params": {
+                                    "actions": [
+                                      {
+                                        "action": "send_message",
+                                        "message": "{% if _behavior.response_json is iterable %}\r\n{% for value in _behavior.response_json %}\r\n* {{value}}\r\n{% endfor %}\r\n{% else %}\r\n{{_behavior.response_json}}\r\n{% endif %}",
+                                        "format": "markdown",
+                                        "delay_ms": "500"
+                                      }
+                                    ]
+                                  }
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "outcome",
+                      "title": "No",
+                      "status": "live",
+                      "params": {
+                        "groups": [
+                          {
+                            "any": 0,
+                            "conditions": []
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uid": "behavior_178",
+          "title": "Get interactions for worker",
+          "is_disabled": false,
+          "is_private": false,
+          "priority": 50,
+          "event": {
+            "key": "event.interactions.get.worker",
+            "label": "Conversation get interactions for worker",
+            "params": {
+              "listen_points": "global\r\n"
+            }
+          },
+          "nodes": [
+            {
+              "type": "switch",
+              "title": "Point:",
+              "status": "live",
+              "nodes": [
+                {
+                  "type": "outcome",
+                  "title": "global",
+                  "status": "live",
+                  "params": {
+                    "groups": [
+                      {
+                        "any": 0,
+                        "conditions": [
+                          {
+                            "condition": "point",
+                            "oper": "is",
+                            "value": "global"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "nodes": [
+                    {
+                      "type": "action",
+                      "title": "Return interactions",
+                      "status": "live",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": "return_interaction",
+                            "behavior_id": "{{{uid.behavior_179}}}",
+                            "name": "DNS lookup",
+                            "interaction": "dns.lookup",
+                            "interaction_params_json": ""
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uid": "behavior_179",
+          "title": "Handle interaction with worker",
+          "is_disabled": false,
+          "is_private": false,
+          "priority": 50,
+          "event": {
+            "key": "event.interaction.chat.worker",
+            "label": "Conversation handle interaction with worker"
+          },
+          "nodes": [
+            {
+              "type": "switch",
+              "title": "Interaction:",
+              "status": "live",
+              "nodes": [
+                {
+                  "type": "outcome",
+                  "title": "dns.lookup",
+                  "status": "live",
+                  "params": {
+                    "groups": [
+                      {
+                        "any": 0,
+                        "conditions": [
+                          {
+                            "condition": "interaction",
+                            "oper": "is",
+                            "value": "dns.lookup"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "nodes": [
+                    {
+                      "type": "action",
+                      "title": "Run behavior",
+                      "status": "live",
+                      "params": {
+                        "actions": [
+                          {
+                            "action": "switch_behavior",
+                            "return": "0",
+                            "behavior_id": "{{{uid.behavior_180}}}",
+                            "var": "_behavior"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "uid": "behavior_181",
+          "title": "Invoke CerbDnsLookup Lambda function",
+          "is_disabled": false,
+          "is_private": true,
+          "priority": 50,
+          "event": {
+            "key": "event.macro.bot",
+            "label": "Custom behavior on bot"
+          },
+          "variables": {
+            "var_mode": {
+              "key": "var_mode",
+              "label": "Mode",
+              "type": "D",
+              "is_private": "0",
+              "params": {
+                "options": "resolve\r\nreverse\r\nmx"
+              }
+            },
+            "var_value": {
+              "key": "var_value",
+              "label": "Value",
+              "type": "S",
+              "is_private": "0",
+              "params": {
+                "widget": "single"
+              }
+            }
+          },
+          "nodes": [
+            {
+              "type": "action",
+              "title": "Invoke CerbDnsLookup Lambda function",
+              "status": "live",
+              "params": {
+                "actions": [
+                  {
+                    "action": "_set_custom_var",
+                    "value": "{% set json = {} %}\r\n{% set json = dict_set(json, 'mode', var_mode) %}\r\n{% set json = dict_set(json, 'value', var_value) %}\r\n{{json|json_encode}}",
+                    "format": "json",
+                    "is_simulator_only": "0",
+                    "var": "request_json"
+                  },
+                  {
+                    "action": "core.va.action.http_request",
+                    "http_verb": "post",
+                    "http_url": "https://lambda.{{{aws_region}}}.amazonaws.com/2015-03-31/functions/CerbDnsLookup/invocations",
+                    "http_headers": "Date: {{'now'|date('r', 'UTC')}}\r\nX-AMZ-Client-Context: {{\"{}\"|base64_encode}}\r\nX-AMZ-Date: {{'now'|date('Ymd\\\\THis\\\\Z', 'UTC')}}",
+                    "http_body": "{{request_json|json_encode}}",
+                    "auth": "connected_account",
+                    "auth_connected_account_id": "{{{aws_account_id}}}",
+                    "options": {
+                      "raw_response_body": "1"
+                    },
+                    "run_in_simulator": "1",
+                    "response_placeholder": "_http_response"
+                  },
+                  {
+                    "action": "_set_custom_var",
+                    "value": "{{_http_response.body|json_pretty}}",
+                    "format": "json",
+                    "is_simulator_only": "0",
+                    "var": "response_json"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
 ```
 
 Click the **Import** button.

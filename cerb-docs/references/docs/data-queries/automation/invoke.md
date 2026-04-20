@@ -23,6 +23,10 @@ The supported result formats are determined by each automation.
 # Examples
 
 ```
-type: automation.invoke name: example.fetchApiData inputs: ( dateRange: "this year" ) 
- format: dictionaries
+type:automation.invoke
+name:example.fetchApiData
+inputs:(
+  dateRange:"this year"
+)
+format:dictionaries
 ```

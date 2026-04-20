@@ -8,7 +8,9 @@ tags: ["docs", "docs-scripting"]
 ## secs\_pretty
 
 ```
-{{ "300" | secs_pretty }} {{ "86400" | secs_pretty }} {{ "604800" | secs_pretty () }}
+{{"300"|secs_pretty}}
+{{"86400"|secs_pretty}}
+{{"604800"|secs_pretty()}}
 ```
 
 ```

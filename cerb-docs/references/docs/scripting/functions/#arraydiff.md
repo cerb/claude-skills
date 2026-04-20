@@ -10,8 +10,10 @@ tags: ["docs", "docs-scripting"]
 The **array\_diff** function returns the items in the second array that are not present in the first array:
 
 ```
-{% set arr1 = ['Apple' , 'Google' , 'Microsoft'] %} {% set arr2 = ['Apple' , 'Microsoft' , 'Cerb'] %} {% set diff = array_diff ( arr2 , arr1 ) %}
-These are new: {{ diff | join ( ', ' ) }}
+{% set arr1 = ['Apple', 'Google', 'Microsoft'] %}
+{% set arr2 = ['Apple', 'Microsoft', 'Cerb'] %}
+{% set diff = array_diff(arr2, arr1) %}
+These are new: {{diff|join(', ')}}
 ```
 
 ```

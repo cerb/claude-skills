@@ -14,10 +14,26 @@ Here is an example of using the [dict\_set()](/docs/scripting/functions/#dict_se
 
 - 
 ```
-start: set: worker@json: {% set var = {"group": {}} %} {% set var = dict_set(var, 'group.name', 'Support') %} {% set var = dict_set(var, 'group.manager.name.first', 'Kina') %} {% set var = dict_set(var, 'group.manager.name.last', 'Halpue') %} {{ var|json_encode }} return: worker@key: worker
+start:
+  set:
+    worker@json:
+      {% set var = {"group": {}} %}
+      {% set var = dict_set(var, 'group.name', 'Support') %}
+      {% set var = dict_set(var, 'group.manager.name.first', 'Kina') %}
+      {% set var = dict_set(var, 'group.manager.name.last', 'Halpue') %}
+      {{var|json_encode}}
+  return:
+    worker@key: worker
 ```
 - 
 ```
-__return: worker: group: name: Support manager: name: first: Kina last: Halpue
+__return:
+  worker:
+    group:
+      name: Support
+      manager:
+        name:
+          first: Kina
+          last: Halpue
 ```
 

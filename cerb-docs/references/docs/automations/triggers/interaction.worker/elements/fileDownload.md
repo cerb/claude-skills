@@ -10,7 +10,15 @@ In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **
 This is particularly useful for interactions that generate large or binary output, like a dynamic image, a CSV/JSON export, or a ZIP archive.
 
 ```
-start: await: form: title: Interaction Download elements: fileDownload/prompt_file: label: Download: uri: cerb:automation_resource:3b1f58c2-1234-11ed-b9e9-01791ccb5549 filename: example.zip
+start:
+  await:
+    form:
+      title: Interaction Download
+      elements:
+        fileDownload/prompt_file:
+          label: Download:
+          uri: cerb:automation_resource:3b1f58c2-1234-11ed-b9e9-01791ccb5549
+          filename: example.zip
 ```
 
  
@@ -36,7 +44,7 @@ The filename to show on the download button.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### uri:

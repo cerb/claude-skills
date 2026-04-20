@@ -12,10 +12,19 @@ tags: ["solutions", "solutions-automations"]
 
 - 
 ```
-start: api.command: output: results inputs: name: cerb.commands.email.spam.train params: ticket_id@int: 1234
+start:
+  api.command:
+    output: results
+    inputs:
+      name: cerb.commands.email.spam.train
+      params:
+        ticket_id@int: 1234
 ```
 - 
 ```
-commands: api.command: deny/name@bool: {{ inputs.name not in ['cerb.commands.email.spam.train'] }} allow@bool: yes
+commands:
+  api.command:
+    deny/name@bool: {{inputs.name not in ['cerb.commands.email.spam.train']}}
+    allow@bool: yes
 ```
 

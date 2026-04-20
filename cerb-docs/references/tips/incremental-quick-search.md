@@ -16,7 +16,7 @@ For instance, let's assume that you already have a [ticket](/docs/tickets/) work
 You can use this quick search:
 
 ```
-+ updated: "-1 year"
++updated:"-1 year"
 ```
 
 The worklist now has three filters:

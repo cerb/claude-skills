@@ -92,7 +92,7 @@ These filters are available in bot scripts and snippets:
 Return the absolute value of a number:
 
 ```
-{{ - 5 | abs }}
+{{-5|abs}}
 ```
 
 ```
@@ -104,7 +104,7 @@ Return the absolute value of a number:
 Remove non-alphanumeric characters from a string:
 
 ```
-{{ "* Ignore spaces and non-alphanumeric characters+1$2%3!" | alphanum }}
+{{"* Ignore spaces and non-alphanumeric characters+1$2%3!"|alphanum}}
 ```
 
 ```
@@ -114,7 +114,7 @@ Ignorespacesandnonalphanumericcharacters123
 Also allow specific characters:
 
 ```
-{{ "* Ignore non-alphanumeric but allow spaces$%#!" | alphanum ( ' !' ) }}
+{{"* Ignore non-alphanumeric but allow spaces$%#!"|alphanum(' !')}}
 ```
 
 ```
@@ -134,7 +134,8 @@ Append a suffix to the current text.
 | **trim** | Optional characters to remove from the end of the current value (e.g. dangling commas). When omitted the trim is set to the same value as the delimiter. |
 
 ```
-{% set emails = "customer@cerb.example" %} {{ emails | append ( 'vendor@cerb.example' , delimiter = ', ' ) }}
+{% set emails = "customer@cerb.example" %}
+{{emails|append('vendor@cerb.example', delimiter=', ')}}
 ```
 
 ```
@@ -142,7 +143,8 @@ customer@cerb.example, vendor@cerb.example
 ```
 
 ```
-{% set emails = null %} {{ emails | append ( 'vendor@cerb.example' , delimiter = ', ' ) }}
+{% set emails = null %}
+{{emails|append('vendor@cerb.example', delimiter=', ')}}
 ```
 
 ```
@@ -154,7 +156,7 @@ vendor@cerb.example
 Sum the numeric elements of an array.
 
 ```
-{{ array_sum ([1 , 2 , 3 , 4 , 5]) }}
+{{array_sum([1,2,3,4,5])}}
 ```
 
 ```
@@ -168,7 +170,11 @@ Convert between number system bases.
 (Introduced in [9.0.8](/releases/9.0.8/))
 
 ```
-{% set int = 123456789 %} {{ int | base_convert ( 10 , 16 ) }} {% set hex = '75bcd15' %} {{ hex | base_convert ( 16 , 10 ) }}
+{% set int = 123456789 %}
+{{int|base_convert(10,16)}}
+
+{% set hex = '75bcd15' %}
+{{hex|base_convert(16,10)}}
 ```
 
 ```
@@ -182,7 +188,8 @@ Convert between number system bases.
 Decode a base64-encoded string:
 
 ```
-{% set b64 = "VGhpcyB3YXMgYmFzZTY0LWVuY29kZWQ=" %} {{ b64 | base64_decode }}
+{% set b64 = "VGhpcyB3YXMgYmFzZTY0LWVuY29kZWQ=" %}
+{{b64|base64_decode}}
 ```
 
 ```
@@ -194,7 +201,7 @@ This was base64-encoded
 Encode a string in base64:
 
 ```
-{{ "This was base64-encoded" | base64_encode }}
+{{"This was base64-encoded"|base64_encode}}
 ```
 
 ```
@@ -208,7 +215,8 @@ VGhpcyB3YXMgYmFzZTY0LWVuY29kZWQ=
 Decode a base64url-encoded string:
 
 ```
-{% set b64 = "VGhpcyB3YXMgYmFzZTY0dXJsLWVuY29kZWQ" %} {{ b64 | base64url_decode }}
+{% set b64 = "VGhpcyB3YXMgYmFzZTY0dXJsLWVuY29kZWQ" %}
+{{b64|base64url_decode}}
 ```
 
 ```
@@ -222,7 +230,7 @@ This was base64url-encoded
 Encode a string in base64url:
 
 ```
-{{ "This was base64url-encoded" | base64url_encode }}
+{{"This was base64url-encoded"|base64url_encode}}
 ```
 
 ```
@@ -234,7 +242,8 @@ VGhpcyB3YXMgYmFzZTY0dXJsLWVuY29kZWQ
 Break a list into smaller chunks with **batch**:
 
 ```
-{% set items = ['red' , 'blue' , 'green'] %} {{ items | batch ( 2 , '(empty)' ) | json_encode | json_pretty }}
+{% set items = ['red','blue','green'] %}
+{{items|batch(2, '(empty)')|json_encode|json_pretty}}
 ```
 
 ```
@@ -255,7 +264,7 @@ Break a list into smaller chunks with **batch**:
 Convert a number into a human readable number of bytes:
 
 ```
-{{ "123456789" | bytes_pretty ( 2 ) }}
+{{"123456789"|bytes_pretty(2)}}
 ```
 
 ```
@@ -269,7 +278,8 @@ The optional argument determines the number of digits of precision.
 Capitalize the first character of a string (and lowercase the rest):
 
 ```
-{% set first_name = "kina" %} {{ first_name | capitalize }}
+{% set first_name = "kina" %}
+{{first_name|capitalize}}
 ```
 
 ```
@@ -283,7 +293,7 @@ Kina
 Converts string IDs (like `status.open`) into text in the current worker's language.
 
 ```
-The ticket is {{ 'status.open' | cerb_translate }}
+The ticket is {{'status.open'|cerb_translate}}
 ```
 
 ```
@@ -297,7 +307,11 @@ The ticket is open.
 Extract a key from each item in an array as a new array. This has the same effect as the [array\_column()](/docs/scripting/functions/#array_column) function.
 
 ```
-{% set people = [{ 'name' : 'Kina Halpue' , 'email' : 'kina@cerb.example' } , { 'name' : 'Milo Dade' , 'email' : 'milo@cerb.example' }] %} {{ people | column ( 'email' ) | join ( ', ' ) }}
+{% set people = [
+  {'name':'Kina Halpue', 'email':'kina@cerb.example'},
+  {'name':'Milo Dade', 'email': 'milo@cerb.example'}
+] %}
+{{people|column('email')|join(', ')}}
 ```
 
 ```
@@ -313,7 +327,9 @@ Convert a Cerb `context` ID into a human readable label.
 | **type** | `singular`, `plural`, `id`, `uri` |
 
 ```
-{{ 'cerberusweb.contexts.ticket' | context_name ( 'singular' ) }} {{ 'cerberusweb.contexts.task' | context_name ( 'plural' ) }} {{ 'worker' | context_name ( 'id' ) }}
+{{'cerberusweb.contexts.ticket'|context_name('singular')}}
+{{'cerberusweb.contexts.task'|context_name('plural')}}
+{{'worker'|context_name('id')}}
 ```
 
 ```
@@ -326,7 +342,7 @@ task
 Convert character encodings to the first argument from the second. If the second argument is blank then Cerb will attempt to auto-detect the current encoding.
 
 ```
-{{ "This has 😂 emoji" | convert_encoding ( 'iso-8859-1' , 'utf-8' ) }}
+{{"This has 😂 emoji"|convert_encoding('iso-8859-1', 'utf-8')}}
 ```
 
 ```
@@ -340,9 +356,18 @@ This has ? emoji
 Format an array as a comma-separated values list. This is useful for exporting reports for Excel from bots.
 
 ```
-{% set records = [{ id : 1 , subject : "Help with the API" , } , { id : 2 , subject : "Automating email replies" , }] %}
+{% set records = [
+	{
+		id: 1,
+		subject: "Help with the API",
+	},
+	{
+		id: 2,
+		subject: "Automating email replies", 
+	}
+] %}
 ID,Subject
-{{ records | csv }}
+{{records|csv}}
 ```
 
 ```
@@ -356,7 +381,9 @@ ID,Subject
 Use the **date** filter to format a [string](/docs/scripting/#strings) or [variable](/docs/scripting/#variables) as a date:
 
 ```
-{{ 'now' | date ( 'F d, Y h:ia T' ) }} {{ 'tomorrow 5pm' | date ( 'D, d F Y H:i T' ) }} {{ '+2 weeks 08:00' | date ( 'Y-m-d h:ia T' ) }}
+{{'now'|date('F d, Y h:ia T')}}
+{{'tomorrow 5pm'|date('D, d F Y H:i T')}}
+{{'+2 weeks 08:00'|date('Y-m-d h:ia T')}}
 ```
 
 ```
@@ -370,11 +397,11 @@ You can use any of the formatting options from PHP DateTime::format.
 The second parameter to the **date** filter can specify a timezone to use:
 
 ```
-{% set ts_now = 'now' - %}
+{% set ts_now = 'now' -%}
 
-Bangalore: {{ ts_now | date ( time_format , 'Asia/Calcutta' ) }}
-Berlin: {{ ts_now | date ( time_format , 'Europe/Berlin' ) }}
-New York: {{ ts_now | date ( time_format , 'America/New_York' ) }}
+Bangalore: {{ts_now|date(time_format, 'Asia/Calcutta')}}
+Berlin: {{ts_now|date(time_format, 'Europe/Berlin')}}
+New York: {{ts_now|date(time_format, 'America/New_York')}}
 ```
 
 ```
@@ -386,7 +413,7 @@ New York: December 12, 2017 14:57
 You can get a Unix timestamp (seconds since 1-Jan-1970 00:00:00 UTC) from a date value with the `|date('U')` filter:
 
 ```
-It has been {{ 'now' | date ( 'U' ) }} seconds since {{ '0' | date ( null , 'UTC' ) }}
+It has been {{'now'|date('U')}} seconds since {{'0'|date(null, 'UTC')}}
 ```
 
 ```
@@ -398,9 +425,10 @@ It has been 1513108417 seconds since January 1, 1970 00:00
 If you need to manipulate a date, create a date object with the [date](/docs/scripting/functions/#date) function and use the **date\_modify** filter:
 
 ```
-{% set format = 'D, d M Y T' %} {% set timestamp = date ( 'now' ) %}
-Now: {{ timestamp | date ( format ) }}
-+2 days: {{ timestamp | date_modify ( '+2 days' ) | date ( format ) }}
+{% set format = 'D, d M Y T' %}
+{% set timestamp = date('now') %}
+Now: {{timestamp|date(format)}}
++2 days: {{timestamp|date_modify('+2 days')|date(format)}}
 ```
 
 ```
@@ -413,7 +441,8 @@ Now: Tue, 12 Dec 2017 PST
 Convert a Unix timestamp into a human-readable, relative date:
 
 ```
-{% set timestamp = date ( "Jan 9 2002 10am" , "America/Los_Angeles" ) %} {{ timestamp | date ( 'U' ) | date_pretty }}
+{% set timestamp = date("Jan 9 2002 10am", "America/Los_Angeles") %}
+{{timestamp|date('U')|date_pretty}}
 ```
 
 ```
@@ -426,7 +455,7 @@ You can use the **default** filter to give a default value to empty variables:
 
 ```
 {% set name = '' %}
-Hi {{ name | default ( 'there' ) }}
+Hi {{name|default('there')}}
 ```
 
 ```
@@ -444,7 +473,8 @@ Escape strings and variables with the following modes:
 - `html_attr`
 
 ```
-{{ 'This is "escaped" for Javascript' | escape ( 'js' ) }} {{ 'This is "escaped" for <b>HTML</b>' | e ( 'html' ) }}
+{{'This is "escaped" for Javascript'|escape('js')}}
+{{'This is "escaped" for <b>HTML</b>'|e('html')}}
 ```
 
 ```
@@ -463,7 +493,8 @@ Exclude items from an array using an arrow function.
 | **func(v,k)** | An arrow function that returns `true` (include) or `false` (exclude) for each item. It receives `v` (value) and `k` (key) as arguments. |
 
 ```
-{% set arr = [1 , 2 , 3 , 4 , 5 , 6 , 7 , 8] %} {{ arr | filter (( v , k ) => v is even ) | values | join ( ',' ) }}
+{% set arr = [1,2,3,4,5,6,7,8] %}
+{{arr|filter((v,k) => v is even)|values|join(',')}}
 ```
 
 ```
@@ -475,7 +506,8 @@ Exclude items from an array using an arrow function.
 Return the first item of an array, object, or string:
 
 ```
-{% set items = [1 , 2 , 3] %} {{ items | first }}
+{% set items = [1,2,3] %}
+{{items|first}}
 ```
 
 ```
@@ -487,7 +519,9 @@ Return the first item of an array, object, or string:
 Insert variables into a [string](/docs/scripting/#strings):
 
 ```
-{% set who = "Kina" %} {% set quantity = 120 %} {{ "%s closed %d tickets today!" | format ( who , quantity ) }}
+{% set who = "Kina" %}
+{% set quantity = 120 %}
+{{"%s closed %d tickets today!"|format(who, quantity)}}
 ```
 
 ```
@@ -509,9 +543,9 @@ The **algorithm** can be one of: `crc32`, `md5`, `murmur3a`, `murmur3c`, `murmur
 
 ```
 {% set text = 'This string will be hashed' %}
-SHA-512: {{ text | hash ( 'sha512' ) }}
-Murmur3a: {{ text | hash ( 'murmur3a' ) }}
-xxh128: {{ text | hash ( 'xxh128' ) }}
+SHA-512: {{text|hash('sha512')}}
+Murmur3a: {{text|hash('murmur3a')}}
+xxh128: {{text|hash('xxh128')}}
 ```
 
 ```
@@ -533,7 +567,8 @@ Generate a hash-based message authentication code (HMAC[1](#fn:hmac)) using a se
 For instance, you can use this to sign parameters in a survey URL to verify that the recipient didn't modify them.
 
 ```
-{% set data = { 'email' : 'kina@cerb.example' , 'survey_id' : 123 } %} {{ data | json_encode | hash_hmac ( "THIS IS SECRET" , "sha256" ) }}
+{% set data = {'email': 'kina@cerb.example', 'survey_id': 123} %}
+{{data|json_encode|hash_hmac("THIS IS SECRET","sha256")}}
 ```
 
 ```
@@ -551,11 +586,21 @@ Convert HTML content to plain text.
 | **truncate** | The maximum length to parse (bytes) |
 
 ```
-{% set html %} <p>
-	This has <b>bold</b> and <u>underlined</u> text with <a href= "https://cerb.ai/" >links</a>.
-</p> <p>
+{% set html %}
+<p>
+	This has <b>bold</b> and <u>underlined</u> text with <a href="https://cerb.ai/">links</a>.
+</p>
+<p>
 	List:
-	<ul> <li>This</li> <li>is</li> <li>a</li> <li>list</li> </ul> </p> {% endset %} {{ html | html_to_text }}
+	<ul>
+		<li>This</li>
+		<li>is</li>
+		<li>a</li>
+		<li>list</li>
+	</ul>
+</p>
+{% endset %}
+{{html|html_to_text}}
 ```
 
 ```
@@ -579,7 +624,8 @@ Returns information about an image. The image may be provided as bytes or in dat
 ```
 {% set image_string %}
 data:image/png;base64,iVBORw0KGgoAAAA....
-{% endset %} {{ image_string | image_info | json_encode | json_pretty }}
+{% endset %}
+{{image_string|image_info|json_encode|json_pretty}}
 ```
 
 ```
@@ -604,7 +650,15 @@ Prefix the start of each line with a given marker in a block of text.
 | **start\_line** | The line number to start prefixing from (0-based). |
 
 ```
-{% set text = " Lorem ipsum dolor sit amet , consectetur adipiscing elit. Mauris eget diam eu orci hendrerit elementum. Suspendisse egestas , dolor at efficitur sollicitudin , magna eros scelerisque risus , at tincidunt massa augue a eros. Nullam scelerisque luctus suscipit. Sed dui metus , rhoncus sed diam non , pretium maximus augue. Phasellus feugiat justo mi , in tristique quam euismod pellentesque. Curabitur ut libero sagittis sem semper ultrices. Nullam et mi id arcu vulputate fringilla ut quis nibh. Fusce lobortis magna eu quam porta scelerisque. Suspendisse maximus fringilla tellus , a pellentesque sem tincidunt sit amet. " - %} {{ text | indent ( '> ' ) }}
+{% set text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eget diam 
+eu orci hendrerit elementum. Suspendisse egestas, dolor at efficitur sollicitudin, magna eros 
+scelerisque risus, at tincidunt massa augue a eros. Nullam scelerisque luctus suscipit. Sed 
+dui metus, rhoncus sed diam non, pretium maximus augue. Phasellus feugiat justo mi, in 
+tristique quam euismod pellentesque. Curabitur ut libero sagittis sem semper ultrices. Nullam 
+et mi id arcu vulputate fringilla ut quis nibh. Fusce lobortis magna eu quam porta scelerisque.
+Suspendisse maximus fringilla tellus, a pellentesque sem tincidunt sit amet." -%}
+
+{{text|indent('> ')}}
 ```
 
 ```
@@ -622,7 +676,9 @@ Prefix the start of each line with a given marker in a block of text.
 Convert an [array](/docs/scripting/arrays-objects/) to a string with delimiters:
 
 ```
-{% set items = [1 , 2 , 3] %} {{ items | join ( ',' ) }} {{ items | join ( ' ' ) }}
+{% set items = [1,2,3] %}
+{{items|join(',')}}
+{{items|join(' ')}}
 ```
 
 ```
@@ -635,7 +691,11 @@ Convert an [array](/docs/scripting/arrays-objects/) to a string with delimiters:
 You can encode any variable as a JSON string with the **json\_encode** filter:
 
 ```
-{% set json = { 'name' : 'Joe Customer' } %} {% set json = dict_set ( json , 'order_id' , 54321 ) %} {% set json = dict_set ( json , 'status.text' , 'shipped' ) %} {% set json = dict_set ( json , 'status.tracking_id' , 'Z1F238' ) %} {{ json | json_encode }}
+{% set json = {'name': 'Joe Customer'} %}
+{% set json = dict_set(json, 'order_id', 54321) %}
+{% set json = dict_set(json, 'status.text', 'shipped') %}
+{% set json = dict_set(json, 'status.tracking_id', 'Z1F238') %}
+{{json|json_encode}}
 ```
 
 ```
@@ -647,7 +707,11 @@ You can encode any variable as a JSON string with the **json\_encode** filter:
 You can _"prettify"_ a JSON string with the **json\_pretty** filter:
 
 ```
-{% set json = { 'name' : 'Joe Customer' } %} {% set json = dict_set ( json , 'order_id' , 54321 ) %} {% set json = dict_set ( json , 'status.text' , 'shipped' ) %} {% set json = dict_set ( json , 'status.tracking_id' , 'Z1F238' ) %} {{ json | json_encode | json_pretty }}
+{% set json = {'name': 'Joe Customer'} %}
+{% set json = dict_set(json, 'order_id', 54321) %}
+{% set json = dict_set(json, 'status.text', 'shipped') %}
+{% set json = dict_set(json, 'status.tracking_id', 'Z1F238') %}
+{{json|json_encode|json_pretty}}
 ```
 
 ```
@@ -666,7 +730,11 @@ You can _"prettify"_ a JSON string with the **json\_pretty** filter:
 Emit an object/array as a KATA text block:
 
 ```
-{% set object = { colors : ["red" , "green" , "blue"], size : 100 , } %} {{ object | kata_encode }}
+{% set object = {
+	colors: ["red","green","blue"],
+	size: 100,
+} %}
+{{object|kata_encode}}
 ```
 
 ```
@@ -682,7 +750,11 @@ size: 100
 Return the keys of an array or object:
 
 ```
-{% set list = ['red' , 'green' , 'blue'] %} {% set obj = { 'name' : 'Kina' , 'age' : 35 , 'title' : 'Customer Support Supervisor' } %} {{ list | keys | join ( ',' ) }} {{ obj | keys | json_encode }}
+{% set list = ['red','green','blue'] %}
+{% set obj = { 'name': 'Kina', 'age': 35, 'title': 'Customer Support Supervisor'} %}
+
+{{list|keys|join(',')}}
+{{obj|keys|json_encode}}
 ```
 
 ```
@@ -696,7 +768,8 @@ Return the keys of an array or object:
 Return the last item of an array, object, or string:
 
 ```
-{% set items = [1 , 2 , 3] %} {{ items | last }}
+{% set items = [1,2,3] %}
+{{items|last}}
 ```
 
 ```
@@ -708,7 +781,8 @@ Return the last item of an array, object, or string:
 Return the length of a string or array:
 
 ```
-{{ "This is a string" | length }} {{ [1 , 2 , 3 , 4 , 5] | length }}
+{{"This is a string"|length}}
+{{[1,2,3,4,5]|length}}
 ```
 
 ```
@@ -721,7 +795,7 @@ Return the length of a string or array:
 Convert a string to lowercase:
 
 ```
-{{ "WHY ARE YOU YELLING?" | lower }}
+{{"WHY ARE YOU YELLING?"|lower}}
 ```
 
 ```
@@ -739,9 +813,14 @@ Apply a function to each item in an array to create a new array.
 | **func(v,k)** | An arrow function that returns the new value for each item. It receives `v` (value) and `k` (key) as arguments. |
 
 ```
-{% set samples = [[ 1 , 2 , 3 , 4 , 5], [6 , 7 , 8 , 9 , 10], [1 , 3 , 5 , 7 , 9], [2 , 4 , 6 , 8 , 10], ] %}
+{% set samples = [
+	[1,2,3,4,5],
+	[6,7,8,9,10],
+	[1,3,5,7,9],
+	[2,4,6,8,10],
+] %}
 Averages:
-{{ samples | map (( v , k ) => array_sum ( v ) / ( samples [k] | length )) | join ( ', ' ) }}
+{{samples|map((v,k) => array_sum(v)/(samples[k]|length))|join(', ')}}
 ```
 
 ```
@@ -758,7 +837,8 @@ Convert Markdown[2](#fn:markdown) formatting to HTML:
 ```
 {% set markdown %}
 This is **bold** text with a link
-{% endset %} {{ markdown | markdown_to_html }}
+{% endset %}
+{{markdown|markdown_to_html}}
 ```
 
 ```
@@ -770,7 +850,7 @@ This is **bold** text with a link
 Generate an MD5[3](#fn:md5) hash for a string:
 
 ```
-{{ "You can verify this hash" | md5 }}
+{{"You can verify this hash"|md5}}
 ```
 
 ```
@@ -782,7 +862,9 @@ Generate an MD5[3](#fn:md5) hash for a string:
 Combine two arrays or objects:
 
 ```
-{% set mfgs = ['Tesla' , 'Ford'] %} {% set mfgs = mfgs | merge (['Toyota' , 'GM']) %} {{ mfgs | json_encode }}
+{% set mfgs = ['Tesla','Ford'] %}
+{% set mfgs = mfgs|merge(['Toyota','GM']) %}
+{{mfgs|json_encode}}
 ```
 
 ```
@@ -794,7 +876,11 @@ Combine two arrays or objects:
 Convert newline characters (`\n`) to HTML breaks (`<br />`):
 
 ```
-{% set text = " This has line feeds in the text " %} {{ text | nl2br }}
+{% set text = "This has
+line feeds
+in the text
+"%}
+{{text|nl2br}}
 ```
 
 ```
@@ -809,7 +895,7 @@ Format a number with thousand separators and decimal places:
 
 ```
 {% set cost = 16858 %}
-That will be ${{ cost | number_format ( 2 , '.' , ',' ) }}
+That will be ${{cost|number_format(2,'.',',')}}
 ```
 
 ```
@@ -833,7 +919,8 @@ Parse a document with rows of comma-separated columns. Returns an array of rows 
 "Person Name",Email,Organization
 "Kina Halpue",kina@cerb.example,Cerb
 "Claire Bertin",c.bertin@baston.example,"Baston Defence"
-{% endset %} {{ text | parse_csv | json_encode | json_pretty }}
+{% endset %}
+{{text|parse_csv|json_encode|json_pretty}}
 ```
 
 ```
@@ -861,7 +948,8 @@ Parse a document with rows of comma-separated columns. Returns an array of rows 
 Parse a delimited string of email addresses into an object. This also assists with email validation.
 
 ```
-{% set emails = "kina@cerb.example, milo@cerb.example, karl" %} {{ emails | parse_emails | json_encode | json_pretty }}
+{% set emails = "kina@cerb.example, milo@cerb.example, karl" %}
+{{emails|parse_emails|json_encode|json_pretty}}
 ```
 
 ```
@@ -895,7 +983,8 @@ Parse a delimited string of email addresses into an object. This also assists wi
 Parse a URL string into an object for validation.
 
 ```
-{% set url = "https://cerb.ai/search?q=oauth2#fragment" %} {{ url | parse_url | json_encode | json_pretty }}
+{% set url = "https://cerb.ai/search?q=oauth2#fragment" %}
+{{url|parse_url|json_encode|json_pretty}}
 ```
 
 ```
@@ -917,7 +1006,8 @@ Parse a user-agent string into an object for validation.
 ```
 {% set user_agent %}
 Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.1 Safari/605.1.15
-{% endset %} {{ user_agent | parse_user_agent | json_encode }}
+{% endset %}
+{{user_agent|parse_user_agent|json_encode}}
 ```
 
 ```
@@ -933,7 +1023,8 @@ Mozilla/5.0 (Macintosh; Intel Mac OS X 13_0) AppleWebKit/605.1.15 (KHTML, like G
 (Added in [9.2.3](/releases/9.2.3/))
 
 ```
-{% set text = "This is the title of a record!" %} {{ text | permalink | lower }}
+{% set text = "This is the title of a record!" %}
+{{text|permalink|lower}}
 ```
 
 ```
@@ -958,7 +1049,9 @@ Have a great day! =F0=9F=8C=88
 
 Best regards,
 The Team =F0=9F=91=8B
-{% endset %} {{ message | qp_decode }}
+{% endset %}
+
+{{message|qp_decode}}
 ```
 
 ```
@@ -990,7 +1083,9 @@ Have a great day! 🌈
 
 Best regards,
 The Team 👋
-{% endset %} {{ message | qp_encode }}
+{% endset %}
+
+{{message|qp_encode}}
 ```
 
 ```
@@ -1009,7 +1104,11 @@ The Team =F0=9F=91=8B
 ## quote
 
 ```
-{% set text = " This is a message you are replying to. You should quote it. " %} {{ text | quote }}
+{% set text = "This is a message you are replying to.
+
+You should quote it.
+" %}
+{{text|quote}}
 ```
 
 ```
@@ -1030,9 +1129,14 @@ Reduce an array of items into a single output value.
 | **initial** | An optional starting value for `carry`. |
 
 ```
-{% set samples = [[ 1 , 2 , 3 , 4 , 5], [6 , 7 , 8 , 9 , 10], [1 , 3 , 5 , 7 , 9], [2 , 4 , 6 , 8 , 10], ] %}
+{% set samples = [
+	[1,2,3,4,5],
+	[6,7,8,9,10],
+	[1,3,5,7,9],
+	[2,4,6,8,10],
+] %}
 Sum:
-{{ samples | reduce (( carry , v ) => carry + array_sum ( v )) }}
+{{samples|reduce((carry,v) => carry + array_sum(v))}}
 ```
 
 ```
@@ -1052,8 +1156,9 @@ You can use regular expressions[4](#fn:regexp) with the **regexp** filter to mat
 Example:
 
 ```
-{% set text = "Your Amazon Order #Z-1234-5678-9 has shipped!" %} {% set order_id = text | regexp ( "/Amazon Order #([A-Z0-9\-]+)/" , 1 ) %}
-Amazon Order #: {{ order_id }}
+{% set text = "Your Amazon Order #Z-1234-5678-9 has shipped!" %}
+{% set order_id = text|regexp("/Amazon Order #([A-Z0-9\-]+)/", 1) %}
+Amazon Order #: {{order_id}}
 ```
 
 ```
@@ -1065,7 +1170,9 @@ If you need to escape characters in your regexp pattern, you should use a [set](
 ```
 {% set pattern %}
 #\[.*?\] (.*)#
-{% endset %} {% set bracketed_text = "[ABC-123-45678] Order Processing - 7 Days" %} {{ bracketed_text | regexp ( pattern , 1 ) }}
+{% endset %}
+{% set bracketed_text = "[ABC-123-45678] Order Processing - 7 Days" %}
+{{bracketed_text|regexp(pattern, 1)}}
 ```
 
 ```
@@ -1083,7 +1190,7 @@ Repeat a string a given number of times.
 | **times** | The number of times to repeat the string. |
 
 ```
-{{ "*" | repeat ( 5 ) }}
+{{"*"|repeat(5)}}
 ```
 
 ```
@@ -1093,7 +1200,7 @@ Repeat a string a given number of times.
 ## replace
 
 ```
-{{ "I really like %food%" | replace ( { '%food%' : 'ice cream' } ) }}
+{{"I really like %food%"|replace({'%food%':'ice cream'})}}
 ```
 
 ```
@@ -1105,7 +1212,8 @@ I really like ice cream
 Reverse a string or array:
 
 ```
-{{ "Leonardo da Vinci" | reverse }} {{ [1 , 2 , 3 , 4 , 5] | reverse | join }}
+{{"Leonardo da Vinci"|reverse}}
+{{[1,2,3,4,5]|reverse|join}}
 ```
 
 ```
@@ -1128,7 +1236,10 @@ Round a number with desired precision.
   - floor
 
 ```
-{% set pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286 %} {{ pi | round }} {{ pi | round ( 5 ) }} {{ pi | round ( 5 , 'ceil' ) }}
+{% set pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406286 %}
+{{pi|round}}
+{{pi|round(5)}}
+{{pi|round(5,'ceil')}}
 ```
 
 ```
@@ -1140,7 +1251,9 @@ Round a number with desired precision.
 ## secs\_pretty
 
 ```
-{{ "300" | secs_pretty }} {{ "86400" | secs_pretty }} {{ "604800" | secs_pretty () }}
+{{"300"|secs_pretty}}
+{{"86400"|secs_pretty}}
+{{"604800"|secs_pretty()}}
 ```
 
 ```
@@ -1154,7 +1267,7 @@ Round a number with desired precision.
 Generate an SHA-1[5](#fn:sha1) hash for a string:
 
 ```
-{{ "You can verify this hash" | sha1 }}
+{{"You can verify this hash"|sha1}}
 ```
 
 ```
@@ -1168,7 +1281,8 @@ Extract part of a string, array, or object.
 `|slice(start, length, preserve_keys)`
 
 ```
-{{ [1 , 2 , 3 , 4 , 5] | slice ( 2 , 2 ) | json_encode }} {{ "This is some text" | slice ( 0 , 4 ) }}
+{{[1,2,3,4,5]|slice(2,2)|json_encode}}
+{{"This is some text"|slice(0,4)}}
 ```
 
 ```
@@ -1181,7 +1295,8 @@ This
 Sort an array:
 
 ```
-{% set x = [9 , 5 , 1 , 6 , 4 , 3] %} {{ x | sort | slice ( 0 , 6 ) | json_encode }}
+{% set x = [9,5,1,6,4,3] %}
+{{x|sort|slice(0,6)|json_encode}}
 ```
 
 ```
@@ -1195,7 +1310,12 @@ You can also provide an arrow function as a custom comparator for advanced sorti
 - (A \<=\> B) == 0 is true if A and B are equal/equivalent
 
 ```
-{% set items = [{ name : "Item C" , priority : 3 } , { name : "Item A" , priority : 1 } , { name : "Item B" , priority : 2 }] %} {{ items | sort (( a , b ) => a.priority <=> b.priority ) | column ( 'name' ) | join ( ', ' ) }}
+{% set items = [
+    {name: "Item C", priority: 3},
+    {name: "Item A", priority: 1},
+    {name: "Item B", priority: 2}
+] %}
+{{items|sort((a,b) => a.priority <=> b.priority)|column('name')|join(', ')}}
 ```
 
 ```
@@ -1209,7 +1329,7 @@ Convert a string to an array with the given delimiter.
 `|split(delimiter, limit)`
 
 ```
-{{ "1,2,3,4,5" | split ( ',' ) | json_encode }}
+{{"1,2,3,4,5"|split(',')|json_encode}}
 ```
 
 ```
@@ -1226,7 +1346,14 @@ Split a string on any combination of carriage return (`\r`) and linefeed (`\n`) 
 | **trim\_lines** | Remove whitespace before and after each line. |
 
 ```
-{% set rainbow = " red orange yellow green blue indigo violet " %} {{ rainbow | split_crlf | json_encode }}
+{% set rainbow = "red
+orange
+yellow
+green
+blue
+indigo
+violet" %}
+{{rainbow|split_crlf|json_encode}}
 ```
 
 ```
@@ -1238,7 +1365,8 @@ Split a string on any combination of carriage return (`\r`) and linefeed (`\n`) 
 Split a string on comma delimiters. This automatically handles whitespace padding.
 
 ```
-{% set coins = "BTC, ETH ,LTC" %} {{ coins | split_csv | json_encode }}
+{% set coins = "BTC, ETH ,LTC" %}
+{{coins|split_csv|json_encode}}
 ```
 
 ```
@@ -1257,7 +1385,8 @@ Calculate a statistical measure for a given array of numbers.
 | **decimals** | The number of decimal places for rounding |
 
 ```
-{% set samples = [1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10] %} {{ samples | stat ( measure = 'median' ) }}
+{% set samples = [1,2,3,4,5,6,7,8,9,10] %}
+{{samples|stat(measure='median')}}
 ```
 
 ```
@@ -1279,7 +1408,8 @@ Return the position of a substring (needle) within a larger text (haystack). Thi
 ```
 {% set alphabet %}
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
-{% endset %} {{ alphabet | str_pos ( needle = 'hi' , offset = 0 , ignoreCase = true ) }}
+{% endset %}
+{{alphabet|str_pos(needle='hi', offset=0, ignoreCase=true)}}
 ```
 
 ```
@@ -1300,7 +1430,8 @@ Extract a substring from a larger string using starting and ending positions. Th
 ```
 {% set alphabet %}
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
-{% endset %} {{ alphabet | str_sub ( 7 , 9 ) }}
+{% endset %}
+{{alphabet|str_sub(7,9)}}
 ```
 
 ```
@@ -1319,7 +1450,8 @@ Remove lines in a text block that begin with one of the given `prefixes`.
 > on multiple lines
 
 This is the original message
-{% endset %} {{ email_message | strip_lines ( prefixes = '>' ) }}
+{% endset %}
+{{email_message|strip_lines(prefixes='>')}}
 ```
 
 ```
@@ -1331,7 +1463,8 @@ This is the original message
 Remove HTML tags from a string.
 
 ```
-{% set html = "This <b>string</b> has <b>HTML</b> tags!" %} {{ html | striptags }}
+{% set html = "This <b>string</b> has <b>HTML</b> tags!" %}
+{{html|striptags}}
 ```
 
 ```
@@ -1341,7 +1474,8 @@ This string has HTML tags!
 ## title
 
 ```
-{% set book_title = "the ultimate bot builder handbook" %} {{ book_title | title }}
+{% set book_title = "the ultimate bot builder handbook" %}
+{{book_title|title}}
 ```
 
 ```
@@ -1359,7 +1493,8 @@ Return an array of word tokens from a text block. This ignores punctuation and r
 KATA ("Key Annotated Tree of Attributes") is a human-friendly format for modeling structured 
 data that is used throughout Cerb to describe configurations, customizations, sheets, and 
 automations. KATA was inspired by YAML but avoids many of its pitfalls.
-{% endset %} {{ array_count_values ( message | tokenize ) | sort | reverse | json_encode | json_pretty }}
+{% endset %}
+{{array_count_values(message|tokenize)|sort|reverse|json_encode|json_pretty}}
 ```
 
 ```
@@ -1415,7 +1550,10 @@ Remove leading and/or trailing whitespace from a string.
   - right
 
 ```
-{% set str = " whitespace " %} {{ str | trim }} {{ str | trim ( ' ' , 'left' ) }} {{ str | trim ( ' ' , side = 'right' ) }}
+{% set str = " whitespace " %}
+{{str|trim}}
+{{str|trim(' ', 'left')}}
+{{str|trim(' ', side='right')}}
 ```
 
 ```
@@ -1431,7 +1569,8 @@ Ensure that a string is no longer than the given limit.
 `|truncate(limit)`
 
 ```
-{% set str = "This string is longer than we'd prefer" %} {{ str | truncate ( 11 ) }}
+{% set str = "This string is longer than we'd prefer" %}
+{{str|truncate(11)}}
 ```
 
 ```
@@ -1443,7 +1582,7 @@ This string...
 Decode HTML entities:
 
 ```
-{{ "&amp;quot;iPhone&amp;quot; is &amp;copy; Apple, Inc." | unescape }}
+{{"&amp;quot;iPhone&amp;quot; is &amp;copy; Apple, Inc."|unescape}}
 ```
 
 ```
@@ -1455,7 +1594,7 @@ Decode HTML entities:
 Convert a string to uppercase:
 
 ```
-{{ "I can't hear you!" | upper }}
+{{"I can't hear you!"|upper}}
 ```
 
 ```
@@ -1467,7 +1606,8 @@ I CAN'T HEAR YOU!
 Decode a URL query string into an array:
 
 ```
-{% set query = "name=Kina&action=light_on" %} {{ query | url_decode ( 'json' ) }}
+{% set query = "name=Kina&action=light_on" %}
+{{query|url_decode('json')}}
 ```
 
 ```
@@ -1479,7 +1619,8 @@ Decode a URL query string into an array:
 Build a URL query string from an array:
 
 ```
-{% set args = { "name" : "Kina" , "action" : "light_on" } %} {{ args | url_encode }}
+{% set args = {"name": "Kina", "action": "light_on" } %}
+{{args|url_encode}}
 ```
 
 ```
@@ -1493,7 +1634,15 @@ name=Kina&action=light_on
 Return the values of an array with sequential keys. This is the filter equivalent of the [array\_values()](/docs/scripting/functions/#array_values) function.
 
 ```
-{% set countries = { 'CA' : 'Canada' , 'CN' : 'China' , 'DE' : 'Germany' , 'IN' : 'India' , 'MX' : 'Mexico' , 'US' : 'United States' , } %} {{ countries | values | json_encode }}
+{% set countries = {
+  'CA': 'Canada',
+  'CN': 'China',
+  'DE': 'Germany',
+  'IN': 'India',
+  'MX': 'Mexico',
+  'US': 'United States',
+} %}
+{{countries|values|json_encode}}
 ```
 
 ```

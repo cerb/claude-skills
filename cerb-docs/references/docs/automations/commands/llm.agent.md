@@ -16,7 +16,37 @@ You simply provide a `system_prompt` with instructions, one or more new conversa
 https://www.youtube.com/embed/dkpaBooNNGc
 
 ```
-llm.agent: output: results inputs: llm: anthropic: model: claude-haiku-4-5 authentication: cerb:connected_account:anthropic system_prompt@raw: You are a helpful AI assistant for Cerb, a web-based platform for automating helpdesk inboxes and workflows. Use your tools to answer user questions. messages: message: role: user content@text: What is Cerb? tools: automation/docs_search: uri: cerb:automation:example.llm.tool.docs.search tool/license_renew: description: Renew or change seats on a Cerb license. on_tool: decision/tool: outcome/license_renew: if@bool: {{ 'license_renew' == __tool.name }} then: await: interaction: output: results uri: cerb:automation:ai.cerb.website.agent.licenses.renew tool.return: content: Request received!
+llm.agent:
+  output: results
+  inputs:
+    llm:
+      anthropic:
+        model: claude-haiku-4-5
+        authentication: cerb:connected_account:anthropic
+    system_prompt@raw:
+      You are a helpful AI assistant for Cerb, a web-based platform for 
+      automating helpdesk inboxes and workflows. Use your tools to answer 
+      user questions.
+    messages:
+      message:
+        role: user
+        content@text: What is Cerb?
+    tools:
+      automation/docs_search:
+        uri: cerb:automation:example.llm.tool.docs.search
+      tool/license_renew:
+        description: Renew or change seats on a Cerb license.
+  on_tool:
+    decision/tool:
+      outcome/license_renew:
+        if@bool: {{'license_renew' == __tool.name}}
+        then:
+          await:
+            interaction:
+              output: results
+              uri: cerb:automation:ai.cerb.website.agent.licenses.renew
+          tool.return:
+            content: Request received!
 ```
 
 - [Syntax](#syntax)
@@ -47,7 +77,35 @@ llm.agent: output: results inputs: llm: anthropic: model: claude-haiku-4-5 authe
 The LLM provider is one of:
 
 ```
-llm: anthropic: model: claude-haiku-4-5 authentication: cerb:connected_account:anthropic aws_bedrock: model: us.anthropic.claude-haiku-4-5-20251001-v1:0 api_endpoint_url: https://bedrock-runtime.us-east-1.amazonaws.com authentication: cerb:connected_account:aws docker: api_endpoint_url: http://model-runner.docker.internal/ model: ai/llama3.2 gemini: model: gemini-2.0-flash authentication: cerb:connected_account:gemini groq: model: gemma2-9b-it authentication: cerb:connected_account:groq huggingface: model: google/gemma-2-2b-it authentication: cerb:connected_account:huggingface ollama: api_endpoint_url: http://host.docker.internal:11434 model: llama3.2 openai: model: gpt-4o authentication: cerb:connected_account:openai together: model: meta-llama/Llama-3.3-70B-Instruct-Turbo authentication: cerb:connected_account:together-ai
+llm:
+  anthropic:
+    model: claude-haiku-4-5
+    authentication: cerb:connected_account:anthropic
+  aws_bedrock:
+    model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+    api_endpoint_url: https://bedrock-runtime.us-east-1.amazonaws.com
+    authentication: cerb:connected_account:aws
+  docker:
+    api_endpoint_url: http://model-runner.docker.internal/
+    model: ai/llama3.2
+  gemini:
+    model: gemini-2.0-flash
+    authentication: cerb:connected_account:gemini
+  groq:
+    model: gemma2-9b-it
+    authentication: cerb:connected_account:groq
+  huggingface:
+    model: google/gemma-2-2b-it
+    authentication: cerb:connected_account:huggingface
+  ollama:
+    api_endpoint_url: http://host.docker.internal:11434
+    model: llama3.2
+  openai:
+    model: gpt-4o
+    authentication: cerb:connected_account:openai
+  together:
+    model: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    authentication: cerb:connected_account:together-ai
 ```
 
 The `model:` key is the name of the model to use. This must be a chat model, and must support function calling if `tools:` are defined.
@@ -66,7 +124,12 @@ For Gemini reasoning models, two optional parameters control thinking behavior:
 | `thinking_include@bool:` | `yes` / `no` | When `yes`, includes the model's thinking content in the response (useful for debugging) |
 
 ```
-llm: gemini: model: gemini-2.5-pro authentication: cerb:connected_account:gemini thinking_level: medium thinking_include@bool: no
+llm:
+  gemini:
+    model: gemini-2.5-pro
+    authentication: cerb:connected_account:gemini
+    thinking_level: medium
+    thinking_include@bool: no
 ```
 
 #### OpenAI reasoning models
@@ -78,13 +141,20 @@ For OpenAI reasoning models (e.g. `o3`, `o4-mini`), the optional `reasoning_effo
 | `reasoning_effort:` | `none`, `low`, `medium`, `high`, `xhigh` | Sets the reasoning effort; higher levels improve quality at the cost of more tokens and latency |
 
 ```
-llm: openai: model: o4-mini authentication: cerb:connected_account:openai reasoning_effort: medium
+llm:
+  openai:
+    model: o4-mini
+    authentication: cerb:connected_account:openai
+    reasoning_effort: medium
 ```
 
 ### system\_prompt:
 
 ```
-system_prompt@text: You are a friendly weather agent. Use your tools to serve user requests. Temperatures should be in Fahrenheit for locations in the United States, and Celsius otherwise.
+system_prompt@text:
+  You are a friendly weather agent. Use your tools to serve user requests.
+  Temperatures should be in Fahrenheit for locations in the United States,
+  and Celsius otherwise.
 ```
 
 ### messages:
@@ -96,13 +166,25 @@ Each message has `role:` and `content:` keys. The `role:` must be either `user` 
 For a conversation, include the next `user` turn.
 
 ```
-messages: message: role: user content: What is the weather today in Paris?
+messages:
+  message:
+    role: user
+    content: What is the weather today in Paris?
 ```
 
 For a one-shot workflow you can provide sample `assistant` and `user` turns.
 
 ```
-messages: 0: role: user content: What is the weather today in Paris? 1: role: assistant content: 16 degrees Celsius and rainy. 2: role: user content: How about Berlin?
+messages:
+  0:
+    role: user
+    content: What is the weather today in Paris?
+  1:
+    role: assistant
+    content: 16 degrees Celsius and rainy.
+  2:
+    role: user
+    content: How about Berlin?
 ```
 
 The message keys must be unique but are arbitrary.
@@ -114,7 +196,11 @@ There are two types of tools.
 An `automation` tool links to an [llm.tool](/docs/automations/triggers/llm.tool/) automation function. Its description and inputs will be automatically described to the model for you, and its output will automatically be sent back to the model.
 
 ```
-tools: automation/docs_search: uri: cerb:automation:example.llm.tool.docs.search automation/docs_fetch: uri: cerb:automation:example.llm.tool.docs.fetch
+tools:
+  automation/docs_search:
+    uri: cerb:automation:example.llm.tool.docs.search
+  automation/docs_fetch:
+    uri: cerb:automation:example.llm.tool.docs.fetch
 ```
 
 Alternatively, a custom `tool` runs the code in the `llm.agent:on_tool:` event when utilized. Use the `tool.return:` command to return the tool's output.
@@ -122,14 +208,33 @@ Alternatively, a custom `tool` runs the code in the `llm.agent:on_tool:` event w
 This approach is particularly useful to seamlessly transition to structured form-based interaction (e.g. signups, renewals, authentication). Afterward, control is returned to the `llm.agent:`.
 
 ```
-tools: tool/tool_name: description: This is a detailed description of the tool. parameters: string/input_name: description: A description of this parameter required@bool: no # An optional list of allowed values
-          enum@csv: option1, option2, option3
+tools:
+  tool/tool_name:
+    description: This is a detailed description of the tool.
+    parameters:
+      string/input_name:
+        description: A description of this parameter
+        required@bool: no
+        # An optional list of allowed values
+        enum@csv: option1, option2, option3
 ```
 
 Individual tools can be conditionally disabled using the `disable@bool:` key. When `yes`, the tool is omitted from the model's available tool list for that invocation. This enables per-worker tool permissions and dynamic tool selection based on context.
 
 ```
-tools: automation/admin_tool: uri: cerb:automation:example.llm.tool.admin disable@bool: {{ not worker_is_superuser }} automation/docs_search: uri: cerb:automation:example.llm.tool.docs.search tool/restricted_action: disable@bool: {{ worker_role != 'manager' }} description: Perform a restricted action. parameters: string/reason: description: The reason for the action. required@bool: yes
+tools:
+  automation/admin_tool:
+    uri: cerb:automation:example.llm.tool.admin
+    disable@bool: {{not worker_is_superuser}}
+  automation/docs_search:
+    uri: cerb:automation:example.llm.tool.docs.search
+  tool/restricted_action:
+    disable@bool: {{worker_role != 'manager'}}
+    description: Perform a restricted action.
+    parameters:
+      string/reason:
+        description: The reason for the action.
+        required@bool: yes
 ```
 
 Implement your tool logic in the `on_tool:` event.
@@ -141,7 +246,17 @@ The current tool's details are stored in the `__tool` dictionary.
 | **\_\_tool.parameters** | list | A list of parameters sent to the tool as key/value pairs. |
 
 ```
-on_tool: decision/tool: outcome/license_renew: if@bool: {{ 'license_renew' == __tool.name }} then: await: interaction: output: results uri: cerb:automation:ai.cerb.website.agent.licenses.renew tool.return: content: Request received!
+on_tool:
+  decision/tool:
+    outcome/license_renew:
+      if@bool: {{'license_renew' == __tool.name}}
+      then:
+        await:
+          interaction:
+            output: results
+            uri: cerb:automation:ai.cerb.website.agent.licenses.renew
+        tool.return:
+          content: Request received!
 ```
 
 ## output:
@@ -160,5 +275,9 @@ Each message has the following schema:
 | `type` | Currently only `text` is supported. |
 
 ```
-output: messages: 0: type: text content: The weather in Paris is 14 degrees Celsius and cloudy
+output:
+  messages:
+    0:
+      type: text
+      content: The weather in Paris is 14 degrees Celsius and cloudy
 ```

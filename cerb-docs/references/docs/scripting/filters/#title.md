@@ -8,7 +8,8 @@ tags: ["docs", "docs-scripting"]
 ## title
 
 ```
-{% set book_title = "the ultimate bot builder handbook" %} {{ book_title | title }}
+{% set book_title = "the ultimate bot builder handbook" %}
+{{book_title|title}}
 ```
 
 ```

@@ -18,7 +18,7 @@ Perform runtime configuration lookups from any feature that supports automation 
 | **default** | The optional default value if the key doesn't exist. |
 
 ```
-{{ cerb_workflow_config ( 'example.workflow' , 'secretCode' , null ) }}
+{{cerb_workflow_config('example.workflow','secretCode',null)}}
 ```
 
 ```

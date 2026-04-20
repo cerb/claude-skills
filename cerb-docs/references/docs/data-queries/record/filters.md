@@ -25,68 +25,71 @@ tags: ["docs"]
 #### Query:
 
 ```
-type: record.filters of: ticket exclude_links: yes format: dictionaries
+type:record.filters
+of:ticket
+exclude_links:yes
+format:dictionaries
 ```
 
 #### Response:
 
 ```
-{ 
-   "data" : { 
-     "id" : { 
-       "type" : "number" , 
-       "options" : { "param_key" : "t_id" }, 
-       "examples" : [ 
-         { "type" : "chooser" , "context" : "cerberusweb.contexts.ticket" , "q" : "" } 
-       ], 
-       "is_sortable" : true 
-     }, 
-     "mask" : { 
-       "type" : "text" , 
-       "options" : { "param_key" : "t_mask" , "match" : 1 }, 
-       "is_sortable" : true 
-     }, 
-     "subject" : { 
-       "type" : "text" , 
-       "options" : { "param_key" : "t_subject" , "match" : 1 }, 
-       "is_sortable" : true 
-     }, 
-     "status" : { 
-       "type" : "virtual" , 
-       "options" : { "param_key" : "t_status_id" }, 
-       "examples" : ["open" , "waiting" , "closed" , "deleted" , "[o,w]" , "![d]" ], 
-       "is_sortable" : true 
-     }, 
-     "owner" : { 
-       "type" : "virtual" , 
-       "options" : { "param_key" : "*_owner_search" }, 
-       "examples" : [ 
-         { "type" : "search" , "context" : "cerberusweb.contexts.worker" , "q" : "" } 
-       ], 
-       "is_sortable" : false 
-     }, 
-     "group.id" : { 
-       "type" : "chooser" , 
-       "options" : { "param_key" : "t_team_id" }, 
-       "examples" : [ 
-         { "type" : "chooser" , "context" : "cerberusweb.contexts.group" , "q" : "" } 
-       ], 
-       "is_sortable" : true 
-     }, 
-     "bucket.id" : { 
-       "type" : "chooser" , 
-       "options" : { "param_key" : "t_bucket_id" }, 
-       "examples" : [ 
-         { "type" : "chooser" , "context" : "cerberusweb.contexts.bucket" , "q" : "" } 
-       ], 
-       "is_sortable" : true 
-     } 
-   }, 
-   "_" : { 
-     "type" : "record.filters" , 
-     "format" : "dictionaries" 
-   } 
- }
+{
+  "data": {
+    "id": {
+      "type": "number",
+      "options": { "param_key": "t_id" },
+      "examples": [
+        { "type": "chooser", "context": "cerberusweb.contexts.ticket", "q": "" }
+      ],
+      "is_sortable": true
+    },
+    "mask": {
+      "type": "text",
+      "options": { "param_key": "t_mask", "match": 1 },
+      "is_sortable": true
+    },
+    "subject": {
+      "type": "text",
+      "options": { "param_key": "t_subject", "match": 1 },
+      "is_sortable": true
+    },
+    "status": {
+      "type": "virtual",
+      "options": { "param_key": "t_status_id" },
+      "examples": ["open", "waiting", "closed", "deleted", "[o,w]", "![d]"],
+      "is_sortable": true
+    },
+    "owner": {
+      "type": "virtual",
+      "options": { "param_key": "*_owner_search" },
+      "examples": [
+        { "type": "search", "context": "cerberusweb.contexts.worker", "q": "" }
+      ],
+      "is_sortable": false
+    },
+    "group.id": {
+      "type": "chooser",
+      "options": { "param_key": "t_team_id" },
+      "examples": [
+        { "type": "chooser", "context": "cerberusweb.contexts.group", "q": "" }
+      ],
+      "is_sortable": true
+    },
+    "bucket.id": {
+      "type": "chooser",
+      "options": { "param_key": "t_bucket_id" },
+      "examples": [
+        { "type": "chooser", "context": "cerberusweb.contexts.bucket", "q": "" }
+      ],
+      "is_sortable": true
+    }
+  },
+  "_": {
+    "type": "record.filters",
+    "format": "dictionaries"
+  }
+}
 ```
 
 Each key in `data` is a filter name usable in [search queries](/docs/search/). Each entry includes:

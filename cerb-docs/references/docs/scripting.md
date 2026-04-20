@@ -24,7 +24,7 @@ The content of this text may need to vary depending on any number of factors –
 In a traditional programming language, you typically generate text output like:
 
 ```
-print ( " Hello, " + firstName + " ! " );
+print("Hello, " + firstName + "!");
 ```
 
 This is cumbersome when you're dealing with a lot of text.
@@ -34,7 +34,7 @@ Instead, Cerb scripting is a full-featured templating language based on Twig[1](
 The example code above would instead be written as:
 
 ```
-Hello, {{ first_name }}!
+Hello, {{first_name}}!
 ```
 
 # Topics

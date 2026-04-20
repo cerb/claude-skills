@@ -14,10 +14,19 @@ Here is an example of using the |filter modifier with arrow functions to filter 
 
 - 
 ```
-start: set: message_headers: x-gitlab-project: abc123 x-blah: def456 x-example: ghi789 return: gitlab_headers@json: {{ message_headers|filter((v,k) => k is prefixed ('x-gitlab'))|json_encode }}
+start:
+  set:
+    message_headers:
+      x-gitlab-project: abc123
+      x-blah: def456
+      x-example: ghi789
+  return:
+    gitlab_headers@json: {{message_headers|filter((v,k) => k is prefixed ('x-gitlab'))|json_encode}}
 ```
 - 
 ```
-__return: gitlab_headers: x-gitlab-project: abc123
+__return:
+  gitlab_headers:
+    x-gitlab-project: abc123
 ```
 

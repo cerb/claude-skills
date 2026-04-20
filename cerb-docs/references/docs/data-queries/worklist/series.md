@@ -55,9 +55,22 @@ If omitted, this defaults to the timezone of the current worker or the server.
 ## Return series data from a worklist
 
 ```
-type: worklist.series series.open_tickets: ( of: tickets x: created@month y: id function: count query: (status:o limit:24) )  
- series.closed_tickets: ( of: tickets x: created@month y: id function: count query: (status:c limit:24) ) 
- format: timeseries
+type:worklist.series 
+series.open_tickets:(
+  of:tickets 
+  x:created@month 
+  y:id 
+  function:count 
+  query:(status:o limit:24)
+) 
+series.closed_tickets:(
+  of:tickets 
+  x:created@month 
+  y:id 
+  function:count 
+  query:(status:c limit:24)
+)
+format:timeseries
 ```
 
  

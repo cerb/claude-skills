@@ -10,7 +10,10 @@ tags: ["docs"]
 `worklist.subtotals` [data queries](/docs/data-queries/) run aggregate functions to categorize matching worklist records.
 
 ```
-type: worklist.subtotals of: tickets by: [created@month,group] format: timeseries
+type:worklist.subtotals 
+of:tickets 
+by:[created@month,group] 
+format:timeseries
 ```
 
 - [of:](#of)
@@ -38,7 +41,7 @@ type: worklist.subtotals of: tickets by: [created@month,group] format: timeserie
 The `of:` key specifies the type of [records](/docs/records/) to subtotal.
 
 ```
-of: tickets
+of:tickets
 ```
 
 # by:
@@ -50,7 +53,7 @@ The `by:` key specifies which record [fields](/docs/records/#fields) to subtotal
 Multiple fields can be separated with commas to generated nested subtotals (e.g. _"tickets by owners by status"_).
 
 ```
-by: [owner,status]
+by:[owner,status]
 ```
 
 ### Aggregate functions
@@ -73,13 +76,14 @@ The other functions may only be used against numeric fields. For example, you ca
 As of [9.0.7](/releases/9.0.7/) the desired function is appended to the `by:` key following a period (`.`):
 
 ```
-by.avg: [worker,responseTime]
+by.avg:[worker,responseTime]
 ```
 
 In earlier versions, a separate `function:` key was specified:
 
 ```
-function: average by: [worker,responseTime]
+function:average
+by:[worker,responseTime]
 ```
 
 This still works, but is deprecated.
@@ -111,7 +115,7 @@ Histograms can be generated for date-based fields by appending a unit of time fo
 When using `@week` you can optionally specify if weeks should start on Sunday or Monday. The default is Monday.
 
 ```
-by: [created@month,worker]
+by:[created@month,worker]
 ```
 
 ### Links
@@ -119,7 +123,7 @@ by: [created@month,worker]
 The `by:` fields can specify `links` or `links.*` (e.g. `links.org`) fields. This could create a report like _"Sum of time tracking entries linked to organizations by month"_.
 
 ```
-by: [links.org]
+by:[links.org]
 ```
 
 ### Limits
@@ -131,7 +135,7 @@ Conversely, some _"high cardinality"_ fields have potentially infinite possible 
 You can **limit** the cardinality of a field by appending a tilde (`~`) to any `by:` field and providing a number. This only returns that number of the most common (top) values.
 
 ```
-by: [created@month~10,org~25]
+by:[created@month~10,org~25]
 ```
 
 ### Limit ordering
@@ -139,7 +143,7 @@ by: [created@month~10,org~25]
 You can also return the least common (bottom) values by providing a negative number as the limit.
 
 ```
-by: [group~-5]
+by:[group~-5]
 ```
 
 # timeout:
@@ -165,7 +169,7 @@ The `metric:` key lets you specify an arbitrary **equation** to modify the calcu
 In this equation, the metric value is represented by the placeholder `x`.
 
 ```
-metric: "x*100"
+metric:"x*100"
 ```
 
 ### Mathematical operations
@@ -173,13 +177,13 @@ metric: "x*100"
 Basic mathematical operations are supported using `+` (addition), `-` (subtraction), `/` (division), `*` (multiplication), `**` (exponents).
 
 ```
-metric: "x**2"
+metric:"x**2"
 ```
 
 You can group operations with parentheses (`()`).
 
 ```
-metric: "(x+2)*100"
+metric:"(x+2)*100"
 ```
 
 ### Filters
@@ -191,7 +195,7 @@ Numeric [filters](/docs/scripting/filters/) from [bot scripting](/docs/scripting
 - [round](/docs/scripting/filters/#round)
 
 ```
-metric: "(x/4.33)|round"
+metric:"(x/4.33)|round"
 ```
 
 # group:
@@ -205,7 +209,9 @@ Suppose you want the average _weekly_ number of email replies sent per worker _o
 If you just use `created@week`:
 
 ```
-of: message by: [worker~20,created@week] query: (created:"-1 month")
+of:message
+by:[worker~20,created@week]
+query:(created:"-1 month")
 ```
 
 …then you'll get back a row for every worker for every week in the past month. If there are 20 workers with 4 weekly samples, that's 80 rows.
@@ -213,7 +219,10 @@ of: message by: [worker~20,created@week] query: (created:"-1 month")
 You can use `group:` to flatten those results with a function:
 
 ```
-of: message by: [worker~20,created@week] query: (created:"-1 month") group.avg: [worker]
+of:message
+by:[worker~20,created@week]
+query:(created:"-1 month")
+group.avg:[worker]
 ```
 
 This returns only a single row per worker, with the average count of their weekly samples over the past month.
@@ -248,7 +257,11 @@ The subtotaled worklist results can be returned in various formats:
 ## Return a stacked bar chart of tickets by owner by status
 
 ```
-type: worklist.subtotals of: tickets by: [owner~10,status] query: (owner.id:any) format: categories
+type:worklist.subtotals
+of:tickets 
+by:[owner~10,status] 
+query:(owner.id:any) 
+format:categories
 ```
 
  

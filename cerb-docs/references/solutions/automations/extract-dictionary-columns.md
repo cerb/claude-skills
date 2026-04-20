@@ -14,11 +14,22 @@ You can extract the same column from a list of dictionaries with the `|column` f
 
 - 
 ```
-start: set: people: kina: name: Kina Halpue email: kina@cerb.example milo: name: Milo Dade email: milo@cerb.example return: emails: {{ people|column('email')|join(', ') }}
+start:
+  set:
+    people:
+      kina:
+        name: Kina Halpue
+        email: kina@cerb.example
+      milo:
+        name: Milo Dade
+        email: milo@cerb.example 
+  return:
+    emails: {{people|column('email')|join(', ')}}
 ```
 - 
 ```
-__return : emails : kina@cerb.example, milo@cerb.example
+__return:
+  emails: kina@cerb.example, milo@cerb.example
 ```
 
 ## Using |map
@@ -30,10 +41,21 @@ You can extract the same column from a list of dictionaries with the `|map` filt
 
 - 
 ```
-start: set: people: kina: name: Kina Halpue email: kina@cerb.example milo: name: Milo Dade email: milo@cerb.example return: emails: {{ people|map((v)=>v['email'])|join(', ') }}
+start:
+  set:
+    people:
+      kina:
+        name: Kina Halpue
+        email: kina@cerb.example
+      milo:
+        name: Milo Dade
+        email: milo@cerb.example
+  return:
+    emails: {{people|map((v)=>v['email'])|join(', ')}}
 ```
 - 
 ```
-__return : emails : kina@cerb.example, milo@cerb.example
+__return:
+  emails: kina@cerb.example, milo@cerb.example
 ```
 

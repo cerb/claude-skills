@@ -8,13 +8,27 @@ tags: ["docs", "docs-automations"]
 The **var.unset:** command removes a placeholder using a key path.
 
 ```
-start: set: person: name: first: Kina last: Halpue phone: +15551234321 var.unset: inputs: key: person:phone return: person@key: person
+start:
+  set:
+    person:
+      name:
+        first: Kina
+        last: Halpue
+      phone: +15551234321
+  var.unset:
+    inputs:
+      key: person:phone
+  return:
+    person@key: person
 ```
 
 Result:
 
 ```
-person: name: first: Kina last: Halpue
+person:
+  name:
+    first: Kina
+    last: Halpue
 ```
 
 - [Syntax](#syntax)

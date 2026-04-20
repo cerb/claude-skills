@@ -40,5 +40,21 @@ Your API key should be available on your Linkup home page. Click the copy button
 https://docs.linkup.so/pages/documentation/api-reference/endpoint/post-search
 
 ```
-start: http.request/search: output: http_response inputs: method: POST url: https://api.linkup.so/v1/search authentication: cerb:connected_account:linkup headers: Content-Type: application/json body: q: Who is Beethoven depth: standard outputType: sourcedAnswer on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/search:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.linkup.so/v1/search
+      authentication: cerb:connected_account:linkup
+      headers:
+        Content-Type: application/json
+      body:
+        q: Who is Beethoven
+        depth: standard
+        outputType: sourcedAnswer
+   on_success:
+    set:
+      response@json: {{http_response.body}}
+      http_response@json: null
 ```

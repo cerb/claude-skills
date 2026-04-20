@@ -10,23 +10,43 @@ Here are examples of different methods for appending values to arrays and lists 
 ## Using var.push:
 
 ```
-start: set: emails@csv: boss@cerb.example, customer@cerb.example, accounting@cerb.example var.push: inputs: key: emails value: marketing@cerb.example
+start:
+  set:
+    emails@csv: boss@cerb.example, customer@cerb.example, accounting@cerb.example
+  var.push:
+    inputs:
+      key: emails
+      value: marketing@cerb.example
 ```
 
 ## Using var.set:
 
 ```
-start: set: emails@csv: boss@cerb.example, customer@cerb.example, accounting@cerb.example var.set: inputs: key: emails: {{ emails|length }} value: marketing@cerb.example
+start:
+  set:
+    emails@csv: boss@cerb.example, customer@cerb.example, accounting@cerb.example
+  var.set:
+    inputs:
+      key: emails:{{emails|length}}
+      value: marketing@cerb.example
 ```
 
 ## Using |merge:
 
 ```
-start: set: emails@csv: boss@cerb.example, customer@cerb.example, accounting@cerb.example set/append: emails@json: {{ emails|merge(['marketing@cerb.example'])|json_encode }}
+start:
+  set:
+    emails@csv: boss@cerb.example, customer@cerb.example, accounting@cerb.example
+  set/append:
+    emails@json: {{emails|merge(['marketing@cerb.example'])|json_encode}}
 ```
 
 ## Using |csv and string concatenation:
 
 ```
-start: set: emails@csv: boss@cerb.example, customer@cerb.example, accounting@cerb.example set/append: emails@csv: {{ emails|join(',') }} , marketing@cerb.example
+start:
+  set:
+    emails@csv: boss@cerb.example, customer@cerb.example, accounting@cerb.example
+  set/append:
+    emails@csv: {{emails|join(',')}}, marketing@cerb.example
 ```

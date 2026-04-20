@@ -12,17 +12,17 @@ A **text** field contains free-form text.
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "subject" : "I need some help with this software" 
- }
+{
+	"subject": "I need some help with this software"
+}
 ```
 
 To enter multiple lines of text, use `\n` control characters.
 
 ```
-{ 
-	 "subject" : "Line 1 \n Line 2 \n " 
- }
+{
+	"subject": "Line 1\nLine 2\n"
+}
 ```
 
 ### Records API

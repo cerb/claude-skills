@@ -16,10 +16,19 @@ The `is_untrusted` parameter sanitizes HTML output (e.g. script blocks and image
 
 - 
 ```
-start: set: markdown_text@text: # Title This is a **Markdown** message. return: output: {{ markdown_text|markdown_to_html(is_untrusted=true) }}
+start:
+  set:
+    markdown_text@text:
+      # Title
+      This is a **Markdown** message.
+  return:
+    output: {{markdown_text|markdown_to_html(is_untrusted=true)}}
 ```
 - 
 ```
-__return : output : |- <h1>Title</h1> <p>This is a <strong>Markdown</strong> message.</p>
+__return:
+  output: |-
+    <h1>Title</h1>
+    <p>This is a <strong>Markdown</strong> message.</p>
 ```
 

@@ -23,7 +23,96 @@ This workflow will automatically close tickets that have been waiting for a clie
 Click on **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» (empty)** and paste the following [KATA](/docs/kata/):
 
 ```
-workflow: name: cerb.ticket.auto_close description: Automatically close idle tickets version: 2025-01-29T00:16:45Z config: text/ticketAge: label: At what age should tickets be closed? default: -30 days text/closeMessage: label: What message should be sent upon closing? default: We haven't heard back from you in 30 days. This ticket has been automatically closed. You may reopen the ticket by replying to this message. This is an automated message. records: automation/auto_close: fields: name: cerb.ticket.auto_close extension_id: cerb.trigger.automation.timer description: Automatically close idle tickets and send a notification to the customer. script@raw: start: set: config@json: {{ cerb_workflow_config('cerb.ticket.auto_close')|json_encode }} record.search/glrxp2: output: results_ticket inputs: record_type: ticket record_query: status:w updated:"big bang to ${ticketAge}" reopen:0 record_query_params: ticketAge: {{ config.ticketAge }} repeat: each@csv: {{ results_ticket|keys|join(',') }} as: ticketid do: record.update/close: output: updated_ticket inputs: record_type: ticket record_id: {{ ticketid }} fields: status: c record.create/customerMessage: output: new_draft inputs: record_type: draft fields: type: mail.transactional params: to: {{ results_ticket[ticketid].initial_message_sender_email }} subject: {{ results_ticket[ticketid].subject }} content: {{ config.closeMessage }} is_queued: 1 queue_delivery_date@date: now record.create/comment: output: new_comment inputs: record_type: comment fields: author__context: app author_id@int: 0 comment: Ticket closed due to idle timeout. A notification has been sent to the customer. target__context: ticket target_id@int: {{ ticketid }} policy_kata@raw: commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes record.update: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes record.create: deny/type@bool: {{ inputs.record_type is not record type ('comment','draft') }} allow@bool: yes automation_timer/auto_closeTimer: fields: name: cerb.timer.auto_close is_disabled@int: 0 is_recurring@int: 1 last_ran_at@int: 0 next_run_at@int: 1738018800 recurring_patterns@text: # Every hour 0 * * * * recurring_timezone: America/Toronto automations_kata@raw: automation/zea2sx: uri: cerb:automation:cerb.ticket.auto_close disabled@bool: no
+workflow:
+  name: cerb.ticket.auto_close
+  description: Automatically close idle tickets
+  version: 2025-01-29T00:16:45Z
+  config:
+    text/ticketAge:
+      label: At what age should tickets be closed?
+      default: -30 days
+    text/closeMessage:
+      label: What message should be sent upon closing?
+      default: We haven't heard back from you in 30 days. This ticket has been automatically closed. You may reopen the ticket by replying to this message. This is an automated message.
+records:
+  automation/auto_close:
+    fields:
+      name: cerb.ticket.auto_close
+      extension_id: cerb.trigger.automation.timer
+      description: Automatically close idle tickets and send a notification to the customer.
+      script@raw:
+        start:
+          set:
+            config@json: {{cerb_workflow_config('cerb.ticket.auto_close')|json_encode}}
+          
+          record.search/glrxp2:
+            output: results_ticket
+            inputs:
+              record_type: ticket
+              record_query: status:w updated:"big bang to ${ticketAge}" reopen:0
+              record_query_params:
+                ticketAge: {{config.ticketAge}}
+          
+          repeat:
+            each@csv: {{results_ticket|keys|join(',')}}
+            as: ticketid
+            do:
+              record.update/close:
+                output: updated_ticket
+                inputs:
+                  record_type: ticket
+                  record_id: {{ticketid}}
+                  fields:
+                    status: c
+              record.create/customerMessage:
+                output: new_draft
+                inputs:
+                  record_type: draft
+                  fields:
+                    type: mail.transactional
+                    params:
+                      to: {{results_ticket[ticketid].initial_message_sender_email}}
+                      subject: {{results_ticket[ticketid].subject}}
+                      content: {{config.closeMessage}}
+                    is_queued: 1
+                    queue_delivery_date@date: now
+              record.create/comment:
+                output: new_comment
+                inputs:
+                  record_type: comment
+                  fields:
+                    author__context: app
+                    author_id@int: 0
+                    comment: Ticket closed due to idle timeout. A notification has been sent to the customer.
+                    target__context: ticket
+                    target_id@int: {{ticketid}}
+      policy_kata@raw:
+        commands:
+          record.search:
+            deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+            allow@bool: yes
+          record.update:
+            deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+            allow@bool: yes
+          record.create:
+            deny/type@bool: {{inputs.record_type is not record type ('comment','draft')}}
+            allow@bool: yes
+  automation_timer/auto_closeTimer:
+    fields:
+      name: cerb.timer.auto_close
+      is_disabled@int: 0
+      is_recurring@int: 1
+      last_ran_at@int: 0
+      next_run_at@int: 1738018800
+      recurring_patterns@text:
+        # Every hour
+        0 * * * *
+        
+      recurring_timezone: America/Toronto
+      automations_kata@raw:
+        automation/zea2sx:
+          uri: cerb:automation:cerb.ticket.auto_close
+          disabled@bool: no
 ```
 
 # Configuration

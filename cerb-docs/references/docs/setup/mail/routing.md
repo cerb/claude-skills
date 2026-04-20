@@ -44,7 +44,14 @@ Actions include: `bucket`, `comment`, `group`, `importance`, `owner`, and `watch
 Multiple conditions in a single `if:` node are "all of these", and multiple `if:` nodes are "any of these".
 
 ```
-rule/dev: if/to: recipients: dev@, development@, bugs@ if/subj: subject: [Bugs] * body: * bug report * then: group: Development
+rule/dev:
+  if/to:
+    recipients: dev@, development@, bugs@
+  if/subj:
+    subject: [Bugs] *
+    body: * bug report *
+  then:
+    group: Development
 ```
 
 In this scenario, tickets would be routed to the Development group if they were either sent to `dev@`. `development@` or `bugs@`, or they had both a subject line containing `[Bugs]` and body containing `bug report`.
@@ -54,7 +61,22 @@ In this scenario, tickets would be routed to the Development group if they were 
 With the `script` condition, you can route based on any custom scripting you would like, such as boolean logic or negation. It also has full access to the `sender` dictionary.
 
 ```
-rule/dev: if: recipient: dev@ script: {{ subject != 'dev conference invite' }} then: group: Development rule/trouble: if/name: script@text: {{ sender_full_name == "Trouble Customer" or sender_num_spam >= 10 }} then: group: Special Handling owner: KinaHalpue
+rule/dev:
+  if:
+    recipient: dev@
+    script: {{subject != 'dev conference invite'}}
+  then:
+    group: Development
+rule/trouble:
+  if/name:
+    script@text: 
+      {{
+        sender_full_name == "Trouble Customer"
+        or sender_num_spam >= 10
+      }}
+  then:
+    group: Special Handling
+    owner: KinaHalpue
 ```
 
 ### recipients
@@ -62,7 +84,18 @@ rule/dev: if: recipient: dev@ script: {{ subject != 'dev conference invite' }} t
 `recipients` routes based on the address(es) the mail is sent to. You can use full addresses. prefixes or domains. You can include multiple addresses in a comma-separated list or in a line-separated list with the `@list` annotation.
 
 ```
-rule/billing: if: recipients: billing@, receipts@ then: group: Billing rule/brand2: if: recipients@list: help@brand2.example sales@brand2.example then: group: Brand 2
+rule/billing:
+    if:
+      recipients: billing@, receipts@
+    then:
+      group: Billing
+  rule/brand2:
+    if:
+      recipients@list: 
+        help@brand2.example
+        sales@brand2.example
+    then:
+      group: Brand 2
 ```
 
 ### sender\_email
@@ -70,7 +103,12 @@ rule/billing: if: recipients: billing@, receipts@ then: group: Billing rule/bran
 `sender_email` routes based on the address(es) of the sender. You can use full addresses. prefixes or domains. You can include multiple addresses in a comma-separated list or in a line-separated list with the `@list` annotation.
 
 ```
-rule/vip: if: sender_email: *@vipcustomer.example then: group: VIP importance: 90
+rule/vip:
+    if:
+      sender_email: *@vipcustomer.example
+    then:
+      group: VIP
+      importance: 90
 ```
 
 ### spam\_score
@@ -78,7 +116,11 @@ rule/vip: if: sender_email: *@vipcustomer.example then: group: VIP importance: 9
 `spam_score` routes based on the assigned spam score of an email. You can use `<`,`>` and `=` operators to specify a "greater than" or "less than" value.
 
 ```
-rule/spam: if: spam_score: >=80% then: group: Spam
+rule/spam:
+    if:
+      spam_score: >=80%
+    then:
+      group: Spam
 ```
 
 ### subject
@@ -86,7 +128,11 @@ rule/spam: if: spam_score: >=80% then: group: Spam
 `subject` routes based on the text of the email subject line.
 
 ```
-rule/bugs: if: subject: this is a bug then: group: Development
+rule/bugs:
+  if:
+    subject: this is a bug
+  then:
+    group: Development
 ```
 
 ### body
@@ -94,7 +140,11 @@ rule/bugs: if: subject: this is a bug then: group: Development
 `body` routes based on content of the email message body.
 
 ```
-rule/campaign: if: body: *I'm responding to your marketing campaign* then: group: Marketing
+rule/campaign:
+  if:
+    body: *I'm responding to your marketing campaign*
+  then:
+    group: Marketing
 ```
 
 ### header
@@ -102,7 +152,13 @@ rule/campaign: if: body: *I'm responding to your marketing campaign* then: group
 `header` routes based on content from the message header
 
 ```
-rule/autoreplies: if: header: Auto-Submitted: auto-generated then: group: Spam bucket: Autoreplies
+rule/autoreplies:
+  if:
+    header: 
+      Auto-Submitted: auto-generated
+  then:
+    group: Spam
+    bucket: Autoreplies
 ```
 
 ## Actions
@@ -114,7 +170,14 @@ Actions are what you want to occur if the conditions are met. You can have multi
 `bucket` sets a bucket to route the ticket.
 
 ```
-rule/bugs: if/email: recipients: bugs@ if/subj: subject: bug report then: group: Development bucket: Bugs
+rule/bugs:
+  if/email:
+    recipients: bugs@
+  if/subj:
+    subject: bug report
+  then:
+    group: Development
+    bucket: Bugs
 ```
 
 ### comment
@@ -122,7 +185,13 @@ rule/bugs: if/email: recipients: bugs@ if/subj: subject: bug report then: group:
 `comment` adds a comment with the given text to the resulting ticket.
 
 ```
-rule/vip: if: sender_email: *@vipcustomer.example then: group: VIP importance: 90 comment: This is a high value customer. Please respond rapidly.
+rule/vip:
+  if:
+    sender_email: *@vipcustomer.example
+  then:
+    group: VIP
+    importance: 90
+    comment: This is a high value customer. Please respond rapidly.
 ```
 
 ### group
@@ -130,7 +199,11 @@ rule/vip: if: sender_email: *@vipcustomer.example then: group: VIP importance: 9
 `group` defines the group a ticket will be moved to. If you do not also use `bucket` the ticket will be placed in the group's inbox.
 
 ```
-rule/billing: if: recipients: billing@, receipts@ then: group: Billing
+rule/billing:
+  if:
+    recipients: billing@, receipts@
+  then:
+    group: Billing
 ```
 
 ### importance
@@ -138,7 +211,18 @@ rule/billing: if: recipients: billing@, receipts@ then: group: Billing
 `importance` sets the "importance" field on the ticket. It can be a value between 0 and 100.
 
 ```
-rule/vip: if: sender_email: *@vipcustomer.example then: group: VIP importance: 90 rule/spam: if: spam_score: >=80% then: group: Spam importance: 0
+rule/vip:
+  if:
+    sender_email: *@vipcustomer.example
+  then:
+    group: VIP
+    importance: 90
+rule/spam:
+  if:
+    spam_score: >=80%
+  then:
+    group: Spam
+    importance: 0
 ```
 
 ### owner
@@ -146,7 +230,12 @@ rule/vip: if: sender_email: *@vipcustomer.example then: group: VIP importance: 9
 `owner` assigns an owner to the ticket. This is done with the @mention name of the relevant worker.
 
 ```
-rule/billing: if: recipients: billing@, receipts@ then: group: Billing owner: karlkwota
+rule/billing:
+  if:
+    recipients: billing@, receipts@
+  then:
+    group: Billing
+    owner: karlkwota
 ```
 
 ### watchers
@@ -154,5 +243,13 @@ rule/billing: if: recipients: billing@, receipts@ then: group: Billing owner: ka
 `watchers` assigns watchers to a ticket with a comma-separated list of their @mention names. This cam be useful, for example, for assigning developers as watchers on tickets about bug reports or certain workers for tickets from a VIP customer.
 
 ```
-rule/bugs: if/email: recipients: bugs@ if/subj: subject: bug report then: group: Development bucket: Bugs watchers@csv: marakusako, milodade
+rule/bugs:
+  if/email:
+    recipients: bugs@
+  if/subj:
+    subject: bug report
+  then:
+    group: Development
+    bucket: Bugs
+    watchers@csv: marakusako, milodade
 ```

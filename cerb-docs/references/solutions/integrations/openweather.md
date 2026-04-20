@@ -43,7 +43,20 @@ Copy your default API key or create a new one with the **Create Key** section.
 https://openweathermap.org/current
 
 ```
-start: set: location: London limit: 2 http.request/current: output: http_response inputs: method: GET url: http://api.openweathermap.org/geo/1.0/direct?q= {{ location }} &limit= {{ limit }} authentication: cerb:connected_account:openweather on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  set:
+    location: London
+    limit: 2
+  http.request/current:
+    output: http_response
+    inputs:
+      method: GET
+      url: http://api.openweathermap.org/geo/1.0/direct?q={{location}}&limit={{limit}}
+      authentication: cerb:connected_account:openweather
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Current weather
@@ -51,5 +64,18 @@ start: set: location: London limit: 2 http.request/current: output: http_respons
 https://openweathermap.org/current#geocoding
 
 ```
-start: set: lat: 44.34 long: 10.99 http.request/geocoding: output: http_response inputs: method: GET url: https://api.openweathermap.org/data/2.5/weather?lat= {{ lat }} &lon= {{ long }} authentication: cerb:connected_account:openweather on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  set:
+    lat: 44.34
+    long: 10.99
+  http.request/geocoding:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.openweathermap.org/data/2.5/weather?lat={{lat}}&lon={{long}}
+      authentication: cerb:connected_account:openweather
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

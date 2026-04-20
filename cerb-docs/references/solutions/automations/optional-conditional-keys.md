@@ -16,10 +16,23 @@ The `gdpr:` key will be removed when the region is not `EU`.
 
 - 
 ```
-start: set: record: name: Kina Halpue email: kina@cerb.example region: US return: output: name: {{ record.name }} email: {{ record.email }} gdpr@optional,bool: {{ 'EU' == record.region ? true }}
+start:
+  set:
+    record:
+      name: Kina Halpue
+      email: kina@cerb.example
+      region: US
+  return:
+    output:
+      name: {{record.name}}
+      email: {{record.email}}
+      gdpr@optional,bool: {{'EU' == record.region ? true}}
 ```
 - 
 ```
-__return: output: name: Kina Halpue email: kina@cerb.example
+__return:
+  output:
+    name: Kina Halpue
+    email: kina@cerb.example
 ```
 

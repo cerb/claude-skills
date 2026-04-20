@@ -12,13 +12,42 @@ The command also supports streaming large file uploads directly from attachment 
 A simple `GET` request:
 
 ```
-start: http.request/get: output: http_response inputs: url: https://api.example/employee/123 on_success: return: body@key: http_response:body
+start:
+  http.request/get:
+    output: http_response
+    inputs:
+      url: https://api.example/employee/123
+    on_success:
+      return:
+        body@key: http_response:body
 ```
 
 A more complex `POST` request:
 
 ```
-start: http.request/post: output: http_response inputs: method: POST url: https://api.example/employee/add headers@text: Content-Type: application/json body: person: name: Kina title: Customer Support Manager on_simulate: set: http_response: status_code@int: 200 content_type: application/json body@text: { "status": true, "id": 123 } set: body@key,json: http_response:body return: employee_id@int: {{ body.id }}
+start:
+  http.request/post:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.example/employee/add
+      headers@text:
+        Content-Type: application/json
+      body:
+        person:
+          name: Kina
+          title: Customer Support Manager
+    on_simulate:
+      set:
+        http_response:
+          status_code@int: 200
+          content_type: application/json
+          body@text:
+            { "status": true, "id": 123 }
+  set:
+    body@key,json: http_response:body
+  return:
+    employee_id@int: {{body.id}}
 ```
 
 - [Syntax](#syntax)
@@ -79,13 +108,17 @@ A set of HTTP headers to include with the request.
 Headers should be described as a set of `name: value` pairs.
 
 ```
-headers: Content-Type: application/json X-Requester: Cerb
+headers:
+  Content-Type: application/json
+  X-Requester: Cerb
 ```
 
 The headers can optionally also be defined as a `@text` block.
 
 ```
-headers@text: Content-Type: application/json X-Requester: Cerb
+headers@text:
+  Content-Type: application/json
+  X-Requester: Cerb
 ```
 
 ### body:
@@ -93,7 +126,9 @@ headers@text: Content-Type: application/json X-Requester: Cerb
 The body of the HTTP request (if applicable).
 
 ```
-body@text: This is the body content on multiple indented lines.
+body@text:
+  This is the body content
+  on multiple indented lines.
 ```
 
 If the body is defined as a dictionary of `key: value` pairs, then it will automatically be encoded based on the `Content-Type:` header:
@@ -105,7 +140,12 @@ If the body is defined as a dictionary of `key: value` pairs, then it will autom
 This removes the need for extraneous `set:` commands to prepare the HTTP request.
 
 ```
-headers: Content-Type: application/json body: person: name: Kina Halpue title: Customer Service Manager
+headers:
+  Content-Type: application/json
+body:
+  person:
+    name: Kina Halpue
+    title: Customer Service Manager
 ```
 
 ### timeout:
@@ -207,5 +247,14 @@ Set the `Content-Type:` header to `application/vnd.cerb.uri` and set the HTTP bo
 The automation will take care of streaming the bytes to the HTTP endpoint, which avoids memory issues with loading large attachment content into an automation variable.
 
 ```
-start: http.request/post: output: http_response inputs: method: POST url: https://api.example/file/upload headers@text: Content-Type: application/vnd.cerb.uri body@text: cerb:attachment:123
+start:
+  http.request/post:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.example/file/upload
+      headers@text:
+        Content-Type: application/vnd.cerb.uri
+      body@text:
+        cerb:attachment:123
 ```

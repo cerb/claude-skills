@@ -10,7 +10,39 @@ tags: ["docs", "docs-automations"]
 In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **chart** element renders an interactive data visualization.
 
 ```
-start: await: form: title: Chart elements: chart/prompt_chart: label: Tickets by group (past 1 year): datasets: dataQuery/tickets: query@text: type:worklist.subtotals of:ticket by:[created@month,group~20] query:(created:"-1 year to now") format:timeseries schema: data: type: bar series: tickets: x_key: ts stacks: 0@csv: tickets axis: x: type: timeseries tick: format: date: pattern: %b %Y fit@bool: no multiline@bool: no rotate: -90
+start:
+  await:
+    form:
+      title: Chart
+      elements:
+        chart/prompt_chart:
+          label: Tickets by group (past 1 year):
+          datasets:
+            dataQuery/tickets:
+              query@text:
+                type:worklist.subtotals
+                of:ticket
+                by:[created@month,group~20]
+                query:(created:"-1 year to now")
+                format:timeseries
+          schema:
+            data:
+              type: bar
+              series:
+                tickets:
+                  x_key: ts
+              stacks:
+                0@csv: tickets
+            axis:
+              x:
+                type: timeseries
+                tick:
+                  format:
+                    date:
+                      pattern: %b %Y
+                  fit@bool: no
+                  multiline@bool: no
+                  rotate: -90
 ```
 
  
@@ -36,7 +68,7 @@ The [datasets](/docs/dashboards/widgets/chart-kata/#datasets) to load and pass t
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### schema:

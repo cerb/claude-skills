@@ -19,7 +19,8 @@ Extract a substring from a larger string using starting and ending positions. Th
 ```
 {% set alphabet %}
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
-{% endset %} {{ alphabet | str_sub ( 7 , 9 ) }}
+{% endset %}
+{{alphabet|str_sub(7,9)}}
 ```
 
 ```

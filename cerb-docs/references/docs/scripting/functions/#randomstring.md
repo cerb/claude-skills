@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Generate a random string of the given length. This is useful for generating confirmation codes or temporary passwords.
 
 ```
-{{ random_string ( 16 ) }}
+{{random_string(16)}}
 ```
 
 ```

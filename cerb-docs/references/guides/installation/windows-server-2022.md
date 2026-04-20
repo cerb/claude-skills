@@ -110,7 +110,13 @@ Set a MySQL root password.
 Enter your root password.
 
 ```
-CREATE DATABASE cerb CHARACTER SET utf8 ; CREATE USER cerb @ localhost IDENTIFIED BY 's3cr3t' ; GRANT ALL PRIVILEGES ON cerb . * TO cerb @ localhost ; QUIT ;
+CREATE DATABASE cerb CHARACTER SET utf8;
+
+CREATE USER cerb@localhost IDENTIFIED BY 's3cr3t';
+
+GRANT ALL PRIVILEGES ON cerb.* TO cerb@localhost;
+
+QUIT;
 ```
 
 Replace s3cr3t above with your own secret password. If you're using a remote database server, replace @localhost with a subnet used by your web servers, like: @'10.0.0.%'
@@ -120,7 +126,14 @@ Replace s3cr3t above with your own secret password. If you're using a remote dat
 Edit `C:\Program Files\PHP\v8.0\php.ini`
 
 ```
-extension = php_curl.dll extension = php_gd.dll extension = php_mbstring.dll extension = php_mysqli.dll extension = php_openssl.dll extension = php_mailparse.dll extension = php_tidy.dll extension = php_yaml.dll
+extension=php_curl.dll
+extension=php_gd.dll
+extension=php_mbstring.dll
+extension=php_mysqli.dll
+extension=php_openssl.dll
+extension=php_mailparse.dll
+extension=php_tidy.dll
+extension=php_yaml.dll
 ```
 
 **Start&nbsp;» Command Prompt**

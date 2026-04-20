@@ -21,7 +21,62 @@ Navigate to **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Empty**.
 Paste the following KATA into the large text box:
 
 ```
-workflow: name: wgm.email.group_watchers version: 2025-07-13T22:13:31Z description: Automatically add all group members as watchers for incoming tickets. website: https://cerb.ai/workflows/wgm.email.group_watchers/ requirements: cerb_version: >=11.0 <11.2 cerb_plugins: cerberusweb.core, records: automation_event_listener/listenerMailReceived: fields: name: Group Watchers event_name: mail.received priority@int: 100 is_disabled: 0 event_kata@raw: automation/addGroupWatchers: uri: cerb:automation:wgm.email.group_watchers.mailReceived disabled@bool: {{ not is_new_ticket or not message_ticket_id or not message_ticket_group_id }} automation/automationMailReceived: fields: name: wgm.email.group_watchers.mailReceived extension_id: cerb.trigger.mail.received description: Add all group members as watchers for new tickets. script@raw: start: outcome/hasTicket: if@bool: {{ not is_new_ticket or not message_ticket_id or not message_ticket_group_id }} then: return: # Add all group members as watchers set: watcher_links@list: {{ message_ticket_group_members |keys |map((worker_id) => 'worker:' ~ worker_id) |join('\n') }} # Only update if we have group members outcome/hasMembers: if@bool: {{ watcher_links is not empty }} then: record.update: inputs: record_type: ticket record_id: {{ message_ticket_id }} fields: links@key: watcher_links policy_kata@raw: commands: record.update: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes
+workflow:
+  name: wgm.email.group_watchers
+  version: 2025-07-13T22:13:31Z
+  description: Automatically add all group members as watchers for incoming tickets.
+  website: https://cerb.ai/workflows/wgm.email.group_watchers/
+  requirements:
+    cerb_version: >=11.0 <11.2
+    cerb_plugins: cerberusweb.core,
+records:
+  automation_event_listener/listenerMailReceived:
+    fields:
+      name: Group Watchers
+      event_name: mail.received
+      priority@int: 100
+      is_disabled: 0
+      event_kata@raw:
+        automation/addGroupWatchers:
+          uri: cerb:automation:wgm.email.group_watchers.mailReceived
+          disabled@bool: {{not is_new_ticket or not message_ticket_id or not message_ticket_group_id}}
+  automation/automationMailReceived:
+    fields:
+      name: wgm.email.group_watchers.mailReceived
+      extension_id: cerb.trigger.mail.received
+      description: Add all group members as watchers for new tickets.
+      script@raw:
+        start:
+          outcome/hasTicket:
+            if@bool: {{not is_new_ticket or not message_ticket_id or not message_ticket_group_id}}
+            then:
+              return:
+          
+          # Add all group members as watchers
+          set:
+            watcher_links@list:
+              {{
+                message_ticket_group_members
+                |keys
+                |map((worker_id) => 'worker:' ~ worker_id)
+                |join('\n')
+              }}
+          
+          # Only update if we have group members
+          outcome/hasMembers:
+            if@bool: {{watcher_links is not empty}}
+            then:
+              record.update:
+                inputs:
+                  record_type: ticket
+                  record_id: {{message_ticket_id}}
+                  fields:
+                    links@key: watcher_links
+      policy_kata@raw:
+        commands:
+          record.update:
+            deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+            allow@bool: yes
 ```
 
 Click the **Continue** button three times.

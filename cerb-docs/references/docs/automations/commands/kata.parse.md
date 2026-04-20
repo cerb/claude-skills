@@ -8,8 +8,19 @@ tags: ["docs", "docs-automations"]
 The **kata.parse:** command parses an arbitrary [KATA](/docs/kata/) document with placeholder substitution.
 
 ```
-start: kata.parse: inputs: kata@raw: template@text: Hello {{ name }} ! Thanks for writing to {{ company }} . dict: name: Janey company: Cerb output: results 
-   return: output: {{ results.template }}
+start:
+  kata.parse:
+    inputs:
+      kata@raw:
+        template@text:
+          Hello {{name}}! Thanks for writing to {{company}}.
+      dict:
+        name: Janey
+        company: Cerb
+    output: results
+
+  return:
+    output: {{results.template}}
 ```
 
 - [Syntax](#syntax)
@@ -42,7 +53,23 @@ A dictionary of keys/values for placeholders.
 A validation schema for the KATA document. This is useful if the document is dynamically generated or user-provided.
 
 ```
-schema: attributes: automation: multiple@bool: yes types: object: attributes: uri: required@bool: yes types: string: disabled: types: bool: inputs: types: list:
+schema:
+    attributes:
+      automation:
+        multiple@bool: yes
+        types:
+          object:
+            attributes:
+              uri:
+                required@bool: yes
+                types:
+                  string:
+              disabled:
+                types:
+                  bool:
+              inputs:
+                types:
+                  list:
 ```
 
 #### Keys

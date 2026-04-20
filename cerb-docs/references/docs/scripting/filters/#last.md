@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Return the last item of an array, object, or string:
 
 ```
-{% set items = [1 , 2 , 3] %} {{ items | last }}
+{% set items = [1,2,3] %}
+{{items|last}}
 ```
 
 ```

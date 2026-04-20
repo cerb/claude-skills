@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Convert a Unix timestamp into a human-readable, relative date:
 
 ```
-{% set timestamp = date ( "Jan 9 2002 10am" , "America/Los_Angeles" ) %} {{ timestamp | date ( 'U' ) | date_pretty }}
+{% set timestamp = date("Jan 9 2002 10am", "America/Los_Angeles") %}
+{{timestamp|date('U')|date_pretty}}
 ```
 
 ```

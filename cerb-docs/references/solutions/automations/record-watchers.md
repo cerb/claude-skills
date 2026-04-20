@@ -18,10 +18,23 @@ A watcher link can be removed by prepending a `-` to the tuple in the list.
 
 - 
 ```
-start: record.update/watcher: output: updated_ticket inputs: record_type: ticket record_id: 123 fields: links@list: worker:1 worker:2 -worker:3
+start:
+  record.update/watcher:
+    output: updated_ticket
+    inputs:
+      record_type: ticket
+      record_id: 123
+      fields:
+        links@list:
+          worker:1
+          worker:2
+          -worker:3
 ```
 - 
 ```
-commands: record.update: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes
+commands:
+  record.update:
+    deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+    allow@bool: yes
 ```
 

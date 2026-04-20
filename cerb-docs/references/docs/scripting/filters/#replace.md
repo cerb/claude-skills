@@ -8,7 +8,7 @@ tags: ["docs", "docs-scripting"]
 ## replace
 
 ```
-{{ "I really like %food%" | replace ( { '%food%' : 'ice cream' } ) }}
+{{"I really like %food%"|replace({'%food%':'ice cream'})}}
 ```
 
 ```

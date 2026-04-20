@@ -12,10 +12,21 @@ The [|date](/docs/scripting/filters/#date) filter can convert human-readable dat
 
 - 
 ```
-start: set: sla_expiration@date: +2 weeks return: output@text: {% if sla_expiration >= 'now'|date('U') %} Your SLA coverage is active. {% else %} Your SLA coverage has expired. {% endif %}
+start:
+  set:
+    sla_expiration@date: +2 weeks
+  return:
+    output@text:
+      {% if sla_expiration >= 'now'|date('U') %}
+      Your SLA coverage is active.
+      {% else %}
+      Your SLA coverage has expired.
+      {% endif %}
 ```
 - 
 ```
-__return : output : | Your SLA coverage is active.
+__return:
+  output: |
+    Your SLA coverage is active.
 ```
 

@@ -16,7 +16,8 @@ colors@list:
   green
   blue
 size@int: 100
-{% endset %} {{ kata_parse ( kata ) | json_encode | json_pretty }}
+{% endset %}
+{{kata_parse(kata)|json_encode|json_pretty}}
 ```
 
 ```

@@ -8,7 +8,15 @@ tags: ["docs", "docs-automations"]
 The **record.get:** command loads a record from a [type](/docs/records/types/) and ID.
 
 ```
-start: record.get: output: record inputs: record_type: task record_id: 123 return: output@text: Loaded {{ record._context }} # {{ record.id }} : {{ record._label }}
+start:
+  record.get:
+    output: record
+    inputs:
+      record_type: task
+      record_id: 123
+  return:
+    output@text:
+      Loaded {{record._context}} #{{record.id}}: {{record._label}}
 ```
 
 ```

@@ -12,7 +12,8 @@ tags: ["docs", "docs-scripting"]
 Decode a base64url-encoded string:
 
 ```
-{% set b64 = "VGhpcyB3YXMgYmFzZTY0dXJsLWVuY29kZWQ" %} {{ b64 | base64url_decode }}
+{% set b64 = "VGhpcyB3YXMgYmFzZTY0dXJsLWVuY29kZWQ" %}
+{{b64|base64url_decode}}
 ```
 
 ```

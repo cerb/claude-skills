@@ -10,8 +10,10 @@ tags: ["docs", "docs-scripting"]
 Round-robin through a sequence.
 
 ```
-{% set options = ['odd' , 'even'] %} {% for n in 1. . 10 %}
-* {{ cycle ( options , n ) }} {% endfor %}
+{% set options = ['odd','even'] %}
+{% for n in 1..10 %}
+* {{cycle(options, n)}}
+{% endfor %}
 ```
 
 ```

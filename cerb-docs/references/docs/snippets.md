@@ -12,14 +12,14 @@ However, unlike the traditional _paste_ action, snippets also support [sophistic
 In a common use case, an auto-responder message will use placeholders in a snippet like:
 
 ```
-Hi <b> {{ first_name }} </b>,
+Hi <b>{{first_name}}</b>,
 
 Thanks for contacting us!
 
 A new support ticket has been opened in response to your message:
 
-Reference #: <b> {{ mask }} </b>
-Subject: <b> {{ subject }} </b>
+Reference #: <b>{{mask}}</b>
+Subject: <b>{{subject}}</b>
 
 We'll be in contact shortly.
 ```

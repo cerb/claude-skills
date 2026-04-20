@@ -14,14 +14,25 @@ Using data.query: and file.read: you can read and extract specific files from a 
 
 - 
 ```
-start: data.query/zip: inputs: query@text: type:attachment.manifest id:1234 filter:*.txt format:dictionaries output: results
+start:
+  data.query/zip:
+    inputs:
+      query@text:
+        type:attachment.manifest
+        id:1234
+        filter:*.txt
+        format:dictionaries
+    output: results
 ```
 
 The optional `filter:` key matches a filename pattern with `*` as wildcards.
 
 - 
 ```
-commands: data.query: deny/type@bool: {{ query.type != 'attachment.manifest' }} allow@bool: yes
+commands:
+  data.query:
+    deny/type@bool: {{query.type != 'attachment.manifest'}}
+    allow@bool: yes
 ```
 
 ## Extract a specific file path from a ZIP archive
@@ -31,10 +42,19 @@ commands: data.query: deny/type@bool: {{ query.type != 'attachment.manifest' }} 
 
 - 
 ```
-start: file.read: output: file_contents inputs: uri: cerb:attachment:1234 extract: README.txt filters: gzip.decompress:
+start:
+  file.read:
+    output: file_contents
+    inputs:
+      uri: cerb:attachment:1234
+      extract: README.txt
+      filters:
+        gzip.decompress:
 ```
 - 
 ```
-commands: file.read: allow@bool: yes
+commands:
+  file.read:
+    allow@bool: yes
 ```
 

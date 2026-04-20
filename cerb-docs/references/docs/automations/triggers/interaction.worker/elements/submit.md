@@ -10,7 +10,10 @@ In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **
 This is automatically added when an interaction exits in the [await state](/docs/automations/#exit-states). You do not need to do it yourself.
 
 ```
-start: await: form: elements:
+start:
+  await:
+    form:
+      elements:
 ```
 
  
@@ -32,7 +35,23 @@ When `submit:buttons:` isn't provided, the default 'continue' and 'reset' button
 The current alternative styles for buttons are 'secondary' (gray like reset) or 'outline' (blue like continue but not filled). This makes it easy to visually distinguish primary/default and secondary options.
 
 ```
-start: await: form: title: Confirmation elements: say: content: # Are you sure? submit/prompt_confirm: buttons: continue/yes: label: Yes value: yes continue/no: label: No style: secondary value: no hidden@bool: no
+start:
+  await:
+    form:
+      title: Confirmation
+      elements:
+        say:
+          content: # Are you sure?
+        submit/prompt_confirm:
+          buttons:
+            continue/yes:
+              label: Yes
+              value: yes
+            continue/no:
+              label: No
+              style: secondary
+              value: no
+              hidden@bool: no
 ```
 
  
@@ -42,7 +61,7 @@ start: await: form: title: Confirmation elements: say: content: # Are you sure? 
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### is\_automatic:

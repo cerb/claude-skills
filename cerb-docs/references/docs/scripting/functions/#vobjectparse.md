@@ -38,7 +38,8 @@ home.label:Hufenshlagel 1234\n
  02828 Goerlitz\n
  Deutschland
 end:vcard
-{% endset %} {{ vobject_parse ( vcard ) | json_encode | json_pretty }}
+{% endset %}
+{{vobject_parse(vcard)|json_encode|json_pretty}}
 ```
 
 ```

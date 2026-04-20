@@ -155,180 +155,180 @@ Switch to **Import** mode at the top.
 Paste the following behavior into the large textbox:
 
 ```
-{ 
-   "behavior" : { 
-     "uid" : "behavior_salesforce_sync" , 
-     "title" : "Sync changed tickets into Salesforce" , 
-     "is_disabled" : true , 
-     "is_private" : false , 
-     "priority" : 50 , 
-     "configure" : [ 
-       { 
-         "label" : "Salesforce Account:" , 
-         "path" : "behavior.nodes[2].nodes[0].params.actions[0].auth_connected_account_id" , 
-         "type" : "chooser" , 
-         "params" : { 
-           "context" : "cerberusweb.contexts.connected_account" , 
-           "query" : "service: \" wgm.salesforce.service.provider \" " , 
-           "single" : true 
-         } 
-       } 
-     ], 
-     "event" : { 
-       "key" : "event.behavior.recurrent" , 
-       "label" : "Recurrent behavior" , 
-       "params" : { 
-         "repeat_patterns" : "# https://en.wikipedia.org/wiki/Cron#CRON_expression \r\n # [min] [hour] [dom] [month] [dow] \r\n */10 * * * *" , 
-         "timezone" : "America/Los_Angeles" , 
-         "repeat_history" : [], 
-         "repeat_run_at" : 1504311300 
-       } 
-     }, 
-     "variables" : { 
-       "var_changed_tickets" : { 
-         "key" : "var_changed_tickets" , 
-         "label" : "Changed Tickets" , 
-         "type" : "ctx_cerberusweb.contexts.ticket" , 
-         "is_private" : "1" , 
-         "params" : [] 
-       } 
-     }, 
-     "nodes" : [ 
-       { 
-         "type" : "action" , 
-         "title" : "Load sync variables" , 
-         "status" : "live" , 
-         "params" : { 
-           "actions" : [ 
-             { 
-               "action" : "_get_key" , 
-               "key" : "sync_json" , 
-               "var" : "_sync_json" 
-             }, 
-             { 
-               "action" : "_set_custom_var" , 
-               "value" : "{{_sync_json|json_pretty}}" , 
-               "format" : "json" , 
-               "is_simulator_only" : "0" , 
-               "var" : "_sync_json" 
-             }, 
-             { 
-               "action" : "_set_custom_var" , 
-               "value" : "{{_sync_json.since|default(0)}}" , 
-               "format" : "" , 
-               "is_simulator_only" : "0" , 
-               "var" : "sync_since" 
-             }, 
-             { 
-               "action" : "_set_custom_var" , 
-               "value" : "{{_sync_json.id|default(0)}}" , 
-               "format" : "" , 
-               "is_simulator_only" : "0" , 
-               "var" : "sync_id" 
-             } 
-           ] 
-         } 
-       }, 
-       { 
-         "type" : "action" , 
-         "title" : "Find changed tickets" , 
-         "status" : "live" , 
-         "params" : { 
-           "actions" : [ 
-             { 
-               "action" : "var_changed_tickets" , 
-               "search_mode" : "quick_search" , 
-               "quick_search" : "((updated: \" {{sync_since}} to {{sync_since}} \" AND id:>{{sync_id}}) OR (updated: \" {{sync_since+1}} to now \" )) sort:updated,id" , 
-               "limit" : "first" , 
-               "limit_count" : "25" , 
-               "mode" : "replace" , 
-               "worklist_model" : null 
-             } 
-           ] 
-         } 
-       }, 
-       { 
-         "type" : "loop" , 
-         "title" : "Loop changed tickets" , 
-         "status" : "live" , 
-         "params" : { 
-           "foreach_json" : "{{var_changed_tickets|keys|json_encode}}" , 
-           "as_placeholder" : "changed_ticket_id" 
-         }, 
-         "nodes" : [ 
-           { 
-            "type" : "action" , 
-            "title" : "Upsert ticket" , 
-            "status" : "live" , 
-            "params" : { 
-                "actions" : [ 
-                    { 
-                        "action" : "core.va.action.http_request" , 
-                        "http_verb" : "patch" , 
-                        "http_url" : "{% set changed_ticket = var_changed_tickets[changed_ticket_id] %} \r\n {% set ns = behavior_bot_config.namespace %} \r\n https://{{behavior_bot_config.instance}}.salesforce.com/services/data/{{behavior_bot_config.api_version}}/sobjects/{{ns}}__Ticket__c/{{ns}}__Cerb_Mask__c/{{changed_ticket.mask}}" , 
-                        "http_headers" : "Content-Type: application/json" , 
-                        "http_body" : "{% set changed_ticket = var_changed_tickets[changed_ticket_id] %} \r\n {% set ns = behavior_bot_config.namespace %} \r\n {% set json = {} %} \r\n {% set json = dict_set(json, 'Name', changed_ticket.subject) %} \r\n {% set json = dict_set(json, ns ~ \" __Bucket__c \" , changed_ticket.bucket__label) %} \r\n {% set json = dict_set(json, ns ~ \"__Created__c \" , changed_ticket.created|date('r')) %} \r\n {% set json = dict_set(json, ns ~ \"__Group__c \" , changed_ticket.group__label) %} \r\n {% set json = dict_set(json, ns ~ \" __Owner__c \" , changed_ticket.owner__label) %} \r\n {% set json = dict_set(json, ns ~ \"__Record_URL__c \" , changed_ticket.url) %} \r\n {% set json = dict_set(json, ns ~ \"__Status__c \" , changed_ticket.status) %} \r\n {% set json = dict_set(json, ns ~ \"__Updated__c \" , changed_ticket.updated|date('r')) %} \r\n {{json|json_encode|json_pretty}}" , 
-                        "auth" : "connected_account" , 
-                        "auth_connected_account_id" : "10" , 
-                        "options" : { 
-                            "raw_response_body" : "1" 
-                        }, 
-                        "run_in_simulator" : "1" , 
-                        "response_placeholder" : "_http_response" 
-                    }, 
-                    { 
-                        "action" : "_set_custom_var" , 
-                        "value" : "{{_http_response.body}}" , 
-                        "format" : "" , 
-                        "is_simulator_only" : "0" , 
-                        "var" : "response" 
-                    } 
-                ] 
-            } 
-           }, 
-           { 
-             "type" : "action" , 
-             "title" : "Update sync variables" , 
-             "status" : "live" , 
-             "params" : { 
-               "actions" : [ 
-                 { 
-                   "action" : "_set_custom_var" , 
-                   "value" : "{% set changed_ticket = var_changed_tickets[changed_ticket_id] %} \r\n {{changed_ticket.updated|default(0)}}" , 
-                   "format" : "" , 
-                   "is_simulator_only" : "0" , 
-                   "var" : "sync_since" 
-                 }, 
-                 { 
-                   "action" : "_set_custom_var" , 
-                   "value" : "{% set changed_ticket = var_changed_tickets[changed_ticket_id] %} \r\n {{changed_ticket.id|default(0)}}" , 
-                   "format" : "" , 
-                   "is_simulator_only" : "0" , 
-                   "var" : "sync_id" 
-                 } 
-               ] 
-             } 
-           } 
-         ] 
-       }, 
-       { 
-         "type" : "action" , 
-         "title" : "Save sync variables" , 
-         "status" : "live" , 
-         "params" : { 
-           "actions" : [ 
-             { 
-               "action" : "_set_key" , 
-               "key" : "sync_json" , 
-               "value" : "{% set json = { \r\n\t\" since \" : sync_since, \r\n\t\" id \" : sync_id, \r\n } %} \r\n {{json|json_encode|json_pretty}}" , 
-               "expires_at" : "" 
-             } 
-           ] 
-         } 
-       } 
-     ] 
-   } 
- }
+{
+  "behavior": {
+    "uid": "behavior_salesforce_sync",
+    "title": "Sync changed tickets into Salesforce",
+    "is_disabled": true,
+    "is_private": false,
+    "priority": 50,
+    "configure": [
+      {
+        "label": "Salesforce Account:",
+        "path": "behavior.nodes[2].nodes[0].params.actions[0].auth_connected_account_id",
+        "type": "chooser",
+        "params": {
+          "context": "cerberusweb.contexts.connected_account",
+          "query": "service:\"wgm.salesforce.service.provider\"",
+          "single": true
+        }
+      }
+    ],
+    "event": {
+      "key": "event.behavior.recurrent",
+      "label": "Recurrent behavior",
+      "params": {
+        "repeat_patterns": "# https://en.wikipedia.org/wiki/Cron#CRON_expression\r\n# [min] [hour] [dom] [month] [dow]\r\n*/10 * * * *",
+        "timezone": "America/Los_Angeles",
+        "repeat_history": [],
+        "repeat_run_at": 1504311300
+      }
+    },
+    "variables": {
+      "var_changed_tickets": {
+        "key": "var_changed_tickets",
+        "label": "Changed Tickets",
+        "type": "ctx_cerberusweb.contexts.ticket",
+        "is_private": "1",
+        "params": []
+      }
+    },
+    "nodes": [
+      {
+        "type": "action",
+        "title": "Load sync variables",
+        "status": "live",
+        "params": {
+          "actions": [
+            {
+              "action": "_get_key",
+              "key": "sync_json",
+              "var": "_sync_json"
+            },
+            {
+              "action": "_set_custom_var",
+              "value": "{{_sync_json|json_pretty}}",
+              "format": "json",
+              "is_simulator_only": "0",
+              "var": "_sync_json"
+            },
+            {
+              "action": "_set_custom_var",
+              "value": "{{_sync_json.since|default(0)}}",
+              "format": "",
+              "is_simulator_only": "0",
+              "var": "sync_since"
+            },
+            {
+              "action": "_set_custom_var",
+              "value": "{{_sync_json.id|default(0)}}",
+              "format": "",
+              "is_simulator_only": "0",
+              "var": "sync_id"
+            }
+          ]
+        }
+      },
+      {
+        "type": "action",
+        "title": "Find changed tickets",
+        "status": "live",
+        "params": {
+          "actions": [
+            {
+              "action": "var_changed_tickets",
+              "search_mode": "quick_search",
+              "quick_search": "((updated:\"{{sync_since}} to {{sync_since}}\" AND id:>{{sync_id}}) OR (updated:\"{{sync_since+1}} to now\")) sort:updated,id",
+              "limit": "first",
+              "limit_count": "25",
+              "mode": "replace",
+              "worklist_model": null
+            }
+          ]
+        }
+      },
+      {
+        "type": "loop",
+        "title": "Loop changed tickets",
+        "status": "live",
+        "params": {
+          "foreach_json": "{{var_changed_tickets|keys|json_encode}}",
+          "as_placeholder": "changed_ticket_id"
+        },
+        "nodes": [
+          {
+           "type": "action",
+           "title": "Upsert ticket",
+           "status": "live",
+           "params": {
+               "actions": [
+                   {
+                       "action": "core.va.action.http_request",
+                       "http_verb": "patch",
+                       "http_url": "{% set changed_ticket = var_changed_tickets[changed_ticket_id] %}\r\n{% set ns = behavior_bot_config.namespace %}\r\nhttps://{{behavior_bot_config.instance}}.salesforce.com/services/data/{{behavior_bot_config.api_version}}/sobjects/{{ns}}__Ticket__c/{{ns}}__Cerb_Mask__c/{{changed_ticket.mask}}",
+                       "http_headers": "Content-Type: application/json",
+                       "http_body": "{% set changed_ticket = var_changed_tickets[changed_ticket_id] %}\r\n{% set ns = behavior_bot_config.namespace %}\r\n{% set json = {} %}\r\n{% set json = dict_set(json, 'Name', changed_ticket.subject) %}\r\n{% set json = dict_set(json, ns ~ \"__Bucket__c\", changed_ticket.bucket__label) %}\r\n{% set json = dict_set(json, ns ~ \"__Created__c\", changed_ticket.created|date('r')) %}\r\n{% set json = dict_set(json, ns ~ \"__Group__c\", changed_ticket.group__label) %}\r\n{% set json = dict_set(json, ns ~ \"__Owner__c\", changed_ticket.owner__label) %}\r\n{% set json = dict_set(json, ns ~ \"__Record_URL__c\", changed_ticket.url) %}\r\n{% set json = dict_set(json, ns ~ \"__Status__c\", changed_ticket.status) %}\r\n{% set json = dict_set(json, ns ~ \"__Updated__c\", changed_ticket.updated|date('r')) %}\r\n{{json|json_encode|json_pretty}}",
+                       "auth": "connected_account",
+                       "auth_connected_account_id": "10",
+                       "options": {
+                           "raw_response_body": "1"
+                       },
+                       "run_in_simulator": "1",
+                       "response_placeholder": "_http_response"
+                   },
+                   {
+                       "action": "_set_custom_var",
+                       "value": "{{_http_response.body}}",
+                       "format": "",
+                       "is_simulator_only": "0",
+                       "var": "response"
+                   }
+               ]
+           }
+          },
+          {
+            "type": "action",
+            "title": "Update sync variables",
+            "status": "live",
+            "params": {
+              "actions": [
+                {
+                  "action": "_set_custom_var",
+                  "value": "{% set changed_ticket = var_changed_tickets[changed_ticket_id] %}\r\n{{changed_ticket.updated|default(0)}}",
+                  "format": "",
+                  "is_simulator_only": "0",
+                  "var": "sync_since"
+                },
+                {
+                  "action": "_set_custom_var",
+                  "value": "{% set changed_ticket = var_changed_tickets[changed_ticket_id] %}\r\n{{changed_ticket.id|default(0)}}",
+                  "format": "",
+                  "is_simulator_only": "0",
+                  "var": "sync_id"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "type": "action",
+        "title": "Save sync variables",
+        "status": "live",
+        "params": {
+          "actions": [
+            {
+              "action": "_set_key",
+              "key": "sync_json",
+              "value": "{% set json = {\r\n\t\"since\": sync_since,\r\n\t\"id\": sync_id,\r\n} %}\r\n{{json|json_encode|json_pretty}}",
+              "expires_at": ""
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
 ```
 
 Click the **Save Changes** button.
@@ -352,36 +352,36 @@ Switch to **Import** mode.
 Paste the following behavior into the large textbox:
 
 ```
-{ 
-   "behavior" : { 
-     "uid" : "behavior_salesforce_reset_sync" , 
-     "title" : "Reset Salesforce ticket synchronization" , 
-     "is_disabled" : false , 
-     "is_private" : true , 
-     "priority" : 50 , 
-     "event" : { 
-       "key" : "event.macro.bot" , 
-       "label" : "Custom behavior on bot" 
-     }, 
-     "nodes" : [ 
-       { 
-         "type" : "action" , 
-         "title" : "Clear the variable" , 
-         "status" : "live" , 
-         "params" : { 
-           "actions" : [ 
-             { 
-               "action" : "_set_key" , 
-               "key" : "sync_json" , 
-               "value" : "{}" , 
-               "expires_at" : "" 
-             } 
-           ] 
-         } 
-       } 
-     ] 
-   } 
- }
+{
+  "behavior": {
+    "uid": "behavior_salesforce_reset_sync",
+    "title": "Reset Salesforce ticket synchronization",
+    "is_disabled": false,
+    "is_private": true,
+    "priority": 50,
+    "event": {
+      "key": "event.macro.bot",
+      "label": "Custom behavior on bot"
+    },
+    "nodes": [
+      {
+        "type": "action",
+        "title": "Clear the variable",
+        "status": "live",
+        "params": {
+          "actions": [
+            {
+              "action": "_set_key",
+              "key": "sync_json",
+              "value": "{}",
+              "expires_at": ""
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
 ```
 
 Click the **Save Changes** button.

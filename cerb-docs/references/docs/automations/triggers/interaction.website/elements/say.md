@@ -8,7 +8,15 @@ tags: ["docs", "docs-automations"]
 In [website interactions](/docs/automations/triggers/interaction.website/) forms, a **say** element displays a block of text or Markdown.
 
 ```
-start: await: form: title: Example elements: say/hello: content@text: # Heading This is a **paragraph** in Markdown.
+start:
+  await:
+    form:
+      title: Example
+      elements:
+        say/hello:
+          content@text:
+            # Heading
+            This is a **paragraph** in Markdown.
 ```
 
  
@@ -28,11 +36,20 @@ Message to display as plain text.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ expression }}
+hidden@bool: {{expression}}
 ```
 
 ### references:
 
 ```
-await/router: form: title: How can we help? elements: say: content@text:  references: resource/logo: uri: cerb:resource:portal.logo.cerb
+await/router:
+  form:
+    title: How can we help?
+    elements:
+      say:
+        content@text:
+          
+        references:
+          resource/logo:
+            uri: cerb:resource:portal.logo.cerb
 ```

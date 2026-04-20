@@ -14,11 +14,21 @@ Convert HTML content to plain text.
 | **truncate** | The maximum length to parse (bytes) |
 
 ```
-{% set html %} <p>
-	This has <b>bold</b> and <u>underlined</u> text with <a href= "https://cerb.ai/" >links</a>.
-</p> <p>
+{% set html %}
+<p>
+	This has <b>bold</b> and <u>underlined</u> text with <a href="https://cerb.ai/">links</a>.
+</p>
+<p>
 	List:
-	<ul> <li>This</li> <li>is</li> <li>a</li> <li>list</li> </ul> </p> {% endset %} {{ html | html_to_text }}
+	<ul>
+		<li>This</li>
+		<li>is</li>
+		<li>a</li>
+		<li>list</li>
+	</ul>
+</p>
+{% endset %}
+{{html|html_to_text}}
 ```
 
 ```

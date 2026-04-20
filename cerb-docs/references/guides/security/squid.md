@@ -77,7 +77,12 @@ htpasswd -c squid-config/passwords cerb_proxy
 Start the Squid proxy container with your configuration files. This command maps port 8888 on your host to port 3128 in the container and mounts your configuration files.
 
 ```
-docker run -d \ --name squid-proxy \ -e TZ =UTC \ -p 8888:3128 \ -v $( pwd )/squid-config/squid.conf:/etc/squid/squid.conf \ -v $( pwd )/squid-config/passwords:/etc/squid/passwords \
+docker run -d \       
+  --name squid-proxy \
+  -e TZ=UTC \
+  -p 8888:3128 \
+  -v $(pwd)/squid-config/squid.conf:/etc/squid/squid.conf \
+  -v $(pwd)/squid-config/passwords:/etc/squid/passwords \
   ubuntu/squid:5.2-22.04_beta
 ```
 
@@ -86,7 +91,7 @@ docker run -d \ --name squid-proxy \ -e TZ =UTC \ -p 8888:3128 \ -v $( pwd )/squ
 Verify that your proxy is working correctly by making a test request through it. This command uses curl to fetch the first 100 characters from a Cerb documentation page.
 
 ```
-curl -s -x "http://cerb_proxy:FJ \! 3G \! ht3Y@localhost:8888" -H "Accept: application/json" "https://cerb.ai/docs/history/" | head -c 100
+curl -s -x "http://cerb_proxy:FJ\!3G\!ht3Y@localhost:8888" -H "Accept: application/json" "https://cerb.ai/docs/history/" | head -c 100
 ```
 
  
@@ -100,7 +105,7 @@ curl -s -x "http://cerb_proxy:FJ \! 3G \! ht3Y@localhost:8888" -H "Accept: appli
 Edit the `framework.config.php` file and add the following line with the other `define()` statements at the top:
 
 ```
-define ( 'DEVBLOCKS_HTTP_PROXY' , 'http://cerb_proxy:YOUR_PASSWORD@host.docker.internal:8888' );
+define('DEVBLOCKS_HTTP_PROXY', 'http://cerb_proxy:YOUR_PASSWORD@host.docker.internal:8888');
 ```
 
 - Replace `YOUR_PASSWORD` with your Squid password.

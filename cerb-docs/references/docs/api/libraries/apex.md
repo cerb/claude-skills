@@ -32,7 +32,76 @@ This class can be included by **Salesforce** applications to simplify interactio
   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
   THE SOFTWARE.
-***********************************************************************/ public class CerbApiTest { public static String apiBaseUrl { get ; set ;} public static String apiAccessKey { get ; set ;} public static String apiSecretKey { get ; set ;} private static String md5 ( String text ) { return EncodingUtil . convertToHex ( Crypto . generateDigest ( ' MD5 ' , Blob . valueOf ( text ))); } public static HttpResponse get ( String path ) { return Cerb . connect ( ' GET ' , path ); } public static HttpResponse put ( String path ) { return Cerb . connect ( ' PUT ' , path ); } public static HttpResponse post ( String path ) { return Cerb . connect ( ' POST ' , path ); } public static HttpResponse del ( String path ) { return Cerb . connect ( ' DELETE ' , path ); } public static HttpResponse connect ( String http_method , String url_path ) { Http http = new Http (); HttpRequest req = new HttpRequest (); String http_date = DateTime . now (). format ( ' EEE , d MMM yyy HH:mm: ss Z ' ); URL url = new URL ( apiBaseUrl + url_path ); req . setEndpoint ( url . toExternalForm ()); req . setMethod ( http_method ); req . setHeader ( ' Date ' , http_date ); String url_query = url . getQuery (); if (! String . isNotBlank ( url_query )) url_query = '' ; String string_to_sign = http_method + '\n' + http_date + '\n' + url . getPath () + '\n' + url_query + '\n' + '' + '\n' + md5 ( apiSecretKey ) + '\n' ; //System.debug('String to sign: ' + string_to_sign); req . setHeader ( ' Cerb - Auth ' , apiAccessKey + ':' + md5 ( string_to_sign )); //System.debug('Cerb-Auth: ' + apiAccessKey + ':' + md5(string_to_sign)); try { HTTPResponse res = http . send ( req ); return res ; } catch ( System . CalloutException e ) { // Handle the error } return null ; } }
+***********************************************************************/
+
+public class CerbApiTest {
+  public static String apiBaseUrl {get;set;}
+  public static String apiAccessKey {get;set;}
+  public static String apiSecretKey {get;set;}
+
+  private static String md5(String text) {
+    return EncodingUtil.convertToHex(Crypto.generateDigest('MD5', Blob.valueOf(text)));
+  }
+
+  public static HttpResponse get(String path) {
+    return Cerb.connect('GET', path);
+  }
+
+  public static HttpResponse put(String path) {
+    return Cerb.connect('PUT', path);
+  }
+
+  public static HttpResponse post(String path) {
+    return Cerb.connect('POST', path);
+  }
+
+  public static HttpResponse del(String path) {
+    return Cerb.connect('DELETE', path);
+  }
+
+  public static HttpResponse connect(String http_method, String url_path) {
+    Http http = new Http();
+    HttpRequest req = new HttpRequest();
+  
+    String http_date = DateTime.now().format('EEE, d MMM yyy HH:mm:ss Z');
+  
+    URL url = new URL(apiBaseUrl + url_path);
+  
+    req.setEndpoint(url.toExternalForm());
+    req.setMethod(http_method);
+    req.setHeader('Date', http_date);
+  
+    String url_query = url.getQuery();
+  
+    if(!String.isNotBlank(url_query))
+      url_query = '';
+  
+    String string_to_sign =
+      http_method + '\n'
+      + http_date + '\n'
+      + url.getPath() + '\n'
+      + url_query + '\n'
+      + '' + '\n'
+      + md5(apiSecretKey) + '\n'
+      ;
+  
+    //System.debug('String to sign: ' + string_to_sign);
+  
+    req.setHeader('Cerb-Auth', apiAccessKey + ':' + md5(string_to_sign));
+  
+    //System.debug('Cerb-Auth: ' + apiAccessKey + ':' + md5(string_to_sign));
+  
+    try {
+      HTTPResponse res = http.send(req);
+      return res;
+    
+    } catch(System.CalloutException e) {
+      // Handle the error
+    }
+  
+    return null;
+  }
+}
 ```
 
 # Usage
@@ -42,5 +111,24 @@ This class can be included by **Salesforce** applications to simplify interactio
 - Make API calls using `Cerb.get()`, `Cerb.post()`, etc.
 
 ```
-Cerb . setApiBaseUrl ( ' https: //example.cerb.me/rest/'); Cerb . setApiAccessKey ( ' xxxxxxxxxxxx ' ); Cerb . setApiSecretKey ( ' xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ' ) HttpResponse res = Cerb . post ( ' tickets / search . json ? q = ' + EncodingUtil . urlEncode ( orgId , ' UTF - 8 ' ) + ' & show_meta = 0 & sortAsc = 0 & sortBy = updated ' ) ; if ( null != res ) { String http_body = res . getBody (); JSONParser parser = JSON . createParser ( http_body ); Map < String , Object > results = Map < String , Object >) JSON . deserializeUntyped ( http_body ); Integer count = ( Integer ) results . get ( ' count ' ); List < Object > rows = ( List < Object >) results . get ( ' results ' ); }
+Cerb.setApiBaseUrl('https://example.cerb.me/rest/');
+Cerb.setApiAccessKey('xxxxxxxxxxxx');
+Cerb.setApiSecretKey('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+
+HttpResponse res = Cerb.post('tickets/search.json?q='
+  + EncodingUtil.urlEncode(orgId, 'UTF-8')
+  + '&show_meta=0&sortAsc=0&sortBy=updated')
+  ;
+
+if(null != res) {
+  String http_body = res.getBody();
+  
+  JSONParser parser = JSON.createParser(http_body);
+  
+  Map<String,Object> results =
+    Map<String,Object>) JSON.deserializeUntyped(http_body);
+  
+  Integer count = (Integer) results.get('count');
+  List<Object> rows = (List<Object>) results.get('results');
+}
 ```

@@ -30,6 +30,35 @@ This workflow adds the `X-PM-KeepId: true` header to outgoing mail.
 As an administrator, navigate to **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» (Empty)** and paste the following template:
 
 ```
-workflow: name: cerb.integrations.postmark version: 2024-11-27T20:22:16Z description: Add the `X-PM-KeepId:` header to outgoing mail when using Postmark SMTP. website: https://cerb.ai/resources/workflows/ requirements: cerb_version: >=11.0 <11.2 cerb_plugins: cerberusweb.core, records: automation/automation_mailSend: fields: name: cerb.integrations.postmark.keepMessageId extension_id: cerb.trigger.mail.send description@text: script@raw: start: return: draft: params: headers: X-PM-KeepId: true   
-   automation_event_listener/listener_mailSend: fields: name: Postmark event_name: mail.send priority@int: 100 is_disabled: 0 event_kata@raw: automation/keepId: uri: cerb:automation:cerb.integrations.postmark.keepMessageId
+workflow:
+  name: cerb.integrations.postmark
+  version: 2024-11-27T20:22:16Z
+  description: Add the `X-PM-KeepId:` header to outgoing mail when using Postmark SMTP.
+  website: https://cerb.ai/resources/workflows/
+  requirements:
+    cerb_version: >=11.0 <11.2
+    cerb_plugins: cerberusweb.core, 
+records:
+  automation/automation_mailSend:
+    fields:
+      name: cerb.integrations.postmark.keepMessageId
+      extension_id: cerb.trigger.mail.send
+      description@text:
+      script@raw:
+        start:
+          return:
+            draft:
+              params:
+                headers:
+                  X-PM-KeepId: true
+  
+  automation_event_listener/listener_mailSend:
+    fields:
+      name: Postmark
+      event_name: mail.send
+      priority@int: 100
+      is_disabled: 0
+      event_kata@raw:
+        automation/keepId:
+          uri: cerb:automation:cerb.integrations.postmark.keepMessageId
 ```

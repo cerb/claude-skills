@@ -12,7 +12,15 @@ tags: ["docs", "docs-scripting"]
 Return the values of an array with sequential keys. This is the filter equivalent of the [array\_values()](/docs/scripting/functions/#array_values) function.
 
 ```
-{% set countries = { 'CA' : 'Canada' , 'CN' : 'China' , 'DE' : 'Germany' , 'IN' : 'India' , 'MX' : 'Mexico' , 'US' : 'United States' , } %} {{ countries | values | json_encode }}
+{% set countries = {
+  'CA': 'Canada',
+  'CN': 'China',
+  'DE': 'Germany',
+  'IN': 'India',
+  'MX': 'Mexico',
+  'US': 'United States',
+} %}
+{{countries|values|json_encode}}
 ```
 
 ```

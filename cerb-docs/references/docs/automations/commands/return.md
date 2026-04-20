@@ -10,7 +10,12 @@ The **return:** command successfully terminates an [automation](/docs/automation
 # Syntax
 
 ```
-start: set: name: Kina return: output@text: Hello, {{ name }} !
+start:
+  set:
+    name: Kina
+  return:
+    output@text:
+      Hello, {{name}}!
 ```
 
 The expected `return:` dictionary depends on the automation [trigger](/docs/automations/#triggers).

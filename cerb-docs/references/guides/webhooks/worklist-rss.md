@@ -45,81 +45,81 @@ On the **Behaviors** tab, click the **Create Behavior** button.
 Select the **Import** tab and paste the following behavior to import it:
 
 ```
-{ 
-   "behavior" :{ 
-     "title" : "New tickets as RSS" , 
-     "is_disabled" : false , 
-     "is_private" : false , 
-     "event" :{ 
-       "key" : "event.webhook.received" , 
-       "label" : "Webhook received" 
-     }, 
-     "variables" :{ 
-       "var_new_tickets" :{ 
-         "key" : "var_new_tickets" , 
-         "label" : "New Tickets" , 
-         "type" : "ctx_cerberusweb.contexts.ticket" , 
-         "is_private" : "1" , 
-         "params" :[ 
+{
+  "behavior":{
+    "title":"New tickets as RSS",
+    "is_disabled":false,
+    "is_private":false,
+    "event":{
+      "key":"event.webhook.received",
+      "label":"Webhook received"
+    },
+    "variables":{
+      "var_new_tickets":{
+        "key":"var_new_tickets",
+        "label":"New Tickets",
+        "type":"ctx_cerberusweb.contexts.ticket",
+        "is_private":"1",
+        "params":[
           
-         ] 
-       } 
-     }, 
-     "nodes" :[ 
-       { 
-         "type" : "action" , 
-         "title" : "Load a page of new tickets" , 
-         "params" :{ 
-           "actions" :[ 
-             { 
-               "action" : "var_new_tickets" , 
-               "search_mode" : "quick_search" , 
-               "quick_search" : "status:o" , 
-               "limit" : "first" , 
-               "limit_count" : "20" , 
-               "mode" : "add" , 
-               "worklist_model" :{ 
-                 "options" :{ 
-                   "disable_recommendations" : "1" 
-                 }, 
-                 "columns" :[ 
-                   "t_group_id" , 
-                   "t_bucket_id" , 
-                   "t_owner_id" , 
-                   "t_updated_date" 
-                 ], 
-                 "params" :{ 
-                 }, 
-                 "limit" : 10 , 
-                 "sort_by" : "t_updated_date" , 
-                 "sort_asc" : false , 
-                 "subtotals" : "" , 
-                 "context" : "cerberusweb.contexts.ticket" 
-               } 
-             } 
-           ] 
-         } 
-       }, 
-       { 
-         "type" : "action" , 
-         "title" : "Output RSS" , 
-         "params" :{ 
-           "actions" :[ 
-             { 
-               "action" : "set_http_header" , 
-               "name" : "Content-Type" , 
-               "value" : "application \/ rss+xml; charset=utf-8" 
-             }, 
-             { 
-               "action" : "set_http_body" , 
-               "value" : "<?xml version= \" 1.0 \" encoding= \" UTF-8 \" ?> \r\n <rss version= \" 2.0 \" xmlns:atom= \" http: \/\/ www.w3.org \/ 2005 \/ Atom \" > \r\n <channel> \r\n <title>Recently updated tickets in Cerb< \/ title> \r\n <description>Tickets that need worker attention< \/ description> \r\n <link>https: \/\/ example.com \/ < \/ link> \r\n <atom:link href= \" https: \/\/ example.com \/ feed.xml \" rel= \" self \" type= \" application \/ rss+xml \"\/ > \r\n <pubDate>{{''|date('r')}}< \/ pubDate> \r\n <lastBuildDate>{{''|date('r')}}< \/ lastBuildDate> \r\n <generator>Cerb< \/ generator> \r\n {% for ticket in var_new_tickets %} \r\n <item> \r\n <title>{{ ticket.subject | e }}< \/ title> \r\n <description><![CDATA[\r\n <p> \r\n <b>Sender:< \/ b> {{ ticket.latest_message_sender__label | e}} \r\n < \/ p> \r\n <p> \r\n <b>Bucket:< \/ b> {{ticket.group__label | e}}: {{ticket.bucket__label | e}} \r\n < \/ p> \r\n <p> \r\n {{ ticket.latest_message_content | e | nl2br}} \r\n < \/ p> \r\n]]>< \/ description> \r\n <pubDate>{{ ticket.updated | date('r') }}< \/ pubDate> \r\n <link>{{ ticket.url | e }}< \/ link> \r\n <guid isPermaLink= \" true \" >{{ ticket.url | e }}< \/ guid> \r\n < \/ item> \r\n {% endfor %} \r\n < \/ channel> \r\n < \/ rss> \r\n " 
-             } 
-           ] 
-         } 
-       } 
-     ] 
-   } 
- }
+        ]
+      }
+    },
+    "nodes":[
+      {
+        "type":"action",
+        "title":"Load a page of new tickets",
+        "params":{
+          "actions":[
+            {
+              "action":"var_new_tickets",
+              "search_mode":"quick_search",
+              "quick_search":"status:o",
+              "limit":"first",
+              "limit_count":"20",
+              "mode":"add",
+              "worklist_model":{
+                "options":{
+                  "disable_recommendations":"1"
+                },
+                "columns":[
+                  "t_group_id",
+                  "t_bucket_id",
+                  "t_owner_id",
+                  "t_updated_date"
+                ],
+                "params":{
+                },
+                "limit":10,
+                "sort_by":"t_updated_date",
+                "sort_asc":false,
+                "subtotals":"",
+                "context":"cerberusweb.contexts.ticket"
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type":"action",
+        "title":"Output RSS",
+        "params":{
+          "actions":[
+            {
+              "action":"set_http_header",
+              "name":"Content-Type",
+              "value":"application\/rss+xml; charset=utf-8"
+            },
+            {
+              "action":"set_http_body",
+              "value":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<rss version=\"2.0\" xmlns:atom=\"http:\/\/www.w3.org\/2005\/Atom\">\r\n <channel>\r\n <title>Recently updated tickets in Cerb<\/title>\r\n <description>Tickets that need worker attention<\/description>\r\n <link>https:\/\/example.com\/<\/link>\r\n <atom:link href=\"https:\/\/example.com\/feed.xml\" rel=\"self\" type=\"application\/rss+xml\"\/>\r\n <pubDate>{{''|date('r')}}<\/pubDate>\r\n <lastBuildDate>{{''|date('r')}}<\/lastBuildDate>\r\n <generator>Cerb<\/generator>\r\n {% for ticket in var_new_tickets %}\r\n <item>\r\n <title>{{ ticket.subject | e }}<\/title>\r\n <description><![CDATA[\r\n <p>\r\n <b>Sender:<\/b> {{ ticket.latest_message_sender__label | e}}\r\n <\/p>\r\n <p>\r\n <b>Bucket:<\/b> {{ticket.group__label | e}}: {{ticket.bucket__label | e}}\r\n <\/p>\r\n <p>\r\n {{ ticket.latest_message_content | e | nl2br}}\r\n <\/p>\r\n]]><\/description>\r\n <pubDate>{{ ticket.updated | date('r') }}<\/pubDate>\r\n <link>{{ ticket.url | e }}<\/link>\r\n <guid isPermaLink=\"true\">{{ ticket.url | e }}<\/guid>\r\n <\/item>\r\n {% endfor %}\r\n <\/channel>\r\n<\/rss>\r\n"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
 ```
 
 If you see a "Invalid event in the provided behavior" error, that usually means that the Webhooks plugin isn't enabled.

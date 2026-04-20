@@ -14,10 +14,21 @@ You can use http.request: to make a request to any server. Here's an example of 
 
 - 
 ```
-start: http.request/get: output: http_response inputs: method: GET url: https://cerb.ai/ on_success: on_error:
+start:
+  http.request/get:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://cerb.ai/
+    on_success:
+    on_error:
 ```
 - 
 ```
-commands: http.request: deny/method@bool: {{ inputs.method not in ['GET'] }} deny/url@bool: {{ inputs.url is not prefixed ('http://','https://') }} allow@bool: yes
+commands:
+  http.request:
+    deny/method@bool: {{inputs.method not in ['GET']}}
+    deny/url@bool: {{inputs.url is not prefixed ('http://','https://')}}
+    allow@bool: yes
 ```
 

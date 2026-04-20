@@ -18,10 +18,27 @@ For instance, this function can be used to rewrite all links in an email templat
 
 - 
 ```
-start: set/init: message@text: Visit our website at https://cerb.ai/ to learn more. urls@json: {{ array_unique(cerb_extract_uris(message|markdown_to_html(is_untrusted=true)).tokens)|json_encode }} set/filter: urls@json: {{ urls|filter((v) => v|parse_url.host ends with 'cerb.ai')|json_encode }} set/sort: urls@json: {{ urls|sort((a,b) => b|length <=> a|length)|values|json_encode }} set/combine: urls@json: {{ array_combine(urls, urls|map((url) => 'https://click.example/?url=' ~ url|url_encode))|json_encode }} return: output@text: {{ message|replace(urls) }}
+start:
+  set/init:
+    message@text: Visit our website at https://cerb.ai/ to learn more.
+    urls@json:
+      {{array_unique(cerb_extract_uris(message|markdown_to_html(is_untrusted=true)).tokens)|json_encode}}
+  set/filter:
+    urls@json: {{urls|filter((v) => v|parse_url.host ends with 'cerb.ai')|json_encode}}
+  set/sort:
+    urls@json: {{urls|sort((a,b) => b|length <=> a|length)|values|json_encode}}
+  set/combine:
+    urls@json:
+      {{array_combine(urls, urls|map((url) => 'https://click.example/?url=' ~ url|url_encode))|json_encode}}
+  return:
+    output@text: {{message|replace(urls)}}
 ```
 - 
 ```
-__return : output : Visit our website at https://click.example/?url=https%3A%2F%2Fcerb.ai%2F to learn more. message : Visit our website at https://cerb.ai/ to learn more. urls : https://cerb.ai/ : https://click.example/?url=https%3A%2F%2Fcerb.ai%2F
+__return:
+  output: Visit our website at https://click.example/?url=https%3A%2F%2Fcerb.ai%2F to learn more.
+  message: Visit our website at https://cerb.ai/ to learn more.
+  urls:
+    https://cerb.ai/: https://click.example/?url=https%3A%2F%2Fcerb.ai%2F
 ```
 

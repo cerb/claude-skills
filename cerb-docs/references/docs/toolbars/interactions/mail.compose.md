@@ -18,7 +18,10 @@ Edit the record for `mail.compose`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/example: uri: cerb:automation:example.alert label: Example icon: bell
+interaction/example:
+  uri: cerb:automation:example.alert
+  label: Example
+  icon: bell
 ```
 
 The following **placeholders** are available in KATA:

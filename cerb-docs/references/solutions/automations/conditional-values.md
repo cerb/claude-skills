@@ -10,5 +10,9 @@ tags: ["solutions", "solutions-automations"]
 The **ternary operator** provides a compact way to write an if/else condition: `{{expression ? if_true : if_false}}`
 
 ```
-start: set: is_admin@bool: true return: is_admin: {{ is_admin ? 'yes' : 'no' }}
+start:
+  set:
+    is_admin@bool: true
+  return:
+    is_admin: {{is_admin ? 'yes' : 'no'}}
 ```

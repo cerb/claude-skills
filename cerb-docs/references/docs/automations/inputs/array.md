@@ -6,10 +6,13 @@ summary: "This page provides information on configuring automation inputs for an
 tags: ["docs", "docs-automations"]
 ---
 ```
-inputs: array/colors: required@bool: yes #default@list:
+inputs:
+  array/colors:
+    required@bool: yes
+    #default@list:
     # Red
     # Green
-     # Blue
+    # Blue
 ```
 
 ### required:

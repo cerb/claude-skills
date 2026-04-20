@@ -8,7 +8,8 @@ tags: ["docs", "docs-scripting"]
 Conditional logic can display different content based on the result of any number of **expressions**:
 
 ```
-{% set sla_expiration = '+2 weeks' | date ( 'U' ) %} {% if sla_expiration >= 'now' | date ( 'U' ) %}
+{% set sla_expiration = '+2 weeks'|date('U') %}
+{% if sla_expiration >= 'now'|date('U') %}
 Your SLA coverage is active.
 {% else %}
 Your SLA coverage has expired.

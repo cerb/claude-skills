@@ -70,7 +70,22 @@ In order to properly use your new Telegram Bot in Cerb, you need to set up a web
 14
 15
 16
-start: http.request/setwebhook: output: http_response inputs: method: POST url: https://api.telegram.org/bot/setWebhook authentication: cerb:connected_account:telegram headers: Content-Type: application/json body: url: https://cerb.example/webhook/abcdef123456 allowed_updates@csv: message on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/setwebhook:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.telegram.org/bot/setWebhook
+      authentication: cerb:connected_account:telegram
+      headers:
+        Content-Type: application/json
+      body:
+        url: https://cerb.example/webhook/abcdef123456
+        allowed_updates@csv: message
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 Use your webhook URL on Line 11 above.
@@ -86,7 +101,19 @@ From here you can set an automation to respond to the webhook however you want.
 https://core.telegram.org/bots/api#getme
 
 ```
-start: http.request/test: output: http_response inputs: method: GET url: https://api.Telegram.io/bot/getMe authentication: cerb:connected_account:Telegram headers: Content-Type: application/json on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/test:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.Telegram.io/bot/getMe
+      authentication: cerb:connected_account:Telegram
+      headers:
+        Content-Type: application/json
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Send a Message
@@ -94,5 +121,20 @@ start: http.request/test: output: http_response inputs: method: GET url: https:/
 https://core.telegram.org/bots/api#sendmessage
 
 ```
-start: http.request/chat: output: http_response inputs: method: GET url: https://api.Telegram.io/bot/sendMessage authentication: cerb:connected_account:Telegram headers: Content-Type: application/json body: chat_id: [your chat or group ID] text: hello testing testing 123 on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/chat:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.Telegram.io/bot/sendMessage
+      authentication: cerb:connected_account:Telegram
+      headers:
+        Content-Type: application/json
+      body:
+        chat_id: [your chat or group ID]
+        text: hello testing testing 123
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Split a string on comma delimiters. This automatically handles whitespace padding.
 
 ```
-{% set coins = "BTC, ETH ,LTC" %} {{ coins | split_csv | json_encode }}
+{% set coins = "BTC, ETH ,LTC" %}
+{{coins|split_csv|json_encode}}
 ```
 
 ```

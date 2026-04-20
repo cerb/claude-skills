@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Return the length of a string or array:
 
 ```
-{{ "This is a string" | length }} {{ [1 , 2 , 3 , 4 , 5] | length }}
+{{"This is a string"|length}}
+{{[1,2,3,4,5]|length}}
 ```
 
 ```

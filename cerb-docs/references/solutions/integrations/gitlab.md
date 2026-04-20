@@ -133,14 +133,33 @@ Click the **Save Changes** button.
 Create an [automation.function](/docs/automations/triggers/automation.function/) automation:
 
 ```
-inputs: text/repo: type: freeform required@bool: yes text/query: type: freeform required@bool: yes 
- start: http.request/search: output: http_response inputs: method: GET url: https://gitlab.com/api/v4/projects/ {{ inputs.repo|url_encode }} /search?scope=issues&search= {{ inputs.query|url_encode }} authentication: cerb:connected_account:gitlab on_success: return: search_results@json: {{ http_response.body }} on_error:
+inputs:
+  text/repo:
+    type: freeform
+    required@bool: yes
+  text/query:
+    type: freeform
+    required@bool: yes
+
+start:
+  http.request/search:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://gitlab.com/api/v4/projects/{{inputs.repo|url_encode}}/search?scope=issues&search={{inputs.query|url_encode}}
+      authentication: cerb:connected_account:gitlab
+    on_success:
+      return:
+        search_results@json: {{http_response.body}}
+    on_error:
 ```
 
 From the **Inputs:** section in the lower left of the automation editor, simulate with:
 
 ```
-inputs: repo: cerb.ai/example-project query: tempore
+inputs:
+  repo: cerb.ai/example-project
+  query: tempore
 ```
 
 ## Create issues
@@ -148,14 +167,37 @@ inputs: repo: cerb.ai/example-project query: tempore
 Create an [automation.function](/docs/automations/triggers/automation.function/) automation:
 
 ```
-inputs: text/repo: type: freeform required@bool: yes text/title: type: freeform required@bool: yes text/description: type: freeform required@bool: yes 
- start: http.request/search: output: http_response inputs: method: POST url: https://gitlab.com/api/v4/projects/ {{ inputs.repo|url_encode }} /issues?title= {{ inputs.title|url_encode }} &description= {{ inputs.description|url_encode }} authentication: cerb:connected_account:gltlab on_success: return: search_results@json: {{ http_response.body }} on_error:
+inputs:
+  text/repo:
+    type: freeform
+    required@bool: yes
+  text/title:
+    type: freeform
+    required@bool: yes
+  text/description:
+    type: freeform
+    required@bool: yes
+
+start:
+  http.request/search:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://gitlab.com/api/v4/projects/{{inputs.repo|url_encode}}/issues?title={{inputs.title|url_encode}}&description={{inputs.description|url_encode}}
+      authentication: cerb:connected_account:gltlab
+    on_success:
+      return:
+        search_results@json: {{http_response.body}}
+    on_error:
 ```
 
 From the **Inputs:** section in the lower left of the automation editor, simulate with:
 
 ```
-inputs: repo: cerb.ai/example-project title: test issue description: this is a test issue
+inputs:
+  repo: cerb.ai/example-project
+  title: test issue
+  description: this is a test issue
 ```
 
 # Use the connected account in Cerb workflows

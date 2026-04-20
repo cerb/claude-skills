@@ -6,7 +6,12 @@ summary: "This page provides detailed information on configuring automation inpu
 tags: ["docs", "docs-automations"]
 ---
 ```
-inputs: records/participants: required@bool: yes record_type: address expand: owner_,customfields # default@csv: 1,2,3
+inputs:
+  records/participants:
+    required@bool: yes
+    record_type: address
+    expand: owner_,customfields
+    #default@csv: 1,2,3
 ```
 
 The value should be an array of record IDs (`123`) or URIs (`cerb:record_type:record_alias`).

@@ -20,20 +20,53 @@ State on sheets is maintained client-side, and paging/sorting/filtering is custo
 For example, this **data query**:
 
 ```
-type: worklist.records of: ticket query: (status:open limit:5) expand: [initial_message_sender_org_,owner_] format: dictionaries
+type:worklist.records
+of:ticket
+query:(status:open limit:5)
+expand:[initial_message_sender_org_,owner_]
+format:dictionaries
 ```
 
 And this **sheet schema**:
 
 ```
-layout: style: table headings: yes paging: yes title_column: _label 
- columns: card/_label: label: Ticket params: bold@bool: no   
-   card/initial_message_sender__label: label: Requester params: underline@bool: no 
-   text/initial_message_sender_org_country: label: Country   
-   text/group__label: label: Group / Bucket params: value_template@raw: {{ group__label }} / {{ bucket__label }}   
-   card/owner__label: label: Owner params: image@bool: yes underline@bool: no   
-   slider/importance:   
-   date/updated: label: Updated params: format: Y-m-d
+layout:
+  style: table
+  headings: yes
+  paging: yes
+  title_column: _label
+
+columns:
+  card/_label:
+    label: Ticket
+    params:
+      bold@bool: no
+  
+  card/initial_message_sender__label:
+    label: Requester
+    params:
+      underline@bool: no
+
+  text/initial_message_sender_org_country:
+    label: Country
+  
+  text/group__label:
+    label: Group / Bucket
+    params:
+      value_template@raw: {{group__label}} / {{bucket__label}}
+  
+  card/owner__label:
+    label: Owner
+    params:
+      image@bool: yes
+      underline@bool: no
+  
+  slider/importance:
+  
+  date/updated:
+    label: Updated
+    params:
+      format: Y-m-d
 ```
 
 Will display this **sheet**:
@@ -82,14 +115,22 @@ You'll also notice that we're displaying the country of the initial sender's org
 By default, sheets display as a **table** of rows and columns.
 
 ```
-layout: style: table
+layout:
+  style: table
 ```
 
 To specify fixed column widths:
 
 ```
-layout: style: table params: column_widths: description: 70% 
- columns: text/name: text/description:
+layout:
+  style: table
+  params:
+    column_widths:
+      description: 70%
+
+columns:
+  text/name:
+  text/description:
 ```
 
 ### Fieldsets
@@ -99,7 +140,8 @@ layout: style: table params: column_widths: description: 70%
 The `fieldsets` layout style displays rows as **fieldsets** (vertically) rather than a table (horizontal). This is useful on profiles to summarize a single record, and in mobile environments.
 
 ```
-layout: style: fieldsets
+layout:
+  style: fieldsets
 ```
 
 ### Columns
@@ -107,7 +149,8 @@ layout: style: fieldsets
 The `columns` layout displays rows as equal width columns.
 
 ```
-layout: style: columns
+layout:
+  style: columns
 ```
 
 ### Grid
@@ -115,7 +158,8 @@ layout: style: columns
 The `grid` layout displays rows as a dynamically sized grid.
 
 ```
-layout: style: grid
+layout:
+  style: grid
 ```
 
 ### Buttons
@@ -123,7 +167,8 @@ layout: style: grid
 The `buttons` layout displays rows as buttons. This also supports one-click continue in [interactions](/docs/interactions/).
 
 ```
-layout: style: buttons
+layout:
+  style: buttons
 ```
 
 ## Colors
@@ -139,7 +184,14 @@ If a color set contains a `_dark` suffix, it will be used automatically in dark 
 Entire rows can be colorized by using the same `color:` parameter on all columns.
 
 ```
-layout: colors: rainbow12@csv: #6e40aa, #b83cb0, #f6478d, #ff6956, #f59f30, #c4d93e, #83f557, #38f17a, #19d3b5, #29a0dd, #5069d9, #6e40aa columns: text/example: params: color: rainbow12:0 text_color: rainbow12:1
+layout:
+  colors:
+    rainbow12@csv: #6e40aa, #b83cb0, #f6478d, #ff6956, #f59f30, #c4d93e, #83f557, #38f17a, #19d3b5, #29a0dd, #5069d9, #6e40aa
+columns:
+  text/example:
+    params:
+      color: rainbow12:0
+      text_color: rainbow12:1
 ```
 
 # Columns
@@ -168,8 +220,18 @@ The `bold:` and `underline:` params control how the link is displayed.
 The `icon:` parameter has the same options as an [icon](#icon) column.
 
 ```
-columns: card/name: label: Name params: context_key: _context id_key: id label_key: _label image: yes bold: yes underline: yes #icon:
-       # image: circle-ok
+columns:
+  card/name:
+    label: Name
+    params:
+      context_key: _context
+      id_key: id
+      label_key: _label
+      image: yes
+      bold: yes
+      underline: yes
+      #icon:
+      # image: circle-ok
 ```
 
 ## Code
@@ -182,7 +244,12 @@ The `syntax:` parameter may be one of:
 | `diff` | Unified diff |
 
 ```
-columns: code/toolbar_kata: label: Code params: syntax: kata value_key: toolbar_kata
+columns:
+  code/toolbar_kata:
+    label: Code
+    params:
+      syntax: kata
+      value_key: toolbar_kata
 ```
 
 ## Date
@@ -192,9 +259,14 @@ The `date` column type displays a datetime in various formats. The default is a 
 The timestamp can be provided as `value:` (a Unix timestamp in seconds) or `value_key:` (a dictionary key containing a Unix timestamp). When both of these are omitted, the `key:` is used.
 
 ```
-columns: date/updated: label: Updated params: # See: https://php.net/date
-        format: d-M-Y H:i:s T #value: 1577836800
-       # value_key: updated
+columns:
+  date/updated:
+    label: Updated
+    params:
+      # See: https://php.net/date
+      format: d-M-Y H:i:s T
+      #value: 1577836800
+      #value_key: updated
 ```
 
 ## Icon
@@ -204,9 +276,16 @@ The `icon` column type displays an icon image, record profile image, or automati
 You'll find a list of icon names in **Setup&nbsp;» Developers&nbsp;» Icon Reference**.
 
 ```
-columns: icon/can_sign: label: Sign params: #image: circle-ok
+columns:
+  icon/can_sign:
+    label: Sign
+    params:
+      #image: circle-ok
       #image_key: icon_key
-        image_template@raw: {% if can_sign %} circle-ok {% endif %}
+      image_template@raw:
+        {% if can_sign %}
+        circle-ok
+        {% endif %}
 ```
 
 ### record\_uri:
@@ -218,7 +297,11 @@ The `record_uri:` may also be an image-based `automation_resource` token.
 If both `record_uri:` and `image:` are defined, the former will be checked first and if empty fall back to the latter.
 
 ```
-columns: icon/group: label: Group params: record_uri: cerb:group:123
+columns:
+  icon/group:
+    label: Group
+    params:
+      record_uri: cerb:group:123
 ```
 
 ### svg:
@@ -228,7 +311,15 @@ Render arbitrary in-line SVG images with the `svg:` key. Rendered SVG images are
 This is particularly useful for dynamic or single-use images. For instance, a survey could display happy/sad or thumbs up/down images on buttons.
 
 ```
-columns: icon/group: label: Group params: svg: data@text: <svg xmlns="http://www.w3.org/2000/svg" width="500" viewBox="0 0 240 135"> ... </svg>
+columns:
+  icon/group:
+    label: Group
+    params:
+      svg:
+        data@text:
+          <svg xmlns="http://www.w3.org/2000/svg" width="500" viewBox="0 0 240 135">
+          ...
+          </svg>
 ```
 
 ## Interaction
@@ -236,7 +327,15 @@ columns: icon/group: label: Group params: svg: data@text: <svg xmlns="http://www
 The `interaction` column type triggers an interaction when clicked.
 
 ```
-columns: interaction/ip: label: IP params: uri: cerb:automation:wgm.interaction.locationByIP text_template@raw: {{ row.source_ip }} inputs: ip@raw: {{ row.source_ip }} # image: circle-ok
+columns:
+  interaction/ip:
+    label: IP
+    params:
+      uri: cerb:automation:wgm.interaction.locationByIP
+      text_template@raw: {{row.source_ip}}
+      inputs:
+        ip@raw: {{row.source_ip}}
+      #image: circle-ok
 ```
 
 ## Link
@@ -258,10 +357,16 @@ The `link` column type displays a relative or external link with some text.
 | `text_template@raw:` | A [script](/docs/scripting/) that outputs a label for the link with placeholders for each row. |
 
 ```
-columns: link/link: label: Link params: #href: https://example.com/
-        href_key: record_url #href_template@raw: /profiles/task/{{id}}-{{title|permalink}}
+columns:
+  link/link:
+    label: Link
+    params:
+      #href: https://example.com/
+      href_key: record_url
+      #href_template@raw: /profiles/task/{{id}}-{{title|permalink}}
       #text: Link title
-        text_key: _label # text_template@raw: {{ title }}
+      text_key: _label
+      #text_template@raw: {{title}}
 ```
 
 ## Markdown
@@ -269,7 +374,9 @@ columns: link/link: label: Link params: #href: https://example.com/
 The `markdown` column type displays Markdown formatted text as HTML.
 
 ```
-columns: markdown/content: label: Answer
+columns:
+  markdown/content:
+    label: Answer
 ```
 
 ## Search
@@ -283,8 +390,13 @@ For instance, a table of calculated results could open a search popup to the sou
 The `icon:` parameter has the same options as an [icon](#icon) column.
 
 ```
-columns: search/count: label: Count params: context: ticket #query_key: query
-        query_template@raw: owner.id: {{ id }}
+columns:
+  search/count:
+    label: Count
+    params:
+      context: ticket
+      #query_key: query
+      query_template@raw: owner.id:{{id}}
 ```
 
 ## Search Button
@@ -298,8 +410,13 @@ The `query:` (or `query_key:`, `query_template:`) param contains the search quer
 The `label:` (or `label_key:`, `label_template:`) param provides the text of the search link.
 
 ```
-columns: search_button/assignments_search: label: Assignments params: context: ticket #query_key: query
-        query_template@raw: owner.id: {{ id }}
+columns:
+  search_button/assignments_search:
+    label: Assignments
+    params:
+      context: ticket
+      #query_key: query
+      query_template@raw: owner.id:{{id}}
 ```
 
 ## Selection
@@ -311,13 +428,17 @@ The selected rows will add their `value:` (or `value_key:`, `value_template:`) t
 The `mode:` parameter controls whether `single` or `multiple` selection is used.
 
 ```
-columns: selection/id: params: mode: single #mode: multiple
+columns:
+  selection/id:
+    params:
+      mode: single
+      #mode: multiple
       #label: Label
       #label_key: label
       #label_template@raw: {{label}}
       #value: 123
       #value_key: id
-       # value_template@raw: {{ id }}
+      #value_template@raw: {{id}}
 ```
 
  
@@ -331,10 +452,16 @@ Use the `show_labels: yes` option to show the min and max values on either side 
 Specify custom `threshold_colors:` to override the defaults. This is a map with limits as keys and colors as values.
 
 ```
-columns: slider/importance: label: Importance params: min: 0 max: 100 #value: 50
+columns:
+  slider/importance:
+    label: Importance
+    params:
+      min: 0
+      max: 100
+      #value: 50
       #value_key: importance
       #value_template@raw: {{importance+10}}
-       # show_labels@bool: no
+      #show_labels@bool: no
 ```
 
 ## Text
@@ -348,11 +475,18 @@ The `icon:` parameter has the same options as an [icon](#icon) column.
 This type is usually the default when no column `type:` is specified.
 
 ```
-columns: text/gender: label: Gender params: #value: Female
+columns:
+  text/gender:
+    label: Gender
+    params:
+      #value: Female
       #value_key: gender
       #value_template@raw: {{gender}}
-        value_map: F: Female M: Male #icon:
-       # image: circle-ok
+      value_map:
+        F: Female
+        M: Male
+      #icon:
+      # image: circle-ok
 ```
 
 ## Time Elapsed
@@ -364,7 +498,11 @@ The `value:` (or `value_key:`, `value_template:`) parameter specifies the value.
 The `precision` parameter controls how granular the date is. For instance, `precision: 3` is _"2 hours, 5 minutes, 29 seconds"_. The default is `2`.
 
 ```
-columns: time_elapsed/elapsed_response_first: label: First Response params: precision: 2
+columns:
+  time_elapsed/elapsed_response_first:
+    label: First Response
+    params:
+      precision: 2
 ```
 
 ## Toolbar
@@ -372,7 +510,23 @@ columns: time_elapsed/elapsed_response_first: label: First Response params: prec
 The `toolbar` column type displays a [toolbar](/docs/toolbars/) for each row.
 
 ```
-columns: toolbar/_toolbar: label: Tickets params: text_align: right kata: interaction/name: uri: cerb:automation:cerb.interaction.echo badge@raw: {{ ticket_count }} label: All inputs: outputs: search: record_type: ticket query@raw: participant.id: {{ id }} subtotal:status after: refresh_widgets@bool: no
+columns:
+  toolbar/_toolbar:
+    label: Tickets
+    params:
+      text_align: right
+      kata:
+        interaction/name:
+          uri: cerb:automation:cerb.interaction.echo
+          badge@raw: {{ticket_count}}
+          label: All
+          inputs:
+            outputs:
+              search:
+                record_type: ticket
+                query@raw: participant.id:{{id}} subtotal:status
+          after:
+            refresh_widgets@bool: no
 ```
 
  

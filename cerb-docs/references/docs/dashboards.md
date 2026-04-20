@@ -44,9 +44,41 @@ Dashboard prompts are configured on a dashboard by clicking the **Edit Dashboard
 They are defined by using a very simple text-based format known as [KATA](/docs/kata/):
 
 ```
-date_range/input_date_range: label: Date range: default: first day of this month -12 months 
- picklist/input_date_subtotal_by: label: By: default: month params: options@list: hour day week month year picklist/input_statuses: label: Statuses: params: multiple: yes options@list: open waiting closed deleted chooser/input_groups: label: Groups: default@json: null params: context: group single: no 
- text/input_keywords: label: Keywords: default@json: null
+date_range/input_date_range:
+  label: Date range:
+  default: first day of this month -12 months
+
+picklist/input_date_subtotal_by:
+  label: By:
+  default: month
+  params:
+    options@list:
+      hour
+      day
+      week
+      month
+      year
+
+picklist/input_statuses:
+  label: Statuses:
+  params:
+    multiple: yes
+    options@list:
+      open
+      waiting
+      closed
+      deleted
+
+chooser/input_groups:
+  label: Groups:
+  default@json: null
+  params:
+    context: group
+    single: no
+
+text/input_keywords:
+  label: Keywords:
+  default@json: null
 ```
 
 This is a tree of `key: value` pairs.
@@ -79,7 +111,13 @@ When prompting with a chooser, the user selects one or more [records](/docs/reco
  
 
 ```
-chooser/input_groups: label: Groups: default@json: null params: context: group query@text: id:>0 single: no
+chooser/input_groups:
+  label: Groups:
+  default@json: null
+  params:
+    context: group
+    query@text: id:>0
+    single: no
 ```
 
 The available **params:** are:
@@ -93,10 +131,16 @@ The available **params:** are:
 The value of the placeholder is a comma-separated list of record IDs. You'd use it in a query like:
 
 ```
-type: worklist.subtotals of: tickets by: [created@month,group] query: ( created: "-1 year to now" {% if input_groups %} 
-	 group.id: [{{ input_groups }}] {% endif %}
-) 
- format: timeseries
+type:worklist.subtotals
+of:tickets
+by:[created@month,group]
+query:(
+	created:"-1 year to now"
+	{% if input_groups %}
+	group.id:[{{input_groups}}]
+	{% endif %}
+)
+format:timeseries
 ```
 
 If a chooser prompt's name ends in `_id` then its placeholder will support key expansion. For instance, a prompt named `prompt_worker_id` can also access `prompt_worker_first_name`.
@@ -108,7 +152,20 @@ When prompting with a date range, the user enters a start and end date (inclusiv
  
 
 ```
-date_range/input_date_range: label: Date range: default: -1 month to now params: presets: 1d: label: today query: today to now 1mo: query: -1 month ytd: query: jan 1 to now all: query: big bang to now
+date_range/input_date_range:
+  label: Date range:
+  default: -1 month to now
+  params:
+    presets:
+      1d:
+        label: today
+        query: today to now
+      1mo:
+        query: -1 month
+      ytd:
+        query: jan 1 to now
+      all:
+        query: big bang to now
 ```
 
 The available **params:** are:
@@ -118,8 +175,13 @@ The available **params:** are:
 The value of the placeholder is a text string with format `"date1 to date2"`. This is suitable for passing directly to any date-based filters. Be sure you wrap it in quotes (`" "`).
 
 ```
-type: worklist.subtotals of: tickets by: [created@month,group~10] query: ( created: " {{ input_date_range }} " ) 
- format: timeseries
+type:worklist.subtotals
+of:tickets
+by:[created@month,group~10]
+query:(
+	created:"{{input_date_range}}"
+)
+format:timeseries
 ```
 
 ### picklist
@@ -129,7 +191,16 @@ When prompting with a picklist, the user selects one item from a pre-defined lis
  
 
 ```
-picklist/input_date_subtotal_by: label: By: default: month params: options@list: hour day week month year
+picklist/input_date_subtotal_by:
+  label: By:
+  default: month
+  params:
+    options@list:
+      hour
+      day
+      week
+      month
+      year
 ```
 
 The available **params:** are:
@@ -139,11 +210,17 @@ The available **params:** are:
 - **options:** a list of possible values for the picklist.
 
 ```
-params: options@csv: day, week, month, year
+params:
+  options@csv: day, week, month, year
 ```
 
 ```
-params: options@list: day week month year
+params:
+  options@list:
+    day
+    week
+    month
+    year
 ```
 
 ```
@@ -151,23 +228,40 @@ As of [9.1.3](/releases/9.1.3/) you can also provide a map of labels and values:
 ```
 
 ```
-params: options: Open: o Waiting: w Closed: c Deleted: d
+params:
+  options:
+    Open: o
+    Waiting: w
+    Closed: c
+    Deleted: d
 ```
 
 In single selection mode (`multiple: no`), the value of the placeholder is the selected option:
 
 ```
-type: worklist.subtotals of: tickets by: [created@ {{ input_date_subtotal_by }} ,group~10] query: ( created: "first day of this month -1 year to now" ) 
- format: timeseries
+type:worklist.subtotals
+of:tickets
+by:[created@{{input_date_subtotal_by}},group~10]
+query:(
+	created:"first day of this month -1 year to now"
+)
+format:timeseries
 ```
 
 In multiple selection mode (`multiple: yes`), the value of the placeholder is an array of selected options:
 
 ```
-type: worklist.subtotals of: tickets by: [created@day,group~10] query: ( created: "first day of this month -1 year to now" {% if input_statuses %} 
-	 status: [{{ input_statuses|join(',') }}] {% endif %} 
-	 status: [] ) 
- format: timeseries
+type:worklist.subtotals
+of:tickets
+by:[created@day,group~10]
+query:(
+	created:"first day of this month -1 year to now"
+	{% if input_statuses %}
+	status:[{{input_statuses|join(',')}}]
+	{% endif %}
+	status:[]
+)
+format:timeseries
 ```
 
 ### text
@@ -175,7 +269,11 @@ type: worklist.subtotals of: tickets by: [created@day,group~10] query: ( created
 When prompting with text input, the user enters freeform text.
 
 ```
-text/input_subject: label: Search: default: some example text params: hidden@bool: no
+text/input_subject:
+  label: Search:
+  default: some example text
+  params:
+    hidden@bool: no
 ```
 
 The optional **params:** are:
@@ -185,10 +283,14 @@ The optional **params:** are:
 The value of the placeholder is a text string. This is suitable for passing directly to any filters. Be sure you wrap it in quotes.
 
 ```
-type: worklist.records of: tickets query: ( {% if input_subject %} 
-	 subject: " {{ input_subject }} " {% endif %}
-) 
- format: dictionaries
+type:worklist.records
+of:tickets
+query:(
+	{% if input_subject %}
+	subject:"{{input_subject}}"
+	{% endif %}
+)
+format:dictionaries
 ```
 
 # Widgets

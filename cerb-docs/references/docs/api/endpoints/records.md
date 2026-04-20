@@ -139,7 +139,9 @@ Return subtotal results based on the given fields. These options vary depending 
 ### Example
 
 ```
-GET / rest / records / attachments / search . json ? q = mimetype % 3 A % 22 image % 2 Fpng % 22 + size % 3 A % 3 E200kb + sort % 3 A - size + page % 3 A1 Host : cerb . example Authorization : Bearer < token >
+GET /rest/records/attachments/search.json?q=mimetype%3A%22image%2Fpng%22+size%3A%3E200kb+sort%3A-size+page%3A1
+Host: cerb.example
+Authorization: Bearer <token>
 ```
 
 # Delete

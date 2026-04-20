@@ -11,7 +11,7 @@ Format a number with thousand separators and decimal places:
 
 ```
 {% set cost = 16858 %}
-That will be ${{ cost | number_format ( 2 , '.' , ',' ) }}
+That will be ${{cost|number_format(2,'.',',')}}
 ```
 
 ```

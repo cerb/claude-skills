@@ -14,10 +14,18 @@ Here is an example of using the [|html\_to\_text](/docs/scripting/filters/#html_
 
 - 
 ```
-start: set: message_html@text: <html><body><h1>Title</h1>This is an <b>HTML</b> message</body></html> return: output: {{ message_html|html_to_text(truncate=50000) }}
+start:
+  set:
+    message_html@text:
+      <html><body><h1>Title</h1>This is an <b>HTML</b> message</body></html>
+  return:
+    output: {{message_html|html_to_text(truncate=50000)}}
 ```
 - 
 ```
-__return : output : |- # Title This is an HTML message
+__return:
+  output: |-
+    # Title
+    This is an HTML message
 ```
 

@@ -42,5 +42,23 @@ Choose **API Keys** from the left menu and copy your user key from the top of th
 https://docs.together.ai/docs/chat-overview
 
 ```
-start: http.request/completions: output: http_response inputs: method: POST url: https://api.together.xyz/v1/chat/completions authentication: cerb:connected_account:togetherai headers: Content-Type: application/json body: model: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo messages: 0: role: user content: What is Cerb? on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/completions:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.together.xyz/v1/chat/completions
+      authentication: cerb:connected_account:togetherai
+      headers:
+        Content-Type: application/json
+      body:
+        model: meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo
+        messages:
+          0:
+            role: user
+            content: What is Cerb?
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

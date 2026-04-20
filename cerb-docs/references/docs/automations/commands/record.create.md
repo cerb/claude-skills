@@ -8,8 +8,16 @@ tags: ["docs", "docs-automations"]
 The **record.create:** command creates a record with the given fields.
 
 ```
-start: record.create/newTask: output: new_task inputs: # See: https://cerb.ai/docs/records/types/task/#records-api
-        record_type: task fields: title: This is a new task status: open importance: 50
+start:
+  record.create/newTask:
+    output: new_task
+    inputs:
+      # See: https://cerb.ai/docs/records/types/task/#records-api
+      record_type: task
+      fields:
+        title: This is a new task
+        status: open
+        importance: 50
 ```
 
 - [Syntax](#syntax)

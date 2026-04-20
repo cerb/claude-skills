@@ -50,7 +50,26 @@ Trigger: `cerb.trigger.mail.filter`
 Enter the following code in the editor.
 
 ```
-start: decision/check_parent: outcome/has_parent: if@bool: {{ parent_ticket_ is not empty }} then: decision/check_status: outcome/is_closed: if@bool: {{ parent_ticket_status == 'closed' }} then: return: set: headers: in-reply-to: null references: null outcome/not_closed: then: return: outcome/no_parent: then: return:
+start:
+  decision/check_parent:
+    outcome/has_parent:
+      if@bool: {{parent_ticket_ is not empty}}
+      then:
+        decision/check_status:
+          outcome/is_closed:
+            if@bool: {{parent_ticket_status == 'closed'}}
+            then:
+              return:
+                set:
+                  headers:
+                    in-reply-to: null
+                    references: null
+          outcome/not_closed:
+            then:
+              return:
+    outcome/no_parent:
+      then:
+        return:
 ```
 
 The visualization tab shows us a logic tree of our code.
@@ -82,7 +101,8 @@ Event: `mail.filter`
 Enter the following code in the editor.
 
 ```
-automation/preventReopenClosed: uri: cerb:automation:example.mailFilter.closedTickets
+automation/preventReopenClosed:
+  uri: cerb:automation:example.mailFilter.closedTickets
 ```
 
 Review the Automation Event Listener.

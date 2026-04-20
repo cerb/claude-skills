@@ -12,7 +12,7 @@ tags: ["docs", "docs-scripting"]
 Returns a boolean if the given actor has read access to the given record. If no actor is provided then the current worker is assumed. This allows bots and widgets to adapt based on record permissions. For instance, an HTML widget on a profile dashboard could only show a button to workers who can modify the record.
 
 ```
-{% if cerb_record_readable ( 'ticket' , 123 , 'worker' , 1 ) %}
+{% if cerb_record_readable('ticket', 123, 'worker', 1) %}
 Worker #1 can read ticket #123.
 {% endif %}
 ```

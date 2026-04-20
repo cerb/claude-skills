@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Decode HTML entities:
 
 ```
-{{ "&amp;quot;iPhone&amp;quot; is &amp;copy; Apple, Inc." | unescape }}
+{{"&amp;quot;iPhone&amp;quot; is &amp;copy; Apple, Inc."|unescape}}
 ```
 
 ```

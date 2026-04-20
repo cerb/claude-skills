@@ -61,7 +61,11 @@ Load series data from a [ui.chart.data](/docs/automations/triggers/ui.chart.data
 This can synthesize and preprocess chart data from anywhere: third-party APIs, Cerb records, business intelligence tools, etc.
 
 ```
-automation/avgInflow: uri: cerb:automation:example.chartData.avgTicketInflows inputs: date_range: today to +4 weeks disabled@bool: no
+automation/avgInflow:
+  uri: cerb:automation:example.chartData.avgTicketInflows
+  inputs:
+    date_range: today to +4 weeks
+  disabled@bool: no
 ```
 
 ### dataQuery:
@@ -69,7 +73,15 @@ automation/avgInflow: uri: cerb:automation:example.chartData.avgTicketInflows in
 Load data from a [data query](/docs/data-queries/).
 
 ```
-dataQuery/tickets: query@text: type:worklist.subtotals of:ticket by:[created@month,group] query:(created:"this year") format:${format} query_params: format: timeseries
+dataQuery/tickets:
+  query@text:
+    type:worklist.subtotals
+    of:ticket
+    by:[created@month,group]
+    query:(created:"this year")
+    format:${format}
+  query_params:
+    format: timeseries
 ```
 
 | Key | &nbsp; |
@@ -84,7 +96,10 @@ dataQuery/tickets: query@text: type:worklist.subtotals of:ticket by:[created@mon
 Load static data.
 
 ```
-manual/series0: data: x@csv: 2022-01-01,2022-02-01,2022-03-01,2022-04-01 custom@csv: 33,66,99,500
+manual/series0:
+  data:
+    x@csv: 2022-01-01,2022-02-01,2022-03-01,2022-04-01
+    custom@csv: 33,66,99,500
 ```
 
 ## Chart
@@ -101,9 +116,43 @@ A `{{datasets.name}}` placeholder is available for each defined dataset. For ins
 | [tooltip:](#tooltip) |
 
 ```
-data: type: bar series: tickets: name: Tickets x_key: ts series0: name: Custom Series x_key: x y_axis: y2 y_type: line tasks: name: Tasks x_key: ts stacks: 0@csv: tickets 1@csv: tasks 
- axis: x: label: Time type: timeseries tick: date: format: %Y-%m y: label: Tickets/Tasks y2: label: Custom 
- grid: y: lines: 0: value: {{ datasets.baseline.value }} text: Target ( {{ datasets.baseline.value }} ) position: start
+data:
+  type: bar
+  series:
+    tickets:
+      name: Tickets
+      x_key: ts
+    series0:
+      name: Custom Series
+      x_key: x
+      y_axis: y2
+      y_type: line
+    tasks:
+      name: Tasks
+      x_key: ts
+  stacks:
+    0@csv: tickets
+    1@csv: tasks
+
+axis:
+  x:
+    label: Time
+    type: timeseries
+    tick:
+      date:
+        format: %Y-%m
+  y:
+    label: Tickets/Tasks
+  y2:
+    label: Custom
+
+grid:
+  y:
+    lines:
+      0:
+        value: {{datasets.baseline.value}}
+        text: Target ({{datasets.baseline.value}})
+        position: start
 ```
 
 ### axis:
@@ -248,15 +297,34 @@ Each line must have a unique key name containing:
 **Datasets:**
 
 ```
-dataQuery/tickets: query@text: type:worklist.subtotals of:ticket by.count:[created@month,group] query:(created:"first day of this month -1 year") format:timeseries
+dataQuery/tickets:
+  query@text:
+    type:worklist.subtotals
+    of:ticket
+    by.count:[created@month,group]
+    query:(created:"first day of this month -1 year")
+    format:timeseries
 ```
 
 **Chart:**
 
 ```
-data: type: bar series: tickets: x_key: ts stacks: 0@csv: tickets 
- axis: x: type: timeseries tick: format: %B '%y 
- tooltip: grouped@bool: no
+data:
+  type: bar
+  series:
+    tickets:
+      x_key: ts
+  stacks:
+    0@csv: tickets
+
+axis:
+  x:
+    type: timeseries
+    tick:
+      format: %B '%y
+
+tooltip:
+  grouped@bool: no
 ```
 
 ### Timeseries: Line comparison of contact methods
@@ -266,15 +334,53 @@ data: type: bar series: tickets: x_key: ts stacks: 0@csv: tickets
 **Datasets:**
 
 ```
-dataQuery/calls: query@text: type:worklist.subtotals of:call by:[created@year] format: timeseries dataQuery/tasks: query@text: type:worklist.subtotals of:task by:[created@year] format: timeseries dataQuery/tickets: query@text: type:worklist.subtotals of:ticket by:[created@year] query:(status:!d) format: timeseries
+dataQuery/calls:
+  query@text:
+    type:worklist.subtotals
+    of:call
+    by:[created@year]
+    format: timeseries
+
+dataQuery/tasks:
+  query@text:
+    type:worklist.subtotals
+    of:task
+    by:[created@year]
+    format: timeseries
+
+dataQuery/tickets:
+  query@text:
+    type:worklist.subtotals
+    of:ticket
+    by:[created@year]
+    query:(status:!d)
+    format: timeseries
 ```
 
 **Chart:**
 
 ```
-data: type: line series: tickets: x_key: ts name: Tickets tasks: x_key: ts name: Tasks calls: x_key: ts name: Calls 
- axis: x: type: timeseries tick: format: %Y 
- tooltip: grouped@bool: no
+data:
+  type: line
+  series:
+    tickets:
+      x_key: ts
+      name: Tickets
+    tasks:
+      x_key: ts
+      name: Tasks
+    calls:
+      x_key: ts
+      name: Calls
+
+axis:
+  x:
+    type: timeseries
+    tick:
+      format: %Y
+
+tooltip:
+  grouped@bool: no
 ```
 
 ### Pie: Tickets created this year by bucket
@@ -284,13 +390,22 @@ data: type: line series: tickets: x_key: ts name: Tickets tasks: x_key: ts name:
 **Datasets:**
 
 ```
-dataQuery/tickets: query@text: type:worklist.subtotals of:ticket by.count:[group_bucket] query:(created:"this year") format:pie
+dataQuery/tickets:
+  query@text:
+    type:worklist.subtotals
+    of:ticket
+    by.count:[group_bucket]
+    query:(created:"this year")
+    format:pie
 ```
 
 **Chart:**
 
 ```
-data: type: pie series: tickets:
+data:
+  type: pie
+  series:
+    tickets:
 ```
 
 ### Donut: Contact methods
@@ -300,11 +415,50 @@ data: type: pie series: tickets:
 **Datasets:**
 
 ```
-dataQuery/calls: query@text: type:worklist.metrics values.calls:( of:call function:count field:id query:() ) format: pie dataQuery/tasks: query@text: type:worklist.metrics values.tasks:( of:task function:count field:id query:() ) format: pie dataQuery/tickets: query@text: type:worklist.metrics values.tickets:( of:ticket function:count field:id query:(status:!d) ) format: pie
+dataQuery/calls:
+  query@text:
+    type:worklist.metrics
+    values.calls:(
+      of:call
+      function:count
+      field:id
+      query:()
+    )
+    format: pie
+
+dataQuery/tasks:
+  query@text:
+    type:worklist.metrics
+    values.tasks:(
+      of:task
+      function:count
+      field:id
+      query:()
+    )
+    format: pie
+
+dataQuery/tickets:
+  query@text:
+    type:worklist.metrics
+    values.tickets:(
+      of:ticket
+      function:count
+      field:id
+      query:(status:!d)
+    )
+    format: pie
 ```
 
 **Chart:**
 
 ```
-data: type: donut series: calls: name: # Calls tasks: name: # Tasks tickets: name: # Tickets
+data:
+  type: donut
+  series:
+    calls:
+      name: # Calls
+    tasks:
+      name: # Tasks
+    tickets:
+      name: # Tickets
 ```

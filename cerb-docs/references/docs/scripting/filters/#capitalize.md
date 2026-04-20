@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Capitalize the first character of a string (and lowercase the rest):
 
 ```
-{% set first_name = "kina" %} {{ first_name | capitalize }}
+{% set first_name = "kina" %}
+{{first_name|capitalize}}
 ```
 
 ```

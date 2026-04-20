@@ -12,12 +12,12 @@ An **object** field contains a _collection_ of **keys** and their associated **v
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "params" : { 
-		 "color" : "red" , 
-		 "quantity" : 6 
-	 } 
- }
+{
+	"params": {
+		"color": "red",
+		"quantity": 6
+	}
+}
 ```
 
 ### Records API

@@ -42,18 +42,52 @@ Send an autoresponder when a new ticket is created:
 
 - 
 ```
-start: record.create: output: new_draft inputs: record_type: draft fields: name: Auto-Response type: ticket.reply ticket_id: {{ message_ticket_id }} is_queued: 1 queue_delivery_date@date: 5 mins to: {{ message_sender_address }} params: to: {{ message_sender_address }} subject: [# {{ message_ticket_mask }}] {{ message_ticket_subject }} headers: In-Reply-To@optional: {{ message_headers['in-reply-to'] }} Auto-Submitted: auto-replied content: Thank you for contacting us. We will respond as soon as possible.
+start:
+  record.create:
+    output: new_draft
+    inputs:
+      record_type: draft
+      fields:
+        name: Auto-Response
+        type: ticket.reply
+        ticket_id: {{message_ticket_id}}
+        is_queued: 1
+        queue_delivery_date@date: 5 mins
+        to: {{message_sender_address}}
+        params:
+          to: {{message_sender_address}}
+          subject: [#{{message_ticket_mask}}] {{message_ticket_subject}}
+          headers:
+            In-Reply-To@optional: {{message_headers['in-reply-to']}}
+            Auto-Submitted: auto-replied
+          content: Thank you for contacting us. We will respond as soon as possible.
 ```
 - 
 ```
-commands: record.create: deny/type@bool: {{ inputs.record_type is not record type ('draft') }} allow@bool: yes
+commands:
+  record.create:
+    deny/type@bool: {{inputs.record_type is not record type ('draft')}}
+    allow@bool: yes
 ```
 - 
 ```
-automation/autoreply: uri: cerb:automation:example.newticket.autoresponder disabled@bool: {{ not is_new_ticket or not message_ticket_group_auto_responder_enabled or message_ticket_subject is pattern ( '*out of the office*', '*out of office*', '*auto response*', '*autoreply*', ) }}
+automation/autoreply:
+  uri: cerb:automation:example.newticket.autoresponder
+  disabled@bool:
+    {{
+      not is_new_ticket
+      or not message_ticket_group_auto_responder_enabled
+      or message_ticket_subject is pattern (
+        '*out of the office*',
+        '*out of office*',
+        '*auto response*',
+        '*autoreply*',
+      )
+    }}
 ```
 - 
 ```
-message__context: message message_id: 1
+message__context: message
+message_id: 1
 ```
 

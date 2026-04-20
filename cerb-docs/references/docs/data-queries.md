@@ -23,7 +23,7 @@ A data query is a collection of `key:value` pairs.
 Every query must include a `type:` key:
 
 ```
-type: worklist.subtotals
+type:worklist.subtotals
 ```
 
 Additional keys are available depending on the type of data being requested.
@@ -31,7 +31,7 @@ Additional keys are available depending on the type of data being requested.
 A `format:` key prepares the response for different visualizations:
 
 ```
-format: dictionaries
+format:dictionaries
 ```
 
 # Types

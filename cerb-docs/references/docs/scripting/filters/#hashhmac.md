@@ -18,7 +18,8 @@ Generate a hash-based message authentication code (HMAC[1](#fn:hmac)) using a se
 For instance, you can use this to sign parameters in a survey URL to verify that the recipient didn't modify them.
 
 ```
-{% set data = { 'email' : 'kina@cerb.example' , 'survey_id' : 123 } %} {{ data | json_encode | hash_hmac ( "THIS IS SECRET" , "sha256" ) }}
+{% set data = {'email': 'kina@cerb.example', 'survey_id': 123} %}
+{{data|json_encode|hash_hmac("THIS IS SECRET","sha256")}}
 ```
 
 ```

@@ -21,8 +21,9 @@ For instance, a snippet could use an automation to dynamically generate content 
 | **inputs** | A key/value dictionary of inputs. The possible keys depend on the function being invoked. |
 
 ```
-{% set ip_data = cerb_automation ( 'wgm.scripting.getLocationByIP' , { ip : "1.2.3.4" } ) %} {% if ip_data.return.data %}
-I see you are contacting us from {{ ip_data.return.data.country_name }}.
+{% set ip_data = cerb_automation('wgm.scripting.getLocationByIP', { ip:"1.2.3.4" } ) %}
+{% if ip_data.return.data %}
+I see you are contacting us from {{ip_data.return.data.country_name}}.
 {% endif %}
 ```
 

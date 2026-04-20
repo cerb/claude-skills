@@ -12,7 +12,11 @@ The **log:** command writes data to the automation log with a given severity. Au
   - [output:](#output)
 
 ```
-start: log: This is a notice log.warn: This is a warning log.error: This is an error log.alert: This is an alert
+start:
+  log: This is a notice
+  log.warn: This is a warning
+  log.error: This is an error
+  log.alert: This is an alert
 ```
 
 Each log entry contains:

@@ -18,7 +18,8 @@ Append a suffix to the current text.
 | **trim** | Optional characters to remove from the end of the current value (e.g. dangling commas). When omitted the trim is set to the same value as the delimiter. |
 
 ```
-{% set emails = "customer@cerb.example" %} {{ emails | append ( 'vendor@cerb.example' , delimiter = ', ' ) }}
+{% set emails = "customer@cerb.example" %}
+{{emails|append('vendor@cerb.example', delimiter=', ')}}
 ```
 
 ```
@@ -26,7 +27,8 @@ customer@cerb.example, vendor@cerb.example
 ```
 
 ```
-{% set emails = null %} {{ emails | append ( 'vendor@cerb.example' , delimiter = ', ' ) }}
+{% set emails = null %}
+{{emails|append('vendor@cerb.example', delimiter=', ')}}
 ```
 
 ```

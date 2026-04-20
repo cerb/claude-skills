@@ -26,7 +26,8 @@ tags: ["docs"]
 # Examples
 
 ```
-type: usage.behaviors format: timeseries
+type:usage.behaviors
+format:timeseries
 ```
 
  

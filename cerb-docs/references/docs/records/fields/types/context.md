@@ -14,9 +14,9 @@ The value is the `identifier` (ID) or `uri` (alias) of a record type.
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "context" : "ticket" 
- }
+{
+	"context": "ticket"
+}
 ```
 
 ### Records API

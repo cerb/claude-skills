@@ -14,10 +14,23 @@ This automation generates an array of 10 random numbers between 0 and 100 (inclu
 
 - 
 ```
-start: return: values@json: {{ range(1, 10)|map((v) => random(0, 100))|json_encode }}
+start:
+  return:
+    values@json: {{range(1, 10)|map((v) => random(0, 100))|json_encode}}
 ```
 - 
 ```
-__return : values : - 30 - 18 - 50 - 39 - 89 - 73 - 98 - 90 - 72 - 37
+__return:
+  values:
+  - 30
+  - 18
+  - 50
+  - 39
+  - 89
+  - 73
+  - 98
+  - 90
+  - 72
+  - 37
 ```
 

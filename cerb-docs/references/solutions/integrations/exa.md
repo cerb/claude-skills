@@ -42,7 +42,23 @@ Click **API Keys** in the menu. From there you can copy your default key or crea
 https://docs.exa.ai/reference/search
 
 ```
-start: http.request/search: output: http_response inputs: method: POST url: https://api.exa.ai/search authentication: cerb:connected_account:exa headers: Content-Type: application/json body: query: What is KATA? includeDomains@csv: cerb.ai text@bool: true on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/search:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.exa.ai/search
+      authentication: cerb:connected_account:exa
+      headers:
+        Content-Type: application/json
+      body:
+        query: What is KATA?
+        includeDomains@csv: cerb.ai
+        text@bool: true
+   on_success:
+    set:
+      response@json: {{http_response.body}}
+      http_response@json: null
 ```
 
 ## Extract
@@ -50,7 +66,22 @@ start: http.request/search: output: http_response inputs: method: POST url: http
 https://docs.exa.ai/reference/get-contents
 
 ```
-start: http.request/contents: output: http_response inputs: method: POST url: https://api.exa.ai/contents authentication: cerb:connected_account:exa headers: Content-Type: application/json body: urls@csv: https://cerb.ai/docs/kata/ text@bool: true on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/contents:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.exa.ai/contents
+      authentication: cerb:connected_account:exa
+      headers:
+        Content-Type: application/json
+      body:
+        urls@csv: https://cerb.ai/docs/kata/
+        text@bool: true
+   on_success:
+    set:
+      response@json: {{http_response.body}}
+      http_response@json: null
 ```
 
 ## Answer
@@ -58,5 +89,20 @@ start: http.request/contents: output: http_response inputs: method: POST url: ht
 https://docs.exa.ai/reference/answer
 
 ```
-start: http.request/contents: output: http_response inputs: method: POST url: https://api.exa.ai/answer authentication: cerb:connected_account:exa headers: Content-Type: application/json body: query: Who is Beethoven text@bool: true on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/contents:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.exa.ai/answer
+      authentication: cerb:connected_account:exa
+      headers:
+        Content-Type: application/json
+      body:
+        query: Who is Beethoven
+        text@bool: true
+   on_success:
+    set:
+      response@json: {{http_response.body}}
+      http_response@json: null
 ```

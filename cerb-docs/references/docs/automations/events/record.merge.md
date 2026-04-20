@@ -40,10 +40,17 @@ Only allow admins to merge tickets:
 
 - 
 ```
-start: outcome/notAdmin: if@bool: {{ not worker_is_superuser }} then: return: deny: Sorry, only admins can merge tickets.
+start:
+  outcome/notAdmin:
+    if@bool: {{not worker_is_superuser}}
+    then:
+      return:
+        deny: Sorry, only admins can merge tickets.
 ```
 - 
 ```
-automation/merge: uri: cerb:automation:example.merge.adminsOnly disabled@bool: {{ record_type is not record type ('ticket') }}
+automation/merge:
+  uri: cerb:automation:example.merge.adminsOnly
+  disabled@bool: {{record_type is not record type ('ticket')}}
 ```
 

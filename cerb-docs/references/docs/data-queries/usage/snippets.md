@@ -26,7 +26,8 @@ tags: ["docs"]
 # Examples
 
 ```
-type: usage.snippets format: timeseries
+type:usage.snippets
+format:timeseries
 ```
 
  

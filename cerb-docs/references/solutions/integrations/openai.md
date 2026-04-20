@@ -66,7 +66,28 @@ Click the **Create** button in the popup.
 https://platform.openai.com/docs/api-reference/chat
 
 ```
-start: http.request/chat: output: http_response inputs: method: POST url: https://api.openai.com/v1/chat/completions headers: Content-Type: application/json authentication: cerb:connected_account:openai body: model: gpt-4o messages: 0: role: developer content: you are a helpful assistant 1: role: user content: hello on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+ http.request/chat:
+   output: http_response
+   inputs:
+     method: POST
+     url: https://api.openai.com/v1/chat/completions
+     headers:
+       Content-Type: application/json
+     authentication: cerb:connected_account:openai
+     body:
+       model: gpt-4o
+       messages:
+        0:
+          role: developer
+          content: you are a helpful assistant
+        1:
+          role: user
+          content: hello
+   on_success:
+     set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Generate text embeddings
@@ -74,7 +95,22 @@ start: http.request/chat: output: http_response inputs: method: POST url: https:
 https://platform.openai.com/docs/api-reference/embeddings
 
 ```
-start: http.request/embeddings: output: http_response inputs: method: POST url: https://api.openai.com/v1/embeddings headers: Content-Type: application/json authentication: cerb:connected_account:openai body: input: Cerb automates helpdesk inboxes and workflows. It has evolved continuously since 2002 based on the feedback of thousands of teams; from solo founders to 1,000+ person enterprises managing millions of customer requests. model: text-embedding-3-small on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+ http.request/embeddings:
+   output: http_response
+   inputs:
+     method: POST
+     url: https://api.openai.com/v1/embeddings
+     headers:
+       Content-Type: application/json
+     authentication: cerb:connected_account:openai
+     body:
+       input: Cerb automates helpdesk inboxes and workflows. It has evolved continuously since 2002 based on the feedback of thousands of teams; from solo founders to 1,000+ person enterprises managing millions of customer requests.
+       model: text-embedding-3-small
+   on_success:
+     set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 # Related Resources

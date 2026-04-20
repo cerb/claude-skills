@@ -28,9 +28,22 @@ Toolbars are configured using a [KATA](/docs/kata/) dialect, which can pass cust
 An interaction begins when it is clicked in the toolbar.
 
 ```
-interaction/participants: label: Participants badge: {{ record_participants|length|default(0) }} uri: cerb:automation:cerb.ticket.participants.manage inputs: ticket@key: record_id #hidden@bool: no
-    after: refresh_widgets@csv: Actions 
- interaction/locationByIp: uri: cerb:automation:example.interaction.locationByIP label: Location by IP icon: globe after: refresh_widgets@list: Actions
+interaction/participants:
+  label: Participants
+  badge: {{record_participants|length|default(0)}}
+  uri: cerb:automation:cerb.ticket.participants.manage
+  inputs:
+    ticket@key: record_id
+  #hidden@bool: no
+  after:
+    refresh_widgets@csv: Actions
+
+interaction/locationByIp:
+  uri: cerb:automation:example.interaction.locationByIP
+  label: Location by IP
+  icon: globe
+  after:
+    refresh_widgets@list: Actions
 ```
 
 | Req'd | Key | &nbsp; |
@@ -50,7 +63,17 @@ interaction/participants: label: Participants badge: {{ record_participants|leng
 Menus may contain any combination of interactions and submenus.
 
 ```
-menu/moreMenu: icon: more tooltip: More items: menu/tools: label: Tools items: interaction/debug: uri: cerb:automation:example.interaction.echo label: Debug icon: bug
+menu/moreMenu:
+  icon: more
+  tooltip: More
+  items:
+    menu/tools:
+      label: Tools
+      items:
+        interaction/debug:
+          uri: cerb:automation:example.interaction.echo
+          label: Debug
+          icon: bug
 ```
 
  

@@ -12,8 +12,10 @@ tags: ["docs", "docs-scripting"]
 Returns a new array for all the elements in array1 that are also present in array2. This is the opposite of [array\_diff](#array_diff).
 
 ```
-{% set arr1 = ['Apple' , 'Google' , 'Microsoft'] %} {% set arr2 = ['Apple' , 'Microsoft' , 'Cerb'] %} {% set intersect = array_intersect ( arr2 , arr1 ) %}
-These are in both: {{ intersect | join ( ', ' ) }}
+{% set arr1 = ['Apple', 'Google', 'Microsoft'] %}
+{% set arr2 = ['Apple', 'Microsoft', 'Cerb'] %}
+{% set intersect = array_intersect(arr2, arr1) %}
+These are in both: {{intersect|join(', ')}}
 ```
 
 ```

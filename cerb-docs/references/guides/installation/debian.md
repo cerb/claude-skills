@@ -85,7 +85,9 @@ We recommend using a dedicated database server that replicates to a standby serv
 If you need to install MariaDB on your EC2 instance instead, you can use these instructions:
 
 ```
-sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.2/debian stretch main' sudo apt-get install -y mariadb-server
+sudo add-apt-repository 'deb [arch=amd64,i386,ppc64el] http://ftp.utexas.edu/mariadb/repo/10.2/debian stretch main'
+
+sudo apt-get install -y mariadb-server
 
 sudo mysql_secure_installation
 
@@ -107,7 +109,13 @@ Enter your root password.
 Create a new database and user for Cerb:
 
 ```
-CREATE DATABASE cerb CHARACTER SET utf8 ; CREATE USER cerb @ localhost IDENTIFIED BY 's3cr3t' ; GRANT ALL PRIVILEGES ON cerb . * TO cerb @ localhost ; QUIT ;
+CREATE DATABASE cerb CHARACTER SET utf8;
+
+CREATE USER cerb@localhost IDENTIFIED BY 's3cr3t';
+
+GRANT ALL PRIVILEGES ON cerb.* TO cerb@localhost; 
+
+QUIT;
 ```
 
 Replace s3cr3t above with your own secret password. If you're using a remote database server, replace @localhost with a subnet used by your web servers, like: @'10.0.0.%'
@@ -173,7 +181,9 @@ sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 For testing, you can also create a self-signed SSL certificate. You **should not** use these instructions in production:
 
 ```
-sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \ -keyout /etc/ssl/private/nginx-selfsigned.key \ -out /etc/ssl/certs/nginx-selfsigned.pem
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+-keyout /etc/ssl/private/nginx-selfsigned.key \
+-out /etc/ssl/certs/nginx-selfsigned.pem
 ```
 
 ```
@@ -300,7 +310,109 @@ Type `i` to switch to insert mode and paste the following:
 101
 102
 103
-server { listen 80 ; server_name cerb.example ; #access_log off; location /status/nginx { stub_status on ; access_log off ; allow 127.0 .0.1 ; deny all ; } location /status/fpm { access_log off ; allow 127.0 .0.1 ; #allow 10.0.0.0/16; deny all ; include fastcgi_params ; fastcgi_pass unix:/var/run/php/php7.0-fpm.sock ; } location / { return 301 https:// $host$request_uri ; } } server { listen 443 ssl ; server_name cerb.example ; #access_log off; root /usr/share/nginx/html/cerb ; index index.php ; # Increase upload max size from default of 1MB client_max_body_size 30m ; charset utf-8 ; # SSL ssl_certificate /etc/ssl/certs/nginx-selfsigned.pem ; ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key ; ssl_protocols TLSv1.2 ; ssl_prefer_server_ciphers on ; ssl_ciphers HIGH:!CAMELLIA:!RC4:!PSK:!aNULL:@STRENGTH ; ssl_dhparam /etc/ssl/certs/dhparam.pem ; # DNS resolver 8.8 .8.8 8.8 .4.4 valid=300s ; resolver_timeout 5s ; # Always let people see the favicon file location = /favicon.ico { allow all ; } # Send PHP scripts to FPM location ~ ^/(index|ajax)\.php$ { proxy_connect_timeout 120 ; proxy_send_timeout 120 ; proxy_read_timeout 120 ; fastcgi_split_path_info ^(.+ \ .php)(/.+)$; fastcgi_pass unix:/var/run/php/php7.0-fpm.sock ; fastcgi_index index.php ; include fastcgi_params ; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name ; } # ============================ # ENABLE ONLY FOR INSTALLATION # ============================ location /install/ { location = /install/ { rewrite ^(.*)$ /install/index.php? $1 last ; } location ~ ^/install/(index|servercheck|phpinfo)\.php$ { fastcgi_split_path_info ^(.+ \ .php)(/.+)$; fastcgi_pass unix:/var/run/php/php7.0-fpm.sock ; fastcgi_index /install/index.php ; include fastcgi_params ; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name ; } location ~ ^/install/(.*)\.(css|js|svg)$ { allow all ; } #location ~ ^/install/ { # deny all; #} } location ~ \.php$ { deny all ; } # Send all other paths to the Devblocks front controller index.php location / { rewrite ^ /index.php last ; } }
+server {
+  listen 80;
+  server_name cerb.example;
+  #access_log off;
+
+  location /status/nginx {
+    stub_status on;
+    access_log off;
+    allow 127.0.0.1;
+    deny all;
+  }
+
+  location /status/fpm {
+    access_log off;
+    allow 127.0.0.1;
+    #allow 10.0.0.0/16;
+    deny all;
+    include fastcgi_params;
+    fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+  }
+
+  location / {
+    return 301 https://$host$request_uri;
+  }
+}
+
+server {
+  listen 443 ssl;
+  server_name cerb.example;
+  #access_log off;
+  
+  root /usr/share/nginx/html/cerb;
+  index index.php;
+
+  # Increase upload max size from default of 1MB
+  client_max_body_size 30m;
+	  
+  charset utf-8;
+
+  # SSL
+  ssl_certificate /etc/ssl/certs/nginx-selfsigned.pem;
+  ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+  ssl_protocols TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  ssl_ciphers HIGH:!CAMELLIA:!RC4:!PSK:!aNULL:@STRENGTH;
+  ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+  # DNS
+  resolver 8.8.8.8 8.8.4.4 valid=300s;
+  resolver_timeout 5s;
+
+  # Always let people see the favicon file
+  location = /favicon.ico {
+    allow all;
+  }
+  
+  # Send PHP scripts to FPM
+  location ~ ^/(index|ajax)\.php$ {
+    proxy_connect_timeout 120;
+    proxy_send_timeout 120;
+    proxy_read_timeout 120;
+    
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+    fastcgi_index index.php;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+  }
+
+  # ============================
+  # ENABLE ONLY FOR INSTALLATION
+  # ============================
+  location /install/ {
+    location = /install/ {
+      rewrite ^(.*)$ /install/index.php?$1 last;
+    }
+    
+    location ~ ^/install/(index|servercheck|phpinfo)\.php$ {
+      fastcgi_split_path_info ^(.+\.php)(/.+)$;
+      fastcgi_pass unix:/var/run/php/php7.0-fpm.sock;
+      fastcgi_index /install/index.php;
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+    
+    location ~ ^/install/(.*)\.(css|js|svg)$ {
+      allow all;
+    }
+    
+    #location ~ ^/install/ {
+    # deny all;
+    #}
+  }
+
+  location ~ \.php$ {
+    deny all;
+  }
+  
+  # Send all other paths to the Devblocks front controller index.php
+  location / {
+    rewrite ^ /index.php last;
+  }
+}
 ```
 
 On lines `3` and `29` change `cerb.example` to the domain name of your server. If for some reason you don't have one, you can temporarily use your server IP.

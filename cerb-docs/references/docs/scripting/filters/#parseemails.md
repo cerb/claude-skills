@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Parse a delimited string of email addresses into an object. This also assists with email validation.
 
 ```
-{% set emails = "kina@cerb.example, milo@cerb.example, karl" %} {{ emails | parse_emails | json_encode | json_pretty }}
+{% set emails = "kina@cerb.example, milo@cerb.example, karl" %}
+{{emails|parse_emails|json_encode|json_pretty}}
 ```
 
 ```

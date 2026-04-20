@@ -6,7 +6,11 @@ summary: "This page provides detailed information on automation inputs for Cerb,
 tags: ["docs", "docs-automations"]
 ---
 ```
-inputs: text/email: required@bool: yes default: you@example.com type: email
+inputs:
+  text/email:
+    required@bool: yes
+    default: you@example.com
+    type: email
 ```
 
 ### required:

@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Convert character encodings to the first argument from the second. If the second argument is blank then Cerb will attempt to auto-detect the current encoding.
 
 ```
-{{ "This has 😂 emoji" | convert_encoding ( 'iso-8859-1' , 'utf-8' ) }}
+{{"This has 😂 emoji"|convert_encoding('iso-8859-1', 'utf-8')}}
 ```
 
 ```

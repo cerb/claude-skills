@@ -118,7 +118,9 @@ As mentioned earlier, map schemas use [KATA](/docs/kata/), our human-friendly te
 A map starts with a `map:resource:`:
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
 ```
 
 Notice that the resource is referred to by a `map:resource:uri:` (uniform resource identifier). This always starts with a `cerb:` prefix, then a record type, another colon `:`, and ends with the unique identifier for a record of that type (an alias or record ID).
@@ -140,7 +142,10 @@ Cerb supports the following projection types:
 Mercator has been the general purpose standard projection for nearly 500 years.
 
 ```
-map: projection: type: mercator scale: 90
+map:
+  projection:
+    type: mercator
+    scale: 90
 ```
 
 #### naturalEarth
@@ -148,7 +153,10 @@ map: projection: type: mercator scale: 90
 Natural Earth is a relatively new projection, suitable for showing worldwide maps at a small scale.
 
 ```
-map: projection: type: naturalEarth scale: 90
+map:
+  projection:
+    type: naturalEarth
+    scale: 90
 ```
 
 #### albersUsa
@@ -156,7 +164,10 @@ map: projection: type: naturalEarth scale: 90
 AlbersUSA is a "composite" projection for displaying a more compact map of the United States, with resized Alaska/Hawaii moved near the continental southwest.
 
 ```
-map: projection: type: albersUsa scale: 650
+map:
+  projection:
+    type: albersUsa
+    scale: 650
 ```
 
 ### scale:
@@ -166,7 +177,10 @@ The `map:projection:scale:` key determines the initial size of the rendered map 
 You can determine the ideal scale by panning and zooming the map, then looking at the current values in the bottom right.
 
 ```
-map: projection: type: mercator scale: 90
+map:
+  projection:
+    type: mercator
+    scale: 90
 ```
 
 ### center:
@@ -174,7 +188,13 @@ map: projection: type: mercator scale: 90
 The `map:projection:center:` key determines the default location at the center of the map's viewport. If omitted, the default is 0º Latitude, 0º Longitude (off the west coast of Africa).
 
 ```
-map: projection: type: mercator scale: 90 center: latitude: 0 longitude: 0
+map:
+  projection:
+    type: mercator
+    scale: 90
+    center:
+        latitude: 0
+        longitude: 0
 ```
 
 The `albersUsa` projection does not support this option, and is instead always centered on the United States by default. You can use `zoom:` to change the focus.
@@ -186,7 +206,17 @@ While `map:projection:center:` determines the baseline map position, the `map:pr
 Interactions can also use the `zoom:` option to move around an existing map.
 
 ```
-map: projection: type: mercator scale: 90 center: latitude: 0 longitude: 0 zoom: latitude: 37.98 longitude: -97.74 scale: 2
+map:
+  projection:
+    type: mercator
+    scale: 90
+    center:
+        latitude: 0
+        longitude: 0
+    zoom:
+        latitude: 37.98
+        longitude: -97.74
+        scale: 2
 ```
 
 The `map:projection:zoom:scale:` key is a zoom multiplier from `1` to `40`.
@@ -208,7 +238,22 @@ To improve reusability, you can use `map:regions:properties:` to merge additiona
 Use the `map:regions:properties:data:` key to specify additional properties to merge into the existing map regions.
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650 regions: properties: data: CA: party: D TX: party: R join: property: postal case: upper
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
+  projection:
+    type: albersUsa
+    scale: 650
+  regions:
+    properties:
+      data:
+        CA:
+          party: D
+        TX:
+          party: R
+      join:
+        property: postal
+        case: upper
 ```
 
 #### resource:
@@ -216,32 +261,44 @@ map: resource: uri: cerb:resource:map.country.usa.states projection: type: alber
 Use the `map:regions:properties:resource:` key to fetch a 'Map Properties' [resource](/docs/resources/) and merge it into the existing map regions.
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650 regions: properties: resource: uri: cerb:resource:mapProperties.usaStateAnimals join: property: name case: upper
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
+  projection:
+    type: albersUsa
+    scale: 650
+  regions:
+    properties:
+      resource:
+        uri: cerb:resource:mapProperties.usaStateAnimals
+      join:
+        property: name
+        case: upper
 ```
 
 The map properties resource must have the following JSON object format:
 
 ```
-{ 
-     "VALUE_TO_MATCH" : { 
-         "new_property" : "some value" , 
-         "another_new_property" : "another value" 
-     }, 
-     ... 
- }
+{
+    "VALUE_TO_MATCH": {
+        "new_property": "some value",
+        "another_new_property": "another value"
+    },
+    ...
+}
 ```
 
 For instance:
 
 ```
-{ 
-     "CALIFORNIA" : { 
-         "state_animal" : "California grizzly bear"  
-     }, 
-     "TEXAS" : { 
-         "state_animal" : "Nine-banded armadillo" 
-     } 
- }
+{
+    "CALIFORNIA": {
+        "state_animal": "California grizzly bear" 
+    },
+    "TEXAS": {
+        "state_animal": "Nine-banded armadillo"
+    }
+}
 ```
 
 #### join:
@@ -261,7 +318,27 @@ It's useful to be able to see all of the properties on a feature when designing 
 You can use the `map:regions:label:` key to control the contents of the floating label.
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650 regions: properties: resource: uri: cerb:resource:mapProperties.usaStateAnimals join: property: name case: upper label: title: name properties: state_animal: label: Animal pop_est: label: Population format: number
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
+  projection:
+    type: albersUsa
+    scale: 650
+  regions:
+    properties:
+      resource:
+        uri: cerb:resource:mapProperties.usaStateAnimals
+      join:
+        property: name
+        case: upper
+    label:
+      title: name
+      properties:
+        state_animal:
+          label: Animal
+        pop_est:
+          label: Population
+          format: number
 ```
 
 ### filter:
@@ -273,7 +350,16 @@ Use `map:regions:filter:` to extract or omit certain features from a larger map 
 Use `is:` to match a single property value:
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650 regions: filter: property: name is: California
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
+  projection:
+    type: albersUsa
+    scale: 650
+  regions:
+    filter:
+      property: name
+      is: California
 ```
 
 #### is@list:
@@ -281,7 +367,24 @@ map: resource: uri: cerb:resource:map.country.usa.states projection: type: alber
 Use `is@list:` or `is@csv:` to match multiple values in a single property:
 
 ```
-map: resource: uri: cerb:resource:map.world.countries projection: type: mercator scale: 790 center: latitude: 48.4088 longitude: 8.2271 regions: filter: property: name is@list: Austria Belgium France Germany Switzerland
+map:
+  resource:
+    uri: cerb:resource:map.world.countries
+  projection:
+    type: mercator
+    scale: 790
+    center:
+      latitude: 48.4088
+      longitude: 8.2271
+  regions:
+    filter:
+      property: name
+      is@list:
+        Austria
+        Belgium
+        France
+        Germany
+        Switzerland
 ```
 
  
@@ -291,7 +394,19 @@ map: resource: uri: cerb:resource:map.world.countries projection: type: mercator
 Use `not:` to exclude a single property value:
 
 ```
-map: resource: uri: cerb:resource:map.world.countries projection: type: mercator scale: 90 center: latitude: 0 longitude: 0 regions: filter: property: continent not: North America
+map:
+  resource:
+    uri: cerb:resource:map.world.countries
+  projection:
+    type: mercator
+    scale: 90
+    center:
+      latitude: 0
+      longitude: 0
+  regions:
+    filter:
+      property: continent
+      not: North America
 ```
 
  
@@ -301,7 +416,19 @@ map: resource: uri: cerb:resource:map.world.countries projection: type: mercator
 Use `not@list:` or `not@csv:` to exclude multiple values in a single property:
 
 ```
-map: resource: uri: cerb:resource:map.world.countries projection: type: mercator scale: 90 center: latitude: 0 longitude: 0 regions: filter: property: name not@csv: Australia, New Zealand, Antarctica
+map:
+  resource:
+    uri: cerb:resource:map.world.countries
+  projection:
+    type: mercator
+    scale: 90
+    center:
+      latitude: 0
+      longitude: 0
+  regions:
+    filter:
+      property: name
+      not@csv: Australia, New Zealand, Antarctica
 ```
 
 ### fill:
@@ -321,7 +448,11 @@ Colors should be specified using web colors (CSS) syntax:
 Use `map:regions:fill:color_key:` to select colors directly from a property.
 
 ```
-map: regions: fill: color_key: property: country_color
+map:
+  regions:
+    fill:
+      color_key:
+        property: country_color
 ```
 
 #### color\_map:
@@ -329,7 +460,17 @@ map: regions: fill: color_key: property: country_color
 Use `map:regions:fill:color_map:` to associate colors with specific property values.
 
 ```
-map: regions: fill: color_map: property: scalerank colors: 1: gray 2: blue 3: green 4: orange 5: red
+map:
+  regions:
+    fill:
+      color_map:
+        property: scalerank
+        colors:
+          1: gray
+          2: blue
+          3: green
+          4: orange
+          5: red
 ```
 
 #### choropleth:
@@ -337,7 +478,12 @@ map: regions: fill: color_map: property: scalerank colors: 1: gray 2: blue 3: gr
 Use `map:regions:fill:choropleth:` to interpolate color intensity on a scale based on a numeric property.
 
 ```
-map: regions: fill: choropleth: property: mapcolor9 classes: 9
+map:
+  regions:
+    fill:
+      choropleth:
+        property: mapcolor9
+        classes: 9
 ```
 
  
@@ -351,7 +497,10 @@ Points of interest can be plotted on a map using geospatial coordinates (latitud
 Like map data, points can be loaded from a [resource](#resources) URI using `map:points:resource:`:
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
 ```
 
  
@@ -363,7 +512,30 @@ You can also use `map:points:data:` to manually specify points and their propert
 If you specify both `map:points:resource:` and `map:points:data:`, the points will be merged into a single dataset.
 
 ```
-map: points: data: point/berlin: latitude: 52.549636074382285 longitude: 13.403320312499998 properties: name: Berlin country: Germany continent: Europe point/los_angeles: latitude: 34.08906131584994 longitude: 241.69921874999997 properties: name: Los Angeles country: United States of America continent: North America point/sydney: latitude: -33.7243396617476 longitude: 151.259765625 properties: name: Sydney country: Australia continent: Oceania
+map:
+  points:
+    data:
+      point/berlin:
+        latitude: 52.549636074382285
+        longitude: 13.403320312499998
+        properties:
+          name: Berlin
+          country: Germany
+          continent: Europe
+      point/los_angeles:
+        latitude: 34.08906131584994
+        longitude: 241.69921874999997
+        properties:
+          name: Los Angeles
+          country: United States of America
+          continent: North America
+      point/sydney:
+        latitude: -33.7243396617476
+        longitude: 151.259765625
+        properties:
+          name: Sydney
+          country: Australia
+          continent: Oceania
 ```
 
  
@@ -375,7 +547,24 @@ The website http://geojson.io/ is very useful for finding point coordinates, or 
 Like with regions, clicking on a point displays its properties. You can use `map:points:label:` to select which properties to show.
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities label: title: name properties: adm1name: label: State adm0name: label: Country pop_max: label: Population format: number latitude: label: Latitude longitude: label: Longitude
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    label:
+      title: name
+      properties:
+        adm1name:
+          label: State
+        adm0name:
+          label: Country
+        pop_max:
+          label: Population
+          format: number
+        latitude:
+          label: Latitude
+        longitude:
+          label: Longitude
 ```
 
  
@@ -389,7 +578,13 @@ Use `map:points:filter:` to extract or omit certain points from a resource.
 Use `is:` to match a single property value:
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities filter: property: continent is: Europe
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    filter:
+      property: continent
+      is: Europe
 ```
 
  
@@ -399,7 +594,18 @@ map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities filter: p
 Use `is@list:` or `is@csv:` to match multiple values in a single property:
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities filter: property: name is@list: Beijing Berlin London Moscow Washington, D.C.
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    filter:
+      property: name
+      is@list:
+        Beijing
+        Berlin
+        London
+        Moscow
+        Washington, D.C.
 ```
 
 #### not:
@@ -407,7 +613,13 @@ map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities filter: p
 Use `not:` to exclude a single property value:
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities filter: property: megacity not: 0
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    filter:
+      property: megacity
+      not: 0
 ```
 
 #### not@list:
@@ -415,7 +627,15 @@ map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities filter: p
 Use `not@list:` or `not@csv:` to exclude multiple values in a single property:
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities filter: property: continent not@list: Asia Oceania
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    filter:
+      property: continent
+      not@list:
+        Asia
+        Oceania
 ```
 
 ### size:
@@ -427,7 +647,12 @@ Use `map:points:size:` to configure the size of each point.
 The `map:points:size:default:` key configures the default size for points which don't match any other rules. The size should be specified as a number.
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities size: default: 2.5
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    size:
+      default: 2.5
 ```
 
 #### value\_map:
@@ -435,7 +660,16 @@ map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities size: def
 Use `map:points:size:value_map:` to associate point sizes based on the value of a property.
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities size: default: 2.5 value_map: property: worldcity values: 1: 5.0
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    size:
+      default: 2.5
+      value_map:
+        property: worldcity
+        values:
+          1: 5.0
 ```
 
  
@@ -457,7 +691,12 @@ Colors should be specified using web colors (CSS) syntax:
 The `map:points:fill:default:` key configures the default color for points which don't match any other rules.
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities fill: default: red
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    fill:
+      default: red
 ```
 
  
@@ -467,7 +706,16 @@ map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities fill: def
 Use `map:points:fill:color_map:` to colorize points based on the value of a property.
 
 ```
-map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities fill: default: #646464 color_map: property: worldcity colors: 1: red
+map:
+  points:
+    resource:
+      uri: cerb:resource:mapPoints.worldCapitalCities
+    fill:
+      default: #646464
+      color_map:
+        property: worldcity
+        colors:
+          1: red
 ```
 
  
@@ -499,7 +747,12 @@ Visualizations of the United States often use a compact format with a smaller Al
 Our map KATA begins with:
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
+  projection:
+    type: albersUsa
+    scale: 650
 ```
 
 This shows all 50 states in a compact format, and scaled up to fill the widget:
@@ -521,7 +774,8 @@ For demonstration, we'll do the conversion manually, so you're better prepared t
 You could write a simple script for this in any programming language; but you can also use the **Setup&nbsp;» Developers&nbsp;» Bot Scripting Tester** and write a quick and disposable script in Cerb's [bot scripting](/docs/scripting/) language.
 
 ```
-{# https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/11-23-2020.csv #} {% set csv %}
+{# https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/11-23-2020.csv #}
+{% set csv %}
 Alabama,US,2020-11-24 05:30:26,32.3182,-86.9023,234080,3459,90702.0,139919.0,1.0,4774.039731317501,1533628.0,,1.4776999316473,84000001,USA,31278.199782386342,
 Alaska,US,2020-11-24 05:30:26,61.3707,-152.4044,28273,103,7165.0,21005.0,2.0,3864.834015679145,933016.0,,0.3643051674742687,84000002,USA,127540.47939634607,
 American Samoa,US,2020-11-24 05:30:26,-14.271,-170.132,0,0,,0.0,60.0,0.0,1988.0,,,16,ASM,3572.904872306393,
@@ -580,7 +834,22 @@ Washington,US,2020-11-24 05:30:26,47.4009,-121.4905,147537,2655,,144882.0,53.0,1
 West Virginia,US,2020-11-24 05:30:26,38.4912,-80.9545,41114,667,26769.0,13678.0,54.0,2294.1198461956524,1038846.0,,1.6223184316777741,84000054,USA,57966.56189475529,
 Wisconsin,US,2020-11-24 05:30:26,44.2685,-89.6165,379693,3158,280358.0,96177.0,55.0,6521.207453789943,4196070.0,,0.8317245774876019,84000055,USA,72067.28320149271,
 Wyoming,US,2020-11-24 05:30:26,42.756,-107.3025,29431,202,17452.0,11777.0,56.0,5085.190899839138,161219.0,,0.6863511263633584,84000056,USA,27855.98150525521,
-{% endset %} {% set results = [] %} {% for line in csv | split_crlf %} {% set data = line | split_csv %} {# Province_State,Country_Region,Last_Update,Lat,Long_,Confirmed,Deaths,Recovered,Active,FIPS,Incident_Rate,Total_Test_Results,People_Hospitalized,Case_Fatality_Ratio,UID,ISO3,Testing_Rate,Hospitalization_Rate #} {% set results = dict_set ( results , data.0 , { covid_incident_rate : data.10 | round ( 2 ), covid_testing_rate : data.16 | round ( 2 ), covid_cases_confirmed : data.5 | round , covid_deaths : data.6 | round , covid_recovered : data.7 | round , covid_active : data.8 | round , covid_fips : data.9 | round , } ) %} {% endfor %} {{ results | json_encode | json_pretty }}
+{% endset %}
+{% set results = [] %}
+{% for line in csv|split_crlf %}
+{% set data = line|split_csv %}
+{# Province_State,Country_Region,Last_Update,Lat,Long_,Confirmed,Deaths,Recovered,Active,FIPS,Incident_Rate,Total_Test_Results,People_Hospitalized,Case_Fatality_Ratio,UID,ISO3,Testing_Rate,Hospitalization_Rate #}
+{% set results = dict_set(results, data.0, {
+	covid_incident_rate: data.10|round(2),
+	covid_testing_rate: data.16|round(2),
+	covid_cases_confirmed: data.5|round,
+	covid_deaths: data.6|round,
+	covid_recovered: data.7|round,
+	covid_active: data.8|round,
+	covid_fips: data.9|round,
+}) %}
+{% endfor %}
+{{results|json_encode|json_pretty}}
 ```
 
 Omitting `|json_pretty` gives more compact output, and will often produce a considerably smaller file for large data sets.
@@ -590,530 +859,530 @@ Don't worry if the above script doesn't make sense to you. It's not important fo
 This script gives us the following JSON output:
 
 ```
-{ 
-   "Alabama" : { 
-     "covid_incident_rate" : 4774.04 , 
-     "covid_testing_rate" : 31278.2 , 
-     "covid_cases_confirmed" : 234080 , 
-     "covid_deaths" : 3459 , 
-     "covid_recovered" : 90702 , 
-     "covid_active" : 139919 , 
-     "covid_fips" : 1 
-   }, 
-   "Alaska" : { 
-     "covid_incident_rate" : 3864.83 , 
-     "covid_testing_rate" : 127540.48 , 
-     "covid_cases_confirmed" : 28273 , 
-     "covid_deaths" : 103 , 
-     "covid_recovered" : 7165 , 
-     "covid_active" : 21005 , 
-     "covid_fips" : 2 
-   }, 
-   "American Samoa" : { 
-     "covid_incident_rate" : 0 , 
-     "covid_testing_rate" : 3572.9 , 
-     "covid_cases_confirmed" : 0 , 
-     "covid_deaths" : 0 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 0 , 
-     "covid_fips" : 60 
-   }, 
-   "Arizona" : { 
-     "covid_incident_rate" : 4153.53 , 
-     "covid_testing_rate" : 29192.96 , 
-     "covid_cases_confirmed" : 302324 , 
-     "covid_deaths" : 6464 , 
-     "covid_recovered" : 48807 , 
-     "covid_active" : 247053 , 
-     "covid_fips" : 4 
-   }, 
-   "Arkansas" : { 
-     "covid_incident_rate" : 4844.25 , 
-     "covid_testing_rate" : 53190.1 , 
-     "covid_cases_confirmed" : 146190 , 
-     "covid_deaths" : 2387 , 
-     "covid_recovered" : 127059 , 
-     "covid_active" : 16744 , 
-     "covid_fips" : 5 
-   }, 
-   "California" : { 
-     "covid_incident_rate" : 2855.37 , 
-     "covid_testing_rate" : 56836.95 , 
-     "covid_cases_confirmed" : 1128219 , 
-     "covid_deaths" : 18753 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 1109466 , 
-     "covid_fips" : 6 
-   }, 
-   "Colorado" : { 
-     "covid_incident_rate" : 3512.73 , 
-     "covid_testing_rate" : 50388.49 , 
-     "covid_cases_confirmed" : 202289 , 
-     "covid_deaths" : 2810 , 
-     "covid_recovered" : 11201 , 
-     "covid_active" : 188278 , 
-     "covid_fips" : 8 
-   }, 
-   "Connecticut" : { 
-     "covid_incident_rate" : 2993.87 , 
-     "covid_testing_rate" : 85224.25 , 
-     "covid_cases_confirmed" : 106740 , 
-     "covid_deaths" : 4871 , 
-     "covid_recovered" : 9800 , 
-     "covid_active" : 92069 , 
-     "covid_fips" : 9 
-   }, 
-   "Delaware" : { 
-     "covid_incident_rate" : 3307.89 , 
-     "covid_testing_rate" : 70600.47 , 
-     "covid_cases_confirmed" : 32211 , 
-     "covid_deaths" : 752 , 
-     "covid_recovered" : 16073 , 
-     "covid_active" : 15386 , 
-     "covid_fips" : 10 
-   }, 
-   "Diamond Princess" : { 
-     "covid_incident_rate" : 0 , 
-     "covid_testing_rate" : 0 , 
-     "covid_cases_confirmed" : 49 , 
-     "covid_deaths" : 0 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 49 , 
-     "covid_fips" : 88888 
-   }, 
-   "District of Columbia" : { 
-     "covid_incident_rate" : 2874.96 , 
-     "covid_testing_rate" : 90607.43 , 
-     "covid_cases_confirmed" : 20290 , 
-     "covid_deaths" : 672 , 
-     "covid_recovered" : 14935 , 
-     "covid_active" : 4683 , 
-     "covid_fips" : 11 
-   }, 
-   "Florida" : { 
-     "covid_incident_rate" : 4398.72 , 
-     "covid_testing_rate" : 54664.6 , 
-     "covid_cases_confirmed" : 944745 , 
-     "covid_deaths" : 18085 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 926660 , 
-     "covid_fips" : 12 
-   }, 
-   "Georgia" : { 
-     "covid_incident_rate" : 4248.26 , 
-     "covid_testing_rate" : 38987.89 , 
-     "covid_cases_confirmed" : 451056 , 
-     "covid_deaths" : 9215 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 441841 , 
-     "covid_fips" : 13 
-   }, 
-   "Grand Princess" : { 
-     "covid_incident_rate" : 0 , 
-     "covid_testing_rate" : 0 , 
-     "covid_cases_confirmed" : 103 , 
-     "covid_deaths" : 3 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 100 , 
-     "covid_fips" : 99999 
-   }, 
-   "Guam" : { 
-     "covid_incident_rate" : 3928.66 , 
-     "covid_testing_rate" : 49320.77 , 
-     "covid_cases_confirmed" : 6452 , 
-     "covid_deaths" : 103 , 
-     "covid_recovered" : 4846 , 
-     "covid_active" : 1503 , 
-     "covid_fips" : 66 
-   }, 
-   "Hawaii" : { 
-     "covid_incident_rate" : 1242.77 , 
-     "covid_testing_rate" : 44927.3 , 
-     "covid_cases_confirmed" : 17596 , 
-     "covid_deaths" : 233 , 
-     "covid_recovered" : 11958 , 
-     "covid_active" : 5405 , 
-     "covid_fips" : 15 
-   }, 
-   "Idaho" : { 
-     "covid_incident_rate" : 5209.1 , 
-     "covid_testing_rate" : 25397.62 , 
-     "covid_cases_confirmed" : 93090 , 
-     "covid_deaths" : 866 , 
-     "covid_recovered" : 38025 , 
-     "covid_active" : 54199 , 
-     "covid_fips" : 16 
-   }, 
-   "Illinois" : { 
-     "covid_incident_rate" : 5244.87 , 
-     "covid_testing_rate" : 78070.71 , 
-     "covid_cases_confirmed" : 664620 , 
-     "covid_deaths" : 12111 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 652509 , 
-     "covid_fips" : 17 
-   }, 
-   "Indiana" : { 
-     "covid_incident_rate" : 4469.74 , 
-     "covid_testing_rate" : 58519.26 , 
-     "covid_cases_confirmed" : 300913 , 
-     "covid_deaths" : 5332 , 
-     "covid_recovered" : 169211 , 
-     "covid_active" : 126370 , 
-     "covid_fips" : 18 
-   }, 
-   "Iowa" : { 
-     "covid_incident_rate" : 6807.84 , 
-     "covid_testing_rate" : 32974.64 , 
-     "covid_cases_confirmed" : 214792 , 
-     "covid_deaths" : 2222 , 
-     "covid_recovered" : 116837 , 
-     "covid_active" : 95733 , 
-     "covid_fips" : 19 
-   }, 
-   "Kansas" : { 
-     "covid_incident_rate" : 4970.01 , 
-     "covid_testing_rate" : 26920.82 , 
-     "covid_cases_confirmed" : 144792 , 
-     "covid_deaths" : 1348 , 
-     "covid_recovered" : 3189 , 
-     "covid_active" : 140255 , 
-     "covid_fips" : 20 
-   }, 
-   "Kentucky" : { 
-     "covid_incident_rate" : 3586.48 , 
-     "covid_testing_rate" : 54651.05 , 
-     "covid_cases_confirmed" : 160232 , 
-     "covid_deaths" : 1792 , 
-     "covid_recovered" : 26611 , 
-     "covid_active" : 131829 , 
-     "covid_fips" : 21 
-   }, 
-   "Louisiana" : { 
-     "covid_incident_rate" : 4757.36 , 
-     "covid_testing_rate" : 70172.87 , 
-     "covid_cases_confirmed" : 221160 , 
-     "covid_deaths" : 6284 , 
-     "covid_recovered" : 185960 , 
-     "covid_active" : 28916 , 
-     "covid_fips" : 22 
-   }, 
-   "Maine" : { 
-     "covid_incident_rate" : 784.4 , 
-     "covid_testing_rate" : 61400.21 , 
-     "covid_cases_confirmed" : 10544 , 
-     "covid_deaths" : 177 , 
-     "covid_recovered" : 7986 , 
-     "covid_active" : 2381 , 
-     "covid_fips" : 23 
-   }, 
-   "Maryland" : { 
-     "covid_incident_rate" : 3040.14 , 
-     "covid_testing_rate" : 69002.56 , 
-     "covid_cases_confirmed" : 183797 , 
-     "covid_deaths" : 4448 , 
-     "covid_recovered" : 8511 , 
-     "covid_active" : 170838 , 
-     "covid_fips" : 24 
-   }, 
-   "Massachusetts" : { 
-     "covid_incident_rate" : 3026.81 , 
-     "covid_testing_rate" : 114908.07 , 
-     "covid_cases_confirmed" : 208623 , 
-     "covid_deaths" : 10531 , 
-     "covid_recovered" : 145682 , 
-     "covid_active" : 52410 , 
-     "covid_fips" : 25 
-   }, 
-   "Michigan" : { 
-     "covid_incident_rate" : 3414.13 , 
-     "covid_testing_rate" : 62717.79 , 
-     "covid_cases_confirmed" : 340964 , 
-     "covid_deaths" : 8940 , 
-     "covid_recovered" : 152267 , 
-     "covid_active" : 179757 , 
-     "covid_fips" : 26 
-   }, 
-   "Minnesota" : { 
-     "covid_incident_rate" : 4902.8 , 
-     "covid_testing_rate" : 66613.87 , 
-     "covid_cases_confirmed" : 276500 , 
-     "covid_deaths" : 3321 , 
-     "covid_recovered" : 227311 , 
-     "covid_active" : 45868 , 
-     "covid_fips" : 27 
-   }, 
-   "Mississippi" : { 
-     "covid_incident_rate" : 4834.4 , 
-     "covid_testing_rate" : 36663.18 , 
-     "covid_cases_confirmed" : 143879 , 
-     "covid_deaths" : 3676 , 
-     "covid_recovered" : 121637 , 
-     "covid_active" : 18566 , 
-     "covid_fips" : 28 
-   }, 
-   "Missouri" : { 
-     "covid_incident_rate" : 4572.68 , 
-     "covid_testing_rate" : 47938.66 , 
-     "covid_cases_confirmed" : 280645 , 
-     "covid_deaths" : 3580 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 277065 , 
-     "covid_fips" : 29 
-   }, 
-   "Montana" : { 
-     "covid_incident_rate" : 5275.28 , 
-     "covid_testing_rate" : 57820.61 , 
-     "covid_cases_confirmed" : 56381 , 
-     "covid_deaths" : 614 , 
-     "covid_recovered" : 39450 , 
-     "covid_active" : 16317 , 
-     "covid_fips" : 30 
-   }, 
-   "Nebraska" : { 
-     "covid_incident_rate" : 5992.58 , 
-     "covid_testing_rate" : 65268.7 , 
-     "covid_cases_confirmed" : 115921 , 
-     "covid_deaths" : 934 , 
-     "covid_recovered" : 58057 , 
-     "covid_active" : 56930 , 
-     "covid_fips" : 31 
-   }, 
-   "Nevada" : { 
-     "covid_incident_rate" : 4422.73 , 
-     "covid_testing_rate" : 49870.07 , 
-     "covid_cases_confirmed" : 136227 , 
-     "covid_deaths" : 2023 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 134204 , 
-     "covid_fips" : 32 
-   }, 
-   "New Hampshire" : { 
-     "covid_incident_rate" : 1329.84 , 
-     "covid_testing_rate" : 56687.85 , 
-     "covid_cases_confirmed" : 18082 , 
-     "covid_deaths" : 512 , 
-     "covid_recovered" : 13226 , 
-     "covid_active" : 4344 , 
-     "covid_fips" : 33 
-   }, 
-   "New Jersey" : { 
-     "covid_incident_rate" : 3485.49 , 
-     "covid_testing_rate" : 63894.9 , 
-     "covid_cases_confirmed" : 309588 , 
-     "covid_deaths" : 16772 , 
-     "covid_recovered" : 41550 , 
-     "covid_active" : 251266 , 
-     "covid_fips" : 34 
-   }, 
-   "New Mexico" : { 
-     "covid_incident_rate" : 4013.11 , 
-     "covid_testing_rate" : 69841.27 , 
-     "covid_cases_confirmed" : 84148 , 
-     "covid_deaths" : 1400 , 
-     "covid_recovered" : 29183 , 
-     "covid_active" : 53565 , 
-     "covid_fips" : 35 
-   }, 
-   "New York" : { 
-     "covid_incident_rate" : 3095.17 , 
-     "covid_testing_rate" : 93493.63 , 
-     "covid_cases_confirmed" : 602120 , 
-     "covid_deaths" : 34339 , 
-     "covid_recovered" : 83307 , 
-     "covid_active" : 484474 , 
-     "covid_fips" : 36 
-   }, 
-   "North Carolina" : { 
-     "covid_incident_rate" : 3234.09 , 
-     "covid_testing_rate" : 47518.38 , 
-     "covid_cases_confirmed" : 339194 , 
-     "covid_deaths" : 5039 , 
-     "covid_recovered" : 293555 , 
-     "covid_active" : 40600 , 
-     "covid_fips" : 37 
-   }, 
-   "North Dakota" : { 
-     "covid_incident_rate" : 9631.37 , 
-     "covid_testing_rate" : 135604.98 , 
-     "covid_cases_confirmed" : 73397 , 
-     "covid_deaths" : 852 , 
-     "covid_recovered" : 62697 , 
-     "covid_active" : 9848 , 
-     "covid_fips" : 38 
-   }, 
-   "Northern Mariana Islands" : { 
-     "covid_incident_rate" : 188.6 , 
-     "covid_testing_rate" : 30558.17 , 
-     "covid_cases_confirmed" : 104 , 
-     "covid_deaths" : 2 , 
-     "covid_recovered" : 29 , 
-     "covid_active" : 73 , 
-     "covid_fips" : 69 
-   }, 
-   "Ohio" : { 
-     "covid_incident_rate" : 3108.06 , 
-     "covid_testing_rate" : 48626.4 , 
-     "covid_cases_confirmed" : 363304 , 
-     "covid_deaths" : 6020 , 
-     "covid_recovered" : 230678 , 
-     "covid_active" : 126606 , 
-     "covid_fips" : 39 
-   }, 
-   "Oklahoma" : { 
-     "covid_incident_rate" : 4495.21 , 
-     "covid_testing_rate" : 49722.86 , 
-     "covid_cases_confirmed" : 177874 , 
-     "covid_deaths" : 1649 , 
-     "covid_recovered" : 142381 , 
-     "covid_active" : 33844 , 
-     "covid_fips" : 40 
-   }, 
-   "Oregon" : { 
-     "covid_incident_rate" : 1572.72 , 
-     "covid_testing_rate" : 24095.43 , 
-     "covid_cases_confirmed" : 66333 , 
-     "covid_deaths" : 826 , 
-     "covid_recovered" : 5870 , 
-     "covid_active" : 59637 , 
-     "covid_fips" : 41 
-   }, 
-   "Pennsylvania" : { 
-     "covid_incident_rate" : 2500.85 , 
-     "covid_testing_rate" : 23586.73 , 
-     "covid_cases_confirmed" : 320158 , 
-     "covid_deaths" : 9846 , 
-     "covid_recovered" : 198072 , 
-     "covid_active" : 112240 , 
-     "covid_fips" : 42 
-   }, 
-   "Puerto Rico" : { 
-     "covid_incident_rate" : 1509.22 , 
-     "covid_testing_rate" : 11089.73 , 
-     "covid_cases_confirmed" : 48200 , 
-     "covid_deaths" : 1032 , 
-     "covid_recovered" : 39214 , 
-     "covid_active" : 7954 , 
-     "covid_fips" : 72 
-   }, 
-   "Rhode Island" : { 
-     "covid_incident_rate" : 4773.92 , 
-     "covid_testing_rate" : 138581.84 , 
-     "covid_cases_confirmed" : 50573 , 
-     "covid_deaths" : 1309 , 
-     "covid_recovered" : 3436 , 
-     "covid_active" : 45828 , 
-     "covid_fips" : 44 
-   }, 
-   "South Carolina" : { 
-     "covid_incident_rate" : 4031.14 , 
-     "covid_testing_rate" : 44042.16 , 
-     "covid_cases_confirmed" : 207552 , 
-     "covid_deaths" : 4288 , 
-     "covid_recovered" : 108469 , 
-     "covid_active" : 94795 , 
-     "covid_fips" : 45 
-   }, 
-   "South Dakota" : { 
-     "covid_incident_rate" : 8347.62 , 
-     "covid_testing_rate" : 35414.44 , 
-     "covid_cases_confirmed" : 73848 , 
-     "covid_deaths" : 819 , 
-     "covid_recovered" : 55679 , 
-     "covid_active" : 17350 , 
-     "covid_fips" : 46 
-   }, 
-   "Tennessee" : { 
-     "covid_incident_rate" : 5045.27 , 
-     "covid_testing_rate" : 63472.45 , 
-     "covid_cases_confirmed" : 344550 , 
-     "covid_deaths" : 4301 , 
-     "covid_recovered" : 296592 , 
-     "covid_active" : 43657 , 
-     "covid_fips" : 47 
-   }, 
-   "Texas" : { 
-     "covid_incident_rate" : 4000.1 , 
-     "covid_testing_rate" : 34914.81 , 
-     "covid_cases_confirmed" : 1162135 , 
-     "covid_deaths" : 21049 , 
-     "covid_recovered" : 917739 , 
-     "covid_active" : 221075 , 
-     "covid_fips" : 48 
-   }, 
-   "Utah" : { 
-     "covid_incident_rate" : 5596.46 , 
-     "covid_testing_rate" : 54143.69 , 
-     "covid_cases_confirmed" : 179420 , 
-     "covid_deaths" : 797 , 
-     "covid_recovered" : 117104 , 
-     "covid_active" : 61519 , 
-     "covid_fips" : 49 
-   }, 
-   "Vermont" : { 
-     "covid_incident_rate" : 595.2 , 
-     "covid_testing_rate" : 83851.96 , 
-     "covid_cases_confirmed" : 3714 , 
-     "covid_deaths" : 63 , 
-     "covid_recovered" : 2300 , 
-     "covid_active" : 1351 , 
-     "covid_fips" : 50 
-   }, 
-   "Virgin Islands" : { 
-     "covid_incident_rate" : 1404.89 , 
-     "covid_testing_rate" : 25617.15 , 
-     "covid_cases_confirmed" : 1507 , 
-     "covid_deaths" : 23 , 
-     "covid_recovered" : 1407 , 
-     "covid_active" : 77 , 
-     "covid_fips" : 78 
-   }, 
-   "Virginia" : { 
-     "covid_incident_rate" : 2589.63 , 
-     "covid_testing_rate" : 37034.17 , 
-     "covid_cases_confirmed" : 221038 , 
-     "covid_deaths" : 3942 , 
-     "covid_recovered" : 23253 , 
-     "covid_active" : 193843 , 
-     "covid_fips" : 51 
-   }, 
-   "Washington" : { 
-     "covid_incident_rate" : 1937.48 , 
-     "covid_testing_rate" : 38009.29 , 
-     "covid_cases_confirmed" : 147537 , 
-     "covid_deaths" : 2655 , 
-     "covid_recovered" : 0 , 
-     "covid_active" : 144882 , 
-     "covid_fips" : 53 
-   }, 
-   "West Virginia" : { 
-     "covid_incident_rate" : 2294.12 , 
-     "covid_testing_rate" : 57966.56 , 
-     "covid_cases_confirmed" : 41114 , 
-     "covid_deaths" : 667 , 
-     "covid_recovered" : 26769 , 
-     "covid_active" : 13678 , 
-     "covid_fips" : 54 
-   }, 
-   "Wisconsin" : { 
-     "covid_incident_rate" : 6521.21 , 
-     "covid_testing_rate" : 72067.28 , 
-     "covid_cases_confirmed" : 379693 , 
-     "covid_deaths" : 3158 , 
-     "covid_recovered" : 280358 , 
-     "covid_active" : 96177 , 
-     "covid_fips" : 55 
-   }, 
-   "Wyoming" : { 
-     "covid_incident_rate" : 5085.19 , 
-     "covid_testing_rate" : 27855.98 , 
-     "covid_cases_confirmed" : 29431 , 
-     "covid_deaths" : 202 , 
-     "covid_recovered" : 17452 , 
-     "covid_active" : 11777 , 
-     "covid_fips" : 56 
-   } 
- }
+{
+  "Alabama": {
+    "covid_incident_rate": 4774.04,
+    "covid_testing_rate": 31278.2,
+    "covid_cases_confirmed": 234080,
+    "covid_deaths": 3459,
+    "covid_recovered": 90702,
+    "covid_active": 139919,
+    "covid_fips": 1
+  },
+  "Alaska": {
+    "covid_incident_rate": 3864.83,
+    "covid_testing_rate": 127540.48,
+    "covid_cases_confirmed": 28273,
+    "covid_deaths": 103,
+    "covid_recovered": 7165,
+    "covid_active": 21005,
+    "covid_fips": 2
+  },
+  "American Samoa": {
+    "covid_incident_rate": 0,
+    "covid_testing_rate": 3572.9,
+    "covid_cases_confirmed": 0,
+    "covid_deaths": 0,
+    "covid_recovered": 0,
+    "covid_active": 0,
+    "covid_fips": 60
+  },
+  "Arizona": {
+    "covid_incident_rate": 4153.53,
+    "covid_testing_rate": 29192.96,
+    "covid_cases_confirmed": 302324,
+    "covid_deaths": 6464,
+    "covid_recovered": 48807,
+    "covid_active": 247053,
+    "covid_fips": 4
+  },
+  "Arkansas": {
+    "covid_incident_rate": 4844.25,
+    "covid_testing_rate": 53190.1,
+    "covid_cases_confirmed": 146190,
+    "covid_deaths": 2387,
+    "covid_recovered": 127059,
+    "covid_active": 16744,
+    "covid_fips": 5
+  },
+  "California": {
+    "covid_incident_rate": 2855.37,
+    "covid_testing_rate": 56836.95,
+    "covid_cases_confirmed": 1128219,
+    "covid_deaths": 18753,
+    "covid_recovered": 0,
+    "covid_active": 1109466,
+    "covid_fips": 6
+  },
+  "Colorado": {
+    "covid_incident_rate": 3512.73,
+    "covid_testing_rate": 50388.49,
+    "covid_cases_confirmed": 202289,
+    "covid_deaths": 2810,
+    "covid_recovered": 11201,
+    "covid_active": 188278,
+    "covid_fips": 8
+  },
+  "Connecticut": {
+    "covid_incident_rate": 2993.87,
+    "covid_testing_rate": 85224.25,
+    "covid_cases_confirmed": 106740,
+    "covid_deaths": 4871,
+    "covid_recovered": 9800,
+    "covid_active": 92069,
+    "covid_fips": 9
+  },
+  "Delaware": {
+    "covid_incident_rate": 3307.89,
+    "covid_testing_rate": 70600.47,
+    "covid_cases_confirmed": 32211,
+    "covid_deaths": 752,
+    "covid_recovered": 16073,
+    "covid_active": 15386,
+    "covid_fips": 10
+  },
+  "Diamond Princess": {
+    "covid_incident_rate": 0,
+    "covid_testing_rate": 0,
+    "covid_cases_confirmed": 49,
+    "covid_deaths": 0,
+    "covid_recovered": 0,
+    "covid_active": 49,
+    "covid_fips": 88888
+  },
+  "District of Columbia": {
+    "covid_incident_rate": 2874.96,
+    "covid_testing_rate": 90607.43,
+    "covid_cases_confirmed": 20290,
+    "covid_deaths": 672,
+    "covid_recovered": 14935,
+    "covid_active": 4683,
+    "covid_fips": 11
+  },
+  "Florida": {
+    "covid_incident_rate": 4398.72,
+    "covid_testing_rate": 54664.6,
+    "covid_cases_confirmed": 944745,
+    "covid_deaths": 18085,
+    "covid_recovered": 0,
+    "covid_active": 926660,
+    "covid_fips": 12
+  },
+  "Georgia": {
+    "covid_incident_rate": 4248.26,
+    "covid_testing_rate": 38987.89,
+    "covid_cases_confirmed": 451056,
+    "covid_deaths": 9215,
+    "covid_recovered": 0,
+    "covid_active": 441841,
+    "covid_fips": 13
+  },
+  "Grand Princess": {
+    "covid_incident_rate": 0,
+    "covid_testing_rate": 0,
+    "covid_cases_confirmed": 103,
+    "covid_deaths": 3,
+    "covid_recovered": 0,
+    "covid_active": 100,
+    "covid_fips": 99999
+  },
+  "Guam": {
+    "covid_incident_rate": 3928.66,
+    "covid_testing_rate": 49320.77,
+    "covid_cases_confirmed": 6452,
+    "covid_deaths": 103,
+    "covid_recovered": 4846,
+    "covid_active": 1503,
+    "covid_fips": 66
+  },
+  "Hawaii": {
+    "covid_incident_rate": 1242.77,
+    "covid_testing_rate": 44927.3,
+    "covid_cases_confirmed": 17596,
+    "covid_deaths": 233,
+    "covid_recovered": 11958,
+    "covid_active": 5405,
+    "covid_fips": 15
+  },
+  "Idaho": {
+    "covid_incident_rate": 5209.1,
+    "covid_testing_rate": 25397.62,
+    "covid_cases_confirmed": 93090,
+    "covid_deaths": 866,
+    "covid_recovered": 38025,
+    "covid_active": 54199,
+    "covid_fips": 16
+  },
+  "Illinois": {
+    "covid_incident_rate": 5244.87,
+    "covid_testing_rate": 78070.71,
+    "covid_cases_confirmed": 664620,
+    "covid_deaths": 12111,
+    "covid_recovered": 0,
+    "covid_active": 652509,
+    "covid_fips": 17
+  },
+  "Indiana": {
+    "covid_incident_rate": 4469.74,
+    "covid_testing_rate": 58519.26,
+    "covid_cases_confirmed": 300913,
+    "covid_deaths": 5332,
+    "covid_recovered": 169211,
+    "covid_active": 126370,
+    "covid_fips": 18
+  },
+  "Iowa": {
+    "covid_incident_rate": 6807.84,
+    "covid_testing_rate": 32974.64,
+    "covid_cases_confirmed": 214792,
+    "covid_deaths": 2222,
+    "covid_recovered": 116837,
+    "covid_active": 95733,
+    "covid_fips": 19
+  },
+  "Kansas": {
+    "covid_incident_rate": 4970.01,
+    "covid_testing_rate": 26920.82,
+    "covid_cases_confirmed": 144792,
+    "covid_deaths": 1348,
+    "covid_recovered": 3189,
+    "covid_active": 140255,
+    "covid_fips": 20
+  },
+  "Kentucky": {
+    "covid_incident_rate": 3586.48,
+    "covid_testing_rate": 54651.05,
+    "covid_cases_confirmed": 160232,
+    "covid_deaths": 1792,
+    "covid_recovered": 26611,
+    "covid_active": 131829,
+    "covid_fips": 21
+  },
+  "Louisiana": {
+    "covid_incident_rate": 4757.36,
+    "covid_testing_rate": 70172.87,
+    "covid_cases_confirmed": 221160,
+    "covid_deaths": 6284,
+    "covid_recovered": 185960,
+    "covid_active": 28916,
+    "covid_fips": 22
+  },
+  "Maine": {
+    "covid_incident_rate": 784.4,
+    "covid_testing_rate": 61400.21,
+    "covid_cases_confirmed": 10544,
+    "covid_deaths": 177,
+    "covid_recovered": 7986,
+    "covid_active": 2381,
+    "covid_fips": 23
+  },
+  "Maryland": {
+    "covid_incident_rate": 3040.14,
+    "covid_testing_rate": 69002.56,
+    "covid_cases_confirmed": 183797,
+    "covid_deaths": 4448,
+    "covid_recovered": 8511,
+    "covid_active": 170838,
+    "covid_fips": 24
+  },
+  "Massachusetts": {
+    "covid_incident_rate": 3026.81,
+    "covid_testing_rate": 114908.07,
+    "covid_cases_confirmed": 208623,
+    "covid_deaths": 10531,
+    "covid_recovered": 145682,
+    "covid_active": 52410,
+    "covid_fips": 25
+  },
+  "Michigan": {
+    "covid_incident_rate": 3414.13,
+    "covid_testing_rate": 62717.79,
+    "covid_cases_confirmed": 340964,
+    "covid_deaths": 8940,
+    "covid_recovered": 152267,
+    "covid_active": 179757,
+    "covid_fips": 26
+  },
+  "Minnesota": {
+    "covid_incident_rate": 4902.8,
+    "covid_testing_rate": 66613.87,
+    "covid_cases_confirmed": 276500,
+    "covid_deaths": 3321,
+    "covid_recovered": 227311,
+    "covid_active": 45868,
+    "covid_fips": 27
+  },
+  "Mississippi": {
+    "covid_incident_rate": 4834.4,
+    "covid_testing_rate": 36663.18,
+    "covid_cases_confirmed": 143879,
+    "covid_deaths": 3676,
+    "covid_recovered": 121637,
+    "covid_active": 18566,
+    "covid_fips": 28
+  },
+  "Missouri": {
+    "covid_incident_rate": 4572.68,
+    "covid_testing_rate": 47938.66,
+    "covid_cases_confirmed": 280645,
+    "covid_deaths": 3580,
+    "covid_recovered": 0,
+    "covid_active": 277065,
+    "covid_fips": 29
+  },
+  "Montana": {
+    "covid_incident_rate": 5275.28,
+    "covid_testing_rate": 57820.61,
+    "covid_cases_confirmed": 56381,
+    "covid_deaths": 614,
+    "covid_recovered": 39450,
+    "covid_active": 16317,
+    "covid_fips": 30
+  },
+  "Nebraska": {
+    "covid_incident_rate": 5992.58,
+    "covid_testing_rate": 65268.7,
+    "covid_cases_confirmed": 115921,
+    "covid_deaths": 934,
+    "covid_recovered": 58057,
+    "covid_active": 56930,
+    "covid_fips": 31
+  },
+  "Nevada": {
+    "covid_incident_rate": 4422.73,
+    "covid_testing_rate": 49870.07,
+    "covid_cases_confirmed": 136227,
+    "covid_deaths": 2023,
+    "covid_recovered": 0,
+    "covid_active": 134204,
+    "covid_fips": 32
+  },
+  "New Hampshire": {
+    "covid_incident_rate": 1329.84,
+    "covid_testing_rate": 56687.85,
+    "covid_cases_confirmed": 18082,
+    "covid_deaths": 512,
+    "covid_recovered": 13226,
+    "covid_active": 4344,
+    "covid_fips": 33
+  },
+  "New Jersey": {
+    "covid_incident_rate": 3485.49,
+    "covid_testing_rate": 63894.9,
+    "covid_cases_confirmed": 309588,
+    "covid_deaths": 16772,
+    "covid_recovered": 41550,
+    "covid_active": 251266,
+    "covid_fips": 34
+  },
+  "New Mexico": {
+    "covid_incident_rate": 4013.11,
+    "covid_testing_rate": 69841.27,
+    "covid_cases_confirmed": 84148,
+    "covid_deaths": 1400,
+    "covid_recovered": 29183,
+    "covid_active": 53565,
+    "covid_fips": 35
+  },
+  "New York": {
+    "covid_incident_rate": 3095.17,
+    "covid_testing_rate": 93493.63,
+    "covid_cases_confirmed": 602120,
+    "covid_deaths": 34339,
+    "covid_recovered": 83307,
+    "covid_active": 484474,
+    "covid_fips": 36
+  },
+  "North Carolina": {
+    "covid_incident_rate": 3234.09,
+    "covid_testing_rate": 47518.38,
+    "covid_cases_confirmed": 339194,
+    "covid_deaths": 5039,
+    "covid_recovered": 293555,
+    "covid_active": 40600,
+    "covid_fips": 37
+  },
+  "North Dakota": {
+    "covid_incident_rate": 9631.37,
+    "covid_testing_rate": 135604.98,
+    "covid_cases_confirmed": 73397,
+    "covid_deaths": 852,
+    "covid_recovered": 62697,
+    "covid_active": 9848,
+    "covid_fips": 38
+  },
+  "Northern Mariana Islands": {
+    "covid_incident_rate": 188.6,
+    "covid_testing_rate": 30558.17,
+    "covid_cases_confirmed": 104,
+    "covid_deaths": 2,
+    "covid_recovered": 29,
+    "covid_active": 73,
+    "covid_fips": 69
+  },
+  "Ohio": {
+    "covid_incident_rate": 3108.06,
+    "covid_testing_rate": 48626.4,
+    "covid_cases_confirmed": 363304,
+    "covid_deaths": 6020,
+    "covid_recovered": 230678,
+    "covid_active": 126606,
+    "covid_fips": 39
+  },
+  "Oklahoma": {
+    "covid_incident_rate": 4495.21,
+    "covid_testing_rate": 49722.86,
+    "covid_cases_confirmed": 177874,
+    "covid_deaths": 1649,
+    "covid_recovered": 142381,
+    "covid_active": 33844,
+    "covid_fips": 40
+  },
+  "Oregon": {
+    "covid_incident_rate": 1572.72,
+    "covid_testing_rate": 24095.43,
+    "covid_cases_confirmed": 66333,
+    "covid_deaths": 826,
+    "covid_recovered": 5870,
+    "covid_active": 59637,
+    "covid_fips": 41
+  },
+  "Pennsylvania": {
+    "covid_incident_rate": 2500.85,
+    "covid_testing_rate": 23586.73,
+    "covid_cases_confirmed": 320158,
+    "covid_deaths": 9846,
+    "covid_recovered": 198072,
+    "covid_active": 112240,
+    "covid_fips": 42
+  },
+  "Puerto Rico": {
+    "covid_incident_rate": 1509.22,
+    "covid_testing_rate": 11089.73,
+    "covid_cases_confirmed": 48200,
+    "covid_deaths": 1032,
+    "covid_recovered": 39214,
+    "covid_active": 7954,
+    "covid_fips": 72
+  },
+  "Rhode Island": {
+    "covid_incident_rate": 4773.92,
+    "covid_testing_rate": 138581.84,
+    "covid_cases_confirmed": 50573,
+    "covid_deaths": 1309,
+    "covid_recovered": 3436,
+    "covid_active": 45828,
+    "covid_fips": 44
+  },
+  "South Carolina": {
+    "covid_incident_rate": 4031.14,
+    "covid_testing_rate": 44042.16,
+    "covid_cases_confirmed": 207552,
+    "covid_deaths": 4288,
+    "covid_recovered": 108469,
+    "covid_active": 94795,
+    "covid_fips": 45
+  },
+  "South Dakota": {
+    "covid_incident_rate": 8347.62,
+    "covid_testing_rate": 35414.44,
+    "covid_cases_confirmed": 73848,
+    "covid_deaths": 819,
+    "covid_recovered": 55679,
+    "covid_active": 17350,
+    "covid_fips": 46
+  },
+  "Tennessee": {
+    "covid_incident_rate": 5045.27,
+    "covid_testing_rate": 63472.45,
+    "covid_cases_confirmed": 344550,
+    "covid_deaths": 4301,
+    "covid_recovered": 296592,
+    "covid_active": 43657,
+    "covid_fips": 47
+  },
+  "Texas": {
+    "covid_incident_rate": 4000.1,
+    "covid_testing_rate": 34914.81,
+    "covid_cases_confirmed": 1162135,
+    "covid_deaths": 21049,
+    "covid_recovered": 917739,
+    "covid_active": 221075,
+    "covid_fips": 48
+  },
+  "Utah": {
+    "covid_incident_rate": 5596.46,
+    "covid_testing_rate": 54143.69,
+    "covid_cases_confirmed": 179420,
+    "covid_deaths": 797,
+    "covid_recovered": 117104,
+    "covid_active": 61519,
+    "covid_fips": 49
+  },
+  "Vermont": {
+    "covid_incident_rate": 595.2,
+    "covid_testing_rate": 83851.96,
+    "covid_cases_confirmed": 3714,
+    "covid_deaths": 63,
+    "covid_recovered": 2300,
+    "covid_active": 1351,
+    "covid_fips": 50
+  },
+  "Virgin Islands": {
+    "covid_incident_rate": 1404.89,
+    "covid_testing_rate": 25617.15,
+    "covid_cases_confirmed": 1507,
+    "covid_deaths": 23,
+    "covid_recovered": 1407,
+    "covid_active": 77,
+    "covid_fips": 78
+  },
+  "Virginia": {
+    "covid_incident_rate": 2589.63,
+    "covid_testing_rate": 37034.17,
+    "covid_cases_confirmed": 221038,
+    "covid_deaths": 3942,
+    "covid_recovered": 23253,
+    "covid_active": 193843,
+    "covid_fips": 51
+  },
+  "Washington": {
+    "covid_incident_rate": 1937.48,
+    "covid_testing_rate": 38009.29,
+    "covid_cases_confirmed": 147537,
+    "covid_deaths": 2655,
+    "covid_recovered": 0,
+    "covid_active": 144882,
+    "covid_fips": 53
+  },
+  "West Virginia": {
+    "covid_incident_rate": 2294.12,
+    "covid_testing_rate": 57966.56,
+    "covid_cases_confirmed": 41114,
+    "covid_deaths": 667,
+    "covid_recovered": 26769,
+    "covid_active": 13678,
+    "covid_fips": 54
+  },
+  "Wisconsin": {
+    "covid_incident_rate": 6521.21,
+    "covid_testing_rate": 72067.28,
+    "covid_cases_confirmed": 379693,
+    "covid_deaths": 3158,
+    "covid_recovered": 280358,
+    "covid_active": 96177,
+    "covid_fips": 55
+  },
+  "Wyoming": {
+    "covid_incident_rate": 5085.19,
+    "covid_testing_rate": 27855.98,
+    "covid_cases_confirmed": 29431,
+    "covid_deaths": 202,
+    "covid_recovered": 17452,
+    "covid_active": 11777,
+    "covid_fips": 56
+  }
+}
 ```
 
 We can copy the output above and save it to a file with a name like `usa-covid-2020-11-23.json.txt`.
@@ -1125,7 +1394,18 @@ Now we can create a new resource in Cerb from **Search&nbsp;» Resources** by cl
 After saving the file, we can refer to it by name in our map KATA.
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650 regions: properties: join: property: name resource: uri: cerb:resource:mapProperties.usaCovidByState
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
+  projection:
+    type: albersUsa
+    scale: 650
+  regions:
+    properties:
+      join:
+        property: name
+      resource:
+        uri: cerb:resource:mapProperties.usaCovidByState
 ```
 
 The map doesn't look any different yet, but if you click on any state then you'll see that the new `covid_` properties have been merged into the bottom of the list:
@@ -1135,7 +1415,22 @@ The map doesn't look any different yet, but if you click on any state then you'l
 We can use the `map:regions:fill:choropleth` feature and the `covid_incident_rate` property to colorize the map.
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650 regions: properties: join: property: name resource: uri: cerb:resource:mapProperties.usaCovidByState fill: choropleth: property: covid_incident_rate classes: 8
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
+  projection:
+    type: albersUsa
+    scale: 650
+  regions:
+    properties:
+      join:
+        property: name
+      resource:
+        uri: cerb:resource:mapProperties.usaCovidByState
+    fill:
+      choropleth:
+        property: covid_incident_rate
+        classes: 8
 ```
 
 We can now easily see that the darker states have a higher incidence rate of the virus:
@@ -1147,7 +1442,43 @@ We can now easily see that the darker states have a higher incidence rate of the
 Now we can configure the labels to only show the virus-related properties:
 
 ```
-map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650 regions: properties: join: property: name resource: uri: cerb:resource:mapProperties.usaCovidByState fill: choropleth: property: covid_incident_rate classes: 8 label: title: name_en properties: covid_incident_rate: label: Cases/100K format: number covid_testing_rate: label: Tests/100K format: number covid_cases_confirmed: label: Cases Confirmed format: number covid_deaths: label: Deaths format: number covid_recovered: label: Recovered format: number covid_active: label: Active format: number
+map:
+  resource:
+    uri: cerb:resource:map.country.usa.states
+  projection:
+    type: albersUsa
+    scale: 650
+  regions:
+    properties:
+      join:
+        property: name
+      resource:
+        uri: cerb:resource:mapProperties.usaCovidByState
+    fill:
+      choropleth:
+        property: covid_incident_rate
+        classes: 8
+    label:
+      title: name_en
+      properties:
+        covid_incident_rate:
+          label: Cases/100K
+          format: number
+        covid_testing_rate:
+          label: Tests/100K
+          format: number
+        covid_cases_confirmed:
+          label: Cases Confirmed
+          format: number
+        covid_deaths:
+          label: Deaths
+          format: number
+        covid_recovered:
+          label: Recovered
+          format: number
+        covid_active:
+          label: Active
+          format: number
 ```
 
 And we see a much more readable label:

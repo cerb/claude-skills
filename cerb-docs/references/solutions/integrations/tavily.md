@@ -43,7 +43,22 @@ Your API key should be available on your Tavily home page. Click the copy button
 https://docs.tavily.com/api-reference/endpoint/search
 
 ```
-start: http.request/search: output: http_response inputs: method: POST url: https://api.tavily.com/search authentication: cerb:connected_account:tavily headers: Content-Type: application/json body: query: What is KATA? include_domains@csv: cerb.ai on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/search:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.tavily.com/search
+      authentication: cerb:connected_account:tavily
+      headers:
+        Content-Type: application/json
+      body:
+        query: What is KATA?
+        include_domains@csv: cerb.ai
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Extract
@@ -51,5 +66,22 @@ start: http.request/search: output: http_response inputs: method: POST url: http
 https://docs.tavily.com/api-reference/endpoint/extract
 
 ```
-start: http.request/extract: output: http_response inputs: method: POST url: https://api.tavily.com/extract authentication: cerb:connected_account:tavily headers: Content-Type: application/json body: urls@list: https://cerb.ai/docs/automations/ include_images@bool: no extract_depth: basic on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/extract:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.tavily.com/extract
+      authentication: cerb:connected_account:tavily
+      headers:
+        Content-Type: application/json
+      body:
+        urls@list:
+          https://cerb.ai/docs/automations/
+        include_images@bool: no
+        extract_depth: basic
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

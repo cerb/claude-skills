@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Remove HTML tags from a string.
 
 ```
-{% set html = "This <b>string</b> has <b>HTML</b> tags!" %} {{ html | striptags }}
+{% set html = "This <b>string</b> has <b>HTML</b> tags!" %}
+{{html|striptags}}
 ```
 
 ```

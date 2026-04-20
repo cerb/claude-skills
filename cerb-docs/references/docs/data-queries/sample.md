@@ -28,8 +28,15 @@ Each `series.*` should provide:
 ### Examples
 
 ```
-type: sample.geo.points series.cities: ( lihue: (name:"Lihue" coordinates:"POINT(-159.342222 21.978611)") new_york: (name:"New York" coordinates:"POINT(-73.935242 40.73061)") seattle: (name:"Seattle" coordinates:"POINT(-122.350876 47.620499)") berlin: (name:"Berlin" coordinates:"POINT(13.393236 52.504043)") sydney: (name: "Sydney" coordinates:"POINT(151.21 -33.868)") ) 
- format: geojson
+type:sample.geo.points
+series.cities:(
+  lihue:(name:"Lihue" coordinates:"POINT(-159.342222 21.978611)")
+  new_york:(name:"New York" coordinates:"POINT(-73.935242 40.73061)")
+  seattle:(name:"Seattle" coordinates:"POINT(-122.350876 47.620499)")
+  berlin:(name:"Berlin" coordinates:"POINT(13.393236 52.504043)")
+  sydney:(name: "Sydney" coordinates:"POINT(151.21 -33.868)")
+)
+format:geojson
 ```
 
  
@@ -53,47 +60,53 @@ The `records:()` key is a collection of arbitrary key/value dictionaries.
 
 - 
 ```
-type: sample.records records: ( new_york: (name:"New York" coordinates:[-73.935242, 40.73061]) toronto: (name:"Toronto" coordinates:[-79.3839347, 43.6534817]) vancouver: (name:"Vancouver" coordinates:[-123.116226, 49.246292]) los_angeles: (name:"Los Angeles" coordinates:[-118.243683, 34.052235]) ) 
- format: dictionaries
+type:sample.records
+records:(
+  new_york:(name:"New York" coordinates:[-73.935242, 40.73061])
+  toronto:(name:"Toronto" coordinates:[-79.3839347, 43.6534817])
+  vancouver:(name:"Vancouver" coordinates:[-123.116226, 49.246292])
+  los_angeles:(name:"Los Angeles" coordinates:[-118.243683, 34.052235])
+)
+format:dictionaries
 ```
 - 
 ```
-{ 
-   "data" : { 
-     "new_york" : { 
-       "name" : "New York" , 
-       "coordinates" : [ 
-         "-73.935242" , 
-         "40.73061" 
-       ] 
-     }, 
-     "toronto" : { 
-       "name" : "Toronto" , 
-       "coordinates" : [ 
-         "-79.3839347" , 
-         "43.6534817" 
-       ] 
-     }, 
-     "vancouver" : { 
-       "name" : "Vancouver" , 
-       "coordinates" : [ 
-         "-123.116226" , 
-         "49.246292" 
-       ] 
-     }, 
-     "los_angeles" : { 
-       "name" : "Los Angeles" , 
-       "coordinates" : [ 
-         "-118.243683" , 
-         "34.052235" 
-       ] 
-     } 
-   }, 
-   "_" : { 
-     "type" : "sample.records" , 
-     "format" : "dictionaries" 
-   } 
- }
+{
+  "data": {
+    "new_york": {
+      "name": "New York",
+      "coordinates": [
+        "-73.935242",
+        "40.73061"
+      ]
+    },
+    "toronto": {
+      "name": "Toronto",
+      "coordinates": [
+        "-79.3839347",
+        "43.6534817"
+      ]
+    },
+    "vancouver": {
+      "name": "Vancouver",
+      "coordinates": [
+        "-123.116226",
+        "49.246292"
+      ]
+    },
+    "los_angeles": {
+      "name": "Los Angeles",
+      "coordinates": [
+        "-118.243683",
+        "34.052235"
+      ]
+    }
+  },
+  "_": {
+    "type": "sample.records",
+    "format": "dictionaries"
+  }
+}
 ```
 
  
@@ -118,10 +131,28 @@ Each `series.*` should provide:
 ### Examples
 
 ```
-type: sample.timeseries x.count: 10 x.unit: months series.created_tickets: ( label: "# Tickets" y.min: 1000 y.max: 100000 trend: down ) 
- series.created_tasks: ( label: "# Tasks" y.min: 200 y.max: 30000 trend: up ) 
- series.created_calls: ( label: "# Calls" y.min: 100 y.max: 10000 trend: random ) 
- format: timeseries
+type:sample.timeseries
+x.count:10
+x.unit:months
+series.created_tickets:(
+	label:"# Tickets"
+	y.min:1000
+	y.max:100000
+	trend:down
+)
+series.created_tasks:(
+	label:"# Tasks"
+	y.min:200
+	y.max:30000
+	trend:up
+)
+series.created_calls:(
+	label:"# Calls"
+	y.min:100
+	y.max:10000
+	trend:random
+)
+format:timeseries
 ```
 
  
@@ -149,9 +180,26 @@ Each `series.*` should provide:
 ### Examples
 
 ```
-type: sample.xy series.standard: ( label: "Standard" samples: 100 trend: down x.min: 120 x.max: 172800 y.min: 0 y.max: 100 ) 
- series.enterprise: ( label: "Enterprise" samples: 25 trend: down x.min: 120 x.max: 86400 y.min: 0 y.max: 100 ) 
- format: scatterplot
+type:sample.xy
+series.standard:(
+	label:"Standard"
+	samples:100
+	trend:down
+	x.min:120
+	x.max:172800
+	y.min:0
+	y.max:100
+)
+series.enterprise:(
+	label:"Enterprise"
+	samples:25
+	trend:down
+	x.min:120
+	x.max:86400
+	y.min:0
+	y.max:100
+)
+format:scatterplot
 ```
 
  

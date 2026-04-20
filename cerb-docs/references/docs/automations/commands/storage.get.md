@@ -8,7 +8,19 @@ tags: ["docs", "docs-automations"]
 The **storage.get:** command retrieves a previously saved value from long-term storage. This key/value can be shared between automations and invocations.
 
 ```
-start: storage.set: inputs: key: some.arbitrary.identifier value: This is the saved value. expires: +15 mins storage.get: output: result inputs: key: some.arbitrary.identifier default: This is a default value. return: output@key: result
+start:
+  storage.set:
+    inputs:
+      key: some.arbitrary.identifier
+      value: This is the saved value.
+      expires: +15 mins
+  storage.get:
+    output: result
+    inputs:
+      key: some.arbitrary.identifier
+      default: This is a default value.
+  return:
+    output@key: result
 ```
 
 Result:

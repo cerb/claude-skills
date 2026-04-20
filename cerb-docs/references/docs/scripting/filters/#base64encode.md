@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Encode a string in base64:
 
 ```
-{{ "This was base64-encoded" | base64_encode }}
+{{"This was base64-encoded"|base64_encode}}
 ```
 
 ```

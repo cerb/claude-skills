@@ -18,7 +18,10 @@ Edit the record for `comment.editor`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/snippets: uri: cerb:automation:wgm.example.snippet icon: paste tooltip: Paste snippets
+interaction/snippets:
+  uri: cerb:automation:wgm.example.snippet
+  icon: paste
+  tooltip: Paste snippets
 ```
 
 The following **placeholders** are available in KATA:

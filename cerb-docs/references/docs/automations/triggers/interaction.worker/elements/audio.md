@@ -10,7 +10,18 @@ tags: ["docs", "docs-automations"]
 In [interaction](/docs/automations/triggers/interaction.worker/) web forms, an **audio** element plays a sound file.
 
 ```
-start: await: form: title: Audio Example elements: audio/prompt_audio: label: Play audio: autoplay@bool: yes controls@bool: yes source: blob: data:audio/mpeg;base64,... # uri: cerb:resource:...
+start:
+  await:
+    form:
+      title: Audio Example
+      elements:
+        audio/prompt_audio:
+          label: Play audio:
+          autoplay@bool: yes
+          controls@bool: yes
+          source:
+            blob: data:audio/mpeg;base64,...
+            #uri: cerb:resource:...
 ```
 
  
@@ -34,7 +45,7 @@ If `no`, the player controls are hidden. The default is `yes`.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### loop:

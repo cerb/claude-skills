@@ -12,7 +12,11 @@ tags: ["docs", "docs-scripting"]
 Extract a key from each item in an array as a new array. This has the same effect as the [array\_column()](/docs/scripting/functions/#array_column) function.
 
 ```
-{% set people = [{ 'name' : 'Kina Halpue' , 'email' : 'kina@cerb.example' } , { 'name' : 'Milo Dade' , 'email' : 'milo@cerb.example' }] %} {{ people | column ( 'email' ) | join ( ', ' ) }}
+{% set people = [
+  {'name':'Kina Halpue', 'email':'kina@cerb.example'},
+  {'name':'Milo Dade', 'email': 'milo@cerb.example'}
+] %}
+{{people|column('email')|join(', ')}}
 ```
 
 ```

@@ -16,25 +16,25 @@ As JSON from [packages](/docs/packages/):
 #### Relative dates
 
 ```
-{ 
-	 "created" : "-1 week 8am" 
- }
+{
+	"created": "-1 week 8am"
+}
 ```
 
 #### Absolute dates
 
 ```
-{ 
-	 "updated" : "Jan 1 2019 13:00:00 +0000" 
- }
+{
+	"updated": "Jan 1 2019 13:00:00 +0000"
+}
 ```
 
 #### Unix timestamps (as seconds)
 
 ```
-{ 
-	 "created" : 1550080259 
- }
+{
+	"created": 1550080259
+}
 ```
 
 ### Records API

@@ -23,7 +23,9 @@ Have a great day! =F0=9F=8C=88
 
 Best regards,
 The Team =F0=9F=91=8B
-{% endset %} {{ message | qp_decode }}
+{% endset %}
+
+{{message|qp_decode}}
 ```
 
 ```

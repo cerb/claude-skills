@@ -12,7 +12,7 @@ tags: ["docs", "docs-scripting"]
 Converts string IDs (like `status.open`) into text in the current worker's language.
 
 ```
-The ticket is {{ 'status.open' | cerb_translate }}
+The ticket is {{'status.open'|cerb_translate}}
 ```
 
 ```

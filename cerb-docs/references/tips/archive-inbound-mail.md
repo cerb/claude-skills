@@ -8,7 +8,7 @@ tags: ["tips"]
 If you need to archive a copy of all inbound messages before Cerb processes them, you can add this line to the top of your `framework.config.php` file:
 
 ```
-define ( 'DEVELOPMENT_ARCHIVE_PARSER_MSGSOURCE' , true );
+define('DEVELOPMENT_ARCHIVE_PARSER_MSGSOURCE', true);
 ```
 
 Messages are archived in the filesystem under `storage/mail/archive/<year>/<month>/<day>`.

@@ -8,7 +8,16 @@ tags: ["docs", "docs-automations"]
 In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **query** element displays a search query prompt with filter autocompletion.
 
 ```
-start: await: form: title: Search Tickets elements: query/prompt_query: label: Query: record_type: ticket default@text: status:o
+start:
+  await:
+    form:
+      title: Search Tickets
+      elements:
+        query/prompt_query:
+          label: Query:
+          record_type: ticket
+          default@text:
+            status:o
 ```
 
  
@@ -28,7 +37,7 @@ The [record type](/docs/records/types/) to use for query autocompletion. For ins
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### required@bool:

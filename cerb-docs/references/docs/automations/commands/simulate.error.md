@@ -8,7 +8,21 @@ tags: ["docs", "docs-automations"]
 The **simulate.error:** command is used inside an [on\_simulate:](/docs/automations/#simulation) event handler to provide mock error output and trigger the enclosing command's `on_error:` event during [simulation](/docs/automations/#simulation).
 
 ```
-start: http.request: output: http_response inputs: method: GET url: https://api.example/ on_simulate: simulate.error: error: Connection timed out on_success: return: body@key: http_response:body on_error: return: error@key: http_response:error
+start:
+  http.request:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.example/
+    on_simulate:
+      simulate.error:
+        error: Connection timed out
+    on_success:
+      return:
+        body@key: http_response:body
+    on_error:
+      return:
+        error@key: http_response:error
 ```
 
 - [Syntax](#syntax)

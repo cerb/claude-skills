@@ -14,10 +14,30 @@ A `mail.transactional` [draft](/docs/records/types/draft/) is sent by the system
 
 - 
 ```
-start: record.create: output: draft_record inputs: record_type: draft fields: type: mail.transactional name: Welcome to the product! is_queued@int: 1 queue_delivery_date@date: 5 mins params: to: customer@cerb.example subject: Welcome to the product! content@text: Welcome to the product! Have you seen these time-saving tips? https://product.example/link/
+start:
+  record.create:
+    output: draft_record
+    inputs:
+      record_type: draft
+      fields:
+        type: mail.transactional
+        name: Welcome to the product!
+        is_queued@int: 1
+        queue_delivery_date@date: 5 mins
+        params:
+          to: customer@cerb.example
+          subject: Welcome to the product!
+          content@text:
+            Welcome to the product!
+
+            Have you seen these time-saving tips?
+            https://product.example/link/
 ```
 - 
 ```
-commands: record.create: deny/type@bool: {{ inputs.record_type is not record type ('draft') }} allow@bool: yes
+commands:
+  record.create:
+    deny/type@bool: {{inputs.record_type is not record type ('draft')}}
+    allow@bool: yes
 ```
 

@@ -8,7 +8,12 @@ tags: ["docs", "docs-automations"]
 The **queue.pop:** command reads messages from a [queue](/docs/queues/).
 
 ```
-start: queue.pop: inputs: queue_name: example.queue.name limit: 1 output: results
+start:
+  queue.pop:
+    inputs:
+      queue_name: example.queue.name
+      limit: 1
+    output: results
 ```
 
 - [Syntax](#syntax)
@@ -51,7 +56,14 @@ The `output:` placeholder receives a dictionary with these keys:
 For example:
 
 ```
-results: consumer_id: "0x1ec8aee9cb856fd48e0a8d3225229102" messages: 1ec8aedf82d0642e858367a0b25a73aa: queue: example.queue.name data: id: message0 priority: high
+results:
+  consumer_id: "0x1ec8aee9cb856fd48e0a8d3225229102"
+  messages:
+    1ec8aedf82d0642e858367a0b25a73aa:
+      queue: example.queue.name
+      data:
+        id: message0
+        priority: high
 ```
 
 ## on\_error:

@@ -17,7 +17,7 @@ Resolve DNS records by hostname and type. This enables workflows like verifying 
 - **type**: The record type (`a`, `aaaa`, `caa`, `cname`, `mx`, `ns`, `ptr`, `soa`, `srv`, `txt`)
 
 ```
-{{ dns_get_record ( 'cerb.ai' , 'a' ) | json_encode | json_pretty }}
+{{dns_get_record('cerb.ai','a')|json_encode|json_pretty}}
 ```
 
 ```

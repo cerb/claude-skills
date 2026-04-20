@@ -51,7 +51,17 @@ Click **Create token** and copy the API key.
 https://airtable.com/developers/web/api/list-bases
 
 ```
-start: http.request/listBases: output: http_response inputs: method: GET url: https://api.airtable.com/v0/meta/bases authentication: cerb:connected_account:airtable on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/listBases:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.airtable.com/v0/meta/bases
+      authentication: cerb:connected_account:airtable
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Get base schema
@@ -59,7 +69,19 @@ start: http.request/listBases: output: http_response inputs: method: GET url: ht
 https://airtable.com/developers/web/api/get-base-schema
 
 ```
-start: set: baseId: appa1b2c3d4e5f6 http.request/getBaseSchema: output: http_response inputs: method: GET url: https://api.airtable.com/v0/meta/bases/ {{ baseId }} /tables authentication: cerb:connected_account:airtable on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  set:
+    baseId: appa1b2c3d4e5f6
+  http.request/getBaseSchema:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.airtable.com/v0/meta/bases/{{baseId}}/tables
+      authentication: cerb:connected_account:airtable
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## List records
@@ -67,5 +89,18 @@ start: set: baseId: appa1b2c3d4e5f6 http.request/getBaseSchema: output: http_res
 https://airtable.com/developers/web/api/list-records
 
 ```
-start: set: baseId: appa1b2c3d4e5f6 tableIdOrName: Projects http.request/getRecords: output: http_response inputs: method: GET url: https://api.airtable.com/v0/ {{ baseId }} / {{ tableIdOrName }} authentication: cerb:connected_account:airtable on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  set:
+    baseId: appa1b2c3d4e5f6
+    tableIdOrName: Projects
+  http.request/getRecords:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.airtable.com/v0/{{baseId}}/{{tableIdOrName}}
+      authentication: cerb:connected_account:airtable
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

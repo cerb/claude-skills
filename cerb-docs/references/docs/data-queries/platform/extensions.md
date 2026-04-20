@@ -27,74 +27,76 @@ tags: ["docs"]
 #### Query:
 
 ```
-type: platform.extensions point: cerb.card.widget format: dictionaries
+type:platform.extensions
+point:cerb.card.widget
+format:dictionaries
 ```
 
 #### Response:
 
 ```
-{ 
-   "data" : [ 
-     { 
-       "id" : "cerb.card.widget.attachment.viewer" , 
-       "name" : "Attachment Viewer" , 
-       "class" : "CardWidget_AttachmentViewer" , 
-       "plugin_id" : "cerberusweb.core" , 
-       "params" : [] 
-     }, 
-     { 
-       "id" : "cerb.card.widget.behavior.tree" , 
-       "name" : "Behavior Tree" , 
-       "class" : "CardWidget_BehaviorTree" , 
-       "plugin_id" : "cerberusweb.core" , 
-       "params" : [] 
-     }, 
-     { 
-       "id" : "cerb.card.widget.classifier.trainer" , 
-       "name" : "Classifier Trainer" , 
-       "class" : "CardWidget_ClassifierTrainer" , 
-       "plugin_id" : "cerberusweb.core" , 
-       "params" : [] 
-     }, 
-     { 
-       "id" : "cerb.card.widget.conversation" , 
-       "name" : "Conversation" , 
-       "class" : "CardWidget_Conversation" , 
-       "plugin_id" : "cerberusweb.core" , 
-       "params" : [] 
-     }, 
-     { 
-       "id" : "cerb.card.widget.form_interaction" , 
-       "name" : "Interactions Toolbar" , 
-       "class" : "CardWidget_FormInteraction" , 
-       "plugin_id" : "cerberusweb.core" , 
-       "params" : [] 
-     }, 
-     { 
-       "id" : "cerb.card.widget.kb_article.viewer" , 
-       "name" : "Knowledgebase Article" , 
-       "class" : "CardWidget_KbArticle" , 
-       "plugin_id" : "cerberusweb.core" , 
-       "params" : [] 
-     }, 
-     { 
-       "id" : "cerb.card.widget.fields" , 
-       "name" : "Record Fields" , 
-       "class" : "CardWidget_Fields" , 
-       "plugin_id" : "cerberusweb.core" , 
-       "params" : [] 
-     }, 
-     { 
-       "id" : "cerb.card.widget.sheet" , 
-       "name" : "Sheet" , 
-       "class" : "CardWidget_Sheet" , 
-       "plugin_id" : "cerberusweb.core" , 
-       "params" : [] 
-     } 
-   ], 
-   "_" : { 
-     "type" : "platform.extensions" , 
-     "format" : "dictionaries" 
-   } 
- }
+{
+  "data": [
+    {
+      "id": "cerb.card.widget.attachment.viewer",
+      "name": "Attachment Viewer",
+      "class": "CardWidget_AttachmentViewer",
+      "plugin_id": "cerberusweb.core",
+      "params": []
+    },
+    {
+      "id": "cerb.card.widget.behavior.tree",
+      "name": "Behavior Tree",
+      "class": "CardWidget_BehaviorTree",
+      "plugin_id": "cerberusweb.core",
+      "params": []
+    },
+    {
+      "id": "cerb.card.widget.classifier.trainer",
+      "name": "Classifier Trainer",
+      "class": "CardWidget_ClassifierTrainer",
+      "plugin_id": "cerberusweb.core",
+      "params": []
+    },
+    {
+      "id": "cerb.card.widget.conversation",
+      "name": "Conversation",
+      "class": "CardWidget_Conversation",
+      "plugin_id": "cerberusweb.core",
+      "params": []
+    },
+    {
+      "id": "cerb.card.widget.form_interaction",
+      "name": "Interactions Toolbar",
+      "class": "CardWidget_FormInteraction",
+      "plugin_id": "cerberusweb.core",
+      "params": []
+    },
+    {
+      "id": "cerb.card.widget.kb_article.viewer",
+      "name": "Knowledgebase Article",
+      "class": "CardWidget_KbArticle",
+      "plugin_id": "cerberusweb.core",
+      "params": []
+    },
+    {
+      "id": "cerb.card.widget.fields",
+      "name": "Record Fields",
+      "class": "CardWidget_Fields",
+      "plugin_id": "cerberusweb.core",
+      "params": []
+    },
+    {
+      "id": "cerb.card.widget.sheet",
+      "name": "Sheet",
+      "class": "CardWidget_Sheet",
+      "plugin_id": "cerberusweb.core",
+      "params": []
+    }
+  ],
+  "_": {
+    "type": "platform.extensions",
+    "format": "dictionaries"
+  }
+}
 ```

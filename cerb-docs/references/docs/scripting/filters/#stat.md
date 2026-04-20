@@ -17,7 +17,8 @@ Calculate a statistical measure for a given array of numbers.
 | **decimals** | The number of decimal places for rounding |
 
 ```
-{% set samples = [1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 10] %} {{ samples | stat ( measure = 'median' ) }}
+{% set samples = [1,2,3,4,5,6,7,8,9,10] %}
+{{samples|stat(measure='median')}}
 ```
 
 ```

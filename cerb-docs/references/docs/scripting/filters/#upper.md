@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Convert a string to uppercase:
 
 ```
-{{ "I can't hear you!" | upper }}
+{{"I can't hear you!"|upper}}
 ```
 
 ```

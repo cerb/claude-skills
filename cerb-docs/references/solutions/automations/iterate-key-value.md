@@ -12,8 +12,21 @@ When using the [`repeat:`](/docs/automations/commands/repeat/) command in [autom
 
 - 
 ```
-start: set: data: 0: label: Red 1: label: Green 2: label: Blue   
-   repeat: each@key: data as: index, obj do: log: Index: {{ index }} Value: {{ obj.label }}
+start:
+  set:
+    data:
+      0:
+        label: Red
+      1:
+        label: Green
+      2:
+        label: Blue
+  
+  repeat:
+    each@key: data
+    as: index, obj
+    do:
+      log: Index: {{index}} Value: {{obj.label}}
 ```
 - 
  

@@ -18,7 +18,14 @@ Use the [xml\_xpath](#xml_xpath) function to extract values with XPath[2](#fn:xp
 - **mode**: Use `html` to convert an HTML DOM into an XML document.
 
 ```
-{% set string_of_xml = " < response > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {{ xml_encode ( xml ) }}
+{% set string_of_xml = 
+"<response>
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{{xml_encode(xml)}}
 ```
 
 ```

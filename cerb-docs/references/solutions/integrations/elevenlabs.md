@@ -43,7 +43,13 @@ Name the key, click **Create** and then **Copy to Clipboard**
 https://elevenlabs.io/docs/api-reference/voices/get-all
 
 ```
-start: http.request/listVoices: output: http_response inputs: method: GET url: https://api.elevenlabs.io/v1/voices authentication: cerb:connected_account:elevenlabs
+start:
+  http.request/listVoices:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.elevenlabs.io/v1/voices
+      authentication: cerb:connected_account:elevenlabs
 ```
 
 ## Text to speech
@@ -51,7 +57,21 @@ start: http.request/listVoices: output: http_response inputs: method: GET url: h
 https://elevenlabs.io/docs/api-reference/text-to-speech/convert
 
 ```
-start: set: voice_id: 9BWtsMINqrJLrRacOk9x http.request/getVoices: output: http_response inputs: method: POST url: https://api.elevenlabs.io/v1/text-to-speech/ {{ voice_id }} ?output_format=mp3_44100_128 authentication: cerb:connected_account:elevenlabs headers: Content-Type: application/json body: text: This is speech from a Cerb automation. model_id: eleven_multilingual_v2 #response:
+start:
+  set:
+    voice_id: 9BWtsMINqrJLrRacOk9x
+  http.request/getVoices:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.elevenlabs.io/v1/text-to-speech/{{voice_id}}?output_format=mp3_44100_128
+      authentication: cerb:connected_account:elevenlabs
+      headers:
+        Content-Type: application/json
+      body:
+        text: This is speech from a Cerb automation.
+        model_id: eleven_multilingual_v2
+      #response:
       # resource:
       # expires@date: 1 hour
 ```

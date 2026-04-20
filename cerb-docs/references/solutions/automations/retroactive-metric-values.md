@@ -14,11 +14,19 @@ Using [metric.increment:](/docs/automations/commands/metric.increment/) you can 
 
 - 
 ```
-start: metric.increment: inputs: metric_name: example.metric.name timestamp@date: Jan 1 2025 5pm America/Los_Angeles values@csv: 1,2,3
+start:
+  metric.increment:
+    inputs:
+      metric_name: example.metric.name
+      timestamp@date: Jan 1 2025 5pm America/Los_Angeles
+      values@csv: 1,2,3
 ```
 - 
 ```
-commands: metric.increment: deny/metric_name@bool: {{ inputs.metric_name != 'example.metric.name' }} allow@bool: yes
+commands:
+  metric.increment:
+    deny/metric_name@bool: {{inputs.metric_name != 'example.metric.name'}}
+    allow@bool: yes
 ```
 
 You can verify the data in **Setup&nbsp;» Developers&nbsp;» Data Query Tester**:
@@ -27,7 +35,14 @@ You can verify the data in **Setup&nbsp;» Developers&nbsp;» Data Query Tester*
 
 - 
 ```
-type: metrics.timeseries series.intervals: ( metric: example.metric.name function: average missing: zero ) 
- period: day range: "this month" format: timeseries
+type:metrics.timeseries
+series.intervals:(
+  metric:example.metric.name
+  function:average
+  missing:zero
+)
+period:day
+range:"this month"
+format:timeseries
 ```
 

@@ -18,7 +18,10 @@ Remove leading and/or trailing whitespace from a string.
   - right
 
 ```
-{% set str = " whitespace " %} {{ str | trim }} {{ str | trim ( ' ' , 'left' ) }} {{ str | trim ( ' ' , side = 'right' ) }}
+{% set str = " whitespace " %}
+{{str|trim}}
+{{str|trim(' ', 'left')}}
+{{str|trim(' ', side='right')}}
 ```
 
 ```

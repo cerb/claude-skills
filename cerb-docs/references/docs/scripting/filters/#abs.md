@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Return the absolute value of a number:
 
 ```
-{{ - 5 | abs }}
+{{-5|abs}}
 ```
 
 ```

@@ -12,9 +12,9 @@ An **image** field contains a Base64-encoded image.
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "image" : "data:image/png;base64,iVBORw0KGgo..." 
- }
+{
+	"image": "data:image/png;base64,iVBORw0KGgo..."
+}
 ```
 
 ### Records API

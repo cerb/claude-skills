@@ -14,10 +14,31 @@ Here is an example of using the [|split](/docs/scripting/filters/#split) filter 
 
 - 
 ```
-start: return: split_list@json: {{ "1,2,3"|split(',')|json_encode }} split_uris@json: {{ "cerb:ticket:123"|split(':')|json_encode }} split_limit@json: {{ "/usr/share/html/cerb/storage/"|trim('/')|split('/', limit=2)|json_encode }} split_chunks@json: {{ "abcdefgh"|split('',limit=2)|json_encode }}
+start:
+  return:
+    split_list@json: {{"1,2,3"|split(',')|json_encode}}
+    split_uris@json: {{"cerb:ticket:123"|split(':')|json_encode}}
+    split_limit@json: {{"/usr/share/html/cerb/storage/"|trim('/')|split('/', limit=2)|json_encode}}
+    split_chunks@json: {{"abcdefgh"|split('',limit=2)|json_encode}}
 ```
 - 
 ```
-__return : split_list : - " 1" - " 2" - " 3" split_uris : - cerb - ticket - " 123" split_limit : - usr - share/html/cerb/storage split_chunks : - ab - cd - ef - gh
+__return:
+  split_list:
+  - "1"
+  - "2"
+  - "3"
+  split_uris:
+  - cerb
+  - ticket
+  - "123"
+  split_limit:
+  - usr
+  - share/html/cerb/storage
+  split_chunks:
+  - ab
+  - cd
+  - ef
+  - gh
 ```
 

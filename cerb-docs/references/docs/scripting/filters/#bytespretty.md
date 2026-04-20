@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Convert a number into a human readable number of bytes:
 
 ```
-{{ "123456789" | bytes_pretty ( 2 ) }}
+{{"123456789"|bytes_pretty(2)}}
 ```
 
 ```

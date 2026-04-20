@@ -18,7 +18,11 @@ Edit the record for `mail.read`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/feedback: label: Capture Feedback icon: conversation uri: cerb:automation:example.captureFeedback # after:
+interaction/feedback:
+  label: Capture Feedback
+  icon: conversation
+  uri: cerb:automation:example.captureFeedback
+  #after:
 ```
 
 The following **placeholders** are available in KATA:

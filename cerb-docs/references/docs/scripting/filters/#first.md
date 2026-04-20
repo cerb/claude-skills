@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Return the first item of an array, object, or string:
 
 ```
-{% set items = [1 , 2 , 3] %} {{ items | first }}
+{% set items = [1,2,3] %}
+{{items|first}}
 ```
 
 ```

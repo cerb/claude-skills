@@ -10,9 +10,10 @@ tags: ["docs", "docs-scripting"]
 You can decode a JSON-encoded string with the **json\_decode** function:
 
 ```
-{% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %} {% set json = json_decode ( json_string ) %}
-Customer: {{ json.name }}
-Order #: {{ json.order_id }}
+{% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %}
+{% set json = json_decode(json_string) %}
+Customer: {{json.name}}
+Order #: {{json.order_id}}
 ```
 
 ```

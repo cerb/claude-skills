@@ -28,42 +28,45 @@ tags: ["docs"]
 #### Query:
 
 ```
-type: record.types filter: widget options: [search] format: dictionaries
+type:record.types
+filter:widget
+options:[search]
+format:dictionaries
 ```
 
 #### Response:
 
 ```
-{ 
-   "data" : { 
-     "18" : { 
-       "id" : "cerb.contexts.card.widget" , 
-       "uri" : "card_widget" , 
-       "label_singular" : "Card Widget" , 
-       "label_plural" : "Card Widgets" 
-     }, 
-     "69" : { 
-       "id" : "cerb.contexts.portal.widget" , 
-       "uri" : "portal_widget" , 
-       "label_singular" : "Portal Widget" , 
-       "label_plural" : "Portal Widgets" 
-     }, 
-     "71" : { 
-       "id" : "cerberusweb.contexts.profile.widget" , 
-       "uri" : "profile_widget" , 
-       "label_singular" : "Profile Widget" , 
-       "label_plural" : "Profile Widgets" 
-     }, 
-     "98" : { 
-       "id" : "cerberusweb.contexts.workspace.widget" , 
-       "uri" : "workspace_widget" , 
-       "label_singular" : "Workspace Widget" , 
-       "label_plural" : "Workspace Widgets" 
-     } 
-   }, 
-   "_" : { 
-     "type" : "record.types" , 
-     "format" : "dictionaries" 
-   } 
- }
+{
+  "data": {
+    "18": {
+      "id": "cerb.contexts.card.widget",
+      "uri": "card_widget",
+      "label_singular": "Card Widget",
+      "label_plural": "Card Widgets"
+    },
+    "69": {
+      "id": "cerb.contexts.portal.widget",
+      "uri": "portal_widget",
+      "label_singular": "Portal Widget",
+      "label_plural": "Portal Widgets"
+    },
+    "71": {
+      "id": "cerberusweb.contexts.profile.widget",
+      "uri": "profile_widget",
+      "label_singular": "Profile Widget",
+      "label_plural": "Profile Widgets"
+    },
+    "98": {
+      "id": "cerberusweb.contexts.workspace.widget",
+      "uri": "workspace_widget",
+      "label_singular": "Workspace Widget",
+      "label_plural": "Workspace Widgets"
+    }
+  },
+  "_": {
+    "type": "record.types",
+    "format": "dictionaries"
+  }
+}
 ```

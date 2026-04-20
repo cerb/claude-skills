@@ -14,10 +14,17 @@ Here is an example of using the [array\_diff()](/docs/scripting/functions/#array
 
 - 
 ```
-start: set: array1@csv: Apple, Google, Microsoft array2@csv: Apple, Microsoft, Cerb diff@csv: {{ array_diff(array2, array1)|join(', ') }} return: output: These are new: {{ diff|join(', ') }}
+start:
+  set:
+    array1@csv: Apple, Google, Microsoft
+    array2@csv: Apple, Microsoft, Cerb
+    diff@csv: {{array_diff(array2, array1)|join(', ')}}
+  return:
+    output: These are new: {{diff|join(', ')}}
 ```
 - 
 ```
-__return : output : ' These are new: Cerb'
+__return:
+  output: 'These are new: Cerb'
 ```
 

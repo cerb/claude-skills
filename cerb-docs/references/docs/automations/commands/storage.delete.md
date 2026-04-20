@@ -8,7 +8,23 @@ tags: ["docs", "docs-automations"]
 The **storage.delete:** command removes a value from long-term storage.
 
 ```
-start: storage.set: inputs: key: some.arbitrary.identifier value: This is the saved value. storage.delete: inputs: key: some.arbitrary.identifier storage.get: output: result inputs: key: some.arbitrary.identifier on_error: set: result@json: null return: output@key: result
+start:
+  storage.set:
+    inputs:
+      key: some.arbitrary.identifier
+      value: This is the saved value.
+  storage.delete:
+    inputs:
+      key: some.arbitrary.identifier
+  storage.get:
+    output: result
+    inputs:
+      key: some.arbitrary.identifier
+    on_error:
+      set:
+        result@json: null
+  return:
+    output@key: result
 ```
 
 Result:

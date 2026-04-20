@@ -12,7 +12,13 @@ The element name (e.g. `fileUpload/photo` in the example below) is used to set a
 If uploading an attachment and the name ends with `_id`, then a corresponding `__context` key will be added with the same prefix. Otherwise, keys for `_id` and `__context` will be added with the element name as the prefix. This allows key expansion of the file's fields (e.g. `name`, `size`) directly on the placeholder, as well as from within a `validation@raw:` script.
 
 ```
-start: await: form: elements: fileUpload/photo: label: Upload a photo: as: automation_resource
+start:
+  await:
+    form:
+      elements:
+        fileUpload/photo:
+          label: Upload a photo:
+          as: automation_resource
 ```
 
  
@@ -37,7 +43,7 @@ The optional label to display above the form element.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### required@bool:
@@ -51,5 +57,20 @@ An optional custom validation script. Any output is considered to be an error.
 You can use `if...elseif` to check multiple conditions.
 
 ```
-start: await: form: elements: fileUpload/prompt_image: label: File required@bool: yes as: attachment validation@raw: {% if prompt_image__context is empty or prompt_image_id is empty %} The file must be a valid image. {% elseif prompt_image_mime_type is not prefixed ('image/') %} The file must be an image ( {{ prompt_image_mime_type }} ). {% elseif prompt_image_size > 50000 %} The image must be smaller than 50KB ( {{ prompt_image_size|bytes_pretty }} ). {% endif %}
+start:
+  await:
+    form:
+      elements:
+        fileUpload/prompt_image:
+          label: File
+          required@bool: yes
+          as: attachment
+          validation@raw:
+            {% if prompt_image__context is empty or prompt_image_id is empty %}
+            The file must be a valid image.
+            {% elseif prompt_image_mime_type is not prefixed ('image/') %}
+            The file must be an image ({{prompt_image_mime_type}}).
+            {% elseif prompt_image_size > 50000 %}
+            The image must be smaller than 50KB ({{prompt_image_size|bytes_pretty}}).
+            {% endif %}
 ```

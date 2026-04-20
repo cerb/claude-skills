@@ -14,11 +14,39 @@ The file.write: command can create a ZIP archive with files from arbitrary text,
 
 - 
 ```
-start: file.write: output: tmp_file inputs: mime_type: application/zip content: zip: files: file/readme: path: README.txt bytes@text: This is the README file. file/docker: path: docker/Dockerfile bytes@text: FROM ubuntu:24.04   
-   record.create/file: output: new_file inputs: record_type: attachment fields: name: example.zip mime_type: application/vnd.cerb.uri content: {{ tmp_file.uri }}
+start:
+  file.write:
+    output: tmp_file
+    inputs:
+      mime_type: application/zip
+      content:
+        zip:
+          files:
+            file/readme:
+              path: README.txt
+              bytes@text:
+                This is the README file.
+            file/docker:
+              path: docker/Dockerfile
+              bytes@text:
+                FROM ubuntu:24.04
+  
+  record.create/file:
+    output: new_file
+    inputs:
+      record_type: attachment
+      fields:
+        name: example.zip
+        mime_type: application/vnd.cerb.uri
+        content: {{tmp_file.uri}}
 ```
 - 
 ```
-commands: file.write: allow@bool: yes record.create: deny/type@bool: {{ inputs.record_type is not record type ('attachment') }} allow@bool: yes
+commands:
+  file.write:
+    allow@bool: yes
+  record.create:
+    deny/type@bool: {{inputs.record_type is not record type ('attachment')}}
+    allow@bool: yes
 ```
 

@@ -8,7 +8,16 @@ tags: ["docs", "docs-automations"]
 The **while:** command conditionally repeats a sequence of actions. This can implement controlled infinite loops for interactions and timers.
 
 ```
-start: set: counter: 0 while: if@bool: {{ counter < 5 ? 'yes' }} do: set: counter: {{ counter+1 }} return: counter@key: counter
+start:
+  set:
+    counter: 0
+  while:
+    if@bool: {{counter < 5 ? 'yes'}}
+    do:
+      set:
+        counter: {{counter+1}}
+  return:
+    counter@key: counter
 ```
 
 ```

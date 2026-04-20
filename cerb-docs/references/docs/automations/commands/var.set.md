@@ -8,7 +8,18 @@ tags: ["docs", "docs-automations"]
 The **var.set:** command sets a value using a key path.
 
 ```
-start: set: person: name: first: Kina var.set: inputs: key: person:name:last value: Halpue return: output@text: {{ person.name.first }} {{ person.name.last }}
+start:
+  set:
+    person:
+      name:
+        first: Kina
+  var.set:
+    inputs:
+      key: person:name:last
+      value: Halpue
+  return:
+    output@text:
+      {{person.name.first}} {{person.name.last}}
 ```
 
 Result:

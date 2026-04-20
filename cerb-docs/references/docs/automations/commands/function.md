@@ -10,14 +10,28 @@ The **function:** command executes an [automation.function](/docs/automations/tr
 With this automation function named `example.math.sum`:
 
 ```
-inputs: array/numbers: required@bool: yes 
- start: return: sum@text,int: {{ array_sum(inputs.numbers) }}
+inputs:
+  array/numbers:
+    required@bool: yes
+
+start:
+  return:
+    sum@text,int:
+      {{array_sum(inputs.numbers)}}
 ```
 
 This automation uses the function:
 
 ```
-start: function/sum: uri: cerb:automation:example.math.sum output: result inputs: numbers@csv: 2,4,8 on_success: return: sum@key: result:sum
+start:
+  function/sum:
+    uri: cerb:automation:example.math.sum
+    output: result
+    inputs:
+      numbers@csv: 2,4,8
+    on_success:
+      return:
+        sum@key: result:sum
 ```
 
 To return:

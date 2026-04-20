@@ -18,7 +18,12 @@ Edit the record for `record.card`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/trackTime: uri: cerb:automation:example.trackTime tooltip: Track time icon: stopwatch hidden@bool: {{ record__type is not pattern("task","ticket") }}
+interaction/trackTime:
+  uri: cerb:automation:example.trackTime
+  tooltip: Track time
+  icon: stopwatch
+  hidden@bool:
+    {{record__type is not pattern("task","ticket")}}
 ```
 
 The following **placeholders** are available in KATA:

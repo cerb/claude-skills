@@ -26,19 +26,19 @@ Packages can be imported from [setup](/docs/setup/), bots, and the [API](/docs/a
 Here's an example package for testing imports:
 
 ```
-{ 
-   "package" : { 
-     "name" : "Example Package" 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "task_001" , 
-       "_context" : "task" , 
-       "title" : "Import your first package" , 
-       "status" : "closed" 
-     } 
-   ] 
- }
+{
+  "package": {
+    "name": "Example Package"
+  },
+  "records": [
+    {
+      "uid": "task_001",
+      "_context": "task",
+      "title": "Import your first package",
+      "status": "closed"
+    }
+  ]
+}
 ```
 
 ## Setup
@@ -76,14 +76,14 @@ In the example above, we're building the JSON object with the [dict\_set()](/doc
 The action returns a placeholder named `_results` with details about the created records in the format:
 
 ```
-{ 
-   "cerberusweb.contexts.task" : { 
-     "task_001" : { 
-       "id" : "258" , 
-       "label" : "Import a package from bots" 
-     } 
-   } 
- }
+{
+  "cerberusweb.contexts.task": {
+    "task_001": {
+      "id": "258",
+      "label": "Import a package from bots"
+    }
+  }
+}
 ```
 
 The results object is keyed by record type. Each record type contains an object keyed by `uid`, with an `id` and `label` for each record created.

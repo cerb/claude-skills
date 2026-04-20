@@ -8,7 +8,13 @@ tags: ["docs", "docs-automations"]
 The **set:** command associates a value with a placeholder key.
 
 ```
-start: set: name: Kina title: Customer Support Manager return: output@text: {{ name }} is a {{ title }}
+start:
+  set:
+    name: Kina
+    title: Customer Support Manager
+  return:
+    output@text:
+      {{name}} is a {{title}}
 ```
 
 Result:
@@ -26,7 +32,13 @@ One or more key/value pairs may be children of the `set:` command.
 You can refer to any keys set above the current one.
 
 ```
-start: set: a@int: 2 b@int: {{ a*2 }} c@int: {{ b*2 }} return: answer@int: {{ a + b + c }}
+start:
+  set:
+    a@int: 2
+    b@int: {{a*2}}
+    c@int: {{b*2}}
+  return:
+    answer@int: {{a + b + c}}
 ```
 
 Result:
@@ -40,7 +52,15 @@ answer: 14
 A [dictionary](/docs/automations/#dictionaries) may be provided as the value:
 
 ```
-start: set: person: name: Kina role: title: Customer Support Manager return: output@text: {{ person.name }} is a {{ person.role.title }}
+start:
+  set:
+    person:
+      name: Kina
+      role:
+        title: Customer Support Manager
+  return:
+    output@text:
+      {{person.name}} is a {{person.role.title}}
 ```
 
 Result:

@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Parse a URL string into an object for validation.
 
 ```
-{% set url = "https://cerb.ai/search?q=oauth2#fragment" %} {{ url | parse_url | json_encode | json_pretty }}
+{% set url = "https://cerb.ai/search?q=oauth2#fragment" %}
+{{url|parse_url|json_encode|json_pretty}}
 ```
 
 ```

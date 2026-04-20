@@ -12,8 +12,12 @@ tags: ["docs", "docs-scripting"]
 The **array\_column** function extracts a column from the elements of an array:
 
 ```
-{% set people = [{ "id" : 1 , "name" : "Kina Halpue" , "email" : "kina@cerb.example" } , { "id" : 2 , "name" : "Milo Dade" , "email" : "milo@cerb.example" } , { "id" : 3 , "name" : "Janey Youve" , "email" : "janey@cerb.example" } ,] %}
-The email addresses are: {{ array_column ( people , 'email' ) | join ( ', ' ) }}
+{% set people = [
+	{"id": 1, "name": "Kina Halpue", "email": "kina@cerb.example"},
+	{"id": 2, "name": "Milo Dade", "email": "milo@cerb.example"},
+	{"id": 3, "name": "Janey Youve", "email": "janey@cerb.example"},
+] %}
+The email addresses are: {{array_column(people,'email')|join(', ')}}
 ```
 
 ```

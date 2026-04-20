@@ -23,7 +23,7 @@ Interpolate the timestamps between two dates with the given `unit` and `step`.
 **Returns:** An array of Unix timestamps.
 
 ```
-{{ date_lerp ( 'this month' , unit = 'day' , step = 5 ) | map (( v ) => v | date ( 'r' )) | json_encode | json_pretty }}
+{{date_lerp('this month',unit='day',step=5)|map((v) => v|date('r'))|json_encode|json_pretty}}
 ```
 
 ```

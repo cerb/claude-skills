@@ -61,13 +61,16 @@ tags: ["docs"]
 This simple automation, written in [KATA](/docs/kata/):
 
 ```
-start: return: answer: {{ a * b }}
+start:
+  return:
+    answer: {{a * b}}
 ```
 
 With this input:
 
 ```
-a: 5 b: 4
+a: 5
+b: 4
 ```
 
 Returns this output:
@@ -111,7 +114,13 @@ The identifier may contain letters, numbers, and underscores.
 For instance, we could "hardcode" the inputs from the first example above as keys:
 
 ```
-start: set/a: a: 5 set/b: b: 4 return: answer: {{ a * b }}
+start:
+  set/a:
+    a: 5
+  set/b:
+    b: 4
+  return:
+    answer: {{a * b}}
 ```
 
 We use the `set:` command twice in the `start:` parent, so we name them `set/a:` and `set/b:`.
@@ -125,7 +134,7 @@ Values can be _dynamically_ generated from the output of **scripting**.
 In the previous examples we had this line:
 
 ```
-answer: {{ a * b }}
+answer: {{a * b}}
 ```
 
 This computes a new value by multiplying the value in placeholder `a` by the value in placeholder `b`.
@@ -149,7 +158,8 @@ Refer to the [**scripting**](/docs/scripting/) documentation for a full list of 
 In KATA, all values that immediately follow a key are assumed to be text by default:
 
 ```
-a: 5 b: 4
+a: 5
+b: 4
 ```
 
 In the example above, `5` and `4` are treated as text rather than numbers. However, in certain situations, like mathematical operations, a text value can be automatically **coerced** into a number.
@@ -161,7 +171,12 @@ Annotations start with `@` and are appended to a key name.
 For example, we can explicitly specify that a key's value is an integer (a non-fractional number) with `@int`:
 
 ```
-start: set: a@int: 5 b@int: 4 return: answer@int: {{ a * b }}
+start:
+  set:
+    a@int: 5
+    b@int: 4
+  return:
+    answer@int: {{a * b}}
 ```
 
 In the above automation's dictionary, the value for the keys `a:`, `b:`, and `answer:` are now strictly numeric.
@@ -192,7 +207,12 @@ Multiple annotations may be joined with commas. They are evaluated from left to 
 For instance:
 
 ```
-start: set: a: 5 b@key,int: a return: answer@int: {{ a * b }}
+start:
+  set:
+    a: 5
+    b@key,int: a
+  return:
+    answer@int: {{a * b}}
 ```
 
 The line `b@key,int: a` is setting the key `b:` to the value of the `a` key, and then converting it to an integer.
@@ -202,7 +222,23 @@ The line `b@key,int: a` is setting the key `b:` to the value of the `a` key, and
 An annotated key may be followed by an indented block of text to set a multiple-line value:
 
 ```
-start: set: countries@json: { "United States": { "pop": 330052960, "pop_est": 2020 }, "China": { "pop": 1441615562, "pop_est": 2020 } } return: output@text: {% set diff = countries.China.pop - countries['United States'].pop %} There are {{ diff|number_format }} more people in China than the USA.
+start:
+  set:
+    countries@json:
+      {
+        "United States": {
+          "pop": 330052960,
+          "pop_est": 2020
+        },
+        "China": {
+          "pop": 1441615562,
+          "pop_est": 2020
+        }
+      }
+  return:
+    output@text:
+      {% set diff = countries.China.pop - countries['United States'].pop %}
+      There are {{diff|number_format}} more people in China than the USA.
 ```
 
 ```
@@ -295,8 +331,17 @@ The `type` must be one of:
 The values are available in the `inputs` placeholder.
 
 ```
-inputs: record/ticket: record_type: ticket required@bool: yes text/subject: required@bool: yes  
- start: return: result@text: Changed the subject on ticket {{ inputs.ticket.mask }} to: {{ inputs.subject }}
+inputs:
+  record/ticket:
+    record_type: ticket
+    required@bool: yes
+  text/subject:
+    required@bool: yes
+ 
+start:
+  return:
+    result@text:
+      Changed the subject on ticket {{inputs.ticket.mask}} to: {{inputs.subject}}
 ```
 
 #### Snippet examples
@@ -306,7 +351,12 @@ Automations that support custom `inputs:` can provide a `snippet:` key for each 
 This is used when inserting the automation into an editor from an interaction.
 
 ```
-inputs: text/subject: type: freeform required@bool: yes snippet: subject: This is an example subject
+inputs:
+  text/subject:
+    type: freeform
+    required@bool: yes
+    snippet:
+      subject: This is an example subject
 ```
 
 ### Exit states
@@ -333,7 +383,13 @@ If the `on_error:` event is omitted, a command error immediately exits the autom
 This [http.request](/docs/automations/commands/http.request/) command requests an invalid URL:
 
 ```
-start: http.request: output: http_response inputs: method: GET url: https://invalid.url.example/ return:
+start:
+  http.request:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://invalid.url.example/
+  return:
 ```
 
 There is no `on_error:` event, so the automation immediately exits in the `error` state. The `return:` command is never reached.
@@ -341,9 +397,18 @@ There is no `on_error:` event, so the automation immediately exits in the `error
 We can add events to handle errors:
 
 ```
-start: http.request: output: http_response inputs: method: GET url: https://invalid.url.example/ on_success: # Commands to perform on success
-        return: on_error: # Handle the error or provide a default
-        return:
+start:
+  http.request:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://invalid.url.example/
+    on_success:
+      # Commands to perform on success
+      return:
+    on_error:
+      # Handle the error or provide a default
+      return:
 ```
 
 The automation now always exits in the `return` state.
@@ -362,7 +427,20 @@ These two special commands are available during simulation:
 The following example simulates an `http.request:` command and provides mock output:
 
 ```
-start: http.request: output: http_response inputs: method: GET url: https://invalid.url.example/ on_simulate: simulate.success: status_code: 200 content_type: application/json body: { "output": "Good job!" } on_success: return: body@key: http_response:body
+start:
+  http.request:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://invalid.url.example/
+    on_simulate:
+      simulate.success:
+        status_code: 200
+        content_type: application/json
+        body: { "output": "Good job!" }
+    on_success:
+      return:
+        body@key: http_response:body
 ```
 
 Even though the URL is invalid, the simulated output is:
@@ -408,7 +486,14 @@ Some automation [triggers](/docs/automations/#triggers) support **callers**. A c
 The following policy allows an [interaction](/docs/interactions/) on [project board](/docs/project-boards/) columns when a worker has write-access on the board, and otherwise denies it:
 
 ```
-callers: cerb.toolbar.projectBoardColumn: allow/owners@bool: {{ cerb_record_writeable('project_board', board_id, worker__context, worker_id) ? 'yes' }} deny: yes
+callers:
+  cerb.toolbar.projectBoardColumn:
+    allow/owners@bool:
+      {{
+        cerb_record_writeable('project_board', board_id, worker__context, worker_id) 
+        ? 'yes'
+      }}
+    deny: yes
 ```
 
 When a caller policy denies an interaction it is automatically hidden from [toolbars](/docs/automations/triggers/interaction.worker/#toolbars).
@@ -418,7 +503,9 @@ When a caller policy denies an interaction it is automatically hidden from [tool
 This policy allows all commands:
 
 ```
-commands: all: allow: yes
+commands:
+  all:
+    allow: yes
 ```
 
 The above policy is simple but not secure. Instead, we recommend adhering to the _"principle of least privilege"_ [1](#fn:polp). This means only allowing the minimal set of commands required to accomplish an automation's purpose.
@@ -430,9 +517,21 @@ The following policy only allows:
 - The reading of all records.
 
 ```
-commands: http.request: allow/ourApi@bool: {{inputs.url starts with 'https://api.example/' and inputs.method == 'GET' ? 'yes'}} record.create: allow/newTasks@bool: {{ inputs.record_type|context_alias == 'task' ? 'yes' }}   
-   record.get: allow: yes    
-   all: deny: yes
+commands:
+  http.request:
+    allow/ourApi@bool:
+      {{inputs.url starts with 'https://api.example/' 
+         and inputs.method == 'GET' ? 'yes'}}
+
+  record.create:
+    allow/newTasks@bool:
+      {{inputs.record_type|context_alias == 'task' ? 'yes'}}
+  
+  record.get:
+    allow: yes
+   
+  all:
+    deny: yes
 ```
 
 Each command can have multiple `allow:` and `deny:` rules, but they must have a unique `/name` suffix.
@@ -446,7 +545,11 @@ The `all:` key matches all commands. This can be used as a final "catch-all" to 
 It is also possible to be permissive by default with exceptions. This following policy permits all HTTP requests _except_ connections to unencrypted `http://` endpoints:
 
 ```
-commands: http.request: deny/http@bool: {{ inputs.url starts with 'http://' ? 'yes' }} allow: yes
+commands:
+  http.request:
+    deny/http@bool:
+      {{inputs.url starts with 'http://' ? 'yes'}} 
+    allow: yes
 ```
 
 #### Time limit
@@ -456,7 +559,8 @@ By default, automations are restricted to a maximum run duration of 25,000 milli
 This can be changed in the policy:
 
 ```
-settings: time_limit_ms: 30000
+settings: 
+ time_limit_ms: 30000
 ```
 
 In most cases, a better approach is to break up long tasks into smaller pieces and use automation timers and queues.
@@ -521,7 +625,10 @@ An **event listener** is a record that binds an automation to a specific event. 
 Each listener has an `event_kata` field that defines the binding using [KATA](/docs/kata/):
 
 ```
-automation/autoreply: uri: cerb:automation:example.mail.received.autoreply disabled@bool: {{ not is_new_ticket }}
+automation/autoreply:
+  uri: cerb:automation:example.mail.received.autoreply
+  disabled@bool:
+    {{not is_new_ticket}}
 ```
 
 Each `automation/name:` entry specifies:
@@ -535,7 +642,13 @@ Each `automation/name:` entry specifies:
 Multiple automations can be bound within a single listener's `event_kata`:
 
 ```
-automation/onlyTasks: uri: cerb:automation:example.cards.task disabled@bool: {{ card_type != 'task' ? 'yes' }} automation/everythingElse: uri: cerb:automation:example.cards.generic
+automation/onlyTasks:
+  uri: cerb:automation:example.cards.task
+  disabled@bool:
+    {{card_type != 'task' ? 'yes'}}
+
+automation/everythingElse:
+  uri: cerb:automation:example.cards.generic
 ```
 
 There can be multiple `disabled:` rules per entry. The first rule to return `true` is used, enabling `allow-deny` or `deny-allow` strategies. By default, all listeners are enabled.
@@ -593,7 +706,16 @@ The continuation identifier is used to resume the automation from the same point
 For instance, here's a basic [interaction](/docs/automations/triggers/interaction.worker/) automation that pauses for user input:
 
 ```
-start: await: form: elements: text/prompt_name: label: What is your name? required@bool: yes return: output@text: Hello, {{ prompt_name }} !
+start:
+  await:
+    form:
+      elements:
+        text/prompt_name:
+          label: What is your name?
+          required@bool: yes
+  return:
+    output@text:
+      Hello, {{prompt_name}}!
 ```
 
 At the `await:` command, the automation will send a web form to the user, create a continuation, and wait for any length of time to resume execution.
@@ -601,13 +723,41 @@ At the `await:` command, the automation will send a web form to the user, create
 An automation that supports continuations can exit in the `await:` state any number of times before concluding.
 
 ```
-start: await/intro: form: elements: text/prompt_name: label: Name: required@bool: yes text/prompt_email: label: Email: required@bool: yes type: email placeholder: you@example.com   
+start:
+  await/intro:
+    form:
+      elements:
+        text/prompt_name:
+          label: Name:
+          required@bool: yes
+        text/prompt_email:
+          label: Email:
+          required@bool: yes
+          type: email
+          placeholder: you@example.com
+  
   # Confirmation code is generated, saved, and emailed
-   
-   await/confirm: form: elements: say/hello: content@text: Hello, {{ prompt_name }} ! We just sent a confirmation code to {{ prompt_email }} text/prompt_code: label: Confirmation Code: required@bool: yes type: uri max_length: 8   
+  
+  await/confirm:
+    form:
+      elements:
+        say/hello:
+          content@text:
+            Hello, {{prompt_name}}!
+            
+            We just sent a confirmation code to {{prompt_email}}
+        text/prompt_code:
+          label: Confirmation Code:
+          required@bool: yes
+          type: uri
+          max_length: 8
+  
   # Confirmation code is verified
-   
-   return: output@text: Thanks, {{ prompt_name }} ! Your email address ( {{ prompt_email }} ) been subscribed to our newsletter.
+  
+  return:
+    output@text:
+      Thanks, {{prompt_name}}! 
+      Your email address ({{prompt_email}}) been subscribed to our newsletter.
 ```
 
 # Timers

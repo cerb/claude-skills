@@ -12,7 +12,7 @@ Convert a string to an array with the given delimiter.
 `|split(delimiter, limit)`
 
 ```
-{{ "1,2,3,4,5" | split ( ',' ) | json_encode }}
+{{"1,2,3,4,5"|split(',')|json_encode}}
 ```
 
 ```

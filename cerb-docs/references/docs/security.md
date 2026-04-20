@@ -85,7 +85,9 @@ route {
 With **nginx**, you can use the following directive in your server configuration:
 
 ```
-location ~ ^/cerb/(\.git|api|features|libs|plugins|storage|tests|vendor)/ { return 403 ; }
+location ~ ^/cerb/(\.git|api|features|libs|plugins|storage|tests|vendor)/ {
+    return 403;
+}
 ```
 
 Make sure that Nginx only sends requests for `/index.php` and `/ajax.php` to PHP.
@@ -151,10 +153,10 @@ It's a good idea to restrict PHP functions that allow arbitrary commands to be e
 
 ```
 disable_functions = pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped, \
-    pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal, \
-    pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo, \
-    pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,show_source,system,exec,passthru, \
-    proc_nice,proc_open,popen,shell_exec,
+  pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal, \
+  pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo, \
+  pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,show_source,system,exec,passthru, \
+  proc_nice,proc_open,popen,shell_exec,
 ```
 
 ## Considerations for HTTP Authentication and IP-based security

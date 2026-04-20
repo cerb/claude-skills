@@ -26,55 +26,58 @@ tags: ["docs"]
 #### Query:
 
 ```
-type: ui.icons filter: git limit: 10 format: dictionaries
+type:ui.icons
+filter:git
+limit:10
+format:dictionaries
 ```
 
 #### Response:
 
 ```
-{ 
-   "data" : [ 
-     { 
-       "icon" : "git-branch" 
-     }, 
-     { 
-       "icon" : "git-commit" 
-     }, 
-     { 
-       "icon" : "git-compare" 
-     }, 
-     { 
-       "icon" : "git-create" 
-     }, 
-     { 
-       "icon" : "git-delete" 
-     }, 
-     { 
-       "icon" : "git-merge" 
-     }, 
-     { 
-       "icon" : "git-private" 
-     }, 
-     { 
-       "icon" : "git-pull-request" 
-     } 
-   ], 
-   "_" : { 
-     "type" : "ui.icons" , 
-     "format" : "dictionaries" , 
-     "paging" : { 
-       "page" : { 
-         "of" : 1 , 
-         "rows" : { 
-           "of" : 8 , 
-           "count" : 8 , 
-           "limit" : 10 , 
-           "from" : 1 , 
-           "to" : 8 
-         }, 
-         "index" : 0 
-       } 
-     } 
-   } 
- }
+{
+  "data": [
+    {
+      "icon": "git-branch"
+    },
+    {
+      "icon": "git-commit"
+    },
+    {
+      "icon": "git-compare"
+    },
+    {
+      "icon": "git-create"
+    },
+    {
+      "icon": "git-delete"
+    },
+    {
+      "icon": "git-merge"
+    },
+    {
+      "icon": "git-private"
+    },
+    {
+      "icon": "git-pull-request"
+    }
+  ],
+  "_": {
+    "type": "ui.icons",
+    "format": "dictionaries",
+    "paging": {
+      "page": {
+        "of": 1,
+        "rows": {
+          "of": 8,
+          "count": 8,
+          "limit": 10,
+          "from": 1,
+          "to": 8
+        },
+        "index": 0
+      }
+    }
+  }
+}
 ```

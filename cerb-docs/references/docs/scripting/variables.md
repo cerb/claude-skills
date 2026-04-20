@@ -12,7 +12,7 @@ This can be accomplished with **variables**. A variable is a special token that 
 Assuming we had a variable named `first_name`, we could write:
 
 ```
-Hello, {{ first_name }}!
+Hello, {{first_name}}!
 ```
 
 This will output something like:
@@ -28,7 +28,9 @@ A variable is indicated by a pair of double curly braces around the variable's n
 You can make your own variables in a template using the [set](/docs/scripting/commands/#set) command:
 
 ```
-{% set name = "Kina" %} {% set quantity = 5 %} {{ name }} has {{ quantity }} gold stars.
+{% set name = "Kina" %}
+{% set quantity = 5 %}
+{{name}} has {{quantity}} gold stars.
 ```
 
 ```
@@ -50,7 +52,7 @@ When editing actions on a bot behavior, the possible filters are automatically s
 For example, we can use the [upper](/docs/scripting/filters/#upper) filter to display a variable's value in uppercase:
 
 ```
-Hi, {{ first_name | upper }}!
+Hi, {{first_name|upper}}!
 ```
 
 ```
@@ -63,7 +65,7 @@ You can use the [default](/docs/scripting/filters/#default) filter to give a def
 
 ```
 {% set name = '' %}
-Hi {{ name | default ( 'there' ) }}
+Hi {{name|default('there')}}
 ```
 
 ```
@@ -76,7 +78,7 @@ You can send the output from one filter as the input to another filter:
 
 ```
 {% set first_name = null %}
-Hi, {{ first_name | default ( 'there' ) | upper }}!
+Hi, {{first_name|default('there')|upper}}!
 ```
 
 ```

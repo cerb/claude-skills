@@ -8,7 +8,20 @@ tags: ["docs", "docs-automations"]
 The **simulate.success:** command is used inside an [on\_simulate:](/docs/automations/#simulation) event handler to provide mock output and trigger the enclosing command's `on_success:` event during [simulation](/docs/automations/#simulation).
 
 ```
-start: http.request: output: http_response inputs: method: GET url: https://api.example/ on_simulate: simulate.success: status_code: 200 content_type: application/json body: '{"result":"ok"}' on_success: return: body@key: http_response:body
+start:
+  http.request:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.example/
+    on_simulate:
+      simulate.success:
+        status_code: 200
+        content_type: application/json
+        body: '{"result":"ok"}'
+    on_success:
+      return:
+        body@key: http_response:body
 ```
 
 - [Syntax](#syntax)

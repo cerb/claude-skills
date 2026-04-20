@@ -14,11 +14,19 @@ record.search: can be used to load records and make them available to an automat
 
 - 
 ```
-start: record.search: inputs: record_type: ticket record_query: status:o output: results
+start:
+  record.search:
+    inputs:
+      record_type: ticket
+      record_query: status:o
+    output: results
 ```
 - 
 ```
-commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes
+commands:
+  record.search:
+    deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+    allow@bool: yes
 ```
 
 ## Find workers active within the past 30 minutes:
@@ -28,10 +36,20 @@ commands: record.search: deny/type@bool: {{ inputs.record_type is not record typ
 
 - 
 ```
-start: record.search: inputs: record_type: worker record_query: isDisabled:no lastActivity:${when} record_query_params: when: -30 mins output: results
+start:
+  record.search:
+    inputs:
+      record_type: worker
+      record_query: isDisabled:no lastActivity:${when}
+      record_query_params:
+        when: -30 mins
+    output: results
 ```
 - 
 ```
-commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('worker') }} allow@bool: yes
+commands:
+  record.search:
+    deny/type@bool: {{inputs.record_type is not record type ('worker')}}
+    allow@bool: yes
 ```
 

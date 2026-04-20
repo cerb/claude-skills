@@ -14,7 +14,7 @@ Create an array with the given keys, each set to the default value.
 `array_fill_keys(keys,value)`
 
 ```
-{{ array_fill_keys ( range ( 1 , 10 ), true ) | json_encode }}
+{{array_fill_keys(range(1,10),true)|json_encode}}
 ```
 
 ```

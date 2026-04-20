@@ -14,10 +14,15 @@ Sometimes you don't want a placeholder to be evaluated in a literal value. You c
 
 - 
 ```
-start: return: unescaped: You escape {{ placeholders }} with the `@raw` annotation escaped@raw: You escape {{ placeholders }} with the `@raw` annotation
+start:
+  return:
+    unescaped: You escape {{placeholders}} with the `@raw` annotation
+    escaped@raw: You escape {{placeholders}} with the `@raw` annotation
 ```
 - 
 ```
-__return: unescaped: You escape with the `@raw` annotation escaped: You escape {{ placeholders }} with the `@raw` annotation
+__return:
+  unescaped: You escape with the `@raw` annotation
+  escaped: You escape {{placeholders}} with the `@raw` annotation
 ```
 

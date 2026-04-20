@@ -10,8 +10,10 @@ tags: ["docs", "docs-scripting"]
 Arrays can be iterated with [for](/docs/scripting/commands/#for) loops:
 
 ```
-{% set list_of_names = ["Jeff" , "Dan" , "Darren"] %} {% for name in list_of_names %}
-* {{ name }} {% endfor %}
+{% set list_of_names = ["Jeff", "Dan", "Darren"] %}
+{% for name in list_of_names %}
+* {{name}}
+{% endfor %}
 ```
 
 ```
@@ -27,7 +29,8 @@ A variable defined within a loop is not accessible outside of it. You can first 
 Loop through a range of values with `..`:
 
 ```
-{% for n in 1. . 5 %} {{ n }}...
+{% for n in 1..5 %}
+{{n}}...
 {% endfor %}
 ```
 

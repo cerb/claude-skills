@@ -63,7 +63,12 @@ Let's look at an example signature for testing your own authentication implement
 For this request:
 
 ```
-POST /rest/tickets/search.json?show_meta=0 HTTP / 1.1 Date : Wed, 08 Feb 2017 19:53:35 GMT Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example Connection : close Content-Length : 27
+POST /rest/tickets/search.json?show_meta=0 HTTP/1.1
+Date: Wed, 08 Feb 2017 19:53:35 GMT
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Host: cerb.example
+Connection: close
+Content-Length: 27
 
 expand=custom_&q=status%3Ao
 ```
@@ -82,7 +87,19 @@ Cerb-Auth: pjlfmn339fgh:0cfe2f3b06552c060c8e77f7a0c875ee
 In PHP, the signature is generated as follows:
 
 ```
-$secret_hash = md5 ( 'fw4y9fjjd5tqjlsk3u9zkjjr154xbftc' ); $string_to_sign = <<< EOF POST Wed , 08 Feb 2017 19 : 53 : 35 GMT / rest / tickets / search . json show_meta = 0 expand = custom_ & q = status % 3 Ao $secret_hash EOF ; echo md5 ( $string_to_sign );
+$secret_hash = md5('fw4y9fjjd5tqjlsk3u9zkjjr154xbftc');
+
+$string_to_sign = <<< EOF
+POST
+Wed, 08 Feb 2017 19:53:35 GMT
+/rest/tickets/search.json
+show_meta=0
+expand=custom_&q=status%3Ao
+$secret_hash
+
+EOF;
+
+echo md5($string_to_sign);
 ```
 
 This outputs:

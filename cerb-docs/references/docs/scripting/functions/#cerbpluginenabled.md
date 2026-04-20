@@ -18,7 +18,7 @@ For instance, this can be used to make dashboard tabs or widgets conditional on 
 | **plugin\_id** | The name or ID of the [workflow](/docs/workflows/). |
 
 ```
-{{ cerb_plugin_enabled ( 'cerb.classifiers' ) }}
+{{cerb_plugin_enabled('cerb.classifiers')}}
 ```
 
 ```

@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Generate an SHA-1[5](#fn:sha1) hash for a string:
 
 ```
-{{ "You can verify this hash" | sha1 }}
+{{"You can verify this hash"|sha1}}
 ```
 
 ```

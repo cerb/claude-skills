@@ -18,7 +18,7 @@ Calculate the time elapsed (in seconds) between two dates using calendar availab
 | **date\_to** | The ending date/time. |
 
 ```
-{{ cerb_calendar_time_elapsed ( 123 , 'last Friday 5pm' , 'now' ) | secs_pretty }}
+{{cerb_calendar_time_elapsed(123,'last Friday 5pm','now')|secs_pretty}}
 ```
 
 ```

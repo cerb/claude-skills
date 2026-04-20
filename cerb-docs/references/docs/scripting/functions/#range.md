@@ -12,7 +12,8 @@ Return an array with values between `from` and `to` (inclusive).
 `range(from,to,step)`
 
 ```
-{{ range ( 5 , 15 ) | json_encode }} {{ range ( 5 , 15 , 2 ) | json_encode }}
+{{range(5,15)|json_encode}}
+{{range(5,15,2)|json_encode}}
 ```
 
 ```

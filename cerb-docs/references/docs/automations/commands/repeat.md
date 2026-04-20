@@ -8,7 +8,17 @@ tags: ["docs", "docs-automations"]
 The **repeat:** command iterates an array and repeats a sequence of commands for each value.
 
 ```
-start: set: sum: 0 repeat: each@json: [1,2,3,4,5,6,7,8,9,10] as: i do: set: sum@int: {{ sum + i }} return: counter@key: counter
+start:
+  set:
+    sum: 0
+  repeat:
+    each@json: [1,2,3,4,5,6,7,8,9,10]
+    as: i
+    do:
+      set:
+        sum@int: {{sum + i}}
+  return:
+    counter@key: counter
 ```
 
 ```

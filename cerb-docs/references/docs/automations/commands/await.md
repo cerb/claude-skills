@@ -12,7 +12,17 @@ This creates a [continuation](/docs/automations/#continuations) for resuming the
 # Syntax
 
 ```
-start: await: form: title: Intro elements: text/prompt_name: label: What is your name? required@bool: yes return: output@text: Hello, {{ prompt_name }} !
+start:
+  await:
+    form:
+      title: Intro
+      elements:
+        text/prompt_name:
+          label: What is your name?
+          required@bool: yes
+  return:
+    output@text:
+      Hello, {{prompt_name}}!
 ```
 
 The expected dictionary depends on the trigger.

@@ -10,7 +10,23 @@ tags: ["docs", "docs-automations"]
 In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **chooser** element displays a search popup for selecting [records](/docs/records/).
 
 ```
-start: await: form: title: Chooser elements: chooser/prompt_chooser: label: Choose records: record_type: worker query@text: isDisabled:n multiple@bool: yes required@bool: yes await/response: form: elements: say: content@text: You selected record IDs: {{ prompt_chooser|join(', ') }}
+start:
+  await:
+    form:
+      title: Chooser
+      elements:
+        chooser/prompt_chooser:
+          label: Choose records:
+          record_type: worker
+          query@text: isDisabled:n
+          multiple@bool: yes
+          required@bool: yes
+  await/response:
+    form:
+      elements:
+        say:
+          content@text:
+            You selected record IDs: {{prompt_chooser|join(', ')}}
 ```
 
  
@@ -34,7 +50,7 @@ The optional [search query](/docs/search/) for filtering the search worklist.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### multiple:

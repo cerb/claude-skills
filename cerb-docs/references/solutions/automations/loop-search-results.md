@@ -16,11 +16,25 @@ This approach is more efficient than looping through records directly since it d
 
 - 
 ```
-start: record.search: output: tickets inputs: record_type: ticket record_query: status:o limit:10 record_expand: customfields   
-   repeat: each@csv: {{ tickets|keys|join(',') }} as: ticket_id do: log: Editing # {{ ticket_id }} {{ tickets[ticket_id]._label }}
+start:
+  record.search:
+    output: tickets
+    inputs:
+      record_type: ticket
+      record_query: status:o limit:10
+      record_expand: customfields
+  
+  repeat:
+    each@csv: {{tickets|keys|join(',')}}  
+    as: ticket_id
+    do:
+      log: Editing #{{ticket_id}} {{tickets[ticket_id]._label}}
 ```
 - 
 ```
-commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes
+commands:
+  record.search:
+    deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+    allow@bool: yes
 ```
 

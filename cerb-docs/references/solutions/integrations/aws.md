@@ -40,17 +40,17 @@ Select the **JSON** tab.
 Paste the following policy:
 
 ```
-{ 
-   "Version" : "2012-10-17" , 
-   "Statement" : [ 
-     { 
-       "Sid" : "CerbIam" , 
-       "Effect" : "Allow" , 
-       "Action" : "iam:GetUser" , 
-       "Resource" : "arn:aws:iam::*:user/${aws:username}" 
-     } 
-   ] 
- }
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "CerbIam",
+      "Effect": "Allow",
+      "Action": "iam:GetUser",
+      "Resource": "arn:aws:iam::*:user/${aws:username}"
+    }
+  ]
+}
 ```
 
 You can add new permissions here depending on the services your automation needs to access. This is covered in those specific guides.

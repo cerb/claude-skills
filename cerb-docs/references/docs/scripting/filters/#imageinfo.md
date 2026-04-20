@@ -16,7 +16,8 @@ Returns information about an image. The image may be provided as bytes or in dat
 ```
 {% set image_string %}
 data:image/png;base64,iVBORw0KGgoAAAA....
-{% endset %} {{ image_string | image_info | json_encode | json_pretty }}
+{% endset %}
+{{image_string|image_info|json_encode|json_pretty}}
 ```
 
 ```

@@ -46,7 +46,225 @@ Click **Add** to the right of the **Cerb** app.
 Click **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Empty** and paste the following KATA into the large text box:
 
 ```
-workflow: name: wgm.integrations.slack.bot version: 2025-02-26T02:23:08Z description: A demo of integrations with a slack bot website: https://cerb.ai/resources/workflows/ requirements: cerb_version: >=11.0 <11.2 cerb_plugins: cerberusweb.core, config: chooser/account: label: Slack Account record_type: connected_account multiple@bool: no records: webhook_listener/slack: fields: name: Slack guid: {{ random_string(40) }} automations_kata@raw: automation/slack: uri: cerb:automation:wgm.integrations.slack.webhook disabled@bool: no updatePolicy: name automation/router: fields: name: wgm.integrations.slack.webhook extension_id: cerb.trigger.webhook.respond description@text: script@raw: start: set/config: config@json: {{ cerb_workflow_config('wgm.integrations.slack.bot')|json_encode }} record.search/worker: output: results_worker inputs: record_type: worker record_query: slack.username:${username} limit:1 record_query_params: username: {{ request_params.user_name }} decision/found: outcome/notfound: if@bool: {{ results_worker.id is empty }} then: set: message: channel: {{ request_params.channel_name }} text@text: Worker not found. Have you set your Slack username in your Cerb profile? outcome/found: then: decision/route: outcome/help: if@bool: {{ request_params.text == "help" }} then: set: message: channel: # {{ request_params.channel_name }} text@text: You can use the following commands: attachments: 0: color: #888888 fields: 0: title: /cerb help value: This help text. short@bool: yes 1: title: /cerb hello value: Say hello! short@bool: yes 2: title: /cerb calendar value: Respond with your next calendar event. outcome/hello: if@bool: {{ request_params.text == "hello" }} then: set: message: channel: # {{ request_params.channel_name }} text@text: Hello!! How are you today, {{ results_worker.first_name }} ? outcome/key: if@bool: {{ request_params.text == "calendar" }} then: function/calendar: uri: cerb:automation:wgm.integrations.slack.calendar inputs: worker: {{ results_worker.id }} channel: {{ request_params.channel_name }} output: results_function http.request: output: response inputs: url: https://slack.com/api/chat.postMessage method: POST authentication: cerb:connected_account: {{ config.account }} headers@text: Content-Type: application/json; charset=utf8 body: {{ message|json_encode }} policy_kata@raw: commands: http.request: deny/url@bool: {{ inputs.url is not prefixed ('https://slack.com/api/') }} deny/method@bool: {{ inputs.method not in ['POST'] }} allow@bool: yes function: deny/uri@bool: {{ uri != 'cerb:automation:wgm.integrations.slack.calendar' }} allow@bool: yes record.search: deny/type@bool: {{ inputs.record_type is not record type ('worker') }} allow@bool: yes automation/calendar: fields: name: wgm.integrations.slack.calendar extension_id: cerb.trigger.automation.function description@text: script@raw: inputs: record/worker: record_type: worker required@bool: yes text/channel: type: freeform required@bool: yes start: set/config: config@json: {{ cerb_workflow_config('wgm.integrations.slack.bot')|json_encode }} record.search/event: output: results_calendar_event inputs: record_type: calendar_event record_query@text: calendar:(owner.worker:(id:${username})) startDate:(since:"now" until:"+7 days") sort:startDate limit:1 record_query_params: username: {{ inputs.worker.id }} decision/events: outcome/found: if@bool: {{ results_calendar_event.id is not empty }} then: set/message: message: channel: # {{ inputs.channel }} text@text: Your next calendar event is: attachments: 0: color: #888888 footer: {{ results_calendar_event.record_url }} fields: 0: title: Event value: {{ results_calendar_event._label }} short@bool: yes 1: title: Starts value: in {{ results_calendar_event.date_start|date_pretty }} short@bool: yes 2: title: Ends value: in {{ results_calendar_event.date_end|date_pretty }} short@bool: yes outcome/else: then: set/message: message: channel: # {{ inputs.channel }} text@text: No upcoming calendar events found. http.request: output: response inputs: url: https://slack.com/api/chat.postMessage method: POST authentication: cerb:connected_account: {{ config.account }} headers@text: Content-Type: application/json; charset=utf8 body: {{ message|json_encode }} policy_kata@raw: commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('calendar_event') }} allow@bool: yes http.request: deny/url@bool: {{ inputs.url is not prefixed ('https://slack.com/api/') }} deny/method@bool: {{ inputs.method not in ['POST'] }} allow@bool: yes custom_fieldset/slack: fields: name: Slack context: worker owner__context: app owner_id: 0 custom_field/slackname: fields: name: Username context: worker uri: slackid type: S custom_fieldset_id: {{ records.slack.id }} pos@int: 0
+workflow:
+  name: wgm.integrations.slack.bot
+  version: 2025-02-26T02:23:08Z
+  description: A demo of integrations with a slack bot
+  website: https://cerb.ai/resources/workflows/
+  requirements:
+    cerb_version: >=11.0 <11.2
+    cerb_plugins: cerberusweb.core,
+  config:
+    chooser/account:
+      label: Slack Account
+      record_type: connected_account
+      multiple@bool: no
+records:
+  webhook_listener/slack:
+    fields:
+      name: Slack
+      guid: {{random_string(40)}}
+      automations_kata@raw:
+        automation/slack:
+          uri: cerb:automation:wgm.integrations.slack.webhook
+          disabled@bool: no
+    updatePolicy: name
+  automation/router:
+    fields:
+      name: wgm.integrations.slack.webhook
+      extension_id: cerb.trigger.webhook.respond
+      description@text:
+      script@raw:
+        start:
+          set/config:
+            config@json: {{cerb_workflow_config('wgm.integrations.slack.bot')|json_encode}}
+            
+          record.search/worker:
+            output: results_worker
+            inputs:
+              record_type: worker
+              record_query: slack.username:${username} limit:1
+              record_query_params:
+                username: {{request_params.user_name}}
+         
+          decision/found:
+            outcome/notfound:
+              if@bool: {{results_worker.id is empty}}
+              then:
+                set:
+                  message:
+                    channel: {{request_params.channel_name}}
+                    text@text:
+                      Worker not found. Have you set your Slack username in your Cerb profile?
+            outcome/found:
+             then:
+               decision/route:
+                 outcome/help:
+                   if@bool: {{request_params.text == "help"}}
+                   then:
+                    set:
+                      message:
+                        channel: #{{request_params.channel_name}}
+                        text@text:
+                          You can use the following commands:
+                        attachments:
+                          0:
+                            color: #888888
+                            fields:
+                              0:
+                                title: /cerb help
+                                value: This help text.
+                                short@bool: yes
+                              1:
+                                title: /cerb hello
+                                value: Say hello!
+                                short@bool: yes
+                              2:
+                                title: /cerb calendar
+                                value: Respond with your next calendar event.
+                 outcome/hello:
+                   if@bool: {{request_params.text == "hello"}}
+                   then:
+                     set:
+                      message:
+                        channel: #{{request_params.channel_name}}
+                        text@text: 
+                          Hello!!
+                          How are you today, {{results_worker.first_name}}?
+                 outcome/key:
+                   if@bool: {{request_params.text == "calendar"}}
+                    then:
+                      function/calendar:
+                        uri: cerb:automation:wgm.integrations.slack.calendar
+                        inputs:
+                          worker: {{results_worker.id}}
+                          channel: {{request_params.channel_name}}
+                        output: results_function
+        
+        
+         http.request:
+           output: response
+           inputs:
+                url: https://slack.com/api/chat.postMessage
+                method: POST
+                authentication: cerb:connected_account:{{config.account}}
+                headers@text:
+                  Content-Type: application/json; charset=utf8
+                body: {{message|json_encode}}
+          
+      policy_kata@raw:
+        commands:
+          http.request:
+            deny/url@bool: {{inputs.url is not prefixed ('https://slack.com/api/')}}
+            deny/method@bool: {{inputs.method not in ['POST']}}
+            allow@bool: yes
+          function:
+            deny/uri@bool: {{uri != 'cerb:automation:wgm.integrations.slack.calendar'}}
+            allow@bool: yes
+          record.search:
+            deny/type@bool: {{inputs.record_type is not record type ('worker')}}
+            allow@bool: yes
+  automation/calendar:
+    fields:
+      name: wgm.integrations.slack.calendar
+      extension_id: cerb.trigger.automation.function
+      description@text:
+      script@raw:
+        inputs:
+          record/worker:
+            record_type: worker
+            required@bool: yes
+          text/channel:
+            type: freeform
+            required@bool: yes
+            
+        start:
+          set/config:
+            config@json: {{cerb_workflow_config('wgm.integrations.slack.bot')|json_encode}}
+            
+          record.search/event:
+            output: results_calendar_event
+            inputs:
+              record_type: calendar_event
+              record_query@text:
+                calendar:(owner.worker:(id:${username}))
+                startDate:(since:"now" until:"+7 days") 
+                sort:startDate
+                limit:1
+              record_query_params:
+                username: {{inputs.worker.id}}
+         
+          decision/events:
+            outcome/found:
+              if@bool: {{results_calendar_event.id is not empty}}
+              then:
+                set/message:
+                  message:
+                    channel: #{{inputs.channel}}
+                    text@text:
+                      Your next calendar event is:
+                    attachments:
+                      0:
+                        color: #888888
+                        footer: {{results_calendar_event.record_url}}
+                        fields:
+                          0:
+                            title: Event
+                            value: {{results_calendar_event._label}}
+                            short@bool: yes
+                          1:
+                            title: Starts
+                            value: in {{results_calendar_event.date_start|date_pretty}}
+                            short@bool: yes
+                          2:
+                            title: Ends
+                            value: in {{results_calendar_event.date_end|date_pretty}}
+                            short@bool: yes
+            outcome/else:
+              then:
+                set/message:
+                  message:
+                    channel: #{{inputs.channel}}
+                    text@text:
+                      No upcoming calendar events found.
+                
+                
+          http.request:
+            output: response
+            inputs:
+              url: https://slack.com/api/chat.postMessage
+              method: POST
+              authentication: cerb:connected_account:{{config.account}}
+              headers@text:
+                Content-Type: application/json; charset=utf8
+              body: {{message|json_encode}}
+              
+                
+          
+          
+      policy_kata@raw:
+        commands:
+          record.search:
+            deny/type@bool: {{inputs.record_type is not record type ('calendar_event')}}
+            allow@bool: yes
+          http.request:
+            deny/url@bool: {{inputs.url is not prefixed ('https://slack.com/api/')}}
+            deny/method@bool: {{inputs.method not in ['POST']}}
+            allow@bool: yes
+  custom_fieldset/slack:
+    fields:
+      name: Slack
+      context: worker
+      owner__context: app
+      owner_id: 0
+  custom_field/slackname:
+    fields:
+      name: Username
+      context: worker
+      uri: slackid
+      type: S
+      custom_fieldset_id: {{records.slack.id}}
+      pos@int: 0
 ```
 
 ### Configure the workflow

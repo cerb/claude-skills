@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Remove non-alphanumeric characters from a string:
 
 ```
-{{ "* Ignore spaces and non-alphanumeric characters+1$2%3!" | alphanum }}
+{{"* Ignore spaces and non-alphanumeric characters+1$2%3!"|alphanum}}
 ```
 
 ```
@@ -20,7 +20,7 @@ Ignorespacesandnonalphanumericcharacters123
 Also allow specific characters:
 
 ```
-{{ "* Ignore non-alphanumeric but allow spaces$%#!" | alphanum ( ' !' ) }}
+{{"* Ignore non-alphanumeric but allow spaces$%#!"|alphanum(' !')}}
 ```
 
 ```

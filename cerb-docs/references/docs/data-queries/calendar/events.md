@@ -29,5 +29,10 @@ The results can be returned in these formats:
 # Examples
 
 ```
-type: calendar.events calendar: (name:["U.S. Holidays","Office Hours"]) from: "this week Monday 00:00:00" to: "this week Sunday 23:59:59" expand: [calendar_owner_] format: dictionaries
+type:calendar.events
+calendar:(name:["U.S. Holidays","Office Hours"])
+from:"this week Monday 00:00:00"
+to:"this week Sunday 23:59:59"
+expand:[calendar_owner_]
+format:dictionaries
 ```

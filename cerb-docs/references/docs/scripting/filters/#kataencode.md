@@ -10,7 +10,11 @@ tags: ["docs", "docs-scripting"]
 Emit an object/array as a KATA text block:
 
 ```
-{% set object = { colors : ["red" , "green" , "blue"], size : 100 , } %} {{ object | kata_encode }}
+{% set object = {
+	colors: ["red","green","blue"],
+	size: 100,
+} %}
+{{object|kata_encode}}
 ```
 
 ```

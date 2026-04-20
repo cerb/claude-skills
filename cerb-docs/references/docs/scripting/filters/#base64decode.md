@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Decode a base64-encoded string:
 
 ```
-{% set b64 = "VGhpcyB3YXMgYmFzZTY0LWVuY29kZWQ=" %} {{ b64 | base64_decode }}
+{% set b64 = "VGhpcyB3YXMgYmFzZTY0LWVuY29kZWQ=" %}
+{{b64|base64_decode}}
 ```
 
 ```

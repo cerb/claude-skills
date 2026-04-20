@@ -14,7 +14,9 @@ Convert a Cerb `context` ID into a human readable label.
 | **type** | `singular`, `plural`, `id`, `uri` |
 
 ```
-{{ 'cerberusweb.contexts.ticket' | context_name ( 'singular' ) }} {{ 'cerberusweb.contexts.task' | context_name ( 'plural' ) }} {{ 'worker' | context_name ( 'id' ) }}
+{{'cerberusweb.contexts.ticket'|context_name('singular')}}
+{{'cerberusweb.contexts.task'|context_name('plural')}}
+{{'worker'|context_name('id')}}
 ```
 
 ```

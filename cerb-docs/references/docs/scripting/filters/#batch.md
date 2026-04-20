@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Break a list into smaller chunks with **batch**:
 
 ```
-{% set items = ['red' , 'blue' , 'green'] %} {{ items | batch ( 2 , '(empty)' ) | json_encode | json_pretty }}
+{% set items = ['red','blue','green'] %}
+{{items|batch(2, '(empty)')|json_encode|json_pretty}}
 ```
 
 ```

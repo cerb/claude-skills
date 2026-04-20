@@ -45,7 +45,25 @@ Copy the API key for use later.
 https://console.groq.com/docs/api-reference#chat-create
 
 ```
-start: http.request/hwu7xs: output: http_response inputs: method: POST url: https://api.groq.com/openai/v1/chat/completions authentication: cerb:connected_account:groq headers: Content-Type: application/json body: model: llama-3.3-70b-versatile messages: 0: role: user content: Tell me who is Beethoven on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/hwu7xs:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.groq.com/openai/v1/chat/completions
+      authentication: cerb:connected_account:groq
+      headers:
+        Content-Type: application/json
+      body:
+        model: llama-3.3-70b-versatile
+        messages:
+          0:
+            role: user
+            content: Tell me who is Beethoven
+    on_success:
+        set:
+          response@json: {{http_response.body}}
+          http_response@json: null
 ```
 
 ## List Models
@@ -53,5 +71,15 @@ start: http.request/hwu7xs: output: http_response inputs: method: POST url: http
 https://console.groq.com/docs/api-reference#models
 
 ```
-start: http.request/hwu7xs: output: http_response inputs: method: GET url: https://api.groq.com/openai/v1/models authentication: cerb:connected_account:groq on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/hwu7xs:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.groq.com/openai/v1/models
+      authentication: cerb:connected_account:groq
+   on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

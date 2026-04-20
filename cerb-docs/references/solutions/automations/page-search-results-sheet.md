@@ -13,6 +13,34 @@ By using the `cerb.data.records` automation data source in a sheet, you can make
 
 - 
 ```
-start: await: form: title: Sheet with paging elements: sheet/prompt_results: label: Results: data: automation: uri: cerb:automation:cerb.data.records inputs: record_type: ticket query_required: status:o limit: 10 schema: layout: title_column: _label headings@bool: yes paging@bool: yes columns: text/_label: params: bold@bool: yes text/status: card/group_id: label: Group card/owner_id: label: Owner date/updated:
+start:
+  await:
+    form:
+      title: Sheet with paging
+      elements:
+        sheet/prompt_results:
+          label: Results:
+          data:
+            automation:
+              uri: cerb:automation:cerb.data.records
+              inputs:
+                record_type: ticket
+                query_required: status:o
+          limit: 10
+          schema:
+            layout:
+              title_column: _label
+              headings@bool: yes
+              paging@bool: yes
+            columns:
+              text/_label:
+                params:
+                  bold@bool: yes
+              text/status:
+              card/group_id:
+                label: Group
+              card/owner_id:
+                label: Owner
+              date/updated:
 ```
 

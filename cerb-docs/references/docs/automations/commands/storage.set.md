@@ -8,7 +8,18 @@ tags: ["docs", "docs-automations"]
 The **storage.set:** command saves a value to long-term storage. This key/value can be shared between automations and invocations.
 
 ```
-start: storage.set: inputs: key: some.arbitrary.identifier value: This is the saved value. expires: +15 mins storage.get: output: result inputs: key: some.arbitrary.identifier return: output@key: result
+start:
+  storage.set:
+    inputs:
+      key: some.arbitrary.identifier
+      value: This is the saved value.
+      expires: +15 mins
+  storage.get:
+    output: result
+    inputs:
+      key: some.arbitrary.identifier
+  return:
+    output@key: result
 ```
 
 Result:

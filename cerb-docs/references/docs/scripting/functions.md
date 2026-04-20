@@ -73,8 +73,12 @@ These functions are available in bot scripts and snippets:
 The **array\_column** function extracts a column from the elements of an array:
 
 ```
-{% set people = [{ "id" : 1 , "name" : "Kina Halpue" , "email" : "kina@cerb.example" } , { "id" : 2 , "name" : "Milo Dade" , "email" : "milo@cerb.example" } , { "id" : 3 , "name" : "Janey Youve" , "email" : "janey@cerb.example" } ,] %}
-The email addresses are: {{ array_column ( people , 'email' ) | join ( ', ' ) }}
+{% set people = [
+	{"id": 1, "name": "Kina Halpue", "email": "kina@cerb.example"},
+	{"id": 2, "name": "Milo Dade", "email": "milo@cerb.example"},
+	{"id": 3, "name": "Janey Youve", "email": "janey@cerb.example"},
+] %}
+The email addresses are: {{array_column(people,'email')|join(', ')}}
 ```
 
 ```
@@ -88,7 +92,10 @@ The email addresses are: kina@cerb.example, milo@cerb.example, janey@cerb.exampl
 The **array\_combine** function creates a new array with the given `keys` and `values`:
 
 ```
-{% set keys = ['name' , 'age' , 'email'] %} {% set values = ['Janey Youve' , '30-ish' , 'janey@cerb.example'] %} {% set person = array_combine ( keys , values ) %} {{ person.name }} can be reached at {{ person.email }}
+{% set keys = ['name', 'age', 'email'] %}
+{% set values = ['Janey Youve', '30-ish', 'janey@cerb.example'] %}
+{% set person = array_combine(keys, values) %}
+{{person.name}} can be reached at {{person.email}}
 ```
 
 ```
@@ -102,7 +109,8 @@ Janey Youve can be reached at janey@cerb.example
 The **array\_count\_values** function takes an array of values as input, and returns an array with distinct values as keys and their count of occurrences. This function only works on arrays of strings or numbers.
 
 ```
-{% set values = [1 , 2 , 3 , 1 , 3 , 2 , 3 , 1 , 2 , 1 , 3 , 1 , 3] %} {{ array_count_values ( values ) | json_encode | json_pretty }}
+{% set values = [1,2,3,1,3,2,3,1,2,1,3,1,3] %}
+{{array_count_values(values)|json_encode|json_pretty}}
 ```
 
 ```
@@ -118,8 +126,10 @@ The **array\_count\_values** function takes an array of values as input, and ret
 The **array\_diff** function returns the items in the second array that are not present in the first array:
 
 ```
-{% set arr1 = ['Apple' , 'Google' , 'Microsoft'] %} {% set arr2 = ['Apple' , 'Microsoft' , 'Cerb'] %} {% set diff = array_diff ( arr2 , arr1 ) %}
-These are new: {{ diff | join ( ', ' ) }}
+{% set arr1 = ['Apple', 'Google', 'Microsoft'] %}
+{% set arr2 = ['Apple', 'Microsoft', 'Cerb'] %}
+{% set diff = array_diff(arr2, arr1) %}
+These are new: {{diff|join(', ')}}
 ```
 
 ```
@@ -133,9 +143,22 @@ These are new: Cerb
 Returns the given keys from all elements of a list.
 
 ```
-{% set records = [{ id : 1 , subject : "Help with the API" , status : "open" , sender : "customer@cerb.example" , } , { id : 2 , subject : "Automating email replies" , status : "open" , sender : "customer@cerb.example" , }] %}
+{% set records = [
+	{
+		id: 1,
+		subject: "Help with the API",
+		status: "open",
+		sender: "customer@cerb.example",
+	},
+	{
+		id: 2,
+		subject: "Automating email replies",
+		status: "open",
+		sender: "customer@cerb.example",
+	}
+] %}
 Sender,Subject,Status
-{{ array_extract_keys ( records , ['sender' , 'subject' , 'status']) | csv }}
+{{array_extract_keys(records, ['sender','subject','status'])|csv}}
 ```
 
 ```
@@ -153,7 +176,7 @@ Create an array with the given keys, each set to the default value.
 `array_fill_keys(keys,value)`
 
 ```
-{{ array_fill_keys ( range ( 1 , 10 ), true ) | json_encode }}
+{{array_fill_keys(range(1,10),true)|json_encode}}
 ```
 
 ```
@@ -167,8 +190,10 @@ Create an array with the given keys, each set to the default value.
 Returns a new array for all the elements in array1 that are also present in array2. This is the opposite of [array\_diff](#array_diff).
 
 ```
-{% set arr1 = ['Apple' , 'Google' , 'Microsoft'] %} {% set arr2 = ['Apple' , 'Microsoft' , 'Cerb'] %} {% set intersect = array_intersect ( arr2 , arr1 ) %}
-These are in both: {{ intersect | join ( ', ' ) }}
+{% set arr1 = ['Apple', 'Google', 'Microsoft'] %}
+{% set arr2 = ['Apple', 'Microsoft', 'Cerb'] %}
+{% set intersect = array_intersect(arr2, arr1) %}
+These are in both: {{intersect|join(', ')}}
 ```
 
 ```
@@ -182,8 +207,10 @@ These are in both: Apple, Microsoft
 Compares an array of values to an array of patterns.
 
 ```
-{% set recipients = ['support@cerb.example' , 'sales@cerb.example'] %} {% set patterns = ['sales@*'] %} {% set results = array_matches ( recipients , patterns ) %}
-Matches: {{ results | join ( ', ' ) }}
+{% set recipients = ['support@cerb.example','sales@cerb.example'] %}
+{% set patterns = ['sales@*'] %}
+{% set results = array_matches(recipients, patterns) %}
+Matches: {{results|join(', ')}}
 ```
 
 ```
@@ -197,7 +224,9 @@ Matches: sales@cerb.example
 Sort an associative array by its keys rather than its values.
 
 ```
-{% set arr = { "z" : "A" , "a" : "B" , "m" : "C" } %} {% set arr = array_sort_keys ( arr ) %} {{ arr | keys | join ( ',' ) }}
+{% set arr = {"z":"A", "a":"B", "m":"C"} %}
+{% set arr = array_sort_keys(arr) %}
+{{arr|keys|join(',')}}
 ```
 
 ```
@@ -211,8 +240,8 @@ a,m,z
 Return a new array with only the distinct values from the `array` argument.
 
 ```
-{% set arr = [1 , 1 , 2 , 2 , 3 , 3 , 4 , 4 , 5 , 5 , 6] %}
-Unique values {{ array_unique ( arr ) | join ( ',' ) }}
+{% set arr = [1,1,2,2,3,3,4,4,5,5,6] %}
+Unique values {{array_unique(arr)|join(',')}}
 ```
 
 ```
@@ -226,7 +255,8 @@ Unique values 1,2,3,4,5,6
 Return the values from an associative array as a new indexed array. For instance, this can affect the output in JSON encoding by using `[]` rather than `{key:value}`.
 
 ```
-{% set arr = { "z" : "A" , "a" : "B" , "m" : "C" } %} {{ array_values ( arr ) | json_encode }}
+{% set arr = {"z":"A", "a":"B", "m":"C"} %}
+{{array_values(arr)|json_encode}}
 ```
 
 ```
@@ -238,7 +268,9 @@ Return the values from an associative array as a new indexed array. For instance
 Access the values of an object with a variable key:
 
 ```
-{% set person = { "first_name" : "Kina" , "last_name" : "Halpue" , "title" : "Customer Support Supervisor" } %} {% set key = 'title' %} {{ attribute ( person , key ) }}
+{% set person = {"first_name": "Kina", "last_name": "Halpue", "title": "Customer Support Supervisor"} %}
+{% set key = 'title' %}
+{{attribute(person, key)}}
 ```
 
 ```
@@ -261,8 +293,9 @@ For instance, a snippet could use an automation to dynamically generate content 
 | **inputs** | A key/value dictionary of inputs. The possible keys depend on the function being invoked. |
 
 ```
-{% set ip_data = cerb_automation ( 'wgm.scripting.getLocationByIP' , { ip : "1.2.3.4" } ) %} {% if ip_data.return.data %}
-I see you are contacting us from {{ ip_data.return.data.country_name }}.
+{% set ip_data = cerb_automation('wgm.scripting.getLocationByIP', { ip:"1.2.3.4" } ) %}
+{% if ip_data.return.data %}
+I see you are contacting us from {{ip_data.return.data.country_name}}.
 {% endif %}
 ```
 
@@ -277,7 +310,7 @@ Retrieve the avatar image for a given record type and ID.
 `cerb_avatar_image(record_type, id, updated)`
 
 ```
-{{ cerb_avatar_image ( 'worker' , '1' , 'now' | date ( 'U' )) }}
+{{cerb_avatar_image('worker','1','now'|date('U'))}}
 ```
 
 ```
@@ -291,7 +324,7 @@ Retrieve the avatar image URL for a given record type and ID.
 `cerb_avatar_url(record_type, id, updated)`
 
 ```
-{{ cerb_avatar_url ( 'worker' , '1' , 'now' | date ( 'U' )) }}
+{{cerb_avatar_url('worker','1','now'|date('U'))}}
 ```
 
 ```
@@ -311,8 +344,8 @@ Calculate a future timestamp using calendar availability. For instance, this can
 | **now** | An optional starting date/time. |
 
 ```
-Now: {{ "now" | date ( 'r' ) }}
-Due: {{ cerb_calendar_get_relative_date ( 123 , '+2 hours' ) | date ( 'r' ) }}
+Now: {{"now"|date('r')}}
+Due: {{cerb_calendar_get_relative_date(123,'+2 hours')|date('r')}}
 ```
 
 ```
@@ -333,7 +366,7 @@ Calculate the time elapsed (in seconds) between two dates using calendar availab
 | **date\_to** | The ending date/time. |
 
 ```
-{{ cerb_calendar_time_elapsed ( 123 , 'last Friday 5pm' , 'now' ) | secs_pretty }}
+{{cerb_calendar_time_elapsed(123,'last Friday 5pm','now')|secs_pretty}}
 ```
 
 ```
@@ -351,7 +384,7 @@ Return a dictionary for the currently logged in worker. This returns an empty di
 | **expand** | An optional comma-delimited string or array of dictionary keys to expand. |
 
 ```
-Hello {{ cerb_current_worker () . first_name }}!
+Hello {{cerb_current_worker().first_name}}!
 ```
 
 ```
@@ -374,8 +407,10 @@ For instance, this function can be used to rewrite all links in an email templat
 
 ```
 {% set html %}
-This is some <b>HTML</b> with <a href= "https://cerb.ai/" >links</a>.
-{% endset %} {% set results = cerb_extract_uris ( html ) %} {{ results | json_encode | json_pretty }}
+This is some <b>HTML</b> with <a href="https://cerb.ai/">links</a>.
+{% endset %}
+{% set results = cerb_extract_uris(html) %}
+{{results|json_encode|json_pretty}}
 ```
 
 ```
@@ -410,8 +445,13 @@ To rewrite links:
 
 ```
 {% set html %}
-This is some <b>HTML</b> with <a href= "https://cerb.ai/" >links</a>.
-{% endset %} {% set results = cerb_extract_uris ( html ) %} {% set new_urls = results.tokens | map ( ( url , token ) => "https://proxy.example/click?url=" ~ url | url_encode ) %} {{ results.template | replace ( new_urls ) }}
+This is some <b>HTML</b> with <a href="https://cerb.ai/">links</a>.
+{% endset %}
+{% set results = cerb_extract_uris(html) %}
+{% set new_urls = results.tokens|map(
+  (url,token) => "https://proxy.example/click?url=" ~ url|url_encode
+)%}
+{{results.template|replace(new_urls)}}
 ```
 
 ```
@@ -427,7 +467,7 @@ This automatically adapts to use within Cerb and community portals (e.g. SSL, pr
 `cerb_file_url(id)`
 
 ```
-{{ cerb_file_url ( '1' ) }}
+{{cerb_file_url('1')}}
 ```
 
 ```
@@ -441,7 +481,7 @@ https://cerb.example/files/1/original_message.html
 Returns a boolean depending on whether the given actor has the given privilege among their roles. If no actor is given, the current worker is assumed. This allows bot functionality, snippets, and widgets, to adapt based on worker permissions. This is particularly useful in HTML-based profile widgets.
 
 ```
-{% if cerb_has_priv ( 'contexts.cerberusweb.context.ticket.create' , 'worker' , 1 ) %}
+{% if cerb_has_priv('contexts.cerberusweb.context.ticket.create', 'worker', 1) %}
 Worker #1 has permission to create tickets.
 {% endif %}
 ```
@@ -460,7 +500,7 @@ Return an [object](/docs/scripting/arrays-objects/) with every placeholder in th
 | **prefix** | The optional new prefix to add (e.g. `group_`) |
 
 ```
-{{ cerb_placeholders_list () | json_encode | json_pretty }}
+{{cerb_placeholders_list()|json_encode|json_pretty}}
 ```
 
 ```
@@ -505,7 +545,7 @@ For instance, this can be used to make dashboard tabs or widgets conditional on 
 | **plugin\_id** | The name or ID of the [workflow](/docs/workflows/). |
 
 ```
-{{ cerb_plugin_enabled ( 'cerb.classifiers' ) }}
+{{cerb_plugin_enabled('cerb.classifiers')}}
 ```
 
 ```
@@ -519,7 +559,7 @@ For instance, this can be used to make dashboard tabs or widgets conditional on 
 Returns a boolean if the given actor has read access to the given record. If no actor is provided then the current worker is assumed. This allows bots and widgets to adapt based on record permissions. For instance, an HTML widget on a profile dashboard could only show a button to workers who can modify the record.
 
 ```
-{% if cerb_record_readable ( 'ticket' , 123 , 'worker' , 1 ) %}
+{% if cerb_record_readable('ticket', 123, 'worker', 1) %}
 Worker #1 can read ticket #123.
 {% endif %}
 ```
@@ -535,7 +575,7 @@ Worker #1 can read ticket #123.
 Returns a boolean if the given actor has write access to the given record. If no actor is provided then the current worker is assumed. This allows bots and widgets to adapt based on record permissions. For instance, an HTML widget on a profile dashboard could only show a button to workers who can modify the record.
 
 ```
-{% if cerb_record_writeable ( 'ticket' , 123 , 'worker' , 1 ) %}
+{% if cerb_record_writeable('ticket', 123, 'worker', 1) %}
 Worker #1 can modify ticket #123.
 {% endif %}
 ```
@@ -551,7 +591,7 @@ Retrieve a full URL to a page or resource in Cerb.
 This automatically adapts to use within Cerb and community portals (e.g. SSL, proxies).
 
 ```
-{{ cerb_url ( "c=profiles&type=ticket&id=5" ) }}
+{{cerb_url("c=profiles&type=ticket&id=5")}}
 ```
 
 ```
@@ -571,7 +611,7 @@ Perform runtime configuration lookups from any feature that supports automation 
 | **default** | The optional default value if the key doesn't exist. |
 
 ```
-{{ cerb_workflow_config ( 'example.workflow' , 'secretCode' , null ) }}
+{{cerb_workflow_config('example.workflow','secretCode',null)}}
 ```
 
 ```
@@ -589,7 +629,7 @@ Perform runtime resource lookups and return a map of workflow resources and thei
 | **name\_or\_id** | The name or ID of the [workflow](/docs/workflows/). |
 
 ```
-{{ cerb_workflow_resources ( 'example.workflow' | json_encode }}
+{{cerb_workflow_resources('example.workflow'|json_encode}}
 ```
 
 ```
@@ -601,7 +641,7 @@ Perform runtime resource lookups and return a map of workflow resources and thei
 Set the range boundaries for a decimal value.
 
 ```
-{{ clamp_float ( - 105.19 , 0 , 100 ) }}
+{{clamp_float(-105.19,0,100)}}
 ```
 
 ```
@@ -613,7 +653,7 @@ Set the range boundaries for a decimal value.
 Set the range boundaries for an integer value.
 
 ```
-{{ clamp_int ( 110 , - 90 , 90 ) }}
+{{clamp_int(110,-90,90)}}
 ```
 
 ```
@@ -625,8 +665,10 @@ Set the range boundaries for an integer value.
 Round-robin through a sequence.
 
 ```
-{% set options = ['odd' , 'even'] %} {% for n in 1. . 10 %}
-* {{ cycle ( options , n ) }} {% endfor %}
+{% set options = ['odd','even'] %}
+{% for n in 1..10 %}
+* {{cycle(options, n)}}
+{% endfor %}
 ```
 
 ```
@@ -647,7 +689,8 @@ Round-robin through a sequence.
 Create a date object for use with the [date\_modify](/docs/scripting/filters/#date_modify) filter.
 
 ```
-{% set d = date ( '1-Jan-2018 10:00am' ) %} {{ d | date_modify ( '+2 hours' ) | date ( 'F d, Y g:ia' ) }}
+{% set d = date('1-Jan-2018 10:00am') %}
+{{d|date_modify('+2 hours')|date('F d, Y g:ia')}}
 ```
 
 ```
@@ -672,7 +715,7 @@ Interpolate the timestamps between two dates with the given `unit` and `step`.
 **Returns:** An array of Unix timestamps.
 
 ```
-{{ date_lerp ( 'this month' , unit = 'day' , step = 5 ) | map (( v ) => v | date ( 'r' )) | json_encode | json_pretty }}
+{{date_lerp('this month',unit='day',step=5)|map((v) => v|date('r'))|json_encode|json_pretty}}
 ```
 
 ```
@@ -707,7 +750,11 @@ You can use the **dict\_set** function to quickly add, modify, or append items i
 You can set deeply nested keys in a single line using dot-notation:
 
 ```
-{% set var = { "group" : {}} %} {% set var = dict_set ( var , 'group.name' , 'Support' ) %} {% set var = dict_set ( var , 'group.manager.name.first' , 'Kina' ) %} {% set var = dict_set ( var , 'group.manager.name.last' , 'Halpue' ) %} {{ var | json_encode | json_pretty }}
+{% set var = {"group": {}} %}
+{% set var = dict_set(var, 'group.name', 'Support') %}
+{% set var = dict_set(var, 'group.manager.name.first', 'Kina') %}
+{% set var = dict_set(var, 'group.manager.name.last', 'Halpue') %}
+{{var|json_encode|json_pretty}}
 ```
 
 ```
@@ -727,7 +774,12 @@ You can set deeply nested keys in a single line using dot-notation:
 Append items to an array by adding `.[]` to the key:
 
 ```
-{% set var = { "group" : {}} %} {% set var = dict_set ( var , 'group.name' , 'Support' ) %} {% set var = dict_set ( var , 'group.members.[]' , 'Kina Halpue' ) %} {% set var = dict_set ( var , 'group.members.[]' , 'William Portcullis' ) %} {% set var = dict_set ( var , 'group.members.[]' , 'Steven Emplois' ) %} {{ var | json_encode | json_pretty }}
+{% set var = {"group": {}} %}
+{% set var = dict_set(var, 'group.name', 'Support') %}
+{% set var = dict_set(var, 'group.members.[]', 'Kina Halpue') %}
+{% set var = dict_set(var, 'group.members.[]', 'William Portcullis') %}
+{% set var = dict_set(var, 'group.members.[]', 'Steven Emplois') %}
+{{var|json_encode|json_pretty}}
 ```
 
 ```
@@ -746,7 +798,11 @@ Append items to an array by adding `.[]` to the key:
 Append to nested arrays:
 
 ```
-{% set var = [1 , 2 ,[ 3 , 4 ,[ 5 , 6]]] %} {% set var = dict_set ( var , '2.2.[]' , 7 ) %} {% set var = dict_set ( var , '2.2.[]' , 8 ) %} {% set var = dict_set ( var , '2.3' , 9 ) %} {{ var | json_encode | json_pretty }}
+{% set var = [1,2,[3,4,[5,6]]] %}
+{% set var = dict_set(var, '2.2.[]', 7) %}
+{% set var = dict_set(var, '2.2.[]', 8) %}
+{% set var = dict_set(var, '2.3', 9) %}
+{{var|json_encode|json_pretty}}
 ```
 
 ```
@@ -774,7 +830,9 @@ You can use the **dict\_unset** function to remove items by key from an array or
 You can unset deeply nested keys in a single line using dot-notation:
 
 ```
-{% set person = { "person" :{ "name" :{ "first" : "Jane" , "last" : "Tester" } , "age" : 28 , "location" : "Secret" }} %} {% set person = dict_unset ( person , ['person.name.last' , 'person.age' , 'person.location']) %} {{ person | json_encode | json_pretty }}
+{% set person = {"person":{"name":{"first":"Jane","last":"Tester"},"age":28,"location":"Secret"}} %}
+{% set person = dict_unset(person, ['person.name.last','person.age','person.location']) %}
+{{person|json_encode|json_pretty}}
 ```
 
 ```
@@ -799,7 +857,7 @@ Resolve DNS records by hostname and type. This enables workflows like verifying 
 - **type**: The record type (`a`, `aaaa`, `caa`, `cname`, `mx`, `ns`, `ptr`, `soa`, `srv`, `txt`)
 
 ```
-{{ dns_get_record ( 'cerb.ai' , 'a' ) | json_encode | json_pretty }}
+{{dns_get_record('cerb.ai','a')|json_encode|json_pretty}}
 ```
 
 ```
@@ -832,7 +890,7 @@ Resolve a hostname from an IP. If a name can't be resolved for a valid IP, the I
 - **ip**: The IP address to reverse lookup a hostname.
 
 ```
-{{ dns_host_by_ip ( '54.148.127.4' ) }}
+{{dns_host_by_ip('54.148.127.4')}}
 ```
 
 ```
@@ -844,9 +902,10 @@ cerb.email
 You can decode a JSON-encoded string with the **json\_decode** function:
 
 ```
-{% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %} {% set json = json_decode ( json_string ) %}
-Customer: {{ json.name }}
-Order #: {{ json.order_id }}
+{% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %}
+{% set json = json_decode(json_string) %}
+Customer: {{json.name}}
+Order #: {{json.order_id}}
 ```
 
 ```
@@ -861,7 +920,10 @@ This returns an [object](/docs/scripting/arrays-objects/).
 This is nearly identical to [dict\_set](#dict_set).
 
 ```
-{% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %} {% set json = json_decode ( json_string ) %} {% set json = jsonpath_set ( json , 'order_id' , '67890' ) %} {{ json.order_id }}
+{% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %}
+{% set json = json_decode(json_string) %}
+{% set json = jsonpath_set(json, 'order_id', '67890') %}
+{{json.order_id}}
 ```
 
 ```
@@ -871,7 +933,12 @@ This is nearly identical to [dict\_set](#dict_set).
 You can specify an array by appending `[]` without a leading dot (`.`):
 
 ```
-{% set json_string = "{\"team\":{\"groups\":[]}}" %} {% set json = json_decode ( json_string ) %} {% set json = jsonpath_set ( json , 'team.groups[]' , 'Support' ) %} {% set json = jsonpath_set ( json , 'team.groups[]' , 'Sales' ) %} {% set json = jsonpath_set ( json , 'team.groups[]' , 'Development' ) %} {{ json | json_encode | json_pretty }}
+{% set json_string = "{\"team\":{\"groups\":[]}}" %}
+{% set json = json_decode(json_string) %}
+{% set json = jsonpath_set(json, 'team.groups[]', 'Support') %}
+{% set json = jsonpath_set(json, 'team.groups[]', 'Sales') %}
+{% set json = jsonpath_set(json, 'team.groups[]', 'Development') %}
+{{json|json_encode|json_pretty}}
 ```
 
 ```
@@ -897,7 +964,8 @@ colors@list:
   green
   blue
 size@int: 100
-{% endset %} {{ kata_parse ( kata ) | json_encode | json_pretty }}
+{% endset %}
+{{kata_parse(kata)|json_encode|json_pretty}}
 ```
 
 ```
@@ -912,7 +980,8 @@ size@int: 100
 Return the largest value in an array or object.
 
 ```
-{% set numbers = [1 , 9 , 8 , 4 , 2] %} {{ max ( numbers ) }}
+{% set numbers = [1,9,8,4,2] %}
+{{max(numbers)}}
 ```
 
 ```
@@ -924,7 +993,8 @@ Return the largest value in an array or object.
 Return the smallest value in an array or object.
 
 ```
-{% set numbers = [1 , 9 , 8 , 4 , 2] %} {{ min ( numbers ) }}
+{% set numbers = [1,9,8,4,2] %}
+{{min(numbers)}}
 ```
 
 ```
@@ -936,7 +1006,9 @@ Return the smallest value in an array or object.
 Return a random item from a string or array, or a random number between 0 and the given number (inclusive).
 
 ```
-{{ random ([1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 0]) }} {{ random ( "abcdefghijklmnopqrstuvwxyz" ) }} {{ random ( 20 ) }}
+{{random([1,2,3,4,5,6,7,8,9,0])}}
+{{random("abcdefghijklmnopqrstuvwxyz")}}
+{{random(20)}}
 ```
 
 ```
@@ -950,7 +1022,7 @@ o
 Generate a random string of the given length. This is useful for generating confirmation codes or temporary passwords.
 
 ```
-{{ random_string ( 16 ) }}
+{{random_string(16)}}
 ```
 
 ```
@@ -964,7 +1036,8 @@ Return an array with values between `from` and `to` (inclusive).
 `range(from,to,step)`
 
 ```
-{{ range ( 5 , 15 ) | json_encode }} {{ range ( 5 , 15 , 2 ) | json_encode }}
+{{range(5,15)|json_encode}}
+{{range(5,15,2)|json_encode}}
 ```
 
 ```
@@ -977,7 +1050,14 @@ Return an array with values between `from` and `to` (inclusive).
 `regexp_match_all(pattern, string, group)`
 
 ```
-{% set headers = " X - Mailer : Cerb From : customer @ cerb.example To : support @ cerb.example " %} {% set results = regexp_match_all ( "#^(.*?): (.*?)$#m" , headers ) %} {{ results | json_encode | json_pretty }}
+{% set headers = 
+"X-Mailer: Cerb
+From: customer@cerb.example
+To: support@cerb.example
+"
+%}
+{% set results = regexp_match_all("#^(.*?): (.*?)$#m", headers) %}
+{{results|json_encode|json_pretty}}
 ```
 
 ```
@@ -1005,7 +1085,7 @@ Return an array with values between `from` and `to` (inclusive).
 Randomize an array:
 
 ```
-{{ shuffle ([1 , 2 , 3 , 4 , 5]) | json_encode }}
+{{shuffle([1,2,3,4,5])|json_encode}}
 ```
 
 ```
@@ -1017,7 +1097,9 @@ Randomize an array:
 Validate an email address:
 
 ```
-{{ validate_email ( 'kina' ) | json_encode }} {{ validate_email ( 'kina#cerb.example' ) | json_encode }} {{ validate_email ( 'kina@cerb.example' ) | json_encode }}
+{{validate_email('kina')|json_encode}}
+{{validate_email('kina#cerb.example')|json_encode}}
+{{validate_email('kina@cerb.example')|json_encode}}
 ```
 
 ```
@@ -1031,7 +1113,10 @@ true
 Validate a number:
 
 ```
-{{ validate_number ( 'abcde' ) | json_encode }} {{ validate_number ( '20.f' ) | json_encode }} {{ validate_number ( 10 ) | json_encode }} {{ validate_number ( '123.45' ) | json_encode }}
+{{validate_number('abcde')|json_encode}}
+{{validate_number('20.f')|json_encode}}
+{{validate_number(10)|json_encode}}
+{{validate_number('123.45')|json_encode}}
 ```
 
 ```
@@ -1074,7 +1159,8 @@ home.label:Hufenshlagel 1234\n
  02828 Goerlitz\n
  Deutschland
 end:vcard
-{% endset %} {{ vobject_parse ( vcard ) | json_encode | json_pretty }}
+{% endset %}
+{{vobject_parse(vcard)|json_encode|json_pretty}}
 ```
 
 ```
@@ -1183,8 +1269,27 @@ Return a single attribute from an XML node.
 **Returns:** A string from the given XML attribute, or `false`.
 
 ```
-{% set xml_string %} <?xml version = "1.0" encoding = "UTF-8"?> <Movies> <Movie rating= "R" > <Title runtime= "142" >The Shawshank Redemption</Title> <Genre>Drama</Genre> <Director> <Name highratedmovie= "The Mist" > <First>Frank</First> <Last>Darabont</Last> </Name> </Director> <Studio>Columbia Pictures</Studio> <Year>1994</Year> </Movie> </Movies> {% endset %} {% set xml = xml_decode ( xml_string ) %} {% set movie = xml_xpath ( xml , '//Movie' ) | first %} {% set runtime = xml_attr ( movie.Title , 'runtime' ) %}
-The runtime of {{ movie.Title }} is {{ runtime ? ( 60 * runtime ) | secs_pretty : 'unknown' }}.
+{% set xml_string %}
+<?xml version = "1.0" encoding = "UTF-8"?>
+<Movies>
+    <Movie rating="R">
+        <Title runtime="142">The Shawshank Redemption</Title>
+        <Genre>Drama</Genre>
+        <Director>
+            <Name highratedmovie="The Mist">
+                <First>Frank</First>
+                <Last>Darabont</Last>
+            </Name>
+        </Director>
+        <Studio>Columbia Pictures</Studio>
+        <Year>1994</Year>
+    </Movie>
+</Movies>
+{% endset %}
+{% set xml = xml_decode(xml_string) %}
+{% set movie = xml_xpath(xml, '//Movie')|first %}
+{% set runtime = xml_attr(movie.Title,'runtime') %}
+The runtime of {{movie.Title}} is {{runtime ? (60*runtime)|secs_pretty : 'unknown'}}.
 ```
 
 ```
@@ -1206,7 +1311,38 @@ Return all attributes from an XML node.
 **Returns:** An array of attribute keys and values.
 
 ```
-{% set xml_string %} <?xml version = "1.0" encoding = "UTF-8"?> <Movies> <Movie rating= "R" > <Title runtime= "177" >The Godfather</Title> <Genre> Crime Drama </Genre> <Director> <Name> <First>Francis Ford</First> <Last>Coppola</Last> </Name> </Director> <Studio>Paramount Pictures</Studio> <Year>1972</Year> </Movie> <Movie rating= "R" > <Title runtime= "142" >The Shawshank Redemption</Title> <Genre>Drama</Genre> <Director> <Name highratedmovie= "The Mist" > <First>Frank</First> <Last>Darabont</Last> </Name> </Director> <Studio>Columbia Pictures</Studio> <Year>1994</Year> </Movie> </Movies> {% endset %} {% set xml = xml_decode ( xml_string ) %} {% set movies = xml_xpath ( xml , '//Movie' ) %} {{ xml_attrs ( movies [1]) | json_encode | json_pretty }}
+{% set xml_string %}
+<?xml version = "1.0" encoding = "UTF-8"?>
+<Movies>
+    <Movie rating="R">
+        <Title runtime="177">The Godfather</Title>
+        <Genre> Crime Drama </Genre>
+        <Director>
+            <Name>
+                <First>Francis Ford</First>
+                <Last>Coppola</Last>
+            </Name>
+        </Director>
+        <Studio>Paramount Pictures</Studio>
+        <Year>1972</Year>
+    </Movie>
+    <Movie rating= "R">
+        <Title runtime="142">The Shawshank Redemption</Title>
+        <Genre>Drama</Genre>
+        <Director>
+            <Name highratedmovie="The Mist">
+                <First>Frank</First>
+                <Last>Darabont</Last>
+            </Name>
+        </Director>
+        <Studio>Columbia Pictures</Studio>
+        <Year>1994</Year>
+    </Movie>
+</Movies>
+{% endset %}
+{% set xml = xml_decode(xml_string) %}
+{% set movies = xml_xpath(xml, '//Movie') %}
+{{xml_attrs(movies[1])|json_encode|json_pretty}}
 ```
 
 ```
@@ -1228,7 +1364,14 @@ Use the [xml\_xpath](#xml_xpath) function to extract values with XPath[2](#fn:xp
 - **mode**: Use `html` to convert an HTML DOM into an XML document.
 
 ```
-{% set string_of_xml = " < response > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {{ xml_encode ( xml ) }}
+{% set string_of_xml = 
+"<response>
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{{xml_encode(xml)}}
 ```
 
 ```
@@ -1244,7 +1387,14 @@ Use the [xml\_xpath](#xml_xpath) function to extract values with XPath[2](#fn:xp
 You can encode an object as XML with the **xml\_encode** function:
 
 ```
-{% set string_of_xml = "<response xmlns=\"http://www.example.com/api/\" > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {{ xml_encode ( xml.client_id ) }}
+{% set string_of_xml = 
+"<response xmlns=\"http://www.example.com/api/\">
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{{xml_encode(xml.client_id)}}
 ```
 
 ```
@@ -1256,9 +1406,17 @@ You can encode an object as XML with the **xml\_encode** function:
 Use the **xml\_xpath** function to extract values with XPath[2](#fn:xpath) queries:
 
 ```
-{% set string_of_xml = " < response > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {% set client_id = xml_xpath ( xml , '//client_id' ) | first %} {% set invoice_id = xml_xpath ( xml , '//invoice_id' ) | first %}
-Client ID: {{ client_id }}
-Invoice ID: {{ invoice_id }}
+{% set string_of_xml = 
+"<response>
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{% set client_id = xml_xpath(xml, '//client_id')|first %}
+{% set invoice_id = xml_xpath(xml, '//invoice_id')|first %}
+Client ID: {{client_id}}
+Invoice ID: {{invoice_id}}
 ```
 
 ```
@@ -1271,9 +1429,18 @@ Invoice ID: 123
 You can define an XML namespace with the **xml\_xpath\_ns** function:
 
 ```
-{% set string_of_xml = "<response xmlns=\"http://www.example.com/api/\" > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {% set xml = xml_xpath_ns ( xml , 'ns' , 'http://www.example.com/api/' ) %} {% set client_id = xml_xpath ( xml , '//ns:client_id' ) | first %} {% set invoice_id = xml_xpath ( xml , '//ns:invoice_id' ) | first %}
-Client ID: {{ client_id }}
-Invoice ID: {{ invoice_id }}
+{% set string_of_xml = 
+"<response xmlns=\"http://www.example.com/api/\">
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{% set xml = xml_xpath_ns(xml, 'ns', 'http://www.example.com/api/') %}
+{% set client_id = xml_xpath(xml, '//ns:client_id')|first %}
+{% set invoice_id = xml_xpath(xml, '//ns:invoice_id')|first %}
+Client ID: {{client_id}}
+Invoice ID: {{invoice_id}}
 ```
 
 ```
@@ -1291,7 +1458,15 @@ Remove elements from an XML document with an XPath query.
 - **path**: The [XPath](#xml_xpath) query to match elements for removal.
 
 ```
-{% set string_of_xml = " < response > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {% set xml = xml_xpath_remove ( xml , '//invoice_id' ) %} {{ xml_encode ( xml ) }}
+{% set string_of_xml =
+"<response>
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{% set xml = xml_xpath_remove(xml, '//invoice_id') %}
+{{xml_encode(xml)}}
 ```
 
 ```

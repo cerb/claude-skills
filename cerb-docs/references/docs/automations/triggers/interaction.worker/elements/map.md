@@ -10,7 +10,28 @@ In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **
 For instance, an interaction that displays the geographical location of an IP address can drop a pin on a map prompt.
 
 ```
-start: await: form: elements: map/respond_map: resource: uri: cerb:resource:map.world.countries projection: type: mercator scale: 350 center: latitude: 47.0416 longitude: 19.6887 points: size: default: 5 data: point/berlin: latitude: 52.5246 longitude: 13.4033 properties: name: Berlin
+start:
+  await:
+    form:
+      elements:
+        map/respond_map:
+          resource:
+            uri: cerb:resource:map.world.countries
+          projection:
+            type: mercator
+            scale: 350
+            center:
+              latitude: 47.0416
+              longitude: 19.6887
+          points:
+            size:
+              default: 5
+            data:
+              point/berlin:
+                latitude: 52.5246
+                longitude: 13.4033
+                properties:
+                  name: Berlin
 ```
 
  
@@ -24,7 +45,7 @@ The maps element supports all of the functionality from [maps KATA](/docs/maps/#
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### required@bool:

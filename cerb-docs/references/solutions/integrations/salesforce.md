@@ -117,7 +117,23 @@ It may take up to 10 minutes for your new app to be available in Salesforce. If 
 https://developer.salesforce.com/docs/atlas.en-us.api\_rest.meta/api\_rest/dome\_sobject\_create.htm
 
 ```
-start: http.request/createAccount: output: http_response inputs: method: POST url: https://YOUR.SALESFORCE.DOMAIN.my.salesforce.com/services/data/v63.0/sobjects/Account/ headers: Content-Type: application/json authentication: cerb:connected_account:salesforce body: Name: Testerson LLC NumberOfEmployees: 5 Industry: Testing on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/createAccount:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://YOUR.SALESFORCE.DOMAIN.my.salesforce.com/services/data/v63.0/sobjects/Account/
+      headers:
+        Content-Type: application/json
+      authentication: cerb:connected_account:salesforce
+      body:
+        Name: Testerson LLC
+        NumberOfEmployees: 5
+        Industry: Testing
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Get Account info
@@ -125,7 +141,19 @@ start: http.request/createAccount: output: http_response inputs: method: POST ur
 https://developer.salesforce.com/docs/atlas.en-us.api\_rest.meta/api\_rest/dome\_get\_field\_values.htm
 
 ```
-start: http.request/createAccount: output: http_response inputs: method: GET url: https://YOUR.SALESFORCE.DOMAIN.my.salesforce.com/services/data/v63.0/sobjects/Account/ABCDEF12345?fields=Name,NumberOfEmployees,Industry headers: Content-Type: application/json authentication: cerb:connected_account:salesforce on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/createAccount:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://YOUR.SALESFORCE.DOMAIN.my.salesforce.com/services/data/v63.0/sobjects/Account/ABCDEF12345?fields=Name,NumberOfEmployees,Industry
+      headers:
+        Content-Type: application/json
+      authentication: cerb:connected_account:salesforce
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Update an Account record
@@ -133,7 +161,21 @@ start: http.request/createAccount: output: http_response inputs: method: GET url
 https://developer.salesforce.com/docs/atlas.en-us.api\_rest.meta/api\_rest/dome\_update\_fields.htm
 
 ```
-start: http.request/createAccount: output: http_response inputs: method: PATCH url: https://YOUR.SALESFORCE.DOMAIN.my.salesforce.com/services/data/v63.0/sobjects/Account/ABCDEF12345 headers: Content-Type: application/json authentication: cerb:connected_account:salesforce body: BillingCity: Testerville on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/createAccount:
+    output: http_response
+    inputs:
+      method: PATCH
+      url: https://YOUR.SALESFORCE.DOMAIN.my.salesforce.com/services/data/v63.0/sobjects/Account/ABCDEF12345
+      headers:
+        Content-Type: application/json
+      authentication: cerb:connected_account:salesforce
+      body:
+        BillingCity: Testerville
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 # Use the connected account in bot behaviors

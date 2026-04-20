@@ -23,7 +23,21 @@ The TMX format is pretty simple. Each `<tu>` tag defines a new phrase with the I
 For example:
 
 ```
-<tmx> <header creationtool= "Cerb" creationtoolversion= "8.1.4" srclang= "en_US" /> <body> <!-- ... --> <tu tuid= "common.notspam" > <tuv xml:lang= "en_US" > <seg>not spam</seg> </tuv> <tuv xml:lang= "de_DE" > <seg>Kein Spam</seg> </tuv> </tu> <!-- ... --> </body> </tmx>
+<tmx>
+	<header creationtool="Cerb" creationtoolversion="8.1.4" srclang="en_US" />
+	<body>
+	 	<!-- ... -->
+		<tu tuid="common.notspam">
+			<tuv xml:lang="en_US">
+				<seg>not spam</seg>
+			</tuv>
+			<tuv xml:lang="de_DE">
+				<seg>Kein Spam</seg>
+			</tuv>
+		</tu>
+		<!-- ... -->
+	</body>
+</tmx>
 ```
 
 We store each translated language in its own TMX file, so there's only one `<tuv>` child within each `<tu>` phrase.
@@ -31,7 +45,7 @@ We store each translated language in its own TMX file, so there's only one `<tuv
 In Cerb, templates in plugins can use these phrases like:
 
 ```
-{ 'common.notspam' | devblocks_translate | capitalize }
+{'common.notspam'|devblocks_translate|capitalize}
 ```
 
 This way we display each phrase in the preferred language of each worker or contact.
@@ -83,7 +97,7 @@ You're all set!
 2. Use quick search to filter the worklist to phrases in your new language without a translation. For example:
 
 ```
-lang: fr_FR mine:""
+lang:fr_FR mine:""
 ```
 
 1. Cerb automatically provides the English version of each phrase. Translate that phrase into your language in the textbox below each entry.
@@ -99,7 +113,7 @@ To share your new translation:
 2. Use quick search to filter the worklist to phrases in your new language. For example:
 
 ```
-lang: fr_FR
+lang:fr_FR
 ```
 
 1. Click the **Export** button below the worklist.

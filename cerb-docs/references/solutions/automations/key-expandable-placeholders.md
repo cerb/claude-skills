@@ -12,5 +12,10 @@ This is a shortcut for [record.get:](/docs/automations/commands/record.get/)
 ## Create a ticket dictionary
 
 ```
-start: set: ticket__context: ticket ticket_id: 1 return: output: {{ ticket__label }}
+start:
+  set:
+    ticket__context: ticket
+    ticket_id: 1
+  return:
+    output: {{ticket__label}}
 ```

@@ -14,11 +14,19 @@ First, you can wrap a text block in the `apply` tag.
 
 - 
 ```
-start: return: output@text: {% apply upper %} All of this text will be uppercase. On every line. {% endapply %}
+start:
+  return:
+    output@text:
+      {% apply upper %}
+      All of this text will be uppercase.
+      On every line.
+      {% endapply %}
 ```
 - 
 ```
-__return: output: | ALL OF THIS TEXT WILL BE UPPERCASE.
+__return:
+  output: |
+    ALL OF THIS TEXT WILL BE UPPERCASE.
     ON EVERY LINE.
 ```
 
@@ -29,11 +37,21 @@ Alternatively, you can chain multiple filters together with the pipe (`|`) chara
 
 - 
 ```
-start: set: text@text: ALL OF THIS TEXT WILL BE LOWER CASE. ON EVERY LINE. WITH A >. AT THE START OF EACH LINE. return: output: {{ text|lower|indent('> ') }}
+start:
+  set:
+    text@text:
+      ALL OF THIS TEXT WILL BE LOWER CASE.
+      ON EVERY LINE.
+      WITH A >.
+      AT THE START OF EACH LINE.
+  return:
+    output: {{text|lower|indent('> ')}}
 ```
 - 
 ```
-__return: output: | > all of this text will be lower case
+__return:
+  output: |
+    > all of this text will be lower case
     > on every line.
     > with a >.
     > at the start of each line.

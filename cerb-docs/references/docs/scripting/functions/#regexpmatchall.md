@@ -10,7 +10,14 @@ tags: ["docs", "docs-scripting"]
 `regexp_match_all(pattern, string, group)`
 
 ```
-{% set headers = " X - Mailer : Cerb From : customer @ cerb.example To : support @ cerb.example " %} {% set results = regexp_match_all ( "#^(.*?): (.*?)$#m" , headers ) %} {{ results | json_encode | json_pretty }}
+{% set headers = 
+"X-Mailer: Cerb
+From: customer@cerb.example
+To: support@cerb.example
+"
+%}
+{% set results = regexp_match_all("#^(.*?): (.*?)$#m", headers) %}
+{{results|json_encode|json_pretty}}
 ```
 
 ```

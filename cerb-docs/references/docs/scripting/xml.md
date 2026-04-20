@@ -14,9 +14,17 @@ You can decode an XML string into an XML object with the [xml\_decode()](/docs/s
 Use the [xml\_xpath()](/docs/scripting/functions/#xml_xpath) function to extract values with XPath[2](#fn:xpath) queries.
 
 ```
-{% set string_of_xml = " < response > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {% set client_id = xml_xpath ( xml , '//client_id' ) | first %} {% set invoice_id = xml_xpath ( xml , '//invoice_id' ) | first %}
-Client ID: {{ client_id }}
-Invoice ID: {{ invoice_id }}
+{% set string_of_xml = 
+"<response>
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{% set client_id = xml_xpath(xml, '//client_id')|first %}
+{% set invoice_id = xml_xpath(xml, '//invoice_id')|first %}
+Client ID: {{client_id}}
+Invoice ID: {{invoice_id}}
 ```
 
 ```
@@ -29,9 +37,18 @@ Invoice ID: 123
 You can define an XML namespace with the [xml\_xpath\_ns()](/docs/scripting/functions/#xml_xpath_ns) function:
 
 ```
-{% set string_of_xml = "<response xmlns=\"http://www.example.com/api/\" > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {% set xml = xml_xpath_ns ( xml , 'ns' , 'http://www.example.com/api/' ) %} {% set client_id = xml_xpath ( xml , '//ns:client_id' ) | first %} {% set invoice_id = xml_xpath ( xml , '//ns:invoice_id' ) | first %}
-Client ID: {{ client_id }}
-Invoice ID: {{ invoice_id }}
+{% set string_of_xml = 
+"<response xmlns=\"http://www.example.com/api/\">
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{% set xml = xml_xpath_ns(xml, 'ns', 'http://www.example.com/api/') %}
+{% set client_id = xml_xpath(xml, '//ns:client_id')|first %}
+{% set invoice_id = xml_xpath(xml, '//ns:invoice_id')|first %}
+Client ID: {{client_id}}
+Invoice ID: {{invoice_id}}
 ```
 
 ```
@@ -44,7 +61,14 @@ Invoice ID: 123
 You can encode an object as XML with the [xml\_encode()](/docs/scripting/functions/#xml_encode) function:
 
 ```
-{% set string_of_xml = "<response xmlns=\"http://www.example.com/api/\" > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {{ xml_encode ( xml.client_id ) }}
+{% set string_of_xml = 
+"<response xmlns=\"http://www.example.com/api/\">
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{{xml_encode(xml.client_id)}}
 ```
 
 ```

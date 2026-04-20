@@ -73,7 +73,253 @@ Click the **Update Template** button at the top of the popup.
 Paste the following workflow KATA into the large text box:
 
 ```
-workflow: name: wgm.example.new_ticket_interaction_with_snippets description: A workflow demonstrating how to create tickets from interactive snippet templates with dynamic prompts and form fields website: https://cerb.ai/workflows/wgm.example.custom_records.academia/ version: 2025-07-13T20:41:19Z requirements: cerb_version: >=11.1.3 <11.2 cerb_plugins: cerberusweb.core records: snippet/snippetTemplate: fields: title: Automatic Email Template context@text: owner__context: app owner_id: 0 prompts_kata@raw: # Add prompted placeholders here # (use Ctrl+Shift for autocompletion) text/summary: label: Summary: required@bool: yes params: multiple@bool: yes picklist/prompt_picklist: label: Picklist: default: green required@bool: no params: options@list: red green blue checkbox/prompt_checkbox: label: Checkbox: required@bool: no default@bool: yes content@raw: ============================================ EMAIL TEMPLATE ============================================ Summary: {{ summary }} Checkbox: {{ prompt_checkbox ? 'yes' : 'no' }} {% if prompt_picklist %} Picklist: {{ prompt_picklist }} {% endif %} automation/scriptCreateTicket: fields: name: wgm.example.new_ticket_interaction_with_snippets.createTicketFromSnippet extension_id: cerb.trigger.interaction.worker description@text: script@raw: inputs: record/snippet: record_type: snippet required@bool: yes text/to: type: email required@bool: yes text/from: type: email default: customer@cerb.example start: outcome/isNotPlaintext: if@bool: {{ inputs.snippet.context is not empty }} then: await/error: form: title: Error elements: say: content: The selected snippet must be of type: plaintext error: The selected snippet must be of type: plaintext # Create interaction form elements for the snippet prompts set/elements: elements@kata: text/form_subject: label: Subject: required@bool: yes {% for prompt in inputs.snippet.prompts %} {% if 'checkbox' == prompt.type %} sheet/form_ {{ prompt.name }} : label: {{ prompt.label }} {% if prompt.required %} required@bool: yes {% endif %} default: {{ prompt.default ? '1' : '0' }} data: true: label: yes value: 1 false: label: no value: 0 schema: layout: style: grid headings@bool: no paging@bool: no columns: selection/value: params: mode: single text/label: {% elseif 'picklist' == prompt.type %} sheet/form_ {{ prompt.name }} : label: {{ prompt.label }} {% if prompt.required %} required@bool: yes {% endif %} default: {{ prompt.default }} data@json: {{ prompt.params.options|map((v) => {'label':v,'value':v})|json_encode }} schema: layout: style: grid headings@bool: no paging@bool: no columns: selection/value: params: mode: single text/label: {% else %} text/form_ {{ prompt.name }} : label: {{ prompt.label }} {% if prompt.required %} required@bool: yes {% endif %} {% endif %} {% endfor %} await: form: title: Interaction elements@key: elements set/dict: template_dict@kata: {% for prompt in inputs.snippet.prompts %} {{ prompt.name }} @key: form_ {{ prompt.name }} {% endfor %} kata.parse: output: parsed_snippet inputs: kata: template: {{ inputs.snippet.content }} dict@key: template_dict email.parse: output: results inputs: message@text: From: {{ inputs.from }} To: {{ inputs.to }} MIME-Version: 1.0 Content-Type: text/plain; charset="UTF-8" Content-Transfer-Encoding: quoted-printable Subject: =?UTF-8?Q? {{ form_subject|qp_encode }} ?= {{ parsed_snippet.template|qp_encode }} await/confirm: form: title: Ticket Created elements: say: content@text: New ticket created! sheet: data: 0@key: results schema: layout: headings@bool: no paging@bool: no columns: card/ticket_id: label: Ticket params: context: ticket id_template@raw: {{ id }} label_template@raw: {{ _label }} # [TODO] Send an API request # http.request: policy_kata@raw: commands: email.parse: allow@bool: yes record.create: deny/type@bool: {{ inputs.record_type is not record type ('draft') }} allow@bool: yes record.search: deny/type@bool: {{ inputs.record_type is not record type ('snippet') }} allow@bool: yes workspace_page/pageEmailTemplates: fields: name: Email Templates extension_id: core.workspace.page.workspace owner__context: workflow owner_id: {{ workflow_id }} workspace_tab/tabExample: fields: name: Example page_id: {{ records.pageEmailTemplates.id }} extension_id: core.workspace.tab.dashboard pos@int: 99 params: layout@text: prompts_kata@text: workspace_widget/widgetToolbar: fields: label: Email templates tab_id: {{ records.tabExample.id }} extension_id: core.workspace.widget.form_interaction pos@int: 1 width_units@int: 4 zone: content params: interactions_kata@text: menu/templates: label: Create ticket icon: envelope items: interaction/createTicket: label: Template #1 uri: cerb:automation:wgm.example.new_ticket_interaction_with_snippets.createTicketFromSnippet inputs: to: support@cerb.example from: customer@cerb.example snippet: {{ records.snippetTemplate.id }} interaction/summary: label: Template #2 uri: cerb:automation:wgm.example.new_ticket_interaction_with_snippets.createTicketFromSnippet inputs: to: support@cerb.example from: boss@cerb.example snippet: {{ records.snippetTemplate.id }} is_popup: 1
+workflow:
+  name: wgm.example.new_ticket_interaction_with_snippets
+  description: A workflow demonstrating how to create tickets from interactive snippet templates with dynamic prompts and form fields
+  website: https://cerb.ai/workflows/wgm.example.custom_records.academia/
+  version: 2025-07-13T20:41:19Z
+  requirements:
+    cerb_version: >=11.1.3 <11.2
+    cerb_plugins: cerberusweb.core
+records:
+  snippet/snippetTemplate:
+    fields:
+      title: Automatic Email Template
+      context@text:
+      owner__context: app
+      owner_id: 0
+      prompts_kata@raw:
+        # Add prompted placeholders here
+        # (use Ctrl+Shift for autocompletion)
+        text/summary:
+          label: Summary:
+          required@bool: yes
+          params:
+            multiple@bool: yes
+        picklist/prompt_picklist:
+          label: Picklist:
+          default: green
+          required@bool: no
+          params:
+            options@list:
+              red
+              green
+              blue
+        checkbox/prompt_checkbox:
+          label: Checkbox:
+          required@bool: no
+          default@bool: yes
+      content@raw:
+        ============================================
+        EMAIL TEMPLATE
+        ============================================
+        
+        Summary:
+        
+        {{summary}}
+        
+        Checkbox: {{prompt_checkbox ? 'yes' : 'no'}}
+        {% if prompt_picklist %}
+        Picklist: {{prompt_picklist}}
+        
+        {% endif %}
+  automation/scriptCreateTicket:
+    fields:
+      name: wgm.example.new_ticket_interaction_with_snippets.createTicketFromSnippet
+      extension_id: cerb.trigger.interaction.worker
+      description@text:
+      script@raw:
+        inputs:
+          record/snippet:
+            record_type: snippet
+            required@bool: yes
+          text/to:
+            type: email
+            required@bool: yes
+          text/from:
+            type: email
+            default: customer@cerb.example
+        
+        start:
+          outcome/isNotPlaintext:
+            if@bool: {{inputs.snippet.context is not empty}}
+            then:
+              await/error:
+                form:
+                  title: Error
+                  elements:
+                    say:
+                      content: The selected snippet must be of type: plaintext
+              error: The selected snippet must be of type: plaintext
+          
+          # Create interaction form elements for the snippet prompts
+          set/elements:
+            elements@kata:
+              text/form_subject:
+                label: Subject:
+                required@bool: yes
+              {% for prompt in inputs.snippet.prompts %}
+              {% if 'checkbox' == prompt.type %}
+              sheet/form_{{prompt.name}}:
+                label: {{prompt.label}}
+                {% if prompt.required %}
+                required@bool: yes
+                {% endif %}
+                default: {{prompt.default ? '1' : '0'}}
+                data:
+                  true:
+                    label: yes
+                    value: 1
+                  false:
+                    label: no
+                    value: 0
+                schema:
+                  layout:
+                    style: grid
+                    headings@bool: no
+                    paging@bool: no
+                  columns:
+                    selection/value:
+                      params:
+                        mode: single
+                    text/label:
+              {% elseif 'picklist' == prompt.type %}
+              sheet/form_{{prompt.name}}:
+                label: {{prompt.label}}
+                {% if prompt.required %}
+                required@bool: yes
+                {% endif %}
+                default: {{prompt.default}}
+                data@json: {{prompt.params.options|map((v) => {'label':v,'value':v})|json_encode}}
+                schema:
+                  layout:
+                    style: grid
+                    headings@bool: no
+                    paging@bool: no
+                  columns:
+                    selection/value:
+                      params:
+                        mode: single
+                    text/label:
+              {% else %}
+              text/form_{{prompt.name}}:
+                label: {{prompt.label}}
+                {% if prompt.required %}
+                required@bool: yes
+                {% endif %}
+                
+              {% endif %}
+              {% endfor %}
+          
+          await:
+            form:
+              title: Interaction
+              elements@key: elements
+        
+          set/dict:
+            template_dict@kata:
+              {% for prompt in inputs.snippet.prompts %}
+              {{prompt.name}}@key: form_{{prompt.name}}
+              {% endfor %}
+        
+          kata.parse:
+            output: parsed_snippet
+            inputs:
+              kata:
+                template: {{inputs.snippet.content}}
+              dict@key: template_dict
+        
+          email.parse:
+            output: results
+            inputs:
+              message@text:
+                From: {{inputs.from}}
+                To: {{inputs.to}}
+                MIME-Version: 1.0
+                Content-Type: text/plain; charset="UTF-8"
+                Content-Transfer-Encoding: quoted-printable
+                Subject: =?UTF-8?Q?{{form_subject|qp_encode}}?=
+                
+                {{parsed_snippet.template|qp_encode}}
+          
+          await/confirm:
+            form:
+              title: Ticket Created
+              elements:
+                say:
+                  content@text:
+                    New ticket created!
+                sheet:
+                  data:
+                    0@key: results
+                  schema:
+                    layout:
+                      headings@bool: no
+                      paging@bool: no
+                    columns:
+                      card/ticket_id:
+                        label: Ticket
+                        params:
+                          context: ticket
+                          id_template@raw: {{id}}
+                          label_template@raw: {{_label}}
+          
+          # [TODO] Send an API request
+          # http.request:
+      policy_kata@raw:
+        commands:
+          email.parse:
+            allow@bool: yes
+          record.create:
+            deny/type@bool: {{inputs.record_type is not record type ('draft')}}
+            allow@bool: yes
+          record.search:
+            deny/type@bool: {{inputs.record_type is not record type ('snippet')}}
+            allow@bool: yes
+  workspace_page/pageEmailTemplates:
+    fields:
+      name: Email Templates
+      extension_id: core.workspace.page.workspace
+      owner__context: workflow
+      owner_id: {{workflow_id}}
+  workspace_tab/tabExample:
+    fields:
+      name: Example
+      page_id: {{records.pageEmailTemplates.id}}
+      extension_id: core.workspace.tab.dashboard
+      pos@int: 99
+      params:
+        layout@text:
+        prompts_kata@text:
+  workspace_widget/widgetToolbar:
+    fields:
+      label: Email templates
+      tab_id: {{records.tabExample.id}}
+      extension_id: core.workspace.widget.form_interaction
+      pos@int: 1
+      width_units@int: 4
+      zone: content
+      params:
+        interactions_kata@text:
+          menu/templates:
+            label: Create ticket
+            icon: envelope
+            items:
+              interaction/createTicket:
+                label: Template #1
+                uri: cerb:automation:wgm.example.new_ticket_interaction_with_snippets.createTicketFromSnippet
+                inputs:
+                  to: support@cerb.example
+                  from: customer@cerb.example
+                  snippet: {{records.snippetTemplate.id}}
+              interaction/summary:
+                label: Template #2
+                uri: cerb:automation:wgm.example.new_ticket_interaction_with_snippets.createTicketFromSnippet
+                inputs:
+                  to: support@cerb.example
+                  from: boss@cerb.example
+                  snippet: {{records.snippetTemplate.id}}
+        is_popup: 1
 ```
 
 Click the **Continue** button three times.

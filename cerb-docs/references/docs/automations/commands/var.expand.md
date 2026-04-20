@@ -8,14 +8,25 @@ tags: ["docs", "docs-automations"]
 The **var.expand:** command expands nested keys at a given dictionary path.
 
 ```
-inputs: records/tickets: record_type: ticket required@bool: yes 
- start: var.expand: inputs: key: inputs:tickets paths: owner_,customfields return: owners@json: {{ array_column(inputs.tickets,'owner__label','_label')|json_encode }}
+inputs:
+  records/tickets:
+    record_type: ticket
+    required@bool: yes
+
+start:
+  var.expand:
+    inputs:
+      key: inputs:tickets
+      paths: owner_,customfields
+  return:
+    owners@json: {{array_column(inputs.tickets,'owner__label','_label')|json_encode}}
 ```
 
 Result:
 
 ```
-owners : ' [#ANB-75367-518] Always use HTML mode on replies' : Kina Halpue
+owners:
+  '[#ANB-75367-518] Always use HTML mode on replies': Kina Halpue
 ```
 
 - [Syntax](#syntax)

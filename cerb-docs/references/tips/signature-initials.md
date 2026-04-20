@@ -19,7 +19,9 @@ Our templating language is based on Twig, which includes a handy syntax for extr
 So you could display the first initial of a worker's last name using:
 
 ```
-{% set first_name = "Kina" %} {% set last_name = "Halpue" %} {{ first_name }} {{ last_name [0 : 1] }}
+{% set first_name = "Kina" %}
+{% set last_name = "Halpue" %}
+{{first_name}} {{last_name[0:1]}}
 ```
 
 Which would output:
@@ -31,7 +33,17 @@ Kina H
 You can also do things like:
 
 ```
-{% set first_name = "Kina" %} {% set last_name = "Halpue" %} {# Shortcut for the first letter #} {{ last_name [: 1] }} {# Everything except for the first letter #} {{ last_name [1 :] }} {# The last three letters #} {{ last_name [- 3 :] }}
+{% set first_name = "Kina" %}
+{% set last_name = "Halpue" %}
+
+{# Shortcut for the first letter #}
+{{last_name[:1]}}
+
+{# Everything except for the first letter #}
+{{last_name[1:]}}
+
+{# The last three letters #}
+{{last_name[-3:]}}
 ```
 
 Which outputs:

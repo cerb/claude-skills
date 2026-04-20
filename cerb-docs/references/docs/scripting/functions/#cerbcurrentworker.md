@@ -16,7 +16,7 @@ Return a dictionary for the currently logged in worker. This returns an empty di
 | **expand** | An optional comma-delimited string or array of dictionary keys to expand. |
 
 ```
-Hello {{ cerb_current_worker () . first_name }}!
+Hello {{cerb_current_worker().first_name}}!
 ```
 
 ```

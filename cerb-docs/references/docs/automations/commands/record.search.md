@@ -8,7 +8,14 @@ tags: ["docs", "docs-automations"]
 The **record.search:** command returns record dictionaries from a search query.
 
 ```
-start: record.search: inputs: record_type: ticket record_query: status:${status} record_query_params: status: o output: results
+start:
+  record.search:
+    inputs:
+      record_type: ticket
+      record_query: status:${status}
+      record_query_params:
+        status: o
+    output: results
 ```
 
 - [Syntax](#syntax)

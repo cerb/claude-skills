@@ -65,7 +65,11 @@ An interaction automation [dictionary](/docs/automations/#dictionaries) starts w
 When suspending in the `await:form:` state, the interaction displays a web form with the desired elements. The form may prompt for user input, validate it, and set dictionary keys (placeholders) with the responses.
 
 ```
-await: form: title: Your form title elements: # ...
+await:
+  form:
+    title: Your form title
+    elements:
+      # ...
 ```
 
 ### title:
@@ -100,9 +104,25 @@ A form can be created with any combination of the following element types:
 When the interaction suspends in the `await` state, a `submit:` element is automatically appended to the form if one doesn't already exist.
 
 ```
-start: await/who: form: title: Introduction elements: text/prompt_name: label: What is your name? required@bool: yes   
-   await/hello: form: title: Hello! elements: say/hello: content: Hello, {{ prompt_name }} !   
-   return: user: name@key: prompt_name
+start:
+  await/who:
+    form:
+      title: Introduction
+      elements:
+        text/prompt_name:
+          label: What is your name?
+          required@bool: yes
+  
+  await/hello:
+    form:
+      title: Hello!
+      elements:
+        say/hello:
+          content: Hello, {{prompt_name}}!
+  
+  return:
+    user:
+      name@key: prompt_name
 ```
 
 ## await:draft:
@@ -123,9 +143,34 @@ An optional `output:` parameter has the following keys:
 This allows the interaction to make decisions based on those outcomes.
 
 ```
-start: record.create: output: draft_record inputs: record_type: draft # See: https://cerb.ai/docs/records/types/draft/
-        fields: name: Draft for customer@cerb.example type: mail.compose worker_id@key,int: worker_id params: to: customer@cerb.example content@text: Hi, #signature await/resume: draft: uri: cerb:draft: {{ draft_record.id }} output: results_draft 
-   outcome/sent: if@bool: {{ results_draft.status ends with '.sent' }} then: await: form: say: Message sent!
+start:
+  record.create:
+    output: draft_record
+    inputs:
+      record_type: draft
+      # See: https://cerb.ai/docs/records/types/draft/
+      fields:
+        name: Draft for customer@cerb.example
+        type: mail.compose
+        worker_id@key,int: worker_id
+        params:
+          to: customer@cerb.example
+          content@text:
+            Hi,
+            
+            #signature
+
+  await/resume:
+    draft:
+      uri: cerb:draft:{{draft_record.id}}
+      output: results_draft
+
+  outcome/sent:
+    if@bool: {{results_draft.status ends with '.sent'}}
+    then:
+      await:
+        form:
+          say: Message sent!
 ```
 
 ## await:duration:
@@ -149,12 +194,45 @@ The `until:` parameter is an absolute (`2021-12-31 08:00 America/New_York`) or r
 (none)
 
 ```
-start: set: isPlaying@bool: yes   
-   while: if@bool: {{ isPlaying }} do: # A suspenseful wait
-        await/rolling: duration: message: Rolling... until: 3 seconds       
-       await/rolled: form: title: Results elements: say: content@text: You rolled a {{ random(1,6) }} ==== submit/prompt_continue: buttons: continue/yes: label: Roll again icon: playing-dices icon_at: start value: roll continue/no: label: Quit style: secondary value: quit       
+start:
+  set:
+    isPlaying@bool: yes
+  
+  while:
+    if@bool: {{isPlaying}}
+    do:
+      # A suspenseful wait
+      await/rolling:
+        duration:
+          message: Rolling...
+          until: 3 seconds
+      
+      await/rolled:
+        form:
+          title: Results
+          elements:
+            say:
+              content@text:
+                You rolled a {{random(1,6)}}
+                ====
+            submit/prompt_continue:
+              buttons:
+                continue/yes:
+                  label: Roll again
+                  icon: playing-dices
+                  icon_at: start
+                  value: roll
+                continue/no:
+                  label: Quit
+                  style: secondary
+                  value: quit
+      
       # If quitting, break the loop
-        outcome/quit: if@bool: {{ prompt_continue == 'quit' }} then: set: isPlaying@bool: no
+      outcome/quit:
+        if@bool: {{prompt_continue == 'quit'}}
+        then:
+          set:
+            isPlaying@bool: no
 ```
 
 ## await:interaction:
@@ -174,7 +252,47 @@ The `uri:` parameter specifies the delegate [automation](/docs/records/types/aut
 An `output:` key specifies the placeholder that should receive the results from the delegate.
 
 ```
-start: while: if@bool: yes do: await/menu: form: title: Menu elements: say: message: How can we help? sheet/prompt_menu: required@bool: yes data: 0: key: map label: Map 1: key: echo label: Echo schema: layout: style: buttons headings@bool: no paging@bool: no title_column: label columns: selection/key: params: mode: single text/label: submit: continue@bool: no reset@bool: no await/do: interaction: output: results uri@text: cerb:automation:{{{ 'map': 'wgm.interaction.locationByIP', 'echo': 'wgm.interaction.echo', }[prompt_menu]}}
+start:
+  while:
+    if@bool: yes
+    do:
+      await/menu:
+        form:
+          title: Menu
+          elements:
+            say:
+              message: How can we help?
+            sheet/prompt_menu:
+              required@bool: yes
+              data:
+                0:
+                  key: map
+                  label: Map
+                1:
+                  key: echo
+                  label: Echo
+              schema:
+                layout:
+                  style: buttons
+                  headings@bool: no
+                  paging@bool: no
+                  title_column: label
+                columns:
+                  selection/key:
+                    params:
+                      mode: single
+                  text/label:
+            submit:
+              continue@bool: no
+              reset@bool: no
+      await/do:
+        interaction:
+          output: results
+          uri@text:
+            cerb:automation:{{{
+                'map': 'wgm.interaction.locationByIP',
+                'echo': 'wgm.interaction.echo',
+              }[prompt_menu]}}
 ```
 
 ## await:record:
@@ -197,8 +315,30 @@ An optional `output:` parameter specifies a placeholder to store the status of t
 This allows the interaction to make decisions based on those outcomes.
 
 ```
-inputs: text/record_type: type: record_type required@bool: yes record/column: record_type: project_board_column required@bool: yes 
- start: await: record: uri: cerb: {{ inputs.record_type }} output: result outcome: if@bool: {{ result.record._context and result.record.id }} then: record.update: output: new_record inputs: record_type: {{ result.record._context }} record_id: {{ result.record.id }} fields: links@list: project_board_column: {{ inputs.column.id }}
+inputs:
+  text/record_type:
+    type: record_type
+    required@bool: yes
+  record/column:
+    record_type: project_board_column
+    required@bool: yes
+
+start:
+  await:
+    record:
+      uri: cerb:{{inputs.record_type}}
+      output: result
+  outcome:
+    if@bool: {{result.record._context and result.record.id}}
+    then:
+      record.update:
+        output: new_record
+        inputs:
+          record_type: {{result.record._context}}
+          record_id: {{result.record.id}}
+          fields:
+            links@list:
+              project_board_column:{{inputs.column.id}}
 ```
 
 ## return:
@@ -208,7 +348,10 @@ When the interaction concludes in the `return` state, it returns any number of k
 Each [caller](#callers) has a set of expected return keys to control its behavior.
 
 ```
-return: key1: value1 key2: value2 ...
+return:
+  key1: value1
+  key2: value2
+  ...
 ```
 
 The following keys are available on all worker interactions:

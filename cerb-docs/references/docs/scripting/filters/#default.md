@@ -11,7 +11,7 @@ You can use the **default** filter to give a default value to empty variables:
 
 ```
 {% set name = '' %}
-Hi {{ name | default ( 'there' ) }}
+Hi {{name|default('there')}}
 ```
 
 ```

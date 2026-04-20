@@ -40,16 +40,29 @@ Route based on LLM classification:
 
 - 
 ```
-start: function/classify: uri: cerb:automation:example.llm.classify inputs: text: {{ email_body }} output: results 
-   return: group_name: {{ results.group }} bucket_name: {{ results.bucket }}
+start:
+  function/classify:
+    uri: cerb:automation:example.llm.classify
+    inputs:
+      text: {{email_body}}
+    output: results
+
+  return:
+    group_name: {{results.group}}
+    bucket_name: {{results.bucket}}
 ```
 - 
 ```
-commands: function: deny/uri@bool: {{ uri != 'cerb:automation:example.llm.classify' }} allow@bool: yes
+commands:
+  function:
+    deny/uri@bool: {{uri != 'cerb:automation:example.llm.classify'}}
+    allow@bool: yes
 ```
 - 
 ```
-automation/llm: uri: cerb:automation:example.llm.route disabled@bool: no
+automation/llm:
+  uri: cerb:automation:example.llm.route
+  disabled@bool: no
 ```
 
 See [Mail Routing](/docs/setup/mail/routing/) for more information about routing and Routing KATA.

@@ -14,7 +14,19 @@ You can use record.create: to create a [comment](/docs/comments/) on any [record
 
 - 
 ```
-start: record.create/comment: output: new_comment inputs: record_type: comment fields: author__context: app author_id@int: 0 target__context: ticket target_id@int: 123 is_markdown@int: 1 comment@text: This is a **comment** from an automation.
+start:
+  record.create/comment:
+    output: new_comment
+    inputs:
+      record_type: comment
+      fields:
+        author__context: app
+        author_id@int: 0
+        target__context: ticket
+        target_id@int: 123
+        is_markdown@int: 1
+        comment@text:
+          This is a **comment** from an automation.
 ```
 
 | Field | &nbsp; |
@@ -24,6 +36,9 @@ start: record.create/comment: output: new_comment inputs: record_type: comment f
 
 - 
 ```
-commands: record.create: deny/type@bool: {{ inputs.record_type is not record type ('comment') }} allow@bool: yes
+commands:
+  record.create:
+    deny/type@bool: {{inputs.record_type is not record type ('comment')}}
+    allow@bool: yes
 ```
 

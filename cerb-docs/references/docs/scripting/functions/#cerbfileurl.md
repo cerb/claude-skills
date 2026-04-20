@@ -14,7 +14,7 @@ This automatically adapts to use within Cerb and community portals (e.g. SSL, pr
 `cerb_file_url(id)`
 
 ```
-{{ cerb_file_url ( '1' ) }}
+{{cerb_file_url('1')}}
 ```
 
 ```

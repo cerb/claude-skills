@@ -10,7 +10,24 @@ In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **
 Formats: date, decimal, bool, email, ip, geopoint, number, record type, timestamp, uri, url
 
 ```
-start: await: form: elements: text/prompt_name: label: Name: required@bool: yes type: freeform text/prompt_email: label: Email: required@bool: yes type: email placeholder: you@example.com text/prompt_website: label: Website: required@bool: yes type: url placeholder: https://website.example
+start:
+  await:
+    form:
+      elements:
+        text/prompt_name:
+          label: Name:
+          required@bool: yes
+          type: freeform
+        text/prompt_email:
+          label: Email:
+          required@bool: yes
+          type: email
+          placeholder: you@example.com
+        text/prompt_website:
+          label: Website:
+          required@bool: yes
+          type: url
+          placeholder: https://website.example
 ```
 
  
@@ -26,7 +43,7 @@ The optional label to display above the form element.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### required@bool:
@@ -80,5 +97,16 @@ An optional custom validation script. Any output is considered to be an error.
 You can use `if...elseif` to check multiple conditions.
 
 ```
-text/prompt_name: label: Name: required@bool: yes type: freeform validation@raw: {% if prompt_name is empty %} A name is required. {% elseif prompt_name|length < 8 %} A name must be 8 or more characters. {% elseif prompt_name|length > 32 %} A name must be less than 32 characters. {% endif %}
+text/prompt_name:
+  label: Name:
+  required@bool: yes
+  type: freeform
+  validation@raw:
+    {% if prompt_name is empty %}
+    A name is required.
+    {% elseif prompt_name|length < 8 %}
+    A name must be 8 or more characters. 
+    {% elseif prompt_name|length > 32 %}
+    A name must be less than 32 characters. 
+    {% endif %}
 ```

@@ -49,8 +49,10 @@ This is primarily useful for expanding placeholders in dictionaries before seria
 Arrays can be iterated with **for** loops:
 
 ```
-{% set list_of_names = ["Jeff" , "Dan" , "Darren"] %} {% for name in list_of_names %}
-* {{ name }} {% endfor %}
+{% set list_of_names = ["Jeff", "Dan", "Darren"] %}
+{% for name in list_of_names %}
+* {{name}}
+{% endfor %}
 ```
 
 ```
@@ -64,7 +66,8 @@ Arrays can be iterated with **for** loops:
 Conditional logic can display different content based on the result of any number of **expressions**:
 
 ```
-{% set sla_expiration = '+2 weeks' | date ( 'U' ) %} {% if sla_expiration >= 'now' | date ( 'U' ) %}
+{% set sla_expiration = '+2 weeks'|date('U') %}
+{% if sla_expiration >= 'now'|date('U') %}
 Your SLA coverage is active.
 {% else %}
 Your SLA coverage has expired.
@@ -80,7 +83,9 @@ Your SLA coverage is active.
 You can make your own variables in a template using the **set** command:
 
 ```
-{% set name = "Kina" %} {% set quantity = 5 %} {{ name }} has {{ quantity }} gold stars.
+{% set name = "Kina" %}
+{% set quantity = 5 %}
+{{name}} has {{quantity}} gold stars.
 ```
 
 ```
@@ -94,7 +99,11 @@ Variables are temporary. When you define a new variable in one action, it can't 
 Remove whitespace between HTML tags in the enclosed block of text with **spaceless**:
 
 ```
-{% spaceless %} <div> <span>This will all be on a single line.</span> </div> {% endspaceless %}
+{% spaceless %}
+<div>
+  <span>This will all be on a single line.</span>
+</div>
+{% endspaceless %}
 ```
 
 ```
@@ -122,9 +131,11 @@ You can print a variable by typing {{variable_name}}
 Create a separate variable scope using the **with** command:
 
 ```
-{% with %} {% set name = 'Kina' - %}
-Hi, {{ name }}!
-{% endwith %} {% if name is empty %}
+{% with %}
+{% set name = 'Kina' -%}
+Hi, {{name}}!
+{% endwith %}
+{% if name is empty %}
 Where did you go?
 {% endif %}
 ```

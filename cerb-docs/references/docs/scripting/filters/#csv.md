@@ -12,9 +12,18 @@ tags: ["docs", "docs-scripting"]
 Format an array as a comma-separated values list. This is useful for exporting reports for Excel from bots.
 
 ```
-{% set records = [{ id : 1 , subject : "Help with the API" , } , { id : 2 , subject : "Automating email replies" , }] %}
+{% set records = [
+	{
+		id: 1,
+		subject: "Help with the API",
+	},
+	{
+		id: 2,
+		subject: "Automating email replies", 
+	}
+] %}
 ID,Subject
-{{ records | csv }}
+{{records|csv}}
 ```
 
 ```

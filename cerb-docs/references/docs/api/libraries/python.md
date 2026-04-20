@@ -21,5 +21,15 @@ pip install cerbapi
 # Usage
 
 ```
-from cerbapi import Cerb cerb = Cerb ( access_key = ' myaccesskey ' , secret = ' IdeallyDontStoreThisInYourCodeLikeThis ' , base = ' https://cerb.example/rest/ ' ) print ( cerb . get_record ( ' ticket ' , 1 )) print ( cerb . get_contexts ()) print ( cerb . search_records ( ' comment ' , query = ' author.worker:Rob ' ))
+from cerbapi import Cerb
+
+cerb = Cerb(
+        access_key='myaccesskey',
+        secret='IdeallyDontStoreThisInYourCodeLikeThis',
+        base='https://cerb.example/rest/'
+        )
+
+print(cerb.get_record('ticket', 1))
+print(cerb.get_contexts())
+print(cerb.search_records('comment', query='author.worker:Rob'))
 ```

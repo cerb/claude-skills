@@ -14,9 +14,9 @@ The value is `1` (true) or `0` (false).
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "checkbox" : 1 
- }
+{
+	"checkbox": 1
+}
 ```
 
 ### Records API

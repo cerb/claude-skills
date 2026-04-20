@@ -8,7 +8,18 @@ tags: ["docs", "docs-automations"]
 The **queue.push:** command adds new messages to a [queue](/docs/queues/).
 
 ```
-start: queue.push: inputs: queue_name: example.queue.name messages: 0: id: message0 priority: high 1: id: message1 priority: low output: results
+start:
+  queue.push:
+    inputs:
+      queue_name: example.queue.name
+      messages:
+        0:
+          id: message0
+          priority: high
+        1:
+          id: message1
+          priority: low
+    output: results
 ```
 
 - [Syntax](#syntax)

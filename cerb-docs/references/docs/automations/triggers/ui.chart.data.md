@@ -26,5 +26,9 @@ The automation [dictionary](/docs/automations/#dictionaries) starts with the fol
 | `data` | dictionary | The chart data as an array of series with the same length |
 
 ```
-return: data: ts@csv: 2023-10, 2023-11, 2023-12 series0@csv: 104, 77, 84 series1@csv: 218, 335, 183
+return:
+  data:
+    ts@csv: 2023-10, 2023-11, 2023-12
+    series0@csv: 104, 77, 84 
+    series1@csv: 218, 335, 183
 ```

@@ -12,7 +12,9 @@ tags: ["docs", "docs-scripting"]
 Sort an associative array by its keys rather than its values.
 
 ```
-{% set arr = { "z" : "A" , "a" : "B" , "m" : "C" } %} {% set arr = array_sort_keys ( arr ) %} {{ arr | keys | join ( ',' ) }}
+{% set arr = {"z":"A", "a":"B", "m":"C"} %}
+{% set arr = array_sort_keys(arr) %}
+{{arr|keys|join(',')}}
 ```
 
 ```

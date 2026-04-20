@@ -60,186 +60,186 @@ Click the **(+)** icon above the behaviors worklist to add a new behavior:
 Copy the following behavior script to your clipboard:
 
 ```
-{ 
-   "behavior" :{ 
-     "title" : "Bot powered contact form" , 
-     "is_disabled" : false , 
-     "is_private" : false , 
-     "event" :{ 
-       "key" : "event.webhook.received" , 
-       "label" : "Webhook received" 
-     }, 
-     "nodes" :[ 
-       { 
-         "type" : "action" , 
-         "title" : "Set CORS headers" , 
-         "params" :{ 
-           "actions" :[ 
-             { 
-               "action" : "set_http_header" , 
-               "name" : "Access-Control-Allow-Origin" , 
-               "value" : "*" 
-             }, 
-             { 
-               "action" : "set_http_header" , 
-               "name" : "Access-Control-Allow-Headers" , 
-               "value" : "User-Agent, Content-Type" 
-             }, 
-             { 
-               "action" : "set_http_header" , 
-               "name" : "Access-Control-Allow-Methods" , 
-               "value" : "OPTION,POST" 
-             } 
-           ] 
-         } 
-       }, 
-       { 
-         "type" : "switch" , 
-         "title" : "Method:" , 
-         "nodes" :[ 
-           { 
-             "type" : "outcome" , 
-             "title" : "OPTIONS" , 
-             "params" :{ 
-               "groups" :[ 
-                 { 
-                   "any" : 0 , 
-                   "conditions" :[ 
-                     { 
-                       "condition" : "http_verb" , 
-                       "oper" : "is" , 
-                       "value" : "OPTIONS" 
-                     } 
-                   ] 
-                 } 
-               ] 
-             } 
-           }, 
-           { 
-             "type" : "outcome" , 
-             "title" : "POST" , 
-             "params" :{ 
-               "groups" :[ 
-                 { 
-                   "any" : 0 , 
-                   "conditions" :[ 
-                     { 
-                       "condition" : "http_verb" , 
-                       "oper" : "is" , 
-                       "value" : "POST" 
-                     } 
-                   ] 
-                 } 
-               ] 
-             }, 
-             "nodes" :[ 
-               { 
-                 "type" : "switch" , 
-                 "title" : "Valid?" , 
-                 "nodes" :[ 
-                   { 
-                     "type" : "outcome" , 
-                     "title" : "No, email is blank" , 
-                     "params" :{ 
-                       "groups" :[ 
-                         { 
-                           "any" : 0 , 
-                           "conditions" :[ 
-                             { 
-                               "condition" : "http_param" , 
-                               "name" : "email" , 
-                               "oper" : "is" , 
-                               "value" : "" 
-                             } 
-                           ] 
-                         } 
-                       ] 
-                     }, 
-                     "nodes" :[ 
-                       { 
-                         "type" : "action" , 
-                         "title" : "Return error" , 
-                         "params" :{ 
-                           "actions" :[ 
-                             { 
-                               "action" : "set_http_body" , 
-                               "value" : "{% set json = {} %} \r\n {% set json = dict_set(json, 'error', \" The 'Email Address' field is required. \" ) %} \r\n {{ json | json_encode | json_pretty }}" 
-                             } 
-                           ] 
-                         } 
-                       } 
-                     ] 
-                   }, 
-                   { 
-                     "type" : "outcome" , 
-                     "title" : "No, message is blank" , 
-                     "params" :{ 
-                       "groups" :[ 
-                         { 
-                           "any" : 0 , 
-                           "conditions" :[ 
-                             { 
-                               "condition" : "http_param" , 
-                               "name" : "message" , 
-                               "oper" : "is" , 
-                               "value" : "" 
-                             } 
-                           ] 
-                         } 
-                       ] 
-                     }, 
-                     "nodes" :[ 
-                       { 
-                         "type" : "action" , 
-                         "title" : "Return error" , 
-                         "params" :{ 
-                           "actions" :[ 
-                             { 
-                               "action" : "set_http_body" , 
-                               "value" : "{% set json = {} %} \r\n {% set json = dict_set(json, 'error', \" The 'Message' field is required. \" ) %} \r\n {{ json | json_encode | json_pretty }}" 
-                             } 
-                           ] 
-                         } 
-                       } 
-                     ] 
-                   }, 
-                   { 
-                     "type" : "outcome" , 
-                     "title" : "Yes" , 
-                     "params" :{ 
-                       "groups" :[ 
-                         { 
-                           "any" : 0 , 
-                           "conditions" :[ 
+{
+  "behavior":{
+    "title":"Bot powered contact form",
+    "is_disabled":false,
+    "is_private":false,
+    "event":{
+      "key":"event.webhook.received",
+      "label":"Webhook received"
+    },
+    "nodes":[
+      {
+        "type":"action",
+        "title":"Set CORS headers",
+        "params":{
+          "actions":[
+            {
+              "action":"set_http_header",
+              "name":"Access-Control-Allow-Origin",
+              "value":"*"
+            },
+            {
+              "action":"set_http_header",
+              "name":"Access-Control-Allow-Headers",
+              "value":"User-Agent, Content-Type"
+            },
+            {
+              "action":"set_http_header",
+              "name":"Access-Control-Allow-Methods",
+              "value":"OPTION,POST"
+            }
+          ]
+        }
+      },
+      {
+        "type":"switch",
+        "title":"Method:",
+        "nodes":[
+          {
+            "type":"outcome",
+            "title":"OPTIONS",
+            "params":{
+              "groups":[
+                {
+                  "any":0,
+                  "conditions":[
+                    {
+                      "condition":"http_verb",
+                      "oper":"is",
+                      "value":"OPTIONS"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "type":"outcome",
+            "title":"POST",
+            "params":{
+              "groups":[
+                {
+                  "any":0,
+                  "conditions":[
+                    {
+                      "condition":"http_verb",
+                      "oper":"is",
+                      "value":"POST"
+                    }
+                  ]
+                }
+              ]
+            },
+            "nodes":[
+              {
+                "type":"switch",
+                "title":"Valid?",
+                "nodes":[
+                  {
+                    "type":"outcome",
+                    "title":"No, email is blank",
+                    "params":{
+                      "groups":[
+                        {
+                          "any":0,
+                          "conditions":[
+                            {
+                              "condition":"http_param",
+                              "name":"email",
+                              "oper":"is",
+                              "value":""
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "nodes":[
+                      {
+                        "type":"action",
+                        "title":"Return error",
+                        "params":{
+                          "actions":[
+                            {
+                              "action":"set_http_body",
+                              "value":"{% set json = {} %}\r\n{% set json = dict_set(json, 'error', \"The 'Email Address' field is required.\") %}\r\n{{ json | json_encode | json_pretty }}"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type":"outcome",
+                    "title":"No, message is blank",
+                    "params":{
+                      "groups":[
+                        {
+                          "any":0,
+                          "conditions":[
+                            {
+                              "condition":"http_param",
+                              "name":"message",
+                              "oper":"is",
+                              "value":""
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    "nodes":[
+                      {
+                        "type":"action",
+                        "title":"Return error",
+                        "params":{
+                          "actions":[
+                            {
+                              "action":"set_http_body",
+                              "value":"{% set json = {} %}\r\n{% set json = dict_set(json, 'error', \"The 'Message' field is required.\") %}\r\n{{ json | json_encode | json_pretty }}"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type":"outcome",
+                    "title":"Yes",
+                    "params":{
+                      "groups":[
+                        {
+                          "any":0,
+                          "conditions":[
                             
-                           ] 
-                         } 
-                       ] 
-                     }, 
-                     "nodes" :[ 
-                       { 
-                         "type" : "action" , 
-                         "title" : "Return success" , 
-                         "params" :{ 
-                           "actions" :[ 
-                             { 
-                               "action" : "set_http_body" , 
-                               "value" : "{% set json = {} %} \r\n {% set json = dict_set(json, 'success', \" Thanks! We've received your message. \" ) %} \r\n {{ json | json_encode | json_pretty }}" 
-                             } 
-                           ] 
-                         } 
-                       } 
-                     ] 
-                   } 
-                 ] 
-               } 
-             ] 
-           } 
-         ] 
-       } 
-     ] 
-   } 
- }
+                          ]
+                        }
+                      ]
+                    },
+                    "nodes":[
+                      {
+                        "type":"action",
+                        "title":"Return success",
+                        "params":{
+                          "actions":[
+                            {
+                              "action":"set_http_body",
+                              "value":"{% set json = {} %}\r\n{% set json = dict_set(json, 'success', \"Thanks! We've received your message.\") %}\r\n{{ json | json_encode | json_pretty }}"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
 Select **Import** at the top of the popup and paste the copied behavior.

@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Set the range boundaries for a decimal value.
 
 ```
-{{ clamp_float ( - 105.19 , 0 , 100 ) }}
+{{clamp_float(-105.19,0,100)}}
 ```
 
 ```

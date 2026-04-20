@@ -16,7 +16,7 @@ Resolve a hostname from an IP. If a name can't be resolved for a valid IP, the I
 - **ip**: The IP address to reverse lookup a hostname.
 
 ```
-{{ dns_host_by_ip ( '54.148.127.4' ) }}
+{{dns_host_by_ip('54.148.127.4')}}
 ```
 
 ```

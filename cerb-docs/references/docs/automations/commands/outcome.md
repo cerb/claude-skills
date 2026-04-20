@@ -15,7 +15,12 @@ The **outcome:** command makes a sequence of commands conditional. Each outcome 
 # Syntax
 
 ```
-start: outcome/weekend: if@bool: {{ 'now'|date('l') in ['Saturday','Sunday'] }} then: return: output: It is the weekend.
+start:
+  outcome/weekend:
+    if@bool: {{'now'|date('l') in ['Saturday','Sunday']}}
+    then:
+      return:
+        output: It is the weekend.
 ```
 
 Multiple outcomes can be grouped in a [decision](/docs/automations/commands/decision/) command. The first matching outcome is used.

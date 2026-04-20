@@ -10,8 +10,15 @@ tags: ["docs"]
 `worklist.records` [data queries](/docs/data-queries/) retrieve record dictionaries with a [search query](/docs/search/).
 
 ```
-type: worklist.records of: ticket expand: [group_,custom_] query: ( status: open limit: 10 sort: -updated ) 
- format: dictionaries
+type:worklist.records
+of:ticket
+expand:[group_,custom_]
+query:(
+  status:open
+  limit:10
+  sort:-updated
+)
+format:dictionaries
 ```
 
 - [of:](#of)
@@ -29,7 +36,7 @@ type: worklist.records of: ticket expand: [group_,custom_] query: ( status: open
 The `of:` key specifies the type of [records](/docs/records/) to retrieve.
 
 ```
-of: ticket
+of:ticket
 ```
 
 # query:
@@ -45,7 +52,7 @@ The `query.required:` key specifies the required [query](/docs/search/) for filt
 The `expand:` key specifies which key paths should be expanded in the results.
 
 ```
-expand: [custom_,group_,owner_]
+expand:[custom_,group_,owner_]
 ```
 
 # page:
@@ -67,7 +74,11 @@ The worklist results can be returned in these formats:
 ## Return a stacked bar chart of tickets by owner by status
 
 ```
-type: worklist.records of: ticket query: (status:open owner.id:me) expand: [group_,owner_] format: dictionaries
+type:worklist.records
+of:ticket
+query:(status:open owner.id:me)
+expand:[group_,owner_]
+format:dictionaries
 ```
 
  

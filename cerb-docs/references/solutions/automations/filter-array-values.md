@@ -14,10 +14,35 @@ Here is an example of using the |filter modifier with arrow functions to filter 
 
 - 
 ```
-start: set: numbers@csv: {{ range(1, 100)|join(',') }} return: multiples5@csv: {{ numbers|filter((n,k) => 0 == n % 5)|join(',') }}
+start:
+  set:
+    numbers@csv: {{range(1, 100)|join(',')}}
+  return:
+    multiples5@csv: {{numbers|filter((n,k) => 0 == n % 5)|join(',')}}
 ```
 - 
 ```
-__return : multiples5 : - " 5" - " 10" - " 15" - " 20" - " 25" - " 30" - " 35" - " 40" - " 45" - " 50" - " 55" - " 60" - " 65" - " 70" - " 75" - " 80" - " 85" - " 90" - " 95" - " 100"
+__return:
+  multiples5:
+  - "5"
+  - "10"
+  - "15"
+  - "20"
+  - "25"
+  - "30"
+  - "35"
+  - "40"
+  - "45"
+  - "50"
+  - "55"
+  - "60"
+  - "65"
+  - "70"
+  - "75"
+  - "80"
+  - "85"
+  - "90"
+  - "95"
+  - "100"
 ```
 

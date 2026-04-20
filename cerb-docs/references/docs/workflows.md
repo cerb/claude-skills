@@ -21,8 +21,29 @@ We provide a [library](/resources/workflows/) of pre-built workflows for common 
 Here's a simple workflow KATA template that creates a new task using a configurable name and owner.
 
 ```
-workflow: name: example.newTask version@date: 2025-12-31T00:00:00Z description: This example workflow manages a task record requirements: cerb_version: >=11.0 <11.2 cerb_plugins: cerberusweb.core, config: text/taskName: label: Task name: default: New task from a workflow chooser/taskOwner: label: Task owner: multiple@bool: no record_type: worker record_query: isDisabled:n 
- records: task/newTask: deletionPolicy: retain fields: owner_id: {{ config.taskOwner_id|default(0) }} title: {{ config.taskName }}
+workflow:
+  name: example.newTask
+  version@date: 2025-12-31T00:00:00Z
+  description: This example workflow manages a task record
+  requirements:
+    cerb_version: >=11.0 <11.2
+    cerb_plugins: cerberusweb.core,
+  config:
+    text/taskName:
+      label: Task name:
+      default: New task from a workflow
+    chooser/taskOwner:
+      label: Task owner:
+      multiple@bool: no
+      record_type: worker
+      record_query: isDisabled:n
+
+records:
+  task/newTask:
+    deletionPolicy: retain
+    fields:
+      owner_id: {{config.taskOwner_id|default(0)}}
+      title: {{config.taskName}}
 ```
 
 When you make a changes to a workflow template, any records that were previously created by the workflow are automatically updated to match. The workflow manages the mapping between template "keys" and local record IDs.
@@ -41,7 +62,33 @@ When you make a changes to a workflow template, any records that were previously
 ## Schema
 
 ```
-config: chooser: default: label: multiple@bool: record_query: record_type: text: default: label: extensions: activity: id: label: message: permission: id: label: translation: id: langs: __lang_code__: records: __record_type__: deletionPolicy: fields: updatePolicy:
+config:
+  chooser:
+    default:
+    label:
+    multiple@bool:
+    record_query:
+    record_type:
+  text:
+    default:
+    label:
+extensions:
+  activity:
+    id:
+    label:
+    message:
+  permission:
+    id:
+    label:
+  translation:
+    id:
+    langs:
+      __lang_code__:
+records:
+  __record_type__:
+    deletionPolicy:
+    fields:
+    updatePolicy:
 ```
 
 ### config:

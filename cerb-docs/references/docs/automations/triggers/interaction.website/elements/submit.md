@@ -10,7 +10,14 @@ In [website interactions](/docs/automations/triggers/interaction.website/) forms
 This is automatically added when an interaction exits in the [await state](/docs/automations/#exit-states). You do not need to do it yourself.
 
 ```
-start: await: form: title: Menu elements: submit: continue@bool: yes reset@bool: yes
+start:
+  await:
+    form:
+      title: Menu
+      elements:
+        submit:
+          continue@bool: yes
+          reset@bool: yes
 ```
 
  
@@ -22,7 +29,24 @@ start: await: form: title: Menu elements: submit: continue@bool: yes reset@bool:
 Alternatively, you can define custom buttons of type `continue` or `reset`. The clicked button will set the `submit/` placeholder to its `value:`.
 
 ```
-start: await: form: title: Menu elements: submit/prompt_menu: buttons: continue/save: label: Save size: whole continue/discard: label: Discard style: secondary size: half reset/back: label: Back value: back size: half
+start:
+  await:
+    form:
+      title: Menu
+      elements:
+        submit/prompt_menu:
+          buttons:
+            continue/save:
+              label: Save
+              size: whole
+            continue/discard:
+              label: Discard
+              style: secondary
+              size: half
+            reset/back:
+              label: Back
+              value: back
+              size: half
 ```
 
  
@@ -32,7 +56,7 @@ start: await: form: title: Menu elements: submit/prompt_menu: buttons: continue/
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ expression }}
+hidden@bool: {{expression}}
 ```
 
 ### is\_automatic:

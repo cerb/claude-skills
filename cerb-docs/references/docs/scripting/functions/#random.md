@@ -10,7 +10,9 @@ tags: ["docs", "docs-scripting"]
 Return a random item from a string or array, or a random number between 0 and the given number (inclusive).
 
 ```
-{{ random ([1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 , 0]) }} {{ random ( "abcdefghijklmnopqrstuvwxyz" ) }} {{ random ( 20 ) }}
+{{random([1,2,3,4,5,6,7,8,9,0])}}
+{{random("abcdefghijklmnopqrstuvwxyz")}}
+{{random(20)}}
 ```
 
 ```

@@ -22,7 +22,9 @@ Have a great day! 🌈
 
 Best regards,
 The Team 👋
-{% endset %} {{ message | qp_encode }}
+{% endset %}
+
+{{message|qp_encode}}
 ```
 
 ```

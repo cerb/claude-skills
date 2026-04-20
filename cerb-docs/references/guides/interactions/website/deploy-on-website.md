@@ -65,7 +65,219 @@ Click on **(Empty)**.
 Paste the following workflow template:
 
 ```
-workflow: name: wgm.example.website.agent version: 2025-02-07T02:17:36Z description: An example interactive bot you can deploy on any website. website: https://cerb.ai/ requirements: cerb_version: >=11.0.4 <11.2 cerb_plugins: cerberusweb.core, cerb.website.interactions config: text/bot_name: label: Bot name: default: Website Agent text/website_url: label: Website URL: default: https://cerb.ai/ records: community_portal/portalBot: fields: name: {{ config.bot_name }} extension_id: cerb.website.interactions updated_at@int: 1738894279 uri: website_agent params: automations_kata@raw: automation/router: uri: cerb:automation:wgm.example.website.agent.router inputs: interaction: {{ interaction }} cors_origins_allowed@text: portal_kata@text: layout: header: logo: text: {{ config.bot_name }} navbar: link/name: label: Website href: {{ config.website_url }} class: cerb-link-button badge: interaction: router automation/scriptRouter: fields: name: wgm.example.website.agent.router extension_id: cerb.trigger.interaction.website description@text: script@raw: inputs: text/interaction: start: set: interactions: contact: key: contact label: Contact me uri: cerb:automation:wgm.example.website.agent.contact docs: key: docs label: Search the docs uri: cerb:automation:wgm.example.website.agent.docs while: if@bool: yes do: # If we're given an interaction on our first run, start it directly decision/hasInteraction: outcome/yes: if@bool: {{ inputs.interaction and interactions[inputs.interaction] }} then: set: prompt_route: {{ inputs.interaction }} var.unset: inputs: key: inputs:interaction outcome/else: then: await/router: form: title: Cerb elements: say: content@text: #### How can I help? submit/prompt_route: buttons@kata: {% for interaction in interactions %} continue/ {{ interaction.key }} : label: {{ interaction.label }} {% endfor %} await/run: interaction: output: results uri: {{ interactions[prompt_route].uri }} policy_kata@text: automation/scriptContact: fields: name: wgm.example.website.agent.contact extension_id: cerb.trigger.interaction.website description@text: script@raw: start: await/contact: form: title: Contact me elements: text/prompt_email: label: Email address: type: email required@bool: yes textarea/prompt_message: label: Message: required@bool: yes submit/prompt_submit: buttons: continue/send: label: Send value: send reset/discard: label: Discard email.parse/parse: output: results inputs: message@text: From: {{ prompt_email }} Subject: Contact me {{ prompt_message }} await/thanks: form: elements: say: content@text: Thanks! Your reference number is # {{ results.mask }} . We'll get back to you as soon as possible. policy_kata@raw: commands: email.parse: allow@bool: yes automation/scriptDocs: fields: name: wgm.example.website.agent.docs extension_id: cerb.trigger.interaction.website description@text: script@raw: start: while: if@bool: {{ 'back' != prompt_submit }} do: http.request/apiDocs: output: http_response inputs: method: POST url: https://api.cerb.cloud/docs/search headers: Content-Type: application/json body: query@key: prompt_query limit@int: 10 on_error: error: on_success: set: response_json@json: {{ http_response.body }} await/query: form: title: Search Docs elements: text/prompt_query: label: Search query: required@bool: yes placeholder: (e.g. What is Cerb?) sheet/prompt_results: hidden@bool: {{ response_json.results is empty }} data@key: response_json:results limit@int: 10 schema: layout: style: fieldsets title_column: title headings@bool: no paging@bool: yes filtering@bool: no columns: link/title: params: text_key: title href_template@raw: {{ url }} # [TODO] new tab text/url: text/summary: submit/prompt_submit: buttons: continue/search: label: Search reset/back: label: Back policy_kata@raw: commands: http.request: deny/url@bool: {{ inputs.url is not prefixed ('https://api.cerb.cloud/docs/') }} allow@bool: yes
+workflow:
+  name: wgm.example.website.agent
+  version: 2025-02-07T02:17:36Z
+  description: An example interactive bot you can deploy on any website.
+  website: https://cerb.ai/
+  requirements:
+    cerb_version: >=11.0.4 <11.2
+    cerb_plugins: cerberusweb.core, cerb.website.interactions
+  config:
+    text/bot_name:
+      label: Bot name:
+      default: Website Agent
+    text/website_url:
+      label: Website URL:
+      default: https://cerb.ai/
+records:
+  community_portal/portalBot:
+    fields:
+      name: {{config.bot_name}}
+      extension_id: cerb.website.interactions
+      updated_at@int: 1738894279
+      uri: website_agent
+      params:
+        automations_kata@raw:
+          automation/router:
+            uri: cerb:automation:wgm.example.website.agent.router
+            inputs:
+              interaction: {{interaction}}
+        cors_origins_allowed@text:
+        portal_kata@text:
+          layout:
+            header:
+              logo:
+                text: {{config.bot_name}}
+              navbar:
+                link/name:
+                  label: Website
+                  href: {{config.website_url}}
+                  class: cerb-link-button
+                
+            badge:
+              interaction: router
+  automation/scriptRouter:
+    fields:
+      name: wgm.example.website.agent.router
+      extension_id: cerb.trigger.interaction.website
+      description@text:
+      script@raw:
+        inputs:
+          text/interaction:
+        
+        start:
+          set:
+            interactions:
+              contact:
+                key: contact
+                label: Contact me
+                uri: cerb:automation:wgm.example.website.agent.contact
+              docs:
+                key: docs
+                label: Search the docs
+                uri: cerb:automation:wgm.example.website.agent.docs
+        
+          while:
+            if@bool: yes
+            do:
+              # If we're given an interaction on our first run, start it directly
+              decision/hasInteraction:
+                outcome/yes:
+                  if@bool: {{inputs.interaction and interactions[inputs.interaction]}}
+                  then:
+                    set:
+                      prompt_route: {{inputs.interaction}}
+                    var.unset:
+                      inputs:
+                        key: inputs:interaction
+                      
+                outcome/else:
+                  then:
+                    await/router:
+                      form:
+                        title: Cerb
+                        elements:
+                          say:
+                            content@text:
+                              #### How can I help?
+                          submit/prompt_route:
+                            buttons@kata:
+                              {% for interaction in interactions %}
+                              continue/{{interaction.key}}:
+                                label: {{interaction.label}}
+                              {% endfor %}
+              await/run:
+                interaction:
+                  output: results
+                  uri: {{interactions[prompt_route].uri}}
+      policy_kata@text:
+  automation/scriptContact:
+    fields:
+      name: wgm.example.website.agent.contact
+      extension_id: cerb.trigger.interaction.website
+      description@text:
+      script@raw:
+        start:
+          await/contact:
+            form:
+              title: Contact me
+              elements:
+                text/prompt_email:
+                  label: Email address:
+                  type: email
+                  required@bool: yes
+                  
+                textarea/prompt_message:
+                  label: Message:
+                  required@bool: yes
+                
+                submit/prompt_submit:
+                  buttons:
+                    continue/send:
+                      label: Send
+                      value: send
+                    reset/discard:
+                      label: Discard
+          
+          email.parse/parse:
+            output: results
+            inputs:
+              message@text:
+                From: {{prompt_email}}
+                Subject: Contact me
+                
+                {{prompt_message}}
+          
+          await/thanks:
+            form:
+              elements:
+                say:
+                  content@text:
+                    Thanks! Your reference number is #{{results.mask}}.
+                    
+                    We'll get back to you as soon as possible.
+      policy_kata@raw:
+        commands:
+          email.parse:
+            allow@bool: yes
+  automation/scriptDocs:
+    fields:
+      name: wgm.example.website.agent.docs
+      extension_id: cerb.trigger.interaction.website
+      description@text:
+      script@raw:
+        start:
+          while:
+            if@bool: {{'back' != prompt_submit}}
+            do:
+              http.request/apiDocs:
+                output: http_response
+                inputs:
+                  method: POST
+                  url: https://api.cerb.cloud/docs/search
+                  headers:
+                    Content-Type: application/json
+                  body:
+                    query@key: prompt_query 
+                    limit@int: 10
+                on_error:
+                  error:
+                on_success:
+                  set:
+                    response_json@json: {{http_response.body}}
+            
+              await/query:
+                form:
+                  title: Search Docs
+                  elements:
+                    text/prompt_query:
+                      label: Search query:
+                      required@bool: yes
+                      placeholder: (e.g. What is Cerb?)
+                    
+                    sheet/prompt_results:
+                      hidden@bool: {{response_json.results is empty}}
+                      data@key: response_json:results
+                      limit@int: 10
+                      schema:
+                        layout:
+                          style: fieldsets
+                          title_column: title
+                          headings@bool: no
+                          paging@bool: yes
+                          filtering@bool: no
+                        columns:
+                          link/title:
+                            params:
+                              text_key: title
+                              href_template@raw: {{url}}
+                              # [TODO] new tab
+                          text/url:
+                          text/summary:
+                    
+                    submit/prompt_submit:
+                      buttons:
+                        continue/search:
+                          label: Search
+                        reset/back:
+                          label: Back
+                          
+      policy_kata@raw:
+        commands:
+          http.request:
+            deny/url@bool: {{inputs.url is not prefixed ('https://api.cerb.cloud/docs/')}}
+            allow@bool: yes
 ```
 
 Click the **Continue** button twice.
@@ -89,7 +301,13 @@ On your portal's profile page, select the **Configure** tab, then copy the code 
 For example, paste the following `<script>` tag in the footer of your website (ideally above the `</body>`).
 
 ```
-<script id= "cerb-interactions" data-cerb-badge-interaction= "menu" type= "text/javascript" src= "https://cerb.example/portal/my-portal/assets/cerb.js" crossorigin= "anonymous" defer ></script>
+<script id="cerb-interactions"
+  data-cerb-badge-interaction="menu"
+  type="text/javascript"
+  src="https://cerb.example/portal/my-portal/assets/cerb.js"
+  crossorigin="anonymous"
+  defer
+></script>
 ```
 
 - Replace `https://cerb.example/` above with your own Cerb base URL.
@@ -104,7 +322,7 @@ You can include URL-encoded parameters in a `data-cerb-interaction-params` attri
 For instance:
 
 ```
-<button type= "button" data-cerb-interaction= "example" data-cerb-interaction-params= "&param1=value1&param2=value2" >Example Interaction</button>
+<button type="button" data-cerb-interaction="example" data-cerb-interaction-params="&param1=value1&param2=value2">Example Interaction</button>
 ```
 
 ### Triggering interactions from links
@@ -128,8 +346,10 @@ When you need to tamper-proof interaction parameters, you should create a signat
 For instance, if you were generating the unsubscribe URLs from a bot behavior in Cerb, we could do something like:
 
 ```
-{% set email = "customer@example.com" %} {% set hmac_secret = "a1b2c3d4e5f6abcd1234" %} {% set signature = [email] | join | hash_hmac ( hmac_secret , "sha256" ) %}
-https://website.example/#/unsubscribe&email={{ email }} &s={{ signature }}
+{% set email = "customer@example.com" %}
+{% set hmac_secret = "a1b2c3d4e5f6abcd1234" %}
+{% set signature = [email]|join|hash_hmac(hmac_secret,"sha256") %}
+https://website.example/#/unsubscribe&email={{email}}&s={{signature}}
 ```
 
 If you had multiple parameters to sign, you'd append them like `[email,param2,param3]|join` above.
@@ -147,8 +367,10 @@ Based on the desired level of security, you can shorten the URL by only includin
 It's a simple change to our URL generation script to use a signature segment instead:
 
 ```
-{% set email = "customer@example.com" %} {% set hmac_secret = "a1b2c3d4e5f6abcd1234" %} {% set signature = [email] | join | hash_hmac ( hmac_secret , "sha256" ) %}
-https://website.example/#/unsubscribe&email={{ email }} &s={{ signature [24 : 16] }}
+{% set email = "customer@example.com" %}
+{% set hmac_secret = "a1b2c3d4e5f6abcd1234" %}
+{% set signature = [email]|join|hash_hmac(hmac_secret,"sha256") %}
+https://website.example/#/unsubscribe&email={{email}}&s={{signature[24:16]}}
 ```
 
 The `signature[24:16]` syntax returns the next 16 characters of `signature` starting at the 24th position. You could use any segment, as long as you're comparing it in the same way later.
@@ -192,7 +414,10 @@ You can style the Cerb bot chat bubble and window on your website using CSS sele
 For instance:
 
 ```
-.cerb-interaction-badge .cerb-interaction-badge--icon { } .cerb-interaction-popup { } .cerb-interaction-popup .cerb-interaction-popup--title { } .cerb-interaction-popup .cerb-interaction-popup--form-elements-button {}
+.cerb-interaction-badge .cerb-interaction-badge--icon { }
+.cerb-interaction-popup { }
+.cerb-interaction-popup .cerb-interaction-popup--title { }
+.cerb-interaction-popup .cerb-interaction-popup--form-elements-button {}
 ```
 
 You can change the icon in the chat bubble, change the bubble's size or position, change the colors in the chat window, etc.

@@ -37,7 +37,21 @@ Let's start with a simple request for your account information.
 Create a new `index.php` file with the following content:
 
 ```
-<?php require_once ( "CerbApi.php" ); define ( 'CERB_BASE_URL' , 'https://cerb.example/rest/' ); // URL to your Cerb install define ( 'CERB_ACCESS_KEY' , 'XXXX' ); // Access Key define ( 'CERB_SECRET_KEY' , 'XXXX' ); // Secret Key $cerb = new Cerb_WebAPI ( CERB_ACCESS_KEY , CERB_SECRET_KEY ); $out = $cerb -> get ( CERB_BASE_URL . 'workers/me.json' ); if ( null != ( $content_type = $cerb -> getContentType ())) { header ( "Content-Type: " . $content_type ); echo $out ; }
+<?php
+require_once("CerbApi.php");
+
+define('CERB_BASE_URL', 'https://cerb.example/rest/'); // URL to your Cerb install
+define('CERB_ACCESS_KEY', 'XXXX'); // Access Key
+define('CERB_SECRET_KEY', 'XXXX'); // Secret Key
+
+$cerb = new Cerb_WebAPI(CERB_ACCESS_KEY, CERB_SECRET_KEY);
+
+$out = $cerb->get(CERB_BASE_URL . 'workers/me.json');
+
+if(null != ($content_type = $cerb->getContentType())) {
+	header("Content-Type: " . $content_type);
+	echo $out;
+}
 ```
 
 You'll need to modify the following constants:
@@ -55,41 +69,41 @@ Run your `index.php` script in a browser or from the command line.
 You should receive back a JSON response with your worker details:
 
 ```
-{ 
-   "__build" : 2017110901 , 
-   "__status" : "success" , 
-   "__version" : "8.2.2" , 
-   "_context" : "cerberusweb.contexts.worker" , 
-   "_image_url" : "https://cerb.example/avatars/worker/1?v=1510279250" , 
-   "_label" : "Kina Halpue" , 
-   "address__context" : "cerberusweb.contexts.address" , 
-   "address_contact__context" : "cerberusweb.contexts.contact" , 
-   "address_contact_org__context" : "cerberusweb.contexts.org" , 
-   "address_contact_org_email__context" : "cerberusweb.contexts.address" , 
-   "address_id" : 2 , 
-   "address_org__context" : "cerberusweb.contexts.org" , 
-   "address_org_email__context" : "cerberusweb.contexts.address" , 
-   "at_mention_name" : "Kina" , 
-   "calendar__context" : "cerberusweb.contexts.calendar" , 
-   "calendar_id" : 1 , 
-   "dob" : "1984-01-09" , 
-   "first_name" : "Kina" , 
-   "full_name" : "Kina Halpue" , 
-   "gender" : "F" , 
-   "id" : 1 , 
-   "is_disabled" : 0 , 
-   "is_superuser" : 0 , 
-   "language" : "en_US" , 
-   "last_name" : "Halpue" , 
-   "location" : "Los Angeles, CA USA" , 
-   "mobile" : "+15559991234" , 
-   "phone" : "" , 
-   "record_url" : "https://cerb.example/profiles/worker/1-Kina-Halpue" , 
-   "time_format" : "D, d M Y h:i a" , 
-   "timezone" : "America/Los_Angeles" , 
-   "title" : "Customer Support Manager" , 
-   "updated" : 1510279250 
- }
+{
+  "__build": 2017110901,
+  "__status": "success",
+  "__version": "8.2.2",
+  "_context": "cerberusweb.contexts.worker",
+  "_image_url": "https://cerb.example/avatars/worker/1?v=1510279250",
+  "_label": "Kina Halpue",
+  "address__context": "cerberusweb.contexts.address",
+  "address_contact__context": "cerberusweb.contexts.contact",
+  "address_contact_org__context": "cerberusweb.contexts.org",
+  "address_contact_org_email__context": "cerberusweb.contexts.address",
+  "address_id": 2,
+  "address_org__context": "cerberusweb.contexts.org",
+  "address_org_email__context": "cerberusweb.contexts.address",
+  "at_mention_name": "Kina",
+  "calendar__context": "cerberusweb.contexts.calendar",
+  "calendar_id": 1,
+  "dob": "1984-01-09",
+  "first_name": "Kina",
+  "full_name": "Kina Halpue",
+  "gender": "F",
+  "id": 1,
+  "is_disabled": 0,
+  "is_superuser": 0,
+  "language": "en_US",
+  "last_name": "Halpue",
+  "location": "Los Angeles, CA USA",
+  "mobile": "+15559991234",
+  "phone": "",
+  "record_url": "https://cerb.example/profiles/worker/1-Kina-Halpue",
+  "time_format": "D, d M Y h:i a",
+  "timezone": "America/Los_Angeles",
+  "title": "Customer Support Manager",
+  "updated": 1510279250
+}
 ```
 
 # Run a search
@@ -99,7 +113,9 @@ Now let's send a search request to the API to build a list of open tickets.
 Comment out the `$cerb->get()` request and add the following:
 
 ```
-//$out = $cerb->get(CERB_BASE_URL . 'workers/me.json'); $out = $cerb -> get ( CERB_BASE_URL . 'records/ticket/search.json?q=status:o&expand=owner_,custom_' );
+//$out = $cerb->get(CERB_BASE_URL . 'workers/me.json');
+
+$out = $cerb->get(CERB_BASE_URL . 'records/ticket/search.json?q=status:o&expand=owner_,custom_');
 ```
 
 We're sending the following parameters to `records/ticket/search.json`:
@@ -110,49 +126,49 @@ We're sending the following parameters to `records/ticket/search.json`:
 The response should be a JSON array of ticket records, like:
 
 ```
-{ 
-   "__build" : 2017110901 , 
-   "__status" : "success" , 
-   "__version" : "8.2.2" , 
-   "count" : 5 , 
-   "page" : 1 , 
-   "results" : [ 
-     { 
-       "_context" : "cerberusweb.contexts.ticket" , 
-       "_label" : "[#AHF-81578-221] Welcome to Cerb!" , 
-       "closed_at" : 0 , 
-       "closed" : 0 , 
-       "created" : 1510279251 , 
-       "elapsed_response_first" : "0" , 
-       "elapsed_resolution_first" : "0" , 
-       "id" : 1 , 
-       "importance" : 50 , 
-       "mask" : "AHF-81578-221" , 
-       "num_messages" : "1" , 
-       "org_id" : 0 , 
-       "reopen_date" : 0 , 
-       "spam_score" : 0.0023 , 
-       "spam_training" : "" , 
-       "status_id" : 0 , 
-       "subject" : "Welcome to Cerb!" , 
-       "updated" : 1510279251 , 
-       "status" : "open" , 
-       "url" : "https://cerb.example/profiles/ticket/AHF-81578-221" , 
-       "group_id" : 1 , 
-       "bucket_id" : 1 , 
-       "initial_message_id" : 1 , 
-       "initial_response_message_id" : 0 , 
-       "latest_message_id" : 1 , 
-       "owner_id" : 0 , 
-       "group__context" : "cerberusweb.contexts.group" , 
-       "owner__context" : "cerberusweb.contexts.worker" , 
-       "org__context" : "cerberusweb.contexts.org" , 
-       ... 
-     }, 
-     ... 
-   ], 
-   "total" : 5 
- }
+{
+  "__build": 2017110901,
+  "__status": "success",
+  "__version": "8.2.2",
+  "count": 5,
+  "page": 1,
+  "results": [
+    {
+      "_context": "cerberusweb.contexts.ticket",
+      "_label": "[#AHF-81578-221] Welcome to Cerb!",
+      "closed_at": 0,
+      "closed": 0,
+      "created": 1510279251,
+      "elapsed_response_first": "0",
+      "elapsed_resolution_first": "0",
+      "id": 1,
+      "importance": 50,
+      "mask": "AHF-81578-221",
+      "num_messages": "1",
+      "org_id": 0,
+      "reopen_date": 0,
+      "spam_score": 0.0023,
+      "spam_training": "",
+      "status_id": 0,
+      "subject": "Welcome to Cerb!",
+      "updated": 1510279251,
+      "status": "open",
+      "url": "https://cerb.example/profiles/ticket/AHF-81578-221",
+      "group_id": 1,
+      "bucket_id": 1,
+      "initial_message_id": 1,
+      "initial_response_message_id": 0,
+      "latest_message_id": 1,
+      "owner_id": 0,
+      "group__context": "cerberusweb.contexts.group",
+      "owner__context": "cerberusweb.contexts.worker",
+      "org__context": "cerberusweb.contexts.org",
+      ...
+    },
+    ...
+  ],
+  "total": 5
+}
 ```
 
 # Create a task
@@ -162,33 +178,39 @@ Comment out the last `$cerb->get()`.
 Let's create a task record through the API:
 
 ```
-//$out = $cerb->get(CERB_BASE_URL . 'workers/me.json'); //$out = $cerb->get(CERB_BASE_URL . 'records/ticket/search.json?q=status:o&expand=owner_,custom_'); $out = $cerb -> post ( CERB_BASE_URL . 'records/task/create.json' , [[ 'fields[title]' , 'Test the Cerb API' ], ['fields[status]' , 'open' ], ]);
+//$out = $cerb->get(CERB_BASE_URL . 'workers/me.json');
+//$out = $cerb->get(CERB_BASE_URL . 'records/ticket/search.json?q=status:o&expand=owner_,custom_');
+
+$out = $cerb->post(CERB_BASE_URL . 'records/task/create.json', [
+	['fields[title]', 'Test the Cerb API'],
+	['fields[status]', 'open'],
+]);
 ```
 
 You should get a JSON response like:
 
 ```
-{ 
-   "__build" : 2017110901 , 
-   "__status" : "success" , 
-   "__version" : "8.2.2" , 
-   "_context" : "cerberusweb.contexts.task" , 
-   "_label" : "Test the Cerb API" , 
-   "completed" : 0 , 
-   "created" : 1510362808 , 
-   "due" : 0 , 
-   "id" : "123" , 
-   "importance" : 0 , 
-   "is_completed" : false , 
-   "owner__context" : "cerberusweb.contexts.worker" , 
-   "owner_id" : 0 , 
-   "record_url" : "https://cerb.example/profiles/task/123-Test-the-Cerb-API" , 
-   "reopen" : 0 , 
-   "status" : "open" , 
-   "status_id" : 0 , 
-   "title" : "Test the Cerb API" , 
-   "updated" : 1510362808 
- }
+{
+  "__build": 2017110901,
+  "__status": "success",
+  "__version": "8.2.2",
+  "_context": "cerberusweb.contexts.task",
+  "_label": "Test the Cerb API",
+  "completed": 0,
+  "created": 1510362808,
+  "due": 0,
+  "id": "123",
+  "importance": 0,
+  "is_completed": false,
+  "owner__context": "cerberusweb.contexts.worker",
+  "owner_id": 0,
+  "record_url": "https://cerb.example/profiles/task/123-Test-the-Cerb-API",
+  "reopen": 0,
+  "status": "open",
+  "status_id": 0,
+  "title": "Test the Cerb API",
+  "updated": 1510362808
+}
 ```
 
 # Mark the task as completed
@@ -198,24 +220,33 @@ Comment out the `$cerb->post()` request.
 Now let's close the task record we just created. You'll need to replace `123.json` with the real `id` value in your last response above.
 
 ```
-//$out = $cerb->get(CERB_BASE_URL . 'workers/me.json'); //$out = $cerb->get(CERB_BASE_URL . 'records/ticket/search.json?q=status:o&expand=owner_,custom_'); //$out = $cerb->post(CERB_BASE_URL . 'records/task/create.json', [//	['fields[title]', 'Test the Cerb API'], //	['fields[status]', 'open'], //]); $out = $cerb -> put ( CERB_BASE_URL . 'records/task/123.json?' . http_build_query (['fields[status]' => 'closed' , ]));
+//$out = $cerb->get(CERB_BASE_URL . 'workers/me.json');
+//$out = $cerb->get(CERB_BASE_URL . 'records/ticket/search.json?q=status:o&expand=owner_,custom_');
+//$out = $cerb->post(CERB_BASE_URL . 'records/task/create.json', [
+//	['fields[title]', 'Test the Cerb API'],
+//	['fields[status]', 'open'],
+//]);
+
+$out = $cerb->put(CERB_BASE_URL . 'records/task/123.json?' . http_build_query([
+	'fields[status]' => 'closed',
+]));
 ```
 
 You should get back an updated ticket record with the new `status`:
 
 ```
-{ 
-   "__build" : 2017110901 , 
-   "__status" : "success" , 
-   "__version" : "8.2.2" , 
-   "_context" : "cerberusweb.contexts.task" , 
-   "_label" : "Test the Cerb API" , 
-   "id" : "123" , 
-   "is_completed" : true , 
-   "status" : "closed" , 
-   "status_id" : 1 , 
-	 ... 
- }
+{
+  "__build": 2017110901,
+  "__status": "success",
+  "__version": "8.2.2",
+  "_context": "cerberusweb.contexts.task",
+  "_label": "Test the Cerb API",
+  "id": "123",
+  "is_completed": true,
+  "status": "closed",
+  "status_id": 1,
+	...
+}
 ```
 
 # Next steps

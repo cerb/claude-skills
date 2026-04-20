@@ -40,9 +40,17 @@ Optionally, multiple functions can be specified for a series, like `functions:[s
 ## Calculating the average first response time from a worklist of tickets
 
 ```
-type: worklist.metrics values.total: ( of: ticket field: response.first function: average query: ( created: "-1 year" response.first: >0 )
-) 
- format: table
+type:worklist.metrics 
+values.total:(
+  of:ticket
+  field:response.first 
+  function:average 
+  query:(
+    created:"-1 year"
+    response.first:>0
+  )
+)
+format:table
 ```
 
  
@@ -50,9 +58,20 @@ type: worklist.metrics values.total: ( of: ticket field: response.first function
 ## Calculating multiple functions in a single query
 
 ```
-type: worklist.metrics values.response_time: ( of: message functions: [average,min,max,sum,count] field: responseTime query: ( worker.id: {{ record_id }} created: "-1 month" isOutgoing: y isBroadcast: n responseTime: >0 )
-) 
- format: table
+type:worklist.metrics
+values.response_time:(
+  of:message 
+  functions:[average,min,max,sum,count] 
+  field:responseTime 
+  query:(
+    worker.id:{{record_id}} 
+    created:"-1 month" 
+    isOutgoing:y 
+    isBroadcast:n 
+    responseTime:>0
+  )
+)
+format:table
 ```
 
  

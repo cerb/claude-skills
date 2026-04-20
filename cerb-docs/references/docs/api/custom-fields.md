@@ -49,67 +49,67 @@ GET /rest/contexts/list.json
 This will return a list of record types with custom field information, like the following example:
 
 ```
-{ 
-    id: "cerberusweb.contexts.ticket" , 
-    name: "Ticket" , 
-    plugin_id: "cerberusweb.core" , 
-    custom_fields: [ 
-       { 
-          id: 146 , 
-          name: "Due" , 
-          type: "E" 
-       }, 
-       { 
-          id: 143 , 
-          name: "Priority" , 
-          type: "D" , 
-          params: { 
-             options: [ 
-                "Moderate" , 
-                "High" , 
-                "Critical" 
-             ] 
-          } 
-       } 
-    ], 
-    custom_fieldsets: [ 
-       { 
-          id: "1" , 
-          name: "Billing" , 
-          owner__context: "cerberusweb.contexts.group" , 
-          owner_id: "5" , 
-          custom_fields: [ 
-             { 
-                id: 14 , 
-                name: "Invoice #" , 
-                type: "S" 
-             } 
-          ] 
-       }, 
-       { 
-          id: "45" , 
-          name: "Impact" , 
-          owner__context: "cerberusweb.contexts.group" , 
-          owner_id: "2" , 
-          custom_fields: [ 
-             { 
-                id: 166 , 
-                name: "Severity" , 
-                type: "D" , 
-                params: { 
-                   options: [ 
-                      "4 - Suggestion" , 
-                      "3 - Need assistance" , 
-                      "2 - Something isn't right" , 
-                      "1 - Urgent" 
-                   ], 
-                   context: "cerberusweb.contexts.activity_log" 
-                } 
-             } 
-          ] 
-       } 
-    ] 
- }
+{
+   id: "cerberusweb.contexts.ticket",
+   name: "Ticket",
+   plugin_id: "cerberusweb.core",
+   custom_fields: [
+      {
+         id: 146,
+         name: "Due",
+         type: "E"
+      },
+      {
+         id: 143,
+         name: "Priority",
+         type: "D",
+         params: {
+            options: [
+               "Moderate",
+               "High",
+               "Critical"
+            ]
+         }
+      }
+   ],
+   custom_fieldsets: [
+      {
+         id: "1",
+         name: "Billing",
+         owner__context: "cerberusweb.contexts.group",
+         owner_id: "5",
+         custom_fields: [
+            {
+               id: 14,
+               name: "Invoice #",
+               type: "S"
+            }
+         ]
+      },
+      {
+         id: "45",
+         name: "Impact",
+         owner__context: "cerberusweb.contexts.group",
+         owner_id: "2",
+         custom_fields: [
+            {
+               id: 166,
+               name: "Severity",
+               type: "D",
+               params: {
+                  options: [
+                     "4 - Suggestion",
+                     "3 - Need assistance",
+                     "2 - Something isn't right",
+                     "1 - Urgent"
+                  ],
+                  context: "cerberusweb.contexts.activity_log"
+               }
+            }
+         ]
+      }
+   ]
+}
 ```
 
 ### Retrieving custom fields on records

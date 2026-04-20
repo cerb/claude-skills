@@ -32,17 +32,75 @@ In the **Name:** field, add some descriptive text like _"Company Letterhead"_.
 In the next large text box, paste the following template:
 
 ```
-<div id= "body" > <img id= "logo" src= "https://cerb.ai/assets/cerb_logo.png" > <div id= "content" >
+<div id="body">
+  <img id="logo" src="https://cerb.ai/assets/cerb_logo.png">
+  <div id="content">
     {{message_body}}
-  </div> <div id= "footer" >
-    Sent from <a href= "https://cerb.ai/" >Cerb</a> </div> </div> <style type= "text/css" > body { margin : 0 ; padding : 0 ; } #body { margin : 0px ; font-family : 'Helvetica Neue' , Helvetica , 'Segoe UI' , sans-serif ; font-size : 10pt ; background-color : #dddddd ; } #content { margin : 0px 20px 20px 20px ; padding : 20px ; background-color : white ; border-radius : 10px ; } #logo { margin : 10px 0px 10px 20px ; } #footer { color : rgb ( 150 , 150 , 150 ); font-weight : normal ; text-align : center ; padding-bottom : 20px ; } #footer a { font-weight : bold ; color : rgb ( 150 , 150 , 150 ); } a { color : black ; } blockquote { color : rgb ( 0 , 128 , 255 ); font-style : italic ; margin-left : 0px ; border-left : 1px solid rgb ( 0 , 128 , 255 ); padding-left : 5px ; } blockquote a { color : rgb ( 0 , 128 , 255 ); } </style>
+  </div>
+  <div id="footer">
+    Sent from <a href="https://cerb.ai/">Cerb</a>
+  </div>
+</div>
+
+<style type="text/css">
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#body {
+  margin: 0px;
+  font-family: 'Helvetica Neue', Helvetica, 'Segoe UI', sans-serif;
+  font-size: 10pt;
+  background-color: #dddddd;
+}
+
+#content {
+  margin: 0px 20px 20px 20px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+#logo {
+  margin: 10px 0px 10px 20px;
+}
+
+#footer {
+  color: rgb(150,150,150);
+  font-weight: normal;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+#footer a {
+  font-weight: bold;
+  color: rgb(150,150,150);
+}
+
+a { 
+  color: black;
+}
+
+blockquote {
+  color: rgb(0, 128, 255);
+  font-style: italic;
+  margin-left: 0px;
+  border-left: 1px solid rgb(0, 128, 255);
+  padding-left: 5px;
+}
+
+blockquote a {
+  color: rgb(0, 128, 255);
+}
+</style>
 ```
 
 In the **Signature** section, you can add HTML formatting to signatures. For example:
 
 ```
 -- 
-{% if first_name %}{{ first_name }}{% else %}the **support** team{% endif %} @ cerb.ai
+{% if first_name %}{{first_name}}{% else %}the **support** team{% endif %} @ cerb.ai
 ```
 
 You can preview the HTML template by clicking on the last icon in the editor toolbar.

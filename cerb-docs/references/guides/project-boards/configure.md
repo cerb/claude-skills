@@ -94,7 +94,7 @@ In **Allow these record types in the project** select **Task**.
 We only want to add open or waiting tasks to the project. Within tasks, set **Quick search query for adding cards** to:
 
 ```
-status: [o,w]
+status:[o,w]
 ```
 
  
@@ -260,8 +260,13 @@ Scroll down to **Task** and click into the **Card custom template** text box.
 Paste the following template:
 
 ```
-{% if is_completed %} <div style= "font-size:120%;" > <span class= "glyphicons glyphicons-circle-ok" style= "color:rgb(0,150,0);" ></span> Completed!
-</div> {% endif %}
+{% if is_completed %}
+
+<div style="font-size:120%;">
+	<span class="glyphicons glyphicons-circle-ok" style="color:rgb(0,150,0);"></span> Completed!
+</div>
+
+{% endif %}
 ```
 
 Click the **Save Changes** button to close the template editor popup.

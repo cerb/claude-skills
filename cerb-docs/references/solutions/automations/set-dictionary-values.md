@@ -14,11 +14,30 @@ When a value (like a model ID selected from a sheet) needs to be expanded, a dic
 
 - 
 ```
-start: set: models: llama3.3: tools@bool: yes params: 70b phi4: tools@bool: no params: 14b mistral: tools@bool: yes params: 7b   
-   return: output@text: {% for model in models|keys %} {{ model }} has {{ models[model].params }} parameters {{ models[model].tools ? ' and supports tools' }} . {% endfor %}
+start:
+  set:
+    models:
+      llama3.3:
+        tools@bool: yes
+        params: 70b
+      phi4:
+        tools@bool: no
+        params: 14b
+      mistral:
+        tools@bool: yes
+        params: 7b
+  
+  return:
+    output@text:
+      {% for model in models|keys %}
+      {{model}} has {{models[model].params}} parameters{{models[model].tools ? ' and supports tools'}}.
+      {% endfor %}
 ```
 - 
 ```
-output@text: llama3.3 has 70b parameters and supports tools. phi4 has 14b parameters. mistral has 7b parameters and supports tools.
+output@text:
+  llama3.3 has 70b parameters and supports tools.
+  phi4 has 14b parameters.
+  mistral has 7b parameters and supports tools.
 ```
 

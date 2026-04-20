@@ -14,10 +14,37 @@ Here is an example of using the [|map](/docs/scripting/filters/#map) modifier wi
 
 - 
 ```
-start: set: numbers@csv: {{ range(1, 10)|join(',') }} return: squares@json: {{ numbers|map((n) => n **2)|json_encode }} cubes@json: {{ numbers|map((n) => n** 3)|json_encode }}
+start:
+  set:
+    numbers@csv: {{range(1, 10)|join(',')}}
+  return:
+    squares@json: {{numbers|map((n) => n ** 2)|json_encode}}
+    cubes@json: {{numbers|map((n) => n ** 3)|json_encode}}
 ```
 - 
 ```
-__return : squares : - 1 - 4 - 9 - 16 - 25 - 36 - 49 - 64 - 81 - 100 cubes : - 1 - 8 - 27 - 64 - 125 - 216 - 343 - 512 - 729 - 1000
+__return:
+  squares:
+  - 1
+  - 4
+  - 9
+  - 16
+  - 25
+  - 36
+  - 49
+  - 64
+  - 81
+  - 100
+  cubes:
+  - 1
+  - 8
+  - 27
+  - 64
+  - 125
+  - 216
+  - 343
+  - 512
+  - 729
+  - 1000
 ```
 

@@ -12,9 +12,9 @@ An **extension** field refers to a plugin [extension](/docs/plugins/extensions/)
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "extension_id" : "example.plugin.extension.name" 
- }
+{
+	"extension_id": "example.plugin.extension.name"
+}
 ```
 
 ### Records API

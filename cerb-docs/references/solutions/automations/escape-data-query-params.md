@@ -16,11 +16,27 @@ Its value is a dictionary. The `${...}` placeholder syntax in a query references
 
 - 
 ```
-start: data.query: output: results inputs: query@text: type:worklist.records of:ticket query:( participant:(email:${email}) status:o ) format:dictionaries query_params: email: customer@cerb.example
+start:
+  data.query:
+    output: results
+    inputs:
+      query@text:
+        type:worklist.records
+        of:ticket
+        query:(
+          participant:(email:${email})
+          status:o
+        )
+        format:dictionaries
+      query_params:
+        email: customer@cerb.example
 ```
 - 
 ```
-commands: data.query: deny/type@bool: {{ query.type != 'worklist.records' }} allow@bool: yes
+commands:
+  data.query:
+    deny/type@bool: {{query.type != 'worklist.records'}}
+    allow@bool: yes
 ```
 
 ## Unsafe placeholders (vulnerable to injection)
@@ -30,5 +46,18 @@ Here's an example of an unsafe data query where malicious user input in the `{{e
 This happens because the placeholder is evaluated before the query is parsed.
 
 ```
-start: set: email: "blah") OR (id:>0 data.query: output: results inputs: query@text: type:worklist.records of:ticket query:( participant:(email: {{ email }} ) status:o ) format:dictionaries
+start:
+  set:
+    email: "blah") OR (id:>0
+  data.query:
+    output: results
+    inputs:
+      query@text:
+        type:worklist.records
+        of:ticket
+        query:(
+          participant:(email:{{email}})
+          status:o
+        )
+        format:dictionaries
 ```

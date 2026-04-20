@@ -8,7 +8,11 @@ tags: ["docs", "docs-scripting"]
 ## quote
 
 ```
-{% set text = " This is a message you are replying to. You should quote it. " %} {{ text | quote }}
+{% set text = "This is a message you are replying to.
+
+You should quote it.
+" %}
+{{text|quote}}
 ```
 
 ```

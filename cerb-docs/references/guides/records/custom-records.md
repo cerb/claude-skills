@@ -211,7 +211,7 @@ Navigate to **Search&nbsp;» Courses**.
 Enter the following quick search:
 
 ```
-instructor: (name:Emell) room:(name:Berners)
+instructor:(name:Emell) room:(name:Berners)
 ```
 
  

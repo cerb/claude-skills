@@ -36,7 +36,25 @@ When creating an OAuth App you can define the scopes that are available.
 The available scopes are defined in YAML:
 
 ```
-" profile" : label : Access your profile information endpoints : - workers/me : GET " search" : label : Search records on your behalf endpoints : - records/*/search : [GET] " api:read-only" : label : Make any read-only API request on your behalf endpoints : - " *" : [GET] " api" : label : Make any API request on your behalf endpoints : - " *" #[GET, PATCH, POST, PUT, DELETE]
+"profile":
+ label: Access your profile information
+ endpoints:
+  - workers/me: GET
+
+"search":
+ label: Search records on your behalf
+ endpoints:
+  - records/*/search: [GET]
+
+"api:read-only":
+ label: Make any read-only API request on your behalf
+ endpoints:
+  - "*": [GET]
+
+"api":
+ label: Make any API request on your behalf
+ endpoints:
+  - "*" #[GET, PATCH, POST, PUT, DELETE]
 ```
 
 Each scope is identified by a name.

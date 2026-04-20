@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Build a URL query string from an array:
 
 ```
-{% set args = { "name" : "Kina" , "action" : "light_on" } %} {{ args | url_encode }}
+{% set args = {"name": "Kina", "action": "light_on" } %}
+{{args|url_encode}}
 ```
 
 ```

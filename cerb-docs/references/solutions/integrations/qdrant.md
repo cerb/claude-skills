@@ -83,7 +83,22 @@ Create a new vector collection with a specified dimension size and distance metr
 https://api.qdrant.tech/api-reference/collections/create-collection
 
 ```
-start: http.request/createCollection: output: http_response inputs: method: PUT url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs authentication: cerb:connected_account:qdrant headers: Content-Type: application/json body: vectors: size@int: 1536 distance: Cosine on_success: set: response@json: {{ http_response.body }}
+start:
+  http.request/createCollection:
+    output: http_response
+    inputs:
+      method: PUT
+      url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs
+      authentication: cerb:connected_account:qdrant
+      headers:
+        Content-Type: application/json
+      body:
+        vectors:
+          size@int: 1536
+          distance: Cosine
+    on_success:
+      set:
+        response@json: {{http_response.body}}
 ```
 
 ## List collections
@@ -93,7 +108,16 @@ Retrieve information about an existing collection.
 https://api.qdrant.tech/api-reference/collections/get-collection
 
 ```
-start: http.request/getCollection: output: http_response inputs: method: GET url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs authentication: cerb:connected_account:qdrant on_success: set: response@json: {{ http_response.body }}
+start:
+  http.request/getCollection:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs
+      authentication: cerb:connected_account:qdrant
+    on_success:
+      set:
+        response@json: {{http_response.body}}
 ```
 
 ## Upsert points
@@ -103,7 +127,26 @@ Add or update vectors (points) in a collection. Each point has an ID, vector, an
 https://api.qdrant.tech/api-reference/points/upsert-points
 
 ```
-start: http.request/upsertPoints: output: http_response inputs: method: PUT url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs/points authentication: cerb:connected_account:qdrant headers: Content-Type: application/json body: points: 0: id@int: 1234 vector@json: [0.2, 0.3, 0.4] payload: title: Getting Started with Cerb category: documentation on_success: set: response@json: {{ http_response.body }}
+start:
+  http.request/upsertPoints:
+    output: http_response
+    inputs:
+      method: PUT
+      url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs/points
+      authentication: cerb:connected_account:qdrant
+      headers:
+        Content-Type: application/json
+      body:
+        points:
+          0:
+            id@int: 1234
+            vector@json: [0.2, 0.3, 0.4]
+            payload:
+              title: Getting Started with Cerb
+              category: documentation
+    on_success:
+      set:
+        response@json: {{http_response.body}}
 ```
 
 ## Search for similar vectors
@@ -113,7 +156,22 @@ Perform a similarity search to find the nearest vectors to a query vector.
 https://api.qdrant.tech/api-reference/points/search-points
 
 ```
-start: http.request/search: output: http_response inputs: method: POST url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs/points/search authentication: cerb:connected_account:qdrant headers: Content-Type: application/json body: vector@json: [0.3, 0.5, 0.2, ...] limit@int: 10 with_payload@bool: true on_success: set: response@json: {{ http_response.body }}
+start:
+  http.request/search:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs/points/search
+      authentication: cerb:connected_account:qdrant
+      headers:
+        Content-Type: application/json
+      body:
+        vector@json: [0.3, 0.5, 0.2, ...]
+        limit@int: 10
+        with_payload@bool: true
+    on_success:
+      set:
+        response@json: {{http_response.body}}
 ```
 
 ## Delete a collection
@@ -123,5 +181,14 @@ Remove a collection and all its data.
 https://api.qdrant.tech/api-reference/collections/delete-collection
 
 ```
-start: http.request/deleteCollection: output: http_response inputs: method: DELETE url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs authentication: cerb:connected_account:qdrant on_success: set: response@json: {{ http_response.body }}
+start:
+  http.request/deleteCollection:
+    output: http_response
+    inputs:
+      method: DELETE
+      url: https://xyz-example.cloud.qdrant.io/collections/cerb_docs
+      authentication: cerb:connected_account:qdrant
+    on_success:
+      set:
+        response@json: {{http_response.body}}
 ```

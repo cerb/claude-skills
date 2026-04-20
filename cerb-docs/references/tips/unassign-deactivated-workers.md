@@ -12,7 +12,7 @@ A deactivated worker may still be assigned to historical records. You can use th
 For instance, you can search a [ticket](/docs/tickets/) [worklist](/docs/worklists/) with this query:
 
 ```
-owner: (isDisabled:y)
+owner:(isDisabled:y)
 ```
 
 This will return all the tickets that are owned by a deactivated worker. You can then [bulk update](/docs/workspaces/#bulk-update) those results to remove the owner. The records will keep their existing status unless you explicitly change it.
@@ -20,5 +20,5 @@ This will return all the tickets that are owned by a deactivated worker. You can
 If you want to handle open and closed tickets differently, you can also include a status filter in the query:
 
 ```
-owner: (isDisabled:y) status:[open,waiting]
+owner:(isDisabled:y) status:[open,waiting]
 ```

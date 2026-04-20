@@ -8,7 +8,23 @@ tags: ["docs", "docs-automations"]
 In [interaction](/docs/automations/triggers/interaction.worker/) web forms, an **editor** element displays a code editor with syntax highlighting, autocompletion, and a custom toolbar.
 
 ```
-start: await: form: title: Editor Example elements: editor/prompt_query: label: Data query: syntax: cerb_query readonly@bool: no default@text: type:worklist.records of:ticket query:( status:o limit:10 ) format:dictionaries
+start:
+  await:
+    form:
+      title: Editor Example
+      elements:
+        editor/prompt_query:
+          label: Data query:
+          syntax: cerb_query
+          readonly@bool: no
+          default@text:
+            type:worklist.records
+            of:ticket
+            query:(
+              status:o
+              limit:10
+            )
+            format:dictionaries
 ```
 
  
@@ -43,7 +59,7 @@ The default editor text.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```
 
 ### line\_numbers@bool:
@@ -78,5 +94,12 @@ An optional custom validation script. Any output is considered to be an error.
 You can use `if...elseif` to check multiple conditions.
 
 ```
-editor/prompt_script: label: Script: validation@raw: {% if prompt_script is empty %} A script is required. {% elseif prompt_script|length < 25 %} A script must be at least 25 characters. {% endif %}
+editor/prompt_script:
+  label: Script:
+  validation@raw:
+    {% if prompt_script is empty %}
+    A script is required.
+    {% elseif prompt_script|length < 25 %}
+    A script must be at least 25 characters. 
+    {% endif %}
 ```

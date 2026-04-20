@@ -14,7 +14,7 @@ Connect to your database from the console or a tool like phpMyAdmin.
 Find your administrator's worker ID:
 
 ```
-SELECT id , CONCAT_WS ( ' ' , first_name , last_name ) AS name FROM worker ;
+SELECT id, CONCAT_WS(' ',first_name,last_name) AS name FROM worker;
 ```
 
 Let's assume your ID is `123`.
@@ -22,13 +22,13 @@ Let's assume your ID is `123`.
 Change back to password authentication for your account:
 
 ```
-UPDATE worker SET is_password_disabled = 0 WHERE id = 123 ;
+UPDATE worker SET is_password_disabled = 0 WHERE id = 123;
 ```
 
 You can also reset your password if needed (replace `s3cr3t` below with your new password):
 
 ```
-UPDATE worker_auth_hash SET pass_hash = SHA1 ( CONCAT ( pass_salt , MD5 ( 's3cr3t' ))) WHERE worker_id = 123 ;
+UPDATE worker_auth_hash SET pass_hash = SHA1(CONCAT(pass_salt,MD5('s3cr3t'))) WHERE worker_id = 123;
 ```
 
 You then need to [clear the server-side cache](/tips/clear-server-cache/).

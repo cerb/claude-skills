@@ -10,7 +10,9 @@ tags: ["docs", "docs-scripting"]
 Validate an email address:
 
 ```
-{{ validate_email ( 'kina' ) | json_encode }} {{ validate_email ( 'kina#cerb.example' ) | json_encode }} {{ validate_email ( 'kina@cerb.example' ) | json_encode }}
+{{validate_email('kina')|json_encode}}
+{{validate_email('kina#cerb.example')|json_encode}}
+{{validate_email('kina@cerb.example')|json_encode}}
 ```
 
 ```

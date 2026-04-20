@@ -14,12 +14,12 @@ The value is an array of `type:id` pairs.
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "links" : [ 
-		 "ticket:123" , 
-		 "org:456" 
-	 ] 
- }
+{
+	"links": [
+		"ticket:123",
+		"org:456"
+	]
+}
 ```
 
 ### Records API

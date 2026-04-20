@@ -12,11 +12,28 @@ Compare against a set of values using boolean logic in automations [scripting](/
 
 - 
 ```
-start: set: message: subject: Receipt for your recent order to: customer@example.com from: shop@example.com return: pass@bool: {{ not ( message.to starts with 'noreply@' or message.from starts with 'spammer@' ) and ( 'receipt' in message.subject|lower or 'kassenzettel' in message.subject|lower ) }}
+start:
+  set:
+    message:
+      subject: Receipt for your recent order
+      to: customer@example.com
+      from: shop@example.com
+  return:
+    pass@bool:
+      {{
+        not (
+          message.to starts with 'noreply@'
+          or message.from starts with 'spammer@'
+        ) and (
+          'receipt' in message.subject|lower
+          or 'kassenzettel' in message.subject|lower
+        )
+      }}
 ```
 - 
 ```
-__return: pass: true
+__return:
+  pass: true
 ```
 
 In this case we use the [`|lower`](/docs/scripting/filters/#lower) filter since `in` is case-sensitive.

@@ -12,7 +12,8 @@ tags: ["docs", "docs-scripting"]
 Return the values from an associative array as a new indexed array. For instance, this can affect the output in JSON encoding by using `[]` rather than `{key:value}`.
 
 ```
-{% set arr = { "z" : "A" , "a" : "B" , "m" : "C" } %} {{ array_values ( arr ) | json_encode }}
+{% set arr = {"z":"A", "a":"B", "m":"C"} %}
+{{array_values(arr)|json_encode}}
 ```
 
 ```

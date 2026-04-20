@@ -16,10 +16,25 @@ When using `Content-Type: application/json`, a `body:` dictionary will automatic
 
 - 
 ```
-start: http.request/post: output: http_response inputs: method: POST url: https://cerb.example/api/endpoint/ headers: Content-Type: application/json body: name_first: Kina name_last: Halpue email: kina.halpue@cerb.example
+start:
+  http.request/post:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://cerb.example/api/endpoint/
+      headers:
+        Content-Type: application/json
+      body:
+        name_first: Kina
+        name_last: Halpue
+        email: kina.halpue@cerb.example
 ```
 - 
 ```
-commands: http.request: deny/method@bool: {{ inputs.method not in ['POST'] }} deny/url@bool: {{ inputs.url is not prefixed ('http://','https://') }} allow@bool: yes
+commands:
+  http.request:
+    deny/method@bool: {{inputs.method not in ['POST']}}
+    deny/url@bool: {{inputs.url is not prefixed ('http://','https://')}}
+    allow@bool: yes
 ```
 

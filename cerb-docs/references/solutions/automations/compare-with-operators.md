@@ -14,10 +14,23 @@ Here are examples of using different comparison [operators](/docs/scripting/oper
 
 - 
 ```
-start: return: eq@bool: {{ 1 == 1 }} not_eq@bool: {{ 1 != 2 }} lt@bool: {{ 50 < 100 }} gte@bool: {{ 100 >= 2 }} in@bool: {{ 5 in [1,2,3,4,5,6] }} nin@bool: {{ 100 not in [1,2,3] }}
+start:
+  return:
+    eq@bool: {{1 == 1}}
+    not_eq@bool: {{1 != 2}}
+    lt@bool: {{50 < 100}}
+    gte@bool: {{100 >= 2}}
+    in@bool: {{5 in [1,2,3,4,5,6]}}
+    nin@bool: {{100 not in [1,2,3]}}
 ```
 - 
 ```
-__return: eq: true not_eq: true lt: true gte: true in: true nin: true
+__return:
+  eq: true
+  not_eq: true
+  lt: true
+  gte: true
+  in: true
+  nin: true
 ```
 

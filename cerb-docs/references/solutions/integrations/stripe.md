@@ -51,31 +51,93 @@ You can use the connected account you just created to access Stripe's API from a
 ## List customers
 
 ```
-start: http.request/subs: output: http_response inputs: method: GET url: https://api.stripe.com/v1/customers authentication: cerb:connected_account:stripe on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/subs:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.stripe.com/v1/customers
+      authentication: cerb:connected_account:stripe
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## List subscriptions
 
 ```
-start: http.request/subs: output: http_response inputs: method: GET url: https://api.stripe.com/v1/subscriptions authentication: cerb:connected_account:stripe on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/subs:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.stripe.com/v1/subscriptions
+      authentication: cerb:connected_account:stripe
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Create a payment link
 
 ```
-start: http.request/link: output: http_response inputs: method: POST url: https://api.stripe.com/v1/payment_links headers: Content-Type: application/x-www-form-urlencoded authentication: cerb:connected_account:stripe body: line_items: 0: price: price_1234567890abcdefghijkl quantity: 1 on_success: set: response_body@json: {{ http_response.body }} return: url: {{ response_body.url }}
+start:
+  http.request/link:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.stripe.com/v1/payment_links
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+      authentication: cerb:connected_account:stripe
+      body:
+        line_items:
+          0:
+            price: price_1234567890abcdefghijkl
+            quantity: 1
+    on_success:
+      set:
+        response_body@json: {{http_response.body}}
+      return:
+        url: {{response_body.url}}
 ```
 
 ## Create a subscription
 
 ```
-start: http.request/subscription: output: http_response inputs: method: POST url: https://api.stripe.com/v1/subscriptions headers: Content-Type: application/x-www-form-urlencoded authentication: cerb:connected_account:stripe body: customer: cus_1234567890abcdefghijkl items: 0: price: price_1234567890abcdefghijkl
+start:
+  http.request/subscription:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.stripe.com/v1/subscriptions
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+      authentication: cerb:connected_account:stripe
+      body:
+        customer: cus_1234567890abcdefghijkl
+        items:
+          0:
+            price: price_1234567890abcdefghijkl
 ```
 
 ## Create an invoice
 
 ```
-start: http.request/invoice: output: http_response inputs: method: POST url: https://api.stripe.com/v1/invoices headers: Content-Type: application/x-www-form-urlencoded authentication: cerb:connected_account:stripe body: customer: cus_1234567890abcdefghijkl subscription: sub_1234567890abcdefghijkl
+start:
+  http.request/invoice:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.stripe.com/v1/invoices
+      headers:
+        Content-Type: application/x-www-form-urlencoded
+      authentication: cerb:connected_account:stripe
+      body:
+        customer: cus_1234567890abcdefghijkl
+        subscription: sub_1234567890abcdefghijkl
 ```
 
 ## Bot

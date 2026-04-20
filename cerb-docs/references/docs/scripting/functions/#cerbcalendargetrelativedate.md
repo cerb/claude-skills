@@ -18,8 +18,8 @@ Calculate a future timestamp using calendar availability. For instance, this can
 | **now** | An optional starting date/time. |
 
 ```
-Now: {{ "now" | date ( 'r' ) }}
-Due: {{ cerb_calendar_get_relative_date ( 123 , '+2 hours' ) | date ( 'r' ) }}
+Now: {{"now"|date('r')}}
+Due: {{cerb_calendar_get_relative_date(123,'+2 hours')|date('r')}}
 ```
 
 ```

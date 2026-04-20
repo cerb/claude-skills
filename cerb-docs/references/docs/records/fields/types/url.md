@@ -16,9 +16,9 @@ A **URL** field contains a hyperlink to a web page in the format:
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "website" : "https://cerb.ai/docs/" 
- }
+{
+	"website": "https://cerb.ai/docs/"
+}
 ```
 
 ### Records API

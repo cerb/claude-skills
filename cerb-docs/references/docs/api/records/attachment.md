@@ -16,7 +16,11 @@ tags: ["docs"]
 **Request:**
 
 ```
-POST /rest/records/attachment/create.json HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Mon, 20 Apr 2026 20:20:47 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
+POST /rest/records/attachment/create.json HTTP/1.1
+Cerb-Auth: XXXX:XXXX
+Date: Mon, 20 Apr 2026 20:41:55 America
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Host: cerb.example
 
 fields[name]=filename.txt
 &fields[mime_type]=text/plain
@@ -31,21 +35,21 @@ fields[name]=filename.txt
 **Response:**
 
 ```
-{ 
-   "__build" : 2017110901 , 
-   "__status" : "success" , 
-   "__version" : "8.2.2" , 
-   "_context" : "cerberusweb.contexts.attachment" , 
-   "_label" : "filename.txt" , 
-   "id" : 123 , 
-   "mime_type" : "text/plain" , 
-   "name" : "filename.txt" , 
-   "size" : 55 , 
-   "storage_extension" : "devblocks.storage.engine.disk" , 
-   "storage_key" : "a/b/123" , 
-   "storage_sha1hash" : "260588f317aec33c59534dddfa91da68e841c424" , 
-   "updated" : 1510680491 
- }
+{
+  "__build": 2017110901,
+  "__status": "success",
+  "__version": "8.2.2",
+  "_context": "cerberusweb.contexts.attachment",
+  "_label": "filename.txt",
+  "id": 123,
+  "mime_type": "text/plain",
+  "name": "filename.txt",
+  "size": 55,
+  "storage_extension": "devblocks.storage.engine.disk",
+  "storage_key": "a/b/123",
+  "storage_sha1hash": "260588f317aec33c59534dddfa91da68e841c424",
+  "updated": 1510680491
+}
 ```
 
 ## Create an attachment with binary content
@@ -53,7 +57,11 @@ fields[name]=filename.txt
 **Request:**
 
 ```
-POST /rest/records/attachment/create.json?expand= HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Mon, 20 Apr 2026 20:20:47 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
+POST /rest/records/attachment/create.json?expand= HTTP/1.1
+Cerb-Auth: XXXX:XXXX
+Date: Mon, 20 Apr 2026 20:41:55 America
+Content-Type: application/x-www-form-urlencoded; charset=utf-8
+Host: cerb.example
 
 fields[name]=cerby.png
 &fields[mime_type]=image/png
@@ -68,20 +76,20 @@ fields[name]=cerby.png
 **Response:**
 
 ```
-{ 
-   "__build" : 2017110901 , 
-   "__status" : "success" , 
-   "__version" : "8.2.2" , 
-   "_context" : "cerberusweb.contexts.attachment" , 
-   "_label" : "cerby.png" , 
-   "custom" : [], 
-   "id" : 123 , 
-   "mime_type" : "image/png" , 
-   "name" : "cerby.png" , 
-   "size" : 15037 , 
-   "storage_extension" : "devblocks.storage.engine.disk" , 
-   "storage_key" : "a/b/123" , 
-   "storage_sha1hash" : "c44ebaf197155c080ae47809dc5cd51c7715fd7c" , 
-   "updated" : 1510681295 
- }
+{
+  "__build": 2017110901,
+  "__status": "success",
+  "__version": "8.2.2",
+  "_context": "cerberusweb.contexts.attachment",
+  "_label": "cerby.png",
+  "custom": [],
+  "id": 123,
+  "mime_type": "image/png",
+  "name": "cerby.png",
+  "size": 15037,
+  "storage_extension": "devblocks.storage.engine.disk",
+  "storage_key": "a/b/123",
+  "storage_sha1hash": "c44ebaf197155c080ae47809dc5cd51c7715fd7c",
+  "updated": 1510681295
+}
 ```

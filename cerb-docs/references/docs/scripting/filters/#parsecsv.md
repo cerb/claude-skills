@@ -22,7 +22,8 @@ Parse a document with rows of comma-separated columns. Returns an array of rows 
 "Person Name",Email,Organization
 "Kina Halpue",kina@cerb.example,Cerb
 "Claire Bertin",c.bertin@baston.example,"Baston Defence"
-{% endset %} {{ text | parse_csv | json_encode | json_pretty }}
+{% endset %}
+{{text|parse_csv|json_encode|json_pretty}}
 ```
 
 ```

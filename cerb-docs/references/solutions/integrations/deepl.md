@@ -50,7 +50,22 @@ https://developers.deepl.com/docs/api-reference/translate
 Note: DeepL uses a different endpoint for their free and paid tiers. If you are using the free tier, change the url to `https://api-free.deepl.com`.
 
 ```
-start: http.request/translate: output: http_response inputs: method: POST url: https://api.deepl.com/v2/translate authentication: cerb:connected_account:deepl headers: Content-Type: application/json body: target_lang: JA text: 0: I want this text to be translated. on_success: set: response@json: {{ http_response.body }}
+start:
+  http.request/translate:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.deepl.com/v2/translate
+      authentication: cerb:connected_account:deepl
+      headers:
+        Content-Type: application/json
+      body:
+        target_lang: JA
+        text:
+          0: I want this text to be translated.
+    on_success:
+      set:
+        response@json: {{http_response.body}}
 ```
 
 # More Resources

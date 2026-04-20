@@ -8,7 +8,17 @@ tags: ["docs", "docs-automations"]
 The **encrypt.pgp:** command encrypts a block of text using one or more PGP public keys.
 
 ```
-start: encrypt.pgp: output: encrypted_message inputs: message@text: This is a secret message. public_keys: uri: cerb:gpg_public_key:D399DA5BA62A0472 on_success: return: encrypted_message@key: encrypted_message
+start:
+  encrypt.pgp:
+    output: encrypted_message
+    inputs:
+      message@text:
+        This is a secret message.
+      public_keys:
+        uri: cerb:gpg_public_key:D399DA5BA62A0472
+    on_success:
+      return:
+        encrypted_message@key: encrypted_message
 ```
 
 - [Syntax](#syntax)

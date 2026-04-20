@@ -223,7 +223,7 @@ How to tell if you need to update your Community Portal file:
 - Compare the following line from the output with your deployed `index.php`:
 
 ```
-define ( 'SCRIPT_LAST_MODIFY' , 1234567890 ); // last change
+define('SCRIPT_LAST_MODIFY', 1234567890); // last change
 ```
 
 If the number is different you should replace the `index.php` file for your community portal with the new version from Cerb.

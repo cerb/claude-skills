@@ -100,7 +100,12 @@ Add any number of links to one context record.
 **Example:**
 
 ```
-POST / rest / contexts / link . json Host : cerb . example Authorization : Bearer < token > on = cerberusweb . contexts . ticket : 1148 & targets = ["cerberusweb.contexts.org:17581" , "cerberusweb.contexts.address:5447"]
+POST /rest/contexts/link.json
+Host: cerb.example
+Authorization: Bearer <token>
+
+on=cerberusweb.contexts.ticket:1148
+&targets=["cerberusweb.contexts.org:17581","cerberusweb.contexts.address:5447"]
 ```
 
 ## Unlink

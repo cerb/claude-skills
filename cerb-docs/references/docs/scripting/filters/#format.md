@@ -10,7 +10,9 @@ tags: ["docs", "docs-scripting"]
 Insert variables into a [string](/docs/scripting/#strings):
 
 ```
-{% set who = "Kina" %} {% set quantity = 120 %} {{ "%s closed %d tickets today!" | format ( who , quantity ) }}
+{% set who = "Kina" %}
+{% set quantity = 120 %}
+{{"%s closed %d tickets today!"|format(who, quantity)}}
 ```
 
 ```

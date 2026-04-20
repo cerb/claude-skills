@@ -14,10 +14,26 @@ In this example we quote a prior email message by adding the standard `>` charac
 
 - 
 ```
-start: set: original_message@text: This is quoted text From a prior conversation and we want to quote it return: new_message@text: {{ original_message|indent('> ') }} ... and this is our reply.
+start:
+  set:
+    original_message@text:
+      This is quoted text
+      From a prior conversation
+      and we want to quote it
+  return:
+    new_message@text:
+      {{original_message|indent('> ')}}
+      
+      ... and this is our reply.
 ```
 - 
 ```
-__return : new_message : |- > This is quoted text > From a prior conversation > and we want to quote it ... and this is our reply.
+__return:
+  new_message: |-
+    > This is quoted text
+    > From a prior conversation
+    > and we want to quote it
+
+    ... and this is our reply.
 ```
 

@@ -44,40 +44,40 @@ Click on the **(+)** icon above the behaviors worklist to add a new behavior.
 Switch to **Import** mode and paste the following behavior:
 
 ```
-{ 
-   "behavior" : { 
-     "title" : "Catch JotForm webhook" , 
-     "is_disabled" : false , 
-     "priority" : 50 , 
-     "event" : { 
-       "key" : "event.webhook.received" , 
-       "label" : "Webhook received" 
-     }, 
-     "nodes" : [ 
-       { 
-         "type" : "action" , 
-         "title" : "Create comment" , 
-         "status" : "live" , 
-         "params" : { 
-           "actions" : [ 
-             { 
-               "action" : "_set_custom_var" , 
-               "value" : "{{http_params.rawrequest}}" , 
-               "format" : "json" , 
-               "is_simulator_only" : "0" , 
-               "var" : "json" 
-             }, 
-             { 
-               "action" : "create_comment" , 
-               "on" : "_trigger_va_id" , 
-               "content" : "{{json|json_encode|json_pretty}}" 
-             } 
-           ] 
-         } 
-       } 
-     ] 
-   } 
- }
+{
+  "behavior": {
+    "title": "Catch JotForm webhook",
+    "is_disabled": false,
+    "priority": 50,
+    "event": {
+      "key": "event.webhook.received",
+      "label": "Webhook received"
+    },
+    "nodes": [
+      {
+        "type": "action",
+        "title": "Create comment",
+        "status": "live",
+        "params": {
+          "actions": [
+            {
+              "action": "_set_custom_var",
+              "value": "{{http_params.rawrequest}}",
+              "format": "json",
+              "is_simulator_only": "0",
+              "var": "json"
+            },
+            {
+              "action": "create_comment",
+              "on": "_trigger_va_id",
+              "content": "{{json|json_encode|json_pretty}}"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
 ```
 
 Click the **Save Changes** button.

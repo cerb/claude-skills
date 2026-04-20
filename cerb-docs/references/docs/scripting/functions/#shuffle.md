@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Randomize an array:
 
 ```
-{{ shuffle ([1 , 2 , 3 , 4 , 5]) | json_encode }}
+{{shuffle([1,2,3,4,5])|json_encode}}
 ```
 
 ```

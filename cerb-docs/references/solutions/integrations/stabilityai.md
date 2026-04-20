@@ -44,7 +44,29 @@ Copy the default key or click **Create API Key** to create a new one.
 https://platform.stability.ai/docs/api-reference#tag/Generate/paths/~1v2beta~1stable-image~1generate~1core/post
 
 ```
-start: http.request/generate: output: http_response inputs: method: POST url: https://api.stability.ai/v2beta/stable-image/generate/core authentication: cerb:connected_account:stabilityai headers: Content-Type: multipart/form-data; boundary=abcdef Accept: image/* response: resource: expires@date: 1 hour body@text: --abcdef Content-Disposition: form-data; name="prompt" A profile picture of a humanoid robot in cyberpunk graphic novel style --abcdef Content-Disposition: form-data; name="output-format" png --abcdef--
+start:
+  http.request/generate:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.stability.ai/v2beta/stable-image/generate/core
+      authentication: cerb:connected_account:stabilityai
+      headers:
+        Content-Type: multipart/form-data; boundary=abcdef
+        Accept: image/*
+      response:
+        resource:
+          expires@date: 1 hour
+      body@text:
+        --abcdef
+        Content-Disposition: form-data; name="prompt"
+        
+        A profile picture of a humanoid robot in cyberpunk graphic novel style
+        --abcdef
+        Content-Disposition: form-data; name="output-format"
+        
+        png
+        --abcdef--
 ```
 
 # Resources

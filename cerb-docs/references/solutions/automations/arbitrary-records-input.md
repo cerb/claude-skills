@@ -13,7 +13,19 @@ You can accept any record type and ID as input parameters, then use them to crea
 
 - 
 ```
-inputs: text/record_type: type: record_type required@bool: yes text/record_id: type: number required@bool: yes 
- start: set: record__context@key: inputs:record_type record_id@key: inputs:record_id return: output: {{ record__label }}
+inputs:
+  text/record_type:
+    type: record_type
+    required@bool: yes
+  text/record_id:
+    type: number
+    required@bool: yes
+
+start:
+  set:
+    record__context@key: inputs:record_type
+    record_id@key: inputs:record_id
+  return:
+    output: {{record__label}}
 ```
 

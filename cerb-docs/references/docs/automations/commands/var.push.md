@@ -8,13 +8,26 @@ tags: ["docs", "docs-automations"]
 The **var.push:** command appends a value to an array.
 
 ```
-start: set: numbers@csv: 1,2,3,4 var.push: output: result inputs: key: numbers value: 5 return: output@text: {{ numbers|join(', ') }} {{ result|json_encode }}
+start:
+  set:
+    numbers@csv: 1,2,3,4
+  var.push:
+    output: result
+    inputs:
+      key: numbers
+      value: 5
+  return:
+    output@text:
+      {{numbers|join(', ')}}
+      {{result|json_encode}}
 ```
 
 Result:
 
 ```
-output@text: 1, 2, 3, 4, 5 ["1","2","3","4","5"]
+output@text:
+  1, 2, 3, 4, 5
+  ["1","2","3","4","5"]
 ```
 
 - [Syntax](#syntax)

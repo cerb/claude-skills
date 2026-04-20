@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Generate an MD5[3](#fn:md5) hash for a string:
 
 ```
-{{ "You can verify this hash" | md5 }}
+{{"You can verify this hash"|md5}}
 ```
 
 ```

@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Return the smallest value in an array or object.
 
 ```
-{% set numbers = [1 , 9 , 8 , 4 , 2] %} {{ min ( numbers ) }}
+{% set numbers = [1,9,8,4,2] %}
+{{min(numbers)}}
 ```
 
 ```

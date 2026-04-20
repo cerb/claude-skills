@@ -21,8 +21,10 @@ For instance, this function can be used to rewrite all links in an email templat
 
 ```
 {% set html %}
-This is some <b>HTML</b> with <a href= "https://cerb.ai/" >links</a>.
-{% endset %} {% set results = cerb_extract_uris ( html ) %} {{ results | json_encode | json_pretty }}
+This is some <b>HTML</b> with <a href="https://cerb.ai/">links</a>.
+{% endset %}
+{% set results = cerb_extract_uris(html) %}
+{{results|json_encode|json_pretty}}
 ```
 
 ```
@@ -57,8 +59,13 @@ To rewrite links:
 
 ```
 {% set html %}
-This is some <b>HTML</b> with <a href= "https://cerb.ai/" >links</a>.
-{% endset %} {% set results = cerb_extract_uris ( html ) %} {% set new_urls = results.tokens | map ( ( url , token ) => "https://proxy.example/click?url=" ~ url | url_encode ) %} {{ results.template | replace ( new_urls ) }}
+This is some <b>HTML</b> with <a href="https://cerb.ai/">links</a>.
+{% endset %}
+{% set results = cerb_extract_uris(html) %}
+{% set new_urls = results.tokens|map(
+  (url,token) => "https://proxy.example/click?url=" ~ url|url_encode
+)%}
+{{results.template|replace(new_urls)}}
 ```
 
 ```

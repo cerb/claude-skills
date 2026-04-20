@@ -13,7 +13,11 @@ You can't use scripting in a KATA key, but if you want to set a dynamic key name
 
 - 
 ```
-start: var.set/random: inputs: key: random_ {{ random_string(6) }} value: {{ random_string(6) }}
+start:
+  var.set/random:
+    inputs:
+      key: random_{{random_string(6)}}
+      value: {{random_string(6)}}
 ```
 
 ## Using forbidden characters in a key name
@@ -24,7 +28,11 @@ This approach can also be used if you want a key name that isn't valid in KATA, 
 
 - 
 ```
-start: var.set/email: inputs: key@text: customer@cerb.example value: allow
+start:
+  var.set/email:
+    inputs:
+      key@text: customer@cerb.example
+      value: allow
 ```
 
 ## Changing the delimiter for key paths
@@ -35,6 +43,11 @@ You can also use the `delimiter:` field to change the delimiter from the standar
 
 - 
 ```
-start: var.set/colon: inputs: key@text: og:image delimiter: :: value: https://example.com/images/social.png
+start:
+  var.set/colon:
+    inputs:
+      key@text: og:image
+      delimiter: ::
+      value: https://example.com/images/social.png
 ```
 

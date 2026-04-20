@@ -14,9 +14,9 @@ The value is a floating point number.
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "spam_score" : 0.9999 
- }
+{
+	"spam_score": 0.9999
+}
 ```
 
 ### Records API

@@ -15,7 +15,14 @@ Split a string on any combination of carriage return (`\r`) and linefeed (`\n`) 
 | **trim\_lines** | Remove whitespace before and after each line. |
 
 ```
-{% set rainbow = " red orange yellow green blue indigo violet " %} {{ rainbow | split_crlf | json_encode }}
+{% set rainbow = "red
+orange
+yellow
+green
+blue
+indigo
+violet" %}
+{{rainbow|split_crlf|json_encode}}
 ```
 
 ```

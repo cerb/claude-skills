@@ -16,7 +16,8 @@ Exclude items from an array using an arrow function.
 | **func(v,k)** | An arrow function that returns `true` (include) or `false` (exclude) for each item. It receives `v` (value) and `k` (key) as arguments. |
 
 ```
-{% set arr = [1 , 2 , 3 , 4 , 5 , 6 , 7 , 8] %} {{ arr | filter (( v , k ) => v is even ) | values | join ( ',' ) }}
+{% set arr = [1,2,3,4,5,6,7,8] %}
+{{arr|filter((v,k) => v is even)|values|join(',')}}
 ```
 
 ```

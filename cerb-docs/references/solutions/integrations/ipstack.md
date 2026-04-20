@@ -41,7 +41,17 @@ Paste your API Access Key from above.
 ## Simple IP lookup
 
 ```
-start: http.request/geolocate: output: http_response inputs: method: GET url: http://api.ipstack.com/1.2.3.4 authentication: cerb:connected_account:ipstack on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/geolocate:
+    output: http_response
+    inputs:
+      method: GET
+      url: http://api.ipstack.com/1.2.3.4
+      authentication: cerb:connected_account:ipstack
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Bulk IP lookup
@@ -49,7 +59,17 @@ start: http.request/geolocate: output: http_response inputs: method: GET url: ht
 _Not available on free or basic tier_
 
 ```
-start: http.request/geolocate: output: http_response inputs: method: GET url: http://api.ipstack.com/1.2.3.4,5.4.3.2 authentication: cerb:connected_account:ipstack on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/geolocate:
+    output: http_response
+    inputs:
+      method: GET
+      url: http://api.ipstack.com/1.2.3.4,5.4.3.2
+      authentication: cerb:connected_account:ipstack
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 # Related Resources

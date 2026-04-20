@@ -28,5 +28,9 @@ The results can be returned in these formats:
 # Examples
 
 ```
-type: attachment.manifest filter: *.xml id: 123 limit: 100 format: dictionaries
+type:attachment.manifest
+filter:*.xml
+id:123
+limit:100
+format:dictionaries
 ```

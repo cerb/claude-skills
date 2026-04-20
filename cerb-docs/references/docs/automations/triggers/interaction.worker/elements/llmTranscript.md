@@ -8,8 +8,18 @@ tags: ["docs", "docs-automations"]
 In [worker interaction](/docs/automations/triggers/interaction.worker/) web forms, an **llmTranscript** element displays an [llm.agent:](/docs/automations/commands/llm.agent/) chat transcript.
 
 ```
-start: # ... Run llm.agent:
-    await: form: title: Cerb Docs Q&A elements: llmTranscript/prompt_transcript: session_id: {{ results.session_id }} hidden@bool: {{ prompt_user is empty }} tool_labels: search_docs@raw: Searching documentation: {{ query }} fetch_doc@raw: Reading documentation
+start:
+  # ... Run llm.agent:
+  await:
+    form:
+      title: Cerb Docs Q&A
+      elements:
+        llmTranscript/prompt_transcript:
+          session_id: {{results.session_id}}
+          hidden@bool: {{prompt_user is empty}}
+          tool_labels:
+            search_docs@raw: Searching documentation: {{query}}
+            fetch_doc@raw: Reading documentation
 ```
 
  
@@ -25,7 +35,8 @@ The transcript ID to display. This can be retrieved from [llm.agent:](/docs/auto
 A dictionary of tool names and the text to render in the transcript. This may include placeholders for the tool parameters.
 
 ```
-tool_labels: example_tool@raw: Running tool: {{ param_name }}
+tool_labels:
+  example_tool@raw: Running tool: {{param_name}}
 ```
 
 ### hidden:
@@ -33,5 +44,5 @@ tool_labels: example_tool@raw: Running tool: {{ param_name }}
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not prompt_user }}
+hidden@bool: {{not prompt_user}}
 ```

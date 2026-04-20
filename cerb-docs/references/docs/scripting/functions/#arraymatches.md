@@ -12,8 +12,10 @@ tags: ["docs", "docs-scripting"]
 Compares an array of values to an array of patterns.
 
 ```
-{% set recipients = ['support@cerb.example' , 'sales@cerb.example'] %} {% set patterns = ['sales@*'] %} {% set results = array_matches ( recipients , patterns ) %}
-Matches: {{ results | join ( ', ' ) }}
+{% set recipients = ['support@cerb.example','sales@cerb.example'] %}
+{% set patterns = ['sales@*'] %}
+{% set results = array_matches(recipients, patterns) %}
+Matches: {{results|join(', ')}}
 ```
 
 ```

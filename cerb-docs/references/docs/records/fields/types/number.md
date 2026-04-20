@@ -14,9 +14,9 @@ The value is an integer.
 As JSON from [packages](/docs/packages/):
 
 ```
-{ 
-	 "importance" : 50 
- }
+{
+	"importance": 50
+}
 ```
 
 ### Records API

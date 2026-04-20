@@ -18,7 +18,13 @@ Edit the record for `records.worklist`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/customExplore: label: custom explore icon: play-button uri: cerb:automation:cerb.worklist.buttons.explore inputs: open_new_tab: yes class: action-always-show
+interaction/customExplore:
+  label: custom explore
+  icon: play-button
+  uri: cerb:automation:cerb.worklist.buttons.explore
+  inputs:
+    open_new_tab: yes
+  class: action-always-show
 ```
 
 The following **placeholders** are available in KATA:

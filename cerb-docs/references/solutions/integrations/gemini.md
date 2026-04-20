@@ -54,5 +54,27 @@ https://ai.google.dev/gemini-api/docs/openai
 This example shows how to make a chat completion request to the Gemini API using the raw `http.request:` command.
 
 ```
-start: http.request/chat: output: gemini_response inputs: method: POST url: https://generativelanguage.googleapis.com/v1beta/openai/chat/completions headers: Content-Type: application/json authentication: cerb:connected_account:gemini body: model: gemini-2.0-flash messages: 0: role: user content: Classify this customer message as positive, negative, or neutral: 'Thank you for the quick response! This solved my problem perfectly.' on_success: set: response@key,json: gemini_response:body return: classification@text: {{ response.choices.0.message.content }} on_error: return: error@key: gemini_response:error
+start:
+  http.request/chat:
+    output: gemini_response
+    inputs:
+      method: POST
+      url: https://generativelanguage.googleapis.com/v1beta/openai/chat/completions
+      headers:
+        Content-Type: application/json
+      authentication: cerb:connected_account:gemini
+      body:
+        model: gemini-2.0-flash
+        messages:
+          0:
+            role: user
+            content: Classify this customer message as positive, negative, or neutral: 'Thank you for the quick response! This solved my problem perfectly.'
+    on_success:
+      set:
+        response@key,json: gemini_response:body
+      return:
+        classification@text: {{response.choices.0.message.content}}
+    on_error:
+      return:
+        error@key: gemini_response:error
 ```

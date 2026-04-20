@@ -12,7 +12,7 @@ tags: ["docs", "docs-scripting"]
 Returns a boolean if the given actor has write access to the given record. If no actor is provided then the current worker is assumed. This allows bots and widgets to adapt based on record permissions. For instance, an HTML widget on a profile dashboard could only show a button to workers who can modify the record.
 
 ```
-{% if cerb_record_writeable ( 'ticket' , 123 , 'worker' , 1 ) %}
+{% if cerb_record_writeable('ticket', 123, 'worker', 1) %}
 Worker #1 can modify ticket #123.
 {% endif %}
 ```

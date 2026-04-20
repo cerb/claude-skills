@@ -16,7 +16,17 @@ Create an example OAuth2 token from **Cerb&nbsp;» Setup&nbsp;» Developers&nbsp
 
 - 
 ```
-start: set: request_headers: authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGc[...] api.command: inputs: name: cerb.commands.oauth2.token.validate params: token: {{ request_headers.authorization|split(' ')|last }} output: results on_error:
+start:
+  set:
+    request_headers:
+      authorization: Bearer: eyJ0eXAiOiJKV1QiLCJhbGc[...]
+  api.command:
+    inputs:
+      name: cerb.commands.oauth2.token.validate
+      params:
+        token: {{request_headers.authorization|split(' ')|last}}
+    output: results
+    on_error:
 ```
 
 The `results` placeholder will contain keys for:
@@ -35,6 +45,9 @@ Cerb does not assume a Bearer token follows a specific format. You can:
 
 - 
 ```
-commands: api.command: deny/name@bool: {{ inputs.name not in ['cerb.commands.oauth2.token.validate'] }} allow@bool: yes
+commands:
+  api.command:
+    deny/name@bool: {{inputs.name not in ['cerb.commands.oauth2.token.validate']}}
+    allow@bool: yes
 ```
 

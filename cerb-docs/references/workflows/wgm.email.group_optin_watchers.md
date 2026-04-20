@@ -21,7 +21,57 @@ Navigate to **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Empty**.
 Paste the following KATA into the large text box:
 
 ```
-workflow: name: wgm.email.group_optin_watchers version: 2025-10-08T22:13:31Z description: Automatically add group watchers as ticket watchers for new/moved tickets. website: https://cerb.ai/workflows/wgm.email.group_optin_watchers/ requirements: cerb_version: >=11.0 <11.2 cerb_plugins: cerberusweb.core, records: automation_event_listener/listenerMailMoved: fields: name: Group (Opt-In) Watchers event_name: mail.moved priority@int: 100 is_disabled: 0 event_kata@raw: automation/addGroupWatchers: uri: cerb:automation:wgm.email.group_optin_watchers.mailMoved disabled@bool: no automation/automationMailMoved: fields: name: wgm.email.group_optin_watchers.mailMoved extension_id: cerb.trigger.mail.moved description: Add group watchers as ticket watchers for new/moved tickets. script@raw: start: # Build a list of Group Watchers to add to the Ticket set: watcher_links@list: {{ ticket_group_links["cerberusweb.contexts.worker"] |values |map((v,k) => 'worker:' ~ v) |join('\n') }} # Only update if we have group members outcome/hasWatchers: if@bool: {{ watcher_links is not empty }} then: record.update: inputs: record_type: ticket record_id: {{ ticket_id }} fields: links@key: watcher_links policy_kata@raw: commands: record.update: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes
+workflow:
+  name: wgm.email.group_optin_watchers
+  version: 2025-10-08T22:13:31Z
+  description: Automatically add group watchers as ticket watchers for new/moved tickets.
+  website: https://cerb.ai/workflows/wgm.email.group_optin_watchers/
+  requirements:
+    cerb_version: >=11.0 <11.2
+    cerb_plugins: cerberusweb.core,
+records:
+  automation_event_listener/listenerMailMoved:
+    fields:
+      name: Group (Opt-In) Watchers
+      event_name: mail.moved
+      priority@int: 100
+      is_disabled: 0
+      event_kata@raw:
+        automation/addGroupWatchers:
+          uri: cerb:automation:wgm.email.group_optin_watchers.mailMoved
+          disabled@bool: no
+  automation/automationMailMoved:
+    fields:
+      name: wgm.email.group_optin_watchers.mailMoved
+      extension_id: cerb.trigger.mail.moved
+      description: Add group watchers as ticket watchers for new/moved tickets.
+      script@raw:
+        start:
+          # Build a list of Group Watchers to add to the Ticket
+          set:
+            watcher_links@list:
+              {{
+                ticket_group_links["cerberusweb.contexts.worker"]
+                |values
+                |map((v,k) => 'worker:' ~ v)
+                |join('\n')
+              }}
+              
+          # Only update if we have group members
+          outcome/hasWatchers:
+            if@bool: {{watcher_links is not empty}}
+            then:
+              record.update:
+                inputs:
+                  record_type: ticket
+                  record_id: {{ticket_id}}
+                  fields:
+                    links@key: watcher_links
+      policy_kata@raw:
+        commands:
+          record.update:
+            deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+            allow@bool: yes
 ```
 
 Click the **Continue** button three times.

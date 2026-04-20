@@ -16,7 +16,24 @@ You simply provide a `system_prompt` with instructions, one or more `messages`, 
 This is useful for text classification, summarization, and other single-turn AI tasks.
 
 ```
-start: llm.chat: output: results inputs: llm: anthropic: model: claude-haiku-4-5 authentication: cerb:connected_account:anthropic system_prompt@text: You are a helpful AI assistant that classifies customer messages as positive, negative, or neutral. Return only the classification. messages: 0: role: user content: Thank you for the quick response! This solved my problem perfectly. on_success: return: classification@key: results:messages:0:content
+start:
+  llm.chat:
+    output: results
+    inputs:
+      llm:
+        anthropic:
+          model: claude-haiku-4-5
+          authentication: cerb:connected_account:anthropic
+      system_prompt@text:
+        You are a helpful AI assistant that classifies customer messages 
+        as positive, negative, or neutral. Return only the classification.
+      messages:
+        0:
+          role: user
+          content: Thank you for the quick response! This solved my problem perfectly.
+    on_success:
+      return:
+        classification@key: results:messages:0:content
 ```
 
 - [Syntax](#syntax)
@@ -50,7 +67,35 @@ start: llm.chat: output: results inputs: llm: anthropic: model: claude-haiku-4-5
 The LLM provider is one of:
 
 ```
-llm: anthropic: model: claude-haiku-4-5 authentication: cerb:connected_account:anthropic aws_bedrock: model: us.anthropic.claude-haiku-4-5-20251001-v1:0 api_endpoint_url: https://bedrock-runtime.us-east-1.amazonaws.com authentication: cerb:connected_account:aws docker: api_endpoint_url: http://model-runner.docker.internal/ model: ai/llama3.2 gemini: model: gemini-2.0-flash authentication: cerb:connected_account:gemini groq: model: gemma2-9b-it authentication: cerb:connected_account:groq huggingface: model: google/gemma-2-2b-it authentication: cerb:connected_account:huggingface ollama: api_endpoint_url: http://host.docker.internal:11434 model: llama3.2 openai: model: gpt-4o authentication: cerb:connected_account:openai together: model: meta-llama/Llama-3.3-70B-Instruct-Turbo authentication: cerb:connected_account:together-ai
+llm:
+  anthropic:
+    model: claude-haiku-4-5
+    authentication: cerb:connected_account:anthropic
+  aws_bedrock:
+    model: us.anthropic.claude-haiku-4-5-20251001-v1:0
+    api_endpoint_url: https://bedrock-runtime.us-east-1.amazonaws.com
+    authentication: cerb:connected_account:aws
+  docker:
+    api_endpoint_url: http://model-runner.docker.internal/
+    model: ai/llama3.2
+  gemini:
+    model: gemini-2.0-flash
+    authentication: cerb:connected_account:gemini
+  groq:
+    model: gemma2-9b-it
+    authentication: cerb:connected_account:groq
+  huggingface:
+    model: google/gemma-2-2b-it
+    authentication: cerb:connected_account:huggingface
+  ollama:
+    api_endpoint_url: http://host.docker.internal:11434
+    model: llama3.2
+  openai:
+    model: gpt-4o
+    authentication: cerb:connected_account:openai
+  together:
+    model: meta-llama/Llama-3.3-70B-Instruct-Turbo
+    authentication: cerb:connected_account:together-ai
 ```
 
 The `model:` key is the name of the model to use. This must be a chat model.
@@ -69,7 +114,12 @@ For Gemini reasoning models, two optional parameters control thinking behavior:
 | `thinking_include@bool:` | `yes` / `no` | When `yes`, includes the model's thinking content in the response (useful for debugging) |
 
 ```
-llm: gemini: model: gemini-2.5-pro authentication: cerb:connected_account:gemini thinking_level: medium thinking_include@bool: no
+llm:
+  gemini:
+    model: gemini-2.5-pro
+    authentication: cerb:connected_account:gemini
+    thinking_level: medium
+    thinking_include@bool: no
 ```
 
 #### OpenAI reasoning models
@@ -81,13 +131,20 @@ For OpenAI reasoning models (e.g. `o3`, `o4-mini`), the optional `reasoning_effo
 | `reasoning_effort:` | `none`, `low`, `medium`, `high`, `xhigh` | Sets the reasoning effort; higher levels improve quality at the cost of more tokens and latency |
 
 ```
-llm: openai: model: o4-mini authentication: cerb:connected_account:openai reasoning_effort: medium
+llm:
+  openai:
+    model: o4-mini
+    authentication: cerb:connected_account:openai
+    reasoning_effort: medium
 ```
 
 ### system\_prompt:
 
 ```
-system_prompt@text: You are a helpful AI assistant that classifies customer support messages. Classify each message as positive, negative, or neutral. Return only the classification word.
+system_prompt@text:
+  You are a helpful AI assistant that classifies customer support messages.
+  Classify each message as positive, negative, or neutral.
+  Return only the classification word.
 ```
 
 ### messages:
@@ -97,13 +154,31 @@ The messages to send to the LLM. Each message has `role:` and `content:` keys. T
 For a simple single-turn completion:
 
 ```
-messages: 0: role: user content: Thank you so much for your help! The issue is now resolved.
+messages:
+  0:
+    role: user
+    content: Thank you so much for your help! The issue is now resolved.
 ```
 
 For few-shot prompting with examples:
 
 ```
-messages: 0: role: user content: "Great service! Very helpful staff." 1: role: assistant content: positive 2: role: user content: "This product is terrible and doesn't work." 3: role: assistant content: negative 4: role: user content: "Thank you for the quick response! This solved my problem perfectly."
+messages:
+  0:
+    role: user
+    content: "Great service! Very helpful staff."
+  1:
+    role: assistant
+    content: positive
+  2:
+    role: user
+    content: "This product is terrible and doesn't work."
+  3:
+    role: assistant
+    content: negative
+  4:
+    role: user
+    content: "Thank you for the quick response! This solved my problem perfectly."
 ```
 
 ## output:
@@ -122,7 +197,11 @@ Each message in the `messages` array has the following structure:
 | `type` | Currently only `text` is supported. |
 
 ```
-output: messages: 0: type: text content: positive
+output:
+  messages:
+    0:
+      type: text
+      content: positive
 ```
 
 # Examples
@@ -130,17 +209,72 @@ output: messages: 0: type: text content: positive
 ## Text classification
 
 ```
-start: llm.chat: output: classification_result inputs: llm: anthropic: model: claude-haiku-4-5 authentication: cerb:connected_account:anthropic system_prompt@text: Classify customer messages as: positive, negative, or neutral. Return only the classification. messages: 0: role: user content: {{ ticket_latest_message_content }} on_success: return: sentiment@key: classification_result:messages:0:content
+start:
+  llm.chat:
+    output: classification_result
+    inputs:
+      llm:
+        anthropic:
+          model: claude-haiku-4-5
+          authentication: cerb:connected_account:anthropic
+      system_prompt@text:
+        Classify customer messages as: positive, negative, or neutral.
+        Return only the classification.
+      messages:
+        0:
+          role: user
+          content: {{ticket_latest_message_content}}
+    on_success:
+      return:
+        sentiment@key: classification_result:messages:0:content
 ```
 
 ## Text summarization
 
 ```
-start: llm.chat: output: summary_result inputs: llm: openai: model: gpt-4o-mini authentication: cerb:connected_account:openai system_prompt@text: Summarize the following text in 2-3 sentences. Focus on the key points and main outcomes. messages: 0: role: user content@text: Please summarize this conversation: {{ ticket_conversation_history }} on_success: return: summary@key: summary_result:messages:0:content
+start:
+  llm.chat:
+    output: summary_result
+    inputs:
+      llm:
+        openai:
+          model: gpt-4o-mini
+          authentication: cerb:connected_account:openai
+      system_prompt@text:
+        Summarize the following text in 2-3 sentences. 
+        Focus on the key points and main outcomes.
+      messages:
+        0:
+          role: user
+          content@text:
+            Please summarize this conversation:
+            
+            {{ticket_conversation_history}}
+    on_success:
+      return:
+        summary@key: summary_result:messages:0:content
 ```
 
 ## Content generation
 
 ```
-start: llm.chat: output: response_result inputs: llm: gemini: model: gemini-2.0-flash authentication: cerb:connected_account:gemini system_prompt@text: You are a helpful customer support agent. Generate a professional and friendly response to the customer's question. Keep it concise and actionable. messages: 0: role: user content: Customer asked: "How do I reset my password?" on_success: return: suggested_response@key: response_result:messages:0:content
+start:
+  llm.chat:
+    output: response_result
+    inputs:
+      llm:
+        gemini:
+          model: gemini-2.0-flash
+          authentication: cerb:connected_account:gemini
+      system_prompt@text:
+        You are a helpful customer support agent. Generate a professional
+        and friendly response to the customer's question. Keep it concise
+        and actionable.
+      messages:
+        0:
+          role: user
+          content: Customer asked: "How do I reset my password?"
+    on_success:
+      return:
+        suggested_response@key: response_result:messages:0:content
 ```

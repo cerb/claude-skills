@@ -14,10 +14,20 @@ Here are examples of using the [|strip\_lines](/docs/scripting/filters#strip_lin
 
 - 
 ```
-start: set: message@text: > This is quoted text > From a prior conversation > and we want to strip it out > This is the reply return: message: {{ message|strip_lines(prefixes='>') }}
+start:
+  set:
+    message@text:
+      > This is quoted text
+      > From a prior conversation
+      > and we want to strip it out
+      >
+      This is the reply
+  return:
+    message: {{message|strip_lines(prefixes='>')}}
 ```
 - 
 ```
-__return: message: This is the reply
+__return:
+  message: This is the reply
 ```
 

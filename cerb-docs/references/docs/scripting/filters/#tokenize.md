@@ -16,7 +16,8 @@ Return an array of word tokens from a text block. This ignores punctuation and r
 KATA ("Key Annotated Tree of Attributes") is a human-friendly format for modeling structured 
 data that is used throughout Cerb to describe configurations, customizations, sheets, and 
 automations. KATA was inspired by YAML but avoids many of its pitfalls.
-{% endset %} {{ array_count_values ( message | tokenize ) | sort | reverse | json_encode | json_pretty }}
+{% endset %}
+{{array_count_values(message|tokenize)|sort|reverse|json_encode|json_pretty}}
 ```
 
 ```

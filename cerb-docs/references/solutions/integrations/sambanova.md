@@ -40,5 +40,27 @@ Copy the API key for use later.
 ## Chat completions
 
 ```
-start: http.request/chat: output: http_response inputs: method: POST url: https://api.sambanova.ai/v1/chat/completions authentication: cerb:connected_account:sambanova headers: Content-Type: application/json body: stream@bool: false model: Meta-Llama-3.1-70B-Instruct messages: 0: role: system content: You are a helpful assistant for Cerb, an app to automate helpdesk inboxes and workflows 1: role: user content: What is Cerb? on_success: set: response_json@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/chat:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.sambanova.ai/v1/chat/completions
+      authentication: cerb:connected_account:sambanova
+      headers:
+        Content-Type: application/json
+      body:
+        stream@bool: false
+        model: Meta-Llama-3.1-70B-Instruct
+        messages:
+          0:
+            role: system
+            content: You are a helpful assistant for Cerb, an app to automate helpdesk inboxes and workflows
+          1:
+            role: user
+            content: What is Cerb?
+    on_success:
+      set:
+        response_json@json: {{http_response.body}}
+        http_response@json: null
 ```

@@ -29,5 +29,8 @@ The results can be returned in these formats:
 # Examples
 
 ```
-type: classifier.prediction classifier: (name:Yes/No) text: "I am not sure" format: dictionaries
+type:classifier.prediction
+classifier:(name:Yes/No)
+text:"I am not sure"
+format:dictionaries
 ```

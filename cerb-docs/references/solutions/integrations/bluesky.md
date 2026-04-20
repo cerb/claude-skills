@@ -50,7 +50,16 @@ Copy the password for use later.
 https://docs.bsky.app/docs/api/app-bsky-feed-get-timeline
 
 ```
-start: http.request/getTimeline: output: http_response inputs: method: GET url: https://bsky.social/xrpc/app.bsky.feed.getTimeline authentication: cerb:connected_account:bluesky on_success: set: response@json: {{ http_response.body }}
+start:
+  http.request/getTimeline:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://bsky.social/xrpc/app.bsky.feed.getTimeline
+      authentication: cerb:connected_account:bluesky
+    on_success:
+      set:
+        response@json: {{http_response.body}}
 ```
 
 ## Make a post
@@ -58,5 +67,19 @@ start: http.request/getTimeline: output: http_response inputs: method: GET url: 
 https://docs.bsky.app/docs/advanced-guides/posts
 
 ```
-start: http.request/post: output: http_response inputs: method: POST url: https://bsky.social/xrpc/com.atproto.repo.createRecord headers: Content-Type: application/json authentication: cerb:connected_account:bluesky body: repo: example.bsky.social collection: app.bsky.feed.post record: text: Testing, testing, 1,2,3! createdAt: {{ 'now'|date('c') }}
+start:
+  http.request/post:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://bsky.social/xrpc/com.atproto.repo.createRecord
+      headers:
+        Content-Type: application/json
+      authentication: cerb:connected_account:bluesky
+      body:
+        repo: example.bsky.social
+        collection: app.bsky.feed.post
+        record:
+          text: Testing, testing, 1,2,3!
+          createdAt: {{'now'|date('c')}}
 ```

@@ -14,7 +14,8 @@ Convert Markdown[2](#fn:markdown) formatting to HTML:
 ```
 {% set markdown %}
 This is **bold** text with a link
-{% endset %} {{ markdown | markdown_to_html }}
+{% endset %}
+{{markdown|markdown_to_html}}
 ```
 
 ```

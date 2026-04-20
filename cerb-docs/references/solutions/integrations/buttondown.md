@@ -46,18 +46,52 @@ Copy the API key for use later.
 ## List newsletters
 
 ```
-start: http.request/newsletters: output: http_response inputs: method: GET url: https://api.buttondown.com/v1/newsletters authentication: cerb:connected_account:buttondown on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/newsletters:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.buttondown.com/v1/newsletters
+      authentication: cerb:connected_account:buttondown
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## List subscribers
 
 ```
-start: http.request/subs: output: http_response inputs: method: GET url: https://api.buttondown.com/v1/subscribers authentication: cerb:connected_account:buttondown on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/subs:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.buttondown.com/v1/subscribers
+      authentication: cerb:connected_account:buttondown
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Add a subscriber
 
 ```
-start: http.request/addSub: output: http_response inputs: method: POST url: https://api.buttondown.com/v1/subscribers authentication: cerb:connected_account:buttondown headers: Content-Type: application/json body: email_address: customer@cerb.example #tags@csv: tag-1, tag-2
-      on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/addSub:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.buttondown.com/v1/subscribers
+      authentication: cerb:connected_account:buttondown
+      headers:
+        Content-Type: application/json
+      body:
+        email_address: customer@cerb.example
+        #tags@csv: tag-1, tag-2
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

@@ -108,30 +108,84 @@ If you have a time-intensive process that the user doesn't need to wait for, use
 76
 77
 78
-start: set/config: # The bytes of the CSV to read in a single iteration
-      chunk_size@int: 1024000 # Start at the beginning of the file
-      offset_from@int: 0 # We'll store the CSV headings from the first row here
-      csv_headings@list: # This will be true when we hit the end of the file
-      is_eof@bool: no   
+start:
+  set/config:
+    # The bytes of the CSV to read in a single iteration
+    chunk_size@int: 1024000
+    # Start at the beginning of the file
+    offset_from@int: 0
+    # We'll store the CSV headings from the first row here
+    csv_headings@list:
+    # This will be true when we hit the end of the file
+    is_eof@bool: no
+  
   # Get a file from the user
-    await/upload: form: title: Upload CSV elements: fileUpload/prompt_file: label: Upload CSV file: as: automation_resource required@bool: yes 
+  await/upload:
+    form:
+      title: Upload CSV
+      elements:
+        fileUpload/prompt_file:
+          label: Upload CSV file:
+          as: automation_resource
+          required@bool: yes
+
   # Loop to ingest chunks
-    while: if@bool: {{ not is_eof }} do: file.read: output: results inputs: uri: cerb:automation_resource: {{ prompt_file }} # Process batches of lines to avoid timeouts
-            length@int: {{ chunk_size }} length_split@json: "\n" offset: {{ offset_from }} on_success: set: csv_rows@json: {{ results.bytes|parse_csv|json_encode }} offset_from: {{ results.offset_to }} # [TODO] Verify array results
+  while:
+    if@bool: {{not is_eof}}
+    do:
+      file.read:
+        output: results
+        inputs:
+          uri: cerb:automation_resource:{{prompt_file}}
+          # Process batches of lines to avoid timeouts
+          length@int: {{chunk_size}}
+          length_split@json: "\n"
+          offset: {{offset_from}}
+        on_success:
+          set:
+            csv_rows@json: {{results.bytes|parse_csv|json_encode}}
+            offset_from: {{results.offset_to}}
+          # [TODO] Verify array results
       
       # The first time, grab the column names
-        outcome/firstChunk: if@bool: {{ 0 == results.offset_from }} then: set: csv_headings@json: {{ csv_rows|first|json_encode }} csv_rows@json: {{ csv_rows[1:]|json_encode }} # [TODO] Enforce the required columns
+      outcome/firstChunk:
+        if@bool: {{0 == results.offset_from}}
+        then:
+          set:
+            csv_headings@json: {{csv_rows|first|json_encode}}
+            csv_rows@json: {{csv_rows[1:]|json_encode}}
+          # [TODO] Enforce the required columns
       
       # Merge the headings as keys
-        set/headings: csv_rows@json: {{ csv_rows|map((row) => array_combine(csv_headings, row))|json_encode }}       
+      set/headings:
+        csv_rows@json: {{csv_rows|map((row) => array_combine(csv_headings, row))|json_encode}}
+      
       # Loop through the each row
-        repeat/rows: each@csv: {{ csv_rows|keys|join(',') }} as: row_id do: set/row: csv_row@json: {{ csv_rows[row_id]|json_encode }}           
+      repeat/rows:
+        each@csv: {{csv_rows|keys|join(',')}}
+        as: row_id
+        do:
+          set/row:
+            csv_row@json: {{csv_rows[row_id]|json_encode}}
+          
           # [TODO] You can do anything with the row data now (tasks, drafts, etc)
           # This example prints each row, which you probably don't want.
           # If the process is time-consuming it's best to use a queue here.
-            await/output: form: title: Row elements: say: content@text: | | | |-|-| {% for key in csv_row|keys %} | **{{ key|trim }} :** | {{ csv_row[key] }} | {% endfor %}        
+          await/output:
+            form:
+              title: Row
+              elements:
+                say:
+                  content@text:
+                    | | |
+                    |-|-|
+                    {% for key in csv_row|keys %}
+                    | **{{key|trim}}:** | {{csv_row[key]}} |
+                    {% endfor %}
+      
       # We're done when the last read byte is the size of the file
-        set/eof: is_eof@bool: {{ offset_from + 1 >= results.size }}
+      set/eof:
+        is_eof@bool: {{offset_from + 1 >= results.size}}
 ```
 
 Here's a breakdown by line numbers:
@@ -180,7 +234,9 @@ Here's a breakdown by line numbers:
 
 - 
 ```
-commands: file.read: allow@bool: yes
+commands:
+  file.read:
+    allow@bool: yes
 ```
 
 # Examples
@@ -295,34 +351,103 @@ We can create a [task](/docs/records/types/task/) record for each row in the upl
 86
 87
 88
-start: set/config: # The bytes of the CSV to read in a single iteration chunk_size@int: 1024000 # Start at the beginning of the file offset_from@int: 0 # We'll store the CSV headings from the first row here csv_headings@list: # This will be true when we hit the end of the file is_eof@bool: no # Keep track of the number of imported tasks count_tasks_created@int: 0
-      # Get a file from the user await/upload: form: title: Upload CSV elements: fileUpload/prompt_file: label: Upload CSV file: as: automation_resource required@bool: yes # Loop to ingest chunks while: if@bool: {{ not is_eof }} do: file.read: output: results inputs: uri: cerb:automation_resource: {{ prompt_file }} # Process batches of lines to avoid timeouts length@int: {{ chunk_size }} length_split@json: "\n" offset: {{ offset_from }} on_success: set: csv_rows@json: {{ results.bytes|parse_csv|json_encode }} offset_from: {{ results.offset_to }} # The first time, grab the column names outcome/firstChunk: if@bool: {{ 0 == results.offset_from }} then: set: csv_headings@json: {{ csv_rows|first|json_encode }} csv_rows@json: {{ csv_rows[1:]|json_encode }} # Enforce the required columns
-            outcome/verify:
-              if@bool: {{ 'Title' not in csv_headings }}
-              then:
-                error: The CSV file must have a column named "Title".
-              # Merge the headings as keys set/headings: csv_rows@json: {{ csv_rows|map((row) => array_combine(csv_headings, row))|json_encode }} # Loop through the each row repeat/rows: each@csv: {{ csv_rows|keys|join(',') }} as: row_id do: set/row: csv_row@json: {{ csv_rows[row_id]|json_encode }} record.create/task:
-              output: new_task
-              inputs:
-                record_type: task
-                fields:
-                  title: {{ csv_row['Title'] }}
-                  importance@optional: {{ csv_row['Importance'] }}
-                  status: open
-              on_success:
-                set:
-                  count_tasks_created@int: {{ count_tasks_created + 1 }}
-       # We're done when the last read byte is the size of the file set/eof: is_eof@bool: {{ offset_from + 1 >= results.size }} await/results:
-      form:
-        title: Imported
-        elements:
-          say:
-            content@text:
-              Imported {{ count_tasks_created }} task {{ 1 != count_tasks_created ? 's' }} .
+start:
+  set/config:
+    # The bytes of the CSV to read in a single iteration
+    chunk_size@int: 1024000
+    # Start at the beginning of the file
+    offset_from@int: 0
+    # We'll store the CSV headings from the first row here
+    csv_headings@list:
+    # This will be true when we hit the end of the file
+    is_eof@bool: no
+    # Keep track of the number of imported tasks
+    count_tasks_created@int: 0
+  
+  # Get a file from the user
+  await/upload:
+    form:
+      title: Upload CSV
+      elements:
+        fileUpload/prompt_file:
+          label: Upload CSV file:
+          as: automation_resource
+          required@bool: yes
+
+  # Loop to ingest chunks
+  while:
+    if@bool: {{not is_eof}}
+    do:
+      file.read:
+        output: results
+        inputs:
+          uri: cerb:automation_resource:{{prompt_file}}
+          # Process batches of lines to avoid timeouts
+          length@int: {{chunk_size}}
+          length_split@json: "\n"
+          offset: {{offset_from}}
+        on_success:
+          set:
+            csv_rows@json: {{results.bytes|parse_csv|json_encode}}
+            offset_from: {{results.offset_to}}
+      
+      # The first time, grab the column names
+      outcome/firstChunk:
+        if@bool: {{0 == results.offset_from}}
+        then:
+          set:
+            csv_headings@json: {{csv_rows|first|json_encode}}
+            csv_rows@json: {{csv_rows[1:]|json_encode}}
+          # Enforce the required columns
+          outcome/verify:
+            if@bool: {{'Title' not in csv_headings}}
+            then:
+              error: The CSV file must have a column named "Title".
+      
+      # Merge the headings as keys
+      set/headings:
+        csv_rows@json: {{csv_rows|map((row) => array_combine(csv_headings, row))|json_encode}}
+      
+      # Loop through the each row
+      repeat/rows:
+        each@csv: {{csv_rows|keys|join(',')}}
+        as: row_id
+        do:
+          set/row:
+            csv_row@json: {{csv_rows[row_id]|json_encode}}
+          
+          record.create/task:
+            output: new_task
+            inputs:
+              record_type: task
+              fields:
+                title: {{csv_row['Title']}}
+                importance@optional: {{csv_row['Importance']}}
+                status: open
+            on_success:
+              set:
+                count_tasks_created@int: {{count_tasks_created + 1}}
+
+      # We're done when the last read byte is the size of the file
+      set/eof:
+        is_eof@bool: {{offset_from + 1 >= results.size}}
+  
+  await/results:
+    form:
+      title: Imported
+      elements:
+        say:
+          content@text:
+            Imported {{count_tasks_created}} task{{1 != count_tasks_created ? 's'}}.
 ```
 - 
 ```
-commands: file.read: allow@bool: yes record.create: deny/type@bool: {{ inputs.record_type is not record type ('task') }} allow@bool: yes
+commands:
+  file.read:
+    allow@bool: yes
+  record.create:
+    deny/type@bool: {{inputs.record_type is not record type ('task')}}
+    allow@bool: yes
 ```
 - 
 ```
@@ -500,88 +625,157 @@ We can create a ticket and schedule an outgoing email draft for each row in the 
 140
 141
 142
-start: set/config: # The bytes of the CSV to read in a single iteration chunk_size@int: 1024000 # Start at the beginning of the file offset_from@int: 0 # The required CSV headings
-      csv_headings_required@csv: Email, First Name
-     # We'll store the CSV headings from the first row here csv_headings@list: # This will be true when we hit the end of the file is_eof@bool: no # Keep track of the number of created drafts
-      count_tickets_created@int: 0
-     # The email template to send with `{{csv_row['Column Name']}}` placeholders from the file
-      email_template:
-        group: Support
-        status: waiting
-        deliver_at: 20 minutes
-        subject@raw: New email for {{ csv_row['First Name']|default('you') }}
-        body@raw:
-          Hello {{ csv_row['First Name']|default('there') }} ,
-         
-          This is a sample email body.
-         
-          -- 
-          Support
-      # Get a file from the user await/upload: form: title: Upload CSV elements: fileUpload/prompt_file: label: Upload CSV file: as: automation_resource required@bool: yes # Loop to ingest chunks while: if@bool: {{ not is_eof }} do: file.read: output: results inputs: uri: cerb:automation_resource: {{ prompt_file }} # Process batches of lines to avoid timeouts length@int: {{ chunk_size }} length_split@json: "\n" offset: {{ offset_from }} on_success: set: csv_rows@json: {{ results.bytes|parse_csv|json_encode }} offset_from: {{ results.offset_to }} # The first time, grab the column names outcome/firstChunk: if@bool: {{ 0 == results.offset_from }} then: set: csv_headings@json: {{ csv_rows|first|json_encode }} csv_rows@json: {{ csv_rows[1:]|json_encode }} # Enforce the required columns
-            outcome/verify:
-              if@bool:
-                {{ array_intersect(csv_headings_required,csv_headings)|length != csv_headings_required|length }}
-              then:
-                error: The CSV file must have columns named: {{ csv_headings_required|join(', ') }}
-              # Merge the headings as keys set/headings: csv_rows@json: {{ csv_rows|map((row) => array_combine(csv_headings, row))|json_encode }} # Loop through the each row repeat/rows: each@csv: {{ csv_rows|keys|join(',') }} as: row_id do: set/row: csv_row@json: {{ csv_rows[row_id]|json_encode }} # Replace the email template placeholders
-            kata.parse:
-              output: parsed_template
-              inputs:
-                dict:
-                  csv_row@key: csv_row
-                kata@key: email_template
- 
-            record.create/ticket:
-              output: new_ticket
-              inputs:
-                record_type: ticket
-                fields:
-                  subject: {{ parsed_template.subject }}
-                  participants: {{ csv_row['Email'] }}
-                  group: {{ parsed_template.group }}
-                  status@optional: {{ parsed_template.status }}
-              on_success:
-                record.create/draft:
-                  output: new_draft
-                  inputs:
-                    record_type: draft
-                    fields:
-                      type: ticket.reply
-                      ticket_id: {{ new_ticket.id }}
-                      name: {{ parsed_template.subject }}
-                      is_queued: 1
-                      queue_delivery_date@date: {{ parsed_template.deliver_at }}
-                     # See: https://cerb.ai/docs/records/types/draft/#params-ticketreply--ticketforward
-                      params:
-                        to: {{ csv_row['Email'] }}
-                        subject: {{ parsed_template.subject }}
-                        content: {{ parsed_template.body }}
-                set:
-                  count_tickets_created@int: {{ count_tickets_created + 1 }}
-               # Keep the user informed of progress
-                outcome/progress:
-                  if@bool: {{ 0 == count_tickets_created % 25 }}
-                  then:
-                    await:
-                      form:
-                        title: Importing CSV
-                        elements:
-                          say:
-                            content@text:
-                              Imported {{ count_tickets_created }} ticket {{ 1 != count_tickets_created ? 's' }} ...
-                          submit:
-                            is_automatic@bool: yes
-       # We're done when the last read byte is the size of the file set/eof: is_eof@bool: {{ offset_from + 1 >= results.size }} await/results:
-      form:
-        title: Imported
-        elements:
-          say:
-            content@text:
-              Imported {{ count_tickets_created }} ticket {{ 1 != count_tickets_created ? 's' }} .
+start:
+  set/config:
+    # The bytes of the CSV to read in a single iteration
+    chunk_size@int: 1024000
+    # Start at the beginning of the file
+    offset_from@int: 0
+    # The required CSV headings
+    csv_headings_required@csv: Email, First Name
+    # We'll store the CSV headings from the first row here
+    csv_headings@list:
+    # This will be true when we hit the end of the file
+    is_eof@bool: no
+    # Keep track of the number of created drafts
+    count_tickets_created@int: 0
+    # The email template to send with `{{csv_row['Column Name']}}` placeholders from the file
+    email_template:
+      group: Support
+      status: waiting
+      deliver_at: 20 minutes
+      subject@raw: New email for {{csv_row['First Name']|default('you')}}
+      body@raw:
+        Hello {{csv_row['First Name']|default('there')}},
+        
+        This is a sample email body.
+        
+        -- 
+        Support
+  
+  # Get a file from the user
+  await/upload:
+    form:
+      title: Upload CSV
+      elements:
+        fileUpload/prompt_file:
+          label: Upload CSV file:
+          as: automation_resource
+          required@bool: yes
+
+  # Loop to ingest chunks
+  while:
+    if@bool: {{not is_eof}}
+    do:
+      file.read:
+        output: results
+        inputs:
+          uri: cerb:automation_resource:{{prompt_file}}
+          # Process batches of lines to avoid timeouts
+          length@int: {{chunk_size}}
+          length_split@json: "\n"
+          offset: {{offset_from}}
+        on_success:
+          set:
+            csv_rows@json: {{results.bytes|parse_csv|json_encode}}
+            offset_from: {{results.offset_to}}
+      
+      # The first time, grab the column names
+      outcome/firstChunk:
+        if@bool: {{0 == results.offset_from}}
+        then:
+          set:
+            csv_headings@json: {{csv_rows|first|json_encode}}
+            csv_rows@json: {{csv_rows[1:]|json_encode}}
+          # Enforce the required columns
+          outcome/verify:
+            if@bool:
+              {{array_intersect(csv_headings_required,csv_headings)|length != csv_headings_required|length}}
+            then:
+              error: The CSV file must have columns named: {{csv_headings_required|join(', ')}}
+      
+      # Merge the headings as keys
+      set/headings:
+        csv_rows@json: {{csv_rows|map((row) => array_combine(csv_headings, row))|json_encode}}
+      
+      # Loop through the each row
+      repeat/rows:
+        each@csv: {{csv_rows|keys|join(',')}}
+        as: row_id
+        do:
+          set/row:
+            csv_row@json: {{csv_rows[row_id]|json_encode}}
+            
+          # Replace the email template placeholders
+          kata.parse:
+            output: parsed_template
+            inputs:
+              dict:
+                csv_row@key: csv_row
+              kata@key: email_template
+
+          record.create/ticket:
+            output: new_ticket
+            inputs:
+              record_type: ticket
+              fields:
+                subject: {{parsed_template.subject}}
+                participants: {{csv_row['Email']}}
+                group: {{parsed_template.group}}
+                status@optional: {{parsed_template.status}}
+            on_success:
+              record.create/draft:
+                output: new_draft
+                inputs:
+                  record_type: draft
+                  fields:
+                    type: ticket.reply
+                    ticket_id: {{new_ticket.id}}
+                    name: {{parsed_template.subject}}
+                    is_queued: 1
+                    queue_delivery_date@date: {{parsed_template.deliver_at}}
+                    # See: https://cerb.ai/docs/records/types/draft/#params-ticketreply--ticketforward
+                    params:
+                      to: {{csv_row['Email']}}
+                      subject: {{parsed_template.subject}}
+                      content: {{parsed_template.body}}
+              set:
+                count_tickets_created@int: {{count_tickets_created + 1}}
+
+              # Keep the user informed of progress
+              outcome/progress:
+                if@bool: {{0 == count_tickets_created % 25}}
+                then:
+                  await:
+                    form:
+                      title: Importing CSV
+                      elements:
+                        say:
+                          content@text:
+                            Imported {{count_tickets_created}} ticket{{1 != count_tickets_created ? 's'}}...
+                        submit:
+                          is_automatic@bool: yes
+
+      # We're done when the last read byte is the size of the file
+      set/eof:
+        is_eof@bool: {{offset_from + 1 >= results.size}}
+  
+  await/results:
+    form:
+      title: Imported
+      elements:
+        say:
+          content@text:
+            Imported {{count_tickets_created}} ticket{{1 != count_tickets_created ? 's'}}.
 ```
 - 
 ```
-commands: file.read: allow@bool: yes record.create: deny/type@bool: {{ inputs.record_type is not record type ('draft','ticket') }} allow@bool: yes
+commands:
+  file.read:
+    allow@bool: yes
+  record.create:
+    deny/type@bool: {{inputs.record_type is not record type ('draft','ticket')}}
+    allow@bool: yes
 ```
 - 
 ```

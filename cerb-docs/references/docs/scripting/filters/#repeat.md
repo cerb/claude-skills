@@ -16,7 +16,7 @@ Repeat a string a given number of times.
 | **times** | The number of times to repeat the string. |
 
 ```
-{{ "*" | repeat ( 5 ) }}
+{{"*"|repeat(5)}}
 ```
 
 ```

@@ -40,15 +40,35 @@ Set the proper MIME type if a file with a `.png` extension comes in as an `appli
 
 - 
 ```
-start: outcome/png: if@bool: {{ record_name is suffixed ('.png') }} then: record.update/fix: output: updated_attachment inputs: record_type: attachment record_id: {{ record_id }} fields: mime_type: image/png
+start:
+  outcome/png:
+    if@bool: {{record_name is suffixed ('.png')}}
+    then:
+      record.update/fix:
+        output: updated_attachment
+        inputs:
+          record_type: attachment
+          record_id: {{record_id}}
+          fields:
+            mime_type: image/png
 ```
 - 
 ```
-commands: record.update: deny/type@bool: {{ inputs.record_type is not record type ('attachment') }} allow@bool: yes
+commands:
+  record.update:
+    deny/type@bool: {{inputs.record_type is not record type ('attachment')}}
+    allow@bool: yes
 ```
 - 
 ```
-automation/png: uri: cerb:automation:example.png.mimefix disabled@bool: {{ change_type not in ['created'] or record__context is not record type ('attachment') or record_mime_type not in ['application/octet-stream'] }}
+automation/png:
+  uri: cerb:automation:example.png.mimefix
+  disabled@bool: 
+      {{
+        change_type not in ['created']
+        or record__context is not record type ('attachment')
+        or record_mime_type not in ['application/octet-stream']
+      }}
 ```
 
 ## Create notifications for new calendar events
@@ -61,15 +81,33 @@ Create a notification when someone adds an event to your calendar:
 
 - 
 ```
-start: record.create/notification: output: new_notification inputs: record_type: notification fields: activity_point: record.created params: message: a new event has been placed on your calendar {{ record_record_url }} worker_id@int: {{ record_calendar_owner_id }}
+start:
+  record.create/notification:
+    output: new_notification
+    inputs:
+      record_type: notification
+      fields:
+        activity_point: record.created
+        params:
+          message: a new event has been placed on your calendar {{record_record_url}}
+        worker_id@int: {{record_calendar_owner_id}}
 ```
 - 
 ```
-commands: record.create: deny/type@bool: {{ inputs.record_type is not record type ('notification') }} allow@bool: yes
+commands:
+  record.create:
+    deny/type@bool: {{inputs.record_type is not record type ('notification')}}
+    allow@bool: yes
 ```
 - 
 ```
-automation/reminder: uri: cerb:automation:example.calendarEvent.notification disabled@bool: {{ change_type not in ['created'] or record__context is not record type ('calendar_event') }}
+automation/reminder:
+  uri: cerb:automation:example.calendarEvent.notification
+  disabled@bool: 
+    {{
+      change_type not in ['created']
+      or record__context is not record type ('calendar_event')
+    }}
 ```
 
 ## Add watchers on high-touch tickets
@@ -82,14 +120,47 @@ Add a watcher (eg. a manager) if a ticket thread reaches a certain number of mes
 
 - 
 ```
-start: decision/number: outcome/15: if@bool: {{ record_num_messages == 15 }} record.update/addManager: output: updated_ticket inputs: record_type: ticket record_id: {{ record_id }} fields: links@list: worker:1 outcome/30: if@bool: {{ record_num_messages == 30 }} then: record.update/addSeniorManager: output: updated_ticket inputs: record_type: ticket record_id: {{ record_id }} fields: links@list: worker:2
+start:
+ decision/number:
+   outcome/15:
+     if@bool: {{record_num_messages == 15}}
+      record.update/addManager:
+        output: updated_ticket
+        inputs:
+          record_type: ticket
+          record_id: {{record_id}}
+          fields:
+            links@list:
+              worker:1
+   outcome/30:
+    if@bool: {{record_num_messages == 30}}
+         then:
+          record.update/addSeniorManager:
+            output: updated_ticket
+            inputs:
+              record_type: ticket
+              record_id: {{record_id}}
+              fields:
+                links@list:
+                  worker:2
 ```
 - 
 ```
-commands: record.update: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes
+commands:
+  record.update:
+    deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+    allow@bool: yes
 ```
 - 
 ```
-automation/manager: uri: cerb:automation:cerb.example.automation disabled@bool: {{ change_type not in ['updated'] or record__context is not record type ('ticket') or record_num_messages == was_record_num_messages or record_num_messages not in [15,30] }}
+automation/manager:
+  uri: cerb:automation:cerb.example.automation
+  disabled@bool: 
+    {{
+      change_type not in ['updated']
+      or record__context is not record type ('ticket')
+      or record_num_messages == was_record_num_messages
+      or record_num_messages not in [15,30]
+    }}
 ```
 

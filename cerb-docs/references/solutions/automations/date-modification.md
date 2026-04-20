@@ -14,10 +14,21 @@ Here is an example of using the [|date\_modify](/docs/scripting/filters/#date_mo
 
 - 
 ```
-start: return: output@text: {% set format = 'D, d M Y T' %} {% set timestamp = date('2025-06-15') %} At: {{ timestamp|date(format) }} +2 days: {{ timestamp|date_modify('+2 days')|date(format) }} -1 week, 3 days: {{ timestamp|date_modify('-1 week, -3 days')|date(format) }}
+start:
+  return:
+    output@text:
+      {% set format = 'D, d M Y T' %}
+      {% set timestamp = date('2025-06-15') %}
+      At: {{timestamp|date(format)}}
+      +2 days: {{timestamp|date_modify('+2 days')|date(format)}}
+      -1 week, 3 days: {{timestamp|date_modify('-1 week, -3 days')|date(format)}}
 ```
 - 
 ```
-__return : output : |- At: Sun, 15 Jun 2025 PDT +2 days: Tue, 17 Jun 2025 PDT -1 week, 3 days: Thu, 05 Jun 2025 PDT
+__return:
+  output: |-
+    At: Sun, 15 Jun 2025 PDT
+    +2 days: Tue, 17 Jun 2025 PDT
+    -1 week, 3 days: Thu, 05 Jun 2025 PDT
 ```
 

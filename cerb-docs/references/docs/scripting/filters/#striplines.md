@@ -17,7 +17,8 @@ Remove lines in a text block that begin with one of the given `prefixes`.
 > on multiple lines
 
 This is the original message
-{% endset %} {{ email_message | strip_lines ( prefixes = '>' ) }}
+{% endset %}
+{{email_message|strip_lines(prefixes='>')}}
 ```
 
 ```

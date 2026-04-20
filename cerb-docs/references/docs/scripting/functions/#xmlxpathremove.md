@@ -15,7 +15,15 @@ Remove elements from an XML document with an XPath query.
 - **path**: The [XPath](#xml_xpath) query to match elements for removal.
 
 ```
-{% set string_of_xml = " < response > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {% set xml = xml_xpath_remove ( xml , '//invoice_id' ) %} {{ xml_encode ( xml ) }}
+{% set string_of_xml =
+"<response>
+  <client_id>1</client_id>
+  <invoice_id>123</invoice_id>
+</response>"
+-%}
+{% set xml = xml_decode(string_of_xml) %}
+{% set xml = xml_xpath_remove(xml, '//invoice_id') %}
+{{xml_encode(xml)}}
 ```
 
 ```

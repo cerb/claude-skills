@@ -43,14 +43,68 @@ Warn if another worker is currently replying to a ticket:
 
 - 
 ```
-start: record.search/drafts: inputs: record_type: draft record_query@text: ticket.id:${ticket_id} worker.id:!${worker_id} is.queued:no updated:"-15 mins to now" record_query_params: ticket_id: {{ inputs.message.ticket_id }} worker_id: {{ worker_id }} output: drafts on_success: outcome/notEmpty: if@bool: {{ drafts is not empty and drafts is iterable }} then: await: form: title: Duplication of effort? elements: sheet/others: data@key: drafts label: Other workers are currently responding to this ticket: schema: columns: date/updated: label: When card/worker_id: label: Who card/id: label: Draft submit/prompt_continue: buttons: continue/yes: label: Reply anyway icon: circle-ok icon_at: start value: yes continue/no: label: Abort style: secondary value: no outcome/abort: if@bool: {{ 'yes' != prompt_continue }} then: return: reject@bool: true
+start:
+  record.search/drafts:
+    inputs:
+      record_type: draft
+      record_query@text:
+        ticket.id:${ticket_id} 
+        worker.id:!${worker_id} 
+        is.queued:no 
+        updated:"-15 mins to now"
+      record_query_params:
+        ticket_id: {{inputs.message.ticket_id}}
+        worker_id: {{worker_id}}
+    output: drafts
+    on_success:
+      outcome/notEmpty:
+        if@bool: {{drafts is not empty and drafts is iterable}}
+        then:
+          await:
+            form:
+              title: Duplication of effort?
+              elements:
+                sheet/others:
+                  data@key: drafts
+                  label: Other workers are currently responding to this ticket:
+                  schema:
+                    columns:
+                      date/updated:
+                        label: When
+                      card/worker_id:
+                        label: Who
+                      card/id:
+                        label: Draft
+                submit/prompt_continue:
+                  buttons:
+                    continue/yes:
+                      label: Reply anyway
+                      icon: circle-ok
+                      icon_at: start
+                      value: yes
+                    continue/no:
+                      label: Abort
+                      style: secondary
+                      value: no
+          outcome/abort:
+            if@bool: {{'yes' != prompt_continue}}
+            then:
+              return:
+                reject@bool: true
 ```
 - 
 ```
-commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('draft') }} allow@bool: yes
+commands:
+  record.search:
+    deny/type@bool: {{inputs.record_type is not record type ('draft')}}
+    allow@bool: yes
 ```
 - 
 ```
-automation/duplicate: uri: cerb:automation:example.mailDraft.duplicateCheck inputs: message@key: message_id disabled@bool: no
+automation/duplicate:
+  uri: cerb:automation:example.mailDraft.duplicateCheck
+  inputs:
+    message@key: message_id
+  disabled@bool: no
 ```
 

@@ -18,10 +18,21 @@ Cerb has several [filters](/docs/scripting/filters/) you can use to change the c
 
 - 
 ```
-start: set: sentence: This is a sentence. return: upper: {{ sentence|upper }} lower: {{ sentence|lower }} capitalized: {{ sentence|capitalize }} title: {{ sentence|title }}
+start:
+  set:
+    sentence: This is a sentence.
+  return:
+    upper: {{sentence|upper}}
+    lower: {{sentence|lower}}
+    capitalized: {{sentence|capitalize}}
+    title: {{sentence|title}}
 ```
 - 
 ```
-__return: upper: THIS IS A SENTENCE. lower: this is a sentence. capitalized: This is a sentence. title: This Is A Sentence.
+__return:
+  upper: THIS IS A SENTENCE.
+  lower: this is a sentence.
+  capitalized: This is a sentence.
+  title: This Is A Sentence.
 ```
 

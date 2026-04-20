@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Sum the numeric elements of an array.
 
 ```
-{{ array_sum ([1 , 2 , 3 , 4 , 5]) }}
+{{array_sum([1,2,3,4,5])}}
 ```
 
 ```

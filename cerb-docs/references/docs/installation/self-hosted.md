@@ -135,7 +135,8 @@ Give ownership of all the files to the webserver daemon using `chown`, and make 
 
 ```
 cd cerb
-chown -R www-data:www-data . chmod -R u+w framework.config.php storage
+chown -R www-data:www-data .
+chmod -R u+w framework.config.php storage
 ```
 
 You must use your own user and group for `www-data` in the example above.
@@ -149,7 +150,11 @@ Create a new MySQL database using the console or your favorite GUI tool.
 From the MySQL console, you can issue the following SQL statements:
 
 ```
-CREATE DATABASE cerb CHARACTER SET utf8mb4 ; CREATE USER cerb @ localhost IDENTIFIED BY 'secret_password' ; GRANT ALL PRIVILEGES ON cerb . * TO cerb @ localhost ;
+CREATE DATABASE cerb CHARACTER SET utf8mb4;
+
+CREATE USER cerb@localhost IDENTIFIED BY 'secret_password';
+
+GRANT ALL PRIVILEGES ON cerb.* TO cerb@localhost;
 ```
 
 Substitute your own database name and login in place of `cerb`, and replace `secret_password` with something that's actually a secret. If you're connecting to a remote database, change `@localhost` to the network address of the webserver where you'll be connecting from.

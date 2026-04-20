@@ -44,9 +44,18 @@ You can specify a `limit:` and `sort:` within each series `query:()`. Nested sor
 ## Generate a table of the top 10 quickest message response times
 
 ```
-type: worklist.xy series.replies: ( of: messages x: worker y: responseTime query: ( responseTime: >0 sort: responseTime limit: 10 )
-) 
- format: table
+type:worklist.xy
+series.replies:(
+  of:messages 
+  x:worker
+  y:responseTime 
+  query:(
+  	responseTime:>0
+    sort:responseTime
+    limit:10
+  )
+)
+format:table
 ```
 
  

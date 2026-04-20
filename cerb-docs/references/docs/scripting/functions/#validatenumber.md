@@ -10,7 +10,10 @@ tags: ["docs", "docs-scripting"]
 Validate a number:
 
 ```
-{{ validate_number ( 'abcde' ) | json_encode }} {{ validate_number ( '20.f' ) | json_encode }} {{ validate_number ( 10 ) | json_encode }} {{ validate_number ( '123.45' ) | json_encode }}
+{{validate_number('abcde')|json_encode}}
+{{validate_number('20.f')|json_encode}}
+{{validate_number(10)|json_encode}}
+{{validate_number('123.45')|json_encode}}
 ```
 
 ```

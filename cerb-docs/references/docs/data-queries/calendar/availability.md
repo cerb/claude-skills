@@ -31,6 +31,10 @@ The results can be returned in these formats:
 # Examples
 
 ```
-type: calendar.availability range: "this month" calendars: ( workerAvailability: (group:(name:"Support")) ) 
- format: timeblocks
+type:calendar.availability
+range:"this month"
+calendars:(
+  workerAvailability:(group:(name:"Support"))
+)
+format:timeblocks
 ```

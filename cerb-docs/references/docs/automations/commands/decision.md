@@ -10,7 +10,17 @@ The **decision:** command conditionally selects one of multiple potential outcom
 # Syntax
 
 ```
-start: decision: outcome/weekend: if@bool: {{ 'now'|date('l') in ['Saturday','Sunday'] ? 'yes' }} then: return: output: It is the weekend. outcome/weekday: then: return: output: It is a weekday.
+start:
+  decision:
+    outcome/weekend:
+      if@bool: {{'now'|date('l') in ['Saturday','Sunday'] ? 'yes'}}
+      then:
+        return:
+          output: It is the weekend.
+    outcome/weekday:
+      then:
+        return:
+          output: It is a weekday.
 ```
 
 ## outcome:

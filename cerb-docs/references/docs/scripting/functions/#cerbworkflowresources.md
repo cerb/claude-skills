@@ -16,7 +16,7 @@ Perform runtime resource lookups and return a map of workflow resources and thei
 | **name\_or\_id** | The name or ID of the [workflow](/docs/workflows/). |
 
 ```
-{{ cerb_workflow_resources ( 'example.workflow' | json_encode }}
+{{cerb_workflow_resources('example.workflow'|json_encode}}
 ```
 
 ```

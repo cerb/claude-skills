@@ -59,7 +59,15 @@ The `file.write:` command can also optionally generate a ZIP file from multiple 
 | `password:` | string | An optional password to encrypt the ZIP contents |
 
 ```
-zip: password: s3cr3t files: file/name0: path: /path/to/example.png uri: cerb:attachment:123 file/name1: path: /path/to/example.txt bytes: This is arbitrary content
+zip:
+    password: s3cr3t
+    files:
+      file/name0:
+         path: /path/to/example.png
+         uri: cerb:attachment:123
+      file/name1:
+         path: /path/to/example.txt
+         bytes: This is arbitrary content
 ```
 
 ### expires:
@@ -121,37 +129,92 @@ The `output:` placeholder receives a dictionary with these keys:
 ## Create a simple text file
 
 ```
-start: file.write: inputs: name: example.txt mime_type: text/plain expires@date: +15 mins content: This is some text output: results
+start:
+  file.write:
+    inputs:
+      name: example.txt
+      mime_type: text/plain
+      expires@date: +15 mins
+      content: This is some text
+    output: results
 ```
 
 The command returns this dictionary:
 
 ```
-results: uri: cerb:automation_resource:247cc278-450e-11ed-8cbd-e1c6a4043a12 name: example.txt mime_type: text/plain expires_at: 1665017156 size: 17 id: 123
+results:
+  uri: cerb:automation_resource:247cc278-450e-11ed-8cbd-e1c6a4043a12
+  name: example.txt
+  mime_type: text/plain
+  expires_at: 1665017156
+  size: 17
+  id: 123
 ```
 
 ## Create a ZIP file from mixed bytes and attachments
 
 ```
-start: file.write: inputs: content: zip: password: s3cr3t files: file/name0: path: /path/to/example.png uri: cerb:attachment:123 file/name1: path: /path/to/example.txt bytes: This is arbitrary content name: example.zip expires@date: +15 mins output: results
+start:
+  file.write:
+    inputs:
+      content:
+        zip:
+          password: s3cr3t
+          files:
+            file/name0:
+               path: /path/to/example.png
+               uri: cerb:attachment:123
+            file/name1:
+               path: /path/to/example.txt
+               bytes: This is arbitrary content
+      name: example.zip
+      expires@date: +15 mins
+    output: results
 ```
 
 The command returns this dictionary:
 
 ```
-results: uri: cerb:automation_resource:835ed6f2-4511-11ed-a716-f9b7c189003f mime_type: application/zip expires_at: 1665018603 size: 557 id: 123 name: example.zip
+results:
+  uri: cerb:automation_resource:835ed6f2-4511-11ed-a716-f9b7c189003f
+  mime_type: application/zip
+  expires_at: 1665018603
+  size: 557
+  id: 123
+  name: example.zip
 ```
 
 ## Create an attachment from an automation resource
 
 ```
-start: record.create: inputs: record_type: attachment fields: name: example.zip mime_type: application/vnd.cerb.uri content: cerb:automation_resource:835ed6f2-4511-11ed-a716-f9b7c189003f output: results
+start:
+  record.create:
+    inputs:
+      record_type: attachment
+      fields:
+        name: example.zip
+        mime_type: application/vnd.cerb.uri
+        content: cerb:automation_resource:835ed6f2-4511-11ed-a716-f9b7c189003f
+    output: results
 ```
 
 Output:
 
 ```
-results: _context: cerberusweb.contexts.attachment id: 1234 _type: attachment _loaded: true _label: example.zip mime_type: application/zip name: example.zip size: 557 storage_extension: devblocks.storage.engine.disk storage_key: a/b/1234 storage_sha1hash: fb528658ed4c4f8cd1b2e4b768b583e42c5a3ec3 updated: 1665018318 url_download: https://cerb.example/files/1234/example.zip
+results:
+  _context: cerberusweb.contexts.attachment
+  id: 1234
+  _type: attachment
+  _loaded: true
+  _label: example.zip
+  mime_type: application/zip
+  name: example.zip
+  size: 557
+  storage_extension: devblocks.storage.engine.disk
+  storage_key: a/b/1234
+  storage_sha1hash: fb528658ed4c4f8cd1b2e4b768b583e42c5a3ec3
+  updated: 1665018318
+  url_download: https://cerb.example/files/1234/example.zip
 ```
 
 ## Create a ZIP with a dynamic file list
@@ -159,6 +222,23 @@ results: _context: cerberusweb.contexts.attachment id: 1234 _type: attachment _l
 Use the [@kata](/docs/kata/#kata) annotation to build a file list using scripting.
 
 ```
-inputs: records/files: record_type: attachment required@bool: yes 
- start: file.write: output: results inputs: name: example.zip mime_type: application/zip content: zip: files@kata: {% for file in inputs.files %} file/ {{ file.id }} : path: {{ file.name }} uri: cerb:attachment: {{ file.id }} {% endfor %}
+inputs:
+  records/files:
+    record_type: attachment
+    required@bool: yes
+
+start:
+  file.write:
+    output: results
+    inputs:
+      name: example.zip
+      mime_type: application/zip
+      content:
+        zip:
+          files@kata:
+            {% for file in inputs.files %}
+            file/{{file.id}}:
+              path: {{file.name}}
+              uri: cerb:attachment:{{file.id}}
+            {% endfor %}
 ```

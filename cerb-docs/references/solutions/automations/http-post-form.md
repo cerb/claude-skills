@@ -16,10 +16,32 @@ When using `Content-Type: application/x-www-form-urlencoded`, a `body:` dictiona
 
 - 
 ```
-start: http.request/post: output: http_response inputs: method: POST url: https://api.cerb.cloud/docs/search headers: Content-Type: application/json body: query: How much does it cost? limit: 10 on_success: outcome/200: if@bool: {{ 200 == http_response.status_code and 'application/json' == http_response.content_type }} then: set: status_code@int: {{ http_response.status_code }} http_response@json: {{ http_response.body }} on_error:
+start:
+  http.request/post:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.cerb.cloud/docs/search
+      headers:
+        Content-Type: application/json
+      body:
+        query: How much does it cost?
+        limit: 10
+    on_success:
+      outcome/200:
+        if@bool: {{200 == http_response.status_code and 'application/json' == http_response.content_type}}
+        then:
+          set:
+            status_code@int: {{http_response.status_code}}
+            http_response@json: {{http_response.body}}
+    on_error:
 ```
 - 
 ```
-commands: http.request: deny/method@bool: {{ inputs.method not in ['POST'] }} deny/url@bool: {{ inputs.url is not prefixed ('http://','https://') }} allow@bool: yes
+commands:
+  http.request:
+    deny/method@bool: {{inputs.method not in ['POST']}}
+    deny/url@bool: {{inputs.url is not prefixed ('http://','https://')}}
+    allow@bool: yes
 ```
 

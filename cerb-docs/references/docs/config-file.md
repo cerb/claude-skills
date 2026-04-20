@@ -12,7 +12,9 @@ The defaults come from the `/libs/devblocks/framework.default.php` file.
 To override a setting, add a line to the `framework.config.php` file like:
 
 ```
-const APP_SETTING_STRING = "setting value" ; const APP_SETTING_NUMBER = 1234 ; const APP_SETTING_BOOLEAN = false ;
+const APP_SETTING_STRING = "setting value";
+const APP_SETTING_NUMBER = 1234;
+const APP_SETTING_BOOLEAN = false;
 ```
 
 # Required Settings

@@ -10,7 +10,7 @@ In [earlier versions](/docs/history/) of Cerb you had to create two [worklists](
 Now you can display both on a single worklist with a simple quick search:
 
 ```
-( owner.id: me OR watchers:me) status:o
+(owner.id:me OR watchers:me) status:o
 ```
 
  

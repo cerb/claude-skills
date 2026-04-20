@@ -46,33 +46,33 @@ Navigate to **Setup&nbsp;» Packages&nbsp;» Import**.
 Paste the following into the textbox:
 
 ```
-{ 
-   "package" : { 
-     "name" : "Webhooks Example" , 
-     "revision" : 1 , 
-     "requires" : { 
-       "cerb_version" : "10.4.0" , 
-       "plugins" : [ 
-         "cerb.webhooks" 
-       ] 
-     }, 
-     "configure" : { 
-       "prompts" : [], 
-       "placeholders" : [] 
-     } 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "automation_webhook" , 
-       "_context" : "automation" , 
-       "name" : "example.webhook.respond" , 
-       "extension_id" : "cerb.trigger.webhook.respond" , 
-       "description" : "An example of an HTTP webhook responder" , 
-       "script" : "start: \r\n set: \r\n response: \r\n http: \r\n method@key: request_method \r\n path@key: request_path \r\n headers@key: request_headers \r\n params@key: request_params \r\n client: \r\n ip@key: request_client_ip \r\n return: \r\n status_code: 200 \r\n headers: \r\n Content-Type: application/json \r\n body@text: {{response|json_encode|json_pretty}}" , 
-       "policy_kata" : "commands: \r\n " 
-     } 
-   ] 
- }
+{
+  "package": {
+    "name": "Webhooks Example",
+    "revision": 1,
+    "requires": {
+      "cerb_version": "10.4.0",
+      "plugins": [
+        "cerb.webhooks"
+      ]
+    },
+    "configure": {
+      "prompts": [],
+      "placeholders": []
+    }
+  },
+  "records": [
+    {
+      "uid": "automation_webhook",
+      "_context": "automation",
+      "name": "example.webhook.respond",
+      "extension_id": "cerb.trigger.webhook.respond",
+      "description": "An example of an HTTP webhook responder",
+      "script": "start:\r\n set:\r\n response:\r\n http:\r\n method@key: request_method\r\n path@key: request_path\r\n headers@key: request_headers\r\n params@key: request_params\r\n client:\r\n ip@key: request_client_ip\r\n return:\r\n status_code: 200\r\n headers:\r\n Content-Type: application/json\r\n body@text: {{response|json_encode|json_pretty}}",
+      "policy_kata": "commands:\r\n "
+    }
+  ]
+}
 ```
 
 Click the **Import** button.
@@ -90,7 +90,9 @@ Name the new webhook `Webhook Example`.
 Paste the following **Event KATA**:
 
 ```
-automation/example: uri: cerb:automation:example.webhook.respond disabled@bool: no
+automation/example:
+    uri: cerb:automation:example.webhook.respond
+    disabled@bool: no
 ```
 
 Click the **Save Changes** button.
@@ -114,7 +116,8 @@ You'll see those keys and values show up in the `http.params` section.
 If you have access to the `curl` command at the console, you can send a `POST` request with a custom header and some query parameters:
 
 ```
-curl -i -X POST -H "X-CustomHeader: true" \ "https://cerb.example/webhooks/b5d89ded60c1e4da7b7b2750182e026a5b975cf3?key=value"
+curl -i -X POST -H "X-CustomHeader: true" \
+"https://cerb.example/webhooks/b5d89ded60c1e4da7b7b2750182e026a5b975cf3?key=value"
 ```
 
 You'll see these options reflected in the JSON response.

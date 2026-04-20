@@ -18,7 +18,67 @@ If you're a [Cerb Cloud](/pricing/) subscriber, we include high-availability com
 Create a new virtual host in nginx for your community portal. Use the following configuration file:
 
 ```
-# HTTPS server { set $cerb_host cerb.example ; set $portal_host portal.example ; set $portal_code abcd1234 ; listen 443 ssl ; server_name $portal_host ; #access_log off; # Increase upload max size from default of 1MB client_max_body_size 32m ; charset utf-8 ; # DNS #resolver 8.8.8.8 8.8.4.4 valid=300s; #resolver_timeout 5s; # SSL # [TODO] Replace this with your own SSL certificate! ssl_certificate /etc/ssl/certs/nginx-selfsigned.pem ; ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key ; ssl_protocols TLSv1.2 ; ssl_prefer_server_ciphers on ; ssl_ciphers HIGH:!CAMELLIA:!RC4:!PSK:!aNULL:@STRENGTH ; ssl_dhparam /etc/ssl/certs/dhparam.pem ; # Resource proxy location ~ * ^/resource/ { rewrite ^/resource/(.*) /resource/ $1 break ; proxy_pass https:// $cerb_host ; } # Everything else location / { rewrite ^/(.*) /portal/ $portal_code / $1 break ; proxy_pass https:// $cerb_host ; proxy_set_header DevblocksProxySSL 1 ; proxy_set_header DevblocksProxyHost $portal_host ; proxy_set_header DevblocksProxyBase "" ; } # Deny any other PHP scripts location ~ \.php$ { deny all ; } } # Redirect HTTP to HTTPS server { set $portal_host portal.example ; listen 80 ; server_name $portal_host ; #access_log off; location / { return 301 https:// $host$request_uri ; } }
+# HTTPS
+server {
+  set $cerb_host cerb.example;
+  set $portal_host portal.example;
+  set $portal_code abcd1234;
+
+  listen 443 ssl;
+  server_name $portal_host;
+  #access_log off;
+
+  # Increase upload max size from default of 1MB
+  client_max_body_size 32m;
+
+  charset utf-8;
+
+  # DNS
+  #resolver 8.8.8.8 8.8.4.4 valid=300s;
+  #resolver_timeout 5s;
+
+  # SSL
+  # [TODO] Replace this with your own SSL certificate!
+  ssl_certificate /etc/ssl/certs/nginx-selfsigned.pem;
+  ssl_certificate_key /etc/ssl/private/nginx-selfsigned.key;
+  ssl_protocols TLSv1.2;
+  ssl_prefer_server_ciphers on;
+  ssl_ciphers HIGH:!CAMELLIA:!RC4:!PSK:!aNULL:@STRENGTH;
+  ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+  # Resource proxy
+  location ~* ^/resource/ {
+    rewrite ^/resource/(.*) /resource/$1 break;
+    proxy_pass https://$cerb_host;
+  }
+
+  # Everything else
+  location / {
+    rewrite ^/(.*) /portal/$portal_code/$1 break;
+    proxy_pass https://$cerb_host;
+    proxy_set_header DevblocksProxySSL 1;
+    proxy_set_header DevblocksProxyHost $portal_host;
+    proxy_set_header DevblocksProxyBase "";
+  }
+
+  # Deny any other PHP scripts
+  location ~ \.php$ {
+    deny all;
+  }
+}
+
+# Redirect HTTP to HTTPS
+server {
+  set $portal_host portal.example;
+
+  listen 80;
+  server_name $portal_host;
+  #access_log off;
+
+  location / {
+    return 301 https://$host$request_uri;
+  }
+}
 ```
 
 Modify the variables at the top of the **server** block:

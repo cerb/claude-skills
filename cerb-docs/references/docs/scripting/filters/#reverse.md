@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Reverse a string or array:
 
 ```
-{{ "Leonardo da Vinci" | reverse }} {{ [1 , 2 , 3 , 4 , 5] | reverse | join }}
+{{"Leonardo da Vinci"|reverse}}
+{{[1,2,3,4,5]|reverse|join}}
 ```
 
 ```

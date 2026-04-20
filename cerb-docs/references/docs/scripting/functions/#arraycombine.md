@@ -12,7 +12,10 @@ tags: ["docs", "docs-scripting"]
 The **array\_combine** function creates a new array with the given `keys` and `values`:
 
 ```
-{% set keys = ['name' , 'age' , 'email'] %} {% set values = ['Janey Youve' , '30-ish' , 'janey@cerb.example'] %} {% set person = array_combine ( keys , values ) %} {{ person.name }} can be reached at {{ person.email }}
+{% set keys = ['name', 'age', 'email'] %}
+{% set values = ['Janey Youve', '30-ish', 'janey@cerb.example'] %}
+{% set person = array_combine(keys, values) %}
+{{person.name}} can be reached at {{person.email}}
 ```
 
 ```

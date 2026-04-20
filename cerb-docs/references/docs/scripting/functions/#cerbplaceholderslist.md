@@ -15,7 +15,7 @@ Return an [object](/docs/scripting/arrays-objects/) with every placeholder in th
 | **prefix** | The optional new prefix to add (e.g. `group_`) |
 
 ```
-{{ cerb_placeholders_list () | json_encode | json_pretty }}
+{{cerb_placeholders_list()|json_encode|json_pretty}}
 ```
 
 ```

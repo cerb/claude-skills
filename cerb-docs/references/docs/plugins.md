@@ -81,7 +81,32 @@ Each plugin must have a **manifest** file named `plugin.xml` that describes its 
 Here's a minimal manifest:
 
 ```
-<?xml version="1.0" encoding="UTF-8"?> <plugin xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation= "http://www.devblocks.com/schema/plugin.xsd" > <id>example.plugin</id> <name>Plugin Name</name> <description>This explains what your plugin does.</description> <author>Webgroup Media, LLC.</author> <version>0.0.0</version> <link>https://cerb.example/path/to/docs</link> <image>plugin.png</image> <requires> <app_version min= "11.0" max= "11.0.99" /> <!--<php_extension name="curl" />--> </requires> <dependencies> <require plugin_id= "cerberusweb.core" version= "11.0.0" /> </dependencies> <patches/> <class_loader/> <event_points/> <acl/> <activity_points/> <extensions/> </plugin>
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.devblocks.com/schema/plugin.xsd">
+	<id>example.plugin</id>
+	<name>Plugin Name</name>
+	<description>This explains what your plugin does.</description>
+	<author>Webgroup Media, LLC.</author>
+	<version>0.0.0</version>
+	<link>https://cerb.example/path/to/docs</link>
+	<image>plugin.png</image>
+
+	<requires>
+		<app_version min="11.0" max="11.0.99" />
+		<!--<php_extension name="curl" />-->
+	</requires>
+
+	<dependencies>
+		<require plugin_id="cerberusweb.core" version="11.0.0" />
+	</dependencies>
+
+	<patches/>
+	<class_loader/>
+	<event_points/>
+	<acl/>
+	<activity_points/>
+	<extensions/>
+</plugin>
 ```
 
 ### Plugin metadata
@@ -133,7 +158,15 @@ Extensions are defined in a plugin's [manifest](/docs/plugins/#manifests) within
 Each extension entry looks like:
 
 ```
-<extension point= "com.example.extension_point" > <id>com.example.extension_name</id> <name>Extension name</name> <class> <file>relative/path/to/file.php</file> <name>Class_Name</name> </class> <params/> </extension>
+<extension point="com.example.extension_point">
+	<id>com.example.extension_name</id>
+	<name>Extension name</name>
+	<class>
+		<file>relative/path/to/file.php</file>
+		<name>Class_Name</name>
+	</class>
+	<params/>
+</extension>
 ```
 
 - **`<extension point="...">`** specifies the [extension point](#extension-points) of the extension.
@@ -191,7 +224,12 @@ Each extension entry looks like:
 Plugins can add new **events** to Cerb based on the contributed functionality. The [activity log](/docs/activity-log/) will record the new events on [records](/docs/records/), [automations](/docs/automations/) can listen for them, etc.
 
 ```
-<event_points> <event id= "example.event" > <name>Example Event</name> <param key= "field_name" /> </event> </event_points>
+<event_points>
+	<event id="example.event">
+		<name>Example Event</name>
+		<param key="field_name" />
+	</event>
+</event_points>
 ```
 
 - **`<event id="...">`** specifies the ID of the event.
@@ -209,7 +247,9 @@ Plugins that need to maintain a _schema_ in the database can do so with **patche
 When you skip several versions of a plugin to upgrade to the latest version, Cerb will automatically handle the migration of your data through the intervening versions. This is the same thing that happens when you upgrade Cerb itself.
 
 ```
-<patches> <patch version= "9.0.0" revision= "1" file= "patches/9.0.0.php" /> </patches>
+<patches>
+	<patch version="9.0.0" revision="1" file="patches/9.0.0.php" />
+</patches>
 ```
 
 # Classloader
@@ -219,7 +259,16 @@ The **class loader** is a map of source code classes and their filesystem paths.
 If your plugin introduces classes that will be referenced by code outside of the plugin, you should register them here. Class loader entries are automatically created for any [extensions](/docs/plugins/extensions/) you register.
 
 ```
-<class_loader> <file path= "api/dao/example.php" > <class name= "Context_Example" /> <class name= "DAO_Example" /> <class name= "Model_Example" /> <class name= "Plugin_Example" /> <class name= "SearchFields_Example" /> <class name= "View_Example" /> </file> </class_loader>
+<class_loader>
+	<file path="api/dao/example.php">
+		<class name="Context_Example" />
+		<class name="DAO_Example" />
+		<class name="Model_Example" />
+		<class name="Plugin_Example" />
+		<class name="SearchFields_Example" />
+		<class name="View_Example" />
+	</file>
+</class_loader>
 ```
 
 # Permissions
@@ -227,7 +276,9 @@ If your plugin introduces classes that will be referenced by code outside of the
 Plugins can introduce new privileges into [roles](/docs/roles/).
 
 ```
-<acl> <priv id= "example.permission" label= "acl.example.permission" /> </acl>
+<acl>
+	<priv id="example.permission" label="acl.example.permission" />
+</acl>
 ```
 
 - **`id="..."`** is the ID of the new privilege. This uses dot-notation like plugins and extensions. It should also use your plugin ID as a namespace prefix.
@@ -241,7 +292,18 @@ Most of the text you see in Cerb is provided by the **translation** system using
 Plugins can add new text to the translation system with a `strings.xml` file in TMX format, which can then be translated into any language by anyone, as well as shared in our official translation packs.
 
 ```
-<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE tmx PUBLIC "-//LISA OSCAR:1998//DTD for Translation Memory eXchange//EN" "tmx14.dtd"> <tmx version= "1.4" > <header creationtool= "Cerb" creationtoolversion= "11.1.0" srclang= "en_US" adminlang= "en" datatype= "unknown" o-tmf= "unknown" segtype= "sentence" creationid= "" creationdate= "" /> <body> <tu tuid= 'example.plugin.string_name' > <tuv xml:lang= "en_US" ><seg>Replace this with your own text.</seg></tuv> </tu> </body> </tmx>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx PUBLIC "-//LISA OSCAR:1998//DTD for Translation Memory eXchange//EN" "tmx14.dtd">
+<tmx version="1.4">
+	<header creationtool="Cerb" creationtoolversion="11.1.0" srclang="en_US" adminlang="en" datatype="unknown" o-tmf="unknown" segtype="sentence" creationid="" creationdate=""/>
+	<body>
+
+		<tu tuid='example.plugin.string_name'>
+			<tuv xml:lang="en_US"><seg>Replace this with your own text.</seg></tuv>
+		</tu>
+		
+	</body>
+</tmx>
 ```
 
 # Resources
@@ -263,13 +325,13 @@ Resources can then be accessed by URL with the format:
 In [templates](/docs/plugins/#templates):
 
 ```
-{ devblocks_url }c=resource&plugin=example.plugin&f=path/to/resource/file.ext{/ devblocks_url }
+{devblocks_url}c=resource&plugin=example.plugin&f=path/to/resource/file.ext{/devblocks_url}
 ```
 
 From [bot scripting](/docs/scripting/):
 
 ```
-{{ cerb_url ( 'c=resource&plugin=example.plugin&f=path/to/resource/file.ext' ) }}
+{{cerb_url('c=resource&plugin=example.plugin&f=path/to/resource/file.ext')}}
 ```
 
 All plugin resources are public (world readable) and do not require a valid session to access. Do not store private content in this directory.
@@ -283,7 +345,9 @@ Templates are stored in the plugin's `templates/` directory.
 They are referenced from plugin code like:
 
 ```
-$tpl = DevblocksPlatform :: services () -> template (); $tpl -> assign ( 'name' , 'Kina Halpue' ); $tpl -> display ( 'devblocks:example.plugin::path/to/template.tpl' );
+$tpl = DevblocksPlatform::services()->template();
+$tpl->assign('name', 'Kina Halpue');
+$tpl->display('devblocks:example.plugin::path/to/template.tpl');
 ```
 
 In `->display()`, `example.plugin` should be your plugin's [ID](/docs/plugins/#ids). The `path/to/` is relative to the plugin's `templates/` directory.
@@ -292,7 +356,7 @@ Here's an example template:
 
 ```
 <div>
-	Hello, <b> { $name } </b>!
+	Hello, <b>{$name}</b>!
 </div>
 ```
 
@@ -301,7 +365,13 @@ Here's an example template:
 We previously mentioned **events** when discussing [automations](/docs/automations/) and the [activity log](/docs/records/#activity-log). Plugins can add new events to Cerb based on the contributed functionality. The activity log will record the new events on records, automations can listen for them, etc.
 
 ```
-<activity_points> <activity point= "example.event" > <param key= "label_key" value= "Example Event" /> <param key= "string_key" value= "activities.example_event" /> <param key= "options" value= "api_create, notifications" /> </activity> </activity_points>
+<activity_points>
+	<activity point="example.event">
+		<param key="label_key" value="Example Event" />
+		<param key="string_key" value="activities.example_event" />
+		<param key="options" value="api_create, notifications" />
+	</activity>
+</activity_points>
 ```
 
 # Library

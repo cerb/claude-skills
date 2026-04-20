@@ -12,7 +12,15 @@ Each API command has a `name:` and an optional set of `params:`.
 New API commands can be added using the [plugin](/docs/plugins/) system.
 
 ```
-start: api.command: inputs: name: cerb.commands.worklist.explorer.create params: interaction: cerb:automation:wgm.explore.worklist interaction_inputs: worklist_id: cust_1 output: results
+start:
+  api.command:
+    inputs:
+      name: cerb.commands.worklist.explorer.create
+      params:
+        interaction: cerb:automation:wgm.explore.worklist
+        interaction_inputs:
+          worklist_id: cust_1
+    output: results
 ```
 
 - [Syntax](#syntax)

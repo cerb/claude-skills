@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Set the range boundaries for an integer value.
 
 ```
-{{ clamp_int ( 110 , - 90 , 90 ) }}
+{{clamp_int(110,-90,90)}}
 ```
 
 ```

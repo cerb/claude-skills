@@ -16,7 +16,28 @@ In this example, we are randomly simulating both successful and failed HTTP requ
 
 - 
 ```
-start: http.request/get: output: http_response inputs: method: GET url: https://cerb.ai/ on_simulate: decision: outcome/error500: if@bool: {{ 0 == random(1) }} then: simulate.error: status_code@int: 500 body: Error! outcome/ok200: then: simulate.success: status_code@int: 200 body: Success! on_error: log.error: This is an error message on_success:
+start:
+  http.request/get:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://cerb.ai/
+    on_simulate:
+      decision:
+        outcome/error500:
+          if@bool: {{0 == random(1)}}
+          then:
+            simulate.error:
+              status_code@int: 500
+              body: Error!
+        outcome/ok200:
+          then:
+            simulate.success:
+              status_code@int: 200
+              body: Success!
+    on_error:
+      log.error: This is an error message
+    on_success:
 ```
 
 The `random(1)` function returns a value of 0 or 1 (50% chance of either outcome).
@@ -27,6 +48,9 @@ The `random(1)` function returns a value of 0 or 1 (50% chance of either outcome
 
 - 
 ```
-commands: http.request: deny/method@bool: {{ inputs.method not in ['GET'] }} allow@bool: yes
+commands:
+  http.request:
+    deny/method@bool: {{inputs.method not in ['GET']}}
+    allow@bool: yes
 ```
 

@@ -45,7 +45,19 @@ Click **Show** and then **Copy** to the right of the **Internal Integration Secr
 https://developers.notion.com/reference/get-users
 
 ```
-start: http.request/listUsers: output: http_response inputs: method: GET url: https://api.notion.com/v1/users authentication: cerb:connected_account:notion headers: Notion-Version: 2022-02-22 on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/listUsers:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.notion.com/v1/users
+      authentication: cerb:connected_account:notion
+      headers:
+        Notion-Version: 2022-02-22
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Search
@@ -53,5 +65,26 @@ start: http.request/listUsers: output: http_response inputs: method: GET url: ht
 https://developers.notion.com/reference/search
 
 ```
-start: http.request/search: output: http_response inputs: method: POST url: https://api.notion.com/v1/search authentication: cerb:connected_account:notion headers: Content-Type: application/json Notion-Version: 2022-06-28 body: query: Docs filter: value: page property: object sort: direction: ascending timestamp: last_edited_time on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/search:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.notion.com/v1/search
+      authentication: cerb:connected_account:notion
+      headers:
+        Content-Type: application/json
+        Notion-Version: 2022-06-28
+      body:
+        query: Docs
+        filter:
+          value: page
+          property: object
+        sort:
+          direction: ascending
+          timestamp: last_edited_time
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```

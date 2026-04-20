@@ -10,7 +10,11 @@ tags: ["docs", "docs-scripting"]
 You can encode any variable as a JSON string with the **json\_encode** filter:
 
 ```
-{% set json = { 'name' : 'Joe Customer' } %} {% set json = dict_set ( json , 'order_id' , 54321 ) %} {% set json = dict_set ( json , 'status.text' , 'shipped' ) %} {% set json = dict_set ( json , 'status.tracking_id' , 'Z1F238' ) %} {{ json | json_encode }}
+{% set json = {'name': 'Joe Customer'} %}
+{% set json = dict_set(json, 'order_id', 54321) %}
+{% set json = dict_set(json, 'status.text', 'shipped') %}
+{% set json = dict_set(json, 'status.tracking_id', 'Z1F238') %}
+{{json|json_encode}}
 ```
 
 ```

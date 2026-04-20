@@ -8,7 +8,12 @@ tags: ["docs", "docs-automations"]
 The **record.delete:** command deletes a record of the given type.
 
 ```
-start: record.delete: output: results inputs: record_type: task record_id: 123
+start:
+  record.delete:
+    output: results
+    inputs:
+      record_type: task
+      record_id: 123
 ```
 
 # Syntax

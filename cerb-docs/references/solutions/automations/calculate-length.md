@@ -12,10 +12,15 @@ With [|length](/docs/scripting/filters/#length) you can calculate the length of 
 
 - 
 ```
-start: return: list_len@int: {{ [1,2,3,4,5,6,7,8,9,10]|length }} text_len@int: {{ 'This is some text'|length }}
+start:
+  return:
+    list_len@int: {{[1,2,3,4,5,6,7,8,9,10]|length}}
+    text_len@int: {{'This is some text'|length}}
 ```
 - 
 ```
-__return : list_len : 10 text_len : 17
+__return:
+  list_len: 10
+  text_len: 17
 ```
 

@@ -62,7 +62,9 @@ Key names end with a colon (`:`), which may be followed by either a value, or a 
 By convention, the indentation for each level should be two spaces.
 
 ```
-parent: child: name:
+parent:
+  child:
+    name:
 ```
 
 ### Root
@@ -70,7 +72,9 @@ parent: child: name:
 The root of the tree is implicit, so there may be multiple keys at the top-level:
 
 ```
-picklist: date_range: text:
+picklist:
+date_range:
+text:
 ```
 
 ### Key names
@@ -82,7 +86,10 @@ Key names serve as _declarative_ instructions to a feature using KATA for custom
 A slash (`/`) may be appended to a key name to provide a unique identifier. This format should be read as `type/name:`.
 
 ```
-options: picklist/status: picklist/color: picklist/group:
+options:
+  picklist/status:
+  picklist/color:
+  picklist/group:
 ```
 
 ### Values
@@ -90,13 +97,15 @@ options: picklist/status: picklist/color: picklist/group:
 A key may be followed by a text value rather than children. KATA will not automatically detect its type, which often removes the need for escaping.
 
 ```
-object: color: red
+object:
+  color: red
 ```
 
 Values may also contain subsequent colons (`:`), which do not require escaping:
 
 ```
-widget: label: Status:
+widget:
+  label: Status:
 ```
 
 ### Whitespace
@@ -104,8 +113,15 @@ widget: label: Status:
 Sibling keys may be separated with blank lines for readability. The blank lines must contain the same indentation as the keys.
 
 ```
-widget/chart: type: chart label: Chart data: ... 
- widget/gauge: type: gauge label: Gauge data: ...
+widget/chart:
+  type: chart
+  label: Chart
+  data: ...
+
+widget/gauge:
+  type: gauge
+  label: Gauge
+  data: ...
 ```
 
 ### Key annotations
@@ -115,7 +131,16 @@ KATA does not perform type coercion on key values. It will not unpredictably con
 To manipulate values, a comma-separated list of [annotations](#annotation-reference) may be appended to a key name starting with a `@` character. The annotations are processed in order.
 
 ```
-picklist: options: color@csv: red, green, blue multiple@bool: no hidden@bool: {% if has_access %} no {% else %} yes {% endif %}
+picklist:
+  options:
+    color@csv: red, green, blue
+    multiple@bool: no
+    hidden@bool:
+      {% if has_access %}
+      no
+      {% else %}
+      yes
+      {% endif %}
 ```
 
 ### Text blocks
@@ -123,7 +148,12 @@ picklist: options: color@csv: red, green, blue multiple@bool: no hidden@bool: {%
 When using key annotations, a value may contain multiple lines of text. Most annotations imply a text block (e.g. `@bool`, `@csv`, `@json`, `@list`). The `@text` annotation may be used for arbitrary text without any special handling.
 
 ```
-comment: content@text: This is a comment with multiple lines of content. author: name: Cerb
+comment:
+  content@text:
+    This is a comment with
+    multiple lines of content.
+  author:
+    name: Cerb
 ```
 
 ### Comments
@@ -131,15 +161,23 @@ comment: content@text: This is a comment with multiple lines of content. author:
 Lines that begin with `#` are treated as comments and are ignored.
 
 ```
-picklist: # The options from a placeholder
-    options: color@csv: {{ colors }}
+picklist:
+  # The options from a placeholder
+  options:
+    color@csv: {{colors}}
 ```
 
 You do not need to escape the `#` character in values or text blocks.
 
 ```
 # This is a comment
- article: title: Using #commands <-- not a comment format: markdown content@text: # Heading <-- not a comment Some **bold** text.
+article:
+  title: Using #commands <-- not a comment
+  format: markdown
+  content@text:
+    # Heading <-- not a comment
+    
+    Some **bold** text.
 ```
 
 ### References
@@ -151,23 +189,39 @@ You define a reference by prefixing an ampersand (`&`) to a top-level key.
 Any key can then use an `@ref` annotation to copy the contents and annotations of the reference.
 
 ```
-picklist: options@ref: colors 
- &colors@list: red green blue
+picklist:
+  options@ref: colors
+
+&colors@list:
+  red
+  green
+  blue
 ```
 
 An `@ref` may target a child of a reference using dot-notation:
 
 ```
-picklist: options@ref: options.colors 
- &options: colors@list: red green blue
+picklist:
+  options@ref: options.colors
+
+&options:
+  colors@list:
+    red
+    green
+    blue
 ```
 
 And references themselves may contain `@ref` annotations:
 
 ```
-picklist: options@ref: options.colors 
- &options: colors@ref: colors   
- &colors@list: red
+picklist:
+  options@ref: options.colors
+
+&options:
+  colors@ref: colors
+  
+&colors@list:
+  red
   green
   blue
 ```
@@ -177,14 +231,23 @@ A reference's annotations take the place of `@ref`, and any remaining annotation
 For instance, this copies a reference as a `@text` block and _then_ converts it to a `@list`:
 
 ```
-picklist: options@ref,list: colors 
- &colors@text: red green blue
+picklist:
+  options@ref,list: colors
+
+&colors@text:
+  red
+  green
+  blue
 ```
 
 The result of all four examples above is:
 
 ```
-picklist: options@list: red green blue
+picklist:
+  options@list:
+    red
+    green
+    blue
 ```
 
 # Dictionaries
@@ -196,7 +259,10 @@ Placeholders and scripting may be used in any value and do not require escaping.
 Use the [@raw](#raw) annotation to prevent tags from being parsed.
 
 ```
-chooser: label: {{ label }} params: record_type: {{ record_type }}
+chooser:
+  label: {{label}}
+  params:
+    record_type: {{record_type}}
 ```
 
 # Annotation Reference
@@ -278,7 +344,13 @@ number@int: 123
 This is particularly useful when combined with a placeholder based on an API response.
 
 ```
-person@json: { "name": "Kina Halpue", "title": "Customer Support Manager" } numbers@json: [1,2,3]
+person@json:
+  {
+    "name": "Kina Halpue",
+    "title": "Customer Support Manager"
+  }
+
+numbers@json: [1,2,3]
 ```
 
 ### kata
@@ -288,7 +360,11 @@ person@json: { "name": "Kina Halpue", "title": "Customer Support Manager" } numb
 This is particularly useful for dynamically generating KATA using scripting.
 
 ```
-records@kata: {% for doc in docs %} record/ {{ doc.id }} : name: {{ doc.name }} {% endfor %}
+records@kata:
+  {% for doc in docs %}
+    record/{{doc.id}}:
+      name: {{doc.name}}
+  {% endfor %}
 ```
 
 ### key
@@ -304,7 +380,10 @@ http_status@key: response.http.status.code
 `@list` converts text into an array with one line per item.
 
 ```
-colors@list: red green blue
+colors@list:
+  red
+  green
+  blue
 ```
 
 ### nowrap
@@ -312,7 +391,10 @@ colors@list: red green blue
 `@nowrap` reads the key's indented value as a text block and removes newlines and line feeds. This continues until the indent returns to the same level as the key.
 
 ```
-content@nowrap: This is a _bunch_ of content on several lines that will be treated as a single line
+content@nowrap:
+  This is a _bunch_ of content 
+  on several lines 
+  that will be treated as a single line
 ```
 
 ### raw
@@ -322,7 +404,8 @@ content@nowrap: This is a _bunch_ of content on several lines that will be treat
 This is useful for returning templates to other functionality (e.g. [sheets](/docs/sheets/)).
 
 ```
-template@raw: {{ person }} is {{ title }} at {{ organization }}
+template@raw:
+  {{person}} is {{title}} at {{organization}}
 ```
 
 ### ref
@@ -336,8 +419,13 @@ The annotations of the target key replace the `@ref`, and any remaining annotati
 See: [References](#references)
 
 ```
-event/start@ref: menu 
- &menu: options@list: Option 1 Option 2 Option 3
+event/start@ref: menu
+
+&menu:
+  options@list:
+    Option 1
+    Option 2
+    Option 3
 ```
 
 ### text
@@ -347,7 +435,11 @@ event/start@ref: menu
 This is useful when a text block can't be implied from any other attributes.
 
 ```
-content@text: This is a _bunch_ of content on several lines that stops **here** format: markdown
+content@text:
+  This is a _bunch_ of content
+  on several lines
+  that stops **here**
+format: markdown
 ```
 
 The first trailing linefeed is always removed so that multiple line scripts can return a single value.
@@ -355,7 +447,11 @@ The first trailing linefeed is always removed so that multiple line scripts can 
 End the text block with one or more indented blank lines to keep linefeeds:
 
 ```
-content@text: This content ends with a blank line format: markdown
+content@text:
+  This content ends
+  with a blank line
+  
+format: markdown
 ```
 
 ### trim

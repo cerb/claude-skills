@@ -83,67 +83,67 @@ Navigate to **Setup&nbsp;» Packages&nbsp;» Import**.
 Paste the following package:
 
 ```
-{ 
-   "package" : { 
-     "name" : "Salesforce OpenID Connect Provider" , 
-     "revision" : 1 , 
-     "requires" : { 
-       "cerb_version" : "9.1.0" , 
-       "plugins" : [] 
-     }, 
-     "configure" : { 
-       "placeholders" : [], 
-       "prompts" : [ 
-         { 
-           "type" : "text" , 
-           "label" : "Client ID" , 
-           "key" : "prompt_client_id" , 
-           "params" : { 
-             "default" : "" , 
-             "placeholder" : "(paste your Client ID)" 
-           } 
-         }, 
-         { 
-           "type" : "text" , 
-           "label" : "Client Secret" , 
-           "key" : "prompt_client_secret" , 
-           "params" : { 
-             "default" : "" , 
-             "placeholder" : "(paste your Client Secret)" 
-           } 
-         }, 
-         { 
-           "type" : "text" , 
-           "label" : "Issuer URL" , 
-           "key" : "prompt_issuer_url" , 
-           "params" : { 
-             "default" : "" , 
-             "placeholder" : "(paste your Issuer URL from Salesforce)" 
-           } 
-         } 
-       ] 
-     } 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "service_salesforce" , 
-       "_context" : "connected_service" , 
-       "name" : "Salesforce" , 
-       "uri" : "salesforce-oidc" , 
-       "extension_id" : "cerb.service.provider.oidc" , 
-       "params" : { 
-         "client_id" : "{{{prompt_client_id}}}" , 
-         "client_secret" : "{{{prompt_client_secret}}}" , 
-         "scope" : "openid profile" , 
-         "issuer" : "{{{prompt_issuer_url}}}" , 
-         "authorization_url" : "{{{prompt_issuer_url}}}/services/oauth2/authorize" , 
-         "access_token_url" : "{{{prompt_issuer_url}}}/services/oauth2/token" , 
-         "userinfo_url" : "{{{prompt_issuer_url}}}/services/oauth2/userinfo" , 
-         "jwks_url" : "{{{prompt_issuer_url}}}/id/keys" 
-       } 
-     } 
-   ] 
- }
+{
+  "package": {
+    "name": "Salesforce OpenID Connect Provider",
+    "revision": 1,
+    "requires": {
+      "cerb_version": "9.1.0",
+      "plugins": []
+    },
+    "configure": {
+      "placeholders": [],
+      "prompts": [
+        {
+          "type": "text",
+          "label": "Client ID",
+          "key": "prompt_client_id",
+          "params": {
+            "default": "",
+            "placeholder": "(paste your Client ID)"
+          }
+        },
+        {
+          "type": "text",
+          "label": "Client Secret",
+          "key": "prompt_client_secret",
+          "params": {
+            "default": "",
+            "placeholder": "(paste your Client Secret)"
+          }
+        },
+        {
+          "type": "text",
+          "label": "Issuer URL",
+          "key": "prompt_issuer_url",
+          "params": {
+            "default": "",
+            "placeholder": "(paste your Issuer URL from Salesforce)"
+          }
+        }
+      ]
+    }
+  },
+  "records": [
+    {
+      "uid": "service_salesforce",
+      "_context": "connected_service",
+      "name": "Salesforce",
+      "uri": "salesforce-oidc",
+      "extension_id": "cerb.service.provider.oidc",
+      "params": {
+        "client_id": "{{{prompt_client_id}}}",
+        "client_secret": "{{{prompt_client_secret}}}",
+        "scope": "openid profile",
+        "issuer": "{{{prompt_issuer_url}}}",
+        "authorization_url": "{{{prompt_issuer_url}}}/services/oauth2/authorize",
+        "access_token_url": "{{{prompt_issuer_url}}}/services/oauth2/token",
+        "userinfo_url": "{{{prompt_issuer_url}}}/services/oauth2/userinfo",
+        "jwks_url": "{{{prompt_issuer_url}}}/id/keys"
+      }
+    }
+  ]
+}
 ```
 
 Click the **Import** button.

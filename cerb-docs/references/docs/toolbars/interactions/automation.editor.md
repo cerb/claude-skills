@@ -18,7 +18,15 @@ Edit the record for `automation.editor`.
 Add [interactions](/docs/automations/triggers/interaction.worker/) using [toolbar KATA](/docs/toolbars/#kata).
 
 ```
-interaction/magic: uri: cerb:automation:wgm.example.openai icon: magic tooltip: Add form elements with OpenAI hidden@bool: {{trigger_name not in ['interaction.website', 'interaction.worker',]}}
+interaction/magic:
+  uri: cerb:automation:wgm.example.openai
+  icon: magic
+  tooltip: Add form elements with OpenAI
+  hidden@bool:
+    {{trigger_name not in [
+      'interaction.website',
+      'interaction.worker',
+    ]}}
 ```
 
 The following **placeholders** are available in KATA:

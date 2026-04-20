@@ -8,7 +8,15 @@ tags: ["docs", "docs-automations"]
 The **metric.increment:** command adds new samples to a [metric](/docs/metrics/).
 
 ```
-start: metric.increment: inputs: metric_name: example.workerLogin.fails dimensions: worker@int: {{ worker_id }} ip: {{ client_ip }} values: 1 output: results
+start:
+  metric.increment:
+    inputs:
+      metric_name: example.workerLogin.fails
+      dimensions:
+        worker@int: {{worker_id}}
+        ip: {{client_ip}}
+      values: 1
+    output: results
 ```
 
 - [Syntax](#syntax)

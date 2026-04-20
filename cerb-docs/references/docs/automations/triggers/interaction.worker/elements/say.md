@@ -8,7 +8,14 @@ tags: ["docs", "docs-automations"]
 In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **say** element displays a block of text or Markdown.
 
 ```
-start: await: form: elements: say/hello: content@text: # Heading This is a **paragraph** in Markdown.
+start:
+  await:
+    form:
+      elements:
+        say/hello:
+          content@text:
+            # Heading
+            This is a **paragraph** in Markdown.
 ```
 
  
@@ -28,5 +35,5 @@ Message to display as plain text.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not worker_is_superuser }}
+hidden@bool: {{not worker_is_superuser}}
 ```

@@ -21,8 +21,27 @@ Return a single attribute from an XML node.
 **Returns:** A string from the given XML attribute, or `false`.
 
 ```
-{% set xml_string %} <?xml version = "1.0" encoding = "UTF-8"?> <Movies> <Movie rating= "R" > <Title runtime= "142" >The Shawshank Redemption</Title> <Genre>Drama</Genre> <Director> <Name highratedmovie= "The Mist" > <First>Frank</First> <Last>Darabont</Last> </Name> </Director> <Studio>Columbia Pictures</Studio> <Year>1994</Year> </Movie> </Movies> {% endset %} {% set xml = xml_decode ( xml_string ) %} {% set movie = xml_xpath ( xml , '//Movie' ) | first %} {% set runtime = xml_attr ( movie.Title , 'runtime' ) %}
-The runtime of {{ movie.Title }} is {{ runtime ? ( 60 * runtime ) | secs_pretty : 'unknown' }}.
+{% set xml_string %}
+<?xml version = "1.0" encoding = "UTF-8"?>
+<Movies>
+    <Movie rating="R">
+        <Title runtime="142">The Shawshank Redemption</Title>
+        <Genre>Drama</Genre>
+        <Director>
+            <Name highratedmovie="The Mist">
+                <First>Frank</First>
+                <Last>Darabont</Last>
+            </Name>
+        </Director>
+        <Studio>Columbia Pictures</Studio>
+        <Year>1994</Year>
+    </Movie>
+</Movies>
+{% endset %}
+{% set xml = xml_decode(xml_string) %}
+{% set movie = xml_xpath(xml, '//Movie')|first %}
+{% set runtime = xml_attr(movie.Title,'runtime') %}
+The runtime of {{movie.Title}} is {{runtime ? (60*runtime)|secs_pretty : 'unknown'}}.
 ```
 
 ```

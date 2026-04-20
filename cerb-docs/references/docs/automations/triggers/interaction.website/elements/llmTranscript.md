@@ -8,8 +8,27 @@ tags: ["docs", "docs-automations"]
 In [website interactions](/docs/automations/triggers/interaction.website/) web forms, an **llmTranscript** element displays an [llm.agent:](/docs/automations/commands/llm.agent/) chat transcript.
 
 ```
-start: # ... Run llm.agent:
-    await: form: title: AI Agent elements: llmTranscript/prompt_transcript: session_id: {{ results.session_id }} hidden@bool: {{ prompt_user is empty }} tool_labels: docs_search@raw: Searching documentation: {{ query }} docs_fetch@raw: Reading documentation text/prompt_user: required@bool: yes placeholder: (ask a question about Cerb) submit: buttons: continue/send: label: Send icon: send value: send
+start:
+  # ... Run llm.agent:
+  await:
+    form:
+      title: AI Agent
+      elements:
+        llmTranscript/prompt_transcript:
+          session_id: {{results.session_id}}
+          hidden@bool: {{prompt_user is empty}}
+          tool_labels:
+            docs_search@raw: Searching documentation: {{query}}
+            docs_fetch@raw: Reading documentation
+        text/prompt_user:
+          required@bool: yes
+          placeholder: (ask a question about Cerb)
+        submit:
+          buttons:
+            continue/send:
+              label: Send
+              icon: send
+              value: send
 ```
 
  
@@ -25,7 +44,8 @@ The transcript ID to display. This can be retrieved from [llm.agent:](/docs/auto
 A dictionary of tool names and the text to render in the transcript. This may include placeholders for the tool parameters.
 
 ```
-tool_labels: example_tool@raw: Running tool: {{ param_name }}
+tool_labels:
+  example_tool@raw: Running tool: {{param_name}}
 ```
 
 ### hidden:
@@ -33,5 +53,5 @@ tool_labels: example_tool@raw: Running tool: {{ param_name }}
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ not prompt_user }}
+hidden@bool: {{not prompt_user}}
 ```

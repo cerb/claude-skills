@@ -14,10 +14,15 @@ The [|batch](/docs/scripting/filters/#batch) filter divides a list into smaller 
 
 - 
 ```
-start: set: items@json: [1,2,3,4,5,6,7,8,9,10] return: batches: {{ items|batch(size=3, fill=-1, preserve_keys=false)|json_encode }}
+start:
+  set:
+    items@json: [1,2,3,4,5,6,7,8,9,10]
+  return:
+    batches: {{items|batch(size=3, fill=-1, preserve_keys=false)|json_encode}}
 ```
 - 
 ```
-__return : batches : ' [[1,2,3],[4,5,6],[7,8,9],[10,-1,-1]]'
+__return:
+  batches: '[[1,2,3],[4,5,6],[7,8,9],[10,-1,-1]]'
 ```
 

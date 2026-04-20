@@ -52,7 +52,10 @@ In addition to the _backups_ user on the system, it's a really smart idea to mak
 In MySQL you can add a read-only user with the following query:
 
 ```
-GRANT SELECT , RELOAD , LOCK TABLES ON * . * TO backups @ localhost IDENTIFIED BY 's3cret' ;
+GRANT SELECT, RELOAD, LOCK TABLES 
+ON *.* 
+TO backups@localhost 
+IDENTIFIED BY 's3cret';
 ```
 
 Choose your own password in place of s3cret above.
@@ -110,7 +113,9 @@ We no longer recommend using the mysqlhotcopy command for backups. Even though i
 **Usage:**
 
 ```
-mysqldump -Q --master-data =2 --single-transaction \ -u backups \ -p ` cat ~backups/.db.shadow` \
+mysqldump -Q --master-data=2 --single-transaction \
+   -u backups \
+   -p`cat ~backups/.db.shadow` \
    cerb_database > cerb_database.sql
 ```
 
@@ -121,7 +126,9 @@ MySQL's binary logs keep a record of all SQL queries that modify a database (e.g
 In the `my.cnf` file you need to make sure these options are enabled:
 
 ```
-log_bin = /backups/mysql-binlogs/mysql-bin.log expire_logs_days = 2 max_binlog_size = 2000M
+log_bin = /backups/mysql-binlogs/mysql-bin.log
+expire_logs_days = 2 
+max_binlog_size = 2000M
 ```
 
 You can customize the settings for your own environment:
@@ -155,7 +162,7 @@ Your location may be different than the above example. If you're unsure, consult
 Now we want to flush the binary logs so a new log file is opened:
 
 ```
-mysqladmin -u backups -p ` cat ~backups/.db.shadow` flush-logs
+mysqladmin -u backups -p`cat ~backups/.db.shadow` flush-logs
 ```
 
 After a `FLUSH`, we can now archive and remove the older log files. We recommend using `lzop` for archival due to its nice balance of performance and compression, but there's nothing wrong with using other tools like `zip`, `gzip`, `bzip`, etc.
@@ -163,7 +170,7 @@ After a `FLUSH`, we can now archive and remove the older log files. We recommend
 The following command will archive all binary log files _except_ the currently active one:
 
 ```
-lzop ` head -n -1 mysql-bin.index | xargs`
+lzop `head -n -1 mysql-bin.index | xargs`
 ```
 
 You can then copy or move these compressed log files to a new location. We recommend archiving binlog backups in Amazon S3.
@@ -171,7 +178,7 @@ You can then copy or move these compressed log files to a new location. We recom
 If you're using Amazon Web Services, the command to copy the files to S3 might look like:
 
 ```
-aws s3 cp *.lzo s3://your-bucket/mysql-binlogs/` hostname -s `/
+aws s3 cp *.lzo s3://your-bucket/mysql-binlogs/`hostname -s`/
 ```
 
 In the above example, you need to replace **_your-bucket_** with a valid S3 bucket name. The hostname -s command will make a directory in that bucket for each short hostname. For example, a server with the fully qualified hostname of atlas.webgroupmedia.com will make a directory called atlas. This is useful if you have multiple servers sending binary log archives to the same bucket.
@@ -185,7 +192,8 @@ rm *.lzo
 Finally, you should instruct MySQL to purge the old log files. This is important because you don't want to waste server resources by constantly archiving and copying an increasingly long list of files. You only want to deal with new files since your last backup::
 
 ```
-mysql -u backups -p ` cat ~backups/.db.shadow` \ -e "PURGE MASTER LOGS TO ' ` basename \` tail -n 1 mysql-bin.index\` ` '"
+mysql -u backups -p`cat ~backups/.db.shadow` \
+   -e "PURGE MASTER LOGS TO '`basename \`tail -n 1 mysql-bin.index\``'"
 ```
 
 The above command will remove all binary log files _except_ the currently active one.
@@ -274,7 +282,7 @@ We highly recommend using the Amazon Web Services command line interface (AWS CL
 **Usage:**
 
 ```
-aws s3 cp *.gz s3://yourbucket/backups/` hostname -s `/dbs/` date +%Y%m%d`/
+aws s3 cp *.gz s3://yourbucket/backups/`hostname -s`/dbs/`date +%Y%m%d`/
 ```
 
 The command above will send all gzipped files (\*.gz) to the bucket named yourbucket in S3. The files will be saved in a backups directory structure organized by server name (`hostname -s`) and date (`date +%Y%m%d`).

@@ -14,7 +14,22 @@ In [website interactions](/docs/automations/triggers/interaction.website/) forms
 ## Upload a single file
 
 ```
-start: await: form: title: File Uploader elements: fileUpload/prompt_file: label: Upload an image: accept: .png,image/png,.jpg,image/jpeg multiple@bool: no required@bool: yes validation@raw: {% if prompt_file_mime_type != 'image/png' %} The file must be a PNG image ( {{ prompt_file_mime_type }} ) {% elseif prompt_file_size > 1024000 %} The file ( {{ prompt_file_size|bytes_pretty }} ) must be smaller than 1MB. {% endif %}
+start:
+  await:
+    form:
+      title: File Uploader
+      elements:
+        fileUpload/prompt_file:
+          label: Upload an image:
+          accept: .png,image/png,.jpg,image/jpeg
+          multiple@bool: no
+          required@bool: yes
+          validation@raw:
+            {% if prompt_file_mime_type != 'image/png' %}
+            The file must be a PNG image ({{prompt_file_mime_type}})
+            {% elseif prompt_file_size > 1024000 %}
+            The file ({{prompt_file_size|bytes_pretty}}) must be smaller than 1MB.
+            {% endif %}
 ```
 
 The output placeholder is set to the new automation resource token.
@@ -24,8 +39,27 @@ The placeholder is also key expandable. In the above example, `prompt_file` coul
 ## Upload multiple files
 
 ```
-start: await/form: form: title: Form Title elements: fileUpload/prompt_files: label: Upload files: required@bool: yes multiple@bool: yes accept: .png,image/png,.jpg,image/jpeg 
-   await/results: form: title: Results elements: say: content@text: You uploaded: {% for prompt_file in prompt_files__records %} * {{ prompt_file.name }} ( {{ prompt_file.size|bytes_pretty }} ) {% endfor %}
+start:
+  await/form:
+    form:
+      title: Form Title
+      elements:
+        fileUpload/prompt_files:
+          label: Upload files:
+          required@bool: yes
+          multiple@bool: yes
+          accept: .png,image/png,.jpg,image/jpeg
+
+  await/results:
+    form:
+      title: Results
+      elements:
+        say:
+          content@text:
+            You uploaded:
+            {% for prompt_file in prompt_files__records %}
+            * {{prompt_file.name}} ({{prompt_file.size|bytes_pretty}})
+            {% endfor %}
 ```
 
 The output placeholder is set to a list of automation resource tokens.
@@ -35,8 +69,29 @@ Another output placeholder is set with a `__records` suffix. This includes the f
 ## Upload multiple files and convert to attachments
 
 ```
-start: await/form: form: title: Form Title elements: fileUpload/prompt_files: label: Upload files: required@bool: yes multiple@bool: yes accept: .png,image/png,.jpg,image/jpeg 
-   repeat: each@key: prompt_files__records as: prompt_file do: record.create: inputs: record_type: attachment fields: name: {{ prompt_file.name }} mime_type: application/vnd.cerb.uri content: cerb:automation_resource: {{ prompt_file.token }} output: new_file
+start:
+  await/form:
+    form:
+      title: Form Title
+      elements:
+        fileUpload/prompt_files:
+          label: Upload files:
+          required@bool: yes
+          multiple@bool: yes
+          accept: .png,image/png,.jpg,image/jpeg
+
+  repeat:
+    each@key: prompt_files__records
+    as: prompt_file
+    do:
+      record.create:
+        inputs:
+          record_type: attachment
+          fields:
+            name: {{prompt_file.name}}
+            mime_type: application/vnd.cerb.uri
+            content: cerb:automation_resource:{{prompt_file.token}}
+        output: new_file
 ```
 
 # Syntax
@@ -54,7 +109,7 @@ An optional comma-delimited list of file extensions or MIME types to accept in t
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ expression }}
+hidden@bool: {{expression}}
 ```
 
 ### multiple@bool:
@@ -74,5 +129,13 @@ An optional custom validation script. Any output is considered to be an error.
 You can use `if...elseif` to check multiple conditions.
 
 ```
-fileUpload/prompt_file: label: Upload a file: required@bool: yes validation@raw: {% if prompt_file_mime_type != 'image/png' %} The file must be a PNG image ( {{ prompt_file_mime_type }} ) {% elseif prompt_file_size > 1024000 %} The file ( {{ prompt_file_size|bytes_pretty }} ) must be smaller than 1MB. {% endif %}
+fileUpload/prompt_file:
+  label: Upload a file:
+  required@bool: yes
+  validation@raw:
+    {% if prompt_file_mime_type != 'image/png' %}
+    The file must be a PNG image ({{prompt_file_mime_type}})
+    {% elseif prompt_file_size > 1024000 %}
+    The file ({{prompt_file_size|bytes_pretty}}) must be smaller than 1MB.
+    {% endif %}
 ```

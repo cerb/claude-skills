@@ -112,25 +112,53 @@ The `output:` placeholder receives a dictionary with these keys:
 This automation reads the attachment with ID `1`:
 
 ```
-start: file.read: inputs: # image.png
-        uri: cerb:attachment:1 output: results
+start:
+  file.read:
+    inputs:
+      # image.png
+      uri: cerb:attachment:1
+    output: results
 ```
 
 Output:
 
 ```
-results: bytes: data:image/png;base64,iVBORw0KGgoAAAA[...] uri: cerb:attachment:1 name: image.png offset_from: 0 offset_to: 23886 mime_type: image/png size: 23886
+results:
+  bytes: data:image/png;base64,iVBORw0KGgoAAAA[...]
+  uri: cerb:attachment:1
+  name: image.png
+  offset_from: 0
+  offset_to: 23886
+  mime_type: image/png
+  size: 23886
 ```
 
 ## Decompress and read a gzip file
 
 ```
-start: file.read: inputs: # smtp.example.com!cerb.ai!1661234567!1667654321.xml.gz
-        uri: cerb:attachment:1234 filters: gzip.decompress: output: results</code>
+start:
+  file.read:
+    inputs:
+      # smtp.example.com!cerb.ai!1661234567!1667654321.xml.gz
+      uri: cerb:attachment:1234
+      filters:
+        gzip.decompress:
+    output: results</code>
 ```
 
 Output:
 
 ```
-results: bytes@text: <?xml version="1.0" encoding="UTF-8" ?> <feedback> ... </feedback> uri: cerb:attachment:1234 name: smtp.example.com!cerb.ai!1661234567!1667654321.xml.gz offset_from: 0 offset_to: 1284 mime_type: application/x-gzip size: 599
+results:
+  bytes@text:
+    <?xml version="1.0" encoding="UTF-8" ?>
+    <feedback>
+      ...
+    </feedback>
+  uri: cerb:attachment:1234
+  name: smtp.example.com!cerb.ai!1661234567!1667654321.xml.gz
+  offset_from: 0
+  offset_to: 1284
+  mime_type: application/x-gzip
+  size: 599
 ```

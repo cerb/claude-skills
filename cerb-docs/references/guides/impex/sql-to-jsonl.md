@@ -48,13 +48,34 @@ This example exports metadata for all ticket records. It uses PHP, but the logic
 26
 27
 28
-<?php const DB_HOST = 'localhost' ; const DB_USER = 'cerb_user' ; const DB_PASS = 'cerb_password' ; const DB_NAME = 'cerb' ; const OUTPUT_FILE = 'records.jsonl' ; $sql = "SELECT closed_at as closed, created_date as created, elapsed_response_first, 
+<?php
+const DB_HOST = 'localhost';
+const DB_USER = 'cerb_user';
+const DB_PASS = 'cerb_password';
+const DB_NAME = 'cerb';
+
+const OUTPUT_FILE = 'records.jsonl';
+
+$sql = "SELECT closed_at as closed, created_date as created, elapsed_response_first, 
 elapsed_status_open, id, mask, num_messages, num_messages_out, num_messages_in, org_id, 
 reopen_at as reopen_date, updated_date as updated, group_id, bucket_id, 
 CASE WHEN status_id=0 THEN 'open' WHEN status_id=1 THEN 'waiting' ELSE 'closed' END as status,
 FROM ticket 
 WHERE status_id < 3
-" ; $fp = fopen ( OUTPUT_FILE , 'w' ); $count = 0 ; $db = mysqli_connect ( DB_HOST , DB_USER , DB_PASS , DB_NAME ); $rs = mysqli_query ( $db , $sql , MYSQLI_USE_RESULT ); while ( $row = $rs -> fetch_object ()) { fwrite ( $fp , json_encode ( $row ) . PHP_EOL ); if ( 0 == ++ $count % 10_000 ) echo $count . PHP_EOL ; } fclose ( $fp );
+";
+
+$fp = fopen(OUTPUT_FILE,'w');
+$count = 0;
+
+$db = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$rs = mysqli_query($db, $sql, MYSQLI_USE_RESULT);
+
+while($row = $rs->fetch_object()) {
+	fwrite($fp, json_encode($row) . PHP_EOL);
+	if(0 == ++$count % 10_000) echo $count . PHP_EOL;
+}
+
+fclose($fp);
 ```
 
 - **Line 1:** Set `DB_HOST` to your database server hostname.
@@ -73,7 +94,9 @@ The script will output a count every 10,000 records.
 You can export custom field values by adding additional `SELECT` clauses above **Line 13**:
 
 ```
-( select cf_123 . field_value from custom_field_numbervalue cf_123 where cf_123 . field_id = 123 and cf_123 . context_id = ticket . id LIMIT 1 ) as custom_123
+(select cf_123.field_value from custom_field_numbervalue cf_123 
+  where cf_123.field_id = 123 and cf_123.context_id = ticket.id LIMIT 1
+) as custom_123
 ```
 
 Change `custom_123` to the ID of your custom field. You'll find this in the `custom_field` table.

@@ -33,18 +33,48 @@ Set a watcher if a ticket is moved to a particular group:
 
 - 
 ```
-start: decision/group: outcome/group1: if@bool: {{ ticket_group_name == "Support" }} then: record.update/watcher: output: updated_ticket inputs: record_type: ticket record_id: {{ ticket_id }} fields: links@list: worker:1 outcome/group2: if@bool: {{ ticket_group_name == "Sales" }} then: record.update/watcher: output: updated_ticket inputs: record_type: ticket record_id: {{ ticket_id }} fields: links@list: worker:2
+start:
+  decision/group:
+    outcome/group1:
+      if@bool: {{ticket_group_name == "Support"}}
+      then:
+        record.update/watcher:
+          output: updated_ticket
+          inputs:
+            record_type: ticket
+            record_id: {{ticket_id}}
+            fields:
+              links@list:
+                worker:1
+    outcome/group2:
+      if@bool: {{ticket_group_name == "Sales"}}
+      then:
+        record.update/watcher:
+          output: updated_ticket
+          inputs:
+            record_type: ticket
+            record_id: {{ticket_id}}
+            fields:
+              links@list:
+                worker:2
 ```
 - 
 ```
-commands: record.update: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes
+commands:
+  record.update:
+    deny/type@bool: {{inputs.record_type is not record type ('ticket')}}
+    allow@bool: yes
 ```
 - 
 ```
-automation/group: uri: cerb:automation:example.ticketMove.watcher disabled@bool: {{ ticket_group_id == was_group_id }}
+automation/group:
+  uri: cerb:automation:example.ticketMove.watcher
+  disabled@bool: {{ticket_group_id == was_group_id}}
 ```
 - 
 ```
-ticket_id: 1 ticket_group_name: Sales was_ticket_group_name: Support
+ticket_id: 1
+ticket_group_name: Sales
+was_ticket_group_name: Support
 ```
 

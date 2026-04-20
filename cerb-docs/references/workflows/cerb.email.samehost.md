@@ -18,7 +18,71 @@ This workflow adds a worker interaction and a toolbar button on email record car
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» (empty)** and entering in the following Workflow KATA:
 
 ```
-workflow: name: cerb.email.samehost description: Find contacts from the same host as a given profile version: 2025-01-18T01:10:19Z records: automation/toolbarinteraction: fields: name: cerb.email.samehost.interaction extension_id: cerb.trigger.interaction.worker description@text: script@raw: inputs: record/email: record_type: address required@bool: yes start: await: form: title: Emails from the same host elements: sheet/prompt_results: label: Results: data: automation: uri: cerb:automation:cerb.data.records inputs: record_type: address query_required: host:" {{ inputs.email.host }} " limit: 10 schema: layout: title_column: _label headings@bool: yes paging@bool: yes columns: card/_label: params: bold@bool: yes text/email: card/org_id: label: Organization text/num_nonspam: label: Number of Messages #on_simulate: #on_success: #on_error: policy_kata@raw: commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('address') }} toolbar_section/profiletoolbar: fields: name: Similar Email toolbar_name: record.card priority@int: 50 is_disabled: 0 toolbar_kata@raw: interaction/l1nn3e: label: Similar uri: cerb:automation:cerb.email.samehost.interaction inputs: email: {{ record_id }} hidden@bool: {{ record__type is not record type ('address') }}
+workflow:
+  name: cerb.email.samehost
+  description: Find contacts from the same host as a given profile
+  version: 2025-01-18T01:10:19Z
+records:
+  automation/toolbarinteraction:
+    fields:
+      name: cerb.email.samehost.interaction
+      extension_id: cerb.trigger.interaction.worker
+      description@text:
+      script@raw:
+        inputs:
+          record/email:
+            record_type: address
+            required@bool: yes
+          
+        start:
+          await:
+            form:
+              title: Emails from the same host
+              elements:
+                sheet/prompt_results:
+                  label: Results:
+                  data:
+                    automation:
+                      uri: cerb:automation:cerb.data.records
+                      inputs:
+                        record_type: address
+                        query_required: host:"{{inputs.email.host}}"
+                  limit: 10
+                  schema:
+                    layout:
+                      title_column: _label
+                      headings@bool: yes
+                      paging@bool: yes
+                    columns:
+                      card/_label:
+                        params:
+                          bold@bool: yes
+                      text/email:
+                      card/org_id:
+                        label: Organization
+                      text/num_nonspam:
+                        label: Number of Messages
+                
+            #on_simulate:
+            #on_success:
+            #on_error:
+      policy_kata@raw:
+        commands:
+          record.search:
+            deny/type@bool: {{inputs.record_type is not record type ('address')}}
+  toolbar_section/profiletoolbar:
+    fields:
+      name: Similar Email
+      toolbar_name: record.card
+      priority@int: 50
+      is_disabled: 0
+      toolbar_kata@raw:
+        interaction/l1nn3e:
+          label: Similar
+          uri: cerb:automation:cerb.email.samehost.interaction
+          inputs:
+            email: {{record_id}}
+          hidden@bool: {{record__type is not record type ('address')}}
 ```
 
 # Usage

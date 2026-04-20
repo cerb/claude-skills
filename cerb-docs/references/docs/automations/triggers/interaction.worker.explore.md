@@ -44,7 +44,17 @@ An interaction automation [dictionary](/docs/automations/#dictionaries) starts w
 When suspending in the `await:explore:` state, the interaction displays the next record in an explore set.
 
 ```
-await: explore: title: The title of the explore set url: The URL of the next item label: The optional label for the next item toolbar: interaction/next: label: Next icon: chevron-right icon_at: end keyboard: ]
+await:
+  explore:
+    title: The title of the explore set
+    url: The URL of the next item
+    label: The optional label for the next item
+    toolbar:
+      interaction/next:
+        label: Next
+        icon: chevron-right
+        icon_at: end
+        keyboard: ]
 ```
 
 Interactions in a custom [toolbar](/docs/toolbars/) can use the following `after:` options:

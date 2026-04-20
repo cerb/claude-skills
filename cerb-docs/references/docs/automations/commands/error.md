@@ -10,7 +10,8 @@ The **error:** command unsuccessfully terminates an [automation](/docs/automatio
 # Syntax
 
 ```
-start: error: An unexpected error occurred!
+start:
+  error: An unexpected error occurred!
 ```
 
 The error message is returned to the caller.

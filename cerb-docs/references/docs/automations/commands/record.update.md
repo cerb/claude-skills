@@ -8,8 +8,15 @@ tags: ["docs", "docs-automations"]
 The **record.update:** command updates an existing record with the given fields.
 
 ```
-start: record.update: output: updated_record inputs: record_type: task record_id: 123 # See: https://cerb.ai/docs/records/types/task/#records-api
-        fields: importance: 90
+start:
+  record.update:
+    output: updated_record
+    inputs:
+      record_type: task
+      record_id: 123
+      # See: https://cerb.ai/docs/records/types/task/#records-api
+      fields:
+        importance: 90
 ```
 
 - [Syntax](#syntax)

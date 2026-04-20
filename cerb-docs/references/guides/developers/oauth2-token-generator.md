@@ -35,7 +35,10 @@ If you want to allow Cerb workers to log in to your integration to generate toke
 You can add your own scopes. The default provides an `api` scope that allows all endpoints and methods. Your automation will need to validate scopes.
 
 ```
-" api" : label : Make any API request on your behalf endpoints : - " *" #[GET, PATCH, POST, PUT, DELETE]
+"api":
+  label: Make any API request on your behalf
+  endpoints:
+   - "*" #[GET, PATCH, POST, PUT, DELETE]
 ```
 
 The scopes are set when a token is generated. If a worker logs in to Cerb from a third-party app, a confirmation screen will show them the requested scopes before they consent. If you use the token generator, you can pick a token's scope.
@@ -61,7 +64,8 @@ Click the **Create** button and copy the **Access Token**.
 You can test a request from **Input:** in the lower left of the automation editor. Set the `Authorization: Bearer` header to your token and click the play button.
 
 ```
-request_headers : authorization : Bearer eyJ0eXAiOi[...]
+request_headers:
+authorization: Bearer eyJ0eXAiOi[...]
 ```
 
 # Testing from curl

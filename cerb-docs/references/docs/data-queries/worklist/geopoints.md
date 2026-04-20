@@ -10,8 +10,14 @@ tags: ["docs"]
 `worklist.geo.points` [data queries](/docs/data-queries/) returns geolocation data from worklist records.
 
 ```
-type: worklist.geo.points series.points: ( of: org point: coordinates fields: [name,coordinates] query: (coordinates:!null) ) 
- format: geojson
+type:worklist.geo.points
+series.points:(
+  of:org
+  point:coordinates
+  fields:[name,coordinates]
+  query:(coordinates:!null)
+)
+format:geojson
 ```
 
 - [series.\*](#series)
@@ -34,7 +40,7 @@ Each `series.*` should provide:
 The `of:` key specifies the type of [records](/docs/records/) to search.
 
 ```
-of: tickets
+of:tickets
 ```
 
 ## point:
@@ -42,7 +48,7 @@ of: tickets
 The `point:` key specifies the record [field](/docs/records/fields/) containing latitude/longitude data.
 
 ```
-point: coordinates
+point:coordinates
 ```
 
 ## fields:
@@ -50,7 +56,7 @@ point: coordinates
 The `fields:` key specifies the record [fields](/docs/records/fields/) to include with each plotted point.
 
 ```
-point: coordinates
+point:coordinates
 ```
 
 ## query:
@@ -58,7 +64,7 @@ point: coordinates
 The `query:` key specifies a [search query](/docs/search/) for filtering records.
 
 ```
-query: (region:Europe)
+query:(region:Europe)
 ```
 
 ## query.required:
@@ -66,7 +72,7 @@ query: (region:Europe)
 The `query.required:` key specifies a mandatory [search query](/docs/search/) for filtering records. This should be protected from user-entered filters.
 
 ```
-query.required: (ids:[1,2,3])
+query.required:(ids:[1,2,3])
 ```
 
 # format:
@@ -82,8 +88,14 @@ The results can be returned in various formats:
 ## Plot organizations based on a geolocation custom field.
 
 ```
-type: worklist.geo.points series.points: ( of: org point: coordinates fields: [name,coordinates] query: (coordinates:!null) ) 
- format: geojson
+type:worklist.geo.points
+series.points:(
+  of:org
+  point:coordinates
+  fields:[name,coordinates]
+  query:(coordinates:!null)
+)
+format:geojson
 ```
 
  

@@ -10,7 +10,11 @@ tags: ["docs", "docs-scripting"]
 Convert newline characters (`\n`) to HTML breaks (`<br />`):
 
 ```
-{% set text = " This has line feeds in the text " %} {{ text | nl2br }}
+{% set text = "This has
+line feeds
+in the text
+"%}
+{{text|nl2br}}
 ```
 
 ```

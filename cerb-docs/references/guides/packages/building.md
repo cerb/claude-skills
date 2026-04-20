@@ -56,23 +56,23 @@ Packages use the JSON[1](#fn:json) file format. This is something you can easily
 Here's the basic structure of a package:
 
 ```
-{ 
-   "package" : { 
-     "name" : "Package Name" , 
-     "revision" : 1 , 
-     "requires" : { 
-       "cerb_version" : "9.2.0" , 
-       "plugins" : [] 
-     }, 
-     "library" : {}, 
-     "configure" : { 
-       "placeholders" : [], 
-       "prompts" : [] 
-     } 
-   }, 
-   "records" : [], 
-   "bots" : [] 
- }
+{
+  "package": {
+    "name": "Package Name",
+    "revision": 1,
+    "requires": {
+      "cerb_version": "9.2.0",
+      "plugins": []
+    },
+    "library": {},
+    "configure": {
+      "placeholders": [],
+      "prompts": []
+    }
+  },
+  "records": [],
+  "bots": []
+}
 ```
 
 First, let's look at the `package` section:
@@ -122,18 +122,18 @@ Pre-approved packages can be added to the package library as templates for use b
 The **library** key uses the following structure:
 
 ```
-{ 
-   "package" : { 
-     "library" : { 
-       "name" : "Package Name" , 
-       "uri" : "a_unique_package_identifier" , 
-       "description" : "A description of your package" , 
-       "instructions" : "Instructions with **Markdown** formatting." , 
-       "point" : "an_extension_point" , 
-       "image" : "data:image/png;base64,..." 
-     } 
-   } 
- }
+{
+  "package": {
+    "library": {
+      "name": "Package Name",
+      "uri": "a_unique_package_identifier",
+      "description": "A description of your package",
+      "instructions": "Instructions with **Markdown** formatting.",
+      "point": "an_extension_point",
+      "image": "data:image/png;base64,..."
+    }
+  }
+}
 ```
 
 - **name** is the human-friendly name of the package shown in the library.
@@ -186,29 +186,29 @@ For instance, the [Customer Satisfaction Surveys](/packages/customer-satisfactio
 Here's an example package that uses the random code generating to generate random tasks:
 
 ```
-{ 
-   "package" : { 
-     "name" : "Example Package" , 
-     "configure" : { 
-       "placeholders" : [ 
-         { 
-           "type" : "random" , 
-           "key" : "random_code" , 
-           "params" : { 
-             "length" : "8" 
-           } 
-         } 
-       ] 
-     } 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "task_001" , 
-       "_context" : "task" , 
-       "title" : "Random task #{{{random_code}}}" 
-     } 
-   ] 
- }
+{
+  "package": {
+    "name": "Example Package",
+    "configure": {
+      "placeholders": [
+        {
+          "type": "random",
+          "key": "random_code",
+          "params": {
+            "length": "8"
+          }
+        }
+      ]
+    }
+  },
+  "records": [
+    {
+      "uid": "task_001",
+      "_context": "task",
+      "title": "Random task #{{{random_code}}}"
+    }
+  ]
+}
 ```
 
 Every time you import this package it will generate a new task record with a random 8-character code, like:
@@ -220,34 +220,34 @@ Every time you import this package it will generate a new task record with a ran
 Added in [9.6](/releases/9.6/).
 
 ```
-{ 
-   "package" : { 
-     "name" : "Example Package" , 
-     "configure" : { 
-       "placeholders" : [ 
-         { 
-           "type" : "data_query" , 
-           "key" : "ticket_profile_tab_id" , 
-           "params" : { 
-             "query" : "type:worklist.records of:profile_tab query:(name: \" Overview \" record: \" cerberusweb.contexts.ticket \" format:dictionaries limit:1)" , 
-             "selector" : "{{results.data|first.id}}" , 
-             "format" : "json" , 
-             "validate" : "{% if results.data|first.id is empty %}Ticket profile tab record not found.{% endif %}" 
-           } 
-         } 
-       ] 
-     } 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "widget_001" , 
-       "_context" : "profile_widget" , 
-       "name" : "Example Widget" , 
-       "profile_tab_id" : "{{{ticket_profile_tab_id}}}" , 
-       "extension_id" : "cerb.profile.tab.widget.sheet" 
-     } 
-   ] 
- }
+{
+  "package": {
+    "name": "Example Package",
+    "configure": {
+      "placeholders": [
+        {
+          "type": "data_query",
+          "key": "ticket_profile_tab_id",
+          "params": {
+            "query": "type:worklist.records of:profile_tab query:(name:\"Overview\" record:\"cerberusweb.contexts.ticket\" format:dictionaries limit:1)",
+            "selector": "{{results.data|first.id}}",
+            "format": "json",
+            "validate": "{% if results.data|first.id is empty %}Ticket profile tab record not found.{% endif %}"
+          }
+        }
+      ]
+    }
+  },
+  "records": [
+    {
+      "uid": "widget_001",
+      "_context": "profile_widget",
+      "name": "Example Widget",
+      "profile_tab_id": "{{{ticket_profile_tab_id}}}",
+      "extension_id": "cerb.profile.tab.widget.sheet"
+    }
+  ]
+}
 ```
 
 ## Prompts
@@ -261,31 +261,31 @@ The simplest prompted placeholder is a text box.
 This package will prompt you for the name of a new task before creating it:
 
 ```
-{ 
-   "package" : { 
-     "name" : "Example Package" , 
-     "configure" : { 
-       "prompts" : [ 
-         { 
-           "type" : "text" , 
-           "label" : "Task name" , 
-           "key" : "task_name" , 
-           "params" : { 
-             "default" : "A very special task" , 
-             "placeholder" : "(enter a task name)" 
-           } 
-         } 
-       ] 
-     } 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "task_001" , 
-       "_context" : "task" , 
-       "title" : "{{{task_name}}}" 
-     } 
-   ] 
- }
+{
+  "package": {
+    "name": "Example Package",
+    "configure": {
+      "prompts": [
+        {
+          "type": "text",
+          "label": "Task name",
+          "key": "task_name",
+          "params": {
+            "default": "A very special task",
+            "placeholder": "(enter a task name)"
+          }
+        }
+      ]
+    }
+  },
+  "records": [
+    {
+      "uid": "task_001",
+      "_context": "task",
+      "title": "{{{task_name}}}"
+    }
+  ]
+}
 ```
 
 When you import the package you'll see the following prompt:
@@ -303,36 +303,36 @@ Your package can prompt with a picklist of pre-defined options.
 This package will prompt you for the importance before creating a task:
 
 ```
-{ 
-   "package" : { 
-     "name" : "Example Package" , 
-     "requires" : { 
-       "cerb_version" : "9.1.4" , 
-       "plugins" : [] 
-     }, 
-     "configure" : { 
-       "prompts" : [ 
-         { 
-           "type" : "picklist" , 
-           "label" : "Importance" , 
-           "key" : "prompt_importance" , 
-           "params" : { 
-             "options" : { "Low" : 25 , "Normal" : 50 , "High" : 75 , "Urgent" : 100 }, 
-             "default" : 50 
-           } 
-         } 
-       ] 
-     } 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "task_001" , 
-       "_context" : "task" , 
-       "title" : "New task" , 
-       "importance" : "{{{prompt_importance}}}" 
-     } 
-   ] 
- }
+{
+  "package": {
+    "name": "Example Package",
+    "requires": {
+      "cerb_version": "9.1.4",
+      "plugins": []
+    },
+    "configure": {
+      "prompts": [
+        {
+          "type": "picklist",
+          "label": "Importance",
+          "key": "prompt_importance",
+          "params": {
+            "options": {"Low":25,"Normal":50,"High":75,"Urgent":100},
+            "default": 50
+          }
+        }
+      ]
+    }
+  },
+  "records": [
+    {
+      "uid": "task_001",
+      "_context": "task",
+      "title": "New task",
+      "importance": "{{{prompt_importance}}}"
+    }
+  ]
+}
 ```
 
 When you import the package, you'll be prompted for the importance with a dropdown:
@@ -346,19 +346,19 @@ After importing the package, the new task has the importance you assigned:
 The options can be specified as a simple array:
 
 ```
-"options" : ["Option 1" , "Option 2" , "Option 3"]
+"options": ["Option 1", "Option 2", "Option 3"]
 ```
 
 Or as an object with label/value pairs:
 
 ```
-"options" : { 
-   "First" : "Value 1" , 
-   "Second" : "Value 2" , 
-   "Third" : "Value 3" , 
-   "Fourth" : "Value 4" , 
-   "Fifth" : "Value 5" 
- }
+"options": {
+  "First": "Value 1",
+  "Second": "Value 2",
+  "Third": "Value 3",
+  "Fourth": "Value 4",
+  "Fifth": "Value 5"
+}
 ```
 
 ### Choosers
@@ -370,37 +370,37 @@ To accomplish this, you can include a **chooser prompt**.
 This package prompts for a worker and assigns them a task:
 
 ```
-{ 
-   "package" : { 
-     "name" : "Example Package" , 
-     "requires" : { 
-       "cerb_version" : "9.1.4" , 
-       "plugins" : [] 
-     }, 
-     "configure" : { 
-       "prompts" : [ 
-         { 
-           "type" : "chooser" , 
-           "label" : "Who should the new task be assigned to?" , 
-           "key" : "task_owner_id" , 
-           "params" : { 
-             "context" : "cerberusweb.contexts.worker" , 
-             "single" : true , 
-             "query" : "isDisabled:n" 
-           } 
-         } 
-       ] 
-     } 
-   }, 
-   "records" : [ 
-     { 
-       "uid" : "task_001" , 
-       "_context" : "task" , 
-       "title" : "New task for {{{task_owner__label}}}" , 
-       "owner_id" : "{{{task_owner_id}}}" 
-     } 
-   ] 
- }
+{
+  "package": {
+    "name": "Example Package",
+    "requires": {
+      "cerb_version": "9.1.4",
+      "plugins": []
+    },
+    "configure": {
+      "prompts": [
+        {
+          "type": "chooser",
+          "label": "Who should the new task be assigned to?",
+          "key": "task_owner_id",
+          "params": {
+            "context": "cerberusweb.contexts.worker",
+            "single": true,
+            "query": "isDisabled:n"
+          }
+        }
+      ]
+    }
+  },
+  "records": [
+    {
+      "uid": "task_001",
+      "_context": "task",
+      "title": "New task for {{{task_owner__label}}}",
+      "owner_id": "{{{task_owner_id}}}"
+    }
+  ]
+}
 ```
 
 When you import the package, you'll be prompted to pick a task assignee with a chooser:
@@ -420,13 +420,13 @@ If the key of your chooser prompt ends with \_id then Cerb will automatically lo
 The **disable\_events** option prevents bot behaviors or automations from triggering on new records.
 
 ```
-"configure" : { 
-             "prompts" : [], 
-             "placeholders" : [], 
-             "options" : { 
-                 "disable_events" : true 
-             } 
-         }
+"configure": {
+            "prompts": [],
+            "placeholders": [],
+            "options": {
+                "disable_events": true
+            }
+        }
 ```
 
 This can be useful, for example, when importing historical records from another system where you don't want workflows for autoresponders or customer surveys to trigger.

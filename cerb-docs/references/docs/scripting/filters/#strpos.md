@@ -20,7 +20,8 @@ Return the position of a substring (needle) within a larger text (haystack). Thi
 ```
 {% set alphabet %}
 ABCDEFGHIJKLMNOPQRSTUVWXYZ
-{% endset %} {{ alphabet | str_pos ( needle = 'hi' , offset = 0 , ignoreCase = true ) }}
+{% endset %}
+{{alphabet|str_pos(needle='hi', offset=0, ignoreCase=true)}}
 ```
 
 ```

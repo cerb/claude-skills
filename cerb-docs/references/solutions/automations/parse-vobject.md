@@ -33,14 +33,58 @@ You can parse it as follows:
 
 - 
 ```
-start: file.read: output: results inputs: uri: cerb:attachment:4 on_success: return: vcalendar@json: {{ vobject_parse(results.bytes)|json_encode }}
+start:
+  file.read:
+    output: results
+    inputs:
+      uri: cerb:attachment:4
+    on_success:
+      return:
+        vcalendar@json: {{vobject_parse(results.bytes)|json_encode}}
 ```
 - 
 ```
-__exit: return__return: vcalendar: VCALENDAR: - props: VERSION: - params: [] value: "2.0" PRODID: - params: [] value: -//hacksw/handcal//NONSGML v1.0//EN children: VEVENT: - props: UID: - params: [] value: uid1@example.com ORGANIZER: - params: CN: John Doe value: MAILTO:john.doe@example.com DTSTAMP: - params: [] value: 19970701T100000Z DTSTART: - params: [] value: 19970714T170000Z DTEND: - params: [] value: 19970715T040000Z SUMMARY: - params: [] value: Bastille Day Party GEO: - params: [] value: 48.85299;2.36885
+__exit: return
+__return:
+  vcalendar:
+    VCALENDAR:
+    - props:
+        VERSION:
+        - params: []
+          value: "2.0"
+        PRODID:
+        - params: []
+          value: -//hacksw/handcal//NONSGML v1.0//EN
+      children:
+        VEVENT:
+        - props:
+            UID:
+            - params: []
+              value: uid1@example.com
+            ORGANIZER:
+            - params:
+                CN: John Doe
+              value: MAILTO:john.doe@example.com
+            DTSTAMP:
+            - params: []
+              value: 19970701T100000Z
+            DTSTART:
+            - params: []
+              value: 19970714T170000Z
+            DTEND:
+            - params: []
+              value: 19970715T040000Z
+            SUMMARY:
+            - params: []
+              value: Bastille Day Party
+            GEO:
+            - params: []
+              value: 48.85299;2.36885
 ```
 - 
 ```
-commands: file.read: allow@bool: yes
+commands:
+  file.read:
+    allow@bool: yes
 ```
 

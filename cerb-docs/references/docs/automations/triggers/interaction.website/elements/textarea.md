@@ -8,7 +8,13 @@ tags: ["docs", "docs-automations"]
 In [website interactions](/docs/automations/triggers/interaction.website/) forms, a **textarea** element displays a multi-line text input without the extra functionality of an [editor](/docs/automations/triggers/interaction.website/elements/editor/).
 
 ```
-start: await: form: title: Example elements: textarea/prompt_comment: label: Please share your experience:
+start:
+  await:
+    form:
+      title: Example
+      elements:
+        textarea/prompt_comment:
+          label: Please share your experience:
 ```
 
  
@@ -24,7 +30,7 @@ The optional label to display above the form element.
 This form element can be conditionally hidden.
 
 ```
-hidden@bool: {{ expression }}
+hidden@bool: {{expression}}
 ```
 
 ### required@bool:
@@ -58,5 +64,12 @@ An optional custom validation script. Any output is considered to be an error.
 You can use `if...elseif` to check multiple conditions.
 
 ```
-textarea/prompt_comment: label: Comment: validation@raw: {% if prompt_comment is empty %} A comment is required. {% elseif prompt_comment|length < 100 %} A comment must be at least 100 characters. {% endif %}
+textarea/prompt_comment:
+  label: Comment:
+  validation@raw:
+    {% if prompt_comment is empty %}
+    A comment is required.
+    {% elseif prompt_comment|length < 100 %}
+    A comment must be at least 100 characters. 
+    {% endif %}
 ```

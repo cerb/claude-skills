@@ -12,9 +12,22 @@ tags: ["docs", "docs-scripting"]
 Returns the given keys from all elements of a list.
 
 ```
-{% set records = [{ id : 1 , subject : "Help with the API" , status : "open" , sender : "customer@cerb.example" , } , { id : 2 , subject : "Automating email replies" , status : "open" , sender : "customer@cerb.example" , }] %}
+{% set records = [
+	{
+		id: 1,
+		subject: "Help with the API",
+		status: "open",
+		sender: "customer@cerb.example",
+	},
+	{
+		id: 2,
+		subject: "Automating email replies",
+		status: "open",
+		sender: "customer@cerb.example",
+	}
+] %}
 Sender,Subject,Status
-{{ array_extract_keys ( records , ['sender' , 'subject' , 'status']) | csv }}
+{{array_extract_keys(records, ['sender','subject','status'])|csv}}
 ```
 
 ```

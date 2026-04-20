@@ -136,13 +136,42 @@ You can use the connected account you just created to access GitHub's API within
 ### Get a list of repositories
 
 ```
-start: http.request/getrepo: output: http_response inputs: method: GET url: https://api.github.com/user/repos authentication: cerb:connected_account:github headers: Content-Type: application/json User-Agent: Cerb on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/getrepo:
+    output: http_response
+    inputs:
+      method: GET
+      url: https://api.github.com/user/repos
+      authentication: cerb:connected_account:github
+      headers:
+        Content-Type: application/json
+        User-Agent: Cerb
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Create issue
 
 ```
-start: http.request/createissue: output: http_response inputs: method: POST url: https://api.github.com/repos/[repo-path]/issues authentication: cerb:connected_account:github headers: Content-Type: application/json User-Agent: Cerb body: title: Example Issue Title body: This is the text of the issue on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request/createissue:
+    output: http_response
+    inputs:
+      method: POST
+      url: https://api.github.com/repos/[repo-path]/issues
+      authentication: cerb:connected_account:github
+      headers:
+        Content-Type: application/json
+        User-Agent: Cerb
+      body:
+        title: Example Issue Title
+        body: This is the text of the issue
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Workflow

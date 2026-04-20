@@ -55,7 +55,42 @@ Navigate to the Workers section in your Cloudflare dashboard:
 After deployment, click **Edit code** and replace the default script with the following:
 
 ```
-export default { async fetch ( request , env ) { const backendHost = ' example.cerb.me ' ; const portalRouting = { ' /support ' : ' a1b2c3d4 ' }; let backendUrl ; const url = new URL ( request . url ); const newHeaders = new Headers ( request . headers ); newHeaders . set ( ' DevblocksProxyHost ' , request . headers . get ( ' Host ' )); for ( let portalPath in portalRouting ) { if ( ! backendUrl && url . pathname . startsWith ( portalPath )) { const pathName = url . pathname . substring ( portalPath . length ); backendUrl = `https:// ${ backendHost } /portal/ ${ portalRouting [portalPath]}${ pathName }${ url . search } ` ; newHeaders . set ( ' DevblocksProxyBase ' , portalPath ); break ; } } if ( ! backendUrl ) backendUrl = `https:// ${ backendHost }${ url . pathname }${ url . search } ` ; const modifiedRequest = new Request ( backendUrl , { method : request . method , headers : newHeaders , body : request . body , redirect : ' manual ' }); const response = await fetch ( modifiedRequest ); return response ; } };
+export default {
+  async fetch(request, env) {
+    const backendHost = 'example.cerb.me';
+    
+    const portalRouting = {
+      '/support': 'a1b2c3d4'
+    };
+
+    let backendUrl;
+    const url = new URL(request.url);
+    const newHeaders = new Headers(request.headers);
+    newHeaders.set('DevblocksProxyHost', request.headers.get('Host'));
+
+    for(let portalPath in portalRouting) {
+      if(!backendUrl && url.pathname.startsWith(portalPath)) {
+        const pathName = url.pathname.substring(portalPath.length);
+        backendUrl = `https://${backendHost}/portal/${portalRouting[portalPath]}${pathName}${url.search}`;
+        newHeaders.set('DevblocksProxyBase', portalPath);
+        break;
+      }
+    }
+
+    if(!backendUrl)
+      backendUrl = `https://${backendHost}${url.pathname}${url.search}`;
+    
+    const modifiedRequest = new Request(backendUrl, {
+      method: request.method,
+      headers: newHeaders,
+      body: request.body,
+      redirect: 'manual'
+    });
+    
+    const response = await fetch(modifiedRequest);
+    return response;
+  }
+};
 ```
 
 Modify the variables in the script:

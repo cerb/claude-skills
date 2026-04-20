@@ -10,7 +10,9 @@ tags: ["docs", "docs-scripting"]
 Combine two arrays or objects:
 
 ```
-{% set mfgs = ['Tesla' , 'Ford'] %} {% set mfgs = mfgs | merge (['Toyota' , 'GM']) %} {{ mfgs | json_encode }}
+{% set mfgs = ['Tesla','Ford'] %}
+{% set mfgs = mfgs|merge(['Toyota','GM']) %}
+{{mfgs|json_encode}}
 ```
 
 ```

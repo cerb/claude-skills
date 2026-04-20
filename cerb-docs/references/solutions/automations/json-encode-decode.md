@@ -14,11 +14,31 @@ Here is an example of using the [|json\_encode](/docs/scripting/json/) filter to
 
 - 
 ```
-start: set: data: name: Joe Customer order_id@int: 54321 status: text: shipped tracking_id: Z1F238 return: encoded: {{ data|json_encode }} pretty: {{ data|json_encode|json_pretty }}
+start:
+  set:
+    data:
+      name: Joe Customer
+      order_id@int: 54321
+      status:
+        text: shipped
+        tracking_id: Z1F238
+  return:
+    encoded: {{data|json_encode}}
+    pretty: {{data|json_encode|json_pretty}}
 ```
 - 
 ```
-__return : encoded : ' {"name":"Joe Customer","order_id":54321,"status":{"text":"shipped","tracking_id":"Z1F238"}}' pretty : |- { "name": "Joe Customer", "order_id": 54321, "status": { "text": "shipped", "tracking_id": "Z1F238" } }
+__return:
+  encoded: '{"name":"Joe Customer","order_id":54321,"status":{"text":"shipped","tracking_id":"Z1F238"}}'
+  pretty: |-
+    {
+        "name": "Joe Customer",
+        "order_id": 54321,
+        "status": {
+            "text": "shipped",
+            "tracking_id": "Z1F238"
+        }
+    }
 ```
 
 ## Converting from JSON using @json
@@ -30,12 +50,20 @@ The [@json](/docs/kata/#json) annotation converts a JSON string back into native
 
 - 
 ```
-start: set: json_string@text: {"name":"Joe Customer","order_id":12345} decoded_data@json: {{ json_string }}   
-   return: customer: {{ decoded_data.name }} order_num@int: {{ decoded_data.order_id }}
+start:
+  set:
+    json_string@text: {"name":"Joe Customer","order_id":12345}
+    decoded_data@json: {{json_string}}
+  
+  return:
+    customer: {{decoded_data.name}}
+    order_num@int: {{decoded_data.order_id}}
 ```
 - 
 ```
-__return : customer : Joe Customer order_num : 12345
+__return:
+  customer: Joe Customer
+  order_num: 12345
 ```
 
 ## Converting from JSON using json\_decode
@@ -47,11 +75,19 @@ Here is an example of using the [json\_decode()](/docs/scripting/json/) function
 
 - 
 ```
-start: set: json_string@text: "{\"name\":\"Joe Customer\",\"order_id\":12345}" decoded_data@json: {{ json_decode(json_string) }}   
-   return: customer: {{ decoded_data.name }} order_num@int: {{ decoded_data.order_id }}
+start:
+  set:
+    json_string@text: "{\"name\":\"Joe Customer\",\"order_id\":12345}"
+    decoded_data@json: {{json_decode(json_string)}}
+  
+  return:
+    customer: {{decoded_data.name}}
+    order_num@int: {{decoded_data.order_id}}
 ```
 - 
 ```
-__return : customer : Joe Customer order_num : 12345
+__return:
+  customer: Joe Customer
+  order_num: 12345
 ```
 

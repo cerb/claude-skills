@@ -10,7 +10,9 @@ tags: ["docs", "docs-scripting"]
 Use the [date](/docs/scripting/filters/#date) filter to format a [string](/docs/scripting/strings/) or [variable](/docs/scripting/variables/) as a date:
 
 ```
-{{ 'now' | date ( 'F d, Y h:ia T' ) }} {{ 'tomorrow 5pm' | date ( 'D, d F Y H:i T' ) }} {{ '+2 weeks 08:00' | date ( 'Y-m-d h:ia T' ) }}
+{{'now'|date('F d, Y h:ia T')}}
+{{'tomorrow 5pm'|date('D, d F Y H:i T')}}
+{{'+2 weeks 08:00'|date('Y-m-d h:ia T')}}
 ```
 
 ```
@@ -26,11 +28,11 @@ You can use any of the formatting options from PHP DateTime::format.
 The second parameter to the [date](/docs/scripting/filters/#date) filter can specify a timezone to use:
 
 ```
-{% set ts_now = date () - %}
+{% set ts_now = date() -%}
 
-Bangalore: {{ ts_now | date ( time_format , 'Asia/Kolkata' ) }}
-Berlin: {{ ts_now | date ( time_format , 'Europe/Berlin' ) }}
-New York: {{ ts_now | date ( time_format , 'America/New_York' ) }}
+Bangalore: {{ts_now|date(time_format, 'Asia/Kolkata')}}
+Berlin: {{ts_now|date(time_format, 'Europe/Berlin')}}
+New York: {{ts_now|date(time_format, 'America/New_York')}}
 ```
 
 ```
@@ -44,7 +46,7 @@ New York: December 12, 2017 14:57
 You can get a Unix timestamp (seconds since 1-Jan-1970 00:00:00 UTC) from a date value with the `|date('U')` filter:
 
 ```
-It has been {{ 'now' | date ( 'U' ) }} seconds since {{ '0' | date ( null , 'UTC' ) }}
+It has been {{'now'|date('U')}} seconds since {{'0'|date(null, 'UTC')}}
 ```
 
 ```
@@ -56,9 +58,10 @@ It has been 1513108417 seconds since January 1, 1970 00:00
 If you need to manipulate a date, create a date object with the [date()](/docs/scripting/functions/#date) function and use the [date\_modify](/docs/scripting/filters/#date_modify) filter:
 
 ```
-{% set format = 'D, d M Y T' %} {% set timestamp = date ( 'now' ) %}
-Now: {{ timestamp | date ( format ) }}
-+2 days: {{ timestamp | date_modify ( '+2 days' ) | date ( format ) }}
+{% set format = 'D, d M Y T' %}
+{% set timestamp = date('now') %}
+Now: {{timestamp|date(format)}}
++2 days: {{timestamp|date_modify('+2 days')|date(format)}}
 ```
 
 ```

@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Decode a URL query string into an array:
 
 ```
-{% set query = "name=Kina&action=light_on" %} {{ query | url_decode ( 'json' ) }}
+{% set query = "name=Kina&action=light_on" %}
+{{query|url_decode('json')}}
 ```
 
 ```

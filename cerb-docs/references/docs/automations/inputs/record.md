@@ -6,7 +6,12 @@ summary: "This page provides detailed information on configuring automation inpu
 tags: ["docs", "docs-automations"]
 ---
 ```
-inputs: record/ticket: required@bool: yes record_type: ticket expand: owner_,customfields # default: 1
+inputs:
+  record/ticket:
+    required@bool: yes
+    record_type: ticket
+    expand: owner_,customfields
+    #default: 1
 ```
 
 The value should be a record ID (`123`) or URI (`cerb:record_type:record_alias`).

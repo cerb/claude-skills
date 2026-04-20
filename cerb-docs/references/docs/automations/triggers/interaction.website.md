@@ -49,7 +49,11 @@ An interaction automation [dictionary](/docs/automations/#dictionaries) starts w
 When suspending in the `await` state, the interaction displays a web form with the desired elements. The form may prompt for user input, validate it, and set dictionary keys (placeholders) with the responses.
 
 ```
-await: form: title: Your form title elements: # ...
+await:
+  form:
+    title: Your form title
+    elements:
+      # ...
 ```
 
 ### title:
@@ -77,9 +81,25 @@ A form can be created with any combination of the following element types:
 When the interaction suspends in the `await` state, a `submit:` element is automatically appended to the form if one doesn't already exist.
 
 ```
-start: await/who: form: title: Introduction elements: text/prompt_name: label: What is your name? required@bool: yes   
-   await/hello: form: title: Hello! elements: say/hello: content: Hello, {{ prompt_name }} !   
-   return: user: name@key: prompt_name
+start:
+  await/who:
+    form:
+      title: Introduction
+      elements:
+        text/prompt_name:
+          label: What is your name?
+          required@bool: yes
+  
+  await/hello:
+    form:
+      title: Hello!
+      elements:
+        say/hello:
+          content: Hello, {{prompt_name}}!
+  
+  return:
+    user:
+      name@key: prompt_name
 ```
 
 ## await:interaction:
@@ -103,7 +123,47 @@ An optional dictionary of `inputs:` for the given `uri:` interaction.
 An `output:` key specifies the placeholder that should receive the results from the delegate.
 
 ```
-start: while: if@bool: yes do: await/menu: form: title: Menu elements: say: message: How can we help? sheet/prompt_menu: required@bool: yes data: 0: key: map label: Map 1: key: echo label: Echo schema: layout: style: buttons headings@bool: no paging@bool: no title_column: label columns: selection/key: params: mode: single text/label: submit: continue@bool: no reset@bool: no await/do: interaction: output: results uri@text: cerb:automation:{{{ 'map': 'wgm.interaction.locationByIP', 'echo': 'wgm.interaction.echo', }[prompt_menu]}}
+start:
+  while:
+    if@bool: yes
+    do:
+      await/menu:
+        form:
+          title: Menu
+          elements:
+            say:
+              message: How can we help?
+            sheet/prompt_menu:
+              required@bool: yes
+              data:
+                0:
+                  key: map
+                  label: Map
+                1:
+                  key: echo
+                  label: Echo
+              schema:
+                layout:
+                  style: buttons
+                  headings@bool: no
+                  paging@bool: no
+                  title_column: label
+                columns:
+                  selection/key:
+                    params:
+                      mode: single
+                  text/label:
+            submit:
+              continue@bool: no
+              reset@bool: no
+      await/do:
+        interaction:
+          output: results
+          uri@text:
+            cerb:automation:{{{
+                'map': 'wgm.interaction.locationByIP',
+                'echo': 'wgm.interaction.echo',
+              }[prompt_menu]}}
 ```
 
 ## return:

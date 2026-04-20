@@ -32,7 +32,9 @@ Using the `#cerb-logo` selector you can target the logo. This is useful if you w
 To reference a logo you previously uploaded, use:
 
 ```
-#cerb-logo { background-image : url ( logo ? v = 1 ); }
+#cerb-logo {
+  background-image:url(logo?v=1);
+}
 ```
 
 If you refer to url(logo) manually then you should increment a version counter to prevent browsers from serving a stale cached image. If you let Cerb manage the logo it will do this for you automatically.
@@ -40,5 +42,7 @@ If you refer to url(logo) manually then you should increment a version counter t
 You can also use an external logo URL like:
 
 ```
-#cerb-logo { background-image : url ( https : // example . com / logo . png ); }
+#cerb-logo {
+  background-image:url(https://example.com/logo.png);
+}
 ```

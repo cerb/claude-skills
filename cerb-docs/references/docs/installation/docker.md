@@ -35,7 +35,9 @@ This repository provides several usage examples. For example:
 ```
 git clone https://github.com/cerb/cerb-docker/
 
-# ... or download + unzip: https://github.com/cerb/cerb-docker/archive/refs/heads/main.zip cd cerb-docker/cerb-caddy-mysql
+# ... or download + unzip: https://github.com/cerb/cerb-docker/archive/refs/heads/main.zip
+
+cd cerb-docker/cerb-caddy-mysql
 
 cat .env
 
@@ -73,7 +75,7 @@ You can use the cerb example to build your own customized image.
 You can use `docker exec` to ping the scheduler in the container.
 
 ```
-docker exec cerb-docker-caddy-1 wget -O - --header " Host: localhost" "https://localhost/cron?loglevel=7&ignore_wait=1"
+docker exec cerb-docker-caddy-1 wget -O - --header "Host: localhost" "https://localhost/cron?loglevel=7&ignore_wait=1"
 ```
 
 You can add this to `crontab` on the host.
@@ -93,7 +95,9 @@ Navigate to the directory where you want to install a copy of Cerb. Then run the
 ```
 git clone -b v11.0 https://github.com/cerb/cerb-release.git v11.0
 
-# ... or download + unzip: https://github.com/cerb/cerb-release/archive/refs/heads/v11.0.zip cd v11.0
+# ... or download + unzip: https://github.com/cerb/cerb-release/archive/refs/heads/v11.0.zip
+
+cd v11.0
 
 cd install/docker
 
@@ -121,7 +125,12 @@ git stash pop
 If you're already using port `80` for a different project, you can bind Cerb to a different port (e.g. `8080`) by editing the `docker-compose.yml` file before running `docker compose up`.
 
 ```
-services : web : image : nginx:latest ports : - " 8080:80" ...
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+...
 ```
 
 ### Connecting to the MySQL console

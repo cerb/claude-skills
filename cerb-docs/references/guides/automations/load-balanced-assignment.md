@@ -71,23 +71,60 @@ Click **Save Changes**.
 ## The automation
 
 ```
-start: # Get the list of workers from a fixed pool
-    record.search: output: workers inputs: record_type: worker record_query: isDisabled:no group:(name:"Support") sort:id 
+start:
+  # Get the list of workers from a fixed pool
+  record.search:
+    output: workers
+    inputs:
+      record_type: worker
+      record_query: isDisabled:no group:(name:"Support") sort:id
+
   # Extract worker IDs into an array
-    set/init: worker_ids@csv: {{ workers|column('id')|join(',') }} 
+  set/init:
+    worker_ids@csv: {{workers|column('id')|join(',')}}
+
   # Increment the counter atomically (realtime)
-    metric.increment: inputs: metric_name: example.roundRobin.counter values: 1 is_realtime@bool: yes output: metric_result 
+  metric.increment:
+    inputs:
+      metric_name: example.roundRobin.counter
+      values: 1
+      is_realtime@bool: yes
+    output: metric_result
+
   # Query the current counter value
-    data.query: output: counter_data inputs: query@text: type:metrics.timeseries period:day range:today series.total:( metric:example.roundRobin.counter function:sum ) format:dictionaries set: # Get the total count from the metric
-      counter@int: {{ counter_data.data|first.value|default(0) }} 
-   return: # Select the next worker using cycle
-      assigned_worker_id@int: {{ cycle(worker_ids, counter) }}
+  data.query:
+    output: counter_data
+    inputs:
+      query@text:
+        type:metrics.timeseries
+        period:day
+        range:today
+        series.total:(
+          metric:example.roundRobin.counter
+          function:sum
+        )
+        format:dictionaries
+
+  set:
+    # Get the total count from the metric
+    counter@int: {{counter_data.data|first.value|default(0)}}
+
+  return:
+    # Select the next worker using cycle
+    assigned_worker_id@int: {{cycle(worker_ids, counter)}}
 ```
 
 ## Policy
 
 ```
-commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('worker') }} allow@bool: yes metric.increment: allow@bool: yes data.query: allow@bool: yes
+commands:
+  record.search:
+    deny/type@bool: {{inputs.record_type is not record type ('worker')}}
+    allow@bool: yes
+  metric.increment:
+    allow@bool: yes
+  data.query:
+    allow@bool: yes
 ```
 
 # Approach 2: Least-loaded
@@ -109,17 +146,55 @@ This approach works best when:
 ## The automation
 
 ```
-start: # Get available workers
-    record.search: output: workers inputs: record_type: worker record_query: isDisabled:no isAvailable:yes group:(name:"Support") sort:id on_success: outcome/empty: if@bool: {{ 0 == workers|length }} then: return: 
+start:
+  # Get available workers
+  record.search:
+    output: workers
+    inputs:
+      record_type: worker
+      record_query: isDisabled:no isAvailable:yes group:(name:"Support") sort:id
+    on_success:
+      outcome/empty:
+        if@bool: {{0 == workers|length}}
+        then:
+          return:
+
   # Count open tickets per available worker
-    data.query: output: assignment_counts inputs: query@text: type:worklist.subtotals of:ticket by:owner~1000 query:(status:o owner.id:[{{ workers|column('id')|join(',') }}]) format:dictionaries # Build a sorted dictionary of workers with their open ticket counts
-    set/loads: worker_loads@json: {% set counts = array_combine( assignment_counts.data|column('owner_id'), assignment_counts.data|column('count')) %} {{ workers|map((worker) => 0+counts[worker.id] ?: 0) |sort |json_encode }} return: assigned_worker_id@int: {{ worker_loads|keys|first }}
+  data.query:
+    output: assignment_counts
+    inputs:
+      query@text:
+        type:worklist.subtotals
+        of:ticket
+        by:owner~1000
+        query:(status:o owner.id:[{{workers|column('id')|join(',')}}])
+        format:dictionaries
+
+  # Build a sorted dictionary of workers with their open ticket counts
+  set/loads:
+    worker_loads@json:
+      {% set counts = array_combine(
+        assignment_counts.data|column('owner_id'),
+        assignment_counts.data|column('count')) %}
+      {{
+        workers|map((worker) => 0+counts[worker.id] ?: 0)
+        |sort
+        |json_encode
+      }}
+
+  return:
+    assigned_worker_id@int: {{worker_loads|keys|first}}
 ```
 
 ## Policy
 
 ```
-commands: record.search: deny/type@bool: {{ inputs.record_type is not record type ('worker') }} allow@bool: yes data.query: allow@bool: yes
+commands:
+  record.search:
+    deny/type@bool: {{inputs.record_type is not record type ('worker')}}
+    allow@bool: yes
+  data.query:
+    allow@bool: yes
 ```
 
 # Choosing an approach
@@ -140,7 +215,11 @@ You can customize the worker query based on your requirements:
 Assign work only to workers who have been active recently:
 
 ```
-record.search: output: workers inputs: record_type: worker record_query: isDisabled:no lastActivity:"-15 mins" sort:id
+record.search:
+  output: workers
+  inputs:
+    record_type: worker
+    record_query: isDisabled:no lastActivity:"-15 mins" sort:id
 ```
 
 ## Workers available per calendar
@@ -148,7 +227,11 @@ record.search: output: workers inputs: record_type: worker record_query: isDisab
 Assign work only to workers whose calendar shows them as available:
 
 ```
-record.search: output: workers inputs: record_type: worker record_query: isDisabled:no isAvailable:yes sort:id
+record.search:
+  output: workers
+  inputs:
+    record_type: worker
+    record_query: isDisabled:no isAvailable:yes sort:id
 ```
 
 ## Workers in a specific group
@@ -156,7 +239,11 @@ record.search: output: workers inputs: record_type: worker record_query: isDisab
 Assign work only to members of a specific group:
 
 ```
-record.search: output: workers inputs: record_type: worker record_query: isDisabled:no group:(name:"Support") sort:id
+record.search:
+  output: workers
+  inputs:
+    record_type: worker
+    record_query: isDisabled:no group:(name:"Support") sort:id
 ```
 
 ## Combining criteria
@@ -164,7 +251,11 @@ record.search: output: workers inputs: record_type: worker record_query: isDisab
 You can combine multiple criteria:
 
 ```
-record.search: output: workers inputs: record_type: worker record_query: isDisabled:no isAvailable:yes group:(name:"Support") lastActivity:"-30 mins" sort:id
+record.search:
+  output: workers
+  inputs:
+    record_type: worker
+    record_query: isDisabled:no isAvailable:yes group:(name:"Support") lastActivity:"-30 mins" sort:id
 ```
 
 # Using the result
@@ -172,7 +263,12 @@ record.search: output: workers inputs: record_type: worker record_query: isDisab
 After getting the assigned worker ID, you can use it to update a record:
 
 ```
-record.update: inputs: record_type: ticket record_id: {{ ticket_id }} fields: owner_id: {{ assigned_worker_id }}
+record.update:
+  inputs:
+    record_type: ticket
+    record_id: {{ticket_id}}
+    fields:
+      owner_id: {{assigned_worker_id}}
 ```
 
 # Next steps

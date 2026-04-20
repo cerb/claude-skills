@@ -12,9 +12,10 @@ JSON[1](#fn:json) is a popular format for serializing or exchanging human-readab
 You can decode a JSON-encoded string with the [json\_decode()](/docs/scripting/functions/#json_decode) function:
 
 ```
-{% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %} {% set json = json_decode ( json_string ) %}
-Customer: {{ json.name }}
-Order #: {{ json.order_id }}
+{% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %}
+{% set json = json_decode(json_string) %}
+Customer: {{json.name}}
+Order #: {{json.order_id}}
 ```
 
 ```
@@ -29,11 +30,14 @@ This returns an [object](/docs/scripting/arrays-objects/#objects).
 You can construct or modify a JSON object using the [dict\_set()](/docs/scripting/functions/#dict_set) function:
 
 ```
-{% set json = { 'name' : 'Joe Customer' , 'order_id' : 12345 } %} {% set json = dict_set ( json , 'order_id' , 54321 ) %} {% set json = dict_set ( json , 'status.text' , 'shipped' ) %} {% set json = dict_set ( json , 'status.tracking_id' , 'Z1F238' ) %}
-Customer: {{ json.name }}
-Order #: {{ json.order_id }}
-Status: {{ json.status.text }}
-Tracking #: {{ json.status.tracking_id }}
+{% set json = {'name': 'Joe Customer', 'order_id': 12345} %}
+{% set json = dict_set(json, 'order_id', 54321) %}
+{% set json = dict_set(json, 'status.text', 'shipped') %}
+{% set json = dict_set(json, 'status.tracking_id', 'Z1F238') %}
+Customer: {{json.name}}
+Order #: {{json.order_id}}
+Status: {{json.status.text}}
+Tracking #: {{json.status.tracking_id}}
 ```
 
 ```
@@ -48,7 +52,11 @@ Tracking #: Z1F238
 You can encode any variable as a JSON string with the [json\_encode](/docs/scripting/filters/#json_encode) filter:
 
 ```
-{% set json = { 'name' : 'Joe Customer' } %} {% set json = dict_set ( json , 'order_id' , 54321 ) %} {% set json = dict_set ( json , 'status.text' , 'shipped' ) %} {% set json = dict_set ( json , 'status.tracking_id' , 'Z1F238' ) %} {{ json | json_encode }}
+{% set json = {'name': 'Joe Customer'} %}
+{% set json = dict_set(json, 'order_id', 54321) %}
+{% set json = dict_set(json, 'status.text', 'shipped') %}
+{% set json = dict_set(json, 'status.tracking_id', 'Z1F238') %}
+{{json|json_encode}}
 ```
 
 ```
@@ -60,7 +68,11 @@ You can encode any variable as a JSON string with the [json\_encode](/docs/scrip
 You can _"prettify"_ a JSON string with the [json\_pretty](/docs/scripting/filters/#json_pretty) filter:
 
 ```
-{% set json = { 'name' : 'Joe Customer' } %} {% set json = dict_set ( json , 'order_id' , 54321 ) %} {% set json = dict_set ( json , 'status.text' , 'shipped' ) %} {% set json = dict_set ( json , 'status.tracking_id' , 'Z1F238' ) %} {{ json | json_encode | json_pretty }}
+{% set json = {'name': 'Joe Customer'} %}
+{% set json = dict_set(json, 'order_id', 54321) %}
+{% set json = dict_set(json, 'status.text', 'shipped') %}
+{% set json = dict_set(json, 'status.tracking_id', 'Z1F238') %}
+{{json|json_encode|json_pretty}}
 ```
 
 ```

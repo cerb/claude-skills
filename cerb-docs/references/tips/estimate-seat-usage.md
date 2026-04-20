@@ -12,19 +12,31 @@ You can add these queries to a chart or run then in the data query tester found 
 Use the following query:
 
 ```
-type: worklist.subtotals of: activity_log by: [actor~500] query: (actor:worker created:"today -1 week") format: pie
+type:worklist.subtotals
+of:activity_log
+by:[actor~500]
+query:(actor:worker created:"today -1 week")
+format:pie
 ```
 
 You can filter workers by group like this:
 
 ```
-type: worklist.subtotals of: activity_log by: [actor~500] query: (actor:worker created:"today -1 week" actor.worker:(group:(name:"Support"))) format: pie
+type:worklist.subtotals
+of:activity_log
+by:[actor~500]
+query:(actor:worker created:"today -1 week" actor.worker:(group:(name:"Support")))
+format:pie
 ```
 
 You can also show the number of distinct workers each day in the activity logs:
 
 ```
-type: worklist.subtotals of: activity_log by.distinct: [created@day,actor~500] query: (actor:worker created:"today -1 week" actor.worker:(group:(name:"Support"))) format: timeseries
+type:worklist.subtotals
+of:activity_log
+by.distinct:[created@day,actor~500]
+query:(actor:worker created:"today -1 week" actor.worker:(group:(name:"Support")))
+format:timeseries
 ```
 
 That won't tell you how long each session was, but it gives a general idea of activity per worker.

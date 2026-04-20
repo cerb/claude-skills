@@ -12,8 +12,9 @@ An **operator** makes comparisons between two values in an expression.
 As you've seen with the [set](/docs/scripting/commands/#set) command, a single `=` (equals) character _assigns_ a value to a variable:
 
 ```
-{% set this = 0 %} {% set that = 1 %}
-this is {{ this }} and that is {{ that }}
+{% set this = 0 %}
+{% set that = 1 %}
+this is {{this}} and that is {{that}}
 ```
 
 ```
@@ -25,9 +26,11 @@ this is 0 and that is 1
 To check if a variable is equal to a specific value, use two equal signs (`==`):
 
 ```
-{% set this = 1 %} {% set that = 1 %} {% if this == that %}
+{% set this = 1 %}
+{% set that = 1 %}
+{% if this == that %}
 This and that are equal.
-{% endif - %}
+{% endif -%}
 ```
 
 ```
@@ -39,9 +42,11 @@ This and that are equal.
 To check that a variable isn't equal to a specific value, use `!=`:
 
 ```
-{% set this = 0 %} {% set that = 1 %} {% if this != that %}
+{% set this = 0 %}
+{% set that = 1 %}
+{% if this != that %}
 This doesn't equal that.
-{% endif - %}
+{% endif -%}
 ```
 
 ```
@@ -53,7 +58,11 @@ This doesn't equal that.
 To check if one variable is less than another, use `<` or `<=`:
 
 ```
-{% set little = 5 %} {% set big = 1000 %} {% if little < big %} {{ little }} is less than {{ big }} {% endif - %}
+{% set little = 5 %}
+{% set big = 1000 %}
+{% if little < big %}
+{{little}} is less than {{big}}
+{% endif -%}
 ```
 
 ```
@@ -65,7 +74,11 @@ To check if one variable is less than another, use `<` or `<=`:
 To check if one variable is greater than another, use `>` or `>=`:
 
 ```
-{% set little = 5 %} {% set big = 1000 %} {% if big > little %} {{ big }} is greater than {{ little }} {% endif - %}
+{% set little = 5 %}
+{% set big = 1000 %}
+{% if big > little %}
+{{big}} is greater than {{little}}
+{% endif -%}
 ```
 
 ```
@@ -77,9 +90,10 @@ To check if one variable is greater than another, use `>` or `>=`:
 You can check if a value exists in a list by using the `in` test:
 
 ```
-{% set colors = ['blue' , 'green' , 'red'] %} {% if 'red' in colors %}
+{% set colors = ['blue','green','red'] %}
+{% if 'red' in colors %}
 One of the colors is red.
-{% endif - %}
+{% endif -%}
 ```
 
 ```
@@ -89,9 +103,10 @@ One of the colors is red.
 You can also negate that test with `not in`:
 
 ```
-{% set colors = ['blue' , 'green' , 'red'] %} {% if 'orange' not in colors %}
+{% set colors = ['blue','green','red'] %}
+{% if 'orange' not in colors %}
 Orange is not one of the colors.
-{% endif - %}
+{% endif -%}
 ```
 
 ```

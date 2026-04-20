@@ -14,11 +14,19 @@ Adding a dash `-` to opening or closing scripting tags will trim leading or trai
 
 - 
 ```
-start: return: output@text: This text {{ -" has no leading or trailing whitespace "- }} in it.
+start:
+  return:
+    output@text:
+      This text
+      
+      {{-" has no leading or trailing whitespace "-}}
+      
+      in it.
 ```
 - 
 ```
-__return: output: This text has no leading or trailing whitespace in it.
+__return:
+  output: This text has no leading or trailing whitespace in it.
 ```
 
 ## Using |spaceless filter
@@ -30,11 +38,20 @@ The `|spaceless` filter removes whitespace between HTML tags.
 
 - 
 ```
-start: return: output@text: {{ "<div> <p>This has extra space</p> <p>between tags</p> </div>"|spaceless }}
+start:
+  return:
+    output@text: 
+      {{
+        "<div>
+          <p>This has extra space</p>
+          <p>between tags</p>
+        </div>"|spaceless
+      }}
 ```
 - 
 ```
-__return: output: <div><p>This has extra space</p><p>between tags</p></div>
+__return:
+  output: <div><p>This has extra space</p><p>between tags</p></div>
 ```
 
 ## Using apply spaceless
@@ -46,10 +63,18 @@ For larger blocks of HTML, you can use the apply spaceless approach.
 
 - 
 ```
-start: return: output@text: {% apply spaceless %} <div> <span>This will all be on a single line.</span> </div> {% endapply %}
+start:
+  return:
+    output@text:
+      {% apply spaceless %}
+      <div>
+        <span>This will all be on a single line.</span>
+      </div>
+      {% endapply %}
 ```
 - 
 ```
-__return: output: <div><span>This will all be on a single line.</span></div>
+__return:
+  output: <div><span>This will all be on a single line.</span></div>
 ```
 

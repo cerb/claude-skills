@@ -10,7 +10,7 @@ tags: ["docs", "docs-scripting"]
 Convert a string to lowercase:
 
 ```
-{{ "WHY ARE YOU YELLING?" | lower }}
+{{"WHY ARE YOU YELLING?"|lower}}
 ```
 
 ```

@@ -18,9 +18,9 @@ The **algorithm** can be one of: `crc32`, `md5`, `murmur3a`, `murmur3c`, `murmur
 
 ```
 {% set text = 'This string will be hashed' %}
-SHA-512: {{ text | hash ( 'sha512' ) }}
-Murmur3a: {{ text | hash ( 'murmur3a' ) }}
-xxh128: {{ text | hash ( 'xxh128' ) }}
+SHA-512: {{text|hash('sha512')}}
+Murmur3a: {{text|hash('murmur3a')}}
+xxh128: {{text|hash('xxh128')}}
 ```
 
 ```

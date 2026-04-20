@@ -14,10 +14,17 @@ You can use [array\_sum()](/docs/scripting/functions/#array_sum) and [|reduce](/
 
 - 
 ```
-start: set: numbers@csv: 1, 9, 2002, 4, 27, 2001 return: sum@int: {{ array_sum(numbers) }} product@int: {{ numbers|reduce((carry,n) => carry * n, 1) }}
+start:
+  set:
+    numbers@csv: 1, 9, 2002, 4, 27, 2001
+  return:
+    sum@int: {{array_sum(numbers)}}
+    product@int: {{numbers|reduce((carry,n) => carry * n, 1)}}
 ```
 - 
 ```
-__return: sum: 4044 product: 3893833944
+__return:
+  sum: 4044
+  product: 3893833944
 ```
 

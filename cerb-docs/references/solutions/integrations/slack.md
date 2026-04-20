@@ -123,13 +123,71 @@ Click the **Save Changes** button.
 ## Send a simple message to a channel
 
 ```
-start: http.request: output: http_response inputs: url: https://slack.com/api/chat.postMessage method: POST authentication: cerb:connected_account:slack headers@text: Content-Type: application/json; charset=utf8 body: channel: #testing text@text: Here is an example message. on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request:
+   output: http_response
+   inputs:
+      url: https://slack.com/api/chat.postMessage
+      method: POST
+      authentication: cerb:connected_account:slack
+      headers@text:
+        Content-Type: application/json; charset=utf8
+      body:
+        channel: #testing
+        text@text:
+          Here is an example message.
+   on_success:
+     set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## Send a Block Kit message to a channel
 
 ```
-start: http.request: output: http_response inputs: url: https://slack.com/api/chat.postMessage method: POST authentication: cerb:connected_account:slack headers@text: Content-Type: application/json; charset=utf8 body: channel: #testing text@text: Here is an example message using Block Kit: blocks: 0: type: section text: text: A message *with some bold text* and _some italicized text_. type: mrkdwn fields: 0: type: mrkdwn text: *Priority* 1: type: mrkdwn text: *Type* 2: type: plain_text text: High 3: type: plain_text text: Silly 1: type: image title: type: plain_text text: a cat image_url: https://cataas.com/cat alt_text: a cat on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request:
+   output: http_response
+   inputs:
+      url: https://slack.com/api/chat.postMessage
+      method: POST
+      authentication: cerb:connected_account:slack
+      headers@text:
+        Content-Type: application/json; charset=utf8
+      body:
+        channel: #testing
+        text@text:
+          Here is an example message using Block Kit:
+        blocks:
+          0:
+            type: section
+            text:
+              text: A message *with some bold text* and _some italicized text_.
+              type: mrkdwn
+            fields:
+              0:
+                type: mrkdwn
+                text: *Priority*
+              1:
+                type: mrkdwn
+                text: *Type*
+              2:
+                type: plain_text
+                text: High
+              3:
+                type: plain_text
+                text: Silly
+          1:
+            type: image
+            title:
+              type: plain_text
+              text: a cat
+            image_url: https://cataas.com/cat
+            alt_text: a cat
+   on_success:
+     set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## List channels
@@ -137,7 +195,19 @@ start: http.request: output: http_response inputs: url: https://slack.com/api/ch
 Requires `channels:read` scope.
 
 ```
-start: http.request: output: http_response inputs: url: https://slack.com/api/conversations.list method: GET authentication: cerb:connected_account:slack headers@text: Content-Type: application/json; charset=utf8 on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request:
+   output: http_response
+   inputs:
+      url: https://slack.com/api/conversations.list
+      method: GET
+      authentication: cerb:connected_account:slack
+      headers@text:
+        Content-Type: application/json; charset=utf8
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 ## List Users
@@ -145,7 +215,19 @@ start: http.request: output: http_response inputs: url: https://slack.com/api/co
 Requires `users:read` scope.
 
 ```
-start: http.request: output: http_response inputs: url: https://slack.com/api/conversations.list method: GET authentication: cerb:connected_account:slack headers: Content-Type: application/json; charset=utf8 on_success: set: response@json: {{ http_response.body }} http_response@json: null
+start:
+  http.request:
+    output: http_response
+    inputs:
+      url: https://slack.com/api/conversations.list
+      method: GET
+      authentication: cerb:connected_account:slack
+      headers:
+        Content-Type: application/json; charset=utf8
+    on_success:
+      set:
+        response@json: {{http_response.body}}
+        http_response@json: null
 ```
 
 # Related Resources

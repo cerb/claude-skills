@@ -14,11 +14,18 @@ With the [range()](/docs/scripting/functions/#range) function, you can loop thro
 
 - 
 ```
-start: return: output@text: {% for n in range(1,5) %} {{ n }} ... {% endfor %}
+start:
+  return:
+    output@text:
+      {% for n in range(1,5) %}
+      {{n}}...
+      {% endfor %}
 ```
 - 
 ```
-__return: output: | 1...
+__return:
+  output: |
+    1...
     2...
     3...
     4...
@@ -32,11 +39,18 @@ With the `step` command, you can skip a certain number with each step. For examp
 
 - 
 ```
-start: return: output@text: {% for n in range(1,10,step=2) %} {{ n }} ... {% endfor %}
+start:
+  return:
+    output@text:
+      {% for n in range(1,10,step=2) %}
+      {{n}}...
+      {% endfor %}
 ```
 - 
 ```
-__return: output: | 1...
+__return:
+  output: |
+    1...
     3...
     5...
     7...

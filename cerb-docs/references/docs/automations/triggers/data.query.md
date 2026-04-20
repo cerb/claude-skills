@@ -33,7 +33,14 @@ The format of `data:` will depend on the given `query_format`.
 For instance, the `dictionaries` format is an array of dictionaries, like:
 
 ```
-return: data: 0: id: 1 name: Record 1 1: id: 2 name: Record 2
+return:
+  data:
+    0:
+      id: 1
+      name: Record 1
+    1:
+      id: 2
+      name: Record 2
 ```
 
 More complex values can be returned using the `@json` or `@key` annotations.

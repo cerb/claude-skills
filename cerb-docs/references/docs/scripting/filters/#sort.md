@@ -10,7 +10,8 @@ tags: ["docs", "docs-scripting"]
 Sort an array:
 
 ```
-{% set x = [9 , 5 , 1 , 6 , 4 , 3] %} {{ x | sort | slice ( 0 , 6 ) | json_encode }}
+{% set x = [9,5,1,6,4,3] %}
+{{x|sort|slice(0,6)|json_encode}}
 ```
 
 ```
@@ -24,7 +25,12 @@ You can also provide an arrow function as a custom comparator for advanced sorti
 - (A \<=\> B) == 0 is true if A and B are equal/equivalent
 
 ```
-{% set items = [{ name : "Item C" , priority : 3 } , { name : "Item A" , priority : 1 } , { name : "Item B" , priority : 2 }] %} {{ items | sort (( a , b ) => a.priority <=> b.priority ) | column ( 'name' ) | join ( ', ' ) }}
+{% set items = [
+    {name: "Item C", priority: 3},
+    {name: "Item A", priority: 1},
+    {name: "Item B", priority: 2}
+] %}
+{{items|sort((a,b) => a.priority <=> b.priority)|column('name')|join(', ')}}
 ```
 
 ```

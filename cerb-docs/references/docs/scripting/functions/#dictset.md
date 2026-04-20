@@ -25,7 +25,11 @@ You can use the **dict\_set** function to quickly add, modify, or append items i
 You can set deeply nested keys in a single line using dot-notation:
 
 ```
-{% set var = { "group" : {}} %} {% set var = dict_set ( var , 'group.name' , 'Support' ) %} {% set var = dict_set ( var , 'group.manager.name.first' , 'Kina' ) %} {% set var = dict_set ( var , 'group.manager.name.last' , 'Halpue' ) %} {{ var | json_encode | json_pretty }}
+{% set var = {"group": {}} %}
+{% set var = dict_set(var, 'group.name', 'Support') %}
+{% set var = dict_set(var, 'group.manager.name.first', 'Kina') %}
+{% set var = dict_set(var, 'group.manager.name.last', 'Halpue') %}
+{{var|json_encode|json_pretty}}
 ```
 
 ```
@@ -45,7 +49,12 @@ You can set deeply nested keys in a single line using dot-notation:
 Append items to an array by adding `.[]` to the key:
 
 ```
-{% set var = { "group" : {}} %} {% set var = dict_set ( var , 'group.name' , 'Support' ) %} {% set var = dict_set ( var , 'group.members.[]' , 'Kina Halpue' ) %} {% set var = dict_set ( var , 'group.members.[]' , 'William Portcullis' ) %} {% set var = dict_set ( var , 'group.members.[]' , 'Steven Emplois' ) %} {{ var | json_encode | json_pretty }}
+{% set var = {"group": {}} %}
+{% set var = dict_set(var, 'group.name', 'Support') %}
+{% set var = dict_set(var, 'group.members.[]', 'Kina Halpue') %}
+{% set var = dict_set(var, 'group.members.[]', 'William Portcullis') %}
+{% set var = dict_set(var, 'group.members.[]', 'Steven Emplois') %}
+{{var|json_encode|json_pretty}}
 ```
 
 ```
@@ -64,7 +73,11 @@ Append items to an array by adding `.[]` to the key:
 Append to nested arrays:
 
 ```
-{% set var = [1 , 2 ,[ 3 , 4 ,[ 5 , 6]]] %} {% set var = dict_set ( var , '2.2.[]' , 7 ) %} {% set var = dict_set ( var , '2.2.[]' , 8 ) %} {% set var = dict_set ( var , '2.3' , 9 ) %} {{ var | json_encode | json_pretty }}
+{% set var = [1,2,[3,4,[5,6]]] %}
+{% set var = dict_set(var, '2.2.[]', 7) %}
+{% set var = dict_set(var, '2.2.[]', 8) %}
+{% set var = dict_set(var, '2.3', 9) %}
+{{var|json_encode|json_pretty}}
 ```
 
 ```

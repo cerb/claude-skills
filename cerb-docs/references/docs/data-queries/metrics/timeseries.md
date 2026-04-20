@@ -12,10 +12,26 @@ tags: ["docs"]
  
 
 ```
-type: metrics.timeseries period: hour range: "-24 hours to now" series.avg: ( label: Average metric: cerb.tickets.open function: avg ) 
- series.min: ( label: Min metric: cerb.tickets.open function: min ) 
- series.avg: ( label: Max metric: cerb.tickets.open function: max ) 
- timezone: Europe/Berlin format: timeseries
+type:metrics.timeseries
+period:hour
+range:"-24 hours to now"
+series.avg:(
+  label:Average
+  metric:cerb.tickets.open
+  function:avg
+)
+series.min:(
+  label:Min
+  metric:cerb.tickets.open
+  function:min
+)
+series.avg:(
+  label:Max
+  metric:cerb.tickets.open
+  function:max
+)
+timezone:Europe/Berlin
+format:timeseries
 ```
 
 - [period:](#period)

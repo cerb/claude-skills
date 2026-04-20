@@ -16,10 +16,25 @@ You can use any of the formating options from PHP DateTime::format.
 
 - 
 ```
-start: return: now: {{ 'now'|date('F d, Y h:ia T') }} timezone: {{ 'now'|date('F d, Y h:ia T', 'Europe/Berlin') }} tomorrow: {{ 'tomorrow 5pm'|date('D, d F Y H:i T') }} two_weeks: {{ '+2 weeks 08:00'|date('Y-m-d h:ia T') }} rfc2822: {{ 'now'|date('r') }} iso8601: {{ 'now'|date('c') }} unix@int: {{ 'now'|date('U') }}
+start:
+  return:
+    now: {{'now'|date('F d, Y h:ia T')}}
+    timezone: {{'now'|date('F d, Y h:ia T', 'Europe/Berlin')}}
+    tomorrow: {{'tomorrow 5pm'|date('D, d F Y H:i T')}}
+    two_weeks: {{'+2 weeks 08:00'|date('Y-m-d h:ia T')}}
+    rfc2822: {{'now'|date('r')}}
+    iso8601: {{'now'|date('c')}}
+    unix@int: {{'now'|date('U')}}
 ```
 - 
 ```
-__return: now: February 07, 2025 09:09am PST timezone: February 07, 2025 06:09pm CET tomorrow: Sat, 08 February 2025 17:00 PST two_weeks: 2025-02-21 08:00am PST rfc2822: Fri, 07 Feb 2025 09:09:43 -0800 iso8601: "2025-02-07T09:09:43-08:00" unix: 1738948183
+__return:
+  now: February 07, 2025 09:09am PST
+  timezone: February 07, 2025 06:09pm CET
+  tomorrow: Sat, 08 February 2025 17:00 PST
+  two_weeks: 2025-02-21 08:00am PST
+  rfc2822: Fri, 07 Feb 2025 09:09:43 -0800
+  iso8601: "2025-02-07T09:09:43-08:00"
+  unix: 1738948183
 ```
 

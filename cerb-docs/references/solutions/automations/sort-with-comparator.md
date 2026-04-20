@@ -14,10 +14,20 @@ Here is an example of using the |sort filter with arrow functions to create cust
 
 - 
 ```
-start: set: example_data@json: [{"name": "Item 1", "key": "ZZZ"}, {"name": "Item 2", "key": "MMM"}, {"name": "Item 3", "key": "AAA"}] return: sorted: {{ example_data|sort((a,b)=> a.key<=>b.key)|column('name')|join(', ') }}
+start:
+  set:
+    example_data@json: 
+      [
+        {"name": "Item 1", "key": "ZZZ"},
+        {"name": "Item 2", "key": "MMM"},
+        {"name": "Item 3", "key": "AAA"}
+      ]
+  return:
+    sorted: {{example_data|sort((a,b)=> a.key<=>b.key)|column('name')|join(', ')}}
 ```
 - 
 ```
-__return: sorted: Item 3, Item 2, Item 1
+__return:
+  sorted: Item 3, Item 2, Item 1
 ```
 

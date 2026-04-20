@@ -14,10 +14,21 @@ Here is an example of using the [|keys](/docs/scripting/filters/#keys) filter to
 
 - 
 ```
-start: set: person: name_first: Kina name_last: Halpue email: kina.halpue@cerb.example return: keys@csv: {{ person|keys|join(', ') }}
+start:
+  set:
+    person:
+      name_first: Kina
+      name_last: Halpue
+      email: kina.halpue@cerb.example
+  return:
+    keys@csv: {{person|keys|join(', ')}}
 ```
 - 
 ```
-__return : keys : - name_first - name_last - email
+__return:
+  keys:
+  - name_first
+  - name_last
+  - email
 ```
 

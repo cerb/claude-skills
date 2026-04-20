@@ -8,8 +8,9 @@ tags: ["docs", "docs-scripting"]
 You can use regular expressions[1](#fn:regexp) with the [regexp](/docs/scripting/filters/#regexp) filter to match or extract patterns in text:
 
 ```
-{% set text = "Your Amazon Order #Z-1234-5678-9 has shipped!" %} {% set order_id = text | regexp ( "/Amazon Order #([A-Z0-9\-]+)/" , 1 ) %}
-Amazon Order #: {{ order_id }}
+{% set text = "Your Amazon Order #Z-1234-5678-9 has shipped!" %}
+{% set order_id = text|regexp("/Amazon Order #([A-Z0-9\-]+)/", 1) %}
+Amazon Order #: {{order_id}}
 ```
 
 ```
