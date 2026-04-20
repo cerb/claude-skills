@@ -5,12 +5,12 @@ url: "https://cerb.ai/solutions/integrations/groq/"
 summary: "This page provides a step-by-step guide for integrating Cerb with Groq, allowing users to leverage Groq's full API in Cerb automations for AI inference. To begin, create a new Groq API key by logging into the Groq account, selecting 'API Keys,' and clicking 'Create API Key.' The generated API key is then used to connect the Groq service in Cerb, which can be done by navigating to 'Search >> Connected Services' and creating a new service with the copied API key. Examples of automations using this integration include creating chat completions and listing available models, demonstrating how users can utilize Groq's capabilities within Cerb."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a Groq API Key.
-- Create the Groq service in Cerb
-- Examples
-  - Create Chat Completion
-  - List Models
+- [Introduction](#introduction)
+- [Get a Groq API Key.](#get-a-groq-api-key)
+- [Create the Groq service in Cerb](#create-the-groq-service-in-cerb)
+- [Examples](#examples)
+  - [Create Chat Completion](#create-chat-completion)
+  - [List Models](#list-models)
 
 # Introduction
 

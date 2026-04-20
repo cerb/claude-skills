@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/setup/mail/routing/"
 summary: "This page provides guidance on setting up mail routing in Cerb, introduced in version 11.0. It explains how to configure rules to automatically direct incoming emails to specific groups based on message properties such as recipient addresses. Examples include routing emails sent to `support@*` to the Support group, `orders@*` to Sales, and `receipts@*` to Billing. The page also introduces the concept of Routing KATA, which allows for complex workflows through automations, though they are not mandatory. It details the use of conditions and actions within routing rules, such as checking recipients, subject lines, and other message attributes to determine the appropriate group for each email. The page includes sample rules for various departments like Development, Sales, Billing, Corporate, and Support, demonstrating how to set up these automated routing processes."
 tags: ["docs"]
 ---
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 You can configure rules to automatically route new mail to groups based on message properties.
 
@@ -13,23 +13,23 @@ For example, you may want to route messages addressed to `support@*` to the **Su
 
 These messages will be delivered to the **Inbox** bucket in those groups, unless specified otherwise, and group managers can configure additional sorting from there.
 
-- Routing KATA
-  - Conditions:
-    - script
-    - recipients
-    - sender\_email
-    - spam\_score
-    - subject
-    - body
-    - header
+- [Routing KATA](#routing-kata)
+  - [Conditions:](#conditions)
+    - [script](#script)
+    - [recipients](#recipients)
+    - [sender\_email](#sender_email)
+    - [spam\_score](#spam_score)
+    - [subject](#subject)
+    - [body](#body)
+    - [header](#header)
 
-  - Actions
-    - bucket
-    - comment
-    - group
-    - importance
-    - owner
-    - watchers
+  - [Actions](#actions)
+    - [bucket](#bucket)
+    - [comment](#comment)
+    - [group](#group)
+    - [importance](#importance)
+    - [owner](#owner)
+    - [watchers](#watchers)
 
 # Routing KATA
 

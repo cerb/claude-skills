@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using comparison operators
 
-Here are examples of using different comparison operators to evaluate values.
+Here are examples of using different comparison [operators](/docs/scripting/operators/) to evaluate values.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

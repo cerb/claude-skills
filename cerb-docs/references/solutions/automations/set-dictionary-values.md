@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 When a value (like a model ID selected from a sheet) needs to be expanded, a dictionary structure can associate multiple attributes with that key. This enables dynamic lookups and conditional formatting based on those attributes in subsequent logic.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

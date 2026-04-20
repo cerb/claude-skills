@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 In this example we quote a prior email message by adding the standard `>` character to the start of each line.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

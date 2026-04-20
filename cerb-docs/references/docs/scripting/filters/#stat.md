@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## stat
 
-(Added in 10.3.8)
+(Added in [10.3.8](/releases/10.3.8/))
 
 Calculate a statistical measure for a given array of numbers.
 

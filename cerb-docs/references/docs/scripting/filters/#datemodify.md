@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## date\_modify
 
-If you need to manipulate a date, create a date object with the date function and use the **date\_modify** filter:
+If you need to manipulate a date, create a date object with the [date](/docs/scripting/functions/#date) function and use the **date\_modify** filter:
 
 ```
 {% set format = 'D, d M Y T' %} {% set timestamp = date ( 'now' ) %}

@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 # Formatting dates
 
-Use the date filter to format a string or variable as a date:
+Use the [date](/docs/scripting/filters/#date) filter to format a [string](/docs/scripting/strings/) or [variable](/docs/scripting/variables/) as a date:
 
 ```
 {{ 'now' | date ( 'F d, Y h:ia T' ) }} {{ 'tomorrow 5pm' | date ( 'D, d F Y H:i T' ) }} {{ '+2 weeks 08:00' | date ( 'Y-m-d h:ia T' ) }}
@@ -23,7 +23,7 @@ You can use any of the formatting options from PHP DateTime::format.
 
 # Timezones
 
-The second parameter to the date filter can specify a timezone to use:
+The second parameter to the [date](/docs/scripting/filters/#date) filter can specify a timezone to use:
 
 ```
 {% set ts_now = date () - %}
@@ -53,7 +53,7 @@ It has been 1513108417 seconds since January 1, 1970 00:00
 
 # Timestamp Manipulation
 
-If you need to manipulate a date, create a date object with the date() function and use the date\_modify filter:
+If you need to manipulate a date, create a date object with the [date()](/docs/scripting/functions/#date) function and use the [date\_modify](/docs/scripting/filters/#date_modify) filter:
 
 ```
 {% set format = 'D, d M Y T' %} {% set timestamp = date ( 'now' ) %}
@@ -66,7 +66,7 @@ Now: Tue, 12 Dec 2017 PST
 +2 days: Thu, 14 Dec 2017 PST
 ```
 
-\< Arrays and Objects
+[\< Arrays and Objects](/docs/scripting/arrays-objects/)
 
-Conditional Logic \>
+[Conditional Logic \>](/docs/scripting/conditional-logic/)
 

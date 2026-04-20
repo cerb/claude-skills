@@ -5,22 +5,22 @@ url: "https://cerb.ai/workflows/cerb.notifications.mention_emailer/"
 summary: "This page provides detailed information on the @Mention Email Notifications workflow in Cerb. It covers the introduction, installation, usage, and reference for setting up email notifications when workers are @mentioned in comments. The workflow is integrated into Cerb version 11.0 and above, and it can be enabled through the Cerb interface. The page explains how to use the feature by commenting on records with @mentions, which triggers email notifications to the mentioned workers. Additionally, it offers a template for creating custom @Mention Email Notifications workflows, including instructions on modifying the workflow identifier and setting up the necessary automation scripts. The reference section provides a comprehensive guide to the workflow's structure and requirements, ensuring users can effectively implement and customize the notification system."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-- Reference
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Reference](#reference)
 
 # Introduction
 
-Notifications keep workers informed about recent activity when they're watching a record or someone `@mentions` them. Notifications are displayed in the top right when a worker is logged in. This is great for workers who use Cerb as part of their daily routine, but workers who only log in when they're needed should be notified in real-time a different way.
+[Notifications](/docs/notifications/) keep workers informed about recent activity when they're watching a [record](/docs/records/) or someone `@mentions` them. Notifications are displayed in the top right when a worker is logged in. This is great for workers who use Cerb as part of their daily routine, but workers who only log in when they're needed should be notified in real-time a different way.
 
 In this guide we'll build a workflow for instantly relaying new notifications to email. This can be customized to notify workers in different ways (Slack, SMS, etc).
 
-You will need at least Cerb 11.0 to follow along.
+You will need at least Cerb [11.0](/releases/11.0/) to follow along.
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» @Mention Email Notifications**.
 

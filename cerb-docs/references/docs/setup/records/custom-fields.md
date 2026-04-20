@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
  
 
-Custom fields and fieldsets allow you to add your own fields to records. The _owner_ of a fieldset determines who can see it.
+[Custom fields](/docs/custom-fields/) and [fieldsets](/docs/custom-fieldsets/) allow you to add your own fields to records. The _owner_ of a fieldset determines who can see it.
 
 You can add many kinds of custom fields:
 

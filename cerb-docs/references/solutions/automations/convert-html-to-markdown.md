@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using |html\_to\_text filter
 
-Here is an example of using the |html\_to\_text filter to convert HTML content into Markdown format.
+Here is an example of using the [|html\_to\_text](/docs/scripting/filters/#html_to_text) filter to convert HTML content into Markdown format.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

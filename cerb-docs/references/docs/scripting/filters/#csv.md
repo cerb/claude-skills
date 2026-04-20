@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## csv
 
-(Added in 9.6.4)
+(Added in [9.6.4](/releases/9.6.4/))
 
 Format an array as a comma-separated values list. This is useful for exporting reports for Excel from bots.
 

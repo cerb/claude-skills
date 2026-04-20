@@ -5,10 +5,10 @@ url: "https://cerb.ai/solutions/automations/reverse-text/"
 summary: "This page demonstrates the use of the `|reverse` function in Cerb scripting to reverse text or list elements. The syntax can be used with a boolean value (`true`) to preserve array keys."
 tags: ["solutions", "solutions-automations"]
 ---
-You can use |reverse in scripting to reverse any given block of text or list. `|reverse(true)` will do so while preserving array keys. %}
+You can use [|reverse](/docs/scripting/filters/#reverse) in scripting to reverse any given block of text or list. `|reverse(true)` will do so while preserving array keys. %}
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

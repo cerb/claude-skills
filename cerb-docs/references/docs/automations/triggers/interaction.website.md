@@ -7,17 +7,17 @@ tags: ["docs", "docs-automations"]
 ---
 https://www.youtube.com/embed/dkpaBooNNGc
 
-**interaction.website** automations are interactions with visitors on third-party websites that use continuations to pause and resume a multi-step workflow.
+**interaction.website** [automations](/docs/automations/) are [interactions](/docs/interactions/) with visitors on third-party websites that use [continuations](/docs/automations/#continuations) to pause and resume a multi-step workflow.
 
 On websites, this can be used for surveys, sign-up forms, contact forms, troubleshooters, customer service bots, and much more.
 
-- Inputs
-- Outputs
-  - await:form:
-  - await:interaction:
-  - return:
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+  - [await:form:](#awaitform)
+  - [await:interaction:](#awaitinteraction)
+  - [return:](#return)
 
-- Deploy interactions on websites
+- [Deploy interactions on websites](#deploy-interactions-on-websites)
 
  
 
@@ -25,22 +25,22 @@ Website interactions are usually started on any website when a page element is i
 
 A website interaction can also be started with a shared link.
 
-At its conclusion, an interaction returns a dictionary and exit state to the caller, which is then responsible for acting on the results.
+At its conclusion, an interaction returns a [dictionary](/docs/automations/#dictionaries) and [exit state](/docs/automations/#exit-states) to the caller, which is then responsible for acting on the results.
 
 # Inputs
 
-An interaction automation dictionary starts with the following input values:
+An interaction automation [dictionary](/docs/automations/#dictionaries) starts with the following input values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
 | `interaction` | string | The name of the interaction. |
 | `interaction_params` | dictionary | Arbitrary interaction parameters. |
-| `inputs` | dictionary | Custom input values from the caller. |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the caller. |
 | `client_browser_name` | string | The client browser name (e.g. Safari). |
 | `client_browser_platform` | string | The client browser platform (e.g. Macintosh). |
 | `client_browser_version` | string | The client browser version. |
 | `client_ip` | string | The client IP address. |
-| `portal` | record | The community portal. |
+| `portal` | record | The community [portal](/docs/records/types/community_portal/). |
 
 # Outputs
 
@@ -66,13 +66,13 @@ A form can be created with any combination of the following element types:
 
 | Element | &nbsp; |
 | --- | --- |
-| **fileUpload:** | File upload prompt |
-| **llmTranscript:** | AI agent chat transcript |
-| **say:** | Block of text or Markdown |
-| **sheet:** | Sheet with row selection |
-| **submit:** | Continue to next step |
-| **text:** | Text input with data types |
-| **textarea:** | Multiple lines of text |
+| [**fileUpload:**](/docs/automations/triggers/interaction.website/elements/fileUpload/) | File upload prompt |
+| [**llmTranscript:**](/docs/automations/triggers/interaction.website/elements/llmTranscript/) | AI agent chat transcript |
+| [**say:**](/docs/automations/triggers/interaction.website/elements/say/) | Block of text or Markdown |
+| [**sheet:**](/docs/automations/triggers/interaction.website/elements/sheet/) | [Sheet](/docs/sheets/) with row selection |
+| [**submit:**](/docs/automations/triggers/interaction.website/elements/submit/) | Continue to next step |
+| [**text:**](/docs/automations/triggers/interaction.website/elements/text/) | Text input with data types |
+| [**textarea:**](/docs/automations/triggers/interaction.website/elements/textarea/) | Multiple lines of text |
 
 When the interaction suspends in the `await` state, a `submit:` element is automatically appended to the form if one doesn't already exist.
 
@@ -92,7 +92,7 @@ This makes interactions much more modular and reusable.
 
 ### uri:
 
-The `uri:` parameter specifies the delegate automation. This must use the interaction.website trigger.
+The `uri:` parameter specifies the delegate [automation](/docs/records/types/automation/). This must use the [interaction.website](/docs/automations/triggers/interaction.website/) trigger.
 
 ### inputs:
 
@@ -112,5 +112,5 @@ When the interaction concludes in the `return` state, it returns any number of k
 
 # Deploy interactions on websites
 
-See the Add a conversational bot to any website guide for instructions on deploying interactions on any website.
+See the [Add a conversational bot to any website](/guides/interactions/website/deploy-on-website/) guide for instructions on deploying interactions on any website.
 

@@ -5,18 +5,18 @@ url: "https://cerb.ai/guides/localization/create-translation/"
 summary: "This page provides a comprehensive guide on translating Cerb's user interface into new languages using the Translation Editor plugin. It details the process of enabling the plugin, creating a new language, and translating text using the built-in translation editor. The guide also explains how to share translations in the TMX1 format, which can be imported by other Cerb users. Additionally, it offers a financial incentive for translation work, with a billing credit of $0.50 USD per phrase. The page includes step-by-step instructions for each part of the translation process, from enabling the plugin to exporting the completed translations. References to the TMX format are also provided for further understanding."
 tags: ["guides"]
 ---
-- Introduction
-- Enable the Translation Editor plugin
-- Create a new language
-- Translate text
-  - Using the built-in translation editor
+- [Introduction](#introduction)
+- [Enable the Translation Editor plugin](#enable-the-translation-editor-plugin)
+- [Create a new language](#create-a-new-language)
+- [Translate text](#translate-text)
+  - [Using the built-in translation editor](#using-the-built-in-translation-editor)
 
-- Sharing translations
-- References
+- [Sharing translations](#sharing-translations)
+- [References](#references)
 
 # Introduction
 
-Cerb includes a plugin for translating the user interface into new languages. These translations are shared as `.xml` files in the TMX1 format, which can be shared and imported by other Cerb users.
+Cerb includes a plugin for translating the user interface into new languages. These translations are shared as `.xml` files in the TMX[1](#fn:tmx) format, which can be shared and [imported](/guides/localization/import-translation/) by other Cerb users.
 
 The TMX format is pretty simple. Each `<tu>` tag defines a new phrase with the ID given in the `tuid` attribute. Within each phrase is any number of `<tuv>` translations that specify a language in the `xml:lang` attribute.
 
@@ -108,5 +108,5 @@ lang: fr_FR
 
 # References
 
-1. Wikipedia: Translation Memory eXchange (TMX) - https://en.wikipedia.org/wiki/Translation\_Memory\_eXchange&nbsp;↩
+1. Wikipedia: Translation Memory eXchange (TMX) - https://en.wikipedia.org/wiki/Translation\_Memory\_eXchange&nbsp;[↩](#fnref:tmx)
 

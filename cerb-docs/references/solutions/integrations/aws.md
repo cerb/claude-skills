@@ -5,15 +5,15 @@ url: "https://cerb.ai/solutions/integrations/aws/"
 summary: "This page provides a comprehensive guide on integrating Cerb with Amazon Web Services (AWS). It covers the steps to log into AWS, create a policy, set up a new user, and generate programmatic credentials necessary for the integration. The guide then explains how to create the AWS service within Cerb and utilize the connected account for automations, allowing users to access AWS APIs directly from Cerb. Additionally, it references related resources for further enhancing Cerb's capabilities with AWS services like Amazon Bedrock, AWS Lambda, and Amazon Polly."
 tags: ["solutions"]
 ---
-- Introduction
-- Log in to Amazon Web Services
-  - Create a policy
-  - Create a new user
-  - Generate programmatic credentials
+- [Introduction](#introduction)
+- [Log in to Amazon Web Services](#log-in-to-amazon-web-services)
+  - [Create a policy](#create-a-policy)
+  - [Create a new user](#create-a-new-user)
+  - [Generate programmatic credentials](#generate-programmatic-credentials)
 
-- Create the AWS service in Cerb
-- Use the connected account in automations
-- Related resources
+- [Create the AWS service in Cerb](#create-the-aws-service-in-cerb)
+- [Use the connected account in automations](#use-the-connected-account-in-automations)
+- [Related resources](#related-resources)
 
 # Introduction
 
@@ -113,11 +113,11 @@ That's everything we need to do in AWS.
 
 # Use the connected account in automations
 
-You can use the connected account you just created to access AWS APIs from automations in Cerb. This is typically accomplished using the http.request command from an automation and referencing this connected account in the **authentication:** option.
+You can use the connected account you just created to access AWS APIs from [automations](/docs/automations/) in Cerb. This is typically accomplished using the [http.request](/docs/automations/commands/http.request/) command from an automation and referencing this connected account in the **authentication:** option.
 
 # Related resources
 
-- Workflow: Generate Profile Images (Amazon Bedrock)
-- Guide: Run AWS Lambda functions from a Cerb bot
-- Guide: Give Cerb bots the power of speech with Amazon Polly
+- Workflow: [Generate Profile Images (Amazon Bedrock)](/workflows/cerb.integrations.aws_bedrock.profile_images/)
+- Guide: [Run AWS Lambda functions from a Cerb bot](/guides/integrations/aws/lambda/)
+- Guide: [Give Cerb bots the power of speech with Amazon Polly](/guides/integrations/aws/polly-speech/)
 

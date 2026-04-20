@@ -16,7 +16,7 @@ tags: ["docs"]
 
 ### Response Formats
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 ### Examples
 

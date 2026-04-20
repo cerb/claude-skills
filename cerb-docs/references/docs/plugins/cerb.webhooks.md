@@ -13,12 +13,12 @@ tags: ["docs"]
 
 This plugin enables Cerb to catch webhooks and execute bot behaviors in response.
 
-- Extensions
-  - Bot Event
-  - Controller
-  - Page Section
-  - Portal
-  - Record Type
+- [Extensions](#extensions)
+  - [Bot Event](#bot-event)
+  - [Controller](#controller)
+  - [Page Section](#page-section)
+  - [Portal](#portal)
+  - [Record Type](#record-type)
 
 # Extensions
 
@@ -36,11 +36,11 @@ This plugin enables Cerb to catch webhooks and execute bot behaviors in response
 
 ### Portal
 
-| **Webhook Portal** | `webhooks.portal` |
+| [**Webhook Portal**](/docs/plugins/extensions/webhooks.portal/) | `webhooks.portal` |
 
 ### Record Type
 
 | Webhook Listener | `cerberusweb.contexts.webhook_listener` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

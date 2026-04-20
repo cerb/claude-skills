@@ -5,10 +5,10 @@ url: "https://cerb.ai/solutions/automations/iterate-key-value/"
 summary: "This page explains how to iterate over objects in Cerb using the `repeat:` command. When using `key, value` in `as:`, it sets two placeholders for accessing each item subsequent commands."
 tags: ["solutions", "solutions-automations"]
 ---
-When using the `repeat:` command in automations, you can specify two placeholders separated by a comma in the `as:` option (`key, value`) and they will be set with the respective key and value of each item.
+When using the [`repeat:`](/docs/automations/commands/repeat/) command in [automations](/docs/automations/), you can specify two placeholders separated by a comma in the `as:` option (`key, value`) and they will be set with the respective key and value of each item.
 
-- automation
-- results
+- [automation](#)
+- [results](#)
 
 - 
 ```

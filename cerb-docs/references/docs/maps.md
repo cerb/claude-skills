@@ -7,63 +7,63 @@ tags: ["docs"]
 ---
 Cerb can create interactive **map** visualizations with geospatial data from any source using the standard GeoJSON format.
 
-A **map schema** is defined using KATA, which may include map resources, additional properties to fetch and merge, region colorization, point datasets, point sizing and colorization, labels, click interactions, and more.
+A **map schema** is defined using [KATA](/docs/kata/), which may include map resources, additional properties to fetch and merge, region colorization, point datasets, point sizing and colorization, labels, click interactions, and more.
 
  
 
-- GeoJSON
-- Resources
-- Maps KATA
-  - Resource:
-  - Projection:
-    - type:
-      - mercator
-      - naturalEarth
-      - albersUsa
+- [GeoJSON](#geojson)
+- [Resources](#resources)
+- [Maps KATA](#maps-kata)
+  - [Resource:](#resource)
+  - [Projection:](#projection)
+    - [type:](#type)
+      - [mercator](#mercator)
+      - [naturalEarth](#naturalearth)
+      - [albersUsa](#albersusa)
 
-    - scale:
-    - center:
-    - zoom:
+    - [scale:](#scale)
+    - [center:](#center)
+    - [zoom:](#zoom)
 
-  - Regions:
-    - properties:
-      - data:
-      - resource:
-      - join:
+  - [Regions:](#regions)
+    - [properties:](#properties)
+      - [data:](#data)
+      - [resource:](#resource-1)
+      - [join:](#join)
 
-    - label:
-    - filter:
-    - fill:
-      - color\_key:
-      - color\_map:
-      - choropleth:
+    - [label:](#label)
+    - [filter:](#filter)
+    - [fill:](#fill)
+      - [color\_key:](#color_key)
+      - [color\_map:](#color_map)
+      - [choropleth:](#choropleth)
 
-  - Points:
-    - resource:
-    - data:
-    - label:
-    - filter:
-    - size:
-      - default:
-      - value\_map:
+  - [Points:](#points)
+    - [resource:](#resource-2)
+    - [data:](#data-1)
+    - [label:](#label-1)
+    - [filter:](#filter-1)
+    - [size:](#size)
+      - [default:](#default)
+      - [value\_map:](#value_map)
 
-    - fill:
-      - default:
-      - color\_map:
+    - [fill:](#fill-1)
+      - [default:](#default-1)
+      - [color\_map:](#color_map-1)
 
-- Zooming and panning
-- Handling clicks with automations
-- Example: COVID-19 cases in the U.S.
-  - Choosing our resource and projection
-  - Creating a properties resource
-  - Simplifying the labels
-  - Conclusion
+- [Zooming and panning](#zooming-and-panning)
+- [Handling clicks with automations](#handling-clicks-with-automations)
+- [Example: COVID-19 cases in the U.S.](#example-covid-19-cases-in-the-us)
+  - [Choosing our resource and projection](#choosing-our-resource-and-projection)
+  - [Creating a properties resource](#creating-a-properties-resource)
+  - [Simplifying the labels](#simplifying-the-labels)
+  - [Conclusion](#conclusion)
 
-- References
+- [References](#references)
 
 # GeoJSON
 
-GeoJSON1 is a text format for describing geometric (latitude/longitude) **features** for use in maps.
+GeoJSON[1](#fn:geojson) is a text format for describing geometric (latitude/longitude) **features** for use in maps.
 
 Each feature contains **geometry** to describe its shape, and a list of key/value **properties** to describe its attributes. This geometry is vector-based, so it can be sharply scaled to any size.
 
@@ -73,7 +73,7 @@ For instance, a GeoJSON document can contain geometry that describes the shape a
 
 # Resources
 
-Detailed map data can be several megabytes in size, which would be cumbersome and redundant to include directly in a widget. Instead, map data is stored in reusable **resource** records. Each resource has a unique name, like `map.world.countries` or `map.country.germany`, which map KATA refers to. To improve performance, resources are cached in a client's web browser and automatically updated with changes.
+Detailed map data can be several megabytes in size, which would be cumbersome and redundant to include directly in a widget. Instead, map data is stored in reusable [**resource**](/docs/resources/) records. Each resource has a unique name, like `map.world.countries` or `map.country.germany`, which map KATA refers to. To improve performance, resources are cached in a client's web browser and automatically updated with changes.
 
 There are three resource types for maps:
 
@@ -111,7 +111,7 @@ These resources are derived from Natural Earth public domain data. They do not r
 
 # Maps KATA
 
-As mentioned earlier, map schemas use KATA, our human-friendly text format for structured data.
+As mentioned earlier, map schemas use [KATA](/docs/kata/), our human-friendly text format for structured data.
 
 ## Resource:
 
@@ -213,7 +213,7 @@ map: resource: uri: cerb:resource:map.country.usa.states projection: type: alber
 
 #### resource:
 
-Use the `map:regions:properties:resource:` key to fetch a 'Map Properties' resource and merge it into the existing map regions.
+Use the `map:regions:properties:resource:` key to fetch a 'Map Properties' [resource](/docs/resources/) and merge it into the existing map regions.
 
 ```
 map: resource: uri: cerb:resource:map.country.usa.states projection: type: albersUsa scale: 650 regions: properties: resource: uri: cerb:resource:mapProperties.usaStateAnimals join: property: name case: upper
@@ -348,7 +348,7 @@ Points of interest can be plotted on a map using geospatial coordinates (latitud
 
 ### resource:
 
-Like map data, points can be loaded from a resource URI using `map:points:resource:`:
+Like map data, points can be loaded from a [resource](#resources) URI using `map:points:resource:`:
 
 ```
 map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities
@@ -358,7 +358,7 @@ map: points: resource: uri: cerb:resource:mapPoints.worldCapitalCities
 
 ### data:
 
-You can also use `map:points:data:` to manually specify points and their properties. This is useful for map widgets; for instance, displaying an organization's location on its profile page, or displaying the approximate location of an IP address from an interaction.
+You can also use `map:points:data:` to manually specify points and their properties. This is useful for map widgets; for instance, displaying an organization's location on its profile page, or displaying the approximate location of an IP address from an [interaction](/docs/interactions/).
 
 If you specify both `map:points:resource:` and `map:points:data:`, the points will be merged into a single dataset.
 
@@ -480,7 +480,7 @@ You can pan a map by clicking on any region or point. Maps can't be panned from 
 
 # Handling clicks with automations
 
-On map widgets, a 'Map clicked' (map.clicked) automation can be added using event handler KATA.
+On map widgets, a 'Map clicked' (map.clicked) [automation](/docs/automations/) can be added using [event handler](/docs/automations/#events) KATA.
 
 The first enabled automation receives the event with inputs for the `feature_type` (`region` or `point`), `feature_properties` (from the GeoJSON), an optional `widget_*` dictionary, and the current `worker_*`.
 
@@ -492,9 +492,9 @@ Suppose we want to visualize COVID-19 cases in the United States by the severity
 
 ### Choosing our resource and projection
 
-We've learned that we can use the built-in `map.country.usa.states` resource to display a map of the United States.
+We've learned that we can use the built-in `map.country.usa.states` [resource](#resources) to display a map of the United States.
 
-Visualizations of the United States often use a compact format with a smaller Alaska, and larger Hawaii, shown closer to the continental states than their true locations. We'll use the albersUsa projection to achieve this effect.
+Visualizations of the United States often use a compact format with a smaller Alaska, and larger Hawaii, shown closer to the continental states than their true locations. We'll use the [albersUsa](#albersusa) projection to achieve this effect.
 
 Our map KATA begins with:
 
@@ -518,7 +518,7 @@ This is a comma-separated value file (`.csv`). We need to convert it to our 'Map
 
 For demonstration, we'll do the conversion manually, so you're better prepared to create your own resources.
 
-You could write a simple script for this in any programming language; but you can also use the **Setup&nbsp;» Developers&nbsp;» Bot Scripting Tester** and write a quick and disposable script in Cerb's bot scripting language.
+You could write a simple script for this in any programming language; but you can also use the **Setup&nbsp;» Developers&nbsp;» Bot Scripting Tester** and write a quick and disposable script in Cerb's [bot scripting](/docs/scripting/) language.
 
 ```
 {# https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports_us/11-23-2020.csv #} {% set csv %}
@@ -1160,11 +1160,11 @@ You can use the same process to gather and visualize data from anywhere.
 
 In production, we'd create a resource automation to pull the latest report via HTTP and automatically convert it from CSV to JSON. We'd only need to do that once, and we'd always have the latest data in the widget.
 
-A resource automation could also fetch properties using a data query.
+A resource automation could also fetch properties using a [data query](/docs/data-queries/).
 
 For instance, you could colorize countries or regions based on the number of clients you have in that area, with the darker regions having a higher density of clients.
 
 # References
 
-1. GeoJSON: https://en.wikipedia.org/wiki/GeoJSON&nbsp;↩
+1. GeoJSON: https://en.wikipedia.org/wiki/GeoJSON&nbsp;[↩](#fnref:geojson)
 

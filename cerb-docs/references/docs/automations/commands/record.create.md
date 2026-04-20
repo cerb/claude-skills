@@ -12,12 +12,12 @@ start: record.create/newTask: output: new_task inputs: # See: https://cerb.ai/do
         record_type: task fields: title: This is a new task status: open importance: 50
 ```
 
-- Syntax
-  - inputs:
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -25,8 +25,8 @@ start: record.create/newTask: output: new_task inputs: # See: https://cerb.ai/do
 
 | Key | &nbsp; |
 | --- | --- |
-| `record_type:` | The record type to create. |
-| `fields:` | The fields to set based on the record type. |
+| `record_type:` | The [record type](/docs/records/types/) to create. |
+| `fields:` | The [fields](/docs/records/#fields) to set based on the record type. |
 | `expand:` | The keys to expand on the `output:` dictionary. |
 | `disable_events@bool:` | Avoid triggering events for newly created records. This is particularly useful for import workflows where events like auto-responders and auto-assignment shouldn't be triggered. |
 
@@ -36,19 +36,19 @@ Save the record dictionary to this placeholder.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of creating the record.
+The [commands](/docs/automations/#commands) to run during simulation instead of creating the record.
 
 If omitted, the record is created during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The `output:` placeholder is a dictionary based on the record type.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using |date\_modify filter
 
-Here is an example of using the |date\_modify filter to add or subtract units of time from dates.
+Here is an example of using the [|date\_modify](/docs/scripting/filters/#date_modify) filter to add or subtract units of time from dates.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

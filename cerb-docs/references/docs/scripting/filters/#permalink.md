@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## permalink
 
-(Added in 9.2.3)
+(Added in [9.2.3](/releases/9.2.3/))
 
 ```
 {% set text = "This is the title of a record!" %} {{ text | permalink | lower }}

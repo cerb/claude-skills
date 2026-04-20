@@ -5,16 +5,16 @@ url: "https://cerb.ai/guides/integrations/ldap/"
 summary: "This page provides a comprehensive guide on how to authenticate worker logins in Cerb using an LDAP corporate directory. It covers the introduction to LDAP as a centralized authentication mechanism, the necessary requirements for setting up LDAP with Cerb, and detailed steps to create an LDAP service within Cerb. The guide also explains how to enable single sign-on (SSO) with LDAP, allowing workers to log in using their LDAP credentials. Additionally, it outlines the process for logging in with LDAP, including handling two-factor authentication and using multiple LDAP services for different corporate directories. References are provided for further reading on LDAP."
 tags: ["guides"]
 ---
-- Introduction
-- Requirements
-- Create an LDAP service in Cerb
-- Enable single sign-on with LDAP
-- Log in with LDAP
-- References
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Create an LDAP service in Cerb](#create-an-ldap-service-in-cerb)
+- [Enable single sign-on with LDAP](#enable-single-sign-on-with-ldap)
+- [Log in with LDAP](#log-in-with-ldap)
+- [References](#references)
 
 # Introduction
 
-Enterprises commonly store and share contact information throughout their organization using an open industry standard called **Lightweight Directory Access Protocol (LDAP)** 1. This can serve as a corporate email and telephone directory; but more importantly, it can also provide a centralized authentication mechanism for various applications and services.
+Enterprises commonly store and share contact information throughout their organization using an open industry standard called **Lightweight Directory Access Protocol (LDAP)** [1](#fn:ldap). This can serve as a corporate email and telephone directory; but more importantly, it can also provide a centralized authentication mechanism for various applications and services.
 
 Cerb can use LDAP to authenticate worker logins. This guide will walk through the process of configuring this integration.
 
@@ -28,7 +28,7 @@ If you're on Cerb Cloud, we've already done this for you.
 
 # Create an LDAP service in Cerb
 
-The LDAP integration only needs a connected service.
+The LDAP integration only needs a [connected service](/docs/connected-services/).
 
 1. Navigate to **Search&nbsp;» Connected Services**.
 
@@ -72,11 +72,11 @@ If you want workers to only authenticate using SSO, you can disappear their Cerb
 
 When a worker authenticates using LDAP, one of the email addresses on their Cerb account must match the email address from their LDAP record.
 
-If a worker has two-factor authentication enabled, they'll be prompted for their security code after authenticating with their password.
+If a worker has [two-factor authentication](/guides/security/two-factor-auth/) enabled, they'll be prompted for their security code after authenticating with their password.
 
 You can use multiple LDAP services to authenticate workers from different corporate directories.
 
 # References
 
-1. Wikipedia: Lightweight Directory Access Protocol (LDAP) - https://en.wikipedia.org/wiki/Lightweight\_Directory\_Access\_Protocol&nbsp;↩
+1. Wikipedia: Lightweight Directory Access Protocol (LDAP) - https://en.wikipedia.org/wiki/Lightweight\_Directory\_Access\_Protocol&nbsp;[↩](#fnref:ldap)
 

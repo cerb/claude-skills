@@ -5,16 +5,16 @@ url: "https://cerb.ai/solutions/integrations/stripe/"
 summary: "This page provides a comprehensive guide on integrating Cerb with Stripe. It covers the steps to obtain API keys from the Stripe dashboard, create a Stripe service within Cerb, and utilize the connected account in bot behaviors. The guide explains how to automate processes using Stripe's API through Cerb bots, including executing HTTP requests with the connected account for authentication. Additionally, it mentions the availability of a Stripe Bot package for practical implementation examples."
 tags: ["solutions"]
 ---
-- Introduction
-- Get your API keys from the Stripe dashboard
-- Create the Stripe service in Cerb
-- Use the connected account in automations
-  - List customers
-  - List subscriptions
-  - Create a payment link
-  - Create a subscription
-  - Create an invoice
-  - Bot
+- [Introduction](#introduction)
+- [Get your API keys from the Stripe dashboard](#get-your-api-keys-from-the-stripe-dashboard)
+- [Create the Stripe service in Cerb](#create-the-stripe-service-in-cerb)
+- [Use the connected account in automations](#use-the-connected-account-in-automations)
+  - [List customers](#list-customers)
+  - [List subscriptions](#list-subscriptions)
+  - [Create a payment link](#create-a-payment-link)
+  - [Create a subscription](#create-a-subscription)
+  - [Create an invoice](#create-an-invoice)
+  - [Bot](#bot)
 
 # Introduction
 
@@ -46,7 +46,7 @@ Click the **Create** button.
 
 # Use the connected account in automations
 
-You can use the connected account you just created to access Stripe's API from automations in Cerb. This is typically accomplished using the http.request command and selecting the connected account in the `authentication` field.
+You can use the connected account you just created to access Stripe's API from automations in Cerb. This is typically accomplished using the [http.request](/docs/automations/commands/http.request/) command and selecting the connected account in the `authentication` field.
 
 ## List customers
 
@@ -80,5 +80,5 @@ start: http.request/invoice: output: http_response inputs: method: POST url: htt
 
 ## Bot
 
-You can import the Stripe Bot package for a working example.
+You can import the [Stripe Bot](/packages/stripe-bot/) package for a working example.
 

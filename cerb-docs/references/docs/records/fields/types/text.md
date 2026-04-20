@@ -9,7 +9,7 @@ A **text** field contains free-form text.
 
 ### Packages
 
-As JSON from packages:
+As JSON from [packages](/docs/packages/):
 
 ```
 { 
@@ -27,7 +27,7 @@ To enter multiple lines of text, use `\n` control characters.
 
 ### Records API
 
-In PUT or POST requests from the API the text should be URL encoded.
+In [PUT](/docs/api/endpoints/records/#update) or [POST](/docs/api/endpoints/records/#create) requests from the [API](/docs/api/) the text should be URL encoded.
 
 ```
 &amp;fields[subject]=I+need+help+with+this+software
@@ -39,7 +39,7 @@ To enter multiple lines of text, encode `\n` as `%0A`:
 &amp;fields[subject]=Line+1%0ALine+2
 ```
 
-\< Object
+[\< Object](/docs/records/fields/types/object/)
 
-Timestamp \>
+[Timestamp \>](/docs/records/fields/types/timestamp/)
 

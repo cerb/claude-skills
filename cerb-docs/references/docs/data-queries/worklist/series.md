@@ -9,11 +9,11 @@ tags: ["docs"]
 
 `worklist.series` data queries return series-based data from any worklist (e.g. tickets created by month by status). Data from multiple series of different record types can be returned in a single query.
 
-- Inputs
-- timezone:
-- Response Formats
-- Examples
-  - Return series data from a worklist
+- [Inputs](#inputs)
+- [timezone:](#timezone)
+- [Response Formats](#response-formats)
+- [Examples](#examples)
+  - [Return series data from a worklist](#return-series-data-from-a-worklist)
 
 # Inputs
 
@@ -23,7 +23,7 @@ Each `series.*` should provide:
 - `of:` (record type)
 - `x:` (record field for the x-axis using quick search keys)
 - `y:` (record field for the y-axis using quick search keys)
-- `y.metric:` (an equation to apply to each y-axis value; 9.1.6 or later)
+- `y.metric:` (an equation to apply to each y-axis value; [9.1.6](/releases/9.1.6/) or later)
 - `function:` (count,min,max,average,sum on `y:` field)
 - `query:` (the query to filter the results for this series)
 - `query.required:` (the required query to filter the results for this series)
@@ -32,7 +32,7 @@ By default you'll receive 10 data points per series. You can add a `limit:<numbe
 
 # timezone:
 
-(Available in 10.2.0 or later)
+(Available in [10.2.0](/releases/10.2/) or later)
 
 The `timezone:` key generates date labels in the given timezone location for bins like `by:[created@day]`.
 
@@ -42,9 +42,9 @@ If omitted, this defaults to the timezone of the current worker or the server.
 
 # Response Formats
 
-- **dictionaries** returns data for use in sheets (as of 10.3).
+- **dictionaries** returns data for use in sheets (as of [10.3](/releases/10.3/)).
 
-- **pie** returns data for use in pie and donut charts (as of 10.2.5).
+- **pie** returns data for use in pie and donut charts (as of [10.2.5](/releases/10.2.5/)).
 
 - **table** returns tabular output, suitable for display with the 'Chart: Table' visualization widget.
 

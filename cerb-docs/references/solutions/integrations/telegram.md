@@ -5,13 +5,13 @@ url: "https://cerb.ai/solutions/integrations/telegram/"
 summary: "This page provides a step-by-step guide for integrating Cerb and Telegram, allowing users to utilize Telegram's full Bot API for text and voice messaging in Cerb automations. To start, users must create a new bot on the Telegram BotFather chat, obtaining an authorization token that will be used later in the integration process. Next, they need to set up a webhook by creating a new automation that sends a request to the Telegram API with their bot's token and a specified URL. This sets up the communication channel between Cerb and Telegram, enabling users to respond to messages sent via the bot. Examples of automations are provided, including tests for authorization and sending messages, which can be used as a starting point for more complex integrations."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a Telegram Bot Token.
-- Create the Telegram service in Cerb
-- Set a Webhook
-- Examples
-  - Test Authorization
-  - Send a Message
+- [Introduction](#introduction)
+- [Get a Telegram Bot Token.](#get-a-telegram-bot-token)
+- [Create the Telegram service in Cerb](#create-the-telegram-service-in-cerb)
+- [Set a Webhook](#set-a-webhook)
+- [Examples](#examples)
+  - [Test Authorization](#test-authorization)
+  - [Send a Message](#send-a-message)
 
 # Introduction
 

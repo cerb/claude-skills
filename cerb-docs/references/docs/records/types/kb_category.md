@@ -10,73 +10,73 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | kb\_category |
 | **Identifier (ID):** | cerberusweb.contexts.kb\_category |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of this knowledgebase category |
-| &nbsp; | `parent_id` | number | The ID of the parent category; if `0` this is a top-level topic |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this knowledgebase category |
+| &nbsp; | `parent_id` | [number](/docs/records/fields/types/number/) | The ID of the parent [category](/docs/records/types/kb_category/); if `0` this is a top-level topic |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `id` | number | Id |
 | `name` | text | Name |
 | `parent_id` | number | Parent |
 | `updated_at` | date | Updated |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
-| `watchers` | watchers | Watchers |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
+| `watchers` | watchers | [Watchers](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in knowledgebase category search queries:
+These [filters](/docs/search/#filters) are available in knowledgebase category [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `article.id:` | chooser | Knowledgebase Article |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Name |
-| `parent.id:` | chooser | Parent |
-| `updated:` | date | Updated |
-| `watchers:` | record | Watchers |
+| `article.id:` | [chooser](/docs/search/#choosers) | [Knowledgebase Article](/docs/records/types/kb_article/) |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Name |
+| `parent.id:` | [chooser](/docs/search/#choosers) | [Parent](/docs/records/types/kb_category/) |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `watchers:` | [record](/docs/search/#deep-search) | [Watchers](/docs/records/types/worker/) |
 
 ### Worklist Columns
 
-These columns are available on knowledgebase category worklists:
+These columns are available on knowledgebase category [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `katc_article_id` | Knowledgebase Article |
 | `kbc_id` | Id |
 | `kbc_name` | Name |
 | `kbc_parent_id` | Parent |
 | `kbc_updated_at` | Updated |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

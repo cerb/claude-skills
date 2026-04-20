@@ -5,23 +5,23 @@ url: "https://cerb.ai/solutions/integrations/slack/"
 summary: "This page provides a comprehensive guide on integrating Cerb with Slack, detailing the steps to create a new Slack app and configure authentication using either bot tokens or OAuth2. It explains how to set up a Slack connected account in Cerb, with specific instructions for both authentication methods. The guide also includes related resources for further integration, such as setting up Slack notifications within Cerb."
 tags: ["solutions"]
 ---
-- Introduction
-- Create a new app at Slack
-  - Configure Slack authentication
-    - Option 1: Bot Tokens (Recommended)
-    - Option 2: OAuth2
+- [Introduction](#introduction)
+- [Create a new app at Slack](#create-a-new-app-at-slack)
+  - [Configure Slack authentication](#configure-slack-authentication)
+    - [Option 1: Bot Tokens (Recommended)](#option-1-bot-tokens-recommended)
+    - [Option 2: OAuth2](#option-2-oauth2)
 
-- Create the Slack connected account in Cerb
-  - Bot Tokens
-  - OAuth2
+- [Create the Slack connected account in Cerb](#create-the-slack-connected-account-in-cerb)
+  - [Bot Tokens](#bot-tokens)
+  - [OAuth2](#oauth2)
 
-- Examples:
-  - Send a simple message to a channel
-  - Send a Block Kit message to a channel
-  - List channels
-  - List Users
+- [Examples:](#examples)
+  - [Send a simple message to a channel](#send-a-simple-message-to-a-channel)
+  - [Send a Block Kit message to a channel](#send-a-block-kit-message-to-a-channel)
+  - [List channels](#list-channels)
+  - [List Users](#list-users)
 
-- Related Resources
+- [Related Resources](#related-resources)
 
 # Introduction
 
@@ -150,6 +150,6 @@ start: http.request: output: http_response inputs: url: https://slack.com/api/co
 
 # Related Resources
 
-- Guide: Send commands to a Cerb automations using Slack
-- Workflow: Slack Notifications
+- Guide: [Send commands to a Cerb automations using Slack](guides/integrations/slack/slash-commands/)
+- Workflow: [Slack Notifications](/workflows/cerb.integrations.slack.notifications/)
 

@@ -5,14 +5,14 @@ url: "https://cerb.ai/solutions/integrations/ipstack/"
 summary: "This page provides a guide on integrating Cerb with ipstack to utilize its API for geolocation purposes. It outlines the steps to sign up for an ipstack account, obtain a free API key, and create a connected account in Cerb to enable IP-based geolocation. The guide emphasizes the approximate nature of IP-derived locations due to factors like VPNs and proxies. Additionally, it includes related resources for further workflow automation using ipstack within Cerb."
 tags: ["solutions"]
 ---
-- Introduction
-- Sign up at ipstack
-- Create the connected account in Cerb
-- Examples
-  - Simple IP lookup
-  - Bulk IP lookup
+- [Introduction](#introduction)
+- [Sign up at ipstack](#sign-up-at-ipstack)
+- [Create the connected account in Cerb](#create-the-connected-account-in-cerb)
+- [Examples](#examples)
+  - [Simple IP lookup](#simple-ip-lookup)
+  - [Bulk IP lookup](#bulk-ip-lookup)
 
-- Related Resources
+- [Related Resources](#related-resources)
 
 # Introduction
 
@@ -54,5 +54,5 @@ start: http.request/geolocate: output: http_response inputs: method: GET url: ht
 
 # Related Resources
 
-- Workflow: Geolocate IPs with IPstack
+- Workflow: [Geolocate IPs with IPstack](/workflows/cerb.integrations.ipstack/)
 

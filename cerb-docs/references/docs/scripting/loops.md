@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 # For
 
-Arrays can be iterated with for loops:
+Arrays can be iterated with [for](/docs/scripting/commands/#for) loops:
 
 ```
 {% set list_of_names = ["Jeff" , "Dan" , "Darren"] %} {% for name in list_of_names %}
@@ -39,7 +39,7 @@ Loop through a range of values with `..`:
 5...
 ```
 
-\< Operators
+[\< Operators](/docs/scripting/operators/)
 
-Regular Expressions \>
+[Regular Expressions \>](/docs/scripting/regex/)
 

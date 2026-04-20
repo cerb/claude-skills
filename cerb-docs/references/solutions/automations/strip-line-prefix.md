@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Removing email quotes
 
-Here are examples of using the |strip\_lines filter (prefix removal, quote stripping) for text processing in automation scripting.
+Here are examples of using the [|strip\_lines](/docs/scripting/filters#strip_lines) filter (prefix removal, quote stripping) for text processing in automation scripting.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

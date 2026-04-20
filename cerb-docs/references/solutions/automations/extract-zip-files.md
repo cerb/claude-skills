@@ -9,8 +9,8 @@ Using data.query: and file.read: you can read and extract specific files from a 
 
 ## Read a ZIP archive manifest
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```
@@ -26,8 +26,8 @@ commands: data.query: deny/type@bool: {{ query.type != 'attachment.manifest' }} 
 
 ## Extract a specific file path from a ZIP archive
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

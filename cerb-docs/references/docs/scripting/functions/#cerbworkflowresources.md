@@ -7,13 +7,13 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_workflow\_resources
 
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 Perform runtime resource lookups and return a map of workflow resources and their local record IDs. This is useful from automations, event listeners, and toolbars.
 
 `cerb_workflow_resources(name_or_id)`
 
-| **name\_or\_id** | The name or ID of the workflow. |
+| **name\_or\_id** | The name or ID of the [workflow](/docs/workflows/). |
 
 ```
 {{ cerb_workflow_resources ( 'example.workflow' | json_encode }}

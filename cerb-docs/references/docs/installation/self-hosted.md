@@ -5,17 +5,17 @@ url: "https://cerb.ai/docs/installation/self-hosted/"
 summary: "This page provides a comprehensive guide for installing Cerb, detailing the necessary browser and server requirements, including supported operating systems, webserver applications, PHP version, and database servers. It outlines the steps to log in to the server, download the source code from GitHub, set file permissions, and create a database. The guide walks through the Cerb installation process with a step-by-step guided installer, covering requirements check, license agreement, database setup, configuration file saving, database initialization, general settings, outgoing mail configuration, admin account creation, testing mode, and security recommendations. The page concludes with instructions for finalizing the installation and references for further information."
 tags: ["docs"]
 ---
-We do not recommend installing Cerb components on your server directly. Use the Docker instructions as a reference.
+We do not recommend installing Cerb components on your server directly. Use the [Docker instructions](/docs/installation/docker/) as a reference.
 
-- Requirements
-  - Browser requirements
-  - Server requirements
+- [Requirements](#requirements)
+  - [Browser requirements](#browser-requirements)
+  - [Server requirements](#server-requirements)
 
-- Log in to your server
-- Download the source code from GitHub
-- Set permissions
-- Create the database
-- Run the guided installer
+- [Log in to your server](#log-in-to-your-server)
+- [Download the source code from GitHub](#download-the-source-code-from-github)
+- [Set permissions](#set-permissions)
+- [Create the database](#create-the-database)
+- [Run the guided installer](#run-the-guided-installer)
 
 # Requirements
 
@@ -78,7 +78,7 @@ We do not recommend installing Cerb components on your server directly. Use the 
   - MariaDB 10.5 or later
   - Amazon Aurora 3.x or later
 
-If you are unable to meet these requirements, consider Cerb Cloud.
+If you are unable to meet these requirements, consider [Cerb Cloud](/pricing/).
 
 # Log in to your server
 
@@ -86,7 +86,7 @@ The following general instructions assume that you have console access to a Linu
 
 You can follow one of these guides to set up a new server:
 
-- Installing Cerb on Ubuntu 24.04 LTS with Nginx and PHP-FPM
+- [Installing Cerb on Ubuntu 24.04 LTS with Nginx and PHP-FPM](/guides/installation/ubuntu/)
 
 # Download the source code from GitHub
 
@@ -104,7 +104,7 @@ When deploying Cerb on a production server you should use **Git** to manage the 
 - See what changes _would_ occur before performing an upgrade.
 - Continuously merge your local changes with our future updates.
 
-You won't need to download the entire project again after your initial installation. You also won't have to hassle with copying your `framework.config.php` configuration file or storage directory when upgrading, or repeating any of your custom modifications to the source code.
+You won't need to download the entire project again after your initial installation. You also won't have to hassle with copying your `framework.config.php` [configuration file](/docs/config-file/) or storage directory when upgrading, or repeating any of your custom modifications to the source code.
 
 You can download Cerb into a specific directory with a single command:
 
@@ -128,7 +128,7 @@ Next, we need to make sure that Cerb's files are owned by the webserver's user a
 
 You only need to enable write access to the webserver in two locations:
 
-- `framework.config.php` This is your configuration file.
+- `framework.config.php` This is your [configuration file](/docs/config-file/).
 - `storage/` This is where any data unique to your installation is stored: third-party plugins, attachments, temporary files, caches, etc.
 
 Give ownership of all the files to the webserver daemon using `chown`, and make the two locations above writable using `chmod`:
@@ -158,9 +158,9 @@ If you're concerned about granting `ALL PRIVILEGES`, the minimum required privil
 
 # Run the guided installer
 
-Cerb has a guided installer that verifies your requirements, initializes the database, and walks you through the initial configuration of the software.
+Cerb has a [guided installer](/docs/guided-installer/) that verifies your requirements, initializes the database, and walks you through the initial configuration of the software.
 
-\< Installation
+[\< Installation](/docs/installation/)
 
-Guided Installer \>
+[Guided Installer \>](/docs/guided-installer/)
 

@@ -39,13 +39,13 @@ Fully managed
 - Optional instant inbound mail delivery (or use POP3/IMAP)
 - Unlimited community portal hosting included
 - Bring your own domain (e.g. support.example.com)
-- ... and more
+- [... and more](/cloud/)
 
 Start your free trial
 
 **Migrate anytime:** Your data is 100% compatible between self-hosted and Cerb Cloud. Subscriptions are interchangeable.
 
-**Need real-time help?** Optional enterprise support adds priority support, training, and consultation for both options.
+**Need real-time help?** Optional [enterprise support](/enterprise-support/) adds priority support, training, and consultation for both options.
 
  - 
 

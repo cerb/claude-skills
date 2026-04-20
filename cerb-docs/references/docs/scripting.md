@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
  
 
-Features like automations and snippets often need to generate dynamic text.
+Features like [automations](/docs/automations/) and [snippets](/docs/snippets/) often need to generate dynamic text.
 
 For instance:
 
@@ -29,7 +29,7 @@ print ( " Hello, " + firstName + " ! " );
 
 This is cumbersome when you're dealing with a lot of text.
 
-Instead, Cerb scripting is a full-featured templating language based on Twig1. A templating language makes the simple assumption that everything you type is text output until it encounters a special command.
+Instead, Cerb scripting is a full-featured templating language based on Twig[1](#fn:twig). A templating language makes the simple assumption that everything you type is text output until it encounters a special command.
 
 The example code above would instead be written as:
 
@@ -39,22 +39,22 @@ Hello, {{ first_name }}!
 
 # Topics
 
-- Variables
-- Strings
-- Arrays and Objects
-- Dates
-- Conditional Logic
-- Operators
-- Loops
-- Regular Expressions
-- JSON
-- XML
-- Commands
-- Functions
-- Filters
-- Tests
+- [Variables](/docs/scripting/variables/)
+- [Strings](/docs/scripting/strings/)
+- [Arrays and Objects](/docs/scripting/arrays-objects/)
+- [Dates](/docs/scripting/dates/)
+- [Conditional Logic](/docs/scripting/conditional-logic/)
+- [Operators](/docs/scripting/operators/)
+- [Loops](/docs/scripting/loops/)
+- [Regular Expressions](/docs/scripting/regex/)
+- [JSON](/docs/scripting/json/)
+- [XML](/docs/scripting/xml/)
+- [Commands](/docs/scripting/commands/)
+- [Functions](/docs/scripting/functions/)
+- [Filters](/docs/scripting/filters/)
+- [Tests](/docs/scripting/tests/)
 
 # References
 
-1. Twig: The flexible, fast, and secure template engine for PHP - https://twig.symfony.com&nbsp;↩
+1. Twig: The flexible, fast, and secure template engine for PHP - https://twig.symfony.com&nbsp;[↩](#fnref:twig)
 

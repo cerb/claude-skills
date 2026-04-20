@@ -5,12 +5,12 @@ url: "https://cerb.ai/guides/integrations/salesforce/sync-accounts/"
 summary: "This webpage provides a comprehensive guide for integrating Salesforce with Cerb to synchronize account changes with Cerb organization records. It includes detailed instructions on authorizing a remote site in Salesforce, importing an example package in Cerb, creating an Apex class and trigger in Salesforce, and testing the webhook. The guide emphasizes the importance of setting up the integration in a Salesforce development sandbox before deploying it in a production environment. It also provides specific code snippets and configuration steps to ensure seamless data synchronization between Salesforce and Cerb."
 tags: ["guides"]
 ---
-- Introduction
-- Authorize the Remote Site in Salesforce
-- Import the example package in Cerb
-- Create the Apex class in Salesforce
-- Create the Apex trigger in Salesforce
-- Test the webhook
+- [Introduction](#introduction)
+- [Authorize the Remote Site in Salesforce](#authorize-the-remote-site-in-salesforce)
+- [Import the example package in Cerb](#import-the-example-package-in-cerb)
+- [Create the Apex class in Salesforce](#create-the-apex-class-in-salesforce)
+- [Create the Apex trigger in Salesforce](#create-the-apex-trigger-in-salesforce)
+- [Test the webhook](#test-the-webhook)
 
 # Introduction
 

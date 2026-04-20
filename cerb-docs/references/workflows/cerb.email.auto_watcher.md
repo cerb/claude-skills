@@ -5,10 +5,10 @@ url: "https://cerb.ai/workflows/cerb.email.auto_watcher/"
 summary: "This page provides detailed information about the 'Auto Watcher' workflow in Cerb, which automatically adds a worker as a watcher when they reply to a ticket. It includes sections on introduction, installation, usage, and reference. The workflow is integrated into Cerb version 11.0 and above, and can be enabled through the Cerb interface. The usage section explains how workers are automatically added as watchers when they reply to a ticket. The reference section offers guidance on creating a custom auto-watcher workflow using the provided template, with instructions on modifying the workflow identifier to suit individual needs. The page also includes a sample workflow script and details on the requirements and configuration for implementing the auto-watcher feature."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-- Reference
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Reference](#reference)
 
 # Introduction
 
@@ -16,7 +16,7 @@ This workflow automatically adds a worker as a watcher when they reply to a tick
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Auto Watcher**.
 

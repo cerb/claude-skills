@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_current\_worker
 
-(Added in 10.4.14)
+(Added in [10.4.14](/releases/10.4.14/))
 
 Return a dictionary for the currently logged in worker. This returns an empty dictionary when used outside a browser session.
 

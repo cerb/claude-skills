@@ -5,10 +5,10 @@ url: "https://cerb.ai/workflows/cerb.records.reminders/"
 summary: "This page provides a detailed guide on creating and managing reminders. The page outlines the usage of the new 'Reminder' button available on record profile pages and card popups, allowing users to quickly set reminders linked to specific records. Additionally, it offers a reference template for building custom record reminder workflows, including detailed instructions on modifying the workflow identifier and using domain-specific prefixes. The page also includes a comprehensive workflow script, detailing the necessary fields, inputs, and commands for creating reminders, as well as toolbar configurations for record profiles and cards."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-- Reference
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Reference](#reference)
 
 # Introduction
 
@@ -16,7 +16,7 @@ This workflow creates reminders from record profiles and cards.
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Record Reminders**.
 

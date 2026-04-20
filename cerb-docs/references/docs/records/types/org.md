@@ -10,44 +10,46 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | org |
 | **Identifier (ID):** | cerberusweb.contexts.org |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `city` | text | City |
-| &nbsp; | `country` | text | Country |
-| &nbsp; | `created` | timestamp | The date/time when this record was created |
-| &nbsp; | `email_id` | number | Primary email address |
-| &nbsp; | `image` | image | The profile image, base64-encoded in data URI format |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of this organization |
-| &nbsp; | `phone` | text | Phone |
-| &nbsp; | `postal` | text | Postal code / ZIP |
-| &nbsp; | `province` | text | State / Province |
-| &nbsp; | `street` | text | Street address |
-| &nbsp; | `updated` | timestamp | The date/time when this record was last modified |
-| &nbsp; | `website` | url | Website |
+| &nbsp; | `aliases` | [text](/docs/records/fields/types/text/) | Alias names as a CRLF-delimited list |
+| &nbsp; | `city` | [text](/docs/records/fields/types/text/) | City |
+| &nbsp; | `country` | [text](/docs/records/fields/types/text/) | Country |
+| &nbsp; | `created` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was created |
+| &nbsp; | `email_id` | [number](/docs/records/fields/types/number/) | Primary [email address](/docs/records/types/address/) |
+| &nbsp; | `image` | [image](/docs/records/fields/types/image/) | The profile image, base64-encoded in data URI format |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this organization |
+| &nbsp; | `phone` | [text](/docs/records/fields/types/text/) | Phone |
+| &nbsp; | `postal` | [text](/docs/records/fields/types/text/) | Postal code / ZIP |
+| &nbsp; | `province` | [text](/docs/records/fields/types/text/) | State / Province |
+| &nbsp; | `street` | [text](/docs/records/fields/types/text/) | Street address |
+| &nbsp; | `updated` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
+| &nbsp; | `website` | [url](/docs/records/fields/types/url/) | Website |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
+| `aliases` | array | Alias names (e.g. `["Acme Corp", "Acme Inc"]`); use `{{record.aliases|join(', ')}}` in scripting |
 | `city` | text | City |
 | `country` | text | Country |
 | `created` | date | Created |
-| `email_` | record | Email |
+| `email_` | record | [Email](/docs/records/types/address/) |
 | `id` | number | Id |
 | `name` | text | Name |
 | `phone` | text | Phone |
@@ -58,49 +60,49 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `updated` | date | Updated |
 | `website` | text | Website |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `last_recipient_message` | record | Latest Message Received To |
-| `last_sender_message` | record | Latest Message Sent From |
-| `links` | links | Links |
-| `watchers` | watchers | Watchers |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `last_recipient_message` | record | Latest [Message](/docs/records/types/message/) Received To |
+| `last_sender_message` | record | Latest [Message](/docs/records/types/message/) Sent From |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
+| `watchers` | watchers | [Watchers](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in organization search queries:
+These [filters](/docs/search/#filters) are available in organization [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `alias:` | virtual | Aliases |
-| `city:` | text | City |
-| `comments:` | fulltext | Comment Content |
-| `contacts:` | record | Contacts |
-| `country:` | text | Country |
-| `created:` | date | Created |
-| `email:` | record | Email |
-| `email.id:` | chooser | Email |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Name |
-| `phone:` | text | Phone |
-| `postal:` | text | Postal |
-| `state:` | text | State/Prov |
-| `street:` | text | Street |
-| `ticket:` | record | Ticket |
-| `ticket.id:` | chooser | Ticket |
-| `updated:` | date | Updated |
-| `watchers:` | record | Watchers |
-| `website:` | text | Website |
+| `alias:` | [text](/docs/search/#text) | Aliases (e.g. `alias:Acme` or `alias:["Acme Corp","Acme Inc"]`) |
+| `city:` | [text](/docs/search/#text) | City |
+| `comments:` | [fulltext](/docs/search/#fulltext) | Comment Content |
+| `contacts:` | [record](/docs/search/#deep-search) | [Contacts](/docs/records/types/contact/) |
+| `country:` | [text](/docs/search/#text) | Country |
+| `created:` | [date](/docs/search/#dates) | Created |
+| `email:` | [record](/docs/search/#deep-search) | [Email](/docs/records/types/address/) |
+| `email.id:` | [chooser](/docs/search/#choosers) | [Email](/docs/records/types/address/) |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Name |
+| `phone:` | [text](/docs/search/#text) | Phone |
+| `postal:` | [text](/docs/search/#text) | Postal |
+| `state:` | [text](/docs/search/#text) | State/Prov |
+| `street:` | [text](/docs/search/#text) | Street |
+| `ticket:` | [record](/docs/search/#deep-search) | [Ticket](/docs/records/types/ticket/) |
+| `ticket.id:` | [chooser](/docs/search/#choosers) | [Ticket](/docs/records/types/ticket/) |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `watchers:` | [record](/docs/search/#deep-search) | [Watchers](/docs/records/types/worker/) |
+| `website:` | [text](/docs/search/#text) | Website |
 
 ### Worklist Columns
 
-These columns are available on organization worklists:
+These columns are available on organization [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -116,7 +118,7 @@ These columns are available on organization worklists:
 | `c_street` | Street |
 | `c_updated` | Updated |
 | `c_website` | Website |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

@@ -10,36 +10,36 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | snippet |
 | **Identifier (ID):** | cerberusweb.contexts.snippet |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| **x** | **`content`** | text | The template of the snippet |
-| &nbsp; | `context` | text | The record type to add the profile tab to |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`owner__context`** | context | The record type of this snippet's owner: `app`, `role`, `group`, or `worker` |
-| **x** | **`owner_id`** | number | The ID of this snippet's owner |
-| &nbsp; | `prompts_kata` | text | Prompted placeholders in KATA format |
-| **x** | **`title`** | text | The name of the snippet |
-| &nbsp; | `total_uses` | number | The total number of times this snippet has been used by all workers |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
+| **x** | **`content`** | [text](/docs/records/fields/types/text/) | The [template](/docs/scripting/) of the snippet |
+| &nbsp; | `context` | [text](/docs/records/fields/types/text/) | The [record type](/docs/records/types/) to add the profile tab to |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`owner__context`** | [context](/docs/records/fields/types/context/) | The [record type](/docs/records/types/) of this snippet's owner: `app`, `role`, `group`, or `worker` |
+| **x** | **`owner_id`** | [number](/docs/records/fields/types/number/) | The ID of this snippet's owner |
+| &nbsp; | `prompts_kata` | [text](/docs/records/fields/types/text/) | Prompted placeholders in [KATA](/docs/snippets/#prompts) format |
+| **x** | **`title`** | [text](/docs/records/fields/types/text/) | The name of the snippet |
+| &nbsp; | `total_uses` | [number](/docs/records/fields/types/number/) | The total number of times this snippet has been used by all workers |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `content` | text | Content |
 | `context` | text | Context |
 | `id` | number | Id |
@@ -48,51 +48,51 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `total_uses` | number | All Uses |
 | `updated_at` | date | Updated |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in snippet search queries:
+These [filters](/docs/search/#filters) are available in snippet [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `content:` | text | Content |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `myUses:` | number | My Uses |
+| `content:` | [text](/docs/search/#text) | Content |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `myUses:` | [number](/docs/search/#numbers) | My Uses |
 | `owner:` | virtual | Owner |
 | `owner.app:` | virtual | Owner |
-| `owner.bot:` | record | Owner |
-| `owner.group:` | record | Owner |
-| `owner.role:` | record | Owner |
-| `owner.worker:` | record | Owner |
-| `title:` | text | Title |
-| `totalUses:` | number | All Uses |
+| `owner.bot:` | [record](/docs/search/#deep-search) | [Owner](/docs/records/types/bot/) |
+| `owner.group:` | [record](/docs/search/#deep-search) | [Owner](/docs/records/types/group/) |
+| `owner.role:` | [record](/docs/search/#deep-search) | [Owner](/docs/records/types/role/) |
+| `owner.worker:` | [record](/docs/search/#deep-search) | [Owner](/docs/records/types/worker/) |
+| `title:` | [text](/docs/search/#text) | Title |
+| `totalUses:` | [number](/docs/search/#numbers) | All Uses |
 | `type:` | virtual | Type |
-| `updated:` | date | Updated |
-| `usableBy.worker:` | virtual | Usable by Worker |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `usableBy.worker:` | virtual | Usable by [Worker](/docs/records/types/worker/) |
 
 ### Worklist Columns
 
-These columns are available on snippet worklists:
+These columns are available on snippet [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
 | `*_owner` | Owner |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `s_context` | Type |
 | `s_title` | Title |
 | `s_total_uses` | All Uses |
 | `s_updated_at` | Updated |
 | `suh_my_uses` | My Uses |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

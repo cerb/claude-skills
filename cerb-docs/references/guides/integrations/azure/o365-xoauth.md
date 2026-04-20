@@ -5,13 +5,13 @@ url: "https://cerb.ai/guides/integrations/azure/o365-xoauth/"
 summary: "This page provides a comprehensive guide on how to authenticate an Office365 mailbox using XOAUTH2 in Cerb. It outlines the steps to configure an Azure app and set up mail transport with specific details for SMTP settings. The guide also includes instructions on configuring a mailbox in Cerb, testing the mailbox connection, and ensuring proper functionality by running the scheduler. The document emphasizes the transition from legacy passwords to OAuth2 access tokens for Office365, highlighting Cerb's support for XOAUTH2 authentication since version 9.6."
 tags: ["guides"]
 ---
-- Introduction
-- Configure an Entra app
-- Configure your mail transport
-  - Is SMTP authentication not enabled?
+- [Introduction](#introduction)
+- [Configure an Entra app](#configure-an-entra-app)
+- [Configure your mail transport](#configure-your-mail-transport)
+  - [Is SMTP authentication not enabled?](#is-smtp-authentication-not-enabled)
 
-- Configure your mailbox in Cerb
-  - Test your mailbox
+- [Configure your mailbox in Cerb](#configure-your-mailbox-in-cerb)
+  - [Test your mailbox](#test-your-mailbox)
 
 # Introduction
 
@@ -19,7 +19,7 @@ Microsoft is in the process of retiring legacy passwords when connecting to Offi
 
 To authenticate in the near future you will need to use OAuth2 access tokens instead.
 
-Cerb supports XOAUTH2 authentication for IMAP mailboxes since version 9.6.
+Cerb supports XOAUTH2 authentication for IMAP mailboxes since version [9.6](/releases/9.6/).
 
 This guide explains how to configure the new feature.
 
@@ -27,7 +27,7 @@ https://www.youtube.com/embed/tYsXwX653sI
 
 # Configure an Entra app
 
-If you haven't already configured an Office365 connected account in Cerb, follow these instructions.
+If you haven't already configured an Office365 connected account in Cerb, [follow these instructions](/solutions/integrations/azure/).
 
 Once your connected account is created you can continue to configuring the mailbox.
 

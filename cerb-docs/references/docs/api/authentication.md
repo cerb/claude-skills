@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/api/authentication/"
 summary: "This page provides detailed information on how Cerb uses the OAuth 2.0 standard for authenticating API requests, replacing the older request signature method used in versions prior to 9.1. It outlines the process for creating an OAuth app within Cerb, which includes generating API credentials, defining scopes, and understanding the roles of Client ID and Client Secret. The page also explains how to authenticate API requests using the Authorization Code grant type, detailing the necessary steps and information required, such as the Authorization URL, Access Token URL, and the inclusion of access tokens in HTTP headers. The document emphasizes the importance of scopes in defining the privileges associated with access tokens and provides examples of default scopes available in Cerb."
 tags: ["docs"]
 ---
-Cerb uses the **OAuth 2.0** 1 industry standard for authenticating API requests.
+Cerb uses the **OAuth 2.0** [1](#fn:oauth2) industry standard for authenticating API requests.
 
-Older versions (prior to 9.1) used API authentication with request signatures instead. XOAuth tokens should be used when possible, but request signature authentication will continue to be supported for the foreseeable future.
+Older versions (prior to [9.1](/releases/9.1/)) used [API authentication with request signatures](/docs/api/authentication/request-signatures/) instead. XOAuth tokens should be used when possible, but request signature authentication will continue to be supported for the foreseeable future.
 
 # Creating an OAuth App
 
@@ -90,5 +90,5 @@ Authorization: Bearer <YOUR-ACCESS-TOKEN>
 
 # References
 
-1. OAuth 2.0 - https://oauth.net/2/&nbsp;↩
+1. OAuth 2.0 - https://oauth.net/2/&nbsp;[↩](#fnref:oauth2)
 

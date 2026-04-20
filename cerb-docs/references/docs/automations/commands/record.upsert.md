@@ -12,12 +12,12 @@ start: record.upsert: output: record inputs: record_type: task record_query: nam
         fields: importance: 75
 ```
 
-- Syntax
-  - inputs:
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -25,10 +25,10 @@ start: record.upsert: output: record inputs: record_type: task record_query: nam
 
 | Key | &nbsp; |
 | --- | --- |
-| `record_type:` | The record type to create. |
-| `record_query:` | The search query to match. With `0` matches the record is created. With `1` match the existing record is updated. The on\_error: event is triggered otherwise. Use `limit:1` and `sort:` in the `record_query:` to reduce multiple matches into one. |
+| `record_type:` | The [record type](/docs/records/types/) to create. |
+| `record_query:` | The [search query](/docs/search/) to match. With `0` matches the record is created. With `1` match the existing record is updated. The [on\_error:](#on_error) event is triggered otherwise. Use `limit:1` and `sort:` in the `record_query:` to reduce multiple matches into one. |
 | `record_query_params:` | Query parameters with untrusted user input as keys/values. Reference these as `${param}` in queries. |
-| `fields:` | The fields to set based on the record type. |
+| `fields:` | The [fields](/docs/records/#fields) to set based on the record type. |
 | `disable_events@bool:` | Avoid triggering events for created or updated records. |
 
 ## output:
@@ -37,19 +37,19 @@ Save the record dictionary to this placeholder.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of updating the record.
+The [commands](/docs/automations/#commands) to run during simulation instead of updating the record.
 
 If omitted, the record is updated during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The `output:` placeholder is a dictionary based on the record type.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

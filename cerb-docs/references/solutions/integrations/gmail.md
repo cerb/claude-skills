@@ -5,23 +5,23 @@ url: "https://cerb.ai/solutions/integrations/gmail/"
 summary: "This page provides a comprehensive guide on integrating Cerb with Gmail by configuring Google APIs and setting up Cerb. It details the steps to create a new project in Google Cloud, configure the OAuth consent screen, enable the Gmail API, and add necessary credentials. The guide then explains how to configure Cerb by creating a connected service and account, using the credentials obtained from Google. It concludes with next steps for authenticating a Gmail mailbox using IMAP and XOAUTH2, making it a useful resource for automating tasks with Google APIs through Cerb bots."
 tags: ["solutions"]
 ---
-- Introduction
-- Configure Google APIs
-  - Create a new project
-  - Configure the consent screen
-  - Enable Gmail API
-  - Add credentials
+- [Introduction](#introduction)
+- [Configure Google APIs](#configure-google-apis)
+  - [Create a new project](#create-a-new-project)
+  - [Configure the consent screen](#configure-the-consent-screen)
+  - [Enable Gmail API](#enable-gmail-api)
+  - [Add credentials](#add-credentials)
 
-- Configure Cerb
-  - Create the connected service
-  - Create the connected account
+- [Configure Cerb](#configure-cerb)
+  - [Create the connected service](#create-the-connected-service)
+  - [Create the connected account](#create-the-connected-account)
 
-- Examples
-  - Search threads
-  - Retrieve thread
-  - Batch retrieve threads
+- [Examples](#examples)
+  - [Search threads](#search-threads)
+  - [Retrieve thread](#retrieve-thread)
+  - [Batch retrieve threads](#batch-retrieve-threads)
 
-- Next steps
+- [Next steps](#next-steps)
 
 # Introduction
 
@@ -173,5 +173,5 @@ start: set: mime_boundary: batch_ {{ random_string(6) }} mime_body@text: -- {{ m
 
 # Next steps
 
-See: Authenticate a Gmail mailbox using IMAP and XOAUTH2
+See: [Authenticate a Gmail mailbox using IMAP and XOAUTH2](/guides/integrations/google/gmail-xoauth/)
 

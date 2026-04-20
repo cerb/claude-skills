@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker.explore/"
 summary: "This page details the functionality of the 'interaction.worker.explore' feature in Cerb, which allows for dynamic exploration of worklists. Unlike the static explore mode that captures a snapshot of the first 1,000 records, the dynamic explore mode updates in real-time to prioritize new and relevant tasks. It provides a mechanism for determining the next most important task by using custom logic and interactions. The page explains how to implement this feature, including the use of custom toolbars, keyboard shortcuts, and the ability to create explore sets through automation commands. It also outlines the inputs and outputs required for these interactions, emphasizing the flexibility and efficiency improvements in managing workflows such as task dispatching and onboarding tours."
 tags: ["docs", "docs-automations"]
 ---
-**interaction.worker.explore** interactions use custom logic to return the next record in a dynamic explore set.
+**interaction.worker.explore** [interactions](/docs/interactions/) use custom logic to return the next record in a dynamic explore set.
 
 Currently, explore mode uses a static point-in-time snapshot of a worklist for the first 1,000 records. This ignores new higher priority records that entered a worklist after explore started, and it includes records that may have been handled recently by other workers.
 
@@ -19,23 +19,23 @@ For convenience, named toolbar buttons (e.g. `interaction/next:`) can also be de
 
 Custom keyboard shortcuts can be assigned to each toolbar button. This will significantly optimize workflows that involve visiting a set of records/URLs (e.g. dispatch, finding a next assignment, etc).
 
-Explore sets are created with api.command: in automations.
+Explore sets are created with [api.command:](/docs/automations/commands/api.command/) in automations.
 
 For example:
 
-- A custom explore mode could track a specific worklist to always display the top unseen record. This would include records that were added to the list after explore mode started.
+- A custom explore mode could track a specific [worklist](/docs/worklists/) to always display the top unseen record. This would include records that were added to the list after explore mode started.
 - An onboarding tour could walk a worker through various pages and explain their functionality.
 
 # Inputs
 
-An interaction automation dictionary starts with the following input values:
+An interaction automation [dictionary](/docs/automations/#dictionaries) starts with the following input values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
 | `explore_hash` | string | The unique identifier of the explore set. |
 | `explore_page` | string | The custom page action returned by `await:explore:` (e.g. `next`) |
-| `inputs` | dictionary | Custom input values from the caller. |
-| `worker_*` | record | The active worker record. Supports key expansion. |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the caller. |
+| `worker_*` | record | The active [worker](/docs/records/types/worker/) record. Supports key expansion. |
 
 # Outputs
 
@@ -47,7 +47,7 @@ When suspending in the `await:explore:` state, the interaction displays the next
 await: explore: title: The title of the explore set url: The URL of the next item label: The optional label for the next item toolbar: interaction/next: label: Next icon: chevron-right icon_at: end keyboard: ]
 ```
 
-Interactions in a custom toolbar can use the following `after:` options:
+Interactions in a custom [toolbar](/docs/toolbars/) can use the following `after:` options:
 
 | Key | Type | &nbsp; |
 | --- | --- | --- |
@@ -58,5 +58,5 @@ Interactions in a custom toolbar can use the following `after:` options:
 
 ## Auto assignment
 
-See: Workflow: Auto Dispatcher
+See: [Workflow: Auto Dispatcher](/workflows/cerb.auto_dispatcher/)
 

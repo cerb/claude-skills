@@ -13,12 +13,12 @@ tags: ["docs"]
 
 This plugin adds a new Call record type for logging incoming and outgoing phone activity.
 
-- Extensions
-  - Bot Action
-  - Bot Event
-  - Event Listener
-  - Page Section
-  - Record Type
+- [Extensions](#extensions)
+  - [Bot Action](#bot-action)
+  - [Bot Event](#bot-event)
+  - [Event Listener](#event-listener)
+  - [Page Section](#page-section)
+  - [Record Type](#record-type)
 
 # Extensions
 
@@ -42,5 +42,5 @@ This plugin adds a new Call record type for logging incoming and outgoing phone 
 
 | Call | `cerberusweb.contexts.call` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

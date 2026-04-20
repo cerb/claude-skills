@@ -9,7 +9,7 @@ tags: ["docs"]
 
 The **scheduler** is responsible for planning and running _jobs_.
 
-A **job** is an automated background task: checking your mailboxes for new messages, search indexing new records, performing nightly maintenance, triggering automation timers, etc. There are several built-in jobs, and plugins can add new jobs.
+A **job** is an automated background task: checking your mailboxes for new messages, search indexing new records, performing nightly maintenance, triggering [automation](/docs/automations/) timers, etc. There are several built-in jobs, and [plugins](/docs/plugins/) can add new jobs.
 
 Each job is repeated at a specific _interval_ – a number of minutes, hours, or days. A job can be _disabled_ to prevent it from running.
 
@@ -17,19 +17,19 @@ Different jobs can run at the same time. A job is _locked_ while running to prev
 
 Each job has a _"run now"_ link that will immediately run the job with logging enabled from inside your web browser. This is useful for troubleshooting and development, but the scheduler should be automated in production environments so that the jobs run without human intervention.
 
-For Cerb's scheduled jobs to automatically run in the background, you need to configure a third-party tool to request the `/cron` page every minute. On Unix-based systems this is accomplished with a cronjob1. On Windows Server you can add a Scheduled Task2.
+For Cerb's scheduled jobs to automatically run in the background, you need to configure a third-party tool to request the `/cron` page every minute. On Unix-based systems this is accomplished with a cronjob[1](#fn:cronjob). On Windows Server you can add a Scheduled Task[2](#fn:windows-scheduled-task).
 
 If you're using **Cerb Cloud**, we handle this for you.
 
 We recommend using **curl** or **wget** to request your scheduler URL every minute.
 
-The `/cron` page doesn't require a login to use. Instead, it is protected with an IP address3 allowlist. You can authorize additional IPs from the Security section, or from the `AUTHORIZED_IPS_DEFAULTS` setting in the `framework.config.php` file.
+The `/cron` page doesn't require a login to use. Instead, it is protected with an IP address[3](#fn:ip) allowlist. You can authorize additional IPs from the [Security](/docs/setup/security/) section, or from the `AUTHORIZED_IPS_DEFAULTS` setting in the `framework.config.php` file.
 
 # References
 
-1. https://en.wikipedia.org/wiki/Cron&nbsp;↩
+1. https://en.wikipedia.org/wiki/Cron&nbsp;[↩](#fnref:cronjob)
 
-2. https://technet.microsoft.com/en-us/library/cc748993.aspx&nbsp;↩
+2. https://technet.microsoft.com/en-us/library/cc748993.aspx&nbsp;[↩](#fnref:windows-scheduled-task)
 
-3. https://en.wikipedia.org/wiki/IP\_address&nbsp;↩
+3. https://en.wikipedia.org/wiki/IP\_address&nbsp;[↩](#fnref:ip)
 

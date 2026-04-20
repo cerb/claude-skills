@@ -5,22 +5,22 @@ url: "https://cerb.ai/guides/sso/google-saml/"
 summary: "This webpage provides a comprehensive guide on setting up single sign-on (SSO) for Cerb using G Suite accounts through the SAML (Security Assertion Markup Language) protocol. It details the step-by-step process of configuring G Suite to create a SAML app, including obtaining Google IdP information, setting up service provider details, and enabling the service for all users. The guide also covers configuring Cerb to authenticate with G Suite SAML by creating a SAML service and setting up SSO for worker logins. Finally, it explains how users can log in to Cerb using their G Suite credentials, enabling seamless access with a single click as long as they remain logged into G Suite."
 tags: ["guides"]
 ---
-- Introduction
-- Configure G Suite for SAML
-  - Create a SAML app
-    - Google IdP Information
-    - Basic information for your Custom App
-    - Service Provider Details
-    - Attribute Mapping
-    - Setting up SSO for Cerb
+- [Introduction](#introduction)
+- [Configure G Suite for SAML](#configure-g-suite-for-saml)
+  - [Create a SAML app](#create-a-saml-app)
+    - [Google IdP Information](#google-idp-information)
+    - [Basic information for your Custom App](#basic-information-for-your-custom-app)
+    - [Service Provider Details](#service-provider-details)
+    - [Attribute Mapping](#attribute-mapping)
+    - [Setting up SSO for Cerb](#setting-up-sso-for-cerb)
 
-  - Enabling the service in G Suite
+  - [Enabling the service in G Suite](#enabling-the-service-in-g-suite)
 
-- Configure Cerb for authentication with G Suite SAML
-  - Create a SAML service in Cerb
-  - Configure SSO for worker logins
+- [Configure Cerb for authentication with G Suite SAML](#configure-cerb-for-authentication-with-g-suite-saml)
+  - [Create a SAML service in Cerb](#create-a-saml-service-in-cerb)
+  - [Configure SSO for worker logins](#configure-sso-for-worker-logins)
 
-- Log in to Cerb using G Suite
+- [Log in to Cerb using G Suite](#log-in-to-cerb-using-g-suite)
 
 # Introduction
 

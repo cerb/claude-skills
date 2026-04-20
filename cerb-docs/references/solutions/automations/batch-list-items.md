@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using |batch filter
 
-The |batch filter divides a list into smaller sets. These sets can be specified to a size, incomplete sets can be filled with a default value, and original array keys can be preserved or not.
+The [|batch](/docs/scripting/filters/#batch) filter divides a list into smaller sets. These sets can be specified to a size, incomplete sets can be filled with a default value, and original array keys can be preserved or not.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

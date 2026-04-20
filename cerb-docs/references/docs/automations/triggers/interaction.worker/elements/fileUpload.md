@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker/elements/file
 summary: "This page provides detailed information on the 'fileUpload' element used in interaction web forms within Cerb. It explains how this element facilitates file uploads by creating an attachment or automation resource record and returning its ID or token. The document outlines the syntax for using the 'fileUpload' element, including setting a placeholder with the element name, handling key expansion for file fields, and specifying the record type to create with the uploaded file. It also covers optional features such as labeling the form element, requiring user input, and implementing custom validation scripts to ensure the uploaded file meets specific criteria, such as being a valid image or not exceeding a certain size."
 tags: ["docs", "docs-automations"]
 ---
-In interaction web forms, a **fileUpload** element displays a file upload prompt. This creates an attachment or automation resource record and returns its ID or token.
+In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **fileUpload** element displays a file upload prompt. This creates an [attachment](/docs/records/types/attachment/) or [automation resource](/docs/records/types/automation_resource/) record and returns its ID or token.
 
 The element name (e.g. `fileUpload/photo` in the example below) is used to set a placeholder.
 
@@ -25,8 +25,8 @@ The record type to create with the uploaded file.
 
 | Record | &nbsp; |
 | --- | --- |
-| `attachment` | (default) A long-term file attachment. This returns a record dictionary. |
-| `automation_resource` | A temporary automation resource. This returns the resource token. |
+| `attachment` | (default) A long-term file [attachment](/docs/records/types/attachment/). This returns a record dictionary. |
+| `automation_resource` | A temporary [automation resource](/docs/records/types/automation_resource/). This returns the resource token. |
 
 ### label:
 

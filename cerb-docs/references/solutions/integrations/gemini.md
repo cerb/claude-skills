@@ -5,15 +5,15 @@ url: "https://cerb.ai/solutions/integrations/gemini/"
 summary: "This guide walks through connecting Cerb to Google's Gemini AI platform, including setting up API access, configuring connected services, and examples of making chat completion requests for text classification and other AI tasks."
 tags: ["solutions"]
 ---
-- Introduction
-- Gemini API
-  - Create an API key
+- [Introduction](#introduction)
+- [Gemini API](#gemini-api)
+  - [Create an API key](#create-an-api-key)
 
-- Configure Cerb
-  - Create the connected service
+- [Configure Cerb](#configure-cerb)
+  - [Create the connected service](#create-the-connected-service)
 
-- Examples
-  - Chat completion
+- [Examples](#examples)
+  - [Chat completion](#chat-completion)
 
 # Introduction
 
@@ -35,7 +35,7 @@ Copy the API key to your clipboard for use in Cerb.
 
 ### Create the connected service
 
-(Added in 11.1.3)
+(Added in [11.1.3](/releases/11.1.3/))
 
 Navigate to **Search&nbsp;» Connected Services**.
 

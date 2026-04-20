@@ -13,14 +13,14 @@ tags: ["docs"]
 
 This plugin adds Domain objects for managing webhosting/SaaS/On-Demand infrastructure.
 
-- Extensions
-  - Bot Action
-  - Bot Event
-  - Event Listener
-  - Page Section
-  - Page Type
-  - Record Type
-  - Rest API Controller
+- [Extensions](#extensions)
+  - [Bot Action](#bot-action)
+  - [Bot Event](#bot-event)
+  - [Event Listener](#event-listener)
+  - [Page Section](#page-section)
+  - [Page Type](#page-type)
+  - [Record Type](#record-type)
+  - [Rest API Controller](#rest-api-controller)
 
 # Extensions
 
@@ -52,5 +52,5 @@ This plugin adds Domain objects for managing webhosting/SaaS/On-Demand infrastru
 
 | Domains | `cerberusweb.datacenter.domains.rest` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

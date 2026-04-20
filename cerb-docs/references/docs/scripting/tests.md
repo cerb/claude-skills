@@ -13,17 +13,17 @@ When used as output, a test returns `1` for `true`, and nothing for `false`.
 
 These tests are available in bot scripts and snippets:
 
-- empty
-- even
-- iterable
-- null
-- numeric
-- odd
-- pattern
-- prefixed
-- record type
-- same as
-- suffixed
+- [empty](#empty)
+- [even](#even)
+- [iterable](#iterable)
+- [null](#null)
+- [numeric](#numeric)
+- [odd](#odd)
+- [pattern](#pattern)
+- [prefixed](#prefixed)
+- [record type](#record-type)
+- [same as](#same-as)
+- [suffixed](#suffixed)
 
 ## empty
 
@@ -185,7 +185,7 @@ The test accepts one or more patterns.
 1
 ```
 
-\< Filters
+[\< Filters](/docs/scripting/filters/)
 
-Plugins \>
+[Plugins \>](/docs/plugins/)
 

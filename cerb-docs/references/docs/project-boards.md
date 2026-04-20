@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
  
 
-**Project boards** are based on the kanban1 development process, which itself was derived from improvements to just-in-time production pioneered by Japanese manufacturer Toyota in the 1940s2.
+**Project boards** are based on the kanban[1](#fn:kanban-dev) development process, which itself was derived from improvements to just-in-time production pioneered by Japanese manufacturer Toyota in the 1940s[2](#fn:kanban).
 
 With kanban, each project has a **board**, and each unit of work in that project is represented by a **card**. Cards are organized into **columns** on the board based on their stage of completion. Typically, cards move from left to right through the columns of the process.
 
@@ -21,13 +21,13 @@ However, Cerb's digital implementation of kanban provides several enhancements:
 
 - An activity log provides a full history of changes to the project and its cards.
 
-- Automations can be triggered every time a card is moved into a new column. This can automate field changes, comments, notifications, webhooks, or anything else.
+- [Automations](/docs/automations/) can be [triggered](/docs/automations/triggers/projectBoard.cardAction/) every time a card is moved into a new column. This can automate field changes, comments, notifications, webhooks, or anything else.
 
-- Automations can also customize the display of cards based on dynamic factors like record type, field values, custom fields, and the current column. Cards always show the most recent information available.
+- Automations can also [customize the display of cards](/docs/automations/triggers/projectBoard.renderCard/) based on dynamic factors like record type, field values, custom fields, and the current column. Cards always show the most recent information available.
 
 ### References
 
-1. Wikipedia: Kanban (development) - https://en.wikipedia.org/wiki/Kanban\_(development))&nbsp;↩
+1. Wikipedia: Kanban (development) - https://en.wikipedia.org/wiki/Kanban\_(development))&nbsp;[↩](#fnref:kanban-dev)
 
-2. Wikipedia: Kanban - https://en.wikipedia.org/wiki/Kanban&nbsp;↩
+2. Wikipedia: Kanban - https://en.wikipedia.org/wiki/Kanban&nbsp;[↩](#fnref:kanban)
 

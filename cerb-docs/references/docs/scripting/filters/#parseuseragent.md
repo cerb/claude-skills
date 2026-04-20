@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## parse\_user\_agent
 
-(Added in 10.3.2)
+(Added in [10.3.2](/releases/10.3.2/))
 
 Parse a user-agent string into an object for validation.
 

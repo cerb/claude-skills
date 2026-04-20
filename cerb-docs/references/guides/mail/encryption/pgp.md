@@ -7,11 +7,11 @@ tags: ["guides"]
 ---
 ### Most email isn't secure
 
-When you send a typical email message, it's readable by more than just the sender and recipients. Without a secure TLS/SSL1 connection between peers, anyone between a sender and recipient can read a message by monitoring network traffic (often even others users of the same network; or worse, public wifi hotspot). Even with TLS/SSL protecting the initial transmission, subsequent mail servers may not continue the use of encryption, and a message is usually still readable _"at rest"_ when stored on each mail server between the communicating parties.
+When you send a typical email message, it's readable by more than just the sender and recipients. Without a secure TLS/SSL[1](#fn:tls) connection between peers, anyone between a sender and recipient can read a message by monitoring network traffic (often even others users of the same network; or worse, public wifi hotspot). Even with TLS/SSL protecting the initial transmission, subsequent mail servers may not continue the use of encryption, and a message is usually still readable _"at rest"_ when stored on each mail server between the communicating parties.
 
 To send a truly secure email message, the contents of the message itself must be encrypted in a way that only the sender and recipient understand. This leaves only the _"metadata"_ of the message exposed (the sender, recipient, date, etc). Without the metadata, mail servers wouldn't know how to route the message.
 
-The 8.1 release includes support for encrypted email communication using the OpenPGP2 standard.
+The [8.1](/releases/8.1/) release includes support for encrypted email communication using the OpenPGP[2](#fn:openpgp) standard.
 
 ### Symmetric encryption
 
@@ -21,7 +21,7 @@ At its core, encryption requires a _"shared secret"_ that both the sender and re
 
 However, it's not always possible or practical to physically exchange a secret with everyone you want to securely communicate with (especially not on the Internet). This led to the advent of _asymmetric encryption_, where parties can securely communicate without establishing a shared secret beforehand. They have different information which can be combined cryptographically to unlock a shared secret.
 
-In an asymmetric system, each participant has a pair of encryption _keys_ 3 – one is made _public_ and the other is kept _private_. These keys are typically stored as files.
+In an asymmetric system, each participant has a pair of encryption _keys_ [3](#fn:public-key) – one is made _public_ and the other is kept _private_. These keys are typically stored as files.
 
 - The **public key** can be used by anyone to encrypt messages for a particular recipient, or to _verify_ authorship of their messages.
 
@@ -132,7 +132,7 @@ The important thing to keep in mind with public keys is that you trust their sou
 
 OpenPGP opts for a decentralized _"web of trust"_ where peers _sign_ each others keys to certify their authenticity. This is in contrast to the issuance of SSL certificates, which relies on a central authority.
 
-We highly recommend using a service like Keybase4, which not only verifies the email address of a public key, but also allows the key owner to prove their identity by verifying ownership of domain names, profiles on various services (e.g. Twitter, GitHub), Bitcoin wallets, etc.
+We highly recommend using a service like Keybase[4](#fn:keybase), which not only verifies the email address of a public key, but also allows the key owner to prove their identity by verifying ownership of domain names, profiles on various services (e.g. Twitter, GitHub), Bitcoin wallets, etc.
 
 You can import public keys from Keybase right into Cerb.
 
@@ -233,11 +233,11 @@ If you want automatic decryption of messages, you need to consider the security 
 
 # References
 
-1. Wikipedia: Transport Layer Security (TLS) - https://en.wikipedia.org/wiki/Transport\_Layer\_Security&nbsp;↩
+1. Wikipedia: Transport Layer Security (TLS) - https://en.wikipedia.org/wiki/Transport\_Layer\_Security&nbsp;[↩](#fnref:tls)
 
-2. Wikipedia: OpenPGP - https://en.wikipedia.org/wiki/Pretty\_Good\_Privacy&nbsp;↩
+2. Wikipedia: OpenPGP - https://en.wikipedia.org/wiki/Pretty\_Good\_Privacy&nbsp;[↩](#fnref:openpgp)
 
-3. Wikipedia: Public-key Cryptography - https://en.wikipedia.org/wiki/Public-key\_cryptography&nbsp;↩
+3. Wikipedia: Public-key Cryptography - https://en.wikipedia.org/wiki/Public-key\_cryptography&nbsp;[↩](#fnref:public-key)
 
-4. Keybase - https://keybase.io/&nbsp;↩
+4. Keybase - https://keybase.io/&nbsp;[↩](#fnref:keybase)
 

@@ -13,14 +13,14 @@ tags: ["docs"]
 
 Public-facing, modular community portals
 
-- Extensions
-  - Community Portal Type
+- [Extensions](#extensions)
+  - [Community Portal Type](#community-portal-type)
 
 # Extensions
 
 ### Community Portal Type
 
-| **Community Portal** | `cerb.community.portal` |
+| [**Community Portal**](/docs/plugins/extensions/cerb.community.portal/) | `cerb.community.portal` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

@@ -5,18 +5,18 @@ url: "https://cerb.ai/docs/automations/events/mail.moved/"
 summary: "This page provides information about the 'mail.moved' automation events in Cerb, which are triggered when a ticket is moved to a new group or bucket. It details the placeholders available in the automation event dictionary, including keys for the current actor, the previous group and bucket, and the new state of the moved ticket. The page specifies that there are no outputs for this event."
 tags: ["docs", "docs-automations"]
 ---
-**mail.moved** automation events trigger after a ticket is moved to a new group or bucket.
+**mail.moved** [automation](/docs/automations/) [events](/docs/automations/#events) trigger after a ticket is moved to a new group or bucket.
 
 # Placeholders
 
-The automation event dictionary starts with the following values:
+The automation event [dictionary](/docs/automations/#dictionaries) starts with the following values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| `actor_*` | record | The current actor record. Supports key expansion. `actor__type` is the record type alias (e.g. `automation`, `worker`) |
-| `was_group_*` | record | The group record before the ticket was moved. Supports key expansion. |
-| `was_bucket_*` | record | The bucket record before the ticket was moved. Supports key expansion. |
-| `ticket_*` | record | The new state of the moved ticket. Supports key expansion. |
+| `actor_*` | record | The current [actor](/docs/records/types/) record. Supports key expansion. `actor__type` is the record type alias (e.g. `automation`, `worker`) |
+| `was_group_*` | record | The [group](/docs/records/types/group/) record before the ticket was moved. Supports key expansion. |
+| `was_bucket_*` | record | The [bucket](/docs/records/types/bucket/) record before the ticket was moved. Supports key expansion. |
+| `ticket_*` | record | The new state of the moved [ticket](/docs/records/types/ticket/). Supports key expansion. |
 
 # Outputs
 
@@ -26,10 +26,10 @@ The automation event dictionary starts with the following values:
 
 Set a watcher if a ticket is moved to a particular group:
 
-- automation
-- policy
-- event
-- inputs
+- [automation](#)
+- [policy](#)
+- [event](#)
+- [inputs](#)
 
 - 
 ```

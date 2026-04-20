@@ -5,9 +5,9 @@ url: "https://cerb.ai/workflows/wgm.search.multi_record/"
 summary: "This page describes the Smart Multi-record Search workflow in Cerb, which enables a smart search that can search multiple record types (organizations, email addresses, tickets, and workers) simultaneously based on a single query. Access the Smart Search interaction from the global menu at the bottom right corner of any page, allowing for efficient searching across multiple record types with a single query."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
 
 # Introduction
 

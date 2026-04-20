@@ -13,12 +13,12 @@ tags: ["docs"]
 
 This plugin provides integration with Atlassian JIRA via their REST API. It is intended to be a bridge used by other plugins to communicate with JIRA services.
 
-- Extensions
-  - Bot Event
-  - Page Section
-  - Record Type
-  - Scheduled Job
-  - Search Schema
+- [Extensions](#extensions)
+  - [Bot Event](#bot-event)
+  - [Page Section](#page-section)
+  - [Record Type](#record-type)
+  - [Scheduled Job](#scheduled-job)
+  - [Search Schema](#search-schema)
 
 # Extensions
 
@@ -48,5 +48,5 @@ This plugin provides integration with Atlassian JIRA via their REST API. It is i
 
 | Jira Issues | `jira.search.schema.jira_issue` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

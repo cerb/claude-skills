@@ -5,24 +5,24 @@ url: "https://cerb.ai/guides/records/sync-records-third-party/"
 summary: "This guide explains how to reliably sync record changes from Cerb to external systems using cursor-based pagination that handles bulk updates correctly. It covers the challenge of syncing large batches of records that may share the same timestamp, and demonstrates a solution using dual-field sorting (updated + id) with persistent cursors. The approach uses storage.get and storage.set to maintain sync state between invocations, and automation timers for background processing. A complete example demonstrates syncing ticket records to a third-party system."
 tags: ["guides"]
 ---
-- Introduction
-- The problem with timestamp-only cursors
-- The solution: Dual-field cursor pagination
-- Persisting sync state
-- Running syncs in the background
-- Example: Syncing tickets to an external system
-  - Create the workflow
-  - Understanding the workflow
-    - Timer automation
-    - Function automation
+- [Introduction](#introduction)
+- [The problem with timestamp-only cursors](#the-problem-with-timestamp-only-cursors)
+- [The solution: Dual-field cursor pagination](#the-solution-dual-field-cursor-pagination)
+- [Persisting sync state](#persisting-sync-state)
+- [Running syncs in the background](#running-syncs-in-the-background)
+- [Example: Syncing tickets to an external system](#example-syncing-tickets-to-an-external-system)
+  - [Create the workflow](#create-the-workflow)
+  - [Understanding the workflow](#understanding-the-workflow)
+    - [Timer automation](#timer-automation)
+    - [Function automation](#function-automation)
 
-  - Batch processing
-  - Enabling the timer
+  - [Batch processing](#batch-processing)
+  - [Enabling the timer](#enabling-the-timer)
 
-- Handling large initial syncs
-- Rate limiting
-- Handling deleted records
-- Next steps
+- [Handling large initial syncs](#handling-large-initial-syncs)
+- [Rate limiting](#rate-limiting)
+- [Handling deleted records](#handling-deleted-records)
+- [Next steps](#next-steps)
 
 # Introduction
 
@@ -59,7 +59,7 @@ For **immutable records** that only need to be synced once (not on updates), you
 
 # Persisting sync state
 
-Use storage.get and storage.set to persist the cursor between sync invocations:
+Use [storage.get](/docs/automations/commands/storage.get/) and [storage.set](/docs/automations/commands/storage.set/) to persist the cursor between sync invocations:
 
 ```
 storage.get: output: sync_cursor inputs: key: sync.example.tickets.cursor default: updated@int: 0 id@int: 0
@@ -73,7 +73,7 @@ storage.set: inputs: key: sync.example.tickets.cursor value: updated@int: {{ las
 
 # Running syncs in the background
 
-For production use, run the sync on a schedule using an automation timer. This allows the sync to run continuously in the background without manual intervention.
+For production use, run the sync on a schedule using an [automation timer](/docs/automations/#timers). This allows the sync to run continuously in the background without manual intervention.
 
 A typical schedule might run every few minutes:
 
@@ -82,7 +82,7 @@ A typical schedule might run every few minutes:
 */5 * * * *
 ```
 
-See the guide on creating recurring tasks for more details on automation timers.
+See the guide on [creating recurring tasks](/guides/automations/automation.timer/create-recurring-tasks/) for more details on automation timers.
 
 # Example: Syncing tickets to an external system
 
@@ -99,7 +99,7 @@ Navigate to **Search&nbsp;» Workflows** and click the **(+)** icon to create a 
 
 Select **(Empty)** and click **Create & Continue**.
 
-Paste the following workflow template. Change occurrences of `example.syncTickets` to your own workflow identifier using a prefix based on a domain you own (e.g. `com.example.syncTickets`).
+Paste the following [workflow](/docs/workflows/) template. Change occurrences of `example.syncTickets` to your own workflow identifier using a prefix based on a domain you own (e.g. `com.example.syncTickets`).
 
 ```
 workflow: name: example.syncTickets version: 2026-02-04T01:28:17Z description: Sync ticket changes to a third-party system using cursor pagination requirements: cerb_version: >=11.0 <12.0 cerb_plugins: cerberusweb.core, records: automation/syncTicketFunction: fields: name: example.syncTicket.function extension_id: cerb.trigger.automation.function description: Sync a single ticket record to a third-party system script@raw: inputs: record/ticket: record_type: ticket required@bool: yes start: # Implement your sync logic here # For example, use http.request: to call an external API log: Syncing ticket # {{ inputs.ticket.id }} : {{ inputs.ticket._label }} return: synced@bool: yes policy_kata@raw: commands: # Add policies for http.request: etc automation/syncTickets: fields: name: example.syncTickets extension_id: cerb.trigger.automation.timer description: Sync ticket changes to a third-party system using cursor pagination script@raw: start: # Load the sync cursor from storage storage.get: output: sync_cursor inputs: key: sync.example.tickets.cursor default: updated@int: 0 id@int: 0 # Search for changed tickets using cursor pagination record.search: output: results inputs: record_type: ticket record_query@text: status:o ( updated:${last_sync_since} OR (updated:${last_sync_at} id:>${last_sync_id}) ) sort:updated,id limit:10 record_query_params: last_sync_since@int: {{ sync_cursor.updated+1 }} last_sync_at@int: {{ sync_cursor.updated }} to {{ sync_cursor.updated }} last_sync_id@int: {{ sync_cursor.id }} on_success: # Process each ticket through the sync function repeat: each@key: results as: ticket do: function: uri: cerb:automation:example.syncTicket.function inputs: ticket: {{ ticket.id }} # Track the last synced record for cursor update set: last_sync_ticket@key: ticket # Only update cursor if we processed records decision: outcome/hasRecords: if@bool: {{ last_sync_ticket.id }} then: # Save the new cursor position storage.set: inputs: key: sync.example.tickets.cursor value: updated@int: {{ last_sync_ticket.updated }} id@int: {{ last_sync_ticket.id }} return: records_synced@int: {{ results|length }} policy_kata@raw: commands: storage.get: allow@bool: yes storage.set: allow@bool: yes record.search: deny/type@bool: {{ inputs.record_type is not record type ('ticket') }} allow@bool: yes function: deny/uri@bool: {{ uri is not prefixed ('cerb:automation:example.syncTicket.') }} allow@bool: yes automation_timer/syncTimer: fields: name: Sync tickets to third-party is_disabled@int: 1 is_recurring@int: 1 recurring_patterns@text: # Run every 5 minutes */5 * * * * recurring_timezone: UTC automations_kata@raw: automation/sync: uri: cerb:automation:example.syncTickets
@@ -109,7 +109,7 @@ Click the **Continue** button three times.
 
 ## Understanding the workflow
 
-This workflow creates three records: a function automation, a timer automation, and an automation timer. When you update the workflow template, changes are automatically synchronized to these records.
+This [workflow](/docs/workflows/) creates three records: a function automation, a timer automation, and an automation timer. When you update the workflow template, changes are automatically synchronized to these records.
 
 ### Timer automation
 
@@ -125,7 +125,7 @@ The timer automation (`example.syncTickets`) follows this flow:
 
 ### Function automation
 
-The function automation (`example.syncTicket.function`) receives a single ticket as a record input:
+The function automation (`example.syncTicket.function`) receives a single ticket as a [record input](/docs/automations/inputs/record/):
 
 ```
 inputs: record/ticket: record_type: ticket required@bool: yes 
@@ -135,7 +135,7 @@ inputs: record/ticket: record_type: ticket required@bool: yes
    return: synced@bool: yes
 ```
 
-Replace the `log:` command with your actual sync logic, such as an http.request to call an external API.
+Replace the `log:` command with your actual sync logic, such as an [http.request](/docs/automations/commands/http.request/) to call an external API.
 
 ## Batch processing
 
@@ -170,7 +170,7 @@ You can control sync frequency at multiple levels:
 
 2. **Batch size**: Reduce the `limit:` in the search query to process fewer records per invocation.
 
-3. **Monitoring with metrics**: Use the built-in automation.invocations metric to track how often your sync automations run and what exit states they produce. This helps identify if syncs are running too frequently or failing unexpectedly.
+3. **Monitoring with metrics**: Use the built-in [automation.invocations](/docs/metrics/automation.invocations/) metric to track how often your sync automations run and what exit states they produce. This helps identify if syncs are running too frequently or failing unexpectedly.
 
 If the external API has strict rate limits, you can add delays between function calls or implement exponential backoff on errors within the sync function.
 
@@ -184,7 +184,7 @@ For deleted records, consider:
 
 2. **Full reconciliation**: Periodically sync all record IDs and remove any from the third-party system that no longer exist in Cerb.
 
-3. **Record change events**: Use record.changed automation events to push deletes in real-time.
+3. **Record change events**: Use [record.changed](/docs/automations/triggers/record.changed/) automation events to push deletes in real-time.
 
 # Next steps
 

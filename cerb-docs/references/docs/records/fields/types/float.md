@@ -11,7 +11,7 @@ The value is a floating point number.
 
 ### Packages
 
-As JSON from packages:
+As JSON from [packages](/docs/packages/):
 
 ```
 { 
@@ -21,13 +21,13 @@ As JSON from packages:
 
 ### Records API
 
-In PUT or POST requests from the API:
+In [PUT](/docs/api/endpoints/records/#update) or [POST](/docs/api/endpoints/records/#create) requests from the [API](/docs/api/):
 
 ```
 &amp;fields[spam_score]=0.9999
 ```
 
-\< Extension
+[\< Extension](/docs/records/fields/types/extension/)
 
-Image \>
+[Image \>](/docs/records/fields/types/image/)
 

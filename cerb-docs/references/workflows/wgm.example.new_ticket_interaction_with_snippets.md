@@ -5,16 +5,16 @@ url: "https://cerb.ai/workflows/wgm.example.new_ticket_interaction_with_snippets
 summary: "This workflow shows how to combine snippets with automation interactions to create a ticket creation system. It includes a snippet template with various prompt types (text, picklist, checkbox), an automation that generates interactive forms based on snippet prompts, and a workspace widget for easy access. The workflow demonstrates dynamic form generation, email parsing, and ticket creation from templated content."
 tags: ["workflows"]
 ---
-- Introduction
-  - Key Components
-    - Snippet Template
-    - Automation
-    - Workspace Integration
+- [Introduction](#introduction)
+  - [Key Components](#key-components)
+    - [Snippet Template](#snippet-template)
+    - [Automation](#automation)
+    - [Workspace Integration](#workspace-integration)
 
-  - Use Cases
+  - [Use Cases](#use-cases)
 
-- Importing the workflow
-- Usage
+- [Importing the workflow](#importing-the-workflow)
+- [Usage](#usage)
 
 # Introduction
 

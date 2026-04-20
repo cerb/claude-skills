@@ -7,12 +7,12 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using |date filter
 
-Here is an example of using the |date filter to format dates and handle different timezones.
+Here is an example of using the [|date](/docs/scripting/filters/#date) filter to format dates and handle different timezones.
 
 You can use any of the formating options from PHP DateTime::format.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

@@ -7,7 +7,7 @@ tags: ["guides"]
 ---
 # Introduction
 
-An AI agent can generate search queries for any record type from natural language.
+An [AI agent](/docs/automations/commands/llm.agent/) can generate search queries for any record type from natural language.
 
 In this example we'll use Anthropic's Claude Haiku 4.5 model. You can use any language model from popular providers.
 
@@ -15,18 +15,18 @@ https://www.youtube.com/embed/3quC6aj6FqA
 
 When dealing with personally identifying information (PII) you should use a model with strong privacy protection. Amazon Bedrock runs Anthropic Claude within an AWS region, or you can use a locally hosted model with tools like Ollama or Docker Model Runner.
 
-- Introduction
-- Installation
-  - Connect to an Anthropic account
-  - Import the example workflow
+- [Introduction](#introduction)
+- [Installation](#installation)
+  - [Connect to an Anthropic account](#connect-to-an-anthropic-account)
+  - [Import the example workflow](#import-the-example-workflow)
 
-- Usage
+- [Usage](#usage)
 
 # Installation
 
 ## Connect to an Anthropic account
 
-Create an Anthropic connected account in Cerb.
+[Create an Anthropic connected account](/solutions/integrations/anthropic/) in Cerb.
 
 ## Import the example workflow
 

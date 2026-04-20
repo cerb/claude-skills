@@ -5,10 +5,10 @@ url: "https://cerb.ai/solutions/automations/calculate-week-range/"
 summary: "This page provides a solution for calculating the weekly date ranges for a full year using the `date_lerp()` function in Cerb. The script interpolates timestamps between two dates."
 tags: ["solutions", "solutions-automations"]
 ---
-You can use `date_lerp()` to calculate the date ranges for a full year. This interpolates the timestamps between two dates with the given unit and step.
+You can use [`date_lerp()`](/docs/scripting/functions/#date_lerp) to calculate the date ranges for a full year. This interpolates the timestamps between two dates with the given unit and step.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

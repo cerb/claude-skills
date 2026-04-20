@@ -7,14 +7,14 @@ tags: ["guides"]
 ---
  
 
-- Introduction
-- Configure Okta as an OpenID Connect identity provider
-  - Configure your identity provider
+- [Introduction](#introduction)
+- [Configure Okta as an OpenID Connect identity provider](#configure-okta-as-an-openid-connect-identity-provider)
+  - [Configure your identity provider](#configure-your-identity-provider)
 
-- Configure Cerb for authentication with Okta
-  - Create an OpenID service for Okta
-    - Configure SSO
-    - Log in
+- [Configure Cerb for authentication with Okta](#configure-cerb-for-authentication-with-okta)
+  - [Create an OpenID service for Okta](#create-an-openid-service-for-okta)
+    - [Configure SSO](#configure-sso)
+    - [Log in](#log-in)
 
 # Introduction
 

@@ -21,7 +21,7 @@ tags: ["docs"]
 
 ## We believe in privacy
 
-- We will respect your privacy regarding any information we may collect while providing our services.
+- We will [respect your privacy](/privacy/) regarding any information we may collect while providing our services.
 - You are not the product. We sell software, not advertising.
 - Your data is your property. We don't monetize it, and we only share it to the degree necessary to provide the services you request, or to comply with the law.
 

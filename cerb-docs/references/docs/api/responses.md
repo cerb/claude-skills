@@ -7,10 +7,10 @@ tags: ["docs"]
 ---
 The Web API answers requests with one or more **objects** encoded in JSON or XML. Each response is a single-level **dictionary** of **key**/**value** pairs.
 
-- Dictionaries
-  - Expanding keys in API requests
+- [Dictionaries](#dictionaries)
+  - [Expanding keys in API requests](#expanding-keys-in-api-requests)
 
-- Meta data
+- [Meta data](#meta-data)
 
 # Dictionaries
 
@@ -76,7 +76,7 @@ The response looks like:
  }
 ```
 
-You can read more about how dictionaries work in the documentation for bots.
+You can read more about how [dictionaries](/docs/guide/developers/dictionaries/) work in the documentation for bots.
 
 ## Expanding keys in API requests
 
@@ -87,7 +87,7 @@ group__context: "cerberusweb.contexts.group" ,
      group_id: 6 ,
 ```
 
-When you're using a dictionary in automations you can continue to expand keys as needed.
+When you're using a dictionary in [automations](/docs/automations/) you can continue to expand keys as needed.
 
 However, with the API, the `GET` request would have already returned the above JSON from the server, so accessing undefined keys from the dictionary would just return `null` values.
 

@@ -5,19 +5,19 @@ url: "https://cerb.ai/workflows/cerb.sla/"
 summary: "This page provides a comprehensive guide on implementing and managing Service Level Agreements (SLAs) within Cerb. It covers the introduction, installation, and detailed usage instructions for adding and assigning SLA plans to organizations, sending test messages, and integrating SLA widgets into ticket profiles. The guide also explains how to update SLA hours, sort work by SLA, and manage the SLA deadline lifecycle. Additionally, it includes related workflows to automate organization assignment and prioritize tickets nearing SLA deadlines. The reference section offers a template for creating custom SLA workflows, ensuring users can tailor the system to their specific needs."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Adding SLA plans
-  - Assigning SLA plans to organizations
-  - Send a test message from that organization
-  - Add the SLA widget to ticket profiles
-  - Updating SLA hours
-  - Sorting work by SLA
-  - SLA deadline lifecycle
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Adding SLA plans](#adding-sla-plans)
+  - [Assigning SLA plans to organizations](#assigning-sla-plans-to-organizations)
+  - [Send a test message from that organization](#send-a-test-message-from-that-organization)
+  - [Add the SLA widget to ticket profiles](#add-the-sla-widget-to-ticket-profiles)
+  - [Updating SLA hours](#updating-sla-hours)
+  - [Sorting work by SLA](#sorting-work-by-sla)
+  - [SLA deadline lifecycle](#sla-deadline-lifecycle)
 
-- Related workflows
-- Reference
+- [Related workflows](#related-workflows)
+- [Reference](#reference)
 
 # Introduction
 
@@ -25,7 +25,7 @@ This workflow enforces Service Level Agreements (SLA) for tickets from organizat
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Service Level Agreements**.
 
@@ -123,9 +123,9 @@ When a participant responds to the ticket without an existing SLA deadline, a ne
 
 # Related workflows
 
-You can enable the Sender Org By Hostname workflow to automatically add organizations to new contacts by email hostname. This will ensure they receive the appropriate SLA deadline.
+You can enable the [Sender Org By Hostname](/workflows/cerb.email.org_by_hostname/) workflow to automatically add organizations to new contacts by email hostname. This will ensure they receive the appropriate SLA deadline.
 
-Use the Auto Dispatcher workflow to give priority assignment to tickets with an approaching SLA deadline.
+Use the [Auto Dispatcher](/workflows/cerb.auto_dispatcher/) workflow to give priority assignment to tickets with an approaching SLA deadline.
 
 # Reference
 

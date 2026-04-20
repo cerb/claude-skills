@@ -5,15 +5,15 @@ url: "https://cerb.ai/guides/scaling/redis/"
 summary: "This guide provides comprehensive instructions for configuring Redis as a caching solution using Docker containers. It covers both basic and secure configurations, including creating Redis containers, managing network connectivity, setting passwords, and configuring Cerb to use Redis. The guide also includes troubleshooting tips, best practices for security, and common Docker commands for managing Redis containers, all aimed at improving application performance through effective caching."
 tags: ["guides"]
 ---
-- Introduction
-- Requirements
-- Local Development Setup
-- Verifying the Connection
-- References
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Local Development Setup](#local-development-setup)
+- [Verifying the Connection](#verifying-the-connection)
+- [References](#references)
 
 # Introduction
 
-Redis1 is an in-memory data structure store that serves as a powerful caching solution for Cerb. While Cerb's default filesystem caching works well for single-server setups, Redis enables you to scale your deployment across multiple servers while significantly reducing database query traffic. By caching frequently accessed but infrequently changed content (like worker data, groups, and bucket information), Redis helps optimize your application's performance. This guide will walk you through configuring Redis for caching in Cerb using Docker containers.
+Redis[1](#fn:redis) is an in-memory data structure store that serves as a powerful [caching](/docs/setup/configure/cache/) solution for Cerb. While Cerb's default filesystem caching works well for single-server setups, Redis enables you to scale your deployment across multiple servers while significantly reducing database query traffic. By caching frequently accessed but infrequently changed content (like worker data, groups, and bucket information), Redis helps optimize your application's performance. This guide will walk you through configuring Redis for caching in Cerb using Docker containers.
 
 # Requirements
 
@@ -57,5 +57,5 @@ You should receive `PONG` as a response.
 
 # References
 
-1. Redis: dockerhub - https://hub.docker.com/\_/redis&nbsp;↩
+1. Redis: dockerhub - https://hub.docker.com/\_/redis&nbsp;[↩](#fnref:redis)
 

@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using array\_diff() function
 
-Here is an example of using the array\_diff() function to find elements that exist in the second array but not in the first.
+Here is an example of using the [array\_diff()](/docs/scripting/functions/#array_diff) function to find elements that exist in the second array but not in the first.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

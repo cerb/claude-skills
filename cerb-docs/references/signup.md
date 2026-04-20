@@ -18,7 +18,7 @@ Up and running in minutes with Docker
 - Guided tutorial on first login
 - Switch to Cerb Cloud anytime
 
-Read the installation guide
+[Read the installation guide](/docs/installation/)
 
 ## Cerb Cloud
 

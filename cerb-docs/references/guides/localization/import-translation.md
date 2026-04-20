@@ -5,27 +5,27 @@ url: "https://cerb.ai/guides/localization/import-translation/"
 summary: "This page provides a comprehensive guide on importing a translation language pack into Cerb. It covers enabling the Translation Editor plugin, downloading and importing language packs, and configuring language preferences for both personal and other users' settings. The guide explains the format and naming conventions of language packs, which are shared as `.xml` files in the TMX1 format, and provides examples of language codes using ISO standards. Additionally, it offers instructions on how to enable the necessary plugin, download available language packs, and import them into the system. The page also includes references to relevant Wikipedia articles for further information on translation memory exchange and ISO language and country codes."
 tags: ["guides"]
 ---
-- Introduction
-- Enable the Translation Editor plugin
-- Download a language pack
-- Import a language pack
-- Configure the language
-  - Setting your own language preference
-  - Modifying someone else's language preference
+- [Introduction](#introduction)
+- [Enable the Translation Editor plugin](#enable-the-translation-editor-plugin)
+- [Download a language pack](#download-a-language-pack)
+- [Import a language pack](#import-a-language-pack)
+- [Configure the language](#configure-the-language)
+  - [Setting your own language preference](#setting-your-own-language-preference)
+  - [Modifying someone else's language preference](#modifying-someone-elses-language-preference)
 
-- References
+- [References](#references)
 
 # Introduction
 
-The text within Cerb's interface can be translated into any language.
+The text within Cerb's interface [can be translated](/guides/localization/create-translation/) into any language.
 
-**Translations** are shared as `.xml` files in the TMX1 format.
+**Translations** are shared as `.xml` files in the TMX[1](#fn:tmx) format.
 
 Language packs use the following naming convention:
 
 `cerb_lang_<language>_<country>.xml`
 
-The `<language>` and `<country>` codes use ISO 6392 and ISO 31663 respectively.
+The `<language>` and `<country>` codes use ISO 639[2](#fn:iso-639) and ISO 3166[3](#fn:iso-3166) respectively.
 
 For instance:
 
@@ -36,7 +36,7 @@ For instance:
 - **es\_MX**: Spanish (Mexico)
 - **it\_IT**: Italian (Italy)
 
-Workers and contacts can each configure their own preferred language.
+[Workers](/docs/workers/) and [contacts](/docs/contacts/) can each configure their own preferred language.
 
 This guide walks through the process of installing a new language pack.
 
@@ -76,7 +76,7 @@ Right-click one of these translation links and select **Download**:
 - Portuguese (Portugal)
 - Russian (Russia)
 
-**Can't find the language you're looking for?** We offer billing credits for creating, maintaining, and sharing translations.
+**Can't find the language you're looking for?** We offer billing credits for [creating, maintaining, and sharing translations](/guides/localization/create-translation/).
 
 # Import a language pack
 
@@ -118,9 +118,9 @@ You should see your new language added to the translation worklist.
 
 # References
 
-1. Wikipedia: Translation Memory eXchange (TMX) - https://en.wikipedia.org/wiki/Translation\_Memory\_eXchange&nbsp;↩
+1. Wikipedia: Translation Memory eXchange (TMX) - https://en.wikipedia.org/wiki/Translation\_Memory\_eXchange&nbsp;[↩](#fnref:tmx)
 
-2. Wikipedia: ISO 639 - https://en.wikipedia.org/wiki/ISO\_639&nbsp;↩
+2. Wikipedia: ISO 639 - https://en.wikipedia.org/wiki/ISO\_639&nbsp;[↩](#fnref:iso-639)
 
-3. Wikipedia: ISO 3166-1 alpha-2 - https://en.wikipedia.org/wiki/ISO\_3166-1\_alpha-2&nbsp;↩
+3. Wikipedia: ISO 3166-1 alpha-2 - https://en.wikipedia.org/wiki/ISO\_3166-1\_alpha-2&nbsp;[↩](#fnref:iso-3166)
 

@@ -11,10 +11,10 @@ tags: ["docs"]
 
 | Portal | &nbsp; |
 | --- | --- |
-| Website Interactions | Public interactions on any websites |
-| Webhook | Respond to arbitrary HTTP requests with automations |
+| [Website Interactions](/docs/portals/website-interactions/) | Public [interactions](/docs/interactions/) on any websites |
+| [Webhook](/docs/portals/webhook/) | Respond to arbitrary HTTP requests with [automations](/docs/automations/) |
 
-You can also create and install new community portal types with plugins.
+You can also create and install new community portal types with [plugins](/docs/plugins/).
 
 ### Legacy portals
 
@@ -22,10 +22,10 @@ These legacy portal types are being retired:
 
 | Type | &nbsp; |
 | --- | --- |
-| Chat Bot | Migrate to Website Interactions |
-| Support Center | This will migrate to the Portal Builder in 11.1+ |
+| [Chat Bot](/docs/portals/chat-bot/) | Migrate to [Website Interactions](/docs/portals/website-interactions/) |
+| [Support Center](/docs/portals/support-center/) | This will migrate to the Portal Builder in 11.1+ |
 
 # Resources
 
-- Guide: Host community portals using Nginx
+- [Guide: Host community portals using Nginx](/guides/portals/nginx-proxy/)
 

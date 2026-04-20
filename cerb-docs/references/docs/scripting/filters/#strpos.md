@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## str\_pos
 
-(Added in 10.1.2)
+(Added in [10.1.2](/releases/10.1.2/))
 
 Return the position of a substring (needle) within a larger text (haystack). This returns `-1` if the substring is not found.
 

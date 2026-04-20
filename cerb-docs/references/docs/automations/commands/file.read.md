@@ -5,25 +5,25 @@ url: "https://cerb.ai/docs/automations/commands/file.read/"
 summary: "This page provides detailed information on the 'file.read' command used in Cerb automations to read chunks of bytes from attachments or automation resource records. It outlines the syntax and inputs required, such as URI, filters, offset, length, length_split, and password, and describes the output structure and handling of success and error states. The page includes examples demonstrating how to read the contents of a binary attachment and decompress and read a gzip file, showcasing the command's functionality in processing various file types and formats."
 tags: ["docs", "docs-automations"]
 ---
-The **file.read:** command can read chunks of bytes from an attachment or automation resource record.
+The **file.read:** command can read chunks of bytes from an [attachment](/docs/records/types/attachment/) or [automation resource](/docs/records/types/automation_resource/) record.
 
-- Syntax
-  - inputs:
-    - uri:
-    - filters:
-    - offset:
-    - length:
-    - length\_split:
-    - password:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [uri:](#uri)
+    - [filters:](#filters)
+    - [offset:](#offset)
+    - [length:](#length)
+    - [length\_split:](#length_split)
+    - [password:](#password)
 
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
-- Examples
-  - Read the contents of a binary attachment
-  - Decompress and read a gzip file
+- [Examples](#examples)
+  - [Read the contents of a binary attachment](#read-the-contents-of-a-binary-attachment)
+  - [Decompress and read a gzip file](#decompress-and-read-a-gzip-file)
 
 # Syntax
 
@@ -57,7 +57,7 @@ The optional length to read bytes from starting at `offset:`. This defaults to `
 
 ### length\_split:
 
-(Added in 10.4.1)
+(Added in [10.4.1](/releases/10.4.1/))
 
 The optional sequence to split the read bytes on. This will always be less than or equal to the requested length.
 
@@ -75,13 +75,13 @@ Save the output to this key name.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of reading the record URI.
+The [commands](/docs/automations/#commands) to run during simulation instead of reading the record URI.
 
 If omitted, the file is read during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The key specified in `output:` is set to a dictionary with the following structure:
 
@@ -97,7 +97,7 @@ The key specified in `output:` is set to a dictionary with the following structu
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

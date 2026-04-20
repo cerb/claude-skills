@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_combine
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 The **array\_combine** function creates a new array with the given `keys` and `values`:
 

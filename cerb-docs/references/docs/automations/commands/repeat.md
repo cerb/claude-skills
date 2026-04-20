@@ -15,10 +15,10 @@ start: set: sum: 0 repeat: each@json: [1,2,3,4,5,6,7,8,9,10] as: i do: set: sum@
 counter: 55
 ```
 
-- Syntax
-  - each:
-  - as:
-  - do:
+- [Syntax](#syntax)
+  - [each:](#each)
+  - [as:](#as)
+  - [do:](#do)
 
 # Syntax
 
@@ -40,5 +40,5 @@ This may optionally take the format of `key, value` to set a placeholder for bot
 
 ### do:
 
-The `do:` key contains any number of commands to repeat.
+The `do:` key contains any number of [commands](/docs/automations/#commands) to repeat.
 

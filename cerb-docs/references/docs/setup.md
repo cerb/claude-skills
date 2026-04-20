@@ -12,65 +12,65 @@ The **setup** page in the top right of the navigation bar provides a central loc
 The page is divided into sections, each with a blue menu designated by a downward-pointing arrow. You can hover over each menu to display the configuration options for that section.
 
 - **Configure**
-  - Branding
-  - Cache
-  - License
-  - Localization
-  - Scheduler
-  - Search
+  - [Branding](/docs/setup/configure/branding/)
+  - [Cache](/docs/setup/configure/cache/)
+  - [License](/docs/setup/configure/license/)
+  - [Localization](/docs/setup/configure/localization/)
+  - [Scheduler](/docs/setup/configure/scheduler/)
+  - [Search](/docs/setup/configure/search/)
 
 - **Security**
-  - Configure
-  - Authentication
-  - Sessions
+  - [Configure](/docs/setup/configure/security/)
+  - [Authentication](/docs/setup/configure/authentication/)
+  - [Sessions](/docs/setup/configure/sessions/)
 
 - **Records**
-  - Avatars
-  - Custom Fields
-  - Snippets
+  - [Avatars](/docs/setup/records/avatars/)
+  - [Custom Fields](/docs/setup/records/custom-fields/)
+  - [Snippets](/docs/setup/records/snippets/)
 
 - **Team**
-  - Configure
-  - Roles
-  - Groups
-  - Workers
+  - [Configure](/docs/setup/team/configure/)
+  - [Roles](/docs/setup/team/roles/)
+  - [Groups](/docs/setup/team/groups/)
+  - [Workers](/docs/setup/team/workers/)
 
 - **Mail**
   - **Incoming Mail**
-    - Settings
-    - Mailboxes
-    - Filtering
-    - Routing
+    - [Settings](/docs/setup/mail/incoming/)
+    - [Mailboxes](/docs/setup/mail/mailboxes/)
+    - [Filtering](/docs/setup/mail/filtering/)
+    - [Routing](/docs/setup/mail/routing/)
     - HTML
-    - Import
-    - Failed Messages
-    - External Relay
+    - [Import](/docs/setup/mail/import/)
+    - [Failed Messages](/docs/setup/mail/failed/)
+    - [External Relay](/docs/setup/mail/relay/)
 
   - **Outgoing Mail**
-    - Email Transports
-    - Sender Addresses
-    - Settings
-    - Automated Email Templates
-    - Queue
+    - [Email Transports](/docs/setup/mail/transports/)
+    - [Sender Addresses](/docs/setup/mail/sender-addresses/)
+    - [Settings](/docs/setup/mail/outgoing/)
+    - [Automated Email Templates](/docs/setup/mail/templates/)
+    - [Queue](/docs/setup/mail/queue/)
 
 - **Packages**
-  - Library
-  - Import
+  - [Library](/docs/setup/packages/library/)
+  - [Import](/docs/setup/packages/import/)
 
 - **Storage**
-  - Overview
-  - Profiles
-  - Objects
+  - [Overview](/docs/setup/storage/overview/)
+  - [Profiles](/docs/setup/storage/profiles/)
+  - [Objects](/docs/setup/storage/objects/)
 
 - **Developers**
-  - Automation Logs
-  - Automation Scripting Tester
-  - Data Query Tester
+  - [Automation Logs](/docs/setup/developers/automation-logs/)
+  - [Automation Scripting Tester](/docs/setup/developers/scripting-tester/)
+  - [Data Query Tester](/docs/setup/developers/data-query-tester/)
   - Export Bots
   - Icon Reference
   - OAuth2 Token Generator
   - Platform
 
 - **Plugins**
-  - Configure
+  - [Configure](/docs/setup/plugins/installed/)
 

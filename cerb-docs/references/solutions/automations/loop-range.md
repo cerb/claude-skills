@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Loop through a numeric range
 
-With the range() function, you can loop through a set range of numbers.
+With the [range()](/docs/scripting/functions/#range) function, you can loop through a set range of numbers.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
@@ -27,8 +27,8 @@ __return: output: | 1...
 
 With the `step` command, you can skip a certain number with each step. For example, `step=2` will return every second number in the range.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

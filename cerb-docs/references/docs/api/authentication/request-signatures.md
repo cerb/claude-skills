@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
 In earlier versions, API requests were authenticated using credentials comprised of an access key and a secret key.
 
-We strongly recommend that you use OAuth2 authentication instead.
+We strongly recommend that you use [OAuth2 authentication](/docs/api/authentication/) instead.
 
 You can think of the access key as a username. A single worker may have multiple access keys with varying permissions for each application or service that uses the API, and each of them would have their own secret key.
 
@@ -15,15 +15,15 @@ Similarly, the secret key is like a password. However, unlike a traditional pass
 
 # Creating an API key-pair
 
-First, enable the Web API plugin and create a key-pair.
+First, [enable the Web API plugin](/guides/api/configure-plugin/) and create a key-pair.
 
 # Authenticating with the provided libraries
 
-The process of signing a request is automatically handled by the libraries for PHP, Perl, Python, Apex, and Node.js.
+The process of signing a request is automatically handled by the [libraries](/docs/api/libraries/) for PHP, Perl, Python, Apex, and Node.js.
 
 # Authenticating from custom scripts
 
-To sign an API request manually, create an MD51 signature of the following string:
+To sign an API request manually, create an MD5[1](#fn:md5) signature of the following string:
 
 ```
 verb\n
@@ -93,16 +93,16 @@ This outputs:
 
 # API Libraries
 
-- PHP
-- Python
-- Perl
-- Node.js
-- Apex
-- Zapier
+- [PHP](/docs/api/libraries/php/)
+- [Python](/docs/api/libraries/python/)
+- [Perl](/docs/api/libraries/perl/)
+- [Node.js](/docs/api/libraries/nodejs/)
+- [Apex](/docs/api/libraries/apex/)
+- [Zapier](/docs/api/libraries/zapier/)
 
 # References
 
-1. Wikipedia: MD5 - http://en.wikipedia.org/wiki/MD5&nbsp;↩
+1. Wikipedia: MD5 - http://en.wikipedia.org/wiki/MD5&nbsp;[↩](#fnref:md5)
 
-2. Wikipedia: Replay Attack - http://en.wikipedia.org/wiki/Replay\_attack&nbsp;↩
+2. Wikipedia: Replay Attack - http://en.wikipedia.org/wiki/Replay\_attack&nbsp;[↩](#fnref:replay-attack)
 

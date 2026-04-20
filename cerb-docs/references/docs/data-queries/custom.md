@@ -11,10 +11,10 @@ tags: ["docs"]
 
 The alias configured there (e.g. `get_stock_price`) can be specified as a data query type (e.g. `type:behavior.get_stock_price`).
 
-- Inputs
-- Response Formats
-- Examples
-  - Fetch stock price data
+- [Inputs](#inputs)
+- [Response Formats](#response-formats)
+- [Examples](#examples)
+  - [Fetch stock price data](#fetch-stock-price-data)
 
 ### Inputs
 

@@ -9,26 +9,26 @@ tags: ["guides"]
 
 This guide will walk you through preparing an Debian Linux 9.6 server for installing Cerb, including Nginx, PHP-FPM, and MySQL.
 
-- Provision an Debian server
-- Connect to your server
-- Install packages
-- Install MariaDB 10.2
-- Create the database
-- Install Cerb
-- Configure Nginx
-  - SSL
-    - Add your SSL certificate
-    - Creating a self-signed SSL certificate
+- [Provision an Debian server](#provision-an-debian-server)
+- [Connect to your server](#connect-to-your-server)
+- [Install packages](#install-packages)
+- [Install MariaDB 10.2](#install-mariadb-102)
+- [Create the database](#create-the-database)
+- [Install Cerb](#install-cerb)
+- [Configure Nginx](#configure-nginx)
+  - [SSL](#ssl)
+    - [Add your SSL certificate](#add-your-ssl-certificate)
+    - [Creating a self-signed SSL certificate](#creating-a-self-signed-ssl-certificate)
 
-  - Add a virtual host
-  - Test Nginx configuration
-  - Restart Nginx and PHP-FPM
+  - [Add a virtual host](#add-a-virtual-host)
+  - [Test Nginx configuration](#test-nginx-configuration)
+  - [Restart Nginx and PHP-FPM](#restart-nginx-and-php-fpm)
 
-- Run the Cerb installer
+- [Run the Cerb installer](#run-the-cerb-installer)
 
 # Provision an Debian server
 
-If you don't already have a server, you can create an EC2 instance in Amazon Web Services.
+If you don't already have a server, you can [create an EC2 instance in Amazon Web Services](/guides/installation/ec2/).
 
 This guide uses the following Amazon Machine Image (AMI):
 
@@ -339,5 +339,5 @@ For more information about Nginx + PHP-FPM, see: https://www.nginx.com/resources
 
 # Run the Cerb installer
 
-Type the hostname of your server into a browser and follow the guided installer.
+Type the hostname of your server into a browser and follow the [guided installer](/docs/installation/#run-the-guided-installer).
 

@@ -5,11 +5,11 @@ url: "https://cerb.ai/guides/mail/html-templates/"
 summary: "This page provides a comprehensive guide on how to create and use email templates with company letterhead in Cerb. It covers the process of setting up a new HTML template for emails, including adding a company logo, customizing the layout with CSS, and incorporating HTML signatures. The guide also explains how to apply these templates when sending emails from the browser or through bots, ensuring consistent corporate branding. Additionally, it highlights the ability to toggle between plaintext and HTML modes and offers tips for previewing and modifying templates for compatibility with various email readers. References to external resources, such as Wikipedia on Cascading Style Sheets, are also included for further reading."
 tags: ["guides"]
 ---
-- Introduction
-- Creating the layout
-- Using the mail template
-- Using the mail template from bots
-- References
+- [Introduction](#introduction)
+- [Creating the layout](#creating-the-layout)
+- [Using the mail template](#using-the-mail-template)
+- [Using the mail template from bots](#using-the-mail-template-from-bots)
+- [References](#references)
 
 # Introduction
 
@@ -51,7 +51,7 @@ You can preview the HTML template by clicking on the last icon in the editor too
 
 This example uses Cerb's branding, but you can easily modify the template to use your own logo, footer, and style preferences.
 
-You'll notice that styles are defined in this template using a CSS1 stylesheet in the `<style>` element. This is a convenience for you when editing the template. When mail is sent using the template, Cerb converts the stylesheet into inline `style="..."` attributes for the widest compatibility with email readers.
+You'll notice that styles are defined in this template using a CSS[1](#fn:css) stylesheet in the `<style>` element. This is a convenience for you when editing the template. When mail is sent using the template, Cerb converts the stylesheet into inline `style="..."` attributes for the widest compatibility with email readers.
 
 Click the **Save Changes** button.
 
@@ -71,11 +71,11 @@ Your client will see:
 
 # Using the mail template from bots
 
-When using the Send email action on a bot behavior, you can enable HTML mode from the first icon on the editor toolbar. In this mode, you'll see a new **HTML Template:** option for selecting the template. You can then preview the message with the last icon.
+When using the [Send email action on a bot behavior](/guides/bots/send-automatic-replies/), you can enable HTML mode from the first icon on the editor toolbar. In this mode, you'll see a new **HTML Template:** option for selecting the template. You can then preview the message with the last icon.
 
  
 
 # References
 
-1. Wikipedia: Cascading Style Sheets - https://en.wikipedia.org/wiki/Cascading\_Style\_Sheets&nbsp;↩
+1. Wikipedia: Cascading Style Sheets - https://en.wikipedia.org/wiki/Cascading\_Style\_Sheets&nbsp;[↩](#fnref:css)
 

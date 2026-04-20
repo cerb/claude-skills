@@ -13,7 +13,7 @@ A **URL** field contains a hyperlink to a web page in the format:
 
 ### Packages
 
-As JSON from packages:
+As JSON from [packages](/docs/packages/):
 
 ```
 { 
@@ -23,11 +23,11 @@ As JSON from packages:
 
 ### Records API
 
-In PUT or POST requests from the API, the URL should be encoded:
+In [PUT](/docs/api/endpoints/records/#update) or [POST](/docs/api/endpoints/records/#create) requests from the [API](/docs/api/), the URL should be encoded:
 
 ```
 &amp;fields[website]=https%3A%2F%2Fcerb.ai%2Fdocs%2F
 ```
 
-\< Timestamp
+[\< Timestamp](/docs/records/fields/types/timestamp/)
 

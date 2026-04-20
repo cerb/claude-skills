@@ -10,40 +10,40 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | mail\_inbound\_log |
 | **Identifier (ID):** | cerb.contexts.mail.inbound.log |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `created_at` | timestamp | The date/time when this record was created |
-| &nbsp; | `events_log_json` | text | &nbsp; |
-| &nbsp; | `from_id` | number | &nbsp; |
-| &nbsp; | `header_message_id` | text | &nbsp; |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| &nbsp; | `mailbox_id` | number | &nbsp; |
-| &nbsp; | `message_id` | number | &nbsp; |
-| &nbsp; | `parse_time_ms` | number | (0-4294967296) |
-| &nbsp; | `status_id` | number | (0-2) |
-| &nbsp; | `status_message` | text | &nbsp; |
-| &nbsp; | `subject` | text | &nbsp; |
-| &nbsp; | `ticket_id` | number | &nbsp; |
-| &nbsp; | `to` | text | &nbsp; |
+| &nbsp; | `created_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was created |
+| &nbsp; | `events_log_json` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `from_id` | [number](/docs/records/fields/types/number/) | &nbsp; |
+| &nbsp; | `header_message_id` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| &nbsp; | `mailbox_id` | [number](/docs/records/fields/types/number/) | &nbsp; |
+| &nbsp; | `message_id` | [number](/docs/records/fields/types/number/) | &nbsp; |
+| &nbsp; | `parse_time_ms` | [number](/docs/records/fields/types/number/) | (0-4294967296) |
+| &nbsp; | `status_id` | [number](/docs/records/fields/types/number/) | (0-2) |
+| &nbsp; | `status_message` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `subject` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `ticket_id` | [number](/docs/records/fields/types/number/) | &nbsp; |
+| &nbsp; | `to` | [text](/docs/records/fields/types/text/) | &nbsp; |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `created_at` | date | Created |
 | `header_message_id` | text | Header Message-Id |
 | `id` | number | Id |
@@ -54,48 +54,48 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `subject` | text | Subject |
 | `to` | text | To |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
 | `events_log` | object[] | Events Log |
-| `links` | links | Links |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in email inbound log search queries:
+These [filters](/docs/search/#filters) are available in email inbound log [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created:` | date | Created |
-| `fieldset:` | record | Fieldset |
-| `from:` | record | From |
-| `from.id:` | chooser | From |
-| `header.messageId:` | text | Header Message-Id |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `mailbox:` | record | Mailbox |
-| `mailbox.id:` | chooser | Mailbox |
-| `message:` | record | Message |
-| `message.id:` | chooser | Message |
-| `parseTime.ms:` | number | Parse Time (Ms) |
+| `created:` | [date](/docs/search/#dates) | Created |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `from:` | [record](/docs/search/#deep-search) | [From](/docs/records/types/address/) |
+| `from.id:` | [chooser](/docs/search/#choosers) | [From](/docs/records/types/address/) |
+| `header.messageId:` | [text](/docs/search/#text) | Header Message-Id |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `mailbox:` | [record](/docs/search/#deep-search) | [Mailbox](/docs/records/types/mailbox/) |
+| `mailbox.id:` | [chooser](/docs/search/#choosers) | [Mailbox](/docs/records/types/mailbox/) |
+| `message:` | [record](/docs/search/#deep-search) | [Message](/docs/records/types/message/) |
+| `message.id:` | [chooser](/docs/search/#choosers) | [Message](/docs/records/types/message/) |
+| `parseTime.ms:` | [number](/docs/search/#numbers) | Parse Time (Ms) |
 | `status:` | virtual | Status |
-| `status.message:` | text | Status Message |
-| `subject:` | text | Subject |
-| `ticket:` | record | Ticket |
-| `ticket.id:` | chooser | Ticket |
-| `to:` | text | To |
+| `status.message:` | [text](/docs/search/#text) | Status Message |
+| `subject:` | [text](/docs/search/#text) | Subject |
+| `ticket:` | [record](/docs/search/#deep-search) | [Ticket](/docs/records/types/ticket/) |
+| `ticket.id:` | [chooser](/docs/search/#choosers) | [Ticket](/docs/records/types/ticket/) |
+| `to:` | [text](/docs/search/#text) | To |
 
 ### Worklist Columns
 
-These columns are available on email inbound log worklists:
+These columns are available on email inbound log [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `m_created_at` | Created |
 | `m_from_id` | From |
 | `m_header_message_id` | Header Message-Id |
@@ -109,5 +109,5 @@ These columns are available on email inbound log worklists:
 | `m_ticket_id` | Ticket |
 | `m_to` | To |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

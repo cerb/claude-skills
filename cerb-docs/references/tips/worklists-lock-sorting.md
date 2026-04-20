@@ -13,7 +13,7 @@ There's a natural tendency to focus on the most recent tickets that land in the 
 
 However, when everyone on your team sorts their work in the same way, it leads to many collisions while finding the next thing to work on.
 
-We introduced bucket responsibilities back in Cerb 7.0 to provide personalized worklists to every worker based on their role and responsibilities. When you add the "Responsibility" column to a worklist and sort on it, workers are directed to work that matches their highest responsibilities, with the highest importance, that have been waiting for the longest.
+We introduced [bucket responsibilities](/releases/7.0/#responsibilities) back in Cerb 7.0 to provide personalized worklists to every worker based on their role and responsibilities. When you add the "Responsibility" column to a worklist and sort on it, workers are directed to work that matches their highest responsibilities, with the highest importance, that have been waiting for the longest.
 
 This feature provides a big boost to team efficiency – but it doesn't do you any good if workers just change their sorting back to "Most recently updated".
 

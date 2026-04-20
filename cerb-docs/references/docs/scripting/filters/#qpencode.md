@@ -7,9 +7,9 @@ tags: ["docs", "docs-scripting"]
 ---
 ## qp\_encode
 
-(Added in 11.1.1)
+(Added in [11.1.1](/releases/11.1.1/))
 
-Encode a string in quoted-printable format. For instance, creating tickets with emoji using email.parse:.
+Encode a string in quoted-printable format. For instance, creating tickets with emoji using [email.parse:](/docs/automations/commands/email.parse/).
 
 ```
 {% set message %}

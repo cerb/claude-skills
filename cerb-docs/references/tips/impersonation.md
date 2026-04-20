@@ -7,7 +7,7 @@ tags: ["tips"]
 ---
 https://www.youtube.com/embed/R7ENOIwOMsY
 
-It's sometimes useful to see Cerb as another worker, whether that's to help them set up their interface or to see an issue from their perspective.  Administrators have the ability to impersonate other workers to help make this easy.
+It's sometimes useful to see Cerb as another [worker](/docs/workers/), whether that's to help them set up their interface or to see an issue from their perspective.  Administrators have the ability to impersonate other workers to help make this easy.
 
 To impersonate another worker, go to **Search&nbsp;» Workers** and click on the name of the worker you want to impersonate.  This will take you to their profile page where you'll find an **Impersonate** button near the top:
 

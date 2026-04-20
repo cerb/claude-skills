@@ -9,9 +9,9 @@ tags: ["docs"]
 
 `usage.snippets` data queries return historical usage data for snippets (e.g. uses by worker over time).
 
-- Inputs
-- Response Formats
-- Examples
+- [Inputs](#inputs)
+- [Response Formats](#response-formats)
+- [Examples](#examples)
 
 # Inputs
 

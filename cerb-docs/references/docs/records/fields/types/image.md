@@ -9,7 +9,7 @@ An **image** field contains a Base64-encoded image.
 
 ### Packages
 
-As JSON from packages:
+As JSON from [packages](/docs/packages/):
 
 ```
 { 
@@ -19,7 +19,7 @@ As JSON from packages:
 
 ### Records API
 
-In PUT or POST requests from the API:
+In [PUT](/docs/api/endpoints/records/#update) or [POST](/docs/api/endpoints/records/#create) requests from the [API](/docs/api/):
 
 ```
 &amp;fields[image]=data:image/png;base64,iVBORw0KGgo...
@@ -29,7 +29,7 @@ In PUT or POST requests from the API:
 
 You can remove an image by setting it to `data:null`
 
-\< Float
+[\< Float](/docs/records/fields/types/float/)
 
-Links \>
+[Links \>](/docs/records/fields/types/links/)
 

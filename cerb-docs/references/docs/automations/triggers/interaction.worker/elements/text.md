@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker/elements/text
 summary: "This page provides detailed information on the 'text' element used in interaction web forms within Cerb. It explains how to configure a text input field with various validation options, including formats like date, decimal, email, URL, and more. The page outlines the syntax for defining labels, setting required fields, specifying input types, and using placeholders. It also covers optional settings such as default values, maximum input length, and custom validation scripts. The examples and explanations guide users on how to implement and validate text inputs effectively in their web forms."
 tags: ["docs", "docs-automations"]
 ---
-In interaction web forms, a **text** element displays a text input field with various validation options.
+In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **text** element displays a text input field with various validation options.
 
 Formats: date, decimal, bool, email, ip, geopoint, number, record type, timestamp, uri, url
 

@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker/elements/quer
 summary: "This page provides information on the 'query' element used in interaction web forms within Cerb. It explains how this element displays a search query prompt with filter autocompletion, specifically for searching records like tickets or workers. The page details the syntax for configuring the query element, including optional parameters such as the label to display above the form element, the record type for autocompletion, and whether user input is required."
 tags: ["docs", "docs-automations"]
 ---
-In interaction web forms, a **query** element displays a search query prompt with filter autocompletion.
+In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **query** element displays a search query prompt with filter autocompletion.
 
 ```
 start: await: form: title: Search Tickets elements: query/prompt_query: label: Query: record_type: ticket default@text: status:o
@@ -21,7 +21,7 @@ The optional label to display above the form element.
 
 ### record\_type:
 
-The record type to use for query autocompletion. For instance, `ticket` or `worker`.
+The [record type](/docs/records/types/) to use for query autocompletion. For instance, `ticket` or `worker`.
 
 ### hidden:
 

@@ -5,13 +5,13 @@ url: "https://cerb.ai/solutions/integrations/linkedin/"
 summary: "This page provides a comprehensive guide on integrating Cerb with LinkedIn, enabling users to utilize LinkedIn's API for automation through Cerb bots. It details the steps to create a LinkedIn app, configure authentication, and set up a LinkedIn service within Cerb. The guide also explains how to link a connected account to LinkedIn in Cerb and use this connection in bot behaviors, allowing for automated interactions with LinkedIn's REST API. The process includes creating an app on LinkedIn, configuring OAuth settings, and using the connected account for executing HTTP requests in bot actions."
 tags: ["solutions"]
 ---
-- Introduction
-- Create an app at LinkedIn
-  - Configure authentication for your LinkedIn App
+- [Introduction](#introduction)
+- [Create an app at LinkedIn](#create-an-app-at-linkedin)
+  - [Configure authentication for your LinkedIn App](#configure-authentication-for-your-linkedin-app)
 
-- Create the LinkedIn service in Cerb
-- Link the connected account to LinkedIn in Cerb
-- Use the connected account in bot behaviors
+- [Create the LinkedIn service in Cerb](#create-the-linkedin-service-in-cerb)
+- [Link the connected account to LinkedIn in Cerb](#link-the-connected-account-to-linkedin-in-cerb)
+- [Use the connected account in bot behaviors](#use-the-connected-account-in-bot-behaviors)
 
 # Introduction
 
@@ -33,7 +33,7 @@ Next, you need to create a new app on LinkedIn for Cerb to connect to.
   - **Company Name:** (your company)
   - **Name:** Cerb
   - **Description:** Integration with Cerb
-  - **Application Logo:** image
+  - **Application Logo:** [image](/assets/cerb_mascot.png)
   - **Application Use:** Sales (CRM), Marketing
   - **Website URL:** https://cerb.ai/
   - **Business Email:** (your email address)
@@ -90,5 +90,5 @@ Next, you need to create a new app on LinkedIn for Cerb to connect to.
 
 You can use the connected account you just created to access LinkedIn's REST API from bot behaviors in Cerb. This is typically accomplished using the **Execute HTTP Request** action from a bot, and selecting the connected account in the **Authentication:** section.
 
-You can import the LinkedIn Bot package for a working example.
+You can import the [LinkedIn Bot](/packages/linkedin-bot/) package for a working example.
 

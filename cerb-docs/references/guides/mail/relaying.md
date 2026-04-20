@@ -11,26 +11,26 @@ The email relay allows workers to respond to messages from external mail applica
 
 Relayed responses are received from a worker's personal email address and rewritten so they appear to be from Cerb before being sent to a conversation's recipients. This process protects the privacy of personal worker email addresses, while still providing the benefits of Cerb (e.g. shared history, assignments, etc).
 
-- Introduction
-- Enabling the mail relay
-- Relaying messages to external email accounts
-  - From bots
-  - From the UI
+- [Introduction](#introduction)
+- [Enabling the mail relay](#enabling-the-mail-relay)
+- [Relaying messages to external email accounts](#relaying-messages-to-external-email-accounts)
+  - [From bots](#from-bots)
+  - [From the UI](#from-the-ui)
 
-- Using #commands in replies
-  - #comment
-  - #cut
-  - #noreply
-  - #reopen
-  - #sig
-  - #status
-  - #start comment
-  - #unwatch
-  - #watch
+- [Using #commands in replies](#using-commands-in-replies)
+  - [#comment](#comment)
+  - [#cut](#cut)
+  - [#noreply](#noreply)
+  - [#reopen](#reopen)
+  - [#sig](#sig)
+  - [#status](#status)
+  - [#start comment](#start-comment)
+  - [#unwatch](#unwatch)
+  - [#watch](#watch)
 
 # Enabling the mail relay
 
-Administrators can enable mail relay functionality from Setup&nbsp;» Mail&nbsp;» Incoming&nbsp;» External Relay.
+Administrators can enable mail relay functionality from [Setup&nbsp;» Mail&nbsp;» Incoming&nbsp;» External Relay](/docs/setup/mail/relay/).
 
 # Relaying messages to external email accounts
 

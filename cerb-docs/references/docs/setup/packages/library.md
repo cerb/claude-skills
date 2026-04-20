@@ -7,5 +7,5 @@ tags: ["docs"]
 ---
  
 
-Administrators can add approved packages to the library which may be used by workers when creating records.
+Administrators can add approved [packages](/docs/packages/) to the library which may be used by workers when creating [records](/docs/records/).
 

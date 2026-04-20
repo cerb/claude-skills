@@ -10,27 +10,27 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | calendar |
 | **Identifier (ID):** | cerberusweb.contexts.calendar |
 
-- Records API
-  - params
-  - series
+- [Records API](#records-api)
+  - [params](#params)
+  - [series](#series)
 
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of this calendar |
-| **x** | **`owner__context`** | context | The record type of this calendar's owner: `app`, `role`, `group`, or `worker` |
-| **x** | **`owner_id`** | number | The ID of this calendar's owner |
-| &nbsp; | `params` | object | JSON-encoded key/value object |
-| &nbsp; | `timezone` | text | &nbsp; |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this calendar |
+| **x** | **`owner__context`** | [context](/docs/records/fields/types/context/) | The [record type](/docs/records/types/) of this calendar's owner: `app`, `role`, `group`, or `worker` |
+| **x** | **`owner_id`** | [number](/docs/records/fields/types/number/) | The ID of this calendar's owner |
+| &nbsp; | `params` | [object](/docs/records/fields/types/object/) | JSON-encoded key/value object |
+| &nbsp; | `timezone` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
 
 #### params
 
@@ -59,13 +59,13 @@ These fields are available in the Records API and packages:
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `id` | number | Id |
 | `name` | text | Name |
 | `owner_` | record | Owner |
@@ -73,46 +73,46 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `timezone` | text | Timezone |
 | `updated_at` | date | Updated |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
 | `events` | &nbsp; | Events |
 | `events_occluded` | &nbsp; | Events (Occluded) |
-| `links` | links | Links |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 | `scope` | &nbsp; | Scope |
-| `watchers` | watchers | Watchers |
+| `watchers` | watchers | [Watchers](/docs/guide/developers/dictionaries/#key-expansion) |
 | `weeks` | &nbsp; | Weeks |
 | `weeks_events` | &nbsp; | Weeks Events |
 | `weeks_events_occluded` | &nbsp; | Weeks Events (Occluded) |
 
 ### Search Query Fields
 
-These filters are available in calendar search queries:
+These [filters](/docs/search/#filters) are available in calendar [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Name |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Name |
 | `owner:` | virtual | Owner |
 | `owner.app:` | virtual | Owner |
-| `owner.bot:` | record | Owner |
-| `owner.group:` | record | Owner |
-| `owner.role:` | record | Owner |
-| `owner.worker:` | record | Owner |
-| `timezone:` | text | Timezone |
-| `updated:` | date | Updated |
-| `watchers:` | record | Watchers |
-| `workerAvailability:` | record | Workers |
+| `owner.bot:` | [record](/docs/search/#deep-search) | [Owner](/docs/records/types/bot/) |
+| `owner.group:` | [record](/docs/search/#deep-search) | [Owner](/docs/records/types/group/) |
+| `owner.role:` | [record](/docs/search/#deep-search) | [Owner](/docs/records/types/role/) |
+| `owner.worker:` | [record](/docs/search/#deep-search) | [Owner](/docs/records/types/worker/) |
+| `timezone:` | [text](/docs/search/#text) | Timezone |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `watchers:` | [record](/docs/search/#deep-search) | [Watchers](/docs/records/types/worker/) |
+| `workerAvailability:` | [record](/docs/search/#deep-search) | [Workers](/docs/records/types/worker/) |
 
 ### Worklist Columns
 
-These columns are available on calendar worklists:
+These columns are available on calendar [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -121,7 +121,7 @@ These columns are available on calendar worklists:
 | `c_name` | Name |
 | `c_timezone` | Timezone |
 | `c_updated_at` | Updated |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

@@ -7,15 +7,15 @@ tags: ["docs"]
 ---
 # Endpoints
 
-- Attachments
-- Automations
-- Bots
-- Contexts
-- Data
-- Groups
-- Packages
-- Parser
-- Records
-- Tickets
-- Workers
+- [Attachments](/docs/api/endpoints/attachments/)
+- [Automations](/docs/api/endpoints/automations/)
+- [Bots](/docs/api/endpoints/bots/)
+- [Contexts](/docs/api/endpoints/contexts/)
+- [Data](/docs/api/endpoints/data/)
+- [Groups](/docs/api/endpoints/groups/)
+- [Packages](/docs/api/endpoints/packages/)
+- [Parser](/docs/api/endpoints/parser/)
+- [Records](/docs/api/endpoints/records/)
+- [Tickets](/docs/api/endpoints/tickets/)
+- [Workers](/docs/api/endpoints/workers/)
 

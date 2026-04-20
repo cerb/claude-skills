@@ -11,15 +11,15 @@ This guide provides instructions on exporting data from Cerb to a neutral JSON f
 
 This process is used to migrate data from Cerb to another application, or to merge multiple Cerb installations.
 
-- Requirements
-- Installation
-- Configuration
-- Customizations
-  - ID Mapping
-  - Scope
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Customizations](#customizations)
+  - [ID Mapping](#id-mapping)
+  - [Scope](#scope)
 
-- Exporting
-- Example
+- [Exporting](#exporting)
+- [Example](#example)
 
 # Requirements
 
@@ -76,7 +76,7 @@ Several functions can be implemented to map record IDs between the source and de
 - `mapWorkerId($id)`
 - `mapTimeTrackingActivityId($id)`
 
-For instance, to merge two Cerb instances, you would map from source groups/buckets/workers to records in the destination. The default JSON format can be directly imported into a Cerb instance as packages.
+For instance, to merge two Cerb instances, you would map from source groups/buckets/workers to records in the destination. The default JSON format can be directly imported into a Cerb instance as [packages](/docs/packages/).
 
 ### Scope
 

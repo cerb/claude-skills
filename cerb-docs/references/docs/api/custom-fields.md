@@ -5,14 +5,14 @@ url: "https://cerb.ai/docs/api/custom-fields/"
 summary: "This page provides detailed information on how to work with custom fields in the Cerb API. It covers the types of custom fields available, such as checkboxes, dropdowns, dates, files, and more. The page explains how to build a list of available custom fields, retrieve custom fields on records and search results, and set custom fields on records using API requests. It includes examples of API calls for each operation, demonstrating how to use key expansion to access custom field data in both GET and POST requests, as well as how to update custom fields with PUT requests."
 tags: ["docs"]
 ---
-Records in Cerb can be extended with custom fields and fieldsets. These fields are available in the API responses using key expansion.
+Records in Cerb can be extended with [custom fields](/docs/custom-fields/) and [fieldsets](/docs/custom-fieldsets/). These fields are available in the [API responses](/docs/api/responses/) using [key expansion](/docs/api/responses/#expanding-keys-in-api-requests).
 
-- Custom field types
-- Working with custom fields in the API
-  - Building a list of the available custom fields
-  - Retrieving custom fields on records
-  - Retrieving custom fields on search results
-  - Setting custom fields on records
+- [Custom field types](#custom-field-types)
+- [Working with custom fields in the API](#working-with-custom-fields-in-the-api)
+  - [Building a list of the available custom fields](#building-a-list-of-the-available-custom-fields)
+  - [Retrieving custom fields on records](#retrieving-custom-fields-on-records)
+  - [Retrieving custom fields on search results](#retrieving-custom-fields-on-search-results)
+  - [Setting custom fields on records](#setting-custom-fields-on-records)
 
 # Custom field types
 
@@ -38,9 +38,9 @@ A custom field is created with one of the following types:
 
 ### Building a list of the available custom fields
 
-You can retrieve custom field information using the /records API endpoint.
+You can retrieve custom field information using the [/records](/docs/api/endpoints/records/) API endpoint.
 
-The available custom fields and fieldsets for a specific record type can also be retrieved using the /contexts/list endpoint:
+The available custom fields and fieldsets for a specific record type can also be retrieved using the [/contexts/list](/docs/api/endpoints/contexts/#list) endpoint:
 
 ```
 GET /rest/contexts/list.json
@@ -171,5 +171,5 @@ fields[custom_14]=CERB-1234
 &fields[custom_143]=Critical
 ```
 
-Each custom field value is sent as a form field in the format `fields[custom_123]=value`, where `123` is the ID, and `value` is determined by the custom field type.
+Each custom field value is sent as a form field in the format `fields[custom_123]=value`, where `123` is the ID, and `value` is determined by the [custom field type](#field-types).
 

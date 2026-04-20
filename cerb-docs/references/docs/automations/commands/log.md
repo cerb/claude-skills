@@ -7,9 +7,9 @@ tags: ["docs", "docs-automations"]
 ---
 The **log:** command writes data to the automation log with a given severity. Automations that exit in the `error` state also create entries to assist with error reporting and debugging.
 
-- Syntax
-  - inputs:
-  - output:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [output:](#output)
 
 ```
 start: log: This is a notice log.warn: This is a warning log.error: This is an error log.alert: This is an alert
@@ -23,7 +23,7 @@ Each log entry contains:
 - log level (severity)
 - message
 
-Log entries are accessed with data queries.
+Log entries are accessed with [data queries](/docs/data-queries/).
 
 # Syntax
 

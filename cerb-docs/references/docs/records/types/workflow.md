@@ -10,36 +10,36 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | workflow |
 | **Identifier (ID):** | cerb.contexts.workflow |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `config_kata` | text | &nbsp; |
-| &nbsp; | `created_at` | timestamp | The date/time when this record was created |
-| &nbsp; | `description` | text | &nbsp; |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of this workflow |
-| &nbsp; | `resources_kata` | text | &nbsp; |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
-| &nbsp; | `version` | number | (0-4294967296) |
-| &nbsp; | `workflow_kata` | text | &nbsp; |
+| &nbsp; | `config_kata` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `created_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was created |
+| &nbsp; | `description` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this workflow |
+| &nbsp; | `resources_kata` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
+| &nbsp; | `version` | [number](/docs/records/fields/types/number/) | (0-4294967296) |
+| &nbsp; | `workflow_kata` | [text](/docs/records/fields/types/text/) | &nbsp; |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `created_at` | date | Created |
 | `description` | text | Description |
 | `has_extensions` | number | Has Extensions |
@@ -51,35 +51,35 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `version` | date | Version |
 | `workflow_kata` | text | Workflow Kata |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
-| `watchers` | watchers | Watchers |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
+| `watchers` | watchers | [Watchers](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in workflow search queries:
+These [filters](/docs/search/#filters) are available in workflow [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created:` | date | Created |
-| `description:` | text | Description |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Name |
-| `updated:` | date | Updated |
-| `version:` | date | Version |
-| `watchers:` | record | Watchers |
+| `created:` | [date](/docs/search/#dates) | Created |
+| `description:` | [text](/docs/search/#text) | Description |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Name |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `version:` | [date](/docs/search/#dates) | Version |
+| `watchers:` | [record](/docs/search/#deep-search) | [Watchers](/docs/records/types/worker/) |
 
 ### Worklist Columns
 
-These columns are available on workflow worklists:
+These columns are available on workflow [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -89,7 +89,7 @@ These columns are available on workflow worklists:
 | `a_name` | Name |
 | `a_updated_at` | Updated |
 | `a_version` | Version |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

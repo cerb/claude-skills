@@ -7,21 +7,21 @@ tags: ["guides"]
 ---
  
 
-- What are packages?
-- Importing packages
-  - Setup
-  - Bots
-  - API
+- [What are packages?](#what-are-packages)
+- [Importing packages](#importing-packages)
+  - [Setup](#setup)
+  - [Bots](#bots)
+  - [API](#api)
 
 # What are packages?
 
 **Packages** are a blueprint for importing a related set of pre-configured records into Cerb. A single package can contain workspaces, dashboards, bots, project boards, custom records, custom fieldsets, tasks, tickets, contacts, etc.
 
-You can build your own packages or import them from our package library.
+You can [build your own packages](/guides/packages/building/) or import them from our [package library](/resources/packages/).
 
 # Importing packages
 
-Packages can be imported from setup, bots, and the API.
+Packages can be imported from [setup](/docs/setup/), bots, and the [API](/docs/api/).
 
 Here's an example package for testing imports:
 
@@ -71,7 +71,7 @@ Paste the package into the **Package:** field.
 
 In **Params:** you can provide the preferred values for any prompted placeholders required by the package. This is a simple JSON object with keys matching the `configure > prompts` section of the package.
 
-In the example above, we're building the JSON object with the dict\_set() function, which automatically handles escaping for us.
+In the example above, we're building the JSON object with the [dict\_set()](/docs/scripting/functions/#dict_set) function, which automatically handles escaping for us.
 
 The action returns a placeholder named `_results` with details about the created records in the format:
 
@@ -90,5 +90,5 @@ The results object is keyed by record type. Each record type contains an object 
 
 ## API
 
-You can use /packages/import.json to import packages using the API.
+You can use [/packages/import.json](/docs/api/endpoints/packages/) to import packages using the API.
 

@@ -13,10 +13,10 @@ tags: ["docs"]
 
 A tool that makes it easy to create batches of realistic sample tickets, tasks, and organizations; useful for evaluations, plugin development, and testing. This adds a Simulator option to the Setup Plugins menu.
 
-- Extensions
-  - Http Request Listener
-  - Page Menu Item
-  - Page Section
+- [Extensions](#extensions)
+  - [Http Request Listener](#http-request-listener)
+  - [Page Menu Item](#page-menu-item)
+  - [Page Section](#page-section)
 
 # Extensions
 
@@ -32,5 +32,5 @@ A tool that makes it easy to create batches of realistic sample tickets, tasks, 
 
 | Setup Page Simulator Section | `simulator.setup.section.simulator` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

@@ -5,15 +5,15 @@ url: "https://cerb.ai/guides/scaling/valkey/"
 summary: "This guide provides instructions for configuring Valkey as a caching solution using Docker containers. Learn how to set up a basic Valkey container and configure Cerb to use it through the Redis cache configuration interface for improved application performance."
 tags: ["guides"]
 ---
-- Introduction
-- Requirements
-- Local Development Setup
-- Verifying the Connection
-- References
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Local Development Setup](#local-development-setup)
+- [Verifying the Connection](#verifying-the-connection)
+- [References](#references)
 
 # Introduction
 
-Valkey1 is a high-performance data structure server that serves as a powerful caching solution for Cerb. While Cerb's default filesystem caching works well for single-server setups, Valkey enables you to scale your deployment across multiple servers while significantly reducing database query traffic. By caching frequently accessed but infrequently changed content (like worker data, groups, and bucket information), Valkey helps optimize your application's performance. This guide will walk you through configuring Valkey for caching in Cerb using Docker containers.
+Valkey[1](#fn:valkey) is a high-performance data structure server that serves as a powerful [caching](/docs/setup/configure/cache/) solution for Cerb. While Cerb's default filesystem caching works well for single-server setups, Valkey enables you to scale your deployment across multiple servers while significantly reducing database query traffic. By caching frequently accessed but infrequently changed content (like worker data, groups, and bucket information), Valkey helps optimize your application's performance. This guide will walk you through configuring Valkey for caching in Cerb using Docker containers.
 
 # Requirements
 
@@ -56,5 +56,5 @@ You should receive `PONG` as a response.
 
 # References
 
-1. Valkey: dockerhub - https://hub.docker.com/r/valkey/valkey&nbsp;↩
+1. Valkey: dockerhub - https://hub.docker.com/r/valkey/valkey&nbsp;[↩](#fnref:valkey)
 

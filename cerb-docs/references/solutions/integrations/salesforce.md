@@ -5,22 +5,22 @@ url: "https://cerb.ai/solutions/integrations/salesforce/"
 summary: "This page provides a comprehensive guide on integrating Cerb with Salesforce. It details the steps to create a new app in Salesforce, including configuring basic information and OAuth settings, and obtaining OAuth credentials. The guide then explains how to create a Salesforce service in Cerb, link a connected account to Salesforce, and utilize this connection in bot behaviors within Cerb. The integration allows users to automate tasks using the Salesforce API through Cerb's bot functionalities."
 tags: ["solutions"]
 ---
-- Introduction
-- Create an app at Salesforce
-  - In Salesforce Classic
-  - In the Lightning Experience
-  - Configure Basic information
-  - Configure OAuth
-  - Copy your OAuth credentials
+- [Introduction](#introduction)
+- [Create an app at Salesforce](#create-an-app-at-salesforce)
+  - [In Salesforce Classic](#in-salesforce-classic)
+  - [In the Lightning Experience](#in-the-lightning-experience)
+  - [Configure Basic information](#configure-basic-information)
+  - [Configure OAuth](#configure-oauth)
+  - [Copy your OAuth credentials](#copy-your-oauth-credentials)
 
-- Create the Salesforce service in Cerb
-- Link the connected account to Salesforce in Cerb
-- Examples
-  - Create an Account record
-  - Get Account info
-  - Update an Account record
+- [Create the Salesforce service in Cerb](#create-the-salesforce-service-in-cerb)
+- [Link the connected account to Salesforce in Cerb](#link-the-connected-account-to-salesforce-in-cerb)
+- [Examples](#examples)
+  - [Create an Account record](#create-an-account-record)
+  - [Get Account info](#get-account-info)
+  - [Update an Account record](#update-an-account-record)
 
-- Use the connected account in bot behaviors
+- [Use the connected account in bot behaviors](#use-the-connected-account-in-bot-behaviors)
 
 # Introduction
 
@@ -57,7 +57,7 @@ Enter the following details:
 - **Connected App Name:** `Salesforce for Cerb`
 - **API Name:** `Salesforce_for_Cerb`
 - **Contact Email:** (your email address)
-- **Logo URL:** image
+- **Logo URL:** [image](/assets/cerb_mascot.png)
 
 ## Configure OAuth
 
@@ -140,5 +140,5 @@ start: http.request/createAccount: output: http_response inputs: method: PATCH u
 
 You can use the connected account you just created to access the Saleforce REST API from bot behaviors in Cerb. This is typically accomplished using the **Execute HTTP Request** action from a bot, and selecting the connected account in the **Authentication:** section.
 
-You can import the Salesforce Bot package for a working example.
+You can import the [Salesforce Bot](/packages/salesforce-bot/) package for a working example.
 

@@ -5,32 +5,32 @@ url: "https://cerb.ai/docs/security/"
 summary: "This page provides a comprehensive guide on securing a Cerb installation, focusing on protecting filesystem access, setting appropriate file permissions, and restricting PHP functions. It explains the Model-View-Controller (MVC) design pattern used by Cerb, where content is served virtually rather than through direct file access. The document details how to configure web servers like Nginx and Apache to restrict access to sensitive directories and files, ensuring only necessary files are exposed to the web. It also outlines best practices for setting file permissions to prevent unauthorized modifications, particularly emphasizing the importance of restricting write access to PHP files. Additionally, the page discusses considerations for implementing HTTP authentication and IP-based security, especially in the context of scheduled tasks, Web-API integrations, and community portals. References to external resources on MVC, Ajax, and Apache security tips are provided for further reading."
 tags: ["docs"]
 ---
-- Introduction
-- Protecting filesystem access
-  - Caddy
-  - Nginx
-  - Apache
+- [Introduction](#introduction)
+- [Protecting filesystem access](#protecting-filesystem-access)
+  - [Caddy](#caddy)
+  - [Nginx](#nginx)
+  - [Apache](#apache)
 
-- File permissions
-- Restricting PHP functions
-- Considerations for HTTP Authentication and IP-based security
-  - Scheduled tasks
-  - Web-API
-  - Community portals
+- [File permissions](#file-permissions)
+- [Restricting PHP functions](#restricting-php-functions)
+- [Considerations for HTTP Authentication and IP-based security](#considerations-for-http-authentication-and-ip-based-security)
+  - [Scheduled tasks](#scheduled-tasks)
+  - [Web-API](#web-api)
+  - [Community portals](#community-portals)
 
-- References
+- [References](#references)
 
 ## Introduction
 
 Traditionally, when you access a URL like `http://www.example.com/pages/help.html` from your browser there is a corresponding file with the name `help.html` on the webserver in the `pages/` directory. This is how resources like HTML, images, Javascript, CSS, and other files are made available for download.
 
-Cerb uses a different approach for serving content, which is known to web application developers as the **Model-View-Controller (MVC)** 1 design pattern. The pages that your workers interact with are _virtual_ – there isn't a file on your webserver that corresponds with each URL.
+Cerb uses a different approach for serving content, which is known to web application developers as the **Model-View-Controller (MVC)** [1](#fn:mvc) design pattern. The pages that your workers interact with are _virtual_ – there isn't a file on your webserver that corresponds with each URL.
 
 All public interaction with the application occurs in two main files in the home directory of your Cerb installation:
 
 - **index.php** returns _responses_ for "full-cycle" HTTP _requests_. These requests occur when you type a URL into your browser, click a link, or request a resource (e.g. image, script, stylesheet, file download). The typical response is to render a new page of output, often including a header, top-level menu, body content, and footer.
 
-- **ajax.php** returns _responses_ for **Asynchronous Javascript And XML (Ajax)** 2 _requests_. _"Asynchronous"_ refers to the fact that these requests happen silently in the background, and your browser won't clear the existing page contents as it would during a full-cycle request. Ajax requests are used to provide functionality aimed at making web applications feel more responsive and interactive (in a way that only desktop applications used to be). These requests generally only affect one part of the greater whole.
+- **ajax.php** returns _responses_ for **Asynchronous Javascript And XML (Ajax)** [2](#fn:ajax) _requests_. _"Asynchronous"_ refers to the fact that these requests happen silently in the background, and your browser won't clear the existing page contents as it would during a full-cycle request. Ajax requests are used to provide functionality aimed at making web applications feel more responsive and interactive (in a way that only desktop applications used to be). These requests generally only affect one part of the greater whole.
 
 Here are some common examples of Ajax functionality:
 
@@ -92,7 +92,7 @@ Make sure that Nginx only sends requests for `/index.php` and `/ajax.php` to PHP
 
 ### Apache
 
-If you're using the provided `.htaccess` file for friendly URLs in Apache3, then we've already given you some defaults for blocking access to these directories:
+If you're using the provided `.htaccess` file for [friendly URLs](/docs/friendly-urls/) in Apache[3](#fn:apache), then we've already given you some defaults for blocking access to these directories:
 
 ```
 RewriteRule ^(.*/)?\.git(/|$) - [F,L]
@@ -167,7 +167,7 @@ All scheduled tasks are triggered by automated requests to the `/cerb/cron` URL.
 
 ### Web-API
 
-If you have applications that use the Web-based API to integrate with Cerb then you'll need to make sure they can make requests to the `/cerb/rest/*` path. You'll need to provide some extra code to handle HTTP Authentication.
+If you have applications that use the [Web-based API](/docs/api/) to integrate with Cerb then you'll need to make sure they can make requests to the `/cerb/rest/*` path. You'll need to provide some extra code to handle HTTP Authentication.
 
 ### Community portals
 
@@ -175,9 +175,9 @@ Community portals also make requests to Cerb. If you install a portal like the S
 
 # References
 
-1. Wikipedia: _Model-View-Controller (MVC)_ http://en.wikipedia.org/wiki/Model-View-Controller&nbsp;↩
+1. Wikipedia: _Model-View-Controller (MVC)_ http://en.wikipedia.org/wiki/Model-View-Controller&nbsp;[↩](#fnref:mvc)
 
-2. Wikipedia: _Asynchronous Javascript and XML (Ajax)_ http://en.wikipedia.org/wiki/Ajax\_(programming))&nbsp;↩
+2. Wikipedia: _Asynchronous Javascript and XML (Ajax)_ http://en.wikipedia.org/wiki/Ajax\_(programming))&nbsp;[↩](#fnref:ajax)
 
-3. Apache: _Protecting Server Files_ http://httpd.apache.org/docs/2.4/misc/security\_tips.html#protectserverfiles&nbsp;↩
+3. Apache: _Protecting Server Files_ http://httpd.apache.org/docs/2.4/misc/security\_tips.html#protectserverfiles&nbsp;[↩](#fnref:apache)
 

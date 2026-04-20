@@ -13,11 +13,11 @@ tags: ["docs"]
 
 Bot-powered project management using Kanban-style boards
 
-- Extensions
-  - Page Section
-  - Profile Widget Type
-  - Record Type
-  - Workspace Widget Type
+- [Extensions](#extensions)
+  - [Page Section](#page-section)
+  - [Profile Widget Type](#profile-widget-type)
+  - [Record Type](#record-type)
+  - [Workspace Widget Type](#workspace-widget-type)
 
 # Extensions
 
@@ -28,7 +28,7 @@ Bot-powered project management using Kanban-style boards
 
 ### Profile Widget Type
 
-| **Project Board** | `cerb.profile.tab.widget.project_board` |
+| [**Project Board**](/docs/plugins/extensions/cerb.profile.tab.widget.project_board/) | `cerb.profile.tab.widget.project_board` |
 
 ### Record Type
 
@@ -37,7 +37,7 @@ Bot-powered project management using Kanban-style boards
 
 ### Workspace Widget Type
 
-| **Project Board** | `cerb.workspace.widget.project_board` |
+| [**Project Board**](/docs/plugins/extensions/cerb.workspace.widget.project_board/) | `cerb.workspace.widget.project_board` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

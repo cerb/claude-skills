@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
  
 
-The Groups tab provides you with a pageable and filterable worklist of all the groups you have set up in Cerb. From here you can view, manage, and add new groups. You can also click any entry in the list to go to its profile page.
+The Groups tab provides you with a pageable and filterable worklist of all the [groups](/docs/groups/) you have set up in Cerb. From here you can view, manage, and add new groups. You can also click any entry in the list to go to its profile page.
 
 The same info and functionality can be accessed from **Search**&nbsp;» **Groups**.
 

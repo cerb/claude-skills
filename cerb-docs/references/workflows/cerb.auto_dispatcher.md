@@ -5,22 +5,22 @@ url: "https://cerb.ai/workflows/cerb.auto_dispatcher/"
 summary: "This page provides a comprehensive guide on the Auto Dispatcher workflow in Cerb, which allows workers to efficiently request their next assignment with a simple button click on a workspace. The workflow prioritizes and assigns tickets based on group memberships, importance, and duration of being open, ensuring a consistent and non-overlapping handling of issues. The guide covers installation, usage, and customization of the Auto Dispatcher, including adding workspace widgets, managing assignment rejections, and customizing rejection reasons and work order queries. It also includes a reference section for building custom auto-dispatcher workflows using the provided template. The Auto Dispatcher is integrated into Cerb 11.0+ and can be enabled through the Cerb interface."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Add the workspace widget
-  - Waiting shortcuts
-  - Assignment rejections
-  - Customizing the assignment rejection reasons
-  - Customizing the work order
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Add the workspace widget](#add-the-workspace-widget)
+  - [Waiting shortcuts](#waiting-shortcuts)
+  - [Assignment rejections](#assignment-rejections)
+  - [Customizing the assignment rejection reasons](#customizing-the-assignment-rejection-reasons)
+  - [Customizing the work order](#customizing-the-work-order)
 
-- Reference
+- [Reference](#reference)
 
 # Introduction
 
 The **cerb.auto\_dispatcher** workflow enables workers to simply request their next assignment by clicking a button on a workspace.
 
-Once you have more than a few simultaneous workers handling tickets in Cerb, it becomes inefficient for them to manually select their own next assignments from shared worklists. Workers may inadvertently choose the same ticket to work on, leading to wasted effort. This can also negatively impact customer satisfaction and service-level agreements, as workers may cherry-pick newer, simpler, or more interesting tickets while other issues frequently languish.
+Once you have more than a few simultaneous [workers](/docs/workers/) handling [tickets](/docs/tickets/) in Cerb, it becomes inefficient for them to manually select their own next assignments from shared [worklists](/docs/worklists/). Workers may inadvertently choose the same ticket to work on, leading to wasted effort. This can also negatively impact customer satisfaction and service-level agreements, as workers may cherry-pick newer, simpler, or more interesting tickets while other issues frequently languish.
 
 Furthermore, while tickets can be automatically assigned to workers during routing, this should not happen without user interaction, as an overly busy worker could block other available workers from handling new issues.
 
@@ -38,7 +38,7 @@ The last ticket would be unassigned, low importance, and most recently opened.
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Auto Dispatcher**.
 

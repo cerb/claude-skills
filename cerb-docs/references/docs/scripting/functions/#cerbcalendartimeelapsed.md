@@ -7,13 +7,13 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_calendar\_time\_elapsed
 
-(Added in 10.1.1)
+(Added in [10.1.1](/releases/10.1.1/))
 
 Calculate the time elapsed (in seconds) between two dates using calendar availability.
 
 `cerb_calendar_time_elapsed(calendar,date_from,date_to)`
 
-| **calendar** | The ID of the calendar to use for determining availability. |
+| **calendar** | The ID of the [calendar](/docs/records/types/calendar/) to use for determining availability. |
 | **date\_from** | The starting date/time. |
 | **date\_to** | The ending date/time. |
 

@@ -13,16 +13,16 @@ tags: ["docs"]
 
 Track time spent on various helpdesk activities (replying to tickets, etc). This adds a Track Time button to Display Ticket and Organizations, and a Time Tracking tab to the Activity page.
 
-- Extensions
-  - Bot Event
-  - Event Listener
-  - Page Section
-  - Page Type
-  - Prebody Renderer
-  - Profile Script
-  - Record Type
-  - Reply Toolbar Item
-  - Rest API Controller
+- [Extensions](#extensions)
+  - [Bot Event](#bot-event)
+  - [Event Listener](#event-listener)
+  - [Page Section](#page-section)
+  - [Page Type](#page-type)
+  - [Prebody Renderer](#prebody-renderer)
+  - [Profile Script](#profile-script)
+  - [Record Type](#record-type)
+  - [Reply Toolbar Item](#reply-toolbar-item)
+  - [Rest API Controller](#rest-api-controller)
 
 # Extensions
 
@@ -64,5 +64,5 @@ Track time spent on various helpdesk activities (replying to tickets, etc). This
 
 | Time Tracking | `cerberusweb.rest.controller.timetracking` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

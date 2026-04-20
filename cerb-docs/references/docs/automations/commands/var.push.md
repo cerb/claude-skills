@@ -17,12 +17,12 @@ Result:
 output@text: 1, 2, 3, 4, 5 ["1","2","3","4","5"]
 ```
 
-- Syntax
-  - inputs:
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -30,7 +30,7 @@ output@text: 1, 2, 3, 4, 5 ["1","2","3","4","5"]
 
 | Key | Req'd | &nbsp; |
 | --- | --- | --- |
-| `key:` | **x** | The key path of the value to append to, delimited with colons (`:`). |
+| `key:` | **x** | The [key path](/docs/automations/#dictionaries) of the value to append to, delimited with colons (`:`). |
 | `value:` | **x** | The value to append. |
 
 ## output:
@@ -39,19 +39,19 @@ The optional placeholder to store the result.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of appending the value.
+The [commands](/docs/automations/#commands) to run during simulation instead of appending the value.
 
 If omitted, the value is appended during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The optional `output:` placeholder is set to the new array after appending.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

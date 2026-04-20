@@ -7,7 +7,7 @@ tags: ["solutions", "solutions-automations"]
 ---
 When you set both `{prefix}__context` and `{prefix}_id` variables using a common prefix, Cerb automatically creates a key expandable dictionary for the referenced record.
 
-This is a shortcut for record.get:
+This is a shortcut for [record.get:](/docs/automations/commands/record.get/)
 
 ## Create a ticket dictionary
 

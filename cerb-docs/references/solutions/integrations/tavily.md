@@ -5,12 +5,12 @@ url: "https://cerb.ai/solutions/integrations/tavily/"
 summary: "This page provides a step-by-step guide for integrating Cerb and Tavily, allowing users to leverage Tavily's full API as a Large Language Model (LLM) tool when semantic search is not required. The integration process begins by obtaining a Tavily API key from the user's account, then creating the Tavily service in Cerb by navigating to Connected Services and entering the API key. Examples of using Tavily's API within Cerb are provided for Search and Extract endpoints, showcasing how users can utilize Tavily's capabilities through pre-built functions in Cerb."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a Tavily API Key.
-- Create the Tavily service in Cerb
-- Examples
-  - Search
-  - Extract
+- [Introduction](#introduction)
+- [Get a Tavily API Key.](#get-a-tavily-api-key)
+- [Create the Tavily service in Cerb](#create-the-tavily-service-in-cerb)
+- [Examples](#examples)
+  - [Search](#search)
+  - [Extract](#extract)
 
 # Introduction
 

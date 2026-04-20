@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_plugin\_enabled
 
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 Test if a Cerb plugin is installed and enabled.
 
@@ -15,7 +15,7 @@ For instance, this can be used to make dashboard tabs or widgets conditional on 
 
 `cerb_plugin_enabled(plugin_id)`
 
-| **plugin\_id** | The name or ID of the workflow. |
+| **plugin\_id** | The name or ID of the [workflow](/docs/workflows/). |
 
 ```
 {{ cerb_plugin_enabled ( 'cerb.classifiers' ) }}

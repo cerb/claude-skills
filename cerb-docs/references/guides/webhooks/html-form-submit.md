@@ -7,11 +7,11 @@ tags: ["guides"]
 ---
 # Introduction
 
-Let's assume that you have a static1 website for your company and you need to add a contact form to it. You're using something like Jekyll2 to generate the site because you want it to be simple to maintain, fast to serve, secure to host, and effortless to scale. You don't want to implement form processing with a dynamic3 programming language on the backend4 server because it will sacrifice those benefits.
+Let's assume that you have a static[1](#fn:static-site) website for your company and you need to add a contact form to it. You're using something like Jekyll[2](#fn:jekyll) to generate the site because you want it to be simple to maintain, fast to serve, secure to host, and effortless to scale. You don't want to implement form processing with a dynamic[3](#fn:dynamic-site) programming language on the backend[4](#fn:backend) server because it will sacrifice those benefits.
 
-Cerb has you covered. You can submit arbitrary web forms directly to bot behaviors in Cerb by using a custom webhook5 URL. The bot can validate the form fields, handle CORS6 access control, verify a CAPTCHA challenge, and then do almost anything with the data.
+Cerb has you covered. You can submit arbitrary web forms directly to bot behaviors in Cerb by using a custom webhook[5](#fn:webhook) URL. The bot can validate the form fields, handle CORS[6](#fn:cors) access control, verify a CAPTCHA challenge, and then do almost anything with the data.
 
-You can create a ticket in Cerb from a contact form, but you're not limited to that common use case. You can implement forms to collect leads on a landing page that directly populate opportunity records and custom fields. You can collect email addresses for an announcement mailing list. You can power signup forms for your products and services which create contact records and automate a series of sales followups. You can create a "request a call" form that uses Twilio7 to automatically connect a salesperson with a prospect.
+You can create a ticket in Cerb from a contact form, but you're not limited to that common use case. You can implement forms to collect leads on a landing page that directly populate opportunity records and custom fields. You can collect email addresses for an announcement mailing list. You can power signup forms for your products and services which create contact records and automate a series of sales followups. You can create a "request a call" form that uses Twilio[7](#fn:twilio) to automatically connect a salesperson with a prospect.
 
 You can do all of this with Cerb bot behaviors that you build entirely from your browser, with a little Javascript on your website, and without sacrificing any of the benefits of a static site on your server.
 
@@ -19,19 +19,19 @@ In this article, we'll build a simple contact form on a static site. When the fo
 
 You can use these fundamental concepts to respond to any kind of web requests with bots in Cerb.
 
-- Enable the Webhooks plugin in Cerb
-- Create the bot behavior in Cerb
-- Create the new webhook in Cerb
-- Open the example form in jsFiddle
-  - Test form validation warnings
-  - Test form success
+- [Enable the Webhooks plugin in Cerb](#enable-the-webhooks-plugin-in-cerb)
+- [Create the bot behavior in Cerb](#create-the-bot-behavior-in-cerb)
+- [Create the new webhook in Cerb](#create-the-new-webhook-in-cerb)
+- [Open the example form in jsFiddle](#open-the-example-form-in-jsfiddle)
+  - [Test form validation warnings](#test-form-validation-warnings)
+  - [Test form success](#test-form-success)
 
-- Restrict access to your webhook URL
-- References
+- [Restrict access to your webhook URL](#restrict-access-to-your-webhook-url)
+- [References](#references)
 
 # Enable the Webhooks plugin in Cerb
 
-If the webhooks plugin isn't already enabled, install it from the Plugin Library.
+If the webhooks plugin isn't already enabled, install it from the [Plugin Library](/docs/plugins/#library).
 
 # Create the bot behavior in Cerb
 
@@ -47,7 +47,7 @@ Enter the following details:
 
  
 
-Click the **Save Changes** button. Then click your the name of your new bot in the yellow notification bubble above the worklist to open its card.
+Click the **Save Changes** button. Then click your the name of your new bot in the yellow notification bubble above the worklist to open its [card](/docs/cards/).
 
 On the popup, click the **Behaviors** button:
 
@@ -306,17 +306,17 @@ You can also optionally hide your webhook URL behind a proxy, which protects the
 
 # References
 
-1. https://en.wikipedia.org/wiki/Static\_web\_page&nbsp;↩
+1. https://en.wikipedia.org/wiki/Static\_web\_page&nbsp;[↩](#fnref:static-site)
 
-2. https://jekyllrb.com&nbsp;↩
+2. https://jekyllrb.com&nbsp;[↩](#fnref:jekyll)
 
-3. https://en.wikipedia.org/wiki/Dynamic\_web\_page&nbsp;↩
+3. https://en.wikipedia.org/wiki/Dynamic\_web\_page&nbsp;[↩](#fnref:dynamic-site)
 
-4. https://en.wikipedia.org/wiki/Front\_and\_back\_ends&nbsp;↩
+4. https://en.wikipedia.org/wiki/Front\_and\_back\_ends&nbsp;[↩](#fnref:backend)
 
-5. https://en.wikipedia.org/wiki/Webhook&nbsp;↩
+5. https://en.wikipedia.org/wiki/Webhook&nbsp;[↩](#fnref:webhook)
 
-6. https://en.wikipedia.org/wiki/Cross-origin\_resource\_sharing&nbsp;↩
+6. https://en.wikipedia.org/wiki/Cross-origin\_resource\_sharing&nbsp;[↩](#fnref:cors)
 
-7. https://www.twilio.com&nbsp;↩
+7. https://www.twilio.com&nbsp;[↩](#fnref:twilio)
 

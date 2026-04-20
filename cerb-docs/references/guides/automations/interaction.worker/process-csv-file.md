@@ -5,28 +5,28 @@ url: "https://cerb.ai/guides/automations/interaction.worker/process-csv-file/"
 summary: "This page provides a guide on how to process an uploaded CSV file using the interaction.worker automation in Cerb. The automation reads and processes the file in chunks to avoid memory and timeout issues. It uses a while loop to ingest chunks, processing each row individually and combining it with column headers to create associative arrays. The process can be customized based on specific needs, and it includes examples of different use cases, such as creating tasks and sending email using scheduled drafts."
 tags: ["guides"]
 ---
-- Introduction
-- Code
-- Examples
-  - Create tasks
-  - Send email using a template and scheduled drafts
+- [Introduction](#introduction)
+- [Code](#code)
+- [Examples](#examples)
+  - [Create tasks](#create-tasks)
+  - [Send email using a template and scheduled drafts](#send-email-using-a-template-and-scheduled-drafts)
 
 # Introduction
 
-This automation reads and processes an uploaded CSV file in chunks to avoid memory and timeout issues. The example is intended to be customized based on your needs.
+This [automation](/docs/automations/) reads and processes an uploaded CSV file in chunks to avoid memory and timeout issues. The example is intended to be customized based on your needs.
 
-You can add the interaction to any toolbar in Cerb's UI.
+You can add the [interaction](/docs/interactions/) to any [toolbar](/docs/toolbars/) in Cerb's UI.
 
-Keep in mind that each step of an interaction has a time limit of 30 seconds. It's important to occasionally use an await: to report progress to the user. Depending on your use case this may be done for every row or in batches.
+Keep in mind that each step of an interaction has a time limit of 30 seconds. It's important to occasionally use an [await:](/docs/automations/commands/await/) to report progress to the user. Depending on your use case this may be done for every row or in batches.
 
-If you have a time-intensive process that the user doesn't need to wait for, use queue.push: here to quickly add the rows to a queue and process them asynchronously in the background. You can notify the user when background processing is complete.
+If you have a time-intensive process that the user doesn't need to wait for, use [queue.push:](/docs/automations/commands/queue.push/) here to quickly add the rows to a queue and process them asynchronously in the background. You can notify the user when background processing is complete.
 
 # Code
 
-| **Trigger:** | interaction.worker |
+| **Trigger:** | [interaction.worker](/docs/automations/triggers/interaction.worker/) |
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```
@@ -191,19 +191,19 @@ In the reference, each row is processed individually (line 54) and displayed to 
 
 ## Create tasks
 
-We can create a task record for each row in the uploaded CSV file.
+We can create a [task](/docs/records/types/task/) record for each row in the uploaded CSV file.
 
 - On line 12 we add `count_tasks_created` to keep a running total of new tasks.
 
 - On lines 48-52 we enforced the required "Title" column.
 
-- On lines 66-76 we create a task record for every row in the CSV file. We can use the @optional annotation for columns that are optional to skip those fields when empty. We use the `on_success:` event to increment the task counter.
+- On lines 66-76 we create a task record for every row in the CSV file. We can use the [@optional](/docs/automations/#annotations) annotation for columns that are optional to skip those fields when empty. We use the `on_success:` event to increment the task counter.
 
 - On lines 82-88 we output the number of created tasks at the end.
 
-- automation
-- policy
-- CSV
+- [automation](#)
+- [policy](#)
+- [CSV](#)
 
 - 
 ```
@@ -346,15 +346,15 @@ We can create a ticket and schedule an outgoing email draft for each row in the 
 
 - On lines 82-88 we replace the placeholders with the CSV row values.
 
-- On lines 90-116 we create a ticket and draft record for every row in the CSV file. We can use the @optional annotation for columns that are optional to skip those fields when empty. We create the draft in the `on_success:` event of the new ticket, then increment the ticket counter.
+- On lines 90-116 we create a [ticket](/docs/records/types/ticket/) and [draft](/docs/records/types/draft/) record for every row in the CSV file. We can use the [@optional](/docs/automations/#annotations) annotation for columns that are optional to skip those fields when empty. We create the draft in the `on_success:` event of the new ticket, then increment the ticket counter.
 
 - On lines 118-130 we show the user a progress update every 25 created tickets.
 
 - On lines 136-142 we output the number of created tickets at the end. This could be more sophisticated and show the new records in a `sheet:` from an `await:form:`.
 
-- automation
-- policy
-- CSV
+- [automation](#)
+- [policy](#)
+- [CSV](#)
 
 - 
 ```

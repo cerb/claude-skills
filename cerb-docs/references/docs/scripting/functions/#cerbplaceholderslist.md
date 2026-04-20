@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_placeholders\_list
 
-Return an object with every placeholder in the current behavior.
+Return an [object](/docs/scripting/arrays-objects/) with every placeholder in the current behavior.
 
 `cerb_placeholders_list(extract, prefix)`
 

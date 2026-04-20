@@ -7,29 +7,29 @@ tags: ["guides"]
 ---
  
 
-- What are packages?
-- The structure of a package
-- Scripting
-- Placeholders
-- Package Library
-  - Library sections
-  - Adding packages to the library
+- [What are packages?](#what-are-packages)
+- [The structure of a package](#the-structure-of-a-package)
+- [Scripting](#scripting)
+- [Placeholders](#placeholders)
+- [Package Library](#package-library)
+  - [Library sections](#library-sections)
+  - [Adding packages to the library](#adding-packages-to-the-library)
 
-- Making packages configurable
-  - Built-in placeholders
-    - Random code generator
-    - Data Query
+- [Making packages configurable](#making-packages-configurable)
+  - [Built-in placeholders](#built-in-placeholders)
+    - [Random code generator](#random-code-generator)
+    - [Data Query](#data-query)
 
-  - Prompts
-    - Text entry
-    - Picklists
-    - Choosers
+  - [Prompts](#prompts)
+    - [Text entry](#text-entry)
+    - [Picklists](#picklists)
+    - [Choosers](#choosers)
 
-  - Options
-    - disable\_events
+  - [Options](#options)
+    - [disable\_events](#disable_events)
 
-- Next steps
-- References
+- [Next steps](#next-steps)
+- [References](#references)
 
 # What are packages?
 
@@ -37,13 +37,13 @@ Packages are a blueprint for importing a related set of pre-configured records i
 
 This allows you to quickly configure Cerb for your needs.
 
-For instance, in our Packages Library you'll find the Customer Satisfaction Surveys package. This creates three new custom fieldsets for tracking satisfaction metrics. It creates a conversational bot that can converse with your clients to gauge their satisfaction. It adds a community portal for the bot to use. And it creates a workspace with three dashboards for reporting on your NPS, CSAT, and CES metrics.
+For instance, in our [Packages Library](/resources/packages/) you'll find the [Customer Satisfaction Surveys](/packages/customer-satisfaction/) package. This creates three new custom fieldsets for tracking satisfaction metrics. It creates a conversational bot that can converse with your clients to gauge their satisfaction. It adds a community portal for the bot to use. And it creates a workspace with three dashboards for reporting on your NPS, CSAT, and CES metrics.
 
 It would probably take you several hours to follow detailed instructions for creating all of that in your own copy of Cerb. With a package, you can import the customer satisfaction workflow and start using it in seconds.
 
 As well, rather than us locking you into a specific approach, you can now modify every aspect of the records created by the package to meet your exact needs. We can also offer alternative packages for different needs.
 
-You can create your own packages and use them in setup, automations, or the API.
+You can create your own packages and use them in [setup](/docs/setup/), [automations](/docs/automations/), or the [API](/docs/api/).
 
 Perhaps you want to build **Onboarding Bot** to configure a default workspace for new workers and give them a project board checklist to get them up to speed. You can create these records as a package, and use **prompts** to personalize them every time they are imported.
 
@@ -51,7 +51,7 @@ Packages also simplify the process of importing and synchronizing records from o
 
 # The structure of a package
 
-Packages use the JSON1 file format. This is something you can easily create from any text editor, and read/write in nearly any programming language.
+Packages use the JSON[1](#fn:json) file format. This is something you can easily create from any text editor, and read/write in nearly any programming language.
 
 Here's the basic structure of a package:
 
@@ -85,16 +85,16 @@ First, let's look at the `package` section:
 
 We also see two other keys:
 
-- **records** is an optional array of record objects. A package can include any number of records.
+- **records** is an optional array of [record objects](/guides/packages/create-records/). A package can include any number of records.
 - **bots** is an optional array of bot objects. While bots are also comprised of records, their potentially complex behaviors are easier to import as a single unit instead of individual records for each component.
 
 # Scripting
 
-A package itself must always be a valid JSON object, but any key or value string can use Cerb's scripting syntax for dynamic content.
+A package itself must always be a valid JSON object, but any key or value string can use [Cerb's scripting syntax](/docs/scripting/) for dynamic content.
 
 Because packages can include bots that also use scripting, packages use a slightly modified syntax to avoid conflicting with them:
 
-- Commands use `{{% ... %}}` rather than `{% ... %}`
+- [Commands](/docs/scripting/commands/) use `{{% ... %}}` rather than `{% ... %}`
 - Placeholders use `{{{...}}}` rather than `{{...}}`
 - Comments use `{{#...#}}` rather than `{#...#}`
 
@@ -113,7 +113,7 @@ There are several sources of placeholders:
 
 - **Built-in placeholders** provide common functionality like generating random numbers or passwords.
 - **Prompts** ask for input to configure the package before it's imported. These can be different every time the package is used, and they're the key to designing reusable packages.
-- **UIDs** are unique identifiers for referencing specific records included within the package. These are automatically replaced with record IDs once imported. e.g. `{{{uid.example_uid}}}`
+- **UIDs** are unique identifiers for referencing specific [records](/guides/packages/create-records/) included within the package. These are automatically replaced with record IDs once imported. e.g. `{{{uid.example_uid}}}`
 
 # Package Library
 
@@ -147,15 +147,15 @@ The **library** key uses the following structure:
 
 - `behavior`
 - `behavior_action`
-- `behavior_action:` \<event.point.id\>
+- `behavior_action:` [\<event.point.id\>](/docs/plugins/extensions/points/devblocks.event/#extensions)
 - `behavior_loop`
 - `behavior_switch`
 - `calendar`
 - `connected_service`
 - `profile_tab`
-- `profile_tab:` \<record\_alias\>
+- `profile_tab:` [\<record\_alias\>](/docs/records/types/)
 - `profile_widget`
-- `profile_widget:` \<record\_alias\>
+- `profile_widget:` [\<record\_alias\>](/docs/records/types/)
 - `project_board`
 - `task`
 - `workflow`
@@ -181,7 +181,7 @@ Paste your package into the **Package: (JSON)** section and click the **Save Cha
 
 The random code generator is useful for generating passwords, confirmation codes, or secret keys.
 
-For instance, the Customer Satisfaction Surveys package generates a different random 16-character secret key every time it's imported. This secret key is used by the bot to "sign" survey URLs and ensure they weren't tampered with. If the same default key was shared by everyone who installed the package, then everyone could forge new survey links for anyone else. Instead, two people importing the same package get two different secret keys.
+For instance, the [Customer Satisfaction Surveys](/packages/customer-satisfaction/) package generates a different random 16-character secret key every time it's imported. This secret key is used by the bot to "sign" survey URLs and ensure they weren't tampered with. If the same default key was shared by everyone who installed the package, then everyone could forge new survey links for anyone else. Instead, two people importing the same package get two different secret keys.
 
 Here's an example package that uses the random code generating to generate random tasks:
 
@@ -217,7 +217,7 @@ Every time you import this package it will generate a new task record with a ran
 
 ### Data Query
 
-Added in 9.6.
+Added in [9.6](/releases/9.6/).
 
 ```
 { 
@@ -433,9 +433,9 @@ This can be useful, for example, when importing historical records from another 
 
 # Next steps
 
-Now that you understand how to create a basic package, learn more about adding records to packages and importing packages.
+Now that you understand how to create a basic package, learn more about [adding records to packages](/guides/packages/create-records/) and [importing packages](/guides/packages/importing/).
 
 # References
 
-1. Wikipedia: JSON - https://en.wikipedia.org/wiki/JSON&nbsp;↩
+1. Wikipedia: JSON - https://en.wikipedia.org/wiki/JSON&nbsp;[↩](#fnref:json)
 

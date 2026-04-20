@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## join
 
-Convert an array to a string with delimiters:
+Convert an [array](/docs/scripting/arrays-objects/) to a string with delimiters:
 
 ```
 {% set items = [1 , 2 , 3] %} {{ items | join ( ',' ) }} {{ items | join ( ' ' ) }}

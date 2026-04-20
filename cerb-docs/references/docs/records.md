@@ -7,15 +7,15 @@ tags: ["docs"]
 ---
  
 
-- Fields
-- Custom Records
-  - Related resources
+- [Fields](#fields)
+- [Custom Records](#custom-records)
+  - [Related resources](#related-resources)
 
 At the core of Cerb is a **record** management system for organizing your team's data. A record is a distinctly identifiable entity.
 
 Two pieces of information are needed to refer to any record:
 
-1. The **record type** (e.g. contact, organization, worker).
+1. The [**record type**](/docs/records/types/) (e.g. contact, organization, worker).
 
 2. The unique numeric identifier ("**ID**") within that particular record type. IDs are automatically assigned when a new record is created.
 
@@ -27,19 +27,19 @@ Each record type has a set of **fields** to describe its attributes. Your `first
 
 | Field Type | Description |
 | --- | --- |
-| Boolean | A _true_ or _false_ value, represented by `1` or `0` respectively |
-| Context | A record type |
-| Extension | A plugin extension |
-| Float | A floating point number |
-| Image | A Base64-encoded images |
-| Links | A list of `context:id` pairs representing linked records |
-| Number | An integer (whole number) |
-| Object | A collection of _keys_ and their associated _values_ |
-| Text | Free-form text |
-| Timestamp | A 64-bit Unix timestamp integer, representing the number of elapsed seconds since January 1, 1970 00:00:00 GMT |
-| URL | A web page URL |
+| [Boolean](/docs/records/fields/types/boolean/) | A _true_ or _false_ value, represented by `1` or `0` respectively |
+| [Context](/docs/records/fields/types/context/) | A [record type](/docs/records/types/) |
+| [Extension](/docs/records/fields/types/extension/) | A [plugin](/docs/plugins/) extension |
+| [Float](/docs/records/fields/types/float/) | A floating point number |
+| [Image](/docs/records/fields/types/images/) | A Base64-encoded images |
+| [Links](/docs/records/fields/types/links/) | A list of `context:id` pairs representing linked records |
+| [Number](/docs/records/fields/types/number/) | An integer (whole number) |
+| [Object](/docs/records/fields/types/object/) | A collection of _keys_ and their associated _values_ |
+| [Text](/docs/records/fields/types/text/) | Free-form text |
+| [Timestamp](/docs/records/fields/types/timestamp/) | A 64-bit Unix timestamp integer, representing the number of elapsed seconds since January 1, 1970 00:00:00 GMT |
+| [URL](/docs/records/fields/types/URL/) | A web page URL |
 
-Here's what the fields for a basic worker record might look like for someone on your team:
+Here's what the fields for a basic [worker record](/docs/records/types/worker/) might look like for someone on your team:
 
 | Field | Type | Value |
 | --- | --- | --- |
@@ -58,9 +58,9 @@ Here's what the fields for a basic worker record might look like for someone on 
 
 # Custom Records
 
-While the built-in record types cover things that every team has in common, you most likely need to keep track of data that is specific to your team and industry.
+While the built-in [record types](/docs/records/types/) cover things that every team has in common, you most likely need to keep track of data that is specific to your team and industry.
 
-In these situations, you can easily create your own record types.
+In these situations, you can easily [create your own record types](/guides/records/custom-records/).
 
 For instance:
 
@@ -74,5 +74,5 @@ For instance:
 
 ## Related resources
 
-- Guide: Create custom records
+- [Guide: Create custom records](/guides/records/custom-records/)
 

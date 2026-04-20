@@ -9,7 +9,7 @@ tags: ["docs", "docs-scripting"]
 
 Append a suffix to the current text.
 
-(Introduced in 10.0.3)
+(Introduced in [10.0.3](/releases/10.0.3/))
 
 `|append(suffix, delimiter, trim)`
 

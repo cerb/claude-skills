@@ -5,18 +5,18 @@ url: "https://cerb.ai/workflows/cerb.integrations.aws_bedrock.profile_images/"
 summary: "This webpage provides a comprehensive guide on generating profile images using Amazon Bedrock's foundational models through a workflow integrated with Cerb. It covers the necessary installation steps, including setting up an AWS account, accessing Amazon Bedrock, and updating IAM policies to allow Cerb automations to invoke AWS Bedrock models. The guide details the process of testing image generation using specific prompts and configuring Cerb to utilize these capabilities. It also includes instructions on how to use the workflow within Cerb to generate and select profile images, and offers a reference template for building custom workflows. The page is structured to assist users in seamlessly integrating and utilizing AI-driven image generation within their Cerb environment."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-  - Requirements
-  - Amazon Bedrock
-    - Test image generation
+- [Introduction](#introduction)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Amazon Bedrock](#amazon-bedrock)
+    - [Test image generation](#test-image-generation)
 
-  - Update your IAM policy
-  - Cerb
-    - Install the workflow
+  - [Update your IAM policy](#update-your-iam-policy)
+  - [Cerb](#cerb)
+    - [Install the workflow](#install-the-workflow)
 
-- Usage
-- Reference
+- [Usage](#usage)
+- [Reference](#reference)
 
 # Introduction
 
@@ -28,7 +28,7 @@ This workflow generates profile images from a text prompt using Amazon Bedrock f
 
 You must have an Amazon Web Services (AWS) account to use this workflow.
 
-If you don't have a connected account in Cerb for Amazon Web Services yet, you can follow these instructions to create one.
+If you don't have a connected account in Cerb for Amazon Web Services yet, you can [follow these instructions](/solutions/integrations/aws/) to create one.
 
 ## Amazon Bedrock
 
@@ -71,7 +71,7 @@ We're going to add access to invoke AWS Bedrock models.
 
 Select **Policies** in the navigation on the left.
 
-Find your existing policy in the list or create a new one. In the earlier instructions we created a policy named **CerbAutomationsPolicy**.
+Find your existing policy in the list or create a new one. In the earlier [instructions](/solutions/integrations/aws/) we created a policy named **CerbAutomationsPolicy**.
 
 Click on the policy and click the **Edit** button in the top right.
 
@@ -104,7 +104,7 @@ Click the orange **Save changes** button in the bottom right.
 
 ### Install the workflow
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Generate Profile Images (Amazon Bedrock)**.
 

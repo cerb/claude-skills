@@ -7,14 +7,14 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using cerb\_extract\_uris()
 
-The cerb\_extract\_uris() function return an array of URLs found in HTML content, along with metadata (e.g. tag, attributes, URI parts).
+The [cerb\_extract\_uris()](/docs/scripting/functions/#cerb_extract_uris) function return an array of URLs found in HTML content, along with metadata (e.g. tag, attributes, URI parts).
 
-In the response, URLs are replaced with tokens in the template which can be modified with the |replace filter.
+In the response, URLs are replaced with tokens in the template which can be modified with the [|replace](/docs/scripting/filters/#replace) filter.
 
 For instance, this function can be used to rewrite all links in an email template for click tracking.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

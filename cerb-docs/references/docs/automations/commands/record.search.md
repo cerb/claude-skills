@@ -11,14 +11,14 @@ The **record.search:** command returns record dictionaries from a search query.
 start: record.search: inputs: record_type: ticket record_query: status:${status} record_query_params: status: o output: results
 ```
 
-- Syntax
-  - inputs:
-    - validation@raw:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [validation@raw:](#validationraw)
 
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -26,8 +26,8 @@ start: record.search: inputs: record_type: ticket record_query: status:${status}
 
 | Key | &nbsp; |
 | --- | --- |
-| `record_type:` | The record type to search. |
-| `record_query:` | The search query to match. Use `limit:1` to return a single dictionary rather than an array of dictionaries. |
+| `record_type:` | The [record type](/docs/records/types/) to search. |
+| `record_query:` | The [search query](/docs/search/) to match. Use `limit:1` to return a single dictionary rather than an array of dictionaries. |
 | `record_query_params:` | Query parameters with untrusted user input as keys/values. Reference these as `${param}` in queries. |
 | `validation@raw:` | An optional template to validate results. Any non-empty output triggers the `on_error:` event. |
 
@@ -43,19 +43,19 @@ Save the search results as record dictionaries in this placeholder.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of searching records.
+The [commands](/docs/automations/#commands) to run during simulation instead of searching records.
 
 If omitted, records are searched during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The `output:` placeholder is an array of record dictionaries.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

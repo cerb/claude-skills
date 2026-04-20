@@ -17,6 +17,6 @@ You can write and run multiline scripts in the tester box. An example is using i
 
  
 
-You can also use |json\_encode to quickly encode objects as JSON.
+You can also use [|json\_encode](/docs/scripting/filters/#json_encode) to quickly encode objects as JSON.
 
  

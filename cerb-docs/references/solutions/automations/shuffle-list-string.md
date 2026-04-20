@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Shuffling lists and strings
 
-Here is an example of using the shuffle function to randomly reorder elements in both lists and strings.
+Here is an example of using the [shuffle](/docs/scripting/functions/#shuffle) function to randomly reorder elements in both lists and strings.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

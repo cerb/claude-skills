@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
  
 
-An **avatar** is the profile picture you see next to certain records: workers, groups, bots, etc.
+An **avatar** is the profile picture you see next to certain [records](/docs/records/): workers, groups, bots, etc.
 
 In this section, you can configure the default avatar for contacts and workers.
 

@@ -31,7 +31,7 @@ No! All we require is a valid email address to contact you. You will **never** r
 
 ## How many workers can I invite to a Cerb Cloud trial?
 
-By default, your trial allows unlimited worker accounts with **3** seats. Contact us if you need to test with more seats, and we can raise the limit.
+By default, your trial allows unlimited worker accounts with **3** seats. [Contact us](/help/) if you need to test with more seats, and we can raise the limit.
 
 ## Do I need my own email server to use Cerb Cloud?
 
@@ -41,7 +41,7 @@ You can easily configure Cerb to use remote mail services if desired.
 
 With Cerb Cloud, we provide you with a subdomain worth of temporary email addresses, like **\*@example.cerb.email**. You can send and receive email from any of these addresses (e.g. billing@, support@, sales@), which makes it much easier to practice routing work to the appropriate groups/buckets in Cerb.
 
-We also configure SPF, DKIM, and DMARC records for these temporary email addresses so you can test our mail deliverability.
+We also configure SPF, DKIM, and DMARC records for these temporary email addresses so you can [test our mail deliverability](/docs/guide/admins/quick-start/#send-a-message-to-test-mail-deliverability).
 
 If you switch to a Cerb Cloud subscription, you can even use these email addresses in production, but you'll probably want to use your own domains. We'll help you configure the SPF, DKIM, and DMARC records on your domains to optimize your mail deliverability from Cerb as well.
 
@@ -65,5 +65,5 @@ This also allows us to provide the highest level of assistance during your evalu
 
 All of your Cerb Cloud configuration and data can be exported to a self-hosted instance of Cerb at any time. Once you're confident that Cerb is a good fit for your team, we're happy to help you with that migration.
 
-If you still need to evaluate Cerb in your own environment, you can simply grab a copy of the project from GitHub and follow the installation instructions.
+If you still need to evaluate Cerb in your own environment, you can simply grab a copy of the project from GitHub and follow the [installation instructions](/docs/installation/).
 

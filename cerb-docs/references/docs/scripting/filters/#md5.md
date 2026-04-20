@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## md5
 
-Generate an MD53 hash for a string:
+Generate an MD5[3](#fn:md5) hash for a string:
 
 ```
 {{ "You can verify this hash" | md5 }}

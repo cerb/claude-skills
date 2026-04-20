@@ -11,46 +11,46 @@ It is our policy to respect your privacy regarding any information we may collec
 
 We do not sell any personally identifiable information or data stored in Cerb Cloud to third-parties. We do not directly share your information with third-parties without explicit permission except to comply with the law or to provide necessary infrastructure in connection with the services you request; however, there is some passive risk of exposure to third-party access inherent in web-based services that is outlined in detail below. We do our best to mitigate and minimize these risks on your behalf.
 
-- Data Privacy Framework (DPF)
-  - Jurisdiction
-  - Resolving Privacy Complaints
-  - Independent Arbitration
-  - Liability For Onward Transfers
+- [Data Privacy Framework (DPF)](#data-privacy-framework-dpf)
+  - [Jurisdiction](#jurisdiction)
+  - [Resolving Privacy Complaints](#resolving-privacy-complaints)
+  - [Independent Arbitration](#independent-arbitration)
+  - [Liability For Onward Transfers](#liability-for-onward-transfers)
 
-- Your Personal Data Rights
-  - Right to be Informed
-  - Right of Access
-  - Right of Choice
-  - Right to be Forgotten
-  - California Privacy Rights
+- [Your Personal Data Rights](#your-personal-data-rights)
+  - [Right to be Informed](#right-to-be-informed)
+  - [Right of Access](#right-of-access)
+  - [Right of Choice](#right-of-choice)
+  - [Right to be Forgotten](#right-to-be-forgotten)
+  - [California Privacy Rights](#california-privacy-rights)
 
-- What Personal Data We Collect
-  - Cerb Cloud
-  - Cookies
-  - Non-personally identifying information
-  - Potentially personally identifying information
-  - Personally identifying information
-  - Ads
-  - Testimonials
-  - Aggregated Statistics
+- [What Personal Data We Collect](#what-personal-data-we-collect)
+  - [Cerb Cloud](#cerb-cloud)
+  - [Cookies](#cookies)
+  - [Non-personally identifying information](#non-personally-identifying-information)
+  - [Potentially personally identifying information](#potentially-personally-identifying-information)
+  - [Personally identifying information](#personally-identifying-information)
+  - [Ads](#ads)
+  - [Testimonials](#testimonials)
+  - [Aggregated Statistics](#aggregated-statistics)
 
-- Why and To Whom We Disclose Personal Data
-  - Amazon Web Services (AWS)
-  - Banking through Freshbooks, Stripe, Wells Fargo, and PayPal
-  - Google (G Suite)
+- [Why and To Whom We Disclose Personal Data](#why-and-to-whom-we-disclose-personal-data)
+  - [Amazon Web Services (AWS)](#amazon-web-services-aws)
+  - [Banking through Freshbooks, Stripe, Wells Fargo, and PayPal](#banking-through-freshbooks-stripe-wells-fargo-and-paypal)
+  - [Google (G Suite)](#google-g-suite)
 
-- Your Privacy Choices
-- Security and Safeguards
-  - Disclosure of Security Breaches
-  - Backups
-  - Disposal of Data and Backups
+- [Your Privacy Choices](#your-privacy-choices)
+- [Security and Safeguards](#security-and-safeguards)
+  - [Disclosure of Security Breaches](#disclosure-of-security-breaches)
+  - [Backups](#backups)
+  - [Disposal of Data and Backups](#disposal-of-data-and-backups)
 
-- Business Transfers
-- Data Protection Addendum
-- Privacy Policy Changes
-  - Changelog
+- [Business Transfers](#business-transfers)
+- [Data Protection Addendum](#data-protection-addendum)
+- [Privacy Policy Changes](#privacy-policy-changes)
+  - [Changelog](#changelog)
 
-- License
+- [License](#license)
 
 # Data Privacy Framework (DPF)
 
@@ -70,7 +70,7 @@ We are subject to the investigatory and enforcement powers of the United States 
 
 ### Resolving Privacy Complaints
 
-In compliance with the Data Privacy Framework, WGM commits to resolve complaints about our collection or use of your personal information. EU, UK, and Swiss individuals with inquiries or complaints regarding our Data Privacy Framework policy should first contact us at: team@cerb.ai
+In compliance with the Data Privacy Framework, WGM commits to resolve complaints about our collection or use of your personal information. EU, UK, and Swiss individuals with inquiries or complaints regarding our Data Privacy Framework policy should first contact us at: [team@cerb.ai](mailto:team@cerb.ai)
 
 WGM has further committed to refer unresolved Data Privacy Framework complaints to JAMS, an alternative dispute resolution provider located in the United States. If you do not receive timely acknowledgment of your complaint from us, or if we have not addressed your complaint to your satisfaction, please contact or visit https://www.jamsadr.com/dpf-dispute-resolution for more information or to file a complaint. The services of JAMS are provided at no cost to you.
 
@@ -98,7 +98,7 @@ You have the right to a copy of any personal information we have collected from 
 
 This information will be transmitted electronically no later than one month from the date we receive your request.
 
-Please submit Data Subject Access Requests (DSAR) by email to: team@cerb.ai
+Please submit Data Subject Access Requests (DSAR) by email to: [team@cerb.ai](mailto:team@cerb.ai)
 
 ### Right of Choice
 
@@ -108,13 +108,13 @@ Sensitive personal information includes, but is not limited to: medical or healt
 
 Absent your consent, we will not transfer your sensitive personal information to third parties for any purpose other than those explicitly outlined in this document.
 
-You may formally opt out of all non-essential third-party information disclosure through email to: team@cerb.ai. Please include the associated email addresses you wish to opt-out with.
+You may formally opt out of all non-essential third-party information disclosure through email to: [team@cerb.ai](mailto:team@cerb.ai). Please include the associated email addresses you wish to opt-out with.
 
 ### Right to be Forgotten
 
 You have the right to the erasure of any personal data we have collected from you or about you.
 
-Please submit data removal requests by email to: team@cerb.ai
+Please submit data removal requests by email to: [team@cerb.ai](mailto:team@cerb.ai)
 
 ### California Privacy Rights
 
@@ -122,7 +122,7 @@ Residents of the State of California have the right to opt-out of our disclosure
 
 We do not disclose your personal information to advertisers.
 
-You may formally opt out by emailing: team@cerb.ai
+You may formally opt out by emailing: [team@cerb.ai](mailto:team@cerb.ai)
 
 # What Personal Data We Collect
 
@@ -253,13 +253,13 @@ We provide the following privacy choices for your data:
 
 - You must opt-in to receive newsletters and other marketing email from us. At any time, you may opt-out of marketing communications by clicking the "unsubscribe" link found at the bottom of such messages. Note that after you opt-out, you may still receive email from us related to your active licenses and services, or in response to information you have requested.
 
-- You may receive a full backup of your content from Cerb Cloud at any time by contacting team@cerb.ai.
+- You may receive a full backup of your content from Cerb Cloud at any time by contacting [team@cerb.ai](mailto:team@cerb.ai).
 
 - You may delete records and other data within your Cerb instance. Use the **search** menu in the top right of the application, edit a record, and click the **Delete** button.
 
-- You may request that we delete your personal profiles, organizational profiles, and/or testimonials, from our client database by contacting team@cerb.ai.
+- You may request that we delete your personal profiles, organizational profiles, and/or testimonials, from our client database by contacting [team@cerb.ai](mailto:team@cerb.ai).
 
-- You may close your Cerb Cloud account and request that your data and backups be permanently deleted by contacting team@cerb.ai.
+- You may close your Cerb Cloud account and request that your data and backups be permanently deleted by contacting [team@cerb.ai](mailto:team@cerb.ai).
 
 # Security and Safeguards
 
@@ -297,7 +297,7 @@ If WGM or substantially all of its assets were acquired, or in the event that we
 
 # Data Protection Addendum
 
-If you require a signed Data Protection Addendum (DPA) for GDPR compliance, you may download ours here. This document formalizes the contract between data exporter and data importer, as well as describing the rights of data subjects. Please review the terms and return a signed copy to team@cerb.ai.
+If you require a signed Data Protection Addendum (DPA) for GDPR compliance, you may [download ours here](/assets/documents/WGM_GDPR_DPA.pdf). This document formalizes the contract between data exporter and data importer, as well as describing the rights of data subjects. Please review the terms and return a signed copy to [team@cerb.ai](mailto:team@cerb.ai).
 
 # Privacy Policy Changes
 

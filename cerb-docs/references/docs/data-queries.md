@@ -9,14 +9,14 @@ tags: ["docs"]
 
 **Data queries** are a purpose-built, text-based query language to retrieve, transform, and format data for visualizations.
 
-- Types
-- Running data queries
-  - Setup
-  - Dashboard widgets
-  - Automations
-  - API
+- [Types](#types)
+- [Running data queries](#running-data-queries)
+  - [Setup](#setup)
+  - [Dashboard widgets](#dashboard-widgets)
+  - [Automations](#automations)
+  - [API](#api)
 
-These textual queries are very simple to automate in automations, dashboard widgets, or the API.
+These textual queries are very simple to automate in [automations](/docs/automations/), [dashboard](/docs/dashboards/) widgets, or the [API](/docs/api/).
 
 A data query is a collection of `key:value` pairs.
 
@@ -38,30 +38,31 @@ format: dictionaries
 
 | Type | Description |
 | --- | --- |
-| attachment.manifest | Iterates and filters the manifest of attachment archives (e.g. ZIP). |
-| automation.invoke | Invoke a custom data.query automation. |
-| autocomplete.completions | Return a complete listing of the autocomplete options for an automation or automation event |
-| calendar.availability | Aggregate any number of matching calenders to display availability over a date range by hour or day |
-| calendar.events | Return events and synthesized recurring events for the given calendars grouped into days |
-| classifier.prediction | Return a predicted classification for the given text using the given classifier |
-| data.query.types | Return a list of data query types |
-| gpg.keyinfo | Return details about a PGP public key |
-| metrics.timeseries | Aggregates metrics statistics over a date range |
-| platform.extensions | Return a filterable and pageable list of plugin extensions for a given point |
-| platform.extension.points | Return a filterable and pageable list of platform extension points |
-| record.fields | Return a filterable and pageable list of fields from a record type |
-| record.types | Return a filterable and pageable list of record types |
-| ui.icons | Return a filterable and pageable list of icons |
-| usage.behaviors | Return historical usage data for bot behaviors (e.g. uses, avg. runtime, and total runtime over time) |
-| usage.snippets | Return historical usage data for snippets (e.g. uses by worker over time) |
-| worklist.geo.points | Return geolocation data from worklist records |
-| worklist.metrics | Return computed metrics based on worklist data (e.g. 'average ticket first response time over the past year') |
-| worklist.records | Retrieve record dictionaries with a search query |
-| worklist.series | Return series-based data from any worklist (e.g. tickets created by month by status) |
-| worklist.subtotals | Run aggregate functions to categorize matching worklist records |
-| worklist.xy | Plot two-dimensional data to visualize clusters or correlations |
-| sample.\* | Return simulated data |
-| custom | Fetch custom data from a bot behavior |
+| [attachment.manifest](/docs/data-queries/attachment/manifest/) | Iterates and filters the manifest of attachment archives (e.g. ZIP). |
+| [automation.invoke](/docs/data-queries/automation/invoke/) | Invoke a custom [data.query](/docs/automations/triggers/data.query/) automation. |
+| [autocomplete.completions](/docs/data-queries/autocomplete/completions/) | Return a complete listing of the autocomplete options for an automation or automation event |
+| [calendar.availability](/docs/data-queries/calendar/availability/) | Aggregate any number of matching calenders to display availability over a date range by hour or day |
+| [calendar.events](/docs/data-queries/calendar/events/) | Return events and synthesized recurring events for the given calendars grouped into days |
+| [classifier.prediction](/docs/data-queries/classifier/prediction/) | Return a predicted classification for the given text using the given classifier |
+| [data.query.types](/docs/data-queries/data/query-types/) | Return a list of data query types |
+| [gpg.keyinfo](/docs/data-queries/gpg/keyinfo/) | Return details about a PGP public key |
+| [metrics.timeseries](/docs/data-queries/metrics/timeseries/) | Aggregates metrics statistics over a date range |
+| [platform.extensions](/docs/data-queries/platform/extensions/) | Return a filterable and pageable list of plugin extensions for a given point |
+| [platform.extension.points](/docs/data-queries/platform/points/) | Return a filterable and pageable list of platform extension points |
+| [record.fields](/docs/data-queries/record/fields/) | Return a filterable and pageable list of fields from a record type |
+| [record.filters](/docs/data-queries/record/filters/) | Return the available search filters for a record type |
+| [record.types](/docs/data-queries/record/types/) | Return a filterable and pageable list of record types |
+| [ui.icons](/docs/data-queries/ui/icons/) | Return a filterable and pageable list of icons |
+| [usage.behaviors](/docs/data-queries/usage/bot-behaviors/) | Return historical usage data for bot behaviors (e.g. uses, avg. runtime, and total runtime over time) |
+| [usage.snippets](/docs/data-queries/usage/snippets/) | Return historical usage data for snippets (e.g. uses by worker over time) |
+| [worklist.geo.points](/docs/data-queries/worklist/geopoints/) | Return geolocation data from worklist records |
+| [worklist.metrics](/docs/data-queries/worklist/metrics/) | Return computed metrics based on worklist data (e.g. 'average ticket first response time over the past year') |
+| [worklist.records](/docs/data-queries/worklist/records/) | Retrieve record dictionaries with a search query |
+| [worklist.series](/docs/data-queries/worklist/series/) | Return series-based data from any worklist (e.g. tickets created by month by status) |
+| [worklist.subtotals](/docs/data-queries/worklist/subtotals/) | Run aggregate functions to categorize matching worklist records |
+| [worklist.xy](/docs/data-queries/worklist/xy/) | Plot two-dimensional data to visualize clusters or correlations |
+| [sample.\*](/docs/data-queries/sample/) | Return simulated data |
+| [custom](/docs/data-queries/custom/) | Fetch custom data from a bot behavior |
 
 # Running data queries
 
@@ -81,7 +82,7 @@ Data queries can be used to build visualizations on dashboards.
 
 ## Automations
 
-Automations can use the data.query command to run a data query and retrieve the results.
+Automations can use the [data.query](/docs/automations/commands/data.query/) command to run a data query and retrieve the results.
 
 This is a much simpler way to exchange information between multiple functions and APIs.
 
@@ -89,7 +90,7 @@ This is a much simpler way to exchange information between multiple functions an
 
 ## API
 
-Data queries can be run from the API using the /data/query endpoint.
+Data queries can be run from the API using the [/data/query](/docs/api/endpoints/data/) endpoint.
 
 For a `GET` the query should be provided in the `q` query parameter.
 

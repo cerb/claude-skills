@@ -7,9 +7,9 @@ tags: ["docs", "docs-scripting"]
 ---
 ## str\_sub
 
-(Added in 10.1.2)
+(Added in [10.1.2](/releases/10.1.2/))
 
-Extract a substring from a larger string using starting and ending positions. This is an alternative to |slice(from,length).
+Extract a substring from a larger string using starting and ending positions. This is an alternative to [|slice(from,length)](/docs/scripting/filters/#slice).
 
 `|str_sub(from, to)`
 

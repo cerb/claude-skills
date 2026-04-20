@@ -13,20 +13,20 @@ tags: ["docs"]
 
 Create and categorize articles to share knowledge between workers or your community.
 
-- Extensions
-  - Bot Event
-  - Controller
-  - Event Listener
-  - Page Section
-  - Page Type
-  - Profile Widget Type
-  - Record Type
-  - Reply Toolbar Item
-  - Rest API Controller
-  - Search Schema
-  - Support Center Controller
-  - Support Center RSS Feed
-  - Workspace Widget Type
+- [Extensions](#extensions)
+  - [Bot Event](#bot-event)
+  - [Controller](#controller)
+  - [Event Listener](#event-listener)
+  - [Page Section](#page-section)
+  - [Page Type](#page-type)
+  - [Profile Widget Type](#profile-widget-type)
+  - [Record Type](#record-type)
+  - [Reply Toolbar Item](#reply-toolbar-item)
+  - [Rest API Controller](#rest-api-controller)
+  - [Search Schema](#search-schema)
+  - [Support Center Controller](#support-center-controller)
+  - [Support Center RSS Feed](#support-center-rss-feed)
+  - [Workspace Widget Type](#workspace-widget-type)
 
 # Extensions
 
@@ -53,7 +53,7 @@ Create and categorize articles to share knowledge between workers or your commun
 
 ### Profile Widget Type
 
-| **Knowledgebase Article** | `cerb.profile.tab.widget.kb_article` |
+| [**Knowledgebase Article**](/docs/plugins/extensions/cerb.profile.tab.widget.kb_article/) | `cerb.profile.tab.widget.kb_article` |
 
 ### Record Type
 
@@ -83,7 +83,7 @@ Create and categorize articles to share knowledge between workers or your commun
 
 ### Workspace Widget Type
 
-| **Knowledgebase Browser** | `kb.workspace.widget.kb.browser` |
+| [**Knowledgebase Browser**](/docs/plugins/extensions/kb.workspace.widget.kb.browser/) | `kb.workspace.widget.kb.browser` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

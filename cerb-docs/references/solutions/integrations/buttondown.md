@@ -5,13 +5,13 @@ url: "https://cerb.ai/solutions/integrations/buttondown/"
 summary: "This page is a step-by-step guide for integrating Cerb and Buttondown, allowing users to leverage Buttondown's full API in Cerb automations for email newsletters."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a Buttondown API key
-- Create the Buttondown service in Cerb
-- Examples
-  - List newsletters
-  - List subscribers
-  - Add a subscriber
+- [Introduction](#introduction)
+- [Get a Buttondown API key](#get-a-buttondown-api-key)
+- [Create the Buttondown service in Cerb](#create-the-buttondown-service-in-cerb)
+- [Examples](#examples)
+  - [List newsletters](#list-newsletters)
+  - [List subscribers](#list-subscribers)
+  - [Add a subscriber](#add-a-subscriber)
 
 # Introduction
 

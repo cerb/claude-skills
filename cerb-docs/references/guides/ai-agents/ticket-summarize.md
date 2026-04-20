@@ -7,9 +7,9 @@ tags: ["guides"]
 ---
 # Introduction
 
-An AI agent can summarize long ticket conversations in a comment to help workers catch up quickly.
+An [AI agent](/docs/automations/commands/llm.agent/) can summarize long ticket conversations in a comment to help workers catch up quickly.
 
-This is also useful for summarizing closed tickets before creating text embeddings for semantic search and RAG.
+This is also useful for summarizing closed tickets before creating [text embeddings](/docs/automations/commands/llm.embed/) for semantic search and RAG.
 
  
 
@@ -17,18 +17,18 @@ In this example we'll use Anthropic's Claude Haiku 4.5 model. You can use any la
 
 When dealing with personally identifying information (PII) you should use a model with strong privacy protection. Amazon Bedrock runs Anthropic Claude within an AWS region, or you can use a locally hosted model with tools like Ollama or Docker Model Runner.
 
-- Introduction
-- Installation
-  - Connect to an Anthropic account
-  - Import the example workflow
+- [Introduction](#introduction)
+- [Installation](#installation)
+  - [Connect to an Anthropic account](#connect-to-an-anthropic-account)
+  - [Import the example workflow](#import-the-example-workflow)
 
-- Usage
+- [Usage](#usage)
 
 # Installation
 
 ## Connect to an Anthropic account
 
-Create an Anthropic connected account in Cerb.
+[Create an Anthropic connected account](/solutions/integrations/anthropic/) in Cerb.
 
 ## Import the example workflow
 

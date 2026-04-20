@@ -5,24 +5,24 @@ url: "https://cerb.ai/docs/automations/triggers/ui.widget/"
 summary: "This page provides information on the 'ui.widget' automations in Cerb, which enable custom output for card, profile, or workspace widgets, replacing the deprecated bot behavior-based widgets. It details the use of event handler KATA for triggering automations, with the first enabled automation being executed. The page outlines the structure of the automation dictionary, including inputs such as custom input values, current record dictionaries, widget records, and worker records. It also describes the expected output, specifically the HTML to be rendered for the widget."
 tags: ["docs", "docs-automations"]
 ---
-**ui.widget** automations allow custom output to be implemented for card, profile, or workspace widgets. This replaces bot behavior-based widgets, which are now deprecated.
+**ui.widget** [automations](/docs/automations/) allow custom output to be implemented for card, profile, or workspace widgets. This replaces bot behavior-based widgets, which are now deprecated.
 
-This trigger uses event handler KATA, and the first enabled automation is executed.
+This trigger uses [event handler](/docs/automations/#events) KATA, and the first enabled automation is executed.
 
-- Inputs
-- Outputs
-  - return:
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+  - [return:](#return)
 
 # Inputs
 
-The automation dictionary starts with the following values:
+The automation [dictionary](/docs/automations/#dictionaries) starts with the following values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| `inputs` | dictionary | Custom input values from the caller |
-| `record_*` | record | The current record dictionary (supports key expansion). Only available on card and profile widgets. |
-| `widget_*` | record | The card, profile, or workspace widget record (supports key expansion) |
-| `worker_*` | record | The current worker record (supports key expansion) |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the caller |
+| `record_*` | record | The current [record](/docs/records/types/) dictionary (supports key expansion). Only available on card and profile widgets. |
+| `widget_*` | record | The [card](/docs/records/types/card_widget/), [profile](/docs/records/types/profile_widget/), or [workspace](/docs/records/types/workspace_widget/) widget record (supports key expansion) |
+| `worker_*` | record | The current [worker](/docs/records/types/worker/) record (supports key expansion) |
 
 # Outputs
 

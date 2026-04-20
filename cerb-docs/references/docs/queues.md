@@ -7,11 +7,11 @@ tags: ["docs"]
 ---
 **Queues** store a set of temporary messages from producers and distribute them to consumers in the order they were received.
 
-- Names
-- Messages
-- Consumers
-- Success and failure
-- Using queues in automations
+- [Names](#names)
+- [Messages](#messages)
+- [Consumers](#consumers)
+- [Success and failure](#success-and-failure)
+- [Using queues in automations](#using-queues-in-automations)
 
 # Names
 
@@ -45,6 +45,6 @@ An `in_flight` queue message is retried after a period of time unless it is mark
 
 | Command | &nbsp; |
 | --- | --- |
-| queue.pop | Pop items from a queue |
-| queue.push | Push items into a queue |
+| [queue.pop](/docs/automations/commands/queue.pop/) | Pop items from a queue |
+| [queue.push](/docs/automations/commands/queue.push/) | Push items into a queue |
 

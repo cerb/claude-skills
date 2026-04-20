@@ -59,7 +59,7 @@ The following variables are required to set up Cerb.
 | `APP_OPT_AUTOCOMPLETE_TICKET_QUERY` | &nbsp; | Additional filters for ticket autocompletion (e.g. `sort:-created`) |
 | `APP_OPT_DEPRECATED_PORTAL_CUSTOM_TEMPLATES` | true | Show deprecation warning on custom portal templates |
 | `APP_OPT_DEPRECATED_PROFILE_QUICK_SEARCH` | false | Display a legacy search query bar on ticket profiles |
-| `APP_OPT_FULLTEXT_ALLOW_WILDCARDS` | false | Allow terms with `*` wildcards in fulltext searches (11.1.6+) |
+| `APP_OPT_FULLTEXT_ALLOW_WILDCARDS` | false | Allow terms with `*` wildcards in fulltext searches ([11.1.6](/releases/11.1.6/)+) |
 | `APP_OPT_FULLTEXT_OPTIMIZE_IN_EXISTS` | true | Heuristically optimize IN() clauses to EXISTS() |
 | `APP_OPT_FULLTEXT_THRESHOLD_EXISTS` | 10000 | Threshold to optimize IN() clauses to EXISTS() |
 | `APP_OPT_FULLTEXT_THRESHOLD_IDS` | 1000 | Threshold to convert fulltext WHERE subqueries to IN(ids) |

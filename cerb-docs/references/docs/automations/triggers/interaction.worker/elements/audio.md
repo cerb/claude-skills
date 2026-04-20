@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker/elements/audi
 summary: "This page provides details on the audio interaction form element introduced in Cerb 11.0. It explains how to incorporate an audio element into web forms, allowing sound files to be played. The page outlines the syntax for configuring the audio element, including options for labels, autoplay, controls, looping, and specifying the audio source. The source can be a base64-encoded MPEG data URI or a Cerb automation resource token. The default settings are autoplay enabled, controls visible, and no looping."
 tags: ["docs", "docs-automations"]
 ---
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
-In interaction web forms, an **audio** element plays a sound file.
+In [interaction](/docs/automations/triggers/interaction.worker/) web forms, an **audio** element plays a sound file.
 
 ```
 start: await: form: title: Audio Example elements: audio/prompt_audio: label: Play audio: autoplay@bool: yes controls@bool: yes source: blob: data:audio/mpeg;base64,... # uri: cerb:resource:...

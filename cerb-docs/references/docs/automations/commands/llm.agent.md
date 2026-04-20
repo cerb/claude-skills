@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/automations/commands/llm.agent/"
 summary: "This page describes the `llm.agent` automation command in Cerb, which interfaces with Large Language Models (LLMs) to maintain conversation history and manage tool use. The command automatically handles authentication, API calls, chat history, and tool invocation. To use this command, you provide a `system_prompt`, one or more new conversational messages turns, and an optional list of tools. The LLM provider can be one of several options, including Anthropic, Groq, Hugging Face, Ollama, OpenAI, and Together. The `model:` key specifies the model to use, while the `authentication:` key provides a connected account for API authentication. The `messages` section defines new messages to append to the conversation, with each message having a `role:` and `content:` key. Tools can be either automation tools that link to LLM tool automation functions or custom tools that run code in the `llm.agent:on_tool:` event."
 tags: ["docs", "docs-automations"]
 ---
-The **llm.agent:** automation command interfaces with Large Language Model (LLM) providers to maintain a conversation history and manage tool use.
+The **llm.agent:** [automation](/docs/automations/) command interfaces with Large Language Model (LLM) providers to maintain a conversation history and manage [tool](/docs/automations/triggers/llm.tool/) use.
 
-(Added in 11.1)
+(Added in [11.1](/releases/11.1/))
 
 Authentication, API calls, chat history, and tool invocation are all automatically handled by the command.
 
@@ -19,14 +19,17 @@ https://www.youtube.com/embed/dkpaBooNNGc
 llm.agent: output: results inputs: llm: anthropic: model: claude-haiku-4-5 authentication: cerb:connected_account:anthropic system_prompt@raw: You are a helpful AI assistant for Cerb, a web-based platform for automating helpdesk inboxes and workflows. Use your tools to answer user questions. messages: message: role: user content@text: What is Cerb? tools: automation/docs_search: uri: cerb:automation:example.llm.tool.docs.search tool/license_renew: description: Renew or change seats on a Cerb license. on_tool: decision/tool: outcome/license_renew: if@bool: {{ 'license_renew' == __tool.name }} then: await: interaction: output: results uri: cerb:automation:ai.cerb.website.agent.licenses.renew tool.return: content: Request received!
 ```
 
-- Syntax
-  - inputs:
-    - llm:
-    - system\_prompt:
-    - messages:
-    - tools:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [llm:](#llm)
+      - [Gemini reasoning models](#gemini-reasoning-models)
+      - [OpenAI reasoning models](#openai-reasoning-models)
 
-  - output:
+    - [system\_prompt:](#system_prompt)
+    - [messages:](#messages)
+    - [tools:](#tools)
+
+  - [output:](#output)
 
 # Syntax
 
@@ -52,6 +55,31 @@ The `model:` key is the name of the model to use. This must be a chat model, and
 The `authentication:` key is a connected account in URI format (e.g. `cerb:connected_account:name`) for API authentication. This may be omitted for local models like Ollama.
 
 The optional `api_endpoint_url:` key overrides the default endpoint. For instance, this can be used with the `openai:` provider for any compatible API (e.g. SambaNova), or a locally hosted Ollama server.
+
+#### Gemini reasoning models
+
+For Gemini reasoning models, two optional parameters control thinking behavior:
+
+| Key | Values | Description |
+| --- | --- | --- |
+| `thinking_level:` | `minimal`, `low`, `medium`, `high` | Sets the reasoning budget; higher levels use more tokens and increase latency |
+| `thinking_include@bool:` | `yes` / `no` | When `yes`, includes the model's thinking content in the response (useful for debugging) |
+
+```
+llm: gemini: model: gemini-2.5-pro authentication: cerb:connected_account:gemini thinking_level: medium thinking_include@bool: no
+```
+
+#### OpenAI reasoning models
+
+For OpenAI reasoning models (e.g. `o3`, `o4-mini`), the optional `reasoning_effort:` parameter controls how much compute is spent on reasoning:
+
+| Key | Values | Description |
+| --- | --- | --- |
+| `reasoning_effort:` | `none`, `low`, `medium`, `high`, `xhigh` | Sets the reasoning effort; higher levels improve quality at the cost of more tokens and latency |
+
+```
+llm: openai: model: o4-mini authentication: cerb:connected_account:openai reasoning_effort: medium
+```
 
 ### system\_prompt:
 
@@ -83,7 +111,7 @@ The message keys must be unique but are arbitrary.
 
 There are two types of tools.
 
-An `automation` tool links to an llm.tool automation function. Its description and inputs will be automatically described to the model for you, and its output will automatically be sent back to the model.
+An `automation` tool links to an [llm.tool](/docs/automations/triggers/llm.tool/) automation function. Its description and inputs will be automatically described to the model for you, and its output will automatically be sent back to the model.
 
 ```
 tools: automation/docs_search: uri: cerb:automation:example.llm.tool.docs.search automation/docs_fetch: uri: cerb:automation:example.llm.tool.docs.fetch
@@ -96,6 +124,12 @@ This approach is particularly useful to seamlessly transition to structured form
 ```
 tools: tool/tool_name: description: This is a detailed description of the tool. parameters: string/input_name: description: A description of this parameter required@bool: no # An optional list of allowed values
           enum@csv: option1, option2, option3
+```
+
+Individual tools can be conditionally disabled using the `disable@bool:` key. When `yes`, the tool is omitted from the model's available tool list for that invocation. This enables per-worker tool permissions and dynamic tool selection based on context.
+
+```
+tools: automation/admin_tool: uri: cerb:automation:example.llm.tool.admin disable@bool: {{ not worker_is_superuser }} automation/docs_search: uri: cerb:automation:example.llm.tool.docs.search tool/restricted_action: disable@bool: {{ worker_role != 'manager' }} description: Perform a restricted action. parameters: string/reason: description: The reason for the action. required@bool: yes
 ```
 
 Implement your tool logic in the `on_tool:` event.

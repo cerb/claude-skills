@@ -5,10 +5,10 @@ url: "https://cerb.ai/workflows/wgm.email.group_watchers/"
 summary: "This page provides detailed information about the 'Group Watchers' workflow in Cerb, which automatically adds all group members as watchers when a new ticket is created from incoming email. It includes sections on introduction, installation, usage, and reference. The workflow is integrated into Cerb version 11.0 and above, and can be enabled through the Cerb interface. The usage section explains how all group members are automatically added as watchers when a new ticket is created. The reference section offers guidance on creating a custom group watchers workflow using the provided template, with instructions on modifying the workflow identifier to suit individual needs. The page also includes a sample workflow script and details on the requirements and configuration for implementing the group watchers feature."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Testing with imported message
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Testing with imported message](#testing-with-imported-message)
 
 # Introduction
 

@@ -5,24 +5,24 @@ url: "https://cerb.ai/docs/api/endpoints/records/"
 summary: "This page provides comprehensive documentation for the Cerb records API, detailing how to create, retrieve, update, upsert, search, and delete records through a single endpoint. It explains the use of specific HTTP methods for each operation, such as GET for retrieval, POST for creation, PUT for updates, PATCH for upserts, and DELETE for record removal. The page also covers how to manage record links, including linking and unlinking records, with examples for each operation. Parameters for each API call are outlined, including fields for setting record attributes and search queries for filtering results. The documentation is designed to guide users in effectively managing records within Cerb using the API."
 tags: ["docs"]
 ---
-The **records** API can abstractly create, retrieve, update, upsert, search, and delete all records in Cerb from a single endpoint.
+The **records** API can abstractly create, retrieve, update, upsert, search, and delete all records in Cerb from a single [endpoint](/docs/api/endpoints/).
 
-This endpoint target a specific record type as `<uri>` in the path.
+This endpoint target a specific [record type](/docs/records/types/) as `<uri>` in the path.
 
-- Retrieve
-- Create
-- Update
-- Upsert
-- Search
-- Delete
-- Links
-  - Unlink
+- [Retrieve](#retrieve)
+- [Create](#create)
+- [Update](#update)
+- [Upsert](#upsert)
+- [Search](#search)
+- [Delete](#delete)
+- [Links](#links)
+  - [Unlink](#unlink)
 
 # Retrieve
 
 **GET /rest/records/`<uri>`/`<id>`.json**
 
-Retrieve a record dictionary.
+Retrieve a record [dictionary](/docs/guide/developers/dictionaries/).
 
 ### Example
 
@@ -42,7 +42,7 @@ Create a new record.
 
 | Field | Type | &nbsp; |
 | --- | --- | --- |
-| `fields[]` | mixed | **required** This field can be provided multiple times for each field to set. The field names are found on each record type. |
+| `fields[]` | mixed | **required** This field can be provided multiple times for each field to set. The field names are found on each [record type](/docs/records/types/). |
 
 ### Example
 
@@ -67,7 +67,7 @@ Update a record object.
 
 | Field | Type | &nbsp; |
 | --- | --- | --- |
-| `fields[]` | mixed | **required** This field can be provided multiple times for each field to set. The field names are found on each record type. |
+| `fields[]` | mixed | **required** This field can be provided multiple times for each field to set. The field names are found on each [record type](/docs/records/types/). |
 
 ### Example
 
@@ -91,8 +91,8 @@ Update an existing record if matched, or create a new record otherwise.
 
 | Field | Type | &nbsp; |
 | --- | --- | --- |
-| `fields[]` | mixed | **required** This field can be provided multiple times for each field to set. The field names are found on each record type. |
-| `query` | string | The search query for detecting a match. This must return either `0` (create) or `1` (update) results. Anything else returns an error. |
+| `fields[]` | mixed | **required** This field can be provided multiple times for each field to set. The field names are found on each [record type](/docs/records/types/). |
+| `query` | string | The [search query](/docs/search/) for detecting a match. This must return either `0` (create) or `1` (update) results. Anything else returns an error. |
 
 ### Example
 
@@ -120,12 +120,12 @@ Search for matching records.
 | `expand` | The keys to expand for each object as a comma-separated list | string |
 | `limit` | The number of results to display per page | integer |
 | `page` | The page of results to display given limit | integer |
-| `q` | Filters to add using a search query | string |
+| `q` | Filters to add using a [search query](/docs/search/) | string |
 | `subtotals[]` | Multiple subtotal sets can be returned | string |
 
 **expand**
 
-Includes additional information in the response. These options vary depending on the record type.
+Includes additional information in the response. These options vary depending on the [record type](/docs/records/types/).
 
 | Field | Description |
 | --- | --- |
@@ -134,7 +134,7 @@ Includes additional information in the response. These options vary depending on
 
 **subtotals[]**
 
-Return subtotal results based on the given fields. These options vary depending on the record type.
+Return subtotal results based on the given fields. These options vary depending on the [record type](/docs/records/types/).
 
 ### Example
 
@@ -158,7 +158,7 @@ Authorization: Bearer <token>
 
 # Links
 
-You can create record links with the `links` field key in a create, update, or upsert request.
+You can create record [links](/docs/records/fields/types/links/) with the `links` field key in a create, update, or upsert request.
 
 The value must be a `context:id` tuple identifying the record to link to.
 

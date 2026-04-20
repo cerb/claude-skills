@@ -11,7 +11,7 @@ The value is `1` (true) or `0` (false).
 
 ### Packages
 
-As JSON from packages:
+As JSON from [packages](/docs/packages/):
 
 ```
 { 
@@ -21,13 +21,13 @@ As JSON from packages:
 
 ### Records API
 
-In PUT or POST requests from the API:
+In [PUT](/docs/api/endpoints/records/#update) or [POST](/docs/api/endpoints/records/#create) requests from the [API](/docs/api/):
 
 ```
 &amp;fields[checkbox]=1
 ```
 
-\< Record Fields
+[\< Record Fields](/docs/records/#fields)
 
-Context \>
+[Context \>](/docs/records/fields/types/context/)
 

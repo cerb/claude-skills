@@ -7,13 +7,13 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_calendar\_get\_relative\_date
 
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 Calculate a future timestamp using calendar availability. For instance, this can be used for SLAs to generate a due date like "+4 business hours".
 
 `cerb_calendar_get_relative_date(calendar,rel_date,now)`
 
-| **calendar** | The ID of the calendar to use for determining availability. |
+| **calendar** | The ID of the [calendar](/docs/records/types/calendar/) to use for determining availability. |
 | **date\_rel** | The time increment (e.g. "+2 hours"). |
 | **now** | An optional starting date/time. |
 

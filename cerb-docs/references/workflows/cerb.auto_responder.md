@@ -5,15 +5,15 @@ url: "https://cerb.ai/workflows/cerb.auto_responder/"
 summary: "This page provides a comprehensive guide on setting up and using the Auto Responder workflow in Cerb, which automatically sends confirmation emails to clients when they open new tickets. It includes detailed instructions on installation, which is built into Cerb 11.0+, and usage, such as creating snippet templates for auto-response emails, enabling automatic responses for different groups, and testing the auto responder. The guide also covers how to suppress auto responses to automated senders by detecting message headers and using mail.filter automation. Additionally, it offers a reference section for building custom auto-responder workflows, complete with a template and detailed configuration options."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Snippet templates
-  - Enabling automatic responses per group
-  - Test the auto responder
-  - Suppressing auto responses to automated senders
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Snippet templates](#snippet-templates)
+  - [Enabling automatic responses per group](#enabling-automatic-responses-per-group)
+  - [Test the auto responder](#test-the-auto-responder)
+  - [Suppressing auto responses to automated senders](#suppressing-auto-responses-to-automated-senders)
 
-- Reference
+- [Reference](#reference)
 
 # Introduction
 
@@ -25,7 +25,7 @@ This workflow automatically sends a confirmation email to clients when they open
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Auto Responder**.
 
@@ -71,7 +71,7 @@ Automatic responses are queued so they can be delivered efficiently without impa
 
 The workflow will attempt to use message headers to detect automated senders to avoid sending them an automated response. It will also avoid sending an automated response to banned or defunct senders, or mailboxes that start with `mailer-daemon@`, `postmaster@`, `noreply@`, or `no-reply@`.
 
-You can use a mail.filter automation to add an `Auto-Submitted: auto-generated` email header to inbound messages that should not receive an automatic response.
+You can use a [mail.filter](/docs/automations/events/mail.filter/) automation to add an `Auto-Submitted: auto-generated` email header to inbound messages that should not receive an automatic response.
 
 # Reference
 

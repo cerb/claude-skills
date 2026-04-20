@@ -5,22 +5,22 @@ url: "https://cerb.ai/guides/interactions/website/deploy-on-website/"
 summary: "This webpage provides a comprehensive guide on integrating a conversational bot into any website using Cerb. It outlines the process of enabling the bot portal plugin, importing the Help Bot package, deploying the bot portal, and testing it. The guide also covers deploying the bot to a personal website, including handling CORS, adding script tags, and customizing styling. It explains how to embed bot interactions on a website, use permalinks for bot interactions, and secure URLs with signatures. The page emphasizes the ease of adding interactivity to websites through conversational bots, which can handle tasks like contact methods, mailing list management, product explanations, and more, all with minimal coding. The guide concludes with suggestions for customizing the Help Bot to fit specific needs."
 tags: ["guides"]
 ---
-- Introduction
-- Installation
-  - Enable the website interactions plugin
-  - Import the example workflow
+- [Introduction](#introduction)
+- [Installation](#installation)
+  - [Enable the website interactions plugin](#enable-the-website-interactions-plugin)
+  - [Import the example workflow](#import-the-example-workflow)
 
-- Adding interactions to websites
-  - Using the built-in portal
-  - Displaying interactions on any website
-    - Triggering interactions from links and buttons
-    - Triggering interactions from links
-      - Securing permalink URLs with signatures
+- [Adding interactions to websites](#adding-interactions-to-websites)
+  - [Using the built-in portal](#using-the-built-in-portal)
+  - [Displaying interactions on any website](#displaying-interactions-on-any-website)
+    - [Triggering interactions from links and buttons](#triggering-interactions-from-links-and-buttons)
+    - [Triggering interactions from links](#triggering-interactions-from-links)
+      - [Securing permalink URLs with signatures](#securing-permalink-urls-with-signatures)
 
-    - Triggering interactions from the floating Cerb menu
+    - [Triggering interactions from the floating Cerb menu](#triggering-interactions-from-the-floating-cerb-menu)
 
-  - CORS
-  - Custom styling
+  - [CORS](#cors)
+  - [Custom styling](#custom-styling)
 
 # Introduction
 

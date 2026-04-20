@@ -13,10 +13,10 @@ tags: ["docs"]
 
 This plugin reproduces the old print functionality from Cerb versions earlier than 9.0.
 
-- Extensions
-  - Controller
-  - Message Toolbar Item
-  - Profile Script
+- [Extensions](#extensions)
+  - [Controller](#controller)
+  - [Message Toolbar Item](#message-toolbar-item)
+  - [Profile Script](#profile-script)
 
 # Extensions
 
@@ -32,5 +32,5 @@ This plugin reproduces the old print functionality from Cerb versions earlier th
 
 | Ticket Profile Print Script | `cerb.legacy.print.profile.ticket.script` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

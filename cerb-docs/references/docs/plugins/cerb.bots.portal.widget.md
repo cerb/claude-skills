@@ -13,9 +13,9 @@ tags: ["docs"]
 
 Embed conversational bots on any website.
 
-- Extensions
-  - Bot Event
-  - Portal
+- [Extensions](#extensions)
+  - [Bot Event](#bot-event)
+  - [Portal](#portal)
 
 # Extensions
 
@@ -26,7 +26,7 @@ Embed conversational bots on any website.
 
 ### Portal
 
-| **Conversational Bot** | `cerb.bots.portal` |
+| [**Conversational Bot**](/docs/plugins/extensions/cerb.bots.portal/) | `cerb.bots.portal` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

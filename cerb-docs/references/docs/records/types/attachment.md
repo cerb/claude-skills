@@ -10,33 +10,33 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | attachment |
 | **Identifier (ID):** | cerberusweb.contexts.attachment |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `attach` | links | An array of `type:id` tuples to attach this file to |
-| &nbsp; | `content` | text | The optional content of this file. For binary, base64-encode in data URI format. For `application/vnd.cerb.uri` this should be a URI like `cerb:automation_resource:3ed620aa-a4b5-11ec-89ea-6b1bb00ef554` |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| &nbsp; | `mime_type` | text | The MIME type of this file (e.g. `image/png`); defaults to `application/octet-stream`. Can be `application/vnd.cerb.uri` for an automation resource URI in `content`. |
-| **x** | **`name`** | text | The filename |
-| &nbsp; | `updated` | timestamp | The date/time when this record was last modified |
+| &nbsp; | `attach` | [links](/docs/records/fields/types/links/) | An array of `type:id` tuples to attach this file to |
+| &nbsp; | `content` | [text](/docs/records/fields/types/text/) | The optional content of this file. For binary, base64-encode in data URI format. For `application/vnd.cerb.uri` this should be a URI like `cerb:automation_resource:3ed620aa-a4b5-11ec-89ea-6b1bb00ef554` |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| &nbsp; | `mime_type` | [text](/docs/records/fields/types/text/) | The MIME type of this file (e.g. `image/png`); defaults to `application/octet-stream`. Can be `application/vnd.cerb.uri` for an [automation resource](/docs/records/types/automation_resource/) URI in `content`. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The filename |
+| &nbsp; | `updated` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `id` | number | Id |
 | `mime_type` | text | Mime Type |
 | `name` | text | Name |
@@ -47,38 +47,38 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `updated` | date | Updated |
 | `url_download` | text | Url |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
-| `on` | records | Records attached to (max 100) |
-| `on.<type>` | records | Records attached to by record type |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
+| `on` | records | [Records](/docs/records/) attached to (max 100) |
+| `on.<type>` | records | [Records](/docs/records/) attached to by [record type](/docs/records/types/) |
 
 ### Search Query Fields
 
-These filters are available in attachment search queries:
+These [filters](/docs/search/#filters) are available in attachment [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bundle:` | record | Bundle |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Attachment Id |
-| `links:` | links | Record Links |
-| `mimetype:` | text | Mime Type |
-| `name:` | text | Name |
-| `on:` | text | On Type |
-| `on.<type>:` | record | On |
-| `size:` | number | Size |
-| `storage.extension:` | text | Storage Extension |
-| `updated:` | date | Updated |
+| `bundle:` | [record](/docs/search/#deep-search) | [Bundle](/docs/records/types/file_bundle/) |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Attachment Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `mimetype:` | [text](/docs/search/#text) | Mime Type |
+| `name:` | [text](/docs/search/#text) | Name |
+| `on:` | [text](/docs/search/#text) | On Type |
+| `on.<type>:` | [record](/docs/search/#deep-search) | On |
+| `size:` | [number](/docs/search/#numbers) | Size |
+| `storage.extension:` | [text](/docs/search/#text) | Storage Extension |
+| `updated:` | [date](/docs/search/#dates) | Updated |
 
 ### Worklist Columns
 
-These columns are available on attachment worklists:
+These columns are available on attachment [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -91,7 +91,7 @@ These columns are available on attachment worklists:
 | `a_storage_sha1hash` | Sha-1 Hash |
 | `a_storage_size` | Size |
 | `a_updated` | Updated |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

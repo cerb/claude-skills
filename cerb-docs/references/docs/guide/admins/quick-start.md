@@ -5,28 +5,28 @@ url: "https://cerb.ai/docs/guide/admins/quick-start/"
 summary: "This webpage serves as an administrative quick start guide for setting up a new instance of Cerb. It provides detailed instructions on personalizing the platform with a team logo, configuring both outbound and inbound email settings, and ensuring mail deliverability. The guide covers setting up mail transports, sender addresses, email signatures, and mail routing. It also includes steps for reviewing and setting up groups, testing mail deliverability, and managing worker permissions through roles. Additionally, it guides administrators on inviting workers, configuring mailboxes, and reviewing mail routing rules. The guide touches on configuring the scheduler, reviewing security considerations, and exploring available plugins to enhance Cerb's functionality. This comprehensive setup guide is intended for administrators performing the initial configuration of a fresh Cerb instance."
 tags: ["docs"]
 ---
-- Add your logo
-- Configure outbound email
-  - Configure mail transports
-  - Configure sender addresses
-  - Configure email signatures
-  - Configure your default sender address
+- [Add your logo](#add-your-logo)
+- [Configure outbound email](#configure-outbound-email)
+  - [Configure mail transports](#configure-mail-transports)
+  - [Configure sender addresses](#configure-sender-addresses)
+  - [Configure email signatures](#configure-email-signatures)
+  - [Configure your default sender address](#configure-your-default-sender-address)
 
-- Configure inbound email
-  - Configure instant delivery in Cerb Cloud
-  - Configure mailboxes
-  - Configure mail routing
+- [Configure inbound email](#configure-inbound-email)
+  - [Configure instant delivery in Cerb Cloud](#configure-instant-delivery-in-cerb-cloud)
+  - [Configure mailboxes](#configure-mailboxes)
+  - [Configure mail routing](#configure-mail-routing)
 
-- Review groups
-- Grant worker permissions with roles
-- Invite workers
-- Configure incoming email
-- Routing
-- Scheduler
-- Security
-- Plugins
+- [Review groups](#review-groups)
+- [Grant worker permissions with roles](#grant-worker-permissions-with-roles)
+- [Invite workers](#invite-workers)
+- [Configure incoming email](#configure-incoming-email)
+- [Routing](#routing)
+- [Scheduler](#scheduler)
+- [Security](#security)
+- [Plugins](#plugins)
 
-This guide assumes that you have a fresh instance of Cerb and you're an administrator who is performing the initial configuration. If Cerb is already configured and you want to learn how to use it, you can jump to the worker guide.
+This guide assumes that you have a fresh instance of Cerb and you're an administrator who is performing the initial configuration. If Cerb is already configured and you want to learn how to use it, you can [jump to the worker guide](/docs/home/).
 
 # Add your logo
 
@@ -114,7 +114,7 @@ Unless you're using a service like Gmail that archives messages rather than dele
 
 Cerb supports the standard POP3 and IMAP protocols, with multiple forms of encryption.
 
-We also support the emerging **XOAuth2** standard that major email providers like Gmail and Office365 are migrating to. This replaces vulnerable passwords with rotating, time-limited access tokens. You can refer to the Authenticate a Gmail mailbox using IMAP and XOAUTH2 guide for an example implementation.
+We also support the emerging **XOAuth2** standard that major email providers like Gmail and Office365 are migrating to. This replaces vulnerable passwords with rotating, time-limited access tokens. You can refer to the [Authenticate a Gmail mailbox using IMAP and XOAUTH2](/guides/integrations/google/gmail-xoauth/) guide for an example implementation.
 
 ## Configure mail routing
 
@@ -122,7 +122,7 @@ New email messages can be delivered to groups of workers with flexible routing r
 
 Navigate to **Setup&nbsp;» Mail&nbsp;» Incoming&nbsp;» Mail Routing**.
 
-Mail routing rules are automations on the mail.route event.
+Mail routing rules are [automations](/docs/automations/) on the [mail.route](/docs/automations/events/mail.route/) event.
 
 If a new message doesn't match any routing rules, it will be delivered to the default group specified at the top of **Setup&nbsp;» Mail&nbsp;» Incoming&nbsp;» Settings**.
 
@@ -132,7 +132,7 @@ You should set up a few groups to distribute work.
 
 Navigate to **Search** » **Groups**
 
-Review your groups.
+Review your [groups](/docs/groups/).
 
 To add a new group, click the **(+)** icon in the blue bar of the worklist.
 
@@ -162,7 +162,7 @@ Navigate to **Setup&nbsp;» Mail&nbsp;» Incoming Mail&nbsp;» Mailboxes**
 
 This page lists the mailboxes that Cerb checks for new messages.
 
-Review your mailboxes.
+Review your [mailboxes](/docs/setup/mail/mailboxes/).
 
 If you're using **Cerb Cloud**, you can alternatively redirect your incoming mail to `support@<you>.cerb.email` for instant delivery. Replace `<you>` with the name of your instance. With this delivery method you won't need to set up a mailbox here.
 
@@ -172,23 +172,23 @@ Cerb deletes messages from your mailbox after it downloads them (unless the mail
 
 Navigate to **Setup&nbsp;» Mail&nbsp;» Incoming Mail&nbsp;» Mail Routing**
 
-Review your mail routing rules.
+Review your [mail routing rules](/docs/setup/mail/routing/).
 
 # Scheduler
 
 Navigate to **Setup**&nbsp;» **Configure**&nbsp;» **Scheduler**
 
-Review the instructions for configuring the scheduler.
+Review the instructions for [configuring the scheduler](/docs/setup/configure/scheduler/).
 
 If you're using **Cerb Cloud**, we handle this for you.
 
 # Security
 
-Review the security considerations.
+Review the [security considerations](/docs/security/).
 
 # Plugins
 
 Navigate to **Setup**&nbsp;» **Plugins**&nbsp;» **Installed Plugins**
 
-This is where you'll find the available plugins that expand Cerb's functionality.
+This is where you'll find the available [plugins](/docs/plugins/) that expand Cerb's functionality.
 

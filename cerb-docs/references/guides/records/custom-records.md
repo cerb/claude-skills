@@ -7,36 +7,36 @@ tags: ["guides"]
 ---
  
 
-- Introduction
-  - The boring foundation of everything: Record keeping
-  - Embracing the web browser
+- [Introduction](#introduction)
+  - [The boring foundation of everything: Record keeping](#the-boring-foundation-of-everything-record-keeping)
+  - [Embracing the web browser](#embracing-the-web-browser)
 
-- Example use case: Academia
-- Create the instructor record type
-- Create the room record type
-- Create the course record type
-- Add new fields to the course record type
-- Create new instructor records
-- Create new room records
-- Create course records
-- Set the default card fields for courses
-- Deep search course records
-- Next steps
-  - References
+- [Example use case: Academia](#example-use-case-academia)
+- [Create the instructor record type](#create-the-instructor-record-type)
+- [Create the room record type](#create-the-room-record-type)
+- [Create the course record type](#create-the-course-record-type)
+- [Add new fields to the course record type](#add-new-fields-to-the-course-record-type)
+- [Create new instructor records](#create-new-instructor-records)
+- [Create new room records](#create-new-room-records)
+- [Create course records](#create-course-records)
+- [Set the default card fields for courses](#set-the-default-card-fields-for-courses)
+- [Deep search course records](#deep-search-course-records)
+- [Next steps](#next-steps)
+  - [References](#references)
 
 # Introduction
 
 ### The boring foundation of everything: Record keeping
 
-As Cerb has incorporated modern innovations over the past 15 years – like interactive bots and encryption – it's easy to forget that the fundamental idea of _record keeping_ has been around for more than 5,000 years1. There's no excuse to not get that part right.
+As Cerb has incorporated modern innovations over the past 15 years – like interactive bots and encryption – it's easy to forget that the fundamental idea of _record keeping_ has been around for more than 5,000 years[1](#fn:record-keeping). There's no excuse to not get that part right.
 
-A **record** is simply a distinctly identifiable entity that you can refer back to. When records refer to the same kind of entity, we say that they are of the same **record type**.
+A [**record**](/docs/records/) is simply a distinctly identifiable entity that you can refer back to. When records refer to the same kind of entity, we say that they are of the same **record type**.
 
 In Cerb, we include a set of built-in record types to help you get started. When you add a new customer they become a **contact** record. Their company becomes an **organization** record. You write to them using an **email address** record. A specific conversation with them is stored as a **ticket** record, which is a collection of **message** and **comment** records. Your team can also keep track of what needs to be done using **task** records.
 
 While the built-in record types cover things that every team has in common, individual teams also need to keep track of data that's specific to them or their industry. For instance, if you're a transportation company, your tickets may refer to physical trucks, planes, and ships in the real world.
 
-New record types can be added using Cerb's plugin system. There are already plugins for logging details about phone **calls**, tracking sales **opportunities**, saving **tweets** where your brand is mentioned, building Kanban-style **project boards**, and much more.
+New record types can be added using Cerb's [plugin](/docs/plugins/) system. There are already plugins for logging details about phone **calls**, tracking sales **opportunities**, saving **tweets** where your brand is mentioned, building Kanban-style **project boards**, and much more.
 
 Previously, if you found yourself needing a completely new record type, you had to find a software developer and have them build a new plugin for it. This was potentially complicated and expensive.
 
@@ -46,7 +46,7 @@ We've made this much easier.
 
 Ever since the introduction of bots in version 5.4 (May 2011), we've been moving customization (like business rules) out of code-based plugins and into the web-based interface. This allows everyone – not just developers – to build new functionality and automate their workflow within Cerb with just a web browser.
 
-As of the 8.2 release, you're now able to create new record types directly from your web browser without the need for plugins.
+As of the [8.2](/releases/8.2/) release, you're now able to create new record types directly from your web browser without the need for plugins.
 
 # Example use case: Academia
 
@@ -220,7 +220,7 @@ instructor: (name:Emell) room:(name:Berners)
 
 You can now link records (like tickets and tasks) to courses, rooms, or instructors. This provides simple references for your entire team during support. You can even automate these links when tickets are created. This also allows you to filter tickets or tasks by which custom records they're linked to.
 
-You can add cards for courses, rooms, and instructor to project boards to visually organize your workflow.
+You can add cards for courses, rooms, and instructor to [project boards](/guides/project-boards/configure/) to visually organize your workflow.
 
 You can create bot behaviors on the **Custom behavior on [course, room, instructor]** to automate changes to those records. Or you can use **Record changed** events that trigger when special fields change on these records.
 
@@ -228,5 +228,5 @@ Most importantly, now you can create custom records for any of your other data y
 
 ### References
 
-1. Wikipedia: Recorded history - https://en.wikipedia.org/wiki/Recorded\_history&nbsp;↩
+1. Wikipedia: Recorded history - https://en.wikipedia.org/wiki/Recorded\_history&nbsp;[↩](#fnref:record-keeping)
 

@@ -9,21 +9,21 @@ The **api.command:** command interacts with APIs to perform various actions that
 
 Each API command has a `name:` and an optional set of `params:`.
 
-New API commands can be added using the plugin system.
+New API commands can be added using the [plugin](/docs/plugins/) system.
 
 ```
 start: api.command: inputs: name: cerb.commands.worklist.explorer.create params: interaction: cerb:automation:wgm.explore.worklist interaction_inputs: worklist_id: cust_1 output: results
 ```
 
-- Syntax
-  - inputs:
-    - name:
-    - params:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [name:](#name)
+    - [params:](#params)
 
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -36,7 +36,7 @@ The name of the API command to invoke.
 | URI | Description |
 | --- | --- |
 | `cerb.commands.activity.log` | Create arbitrary activity log entries and send watcher notifications. |
-| `cerb.commands.dataset.vector_similarity` | Load a JSONL dataset resource and find the most similar vectors to a query. |
+| `cerb.commands.dataset.vector_similarity` | Load a JSONL dataset [resource](/docs/resources/) and find the most similar vectors to a query. |
 | `cerb.commands.email.relay` | Relay a message to a list of external worker email addresses. |
 | `cerb.commands.email.relay.sign` | Generate the signed `Message-Id:` header for an outgoing worker relay message. |
 | `cerb.commands.email.spam.train` | Train ticket content as spam. |
@@ -56,19 +56,19 @@ The results depend on the selected command.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of the API command.
+The [commands](/docs/automations/#commands) to run during simulation instead of the API command.
 
 If omitted, the API command is invoked during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The `output:` placeholder receives a dictionary based on the API command.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

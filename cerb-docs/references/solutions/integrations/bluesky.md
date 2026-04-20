@@ -5,12 +5,12 @@ url: "https://cerb.ai/solutions/integrations/bluesky/"
 summary: "This page provides a step-by-step guide for integrating Cerb and Bluesky, allowing users to use Bluesky's full API in Cerb automations."
 tags: ["solutions"]
 ---
-- Introduction
-- Create a Bluesky App Password.
-- Create the Bluesky service in Cerb
-- Examples
-  - Get timeline
-  - Make a post
+- [Introduction](#introduction)
+- [Create a Bluesky App Password.](#create-a-bluesky-app-password)
+- [Create the Bluesky service in Cerb](#create-the-bluesky-service-in-cerb)
+- [Examples](#examples)
+  - [Get timeline](#get-timeline)
+  - [Make a post](#make-a-post)
 
 # Introduction
 

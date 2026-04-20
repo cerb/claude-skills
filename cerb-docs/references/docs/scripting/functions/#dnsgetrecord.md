@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## dns\_get\_record
 
-(Added in 10.2.6)
+(Added in [10.2.6](/releases/10.2.6/))
 
 Resolve DNS records by hostname and type. This enables workflows like verifying domain ownership via TXT records, validating SPF/DKIM, verifying MX servers, etc.
 

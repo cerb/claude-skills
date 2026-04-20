@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## repeat
 
-(Added in 10.2.3)
+(Added in [10.2.3](/releases/10.2.3/))
 
 Repeat a string a given number of times.
 

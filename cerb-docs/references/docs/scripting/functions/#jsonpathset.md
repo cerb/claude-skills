@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## jsonpath\_set
 
-This is nearly identical to dict\_set.
+This is nearly identical to [dict\_set](#dict_set).
 
 ```
 {% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %} {% set json = json_decode ( json_string ) %} {% set json = jsonpath_set ( json , 'order_id' , '67890' ) %} {{ json.order_id }}

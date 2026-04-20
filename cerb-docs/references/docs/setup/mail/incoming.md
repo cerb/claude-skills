@@ -11,7 +11,7 @@ tags: ["docs"]
 
 ### Reply to All
 
-When this setting is enabled, every email address in the `To:` and `Cc:` headers will also be added as a participant on new tickets
+When this setting is enabled, every email address in the `To:` and `Cc:` headers will also be added as a participant on new [tickets](/docs/tickets/)
 
 By default, only the email address in the `From:` header is automatically added as a participant. The other addresses are suggested to a worker as potential participants when replying.
 
@@ -31,13 +31,13 @@ It's a good idea to send large files as links rather than attachments.
 
 ## Displaying HTML Messages
 
-When displaying email messages in HTML format, Cerb will use the Tidy1 PHP extension when available to correct common syntax errors.
+When displaying email messages in HTML format, Cerb will use the Tidy[1](#fn:php-tidy) PHP extension when available to correct common syntax errors.
 
 As part of this process, extraneous markup is cleaned up from mail sent by Microsoft Office applications. In rare situations this can cause issues, and you can disable the functionality here.
 
 ## Default Ticket Mask Format
 
-Cerb will use this pattern when generating _reference masks_ for new tickets.
+Cerb will use this pattern when generating _reference masks_ for new [tickets](/docs/tickets/).
 
 By default, the format is `LLL-NNNNN-NNN`, which provides a mask with three leading letters for quick and efficient lookups. This minimizes the amount of information required from a customer over the phone, etc. Contrast this with masks that begin with the current year, which can have millions of matches with the same first digits.
 
@@ -47,5 +47,5 @@ The default mask format has 25^3 \* 9^8 combinations because the letter O and th
 
 # References
 
-1. Tidy PHP Extension - http://php.net/tidy&nbsp;↩
+1. Tidy PHP Extension - http://php.net/tidy&nbsp;[↩](#fnref:php-tidy)
 

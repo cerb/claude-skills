@@ -5,13 +5,13 @@ url: "https://cerb.ai/workflows/cerb.email.pgp_inline/"
 summary: "This page provides a comprehensive guide on implementing PGP Inline Encryption within Cerb, focusing on its introduction, installation, and usage. It explains how this workflow allows users to encrypt entire emails or specific parts, such as sensitive information, ensuring that recipients can decrypt the content using their preferred tools. The installation section details that this feature is integrated into Cerb 11.0+ and can be enabled through the workflow settings. The usage section covers adding public keys and sending encrypted messages, including step-by-step instructions for encrypting messages and selecting recipient keys. Additionally, the page offers a reference template for building a custom PGP Inline Encryption workflow, complete with detailed configuration and policy settings."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Add public keys
-  - Send encrypted messages
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Add public keys](#add-public-keys)
+  - [Send encrypted messages](#send-encrypted-messages)
 
-- Reference
+- [Reference](#reference)
 
 # Introduction
 
@@ -25,7 +25,7 @@ For instance, you may encrypt login credentials or payment information.
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» PGP Inline Encryption**.
 

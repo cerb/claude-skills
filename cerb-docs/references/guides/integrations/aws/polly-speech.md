@@ -9,22 +9,22 @@ tags: ["guides"]
 
 In this guide you'll learn how to generate audio streams of speech from arbitrary text using bots in Cerb.
 
-First, we'll create a new connected account to securely integrate with Amazon Polly – a fast, inexpensive, and lifelike text-to-speech service from Amazon Web Services.
+First, we'll create a new [connected account](/docs/connected-accounts/) to securely integrate with Amazon Polly – a fast, inexpensive, and lifelike text-to-speech service from Amazon Web Services.
 
 Next, we'll create a delegate named _Polly Bot_ to secure your credentials and provide text-to-speech as a simple service for any other bot in Cerb. Your team's bots will be able to give Polly Bot some text and a preferred voice (gender/accent), and receive back a secure time-limited URL that you can share and play anywhere.
 
-Finally, we'll demonstrate how to use Polly Bot as a delegate from a conversational bot to respond to workers with speech directly in their web browser.
+Finally, we'll demonstrate how to use Polly Bot as a delegate from a conversational bot to respond to [workers](/docs/workers/) with speech directly in their web browser.
 
-- Configure the Amazon Web Services service in Cerb
-- Log in to Amazon Web Services
-  - Update your IAM policy
+- [Configure the Amazon Web Services service in Cerb](#configure-the-amazon-web-services-service-in-cerb)
+- [Log in to Amazon Web Services](#log-in-to-amazon-web-services)
+  - [Update your IAM policy](#update-your-iam-policy)
 
-- Create Polly Bot in Cerb
-- Using Polly Bot from a conversational bot
-  - Learn how the behavior works
-  - Test the behavior with the bot simulator
+- [Create Polly Bot in Cerb](#create-polly-bot-in-cerb)
+- [Using Polly Bot from a conversational bot](#using-polly-bot-from-a-conversational-bot)
+  - [Learn how the behavior works](#learn-how-the-behavior-works)
+  - [Test the behavior with the bot simulator](#test-the-behavior-with-the-bot-simulator)
 
-- References
+- [References](#references)
 
 # Configure the Amazon Web Services service in Cerb
 
@@ -32,7 +32,7 @@ Finally, we'll demonstrate how to use Polly Bot as a delegate from a conversatio
 
 2. Navigate to **Search&nbsp;» Connected Accounts**.
 
-3. If you don't have a connected account for Amazon Web Services yet, you can follow these instructions to create one.
+3. If you don't have a connected account for Amazon Web Services yet, you can [follow these instructions](/solutions/integrations/aws/) to create one.
 
 # Log in to Amazon Web Services
 
@@ -54,7 +54,7 @@ We're going to update the IAM policy to provide:
 
 Select **Policies** in the navigation on the left.
 
-Find your bot's policy in the list or create a new one. In the earlier instructions we created a policy named **CerbBot**.
+Find your bot's policy in the list or create a new one. In the earlier [instructions](/solutions/integrations/aws/) we created a policy named **CerbBot**.
 
 Click the **Edit Policy** button.
 
@@ -514,7 +514,7 @@ While you still have the action editor popup open, click the **Simulator** butto
 
 Enter some text that you want the bot to say. You can optionally choose the voice to use.
 
-We've included a few of our favorite voices, but you can use any of the voices or languages supported by Polly1 by editing the behavior and adding them to the public behavior variables. You can even use the SSML2 format instead for fine-tuning pronunciation, pitch curves, etc.
+We've included a few of our favorite voices, but you can use any of the voices or languages supported by Polly[1](#fn:polly-voices) by [editing the behavior](#understanding-how-the-behavior-works) and adding them to the public behavior variables. You can even use the SSML[2](#fn:ssml) format instead for fine-tuning pronunciation, pitch curves, etc.
 
 Click the **Simulate** button.
 
@@ -542,7 +542,7 @@ In a conversational bot behavior, you can use the **Respond with script** action
 
 # References
 
-1. AWS Developer Guide: Polly Voices http://docs.aws.amazon.com/polly/latest/dg/API\_Voice.html&nbsp;↩
+1. AWS Developer Guide: Polly Voices http://docs.aws.amazon.com/polly/latest/dg/API\_Voice.html&nbsp;[↩](#fnref:polly-voices)
 
-2. AWS: Using SSML - http://docs.aws.amazon.com/polly/latest/dg/ssml.html&nbsp;↩
+2. AWS: Using SSML - http://docs.aws.amazon.com/polly/latest/dg/ssml.html&nbsp;[↩](#fnref:ssml)
 

@@ -11,13 +11,13 @@ It is highly recommended that you configure a single mailbox as a "dropbox". You
 
 For example, you can redirect `sales@example.com` and `support@example.com` to `cerb@example.com`.
 
-Your mail routing and filtering rules will still be able to identify the original destination. This is much more efficient than checking several mailboxes every few minutes.
+Your [mail routing](/docs/setup/mail/routing/) and [filtering](/docs/setup/mail/filtering/) rules will still be able to identify the original destination. This is much more efficient than checking several mailboxes every few minutes.
 
 If you're using **Cerb Cloud**, you can alternatively redirect your incoming mail to `support@<you>.cerb.email` for instant delivery. Replace `<you>` with the name of your instance. With this delivery method you won't need to set up a mailbox here.
 
 ## Adding a mailbox
 
-To add a new mailbox, click the **(+)** icon in the blue bar of the worklist.
+To add a new mailbox, click the **(+)** icon in the blue bar of the [worklist](/docs/worklists/).
 
 A mailbox has the following fields:
 
@@ -41,7 +41,7 @@ You can verify your mailbox connection details by clicking the **Test Mailbox** 
 
 # References
 
-1. Wikipedia: Post Office Protocol (POP3) - https://en.wikipedia.org/wiki/Post\_Office\_Protocol&nbsp;↩
+1. Wikipedia: Post Office Protocol (POP3) - https://en.wikipedia.org/wiki/Post\_Office\_Protocol&nbsp;[↩](#fnref:pop3)
 
-2. Wikipedia: Port (computer networking) - https://en.wikipedia.org/wiki/Port\_(computer\_networking))&nbsp;↩
+2. Wikipedia: Port (computer networking) - https://en.wikipedia.org/wiki/Port\_(computer\_networking))&nbsp;[↩](#fnref:port)
 

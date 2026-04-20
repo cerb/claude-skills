@@ -7,7 +7,7 @@ tags: ["guides"]
 ---
 # Introduction
 
-Classifiers take text written in natural language and learn to _classify_ it for you. Automations can use classifiers to make smarter decisions.
+[Classifiers](/docs/classifiers/) take text written in natural language and learn to _classify_ it for you. [Automations](/docs/automations/) can use classifiers to make smarter decisions.
 
 For instance, let's assume that we have a conversational bot who asks a question like _"Are you sure?"_ to confirm the user's intent before performing some action.
 
@@ -23,21 +23,21 @@ That's exactly what a classifier does for us – it weighs the evidence it's giv
 
 If a user responds to the bot with _"sure, make it happen!"_, the classifier may predict with 99.82% confidence that the user meant _"yes"_. If instead the user says _"stop, I don't want this"_, the classifier may predict with 82.97% confidence that they meant _"no"_.
 
-With that information, an automation can pick the appropriate outcome for a _"Did they say yes?"_ decision.
+With that information, an automation can pick the appropriate [outcome](/docs/automations/commands/decision/) for a _"Did they say yes?"_ decision.
 
 In this guide, we'll quickly build the above classifier so that you can use it in your own bot behaviors.
 
-- Create a new classifier
-- Import training data
-- Test predictions
-- Continue training the classifier
-- Next steps
+- [Create a new classifier](#create-a-new-classifier)
+- [Import training data](#import-training-data)
+- [Test predictions](#test-predictions)
+- [Continue training the classifier](#continue-training-the-classifier)
+- [Next steps](#next-steps)
 
 # Create a new classifier
 
 Let's start by creating a new classifier.
 
-Open a classifiers worklist from **Search** » **Classifiers**.
+Open a classifiers [worklist](/docs/worklists/) from **Search** » **Classifiers**.
 
 Click the **(+)** icon above the the worklist.
 
@@ -53,7 +53,7 @@ Click the **Save Changes** button.
 
 Classifiers are trained with as many human-verified, real-world examples as you can provide. In the interest of time, we'll use the bulk import feature to add some training data. You can add additional training examples at any time.
 
-Open the card for the newly created **Yes/No** classifier. As a shortcut, you can click its name in the yellow notification that appeared above the worklist when you added the record.
+Open the [card](/docs/cards/) for the newly created **Yes/No** classifier. As a shortcut, you can click its name in the yellow notification that appeared above the worklist when you added the record.
 
 Once the popup opens, click the **Import** button at the top.
 

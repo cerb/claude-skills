@@ -5,30 +5,30 @@ url: "https://cerb.ai/guides/project-boards/configure/"
 summary: "This webpage provides a comprehensive guide on configuring project boards in Cerb, focusing on the kanban methodology for visualizing and organizing workflows. It details the steps to enable the project boards plugin, create a project board, and manage tasks using columns and cards. The guide also explains how to automate task management with bot behaviors, such as automatically closing tasks when they reach a certain stage. Additionally, it covers customizing the visual display of task cards using scriptable templates to enhance clarity and efficiency. The page concludes with practical applications of these features to streamline multi-step workflows."
 tags: ["guides"]
 ---
-- Introduction
-- Enable the project boards plugin
-- Create a project board
-  - Add columns to the board
-  - Add cards to the board
-  - Drag your first card
+- [Introduction](#introduction)
+- [Enable the project boards plugin](#enable-the-project-boards-plugin)
+- [Create a project board](#create-a-project-board)
+  - [Add columns to the board](#add-columns-to-the-board)
+  - [Add cards to the board](#add-cards-to-the-board)
+  - [Drag your first card](#drag-your-first-card)
 
-- Create a bot behavior for automatically closing tasks
-  - Add the behavior to the project board
-  - Test the new automation behavior
+- [Create a bot behavior for automatically closing tasks](#create-a-bot-behavior-for-automatically-closing-tasks)
+  - [Add the behavior to the project board](#add-the-behavior-to-the-project-board)
+  - [Test the new automation behavior](#test-the-new-automation-behavior)
 
-- Add visual cues with custom templates
-- Conclusion
-- Resources
+- [Add visual cues with custom templates](#add-visual-cues-with-custom-templates)
+- [Conclusion](#conclusion)
+- [Resources](#resources)
 
  
 
 # Introduction
 
-Cerb 8.0 (June 2017) introduced **project boards** as a better way to visualize and organize multi-step workflows.
+Cerb [8.0](/releases/8.0/#project-boards) (June 2017) introduced **project boards** as a better way to visualize and organize multi-step workflows.
 
  
 
-Project boards are based on the kanban1 development process, which itself was derived from improvements to just-in-time production pioneered by Japanese manufacturer Toyota in the 1940s2.
+Project boards are based on the kanban[1](#fn:kanban-dev) development process, which itself was derived from improvements to just-in-time production pioneered by Japanese manufacturer Toyota in the 1940s[2](#fn:kanban).
 
 With kanban, each project has a board, and each unit of work in that project is represented by a **card**. Cards are organized into columns on the board based on their stage of completion. Typically, cards move from left to right through the columns of the process.
 
@@ -284,7 +284,7 @@ You can use the project board concepts you just learned to better organize and a
 
 # Resources
 
-1. Wikipedia: Kanban (development) - https://en.wikipedia.org/wiki/Kanban\_(development))&nbsp;↩
+1. Wikipedia: Kanban (development) - https://en.wikipedia.org/wiki/Kanban\_(development))&nbsp;[↩](#fnref:kanban-dev)
 
-2. Wikipedia: Kanban - https://en.wikipedia.org/wiki/Kanban&nbsp;↩
+2. Wikipedia: Kanban - https://en.wikipedia.org/wiki/Kanban&nbsp;[↩](#fnref:kanban)
 

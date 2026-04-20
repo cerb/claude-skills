@@ -17,12 +17,12 @@ Result:
 person: name: first: Kina last: Halpue
 ```
 
-- Syntax
-  - inputs:
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -30,7 +30,7 @@ person: name: first: Kina last: Halpue
 
 | Key | Req'd | &nbsp; |
 | --- | --- | --- |
-| `key:` | **x** | One or more key paths to unset, delimited with colons (`:`). |
+| `key:` | **x** | One or more [key paths](/docs/automations/#dictionaries) to unset, delimited with colons (`:`). |
 
 ## output:
 
@@ -38,19 +38,19 @@ The optional placeholder to store the result.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of unsetting the value.
+The [commands](/docs/automations/#commands) to run during simulation instead of unsetting the value.
 
 If omitted, the value is not unset during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The optional `output:` placeholder is set to `true` if the key was found, and `false` otherwise.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## map
 
-(Added in 10.1.1)
+(Added in [10.1.1](/releases/10.1.1/))
 
 Apply a function to each item in an array to create a new array.
 

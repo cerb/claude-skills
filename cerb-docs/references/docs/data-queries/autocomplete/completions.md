@@ -9,7 +9,7 @@ tags: ["docs"]
 
 `autocomplete.completions` data queries return autocomplete suggestions for a KATA document.
 
-This functionality is used by various interactions in automation editors.
+This functionality is used by various [interactions](/docs/interactions/) in [automation](/docs/automations/) editors.
 
 ### Inputs
 
@@ -19,12 +19,12 @@ This functionality is used by various interactions in automation editors.
 
 ### Response Formats
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 ### Examples
 
-- query
-- response
+- [query](#)
+- [response](#)
 
 - 
 ```

@@ -5,10 +5,10 @@ url: "https://cerb.ai/solutions/automations/calculate-length/"
 summary: "This page documents the use of the `|length` syntax in Cerb automation scripting, which allows you to calculate the length of any list or text string."
 tags: ["solutions", "solutions-automations"]
 ---
-With |length you can calculate the length of any list or text string.
+With [|length](/docs/scripting/filters/#length) you can calculate the length of any list or text string.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

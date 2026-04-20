@@ -5,24 +5,24 @@ url: "https://cerb.ai/docs/backups/"
 summary: "This page provides a comprehensive guide on setting up and managing backups for Cerb installations. It covers the creation of a dedicated backups user and database user with restricted access for security purposes. The document emphasizes the importance of backing up both the MySQL database and the storage filesystem, recommending tools like mysqldump for database backups and rsync for filesystem backups. It also discusses enabling and backing up MySQL's binary logs for incremental backups and point-in-time recovery. The guide suggests using Amazon S3 for off-site backups, detailing the use of AWS CLI for automating the backup process. It highlights best practices for ensuring data integrity and security, including the use of shadow passwords and IAM roles for restricted access. The document is tailored for Unix-based systems and provides detailed command-line instructions for each step."
 tags: ["docs"]
 ---
-- Set up the environment
-  - Create a backups user
-  - Create a backups database user with a shadow password
+- [Set up the environment](#set-up-the-environment)
+  - [Create a backups user](#create-a-backups-user)
+  - [Create a backups database user with a shadow password](#create-a-backups-database-user-with-a-shadow-password)
 
-- Backing up the database
-  - Using mysqldump (recommended)
-  - Enabling MySQL's binary logs
-  - Backing up MySQL's binary logs
+- [Backing up the database](#backing-up-the-database)
+  - [Using mysqldump (recommended)](#using-mysqldump-recommended)
+  - [Enabling MySQL's binary logs](#enabling-mysqls-binary-logs)
+  - [Backing up MySQL's binary logs](#backing-up-mysqls-binary-logs)
 
-- Backing up the storage filesystem
-  - Using rsync (recommended)
-  - Keeping off-site backups
-  - Using Amazon S3 (recommended)
-    - Using AWS CLI to send database backups to S3
-    - Using AWS CLI to send incremental filesystem backups to S3
-    - Using Amazon's Web Console
+- [Backing up the storage filesystem](#backing-up-the-storage-filesystem)
+  - [Using rsync (recommended)](#using-rsync-recommended)
+  - [Keeping off-site backups](#keeping-off-site-backups)
+  - [Using Amazon S3 (recommended)](#using-amazon-s3-recommended)
+    - [Using AWS CLI to send database backups to S3](#using-aws-cli-to-send-database-backups-to-s3)
+    - [Using AWS CLI to send incremental filesystem backups to S3](#using-aws-cli-to-send-incremental-filesystem-backups-to-s3)
+    - [Using Amazon's Web Console](#using-amazons-web-console)
 
-- References
+- [References](#references)
 
 If you're using **Cerb Cloud** then we handle backups for you already.
 
@@ -37,7 +37,7 @@ To fully protect your Cerb data you need to backup both the MySQL database and t
 
 ## Create a backups user
 
-For convenience and security, it's a good idea to make a _backups_ user on the local system. This account's home directory should be on a different hard disk than your live databases to provide extra fault tolerance and better write performance. The examples below will refer to this location as `~backups`. A separate location is important – while a RAID1 configuration will protect you from the failure of individual storage hardware devices, it won't protect you from certain forms of filesystem corruption, or any data loss not related to hardware (e.g. bugs, errant queries, maliciousness). We've seen a failing RAID controller write corrupt data to the entire disk array.
+For convenience and security, it's a good idea to make a _backups_ user on the local system. This account's home directory should be on a different hard disk than your live databases to provide extra fault tolerance and better write performance. The examples below will refer to this location as `~backups`. A separate location is important – while a RAID[1](#fn:raid) configuration will protect you from the failure of individual storage hardware devices, it won't protect you from certain forms of filesystem corruption, or any data loss not related to hardware (e.g. bugs, errant queries, maliciousness). We've seen a failing RAID controller write corrupt data to the entire disk array.
 
 You can add a new _backups_ user with the following command:
 
@@ -57,7 +57,7 @@ GRANT SELECT , RELOAD , LOCK TABLES ON * . * TO backups @ localhost IDENTIFIED B
 
 Choose your own password in place of s3cret above.
 
-Next, we're going to create a shadow file2 to securely store your database password for automation. This is a fancy way of saying we're going to store the password text inside a hidden file with strict permissions.
+Next, we're going to create a shadow file[2](#fn:shadow-file) to securely store your database password for automation. This is a fancy way of saying we're going to store the password text inside a hidden file with strict permissions.
 
 When writing to the file, it's better to use an editor like vi rather than redirecting the output of echo, since you don't want to leave your password in your command history. We'll use echo here for simplicity:
 
@@ -233,7 +233,7 @@ rsync -aze ssh --verbose --delete /path/to/cerb/storage \
 
 ## Keeping off-site backups
 
-It's crucial to assume that _"anything that can go wrong will go wrong_"3. You can't trust your RAID, your server, or your datacenter, to store the only copy of data that your business is doomed without.
+It's crucial to assume that _"anything that can go wrong will go wrong_"[3](#fn:murphys-law). You can't trust your RAID, your server, or your datacenter, to store the only copy of data that your business is doomed without.
 
 In a simple scenario, off-site backups may involve downloading a copy of your backups to your office. Keep in mind that it does you no good to have 250GB of backups on your office network if you have a 1Mbps upstream to your datacenter. If you could drive across the country to hand deliver your backups faster than you could upload them, then you'll want to place your backups somewhere where you can retrieve them quickly.
 
@@ -302,9 +302,9 @@ You can also manage your data in S3 by using Amazon's web-based management inter
 
 # References
 
-1. http://en.wikipedia.org/wiki/RAID&nbsp;↩
+1. http://en.wikipedia.org/wiki/RAID&nbsp;[↩](#fnref:raid)
 
-2. http://en.wikipedia.org/wiki/Shadow\_password&nbsp;↩
+2. http://en.wikipedia.org/wiki/Shadow\_password&nbsp;[↩](#fnref:shadow-file)
 
-3. http://en.wikipedia.org/wiki/Murphy's\_law&nbsp;↩
+3. http://en.wikipedia.org/wiki/Murphy's\_law&nbsp;[↩](#fnref:murphys-law)
 

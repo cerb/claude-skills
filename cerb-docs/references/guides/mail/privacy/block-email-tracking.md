@@ -5,9 +5,9 @@ url: "https://cerb.ai/guides/mail/privacy/block-email-tracking/"
 summary: "This page provides a guide on how to block email tracking pixels and beacons in Cerb to protect user privacy. It explains the use of external images by digital marketers to track email views and how Cerb blocks these by default. The guide includes instructions on importing a sample blocklist to prevent known tracking images from loading and details on creating custom blocking rules. It emphasizes the importance of configuring blocklists to enhance privacy by preventing tracking through images, even when other images are displayed. The page also provides step-by-step instructions for administrators to implement these blocklists and create efficient blocking rules using URL patterns."
 tags: ["guides"]
 ---
-- Introduction
-- Importing the sample blocklist
-- Adding your own blocking rules
+- [Introduction](#introduction)
+- [Importing the sample blocklist](#importing-the-sample-blocklist)
+- [Adding your own blocking rules](#adding-your-own-blocking-rules)
 
 # Introduction
 

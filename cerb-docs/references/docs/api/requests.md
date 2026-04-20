@@ -5,22 +5,22 @@ url: "https://cerb.ai/docs/api/requests/"
 summary: "This page provides a detailed overview of how to interact with Cerb's web API using various HTTP verbs, including GET, PUT, POST, PATCH, and DELETE. It explains how each verb is used for different actions such as retrieving, updating, creating, partially modifying, and deleting records. The page also describes how to format requests, including specifying the response format with extensions like .json or .xml and using payloads for certain actions. Examples are provided for each verb to illustrate how to perform specific tasks, such as retrieving a ticket record, updating a subject, searching for tickets, upserting an organization, and deleting a ticket. The page emphasizes the automatic handling of payload encoding when using official libraries and references additional documentation for detailed module and action-specific information."
 tags: ["docs"]
 ---
-The web API is organized into endpoints. For instance, ticket-related actions are found in the tickets module.
+The web API is organized into [endpoints](/docs/api/endpoints/). For instance, ticket-related actions are found in the [tickets](/docs/api/endpoints/tickets/) module.
 
 A request is performed by pairing an HTTP **verb** with the appropriate **path** as a URL.
 
 An **extension** of `.json` or `.xml` is added to the path to specify the format that the server should use for the response.
 
-Some actions require a **payload**, which uses the standard HTTP POST web form format1 of key/value pairs.
+Some actions require a **payload**, which uses the standard HTTP POST web form format[1](#fn:http-post) of key/value pairs.
 
-- Verbs
-  - GET
-  - PUT
-  - POST
-  - PATCH
-  - DELETE
+- [Verbs](#verbs)
+  - [GET](#get)
+  - [PUT](#put)
+  - [POST](#post)
+  - [PATCH](#patch)
+  - [DELETE](#delete)
 
-- References
+- [References](#references)
 
 # Verbs
 
@@ -76,7 +76,7 @@ Like with a PUT request, the payload encoding of a POST is handled automatically
 
 ## PATCH
 
-A `PATCH` request partially modifies a record. Currently, patching is only used by upserts.
+A `PATCH` request partially modifies a record. Currently, patching is only used by [upserts](/docs/api/endpoints/records/#upsert).
 
 For instance, this request upserts (updates or inserts) an organization record and returns results in JSON format:
 
@@ -101,5 +101,5 @@ DELETE /rest/records/ticket/5.json
 
 # References
 
-1. Wikipedia: HTTP POST - http://en.wikipedia.org/wiki/POST\_(HTTP))&nbsp;↩
+1. Wikipedia: HTTP POST - http://en.wikipedia.org/wiki/POST\_(HTTP))&nbsp;[↩](#fnref:http-post)
 

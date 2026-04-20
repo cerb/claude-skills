@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/api/records/attachment/"
 summary: "This page provides detailed examples of how to create attachments using the Cerb API. It includes instructions for creating attachments with both plaintext and binary content. The examples demonstrate the necessary HTTP POST requests, including the required headers and URL-encoded fields, such as the attachment's name, MIME type, and content. The page also explains how to optionally link attachments to specific contexts using context:id tuples. The responses from the API are shown, indicating successful creation with details like the attachment's ID, MIME type, name, size, storage information, and update timestamp."
 tags: ["docs"]
 ---
-- Examples
-  - Create an attachment with plaintext content
-  - Create an attachment with binary content
+- [Examples](#examples)
+  - [Create an attachment with plaintext content](#create-an-attachment-with-plaintext-content)
+  - [Create an attachment with binary content](#create-an-attachment-with-binary-content)
 
 # Examples
 
@@ -16,7 +16,7 @@ tags: ["docs"]
 **Request:**
 
 ```
-POST /rest/records/attachment/create.json HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Sat, 18 Apr 2026 04:12:55 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
+POST /rest/records/attachment/create.json HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Mon, 20 Apr 2026 20:20:47 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
 
 fields[name]=filename.txt
 &fields[mime_type]=text/plain
@@ -53,7 +53,7 @@ fields[name]=filename.txt
 **Request:**
 
 ```
-POST /rest/records/attachment/create.json?expand= HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Sat, 18 Apr 2026 04:12:55 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
+POST /rest/records/attachment/create.json?expand= HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Mon, 20 Apr 2026 20:20:47 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
 
 fields[name]=cerby.png
 &fields[mime_type]=image/png

@@ -7,20 +7,20 @@ tags: ["docs"]
 ---
 # record.fields
 
-`record.fields` data queries return a filterable and pageable list of fields from a record type.
+`record.fields` data queries return a filterable and pageable list of fields from a [record type](/docs/records/types/).
 
 ### Inputs
 
 | Req'd | Key | Notes |
 | --- | --- | --- |
-| **x** | `of:` | The record type |
+| **x** | `of:` | The [record type](/docs/records/types/) |
 | &nbsp; | `filter:` | An optional keyword used to filter the results |
 | &nbsp; | `limit:` | The desired number of results per page |
 | &nbsp; | `page:` | The desired starting page (zero-based) |
 
 ### Response Formats
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 ### Examples
 
@@ -39,7 +39,7 @@ type: record.fields of: ticket format: dictionaries
        "key" : "bucket_id" , 
        "is_immutable" : false , 
        "is_required" : false , 
-       "notes" : "The ID of the bucket containing this ticket" , 
+       "notes" : "The ID of the [bucket](/docs/records/types/bucket/) containing this ticket" , 
        "type" : "id" 
      }, 
      "closed" : { 
@@ -66,21 +66,21 @@ type: record.fields of: ticket format: dictionaries
        "key" : "fieldsets" , 
        "is_immutable" : false , 
        "is_required" : false , 
-       "notes" : "An array or comma-separated list of custom fieldset IDs" , 
+       "notes" : "An array or comma-separated list of [custom fieldset](/docs/records/types/custom_fieldset/) IDs" , 
        "type" : "fieldsets" 
      }, 
      "group" : { 
        "key" : "group" , 
        "is_immutable" : false , 
        "is_required" : false , 
-       "notes" : "The group of the ticket; alternative to `group_id`" , 
+       "notes" : "The [group](/docs/records/types/group/) of the ticket; alternative to `group_id`" , 
        "type" : "string" 
      }, 
      "group_id" : { 
        "key" : "group_id" , 
        "is_immutable" : false , 
        "is_required" : true , 
-       "notes" : "The ID of the group containing this ticket" , 
+       "notes" : "The ID of the [group](/docs/records/types/group/) containing this ticket" , 
        "type" : "id" 
      }, 
      "importance" : { 
@@ -108,21 +108,21 @@ type: record.fields of: ticket format: dictionaries
        "key" : "org" , 
        "is_immutable" : false , 
        "is_required" : false , 
-       "notes" : "The exact name of the organization linked to this ticket; alternative to `org_id`" , 
+       "notes" : "The exact name of the [organization](/docs/records/types/org/) linked to this ticket; alternative to `org_id`" , 
        "type" : "string" 
      }, 
      "org_id" : { 
        "key" : "org_id" , 
        "is_immutable" : false , 
        "is_required" : false , 
-       "notes" : "The ID of the organization linked to this ticket; alternative to `org`" , 
+       "notes" : "The ID of the [organization](/docs/records/types/org/) linked to this ticket; alternative to `org`" , 
        "type" : "id" 
      }, 
      "owner_id" : { 
        "key" : "owner_id" , 
        "is_immutable" : false , 
        "is_required" : false , 
-       "notes" : "The ID of the worker responsible for this ticket" , 
+       "notes" : "The ID of the [worker](/docs/records/types/worker/) responsible for this ticket" , 
        "type" : "id" 
      }, 
      "participant_ids" : { 

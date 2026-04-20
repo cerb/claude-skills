@@ -13,13 +13,13 @@ tags: ["docs"]
 
 Create opportunities (sales leads) linked to e-mail addresses. Opportunity records can be created from the Activity menu or while reading tickets.
 
-- Extensions
-  - Bot Action
-  - Bot Event
-  - Event Listener
-  - Page Section
-  - Record Type
-  - Rest API Controller
+- [Extensions](#extensions)
+  - [Bot Action](#bot-action)
+  - [Bot Event](#bot-event)
+  - [Event Listener](#event-listener)
+  - [Page Section](#page-section)
+  - [Record Type](#record-type)
+  - [Rest API Controller](#rest-api-controller)
 
 # Extensions
 
@@ -47,5 +47,5 @@ Create opportunities (sales leads) linked to e-mail addresses. Opportunity recor
 
 | Opportunities | `crm.rest.controller.opps` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

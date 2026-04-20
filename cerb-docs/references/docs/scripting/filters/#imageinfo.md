@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## image\_info
 
-(Added in 9.6.7)
+(Added in [9.6.7](/releases/9.6.7/))
 
 Returns information about an image. The image may be provided as bytes or in data URI format.
 

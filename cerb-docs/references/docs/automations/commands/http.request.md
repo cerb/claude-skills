@@ -21,26 +21,26 @@ A more complex `POST` request:
 start: http.request/post: output: http_response inputs: method: POST url: https://api.example/employee/add headers@text: Content-Type: application/json body: person: name: Kina title: Customer Support Manager on_simulate: set: http_response: status_code@int: 200 content_type: application/json body@text: { "status": true, "id": 123 } set: body@key,json: http_response:body return: employee_id@int: {{ body.id }}
 ```
 
-- Syntax
-  - inputs:
-    - method:
-    - url:
-    - headers:
-    - body:
-    - timeout:
-    - authentication:
-    - response:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [method:](#method)
+    - [url:](#url)
+    - [headers:](#headers)
+    - [body:](#body)
+    - [timeout:](#timeout)
+    - [authentication:](#authentication)
+    - [response:](#response)
 
-  - output:
-    - Binary responses
-    - Large responses
+  - [output:](#output)
+    - [Binary responses](#binary-responses)
+    - [Large responses](#large-responses)
 
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
-- Examples
-  - Stream a large upload from an attachment
+- [Examples](#examples)
+  - [Stream a large upload from an attachment](#stream-a-large-upload-from-an-attachment)
 
 # Syntax
 
@@ -118,7 +118,7 @@ timeout: 0.5
 
 ### authentication:
 
-The optional URI of a connected account to use for authenticating this HTTP request.
+The optional URI of a [connected account](/docs/records/types/connected_account/) to use for authenticating this HTTP request.
 
 For instance, an OAuth2 connected account will include a bearer token in the `Authorization:` header.
 
@@ -128,7 +128,7 @@ authentication: cerb:connected_account:my-oauth2-account
 
 ### response:
 
-If set, the response will always be returned as an automation resource regardless of its size.
+If set, the response will always be returned as an [automation resource](/docs/records/types/automation_resource/) regardless of its size.
 
 | Key | Description |
 | --- | --- |
@@ -148,7 +148,7 @@ You should always use the `http.request:on_success:` handler to verify an HTTP r
 
 ### Large responses
 
-A large HTTP response body (\>1MB) will now be returned as an automation resource record for further processing.
+A large HTTP response body (\>1MB) will now be returned as an [automation resource](/docs/records/types/automation_resource/) record for further processing.
 
 These bytes are streamed directly to a file to avoid memory limitations in the automation (e.g. video processing).
 
@@ -159,17 +159,17 @@ When this occurs:
 - `output:content_type_original:` contains the original content type
 - The HTTP body is a Cerb record URI (e.g. `cerb:automation_resource:c10028f0-1cad-11ec-81e5-59d4c4af2d7`)
 
-The new file.read: command can be used to process the file in chunks.
+The new [file.read:](/docs/automations/commands/file.read/) command can be used to process the file in chunks.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of the HTTP request.
+The [commands](/docs/automations/#commands) to run during simulation instead of the HTTP request.
 
 If omitted, the HTTP request is executed during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The `output:` placeholder receives a dictionary with these keys:
 
@@ -183,7 +183,7 @@ The `output:` placeholder receives a dictionary with these keys:
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

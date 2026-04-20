@@ -13,9 +13,9 @@ tags: ["docs"]
 
 A GUI for translating the Cerb interface into other languages. This adds a 'Translations' tab to Configuration.
 
-- Extensions
-  - Page Menu Item
-  - Page Section
+- [Extensions](#extensions)
+  - [Page Menu Item](#page-menu-item)
+  - [Page Section](#page-section)
 
 # Extensions
 
@@ -27,5 +27,5 @@ A GUI for translating the Cerb interface into other languages. This adds a 'Tran
 
 | Setup Page Translations Section | `translators.setup.section.translations` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

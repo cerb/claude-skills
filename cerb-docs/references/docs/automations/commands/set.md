@@ -37,7 +37,7 @@ answer: 14
 
 ### Dictionaries
 
-A dictionary may be provided as the value:
+A [dictionary](/docs/automations/#dictionaries) may be provided as the value:
 
 ```
 start: set: person: name: Kina role: title: Customer Support Manager return: output@text: {{ person.name }} is a {{ person.role.title }}
@@ -51,5 +51,5 @@ output: Kina is a Customer Support Manager
 
 ### Paths
 
-You can set a value using a key path with the var.set command.
+You can set a value using a key path with the [var.set](/docs/automations/commands/var.set/) command.
 

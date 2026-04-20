@@ -5,57 +5,60 @@ url: "https://cerb.ai/docs/automations/"
 summary: "This page provides an in-depth guide on automations in Cerb, focusing on their structure, execution, and management. Automations are described as state machines written in KATA, designed to transform input dictionaries into output dictionaries, thereby automating workflows. Key topics include the syntax of KATA, such as dictionaries, dialects, scripting, and annotations, as well as execution details like inputs, exit states, error handling, and simulation. The page also covers policies that govern automation permissions, including scopes, placeholders, and rules, and explains triggers and events that initiate automations. Additionally, it details commands for state transitions, flow control, logging, and actions, and provides information on the automation editor, including features like change history, export options, and visualizations. The document serves as a comprehensive resource for understanding and implementing automations within Cerb."
 tags: ["docs"]
 ---
-**Automations** are self-contained state machines written in KATA that transform an input dictionary into an output dictionary. The results are used to automate and customize workflows throughout Cerb.
+**Automations** are self-contained state machines written in [KATA](/docs/kata/) that transform an input dictionary into an output dictionary. The results are used to automate and customize workflows throughout Cerb.
 
  
 
-- Syntax
-  - Dictionaries
-  - Dialects
-  - Names
-  - Scripting
-  - Annotations
-  - Multiple line values
+- [Syntax](#syntax)
+  - [Dictionaries](#dictionaries)
+  - [Dialects](#dialects)
+  - [Names](#names)
+  - [Scripting](#scripting)
+  - [Annotations](#annotations)
+  - [Multiple line values](#multiple-line-values)
 
-- Execution
-  - Inputs
-    - Snippet examples
+- [Commands](#commands)
+  - [State transitions](#state-transitions)
+  - [Flow control](#flow-control)
+  - [Logging](#logging)
+  - [Actions](#actions)
+  - [Simulation](#simulation)
 
-  - Exit states
-  - Error handling
-  - Simulation
-  - Continuations
-  - Timers
+- [Execution](#execution)
+  - [Inputs](#inputs)
+    - [Snippet examples](#snippet-examples)
 
-- Policies
-  - Scopes
-  - Placeholders
-  - Rules
-    - Callers
-    - Allowed commands
-    - Time limit
+  - [Exit states](#exit-states)
+  - [Error handling](#error-handling)
+  - [Simulation](#simulation-1)
 
-  - Testing policy rules
+- [Policies](#policies)
+  - [Scopes](#scopes)
+  - [Placeholders](#placeholders)
+  - [Rules](#rules)
+    - [Callers](#callers)
+    - [Allowed commands](#allowed-commands)
+    - [Time limit](#time-limit)
 
-- Triggers
-- Events
-- Commands
-  - State transitions
-  - Flow control
-  - Logging
-  - Actions
-  - Simulation
+  - [Testing policy rules](#testing-policy-rules)
 
-- Editor
-  - Change History
-  - Export
-  - Visualizations
+- [Events](#events)
+  - [Event Listeners](#event-listeners)
+    - [Priority](#priority)
 
-- References
+- [Triggers](#triggers)
+- [Continuations](#continuations)
+- [Timers](#timers)
+- [Editor](#editor)
+  - [Change History](#change-history)
+  - [Export](#export)
+  - [Visualizations](#visualizations)
+
+- [References](#references)
 
 # Syntax
 
-This simple automation, written in KATA:
+This simple automation, written in [KATA](/docs/kata/):
 
 ```
 start: return: answer: {{ a * b }}
@@ -83,7 +86,7 @@ The input dictionary has a key `a:` with the value `5`, and a key `b:` with the 
 
 The output dictionary has a key `answer:` with the value `20`.
 
-In KATA, indenting keys with spaces creates a hierarchy of parent/child relationships. `start:` has a child `return:` which has a child `answer:`.
+In [KATA](/docs/kata/), indenting keys with spaces creates a hierarchy of parent/child relationships. `start:` has a child `return:` which has a child `answer:`.
 
 There is a unique **key path** to any key. In the example above, `start:return:answer:` is the path to the key containing the answer. These paths are used by visualizations and error messages to refer to a specific point in a KATA document.
 
@@ -93,11 +96,11 @@ When an automation executes, it creates a new **working memory** dictionary that
 
 ### Dialects
 
-There are various **dialects** of KATA: automations, maps, toolbars, events, etc. The dialects share the same overall syntax, but each has a different **vocabulary** of keys.
+There are various **dialects** of KATA: automations, [maps](/docs/maps/), [toolbars](/docs/toolbars/), [events](/docs/automations/#events), etc. The dialects share the same overall [syntax](/docs/kata/), but each has a different **vocabulary** of keys.
 
 In automations, keys describe a _declarative_ set of **commands**. In other words, an automation serves as a natural language outline of logic and actions to be undertaken, rather than a set of detailed computer programming instructions for carrying out each step.
 
-For instance, the command http.request: fetches a web page by URL and save its status code, headers, and body to a given key in the dictionary.
+For instance, the command [http.request:](/docs/automations/commands/http.request/) fetches a web page by URL and save its status code, headers, and body to a given key in the dictionary.
 
 ### Names
 
@@ -137,9 +140,9 @@ Scripting occurs within specific tags:
 
 In scripts, you can refer to any key from the working memory dictionary, which are often referred to as **placeholders** to avoid ambiguity with keys in KATA documents.
 
-Scripting provides several functions and filters for quickly formatting and manipulating data.
+Scripting provides several [functions](/docs/scripting/functions/) and [filters](/docs/scripting/filters/) for quickly formatting and manipulating data.
 
-Refer to the **scripting** documentation for a full list of capabilities.
+Refer to the [**scripting**](/docs/scripting/) documentation for a full list of capabilities.
 
 ### Annotations
 
@@ -208,9 +211,69 @@ There are 1,111,562,602 more people in China than the USA.
 
 This approach is particularly useful when you need to create a dictionary with keys that contain characters like spaces, which are not valid in KATA keys.
 
+# Commands
+
+### State transitions
+
+| [**await:**](/docs/automations/commands/await/) | Pauses the automation in the `await` state with output. Creates a [continuation](#continuations) for resuming. |
+| [**error:**](/docs/automations/commands/error/) | Unsuccessfully terminates the automation in the `error` state with output. |
+| [**return:**](/docs/automations/commands/return/) | Successfully terminates the automation in the `return` state with output. |
+
+### Flow control
+
+| [**decision:**](/docs/automations/commands/decision/) | Conditionally select one of multiple potential outcomes. |
+| [**outcome:**](/docs/automations/commands/outcome/) | A conditional sequence of commands. |
+| [**repeat:**](/docs/automations/commands/repeat/) | Iterate an array and repeat a sequence of commands for each value. |
+| [**while:**](/docs/automations/commands/while/) | Conditionally loop a sequence of commands. |
+
+### Logging
+
+| [**log:**](/docs/automations/commands/log/) | Log a debug message. |
+| [**log.warn:**](/docs/automations/commands/log/) | Log a warning message. |
+| [**log.error:**](/docs/automations/commands/log/) | Log an error message. |
+| [**log.alert:**](/docs/automations/commands/log/) | Log an alert message. |
+
+### Actions
+
+| [**api.command:**](/docs/automations/commands/api.command/) | Execute an API command and return the response. |
+| [**data.query:**](/docs/automations/commands/data.query/) | Execute a [data query](/docs/data-queries/) and return the response. |
+| [**decrypt.pgp:**](/docs/automations/commands/decrypt.pgp/) | Decrypt a PGP encrypted message. |
+| [**email.parse:**](/docs/automations/commands/email.parse/) | Parse a MIME-encoded email message into a [ticket](/docs/records/types/ticket/). |
+| [**encrypt.pgp:**](/docs/automations/commands/encrypt.pgp/) | Encrypt a message for one or more PGP public keys. |
+| [**file.read:**](/docs/automations/commands/file.read/) | Read chunks of bytes from an [attachment](/docs/records/types/attachment/) or [automation resource](/docs/records/types/automation_resource/). |
+| [**file.write:**](/docs/automations/commands/file.write/) | Write bytes to an [automation resource](/docs/records/types/automation_resource/). |
+| [**function:**](/docs/automations/commands/function/) | Execute an [automation.function](/docs/automations/triggers/automation.function/) automation and return output. |
+| [**http.request:**](/docs/automations/commands/http.request/) | Send data to an HTTP endpoint and return the response. |
+| [**kata.parse:**](/docs/automations/commands/kata.parse/) | Parse an arbitrary [KATA](/docs/kata/) document with placeholders. |
+| [**llm.agent:**](/docs/automations/commands/llm.agent/) | Send a message to a conversational AI agent using a large language model with tools and transcripts. |
+| [**llm.chat:**](/docs/automations/commands/llm.chat/) | Send a message to a conversational large language model. |
+| [**llm.embed:**](/docs/automations/commands/llm.embed/) | Generate text vector embeddings using a large language model. |
+| [**metric.increment:**](/docs/automations/commands/metric.increment/) | Add new samples to a [metric](/docs/metrics/). |
+| [**queue.pop:**](/docs/automations/commands/queue.pop/) | Pop an item from a [queue](/docs/queues/). |
+| [**queue.push:**](/docs/automations/commands/queue.push/) | Push an item into a [queue](/docs/queues/). |
+| [**record.create:**](/docs/automations/commands/record.create/) | Create a [record](/docs/records/). |
+| [**record.delete:**](/docs/automations/commands/record.delete/) | Delete a [record](/docs/records/). |
+| [**record.get:**](/docs/automations/commands/record.get/) | Retrieve a [record](/docs/records/). |
+| [**record.search:**](/docs/automations/commands/record.search/) | Search [records](/docs/records/). |
+| [**record.update:**](/docs/automations/commands/record.update/) | Update a [record](/docs/records/). |
+| [**record.upsert:**](/docs/automations/commands/record.upsert/) | Create or update a [record](/docs/records/). |
+| [**set:**](/docs/automations/commands/set/) | Set one or more placeholders. |
+| [**storage.get:**](/docs/automations/commands/storage.get/) | Retrieve arbitrary data from long-term storage. |
+| [**storage.set:**](/docs/automations/commands/storage.set/) | Save arbitrary data to long-term storage. |
+| [**storage.delete:**](/docs/automations/commands/storage.delete/) | Delete data from long-term storage. |
+| [**var.expand:**](/docs/automations/commands/var.expand/) | Expand paths on keys. |
+| [**var.push:**](/docs/automations/commands/var.push/) | Add an element to a list placeholder. |
+| [**var.set:**](/docs/automations/commands/var.set/) | Set a placeholder using a complex key path. |
+| [**var.unset:**](/docs/automations/commands/var.unset/) | Unset a placeholder. |
+
+### Simulation
+
+| [**simulate.success:**](/docs/automations/commands/simulate.success/) | Simulate command output and execute the `on_success:` event. |
+| [**simulate.error:**](/docs/automations/commands/simulate.error/) | Simulate command output and execute the `on_error:` event. |
+
 # Execution
 
-An automation can store, retrieve, and manipulate data using keys in the working memory dictionary.
+An automation can store, retrieve, and manipulate data using keys in the [working memory dictionary](#dictionaries).
 
 During execution, the dictionary also keeps track of an automation's control flow (conditional branches, call stack, loops, past inputs, etc).
 
@@ -224,10 +287,10 @@ Inputs are defined with a `type/name:` key. The `name` must be unique within the
 
 The `type` must be one of:
 
-| **array:** | An array of values |
-| **record:** | A record ID of a given type (converted to a dictionary) |
-| **records:** | Multiple record IDs of a given type (converted to an array of dictionaries) |
-| **text:** | Text with an optional data type |
+| [**array:**](/docs/automations/inputs/array/) | An array of values |
+| [**record:**](/docs/automations/inputs/record/) | A record ID of a given type (converted to a dictionary) |
+| [**records:**](/docs/automations/inputs/records/) | Multiple record IDs of a given type (converted to an array of dictionaries) |
+| [**text:**](/docs/automations/inputs/text/) | Text with an optional data type |
 
 The values are available in the `inputs` placeholder.
 
@@ -259,15 +322,15 @@ After execution, an automation concludes in one of the following `__exit` states
 
 ### Error handling
 
-Each command in the automation can result in success or failure.
+Each [command](#commands) in the automation can result in success or failure.
 
 Commands may provide `on_success:` and `on_error:` events to run any number of commands in response to success or failure.
 
 The `on_error:` event can recover from an error to continue execution.
 
-If the `on_error:` event is omitted, a command error immediately exits the automation in the `error` state.
+If the `on_error:` event is omitted, a command error immediately exits the automation in the `error` [state](#exit-states).
 
-This http.request command requests an invalid URL:
+This [http.request](/docs/automations/commands/http.request/) command requests an invalid URL:
 
 ```
 start: http.request: output: http_response inputs: method: GET url: https://invalid.url.example/ return:
@@ -289,12 +352,12 @@ The automation now always exits in the `return` state.
 
 During testing and development, it may not be desirable to execute certain actions. An automation's execution can be **simulated** instead.
 
-Each command can provide an `on_simulate:` event that is used during simulation instead of executing. This can run any number of alternative commands.
+Each [command](#commands) can provide an `on_simulate:` event that is used during simulation instead of executing. This can run any number of alternative commands.
 
 These two special commands are available during simulation:
 
-| **`simulate.success:`** | Simulate command output and execute the `on_success:` event. |
-| **`simulate.error:`** | Simulate command output and execute the `on_error:` event. |
+| [**simulate.success:**](/docs/automations/commands/simulate.success/) | Simulate command output and execute the `on_success:` event. |
+| [**simulate.error:**](/docs/automations/commands/simulate.error/) | Simulate command output and execute the `on_error:` event. |
 
 The following example simulates an `http.request:` command and provides mock output:
 
@@ -307,56 +370,6 @@ Even though the URL is invalid, the simulated output is:
 ```
 body: { "output": "Good job!" }
 ```
-
-### Continuations
-
-When an automation exits in the `await:` state, a snapshot of its current dictionary is saved and assigned a long random identifier. This snapshot is called a **continuation**.
-
-The continuation identifier is used to resume the automation from the same point at a future time with additional input.
-
-For instance, here's a basic interaction automation that pauses for user input:
-
-```
-start: await: form: elements: text/prompt_name: label: What is your name? required@bool: yes return: output@text: Hello, {{ prompt_name }} !
-```
-
-At the `await:` command, the automation will send a web form to the user, create a continuation, and wait for any length of time to resume execution.
-
-An automation that supports continuations can exit in the `await:` state any number of times before concluding.
-
-```
-start: await/intro: form: elements: text/prompt_name: label: Name: required@bool: yes text/prompt_email: label: Email: required@bool: yes type: email placeholder: you@example.com   
-  # Confirmation code is generated, saved, and emailed
-   
-   await/confirm: form: elements: say/hello: content@text: Hello, {{ prompt_name }} ! We just sent a confirmation code to {{ prompt_email }} text/prompt_code: label: Confirmation Code: required@bool: yes type: uri max_length: 8   
-  # Confirmation code is verified
-   
-   return: output@text: Thanks, {{ prompt_name }} ! Your email address ( {{ prompt_email }} ) been subscribed to our newsletter.
-```
-
-### Timers
-
-Automations can use **timers** to run at a future time either once or on a recurring schedule.
-
- 
-
-Timers can be created procedurally by automations and interactions, or manually by workers.
-
-A timer specifies a name, a future datetime, an optional schedule, and a block of events KATA to conditionally determine an automation.timer to run.
-
-On the first invocation of the timer, an automation is selected. This may optionally provide inputs.
-
-When the automation concludes:
-
-- If the timer has a recurring schedule, it is rescheduled for the next occurrence.
-
-- Otherwise, a one-shot timer is disabled (or optionally deleted) at conclusion.
-
-If the automation ends in the `await` state, a continuation is created, and the timer is rescheduled for the given datetime.
-
-The timer stores the continuation ID and the automation pauses at the current point. On the next timer invocation, the automation resumes where it left off rather than starting over.
-
-Schedules are defined in Unix CRON expression format. When multiple expressions are specified, the timer is scheduled for the next most recent occurrence among them.
 
 # Policies
 
@@ -386,19 +399,19 @@ Policies can use placeholders based on the command:
 
 #### Callers
 
-Some automation triggers support **callers**. A caller contains information about where, and by whom, an automation was started. These details can be used in policy rules.
+Some automation [triggers](/docs/automations/#triggers) support **callers**. A caller contains information about where, and by whom, an automation was started. These details can be used in policy rules.
 
 | Trigger |
 | --- |
-| interaction.worker |
+| [interaction.worker](/docs/automations/triggers/interaction.worker/#callers) |
 
-The following policy allows an interaction on project board columns when a worker has write-access on the board, and otherwise denies it:
+The following policy allows an [interaction](/docs/interactions/) on [project board](/docs/project-boards/) columns when a worker has write-access on the board, and otherwise denies it:
 
 ```
 callers: cerb.toolbar.projectBoardColumn: allow/owners@bool: {{ cerb_record_writeable('project_board', board_id, worker__context, worker_id) ? 'yes' }} deny: yes
 ```
 
-When a caller policy denies an interaction it is automatically hidden from toolbars.
+When a caller policy denies an interaction it is automatically hidden from [toolbars](/docs/automations/triggers/interaction.worker/#toolbars).
 
 #### Allowed commands
 
@@ -408,7 +421,7 @@ This policy allows all commands:
 commands: all: allow: yes
 ```
 
-The above policy is simple but not secure. Instead, we recommend adhering to the _"principle of least privilege"_ 1. This means only allowing the minimal set of commands required to accomplish an automation's purpose.
+The above policy is simple but not secure. Instead, we recommend adhering to the _"principle of least privilege"_ [1](#fn:polp). This means only allowing the minimal set of commands required to accomplish an automation's purpose.
 
 The following policy only allows:
 
@@ -478,131 +491,154 @@ We can change the inputs to exceed the granted permissions:
 
 The above test object now returns blank, which is interpreted as `no` and ignored. The policy returns the default `deny: yes`.
 
-# Triggers
-
-Automations are automatically **triggered** in response to events within Cerb.
-
-| Trigger | **Inputs** | **Await** | &nbsp; |
-| --- | --- | --- | --- |
-| **automation.function** | **x** | &nbsp; | A reusable function with shared functionality called by other automations |
-| **automation.timer** | **x** | \* | A scheduled automation with continuations |
-| **behavior.action** | **x** | &nbsp; | Execute an automation from a legacy bot behavior |
-| **data.query** | **x** | &nbsp; | Return results for custom data queries |
-| **interaction.worker** | **x** | \* | Worker interactions on toolbars and widgets |
-| **interaction.worker.explore** | **x** | \* | Worker interactions that use custom logic to return the next record in explore mode |
-| **interaction.website** | **x** | \* | Website visitor interactions |
-| **llm.tool** | **x** | &nbsp; | A reusable function that can be invoked by a large language model |
-| **map.clicked** | **x** | &nbsp; | Handlers for clicks on map regions and points |
-| **projectBoard.cardAction** | **x** | &nbsp; | Actions that take place for new cards in a project board column |
-| **projectBoard.renderCard** | **x** | &nbsp; | Dynamic card layouts on project boards |
-| **reminder.remind** | **x** | &nbsp; | Actions that run for reminder alerts |
-| **resource.get** | **x** | &nbsp; | Dynamic resource content |
-| **scripting.function** | **x** | &nbsp; | Run an automation from the cerb\_automation() function in scripting |
-| **ui.chart.data** | **x** | &nbsp; | Data sources for Chart KATA widgets |
-| **ui.sheet.data** | **x** | &nbsp; | Data sources for sheets |
-| **ui.widget** | **x** | &nbsp; | Custom output for card, profile, or workspace widgets |
-| **webhook.respond** | **x** | &nbsp; | Handlers for webhook listeners |
-
 # Events
 
-In functionality that triggers automations (e.g. widgets), event handlers are defined in a KATA dialect.
+Events are **broadcast** by Cerb when something happens — a message is received, a record changes, a worker logs in. Unlike [triggers](#triggers), events are not aimed at a specific automation. Instead, they use **event listeners** to associate one or more automations with an event.
 
-For events that expect a single handler (e.g. `interaction.worker`), the first matching (non-disabled) automation is executed and its end state is returned. This can be used to conditionally respond based on the event/caller.
+| Event | &nbsp; |
+| --- | --- |
+| [**mail.draft**](/docs/automations/events/mail.draft/) | Modify a new or resumed draft before the editor is opened |
+| [**mail.draft.validate**](/docs/automations/events/mail.draft.validate/) | Validate an email draft before sending |
+| [**mail.filter**](/docs/automations/events/mail.filter/) | Modify or reject an inbound message based on its properties |
+| [**mail.moved**](/docs/automations/events/mail.moved/) | After a ticket is moved to a new group/bucket |
+| [**mail.received**](/docs/automations/events/mail.received/) | After a new email message is received |
+| [**mail.reply.validate**](/docs/automations/events/mail.reply.validate/) | Validate before a worker starts a new reply |
+| [**mail.route**](/docs/automations/events/mail.route/) | Determine a destination group inbox given properties of an incoming message |
+| [**mail.send**](/docs/automations/events/mail.send/) | Before a sent message is delivered |
+| [**mail.sent**](/docs/automations/events/mail.sent/) | After a sent message is delivered |
+| [**record.changed**](/docs/automations/events/record.changed/) | React to changes in record field values |
+| [**record.merge**](/docs/automations/events/record.merge/) | Allow or deny record merge requests |
+| [**record.merged**](/docs/automations/events/record.merged/) | After a set of records was merged |
+| [**record.viewed**](/docs/automations/events/record.viewed/) | After a record profile is viewed by a worker |
+| [**reminder.remind**](/docs/automations/events/reminder.remind/) | Send notifications about a reminder |
+| [**worker.authenticate.failed**](/docs/automations/events/worker.authenticate.failed/) | After a [worker](/docs/workers/) failed to log in (e.g. invalid password) |
+| [**worker.authenticated**](/docs/automations/events/worker.authenticated/) | After a [worker](/docs/workers/) logged in successfully |
 
-For events that run all handlers (e.g. `projectBoard.cardAction`), all non-disabled automations are executed in order, and their end states are returned.
+## Event Listeners
 
-Global automation events can be edited from **Search&nbsp;» Automation Events**. This allows event handler KATA to be configured for global events that don't otherwise have a parent record (e.g. mail filtering).
+An **event listener** is a record that binds an automation to a specific event. Listeners are managed at **Search&nbsp;» Automation Event Listeners**.
+
+Each listener has an `event_kata` field that defines the binding using [KATA](/docs/kata/):
+
+```
+automation/autoreply: uri: cerb:automation:example.mail.received.autoreply disabled@bool: {{ not is_new_ticket }}
+```
+
+Each `automation/name:` entry specifies:
+
+| Key | Notes |
+| --- | --- |
+| `uri:` | The automation to run (e.g. `cerb:automation:example.name`) |
+| `disabled@bool:` | An optional condition — when `true`, this listener is skipped |
+| `inputs:` | Optional key/value pairs passed to the automation's `inputs:` |
+
+Multiple automations can be bound within a single listener's `event_kata`:
 
 ```
 automation/onlyTasks: uri: cerb:automation:example.cards.task disabled@bool: {{ card_type != 'task' ? 'yes' }} automation/everythingElse: uri: cerb:automation:example.cards.generic
 ```
 
-There can now be multiple `enabled:` or `disabled:` rules. The first rule to return `true` is used. This allows `deny-allow` and `allow-deny` strategies. By default, all handlers are enabled.
+There can be multiple `disabled:` rules per entry. The first rule to return `true` is used, enabling `allow-deny` or `deny-allow` strategies. By default, all listeners are enabled.
 
-| Event | &nbsp; |
+For events that expect a **single** handler (e.g. `mail.route`), the first matching (non-disabled) automation — ordered by [priority](#priority) — is executed and its result returned.
+
+For events that run **all** handlers (e.g. `mail.received`), all non-disabled automations are executed in [priority](#priority) order and their results collected.
+
+Global automation events (those without a parent record, such as mail filtering) can be configured from **Search&nbsp;» Automation Events**.
+
+### Priority
+
+Each event listener has a numeric **priority** from `0` to `255`. Lower numbers run first. When two listeners share the same priority, they run in the order they were created.
+
+When both automations and legacy [bot](/docs/records/types/bot/) behaviors are active on the same event, priority also determines their relative ordering:
+
+| Priority | Execution order |
 | --- | --- |
-| **mail.draft** | Modify a new or resumed draft before the editor is opened |
-| **mail.draft.validate** | Validate an email draft before sending |
-| **mail.filter** | Modify or reject an inbound message based on its properties |
-| **mail.moved** | After a ticket is moved to a new group/bucket |
-| **mail.received** | After a new email message is received |
-| **mail.reply.validate** | Validate before a worker starts a new reply |
-| **mail.route** | Determine a destination group inbox given properties of an incoming message |
-| **mail.send** | Before a sent message is delivered |
-| **mail.sent** | After a sent message is delivered |
-| **record.changed** | React to changes in record field values |
-| **record.merge** | Allow or deny record merge requests |
-| **record.merged** | After a set of records was merged |
-| **record.viewed** | After a record profile is viewed by a worker |
-| **reminder.remind** | Send notifications about a reminder |
-| **worker.authenticate.failed** | After a worker failed to log in (e.g. invalid password) |
-| **worker.authenticated** | After a worker logged in successfully |
+| 0–127 | Automation runs **before** legacy behaviors |
+| 128–255 | Automation runs **after** legacy behaviors |
 
-# Commands
+This ordering was introduced in [11.1.8](/releases/11.1.8/). Prior to that version, automations always ran before legacy behaviors regardless of priority.
 
-### State transitions
+# Triggers
 
-| **await:** | Pauses the automation in the `await` state with output. Creates a continuation for resuming. |
-| **error:** | Unsuccessfully terminates the automation in the `error` state with output. |
-| **return:** | Successfully terminates the automation in the `return` state with output. |
+Triggers are invoked **directly** by Cerb functionality — widgets, AI agents, timers, and [function:](/docs/automations/commands/function/) calls from other automations. A trigger invokes a specific automation by name and passes structured inputs. Triggers do **not** use listeners.
 
-### Flow control
+| Trigger | [**Inputs**](#inputs) | [**Await**](#continuations) | &nbsp; |
+| --- | --- | --- | --- |
+| [**automation.function**](/docs/automations/triggers/automation.function/) | **x** | &nbsp; | A reusable function with shared functionality called by other automations |
+| [**automation.timer**](/docs/automations/triggers/automation.timer/) | **x** | \* | A scheduled automation with [continuations](#continuations) |
+| [**behavior.action**](/docs/automations/triggers/behavior.action/) | **x** | &nbsp; | Execute an automation from a legacy bot behavior |
+| [**data.query**](/docs/automations/triggers/data.query/) | **x** | &nbsp; | Return results for custom [data queries](/docs/data-queries/) |
+| [**interaction.worker**](/docs/automations/triggers/interaction.worker/) | **x** | \* | Worker [interactions](/docs/interactions/) on [toolbars](/docs/toolbars/) and widgets |
+| [**interaction.worker.explore**](/docs/automations/triggers/interaction.worker.explore/) | **x** | \* | Worker [interactions](/docs/interactions/) that use custom logic to return the next record in explore mode |
+| [**interaction.website**](/docs/automations/triggers/interaction.website/) | **x** | \* | Website visitor [interactions](/docs/interactions/) |
+| [**llm.tool**](/docs/automations/triggers/llm.tool/) | **x** | &nbsp; | A reusable function that can be invoked by a large language model |
+| [**map.clicked**](/docs/automations/triggers/map.clicked/) | **x** | &nbsp; | Handlers for clicks on [map](/docs/maps/) regions and points |
+| [**projectBoard.cardAction**](/docs/automations/triggers/projectBoard.cardAction/) | **x** | &nbsp; | Actions that take place for new cards in a project board column |
+| [**projectBoard.renderCard**](/docs/automations/triggers/projectBoard.renderCard/) | **x** | &nbsp; | Dynamic card layouts on project boards |
+| [**reminder.remind**](/docs/automations/triggers/reminder.remind/) | **x** | &nbsp; | Actions that run for [reminder](/docs/reminders/) alerts |
+| [**resource.get**](/docs/automations/triggers/resource.get/) | **x** | &nbsp; | Dynamic [resource](/docs/resources/) content |
+| [**scripting.function**](/docs/automations/triggers/scripting.function/) | **x** | &nbsp; | Run an [automation](/docs/automations/) from the [cerb\_automation()](/docs/scripting/functions/#cerb_automation) function in scripting |
+| [**ui.chart.data**](/docs/automations/triggers/ui.chart.data/) | **x** | &nbsp; | Data sources for [Chart KATA widgets](/docs/dashboards/) |
+| [**ui.sheet.data**](/docs/automations/triggers/ui.sheet.data/) | **x** | &nbsp; | Data sources for [sheets](/docs/sheets/) |
+| [**ui.widget**](/docs/automations/triggers/ui.widget/) | **x** | &nbsp; | Custom output for [card](/docs/records/types/card_widget/), [profile](/docs/records/types/profile_widget/), or [workspace](/docs/records/types/workspace_widget/) widgets |
+| [**webhook.respond**](/docs/automations/triggers/webhook.respond/) | **x** | &nbsp; | Handlers for [webhook listeners](/docs/webhooks/) |
 
-| **decision:** | Conditionally select one of multiple potential outcomes. |
-| **outcome:** | A conditional sequence of commands. |
-| **repeat:** | Iterate an array and repeat a sequence of commands for each value. |
-| **while:** | Conditionally loop a sequence of commands. |
+# Continuations
 
-### Logging
+When an automation exits in the `await:` state, a snapshot of its current dictionary is saved and assigned a long random identifier. This snapshot is called a **continuation**.
 
-| **log:** | Log a debug message. |
-| **log.warn:** | Log a warning message. |
-| **log.error:** | Log an error message. |
-| **log.alert:** | Log an alert message. |
+The continuation identifier is used to resume the automation from the same point at a future time with additional input.
 
-### Actions
+For instance, here's a basic [interaction](/docs/automations/triggers/interaction.worker/) automation that pauses for user input:
 
-| **api.command:** | Execute an API command and return the response. |
-| **data.query:** | Execute a data query and return the response. |
-| **decrypt.pgp:** | Decrypt a PGP encrypted message. |
-| **email.parse:** | Parse a MIME-encoded email message into a ticket. |
-| **encrypt.pgp:** | Encrypt a message for one or more PGP public keys. |
-| **file.read:** | Read chunks of bytes from an attachment or automation resource. |
-| **file.write:** | Write bytes to an automation resource. |
-| **function:** | Execute an automation.function automation and return output. |
-| **http.request:** | Send data to an HTTP endpoint and return the response. |
-| **kata.parse:** | Parse an arbitrary KATA document with placeholders. |
-| **llm.agent:** | Send a message to a conversational AI agent using a large language model with tools and transcripts. |
-| **llm.chat:** | Send a message to a conversational large language model. |
-| **llm.embed:** | Generate text vector embeddings using a large language model. |
-| **metric.increment:** | Add new samples to a metric. |
-| **queue.pop:** | Pop an item from a queue. |
-| **queue.push:** | Push an item into a queue. |
-| **record.create:** | Create a record. |
-| **record.delete:** | Delete a record. |
-| **record.get:** | Retrieve a record. |
-| **record.search:** | Search records. |
-| **record.update:** | Update a record. |
-| **record.upsert:** | Create or update a record. |
-| **set:** | Set one or more placeholders. |
-| **storage.get:** | Retrieve arbitrary data from long-term storage. |
-| **storage.set:** | Save arbitrary data to long-term storage. |
-| **storage.delete:** | Delete data from long-term storage. |
-| **var.expand:** | Expand paths on keys. |
-| **var.push:** | Add an element to a list placeholder. |
-| **var.set:** | Set a placeholder using a complex key path. |
-| **var.unset:** | Unset a placeholder. |
+```
+start: await: form: elements: text/prompt_name: label: What is your name? required@bool: yes return: output@text: Hello, {{ prompt_name }} !
+```
 
-### Simulation
+At the `await:` command, the automation will send a web form to the user, create a continuation, and wait for any length of time to resume execution.
 
-| `simulate.success:` | Simulate command output and execute the `on_success:` event. |
-| `simulate.error:` | Simulate command output and execute the `on_error:` event. |
+An automation that supports continuations can exit in the `await:` state any number of times before concluding.
+
+```
+start: await/intro: form: elements: text/prompt_name: label: Name: required@bool: yes text/prompt_email: label: Email: required@bool: yes type: email placeholder: you@example.com   
+  # Confirmation code is generated, saved, and emailed
+   
+   await/confirm: form: elements: say/hello: content@text: Hello, {{ prompt_name }} ! We just sent a confirmation code to {{ prompt_email }} text/prompt_code: label: Confirmation Code: required@bool: yes type: uri max_length: 8   
+  # Confirmation code is verified
+   
+   return: output@text: Thanks, {{ prompt_name }} ! Your email address ( {{ prompt_email }} ) been subscribed to our newsletter.
+```
+
+# Timers
+
+Automations can use **timers** to run at a future time either once or on a recurring schedule.
+
+ 
+
+Timers can be created procedurally by automations and interactions, or manually by workers.
+
+A timer specifies a name, a future datetime, an optional schedule, and a block of [events KATA](#events) to conditionally determine an [automation.timer](/docs/automations/triggers/automation.timer/) to run.
+
+On the first invocation of the timer, an automation is selected. This may optionally provide [inputs](#inputs).
+
+When the automation concludes:
+
+- If the timer has a recurring schedule, it is rescheduled for the next occurrence.
+
+- Otherwise, a one-shot timer is disabled (or optionally deleted) at the conclusion.
+
+If the automation ends in the `await` state, a [continuation](#continuations) is created, and the timer is rescheduled for the given datetime.
+
+The timer stores the continuation ID and the automation pauses at the current point. On the next timer invocation, the automation resumes where it left off rather than starting over.
+
+Schedules are defined in Unix CRON expression format. When multiple expressions are specified, the timer is scheduled for the next most recent occurrence among them.
 
 # Editor
 
-The automation editor includes syntax highlighting, autocompletion for the KATA syntax, a step-based debugger with full access to the current state, a simulator, and a reference for each trigger event.
+The automation editor includes syntax highlighting, autocompletion for the [KATA](/docs/kata/) syntax, a step-based debugger with full access to the current state, a simulator, and a reference for each trigger event.
 
-A contextual toolbar provides interactions for adding inputs, commands, and exit states.
+A contextual toolbar provides interactions for adding [inputs](#inputs), [commands](#commands), and [exit states](#exit-states).
 
 ### Change History
 
@@ -622,7 +658,7 @@ An automation may be exported by clicking on the **Export** button in the editor
 
  
 
-This creates a package that can be imported into another Cerb environment.
+This creates a [package](/docs/packages/) that can be imported into another Cerb environment.
 
 ### Visualizations
 
@@ -634,5 +670,5 @@ Clicking on a node highlights the relevant line of code in the editor.
 
 # References
 
-1. Wikipedia: Principle of Least Privilege - https://en.wikipedia.org/wiki/Principle\_of\_least\_privilege&nbsp;↩
+1. Wikipedia: Principle of Least Privilege - https://en.wikipedia.org/wiki/Principle\_of\_least\_privilege&nbsp;[↩](#fnref:polp)
 

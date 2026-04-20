@@ -7,9 +7,9 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Record search results in a sheet with paging
 
-By using the `cerb.data.records` automation data source in a sheet, you can make a paged sheet of records in a worker interaction.
+By using the `cerb.data.records` automation data source in a sheet, you can make a paged sheet of records in a [worker interaction](/docs/automations/triggers/interaction.worker/).
 
-- automation
+- [automation](#)
 
 - 
 ```

@@ -7,11 +7,11 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_extract\_uris
 
-(Added in 9.5.3)
+(Added in [9.5.3](/releases/9.5.3/))
 
 Return an array of URLs found in HTML content, along with metadata (e.g. tag, attributes, URI parts).
 
-In the response, URLs are replaced with `tokens` in the `template` which can be modified with the |replace filter.
+In the response, URLs are replaced with `tokens` in the `template` which can be modified with the [|replace](/docs/scripting/filters/#replace) filter.
 
 For instance, this function can be used to rewrite all links in an email template for click tracking.
 

@@ -7,12 +7,12 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Safely handling untrusted user input in data queries
 
-When using the data.query: command, the `query_params:` option provides a secure way to substitute untrusted user input into queries.
+When using the [data.query:](/docs/automations/commands/data.query/) command, the `query_params:` option provides a secure way to substitute untrusted user input into queries.
 
 Its value is a dictionary. The `${...}` placeholder syntax in a query references these sanitized keys. These placeholders aren't evaluated until the query is parsed, so they can never modify the structure of the query (e.g. changing other filters).
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

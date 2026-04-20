@@ -11,8 +11,8 @@ The `on_simulate:` command will only be used by the automation editor's simulato
 
 In this example, we are randomly simulating both successful and failed HTTP requests.
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

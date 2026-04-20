@@ -5,17 +5,17 @@ url: "https://cerb.ai/docs/dashboards/"
 summary: "This page provides an in-depth overview of Cerb's dashboard functionality, focusing on the customization and configuration of widgets and prompts. It explains how dashboards are responsive and adaptable to different screen sizes, allowing for flexible layout configurations with various zones for widget placement. The page details the types of prompts available, such as chooser, date range, picklist, and text, and how these can be configured using a simple text-based format called KATA. It also describes how prompts can be used to filter data across all widgets on a dashboard, enhancing real-time data interaction. Additionally, the page lists various types of widgets that can be used on dashboards, including charts, calendars, maps, and project boards, highlighting the versatility and customization options available to users."
 tags: ["docs"]
 ---
-**Dashboards** provide visual insight with collections of highly customizable **widgets**. Most widgets take a data query as input.
+**Dashboards** provide visual insight with collections of highly customizable **widgets**. Most widgets take a [data query](/docs/data-queries/) as input.
 
-- Prompts
-  - Configuring dashboard prompts
-  - Prompt types
-    - chooser
-    - date\_range
-    - picklist
-    - text
+- [Prompts](#prompts)
+  - [Configuring dashboard prompts](#configuring-dashboard-prompts)
+  - [Prompt types](#prompt-types)
+    - [chooser](#chooser)
+    - [date\_range](#date_range)
+    - [picklist](#picklist)
+    - [text](#text)
 
-- Widgets
+- [Widgets](#widgets)
 
 Dashboards are **responsive** – they automatically adapt to various screen sizes on different devices. If you have a narrow screen like a smartphone held vertically, you may only be able to display a single column of widgets. On a much larger desktop display, the same dashboard could display multiple horizontal columns of widgets.
 
@@ -29,9 +29,9 @@ By configuring the **layout** of a dashboard, different **zones** become availab
 
  
 
-As of 9.0.4, user-editable custom prompts can be added to the top of workspace dashboards. These prompts automatically apply to all the dashboard's widgets. Previously, each widget had to be filtered individually.
+As of [9.0.4](/releases/9.0.4/), user-editable custom prompts can be added to the top of workspace [dashboards](/docs/dashboards/). These prompts automatically apply to all the dashboard's widgets. Previously, each widget had to be filtered individually.
 
-Each dashboard prompt is associated with a new placeholder that can be used when configuring queries widgets (e.g. search queries, data queries).
+Each dashboard prompt is associated with a new placeholder that can be used when configuring queries widgets (e.g. [search queries](/docs/search/), [data queries](/docs/data-queries/)).
 
 For example, a reporting dashboard can provide prompts for a date range, date grouping (e.g. year/month/day), and a specific list of workers. Its various charts and worklists will adapt in real-time to changes in those prompts from a single place.
 
@@ -41,7 +41,7 @@ The current state of a dashboard's prompts is remembered per worker between page
 
 Dashboard prompts are configured on a dashboard by clicking the **Edit Dashboard** button.
 
-They are defined by using a very simple text-based format known as KATA:
+They are defined by using a very simple text-based format known as [KATA](/docs/kata/):
 
 ```
 date_range/input_date_range: label: Date range: default: first day of this month -12 months 
@@ -55,10 +55,10 @@ The top-level keys describe the prompts with the format: `{type}/{placeholder}:`
 
 The possible prompt types are:
 
-- chooser
-- date\_range
-- picklist
-- text
+- [chooser](#chooser)
+- [date\_range](#date_range)
+- [picklist](#picklist)
+- [text](#text)
 
 The placeholder is the name of this prompt when used in queries on dashboard widgets. This should be a lowercase string containing only letters, numbers, and underscores (`_`).
 
@@ -74,7 +74,7 @@ Each filter may have the following keys:
 
 ### chooser
 
-When prompting with a chooser, the user selects one or more records using a helper popup.
+When prompting with a chooser, the user selects one or more [records](/docs/records/) using a helper popup.
 
  
 
@@ -84,9 +84,9 @@ chooser/input_groups: label: Groups: default@json: null params: context: group q
 
 The available **params:** are:
 
-- **context:** a record type alias.
+- **context:** a [record type](/docs/records/types/) alias.
 
-- **query:** a search query to filter the worklist popup.
+- **query:** a [search query](/docs/search/) to filter the worklist popup.
 
 - **single:** `yes` for single record selection, `no` (default) for multiple.
 
@@ -147,7 +147,7 @@ params: options@list: day week month year
 ```
 
 ```
-As of 9.1.3 you can also provide a map of labels and values:
+As of [9.1.3](/releases/9.1.3/) you can also provide a map of labels and values:
 ```
 
 ```
@@ -196,19 +196,19 @@ type: worklist.records of: tickets query: ( {% if input_subject %}
 | Type | Description |
 | --- | --- |
 | Automation | &nbsp; |
-| Calendar | A calendar widget with dates and events. |
-| Chart KATA | A highly customizable chart combining multiple datasources from data queries and automations. |
+| [Calendar](/docs/dashboards/widgets/calendar/) | A calendar widget with dates and events. |
+| [Chart KATA](/docs/dashboards/widgets/chart-kata/) | A highly customizable chart combining multiple datasources from data queries and automations. |
 | Chart: Pie | &nbsp; |
-| Chart: Time Blocks | A heatmap-style chart useful for availability visualizations. |
-| Chart: Time Series | A chart used for visualizing changes over time. |
-| Clock | A clock widget with a configurable timezone and format (12/24-hr). |
+| [Chart: Time Blocks](/docs/dashboards/widgets/timeblocks/) | A heatmap-style chart useful for availability visualizations. |
+| [Chart: Time Series](/docs/dashboards/widgets/timeseries/) | A chart used for visualizing changes over time. |
+| [Clock](/docs/dashboards/widgets/clock/) | A clock widget with a configurable timezone and format (12/24-hr). |
 | Countdown | &nbsp; |
 | Counter | &nbsp; |
-| Interactions Toolbar | A toolbar widget for running worker interactions. |
+| [Interactions Toolbar](/docs/dashboards/widgets/interactions-toolbar/) | A toolbar widget for running worker interactions. |
 | Knowledgebase Browser | &nbsp; |
-| Map | A map widget that displays interactive geographic visualizations with regions and data points. |
-| Project Board | A project board that visually organizes and automates multi-step processes. |
-| Record Fields | A widget that displays field metadata for record types. |
-| Sheet | A highly customizable data grid tool for displaying records. |
-| Worklist | A record worklist with configurable search queries and columns. |
+| [Map](/docs/dashboards/widgets/map/) | A map widget that displays interactive geographic visualizations with regions and data points. |
+| [Project Board](/docs/dashboards/widgets/project-board/) | A project board that visually organizes and automates multi-step processes. |
+| [Record Fields](/docs/dashboards/widgets/record-fields/) | A widget that displays field metadata for record types. |
+| [Sheet](/docs/dashboards/widgets/sheet/) | A highly customizable data grid tool for displaying records. |
+| [Worklist](/docs/dashboards/widgets/worklist/) | A record worklist with configurable search queries and columns. |
 

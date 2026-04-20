@@ -7,13 +7,13 @@ tags: ["docs"]
 ---
  
 
-**Sheets** are a modern, automation-friendly data visualization that avoids the schematic rigidity of **worklists**. A sheet is still a collection of rows and columns, but its column are defined in a fully customizable KATA-based text schema. This text-based schema can live within a bot behavior or widget without having to be previously defined or saved.
+**Sheets** are a modern, automation-friendly data visualization that avoids the schematic rigidity of [**worklists**](/docs/worklists/). A sheet is still a collection of rows and columns, but its column are defined in a fully customizable [KATA](/docs/kata/)-based text schema. This text-based schema can live within a bot behavior or widget without having to be previously defined or saved.
 
 Each column in a sheet has a type (e.g. card, date, text) with configurable options.
 
 A _cell_ (the intersection of a specific row and column) doesn't have to relate to a schema field at all – it can be a synthetic or computed value, translation, interactive element, deep-linked field, arbitrary output, etc.
 
-Sheets use placeholder dictionaries to to render cells, and they receive their input from any data query that can generate dictionaries – including worklist.subtotals and a new worklist.records data query type that significantly simplifies fetching record data. This means that sheets can also easily format and display data from third-party APIs. The data query itself, being text, supports placeholders and bot scripting logic – so you can determine which columns are available, or what a cell displays, based not only on aspects of the record, but also based on on who is looking at it, their permissions, etc.
+Sheets use placeholder dictionaries to to render cells, and they receive their input from any data query that can generate dictionaries – including [worklist.subtotals](/docs/data-queries/worklist/subtotals/) and a new [worklist.records](/docs/data-queries/worklist/records/) data query type that significantly simplifies fetching record data. This means that sheets can also easily format and display data from third-party APIs. The data query itself, being text, supports placeholders and bot scripting logic – so you can determine which columns are available, or what a cell displays, based not only on aspects of the record, but also based on on who is looking at it, their permissions, etc.
 
 State on sheets is maintained client-side, and paging/sorting/filtering is customized for the use case (e.g. bot interaction vs portal vs dashboard widget) – essentially just passing simple information to the input data query.
 
@@ -44,34 +44,34 @@ Unlike a worklist that is limited to records, the results of the data query abov
 
 You'll also notice that we're displaying the country of the initial sender's organization as a column. The group and bucket are displayed as a single column. We're selecting which columns to show cards and profile images for. We're changing the date format. None of this was possible with worklists.
 
-- Layout
-  - Styles
-    - Tables
-    - Fieldsets
-    - Columns
-    - Grid
-    - Buttons
+- [Layout](#layout)
+  - [Styles](#styles)
+    - [Tables](#tables)
+    - [Fieldsets](#fieldsets)
+    - [Columns](#columns)
+    - [Grid](#grid)
+    - [Buttons](#buttons)
 
-  - Colors
+  - [Colors](#colors)
 
-- Columns
-  - Card
-  - Code
-  - Date
-  - Icon
-    - record\_uri:
-    - svg:
+- [Columns](#columns-1)
+  - [Card](#card)
+  - [Code](#code)
+  - [Date](#date)
+  - [Icon](#icon)
+    - [record\_uri:](#record_uri)
+    - [svg:](#svg)
 
-  - Interaction
-  - Link
-  - Markdown
-  - Search
-  - Search Button
-  - Selection
-  - Slider
-  - Text
-  - Time Elapsed
-  - Toolbar
+  - [Interaction](#interaction)
+  - [Link](#link)
+  - [Markdown](#markdown)
+  - [Search](#search)
+  - [Search Button](#search-button)
+  - [Selection](#selection)
+  - [Slider](#slider)
+  - [Text](#text)
+  - [Time Elapsed](#time-elapsed)
+  - [Toolbar](#toolbar)
 
 # Layout
 
@@ -120,7 +120,7 @@ layout: style: grid
 
 ### Buttons
 
-The `buttons` layout displays rows as buttons. This also supports one-click continue in interactions.
+The `buttons` layout displays rows as buttons. This also supports one-click continue in [interactions](/docs/interactions/).
 
 ```
 layout: style: buttons
@@ -165,7 +165,7 @@ If an `image: true` param is provided, a profile image will be displayed to the 
 
 The `bold:` and `underline:` params control how the link is displayed.
 
-The `icon:` parameter has the same options as an icon column.
+The `icon:` parameter has the same options as an [icon](#icon) column.
 
 ```
 columns: card/name: label: Name params: context_key: _context id_key: id label_key: _label image: yes bold: yes underline: yes #icon:
@@ -249,13 +249,13 @@ The `link` column type displays a relative or external link with some text.
 | --- | --- |
 | `href:` | The static URL to open. This can be a relative path (e.g. `/path/to/page`) or an absolute path (e.g. `https://cerb.ai/`) |
 | `href_key:` | The dynamic key with a URL to open. |
-| `href_template@raw:` | A script that outputs a URL to open with placeholders for each row. |
+| `href_template@raw:` | A [script](/docs/scripting/) that outputs a URL to open with placeholders for each row. |
 | `href_new_tab@bool:` | If `yes` the link opens in a new tab, otherwise it opens in the current tab (default). |
-| `icon:` | An icon to display adjacent to the link text (e.g. `new-window-alt`). |
+| `icon:` | An [icon](/docs/developers/icons/) to display adjacent to the link text (e.g. `new-window-alt`). |
 | `icon_at:` | `start` or `end` |
 | `text:` | The static label of the link. |
 | `text_key:` | The dynamic key with the label of the link. |
-| `text_template@raw:` | A script that outputs a label for the link with placeholders for each row. |
+| `text_template@raw:` | A [script](/docs/scripting/) that outputs a label for the link with placeholders for each row. |
 
 ```
 columns: link/link: label: Link params: #href: https://example.com/
@@ -280,7 +280,7 @@ Clicking the links runs search `query:` (or `query_key:`, `query_template:`) aga
 
 For instance, a table of calculated results could open a search popup to the source data.
 
-The `icon:` parameter has the same options as an icon column.
+The `icon:` parameter has the same options as an [icon](#icon) column.
 
 ```
 columns: search/count: label: Count params: context: ticket #query_key: query
@@ -304,7 +304,7 @@ columns: search_button/assignments_search: label: Assignments params: context: t
 
 ## Selection
 
-The `selection` column type allows single and multiple selection of sheet rows. This is useful when a sheet has a toolbar or is displayed in an interaction.
+The `selection` column type allows single and multiple selection of sheet rows. This is useful when a sheet has a [toolbar](/docs/toolbars/) or is displayed in an [interaction](/docs/interactions/).
 
 The selected rows will add their `value:` (or `value_key:`, `value_template:`) to a placeholder. When omitted, the default value is the placeholder matching the column's name.
 
@@ -343,7 +343,7 @@ The `text` column type displays arbitrary text as `value:` (or `value_key:`, `va
 
 Text columns may include a `value_map:` parameter for associating new labels to values. For instance, "F =\> Female" or "1 =\> Yes". This reduces the need for custom columns.
 
-The `icon:` parameter has the same options as an icon column.
+The `icon:` parameter has the same options as an [icon](#icon) column.
 
 This type is usually the default when no column `type:` is specified.
 
@@ -369,7 +369,7 @@ columns: time_elapsed/elapsed_response_first: label: First Response params: prec
 
 ## Toolbar
 
-The `toolbar` column type displays a toolbar for each row.
+The `toolbar` column type displays a [toolbar](/docs/toolbars/) for each row.
 
 ```
 columns: toolbar/_toolbar: label: Tickets params: text_align: right kata: interaction/name: uri: cerb:automation:cerb.interaction.echo badge@raw: {{ ticket_count }} label: All inputs: outputs: search: record_type: ticket query@raw: participant.id: {{ id }} subtotal:status after: refresh_widgets@bool: no

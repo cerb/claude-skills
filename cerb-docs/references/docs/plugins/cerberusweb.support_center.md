@@ -13,12 +13,12 @@ tags: ["docs"]
 
 Adds a Support Center community portal for public-facing support.
 
-- Extensions
-  - Bot Event
-  - Event Listener
-  - Portal
-  - Support Center Controller
-  - Support Center Login Authenticator
+- [Extensions](#extensions)
+  - [Bot Event](#bot-event)
+  - [Event Listener](#event-listener)
+  - [Portal](#portal)
+  - [Support Center Controller](#support-center-controller)
+  - [Support Center Login Authenticator](#support-center-login-authenticator)
 
 # Extensions
 
@@ -32,7 +32,7 @@ Adds a Support Center community portal for public-facing support.
 
 ### Portal
 
-| **Support Center** | `sc.tool` |
+| [**Support Center**](/docs/plugins/extensions/sc.tool/) | `sc.tool` |
 
 ### Support Center Controller
 
@@ -49,5 +49,5 @@ Adds a Support Center community portal for public-facing support.
 
 | Cerb (Default) | `sc.login.auth.default` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

@@ -9,13 +9,13 @@ tags: ["docs"]
 
 `calendar.events` queries return events and synthesized recurring events for the given calendars grouped into days.
 
-- Inputs
-- Response Formats
-- Examples
+- [Inputs](#inputs)
+- [Response Formats](#response-formats)
+- [Examples](#examples)
 
 # Inputs
 
-- `calendar:` (a search query of calendar records to include)
+- `calendar:` (a [search query](/docs/search/) of [calendar](/docs/records/types/calendar/#search-query-fields) records to include)
 - `from:` (return events from this starting datetime)
 - `to:` (return events until this ending datetime)
 - `expand:` (the keys to expand on the returned event dictionaries)
@@ -24,7 +24,7 @@ tags: ["docs"]
 
 The results can be returned in these formats:
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 # Examples
 

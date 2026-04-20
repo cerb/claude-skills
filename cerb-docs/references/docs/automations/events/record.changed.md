@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/events/record.changed/"
 summary: "This page provides information about the 'record.changed' automation events in Cerb, which are triggered when fields on a record are modified. It explains how automations are executed in sequence within the events KATA and can be dynamically enabled or disabled based on record type, field values, or the actor involved. The page details the placeholders available in the automation event dictionary, including keys for the current actor, custom input values, whether the record is new, and both the new and former record dictionaries. There are no outputs specified for these events."
 tags: ["docs", "docs-automations"]
 ---
-**record.changed** automation events are triggered whenever one or more fields are changed on a record.
+**record.changed** [automation](/docs/automations/) [events](/docs/automations/#events) are triggered whenever one or more fields are changed on a [record](/docs/records/types/).
 
 In the events KATA, all enabled automations are executed in order.
 
@@ -13,16 +13,16 @@ Automations can dynamically be enabled/disabled by record type, field values, or
 
 # Placeholders
 
-The automation event dictionary starts with the following values:
+The automation event [dictionary](/docs/automations/#dictionaries) starts with the following values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
 | `actor_*` | record | The current actor dictionary. Supports key expansion. |
 | `change_type` | string | `created`, `updated`, or `deleted` |
-| `inputs` | dictionary | Custom input values from the caller. |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the caller. |
 | `is_new` | boolean | `true` if the record was created during the current request. |
-| `record_*` | record | The new record dictionary. Supports key expansion. |
-| `was_record_*` | record | The former record dictionary. Supports key expansion. |
+| `record_*` | record | The new [record](/docs/records/types/) dictionary. Supports key expansion. |
+| `was_record_*` | record | The former [record](/docs/records/types/) dictionary. Supports key expansion. |
 
 # Outputs
 
@@ -34,9 +34,9 @@ The automation event dictionary starts with the following values:
 
 Set the proper MIME type if a file with a `.png` extension comes in as an `application/octet-stream`:
 
-- automation
-- policy
-- event
+- [automation](#)
+- [policy](#)
+- [event](#)
 
 - 
 ```
@@ -55,9 +55,9 @@ automation/png: uri: cerb:automation:example.png.mimefix disabled@bool: {{ chang
 
 Create a notification when someone adds an event to your calendar:
 
-- automation
-- policy
-- event
+- [automation](#)
+- [policy](#)
+- [event](#)
 
 - 
 ```
@@ -76,9 +76,9 @@ automation/reminder: uri: cerb:automation:example.calendarEvent.notification dis
 
 Add a watcher (eg. a manager) if a ticket thread reaches a certain number of messages:
 
-- automation
-- policy
-- event
+- [automation](#)
+- [policy](#)
+- [event](#)
 
 - 
 ```

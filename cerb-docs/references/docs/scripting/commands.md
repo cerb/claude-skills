@@ -7,14 +7,14 @@ tags: ["docs", "docs-scripting"]
 ---
 These commands are available in bot scripts and snippets:
 
-- apply
-- do
-- for
-- if
-- set
-- spaceless
-- verbatim
-- with
+- [apply](#apply)
+- [do](#do)
+- [for](#for)
+- [if](#if)
+- [set](#set)
+- [spaceless](#spaceless)
+- [verbatim](#verbatim)
+- [with](#with)
 
 ## apply
 
@@ -38,7 +38,7 @@ Evaluate a variable or expression without outputting anything:
 {% do "This won't print" %}
 ```
 
-This is primarily useful for expanding placeholders in dictionaries before serializing the object to JSON or XML:
+This is primarily useful for expanding placeholders in dictionaries before serializing the object to [JSON](/docs/scripting/#json) or [XML](/docs/scripting/#xml):
 
 ```
 {% do ticket_custom_ %}
@@ -134,7 +134,7 @@ Hi, Kina!
 Where did you go?
 ```
 
-\< XML
+[\< XML](/docs/scripting/xml/)
 
-Functions \>
+[Functions \>](/docs/scripting/functions/)
 

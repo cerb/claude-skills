@@ -5,27 +5,27 @@ url: "https://cerb.ai/guides/automations/load-balanced-assignment/"
 summary: "This page provides a guide on implementing load-balanced assignment in Cerb using automations. It covers two approaches for distributing work fairly across team members. The counter-based round-robin approach uses a metric with the cycle function and works best for fixed worker lists. The least-loaded approach assigns to the worker with fewest open tickets and works best when availability changes dynamically."
 tags: ["guides"]
 ---
-- Introduction
-- Approach 1: Round-robin
-  - How it works
-  - Create the metric
-  - The automation
-  - Policy
+- [Introduction](#introduction)
+- [Approach 1: Round-robin](#approach-1-round-robin)
+  - [How it works](#how-it-works)
+  - [Create the metric](#create-the-metric)
+  - [The automation](#the-automation)
+  - [Policy](#policy)
 
-- Approach 2: Least-loaded
-  - How it works
-  - The automation
-  - Policy
+- [Approach 2: Least-loaded](#approach-2-least-loaded)
+  - [How it works](#how-it-works-1)
+  - [The automation](#the-automation-1)
+  - [Policy](#policy-1)
 
-- Choosing an approach
-- Worker selection examples
-  - Workers active in the past 15 minutes
-  - Workers available per calendar
-  - Workers in a specific group
-  - Combining criteria
+- [Choosing an approach](#choosing-an-approach)
+- [Worker selection examples](#worker-selection-examples)
+  - [Workers active in the past 15 minutes](#workers-active-in-the-past-15-minutes)
+  - [Workers available per calendar](#workers-available-per-calendar)
+  - [Workers in a specific group](#workers-in-a-specific-group)
+  - [Combining criteria](#combining-criteria)
 
-- Using the result
-- Next steps
+- [Using the result](#using-the-result)
+- [Next steps](#next-steps)
 
 # Introduction
 
@@ -49,8 +49,8 @@ This approach works best when:
 ## How it works
 
 1. **Query workers** - Get a list of worker IDs from a fixed pool
-2. **Increment the counter** - Use a metric to maintain a persistent counter
-3. **Cycle through workers** - Pass the counter to cycle() to select the next worker
+2. **Increment the counter** - Use a [metric](/docs/metrics/) to maintain a persistent counter
+3. **Cycle through workers** - Pass the counter to [cycle()](/docs/scripting/functions/#cycle) to select the next worker
 
 ## Create the metric
 
@@ -103,7 +103,7 @@ This approach works best when:
 ## How it works
 
 1. **Query available workers** - Get workers who are currently available
-2. **Count open tickets** - Use worklist.subtotals to count each worker's open tickets
+2. **Count open tickets** - Use [worklist.subtotals](/docs/data-queries/worklist/subtotals/) to count each worker's open tickets
 3. **Select least loaded** - Assign to the worker with the minimum count
 
 ## The automation
@@ -179,6 +179,6 @@ record.update: inputs: record_type: ticket record_id: {{ ticket_id }} fields: ow
 
 - Create separate metrics or queries for different assignment pools (e.g. Support, Sales)
 - Add error handling for when no workers are available
-- Combine with automation timers for scheduled assignment
-- Use mail routing to trigger assignment on new tickets
+- Combine with [automation timers](/docs/automations/#timers) for scheduled assignment
+- Use [mail routing](/docs/mail/routing/) to trigger assignment on new tickets
 

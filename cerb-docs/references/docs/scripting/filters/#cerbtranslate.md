@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_translate
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Converts string IDs (like `status.open`) into text in the current worker's language.
 

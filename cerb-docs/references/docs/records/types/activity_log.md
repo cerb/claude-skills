@@ -10,27 +10,27 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | activity\_log |
 | **Identifier (ID):** | cerberusweb.contexts.activity\_log |
 
-- Records API
-  - params
+- [Records API](#records-api)
+  - [params](#params)
 
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| **x** | **`activity_point`** | text | The event ID that occurred (or `custom.other`) |
-| **x** | **`actor__context`** | context | The actor's record type |
-| **x** | **`actor_id`** | number | The actor's record ID |
-| &nbsp; | `created` | timestamp | The date/time when this record was created |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| &nbsp; | `params` | object | JSON-encoded key/value object |
-| **x** | **`target__context`** | context | The target's record type |
-| **x** | **`target_id`** | number | The target's record ID |
+| **x** | **`activity_point`** | [text](/docs/records/fields/types/text/) | The event ID that occurred (or `custom.other`) |
+| **x** | **`actor__context`** | [context](/docs/records/fields/types/context/) | The actor's record type |
+| **x** | **`actor_id`** | [number](/docs/records/fields/types/number/) | The actor's record ID |
+| &nbsp; | `created` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was created |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| &nbsp; | `params` | [object](/docs/records/fields/types/object/) | JSON-encoded key/value object |
+| **x** | **`target__context`** | [context](/docs/records/fields/types/context/) | The target's record type |
+| **x** | **`target_id`** | [number](/docs/records/fields/types/number/) | The target's record ID |
 
 #### params
 
@@ -42,13 +42,13 @@ These fields are available in the Records API and packages:
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `activity_point` | text | Event Id |
 | `actor_` | record | Actor |
 | `created` | date | Created |
@@ -58,21 +58,21 @@ These placeholders are available in dictionaries for automations, snippets, and 
 
 ### Search Query Fields
 
-These filters are available in activity log search queries:
+These [filters](/docs/search/#filters) are available in activity log [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity:` | text | Activity |
-| `actor:` | text | Actor Type |
-| `actor.<type>:` | record | Actor |
-| `created:` | date | Created |
-| `id:` | number | Id |
-| `target:` | text | Target Type |
-| `target.<type>:` | record | Target |
+| `activity:` | [text](/docs/search/#text) | Activity |
+| `actor:` | [text](/docs/search/#text) | Actor Type |
+| `actor.<type>:` | [record](/docs/search/#deep-search) | Actor |
+| `created:` | [date](/docs/search/#dates) | Created |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `target:` | [text](/docs/search/#text) | Target Type |
+| `target.<type>:` | [record](/docs/search/#deep-search) | Target |
 
 ### Worklist Columns
 
-These columns are available on activity log worklists:
+These columns are available on activity log [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -85,5 +85,5 @@ These columns are available on activity log worklists:
 | `c_id` | Id |
 | `c_target_context` | Target Context |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

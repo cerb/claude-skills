@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Split text with delimiters
 
-Here is an example of using the |split filter to divide text using different delimiters.
+Here is an example of using the [|split](/docs/scripting/filters/#split) filter to divide text using different delimiters.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

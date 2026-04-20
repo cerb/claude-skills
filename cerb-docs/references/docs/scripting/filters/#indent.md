@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## indent
 
-(Added in 9.6.4)
+(Added in [9.6.4](/releases/9.6.4/))
 
 Prefix the start of each line with a given marker in a block of text.
 

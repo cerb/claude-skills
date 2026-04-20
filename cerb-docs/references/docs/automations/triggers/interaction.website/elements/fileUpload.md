@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.website/elements/fil
 summary: "This page provides detailed information on the 'fileUpload' element used in Cerb's website interaction forms, which allows users to upload files as automation resource records. It includes examples of uploading a single file with specific validation criteria, such as file type and size, and uploading multiple files with options to convert them into attachments. The page also explains the syntax for configuring the file upload element, including optional parameters like label, accepted file types, multiple file uploads, required fields, and custom validation scripts. The examples demonstrate how to handle file uploads and manage the resulting automation resource tokens effectively."
 tags: ["docs", "docs-automations"]
 ---
-In website interactions forms, a **fileUpload** element allows a user to upload one or more files as automation resource records.
+In [website interactions](/docs/automations/triggers/interaction.website/) forms, a **fileUpload** element allows a user to upload one or more files as [automation resource](/docs/records/types/automation_resource/) records.
 
  
 
@@ -59,7 +59,7 @@ hidden@bool: {{ expression }}
 
 ### multiple@bool:
 
-If `yes`, multiple files may be uploaded at once. The result is an array of automation resource dictionaries.
+If `yes`, multiple files may be uploaded at once. The result is an array of [automation resource](/docs/records/types/automation_resource/) dictionaries.
 
 If omitted or `no`, a single file may be uploaded. The result is a single automation resource dictionary.
 

@@ -5,31 +5,31 @@ url: "https://cerb.ai/docs/automations/commands/file.write/"
 summary: "This page provides detailed information on the 'file.write' command in Cerb automations, which is used to write arbitrary bytes to a temporary automation resource record with a unique token identifier. It explains the efficiency of this method over storing large data within the automation state and describes how the command can generate a ZIP file from multiple attachments or resources. The page outlines the syntax, including inputs like content, expiration, MIME type, and URI, and details the outputs and error handling. It also provides examples of creating a simple text file, a ZIP file from mixed bytes and attachments, and an attachment from an automation resource, complete with the expected output structure for each scenario."
 tags: ["docs", "docs-automations"]
 ---
-The **file.write:** command writes arbitrary bytes to a temporary automation resource record with a unique token identifier.
+The **file.write:** command writes arbitrary bytes to a temporary [automation resource](/docs/records/types/automation_resource/) record with a unique token identifier.
 
 This is much more efficient than storing a large amount of data within the automation state.
 
-The `file.write:` command can also optionally generate a ZIP file from multiple attachments or automation resources.
+The `file.write:` command can also optionally generate a ZIP file from multiple [attachments](/docs/records/types/automations/) or automation resources.
 
-- Syntax
-  - inputs:
-    - content:
-    - content:zip:
-    - expires:
-    - mime\_type:
-    - name:
-    - uri:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [content:](#content)
+    - [content:zip:](#contentzip)
+    - [expires:](#expires)
+    - [mime\_type:](#mime_type)
+    - [name:](#name)
+    - [uri:](#uri)
 
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
-- Examples
-  - Create a simple text file
-  - Create a ZIP file from mixed bytes and attachments
-  - Create an attachment from an automation resource
-  - Create a ZIP with a dynamic file list
+- [Examples](#examples)
+  - [Create a simple text file](#create-a-simple-text-file)
+  - [Create a ZIP file from mixed bytes and attachments](#create-a-zip-file-from-mixed-bytes-and-attachments)
+  - [Create an attachment from an automation resource](#create-an-attachment-from-an-automation-resource)
+  - [Create a ZIP with a dynamic file list](#create-a-zip-with-a-dynamic-file-list)
 
 # Syntax
 
@@ -86,13 +86,13 @@ Save the output to this key name.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of writing the record URI.
+The [commands](/docs/automations/#commands) to run during simulation instead of writing the record URI.
 
 If omitted, the file is written during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The key specified in `output:` is set to a dictionary with the following structure:
 
@@ -104,11 +104,11 @@ The key specified in `output:` is set to a dictionary with the following structu
 | `name` | The filename of the record. |
 | `size` | The total size in bytes of the file or resource. |
 | `token` | The `uri` token of the automation resource. |
-| `uri` | The record URI of the automation\_resource. The `uri` uses a random UUID identifier rather than an ID, which is suitable for sharing publicly. |
+| `uri` | The record URI of the [automation\_resource](/docs/records/types/automation_resource/). The `uri` uses a random UUID identifier rather than an ID, which is suitable for sharing publicly. |
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 
@@ -156,7 +156,7 @@ results: _context: cerberusweb.contexts.attachment id: 1234 _type: attachment _l
 
 ## Create a ZIP with a dynamic file list
 
-Use the @kata annotation to build a file list using scripting.
+Use the [@kata](/docs/kata/#kata) annotation to build a file list using scripting.
 
 ```
 inputs: records/files: record_type: attachment required@bool: yes 

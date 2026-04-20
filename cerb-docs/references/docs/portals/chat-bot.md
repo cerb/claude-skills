@@ -31,5 +31,5 @@ You can also share links in email, chats, text messages, or social media posts, 
 
 ### Resources
 
-- Guide: Add a conversational bot to any website
+- [Guide: Add a conversational bot to any website](/guides/bots/deploy-bot-on-website/)
 

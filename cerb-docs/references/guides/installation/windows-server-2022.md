@@ -9,27 +9,27 @@ tags: ["guides"]
 
 This guide will walk you through preparing a Microsoft Windows Server 2022 server for installing Cerb, including IIS, PHP, and MySQL.
 
-- Provision a Microsoft Windows Server 2022 server
-- Connect to your server
-- Install IIS
-- Install PHP with Web Platform Installer
-  - Install PHP
-  - Install Git
+- [Provision a Microsoft Windows Server 2022 server](#provision-a-microsoft-windows-server-2022-server)
+- [Connect to your server](#connect-to-your-server)
+- [Install IIS](#install-iis)
+- [Install PHP with Web Platform Installer](#install-php-with-web-platform-installer)
+  - [Install PHP](#install-php)
+  - [Install Git](#install-git)
 
-- Install the PHP mailparse extension
-- Install the YAML extension
-- Install MySQL
-  - Create a database and user
+- [Install the PHP mailparse extension](#install-the-php-mailparse-extension)
+- [Install the YAML extension](#install-the-yaml-extension)
+- [Install MySQL](#install-mysql)
+  - [Create a database and user](#create-a-database-and-user)
 
-- Configure PHP
-- Download Cerb from Git Shell
-- Permissions
-- Run the Cerb installer
-- Next Steps
+- [Configure PHP](#configure-php)
+- [Download Cerb from Git Shell](#download-cerb-from-git-shell)
+- [Permissions](#permissions)
+- [Run the Cerb installer](#run-the-cerb-installer)
+- [Next Steps](#next-steps)
 
 # Provision a Microsoft Windows Server 2022 server
 
-If you don't already have a server, you can create an EC2 instance in Amazon Web Services.
+If you don't already have a server, you can [create an EC2 instance in Amazon Web Services](/guides/installation/ec2/).
 
 This guide uses the following Amazon Machine Image (AMI):
 
@@ -155,11 +155,11 @@ Navigate to C:\inetpub\www\root\cerb\storage\
 
 # Run the Cerb installer
 
-Type the hostname of your server (e.g. `http://localhost/cerb/`) into a browser and follow the guided installer.
+Type the hostname of your server (e.g. `http://localhost/cerb/`) into a browser and follow the [guided installer](/docs/installation/#run-the-guided-installer).
 
 # Next Steps
 
-Set up Friendly URLs.
+Set up [Friendly URLs](/docs/friendly-urls/).
 
-Read the Security Best Practices.
+Read the [Security Best Practices](/docs/security/).
 

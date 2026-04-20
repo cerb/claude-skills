@@ -7,17 +7,17 @@ tags: ["docs"]
 ---
  
 
-Many worklists provide a full-text1 search filter to match record content based on terms and phrases.
+Many [worklists](/docs/worklists/) provide a full-text[1](#fn:fts) search [filter](/docs/workspaces/#filters) to match [record](/docs/records/) content based on terms and phrases.
 
 For instance, you may need to search your email history for the phrase: `"facebook ads" receipt`.
 
-By default, these searches are implemented as `FULLTEXT` indexes in MySQL2. We've done a lot of optimization to keep these searches efficient, and it _"just works"_. However, MySQL isn't an optimal search engine for larger environments.
+By default, these searches are implemented as `FULLTEXT` indexes in MySQL[2](#fn:mysql-fulltext). We've done a lot of optimization to keep these searches efficient, and it _"just works"_. However, MySQL isn't an optimal search engine for larger environments.
 
-As you scale, you may decide to switch to Elasticsearch or Sphinx. We support both. These options require you to manage an additional service, but they're much faster and provide you with more control over how your content is indexed.
+As you [scale](/docs/scaling/), you may decide to switch to Elasticsearch or Sphinx. We support both. These options require you to manage an additional service, but they're much faster and provide you with more control over how your content is indexed.
 
 # References
 
-1. https://en.wikipedia.org/wiki/Full-text\_search&nbsp;↩
+1. https://en.wikipedia.org/wiki/Full-text\_search&nbsp;[↩](#fnref:fts)
 
-2. http://dev.mysql.com/doc/refman/5.7/en/fulltext-search.html&nbsp;↩
+2. http://dev.mysql.com/doc/refman/5.7/en/fulltext-search.html&nbsp;[↩](#fnref:mysql-fulltext)
 

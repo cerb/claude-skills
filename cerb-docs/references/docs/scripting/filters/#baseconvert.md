@@ -9,7 +9,7 @@ tags: ["docs", "docs-scripting"]
 
 Convert between number system bases.
 
-(Introduced in 9.0.8)
+(Introduced in [9.0.8](/releases/9.0.8/))
 
 ```
 {% set int = 123456789 %} {{ int | base_convert ( 10 , 16 ) }} {% set hex = '75bcd15' %} {{ hex | base_convert ( 16 , 10 ) }}

@@ -5,13 +5,13 @@ url: "https://cerb.ai/solutions/integrations/anthropic/"
 summary: "This page provides a step-by-step guide for integrating Cerb with Anthropic, enabling the use of Anthropic's full API in Cerb automations as an LLM provider. The process involves obtaining an Anthropic API key, creating the Anthropic service in Cerb, and configuring examples such as chat completions automation and policy."
 tags: ["solutions"]
 ---
-- Introduction
-- Get an Anthropic API Key.
-- Create the Anthropic service in Cerb
-- Examples
-  - Chat completions
+- [Introduction](#introduction)
+- [Get an Anthropic API Key.](#get-an-anthropic-api-key)
+- [Create the Anthropic service in Cerb](#create-the-anthropic-service-in-cerb)
+- [Examples](#examples)
+  - [Chat completions](#chat-completions)
 
-- Resources
+- [Resources](#resources)
 
 # Introduction
 
@@ -49,8 +49,8 @@ Copy the API key for use later.
 
 https://docs.anthropic.com/en/api/messages
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```
@@ -63,6 +63,6 @@ commands: http.request: deny/url@bool: {{ inputs.url is not prefixed ('https://a
 
 # Resources
 
-- Guide: Summarize long ticket conversations
-- Guide: Update organization contact details from their website
+- Guide: [Summarize long ticket conversations](/guides/ai-agents/ticket-summarize/)
+- Guide: [Update organization contact details from their website](/guides/ai-agents/find-and-update-org-contact-fields/)
 

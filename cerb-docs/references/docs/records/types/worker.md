@@ -10,55 +10,55 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | worker |
 | **Identifier (ID):** | cerberusweb.contexts.worker |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `at_mention_name` | text | The nickname used for `@mention` notifications in comments |
-| &nbsp; | `calendar_id` | number | The ID of the calendar used to compute worker availability |
-| &nbsp; | `dob` | text | Date of birth in `YYYY-MM-DD` format |
-| &nbsp; | `email` | text | The primary email address of the worker; alternative to `email_id` |
-| **x** | **`email_id`** | number | The ID of the primary email address; alternative to `email` |
-| &nbsp; | `email_ids` | text | A comma-separated list of IDs for alternative email addresses |
-| **x** | **`first_name`** | text | Given name |
-| &nbsp; | `gender` | text | `F` (female), `M` (male), or blank or unknown |
-| &nbsp; | `image` | image | The profile image, base64-encoded in data URI format |
-| &nbsp; | `is_disabled` | boolean | Is this worker deactivated and prevented from logging in? |
-| &nbsp; | `is_mfa_required` | boolean | Is this worker required to use multi-factor authentication? |
-| &nbsp; | `is_password_disabled` | boolean | Is this worker allowed to log in with a password? |
-| &nbsp; | `is_superuser` | boolean | Is this worker an administrator with full privileges? |
-| **x** | **`language`** | text | ISO-639 language code and ISO-3166 country code; e.g. `en_US` |
-| &nbsp; | `last_name` | text | Surname |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| &nbsp; | `location` | text | Location description; `Los Angeles, CA, USA` |
-| &nbsp; | `mobile` | text | Mobile number |
-| &nbsp; | `password` | text | The worker's password, if applicable; stored security; will be automatically generated if blank |
-| &nbsp; | `phone` | text | &nbsp; |
-| &nbsp; | `time_format` | text | Preference for displaying timestamps, `DateTime()` syntax |
-| &nbsp; | `timeout_idle_secs` | number | Consider a session idle after this many seconds of inactivity |
-| **x** | **`timezone`** | text | IANA tz/zoneinfo timezone; `America/Los_Angeles` |
-| &nbsp; | `title` | text | Job title / Position |
-| &nbsp; | `updated` | timestamp | The date/time when this record was last modified |
+| &nbsp; | `at_mention_name` | [text](/docs/records/fields/types/text/) | The nickname used for `@mention` notifications in comments |
+| &nbsp; | `calendar_id` | [number](/docs/records/fields/types/number/) | The ID of the [calendar](/docs/records/types/calendar/) used to compute worker availability |
+| &nbsp; | `dob` | [text](/docs/records/fields/types/text/) | Date of birth in `YYYY-MM-DD` format |
+| &nbsp; | `email` | [text](/docs/records/fields/types/text/) | The primary email address of the worker; alternative to `email_id` |
+| **x** | **`email_id`** | [number](/docs/records/fields/types/number/) | The ID of the primary [email address](/docs/records/types/address/); alternative to `email` |
+| &nbsp; | `email_ids` | [text](/docs/records/fields/types/text/) | A comma-separated list of IDs for alternative [email addresses](/docs/records/types/address/) |
+| **x** | **`first_name`** | [text](/docs/records/fields/types/text/) | Given name |
+| &nbsp; | `gender` | [text](/docs/records/fields/types/text/) | `F` (female), `M` (male), or blank or unknown |
+| &nbsp; | `image` | [image](/docs/records/fields/types/image/) | The profile image, base64-encoded in data URI format |
+| &nbsp; | `is_disabled` | [boolean](/docs/records/fields/types/boolean/) | Is this worker deactivated and prevented from logging in? |
+| &nbsp; | `is_mfa_required` | [boolean](/docs/records/fields/types/boolean/) | Is this worker required to use multi-factor authentication? |
+| &nbsp; | `is_password_disabled` | [boolean](/docs/records/fields/types/boolean/) | Is this worker allowed to log in with a password? |
+| &nbsp; | `is_superuser` | [boolean](/docs/records/fields/types/boolean/) | Is this worker an administrator with full privileges? |
+| **x** | **`language`** | [text](/docs/records/fields/types/text/) | ISO-639 language code and ISO-3166 country code; e.g. `en_US` |
+| &nbsp; | `last_name` | [text](/docs/records/fields/types/text/) | Surname |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| &nbsp; | `location` | [text](/docs/records/fields/types/text/) | Location description; `Los Angeles, CA, USA` |
+| &nbsp; | `mobile` | [text](/docs/records/fields/types/text/) | Mobile number |
+| &nbsp; | `password` | [text](/docs/records/fields/types/text/) | The worker's password, if applicable; stored security; will be automatically generated if blank |
+| &nbsp; | `phone` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `time_format` | [text](/docs/records/fields/types/text/) | Preference for displaying timestamps, `DateTime()` syntax |
+| &nbsp; | `timeout_idle_secs` | [number](/docs/records/fields/types/number/) | Consider a session idle after this many seconds of inactivity |
+| **x** | **`timezone`** | [text](/docs/records/fields/types/text/) | IANA tz/zoneinfo timezone; `America/Los_Angeles` |
+| &nbsp; | `title` | [text](/docs/records/fields/types/text/) | Job title / Position |
+| &nbsp; | `updated` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
-| `address_` | record | Email |
+| `_type` | text | [Record type](/docs/records/types/) alias |
+| `address_` | record | [Email](/docs/records/types/address/) |
 | `at_mention_name` | text | @Mention |
-| `calendar_` | record | Calendar |
+| `calendar_` | record | [Calendar](/docs/records/types/calendar/) |
 | `calendar_owner_` | record | Calendar Owner |
 | `dob` | text | Date Of Birth |
 | `first_name` | text | First Name |
@@ -79,66 +79,66 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `title` | text | Title |
 | `updated` | date | Updated |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
 | `emails` | records | Emails |
 | `groups` | records | Groups |
-| `links` | links | Links |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 | `roles` | records | Roles |
 
 ### Search Query Fields
 
-These filters are available in worker search queries:
+These [filters](/docs/search/#filters) are available in worker [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `alias:` | virtual | Aliases |
-| `calendar:` | record | Calendar |
-| `calendar.id:` | chooser | Calendar |
-| `email:` | record | Email |
-| `email.id:` | chooser | Email |
-| `fieldset:` | record | Fieldset |
-| `firstName:` | text | First Name |
-| `gender:` | text | Gender |
-| `group:` | record | Groups |
-| `group.manager:` | record | Group Manager |
-| `id:` | number | Id |
-| `isAdmin:` | boolean | Administrator |
+| `calendar:` | [record](/docs/search/#deep-search) | [Calendar](/docs/records/types/calendar/) |
+| `calendar.id:` | [chooser](/docs/search/#choosers) | [Calendar](/docs/records/types/calendar/) |
+| `email:` | [record](/docs/search/#deep-search) | [Email](/docs/records/types/address/) |
+| `email.id:` | [chooser](/docs/search/#choosers) | [Email](/docs/records/types/address/) |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `firstName:` | [text](/docs/search/#text) | First Name |
+| `gender:` | [text](/docs/search/#text) | Gender |
+| `group:` | [record](/docs/search/#deep-search) | [Groups](/docs/records/types/group/) |
+| `group.manager:` | [record](/docs/search/#deep-search) | [Group Manager](/docs/records/types/group/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `isAdmin:` | [boolean](/docs/search/#booleans) | Administrator |
 | `isAvailable:` | virtual | Calendar Availability |
 | `isBusy:` | virtual | Calendar Availability |
-| `isDisabled:` | boolean | Disabled |
-| `isMfaRequired:` | boolean | Mfa Required |
-| `isPasswordDisabled:` | boolean | Password Disabled |
-| `language:` | text | Language |
-| `lastActivity:` | date | Last Activity |
-| `lastName:` | text | Last Name |
-| `links:` | links | Record Links |
-| `location:` | text | Location |
-| `mention:` | text | @Mention |
-| `mobile:` | text | Mobile |
-| `phone:` | text | Phone |
-| `role:` | record | Role |
-| `role.editor:` | record | Role Editor |
-| `role.reader:` | record | Role Reader |
-| `timezone:` | text | Timezone |
-| `title:` | text | Title |
-| `updated:` | date | Updated |
-| `using.workspace:` | record | Using Workspace |
+| `isDisabled:` | [boolean](/docs/search/#booleans) | Disabled |
+| `isMfaRequired:` | [boolean](/docs/search/#booleans) | Mfa Required |
+| `isPasswordDisabled:` | [boolean](/docs/search/#booleans) | Password Disabled |
+| `language:` | [text](/docs/search/#text) | Language |
+| `lastActivity:` | [date](/docs/search/#dates) | Last Activity |
+| `lastName:` | [text](/docs/search/#text) | Last Name |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `location:` | [text](/docs/search/#text) | Location |
+| `mention:` | [text](/docs/search/#text) | @Mention |
+| `mobile:` | [text](/docs/search/#text) | Mobile |
+| `phone:` | [text](/docs/search/#text) | Phone |
+| `role:` | [record](/docs/search/#deep-search) | [Role](/docs/records/types/role/) |
+| `role.editor:` | [record](/docs/search/#deep-search) | [Role Editor](/docs/records/types/role/) |
+| `role.reader:` | [record](/docs/search/#deep-search) | [Role Reader](/docs/records/types/role/) |
+| `timezone:` | [text](/docs/search/#text) | Timezone |
+| `title:` | [text](/docs/search/#text) | Title |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `using.workspace:` | [record](/docs/search/#deep-search) | [Using Workspace](/docs/records/types/workspace_page/) |
 
 ### Worklist Columns
 
-These columns are available on worker worklists:
+These columns are available on worker [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
 | `*_calendar_availability` | Calendar Availability |
 | `a_address_email` | Email Address |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `w_at_mention_name` | @Mention |
 | `w_calendar_id` | Calendar |
 | `w_dob` | D.o.b. |
@@ -160,5 +160,5 @@ These columns are available on worker worklists:
 | `w_title` | Title |
 | `w_updated` | Updated |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

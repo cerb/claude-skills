@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
 # record.types
 
-`record.types` data queries return a filterable and pageable list of record types.
+`record.types` data queries return a filterable and pageable list of [record types](/docs/records/types/).
 
 ### Inputs
 
@@ -21,7 +21,7 @@ tags: ["docs"]
 
 ### Response Formats
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 ### Examples
 

@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## hash\_hmac
 
-Generate a hash-based message authentication code (HMAC1) using a secret key.
+Generate a hash-based message authentication code (HMAC[1](#fn:hmac)) using a secret key.
 
 `|hash_hmac(secret_key, algorithm, binary)`
 

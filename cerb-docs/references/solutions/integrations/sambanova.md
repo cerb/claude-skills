@@ -5,11 +5,11 @@ url: "https://cerb.ai/solutions/integrations/sambanova/"
 summary: "This page provides a step-by-step guide for integrating Cerb and SambaNova, a platform that enables the automation of helpdesk inboxes and workflows. To begin, users must log into their SambaNova account, generate a new API key, and then create a new connected service in Cerb using this key. Once set up, users can leverage SambaNova's full API within Cerb automations, as demonstrated by the provided example of integrating chat completions with Meta-Llama-3.1-70B-Instruct model."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a SambaNova API Key.
-- Create the SambaNova service in Cerb
-- Examples
-  - Chat completions
+- [Introduction](#introduction)
+- [Get a SambaNova API Key.](#get-a-sambanova-api-key)
+- [Create the SambaNova service in Cerb](#create-the-sambanova-service-in-cerb)
+- [Examples](#examples)
+  - [Chat completions](#chat-completions)
 
 # Introduction
 

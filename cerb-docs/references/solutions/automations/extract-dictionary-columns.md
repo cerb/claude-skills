@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 You can extract the same column from a list of dictionaries with the `|column` filter.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
@@ -25,8 +25,8 @@ __return : emails : kina@cerb.example, milo@cerb.example
 
 You can extract the same column from a list of dictionaries with the `|map` filter.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

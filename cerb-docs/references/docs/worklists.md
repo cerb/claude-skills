@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/worklists/"
 summary: "This page provides a comprehensive overview of worklists in Cerb, highlighting their functionality as customizable, searchable, pageable, and sortable sets of records. Key features include the ability to search and filter records, sort them by specific fields, and view detailed information through the peek function. Worklists support pagination for managing large sets of data and allow for subtotals to group records by similar values. Users can perform bulk updates on selected records, import and export data in various formats, and utilize explore mode for sequentially viewing record profiles. These features enable efficient data management and streamlined workflows within Cerb."
 tags: ["docs"]
 ---
-A **worklist** is a searchable, pageable, sortable, and customizable set of records displayed using rows and columns.
+A **worklist** is a [searchable](#search), [pageable](#pagination), [sortable](#sorting), and customizable set of [records](/docs/records/) displayed using rows and columns.
 
-Each row of a worklist is a matching record, and each column is a particular field from that record. The displayed columns can be customized for each worklist based on your needs.
+Each row of a worklist is a matching record, and each column is a particular [field](/docs/records/fields/) from that record. The displayed columns can be customized for each worklist based on your needs.
 
  
 
@@ -15,18 +15,18 @@ By saving a worklist, you'll always have an up-to-date view of matching records 
 
 For instance, a worklist can display new customer messages that need a response, client organizations in a specific industry, tasks that are overdue, etc.
 
-- Search
-- Sorting
-- Peek
-- Pagination
-- Subtotals
-- Bulk Update
-- Import/Export
-- Explore Mode
+- [Search](#search)
+- [Sorting](#sorting)
+- [Peek](#peek)
+- [Pagination](#pagination)
+- [Subtotals](#subtotals)
+- [Bulk Update](#bulk-update)
+- [Import/Export](#importexport)
+- [Explore Mode](#explore-mode)
 
 # Search
 
-The most useful feature of worklists is their ability to pull out interesting sets of records from your data using search queries.
+The most useful feature of worklists is their ability to pull out interesting sets of records from your data using [search queries](/docs/search/).
 
 For instance, you can build a worklist of email messages sent by organizations in the health care industry who have an enterprise SLA and also have at least one female contact whose name starts with the letter 'M'.
 
@@ -44,7 +44,7 @@ You can click on the column label to toggle sorting between ascending and descen
 
 # Peek
 
-When records are displayed in a worklist, you can hover over any row and click the **peek** icon to open its card without leaving the list.
+When records are displayed in a worklist, you can hover over any row and click the **peek** icon to open its [card](/docs/cards/) without leaving the list.
 
  
 
@@ -86,7 +86,7 @@ Similarly, you can also **import** records on most worklists in CSV format. You'
 
 # Explore Mode
 
-When you need to view the profile page of each matching record in sequence, click the **explore** button below a worklist. This will create a consistent snapshot of the worklist at the current point-in-time and allow you to navigate through it. You can even send an explore set to another worker using its permalink.
+When you need to view the [profile](/docs/profiles/) page of each matching [record](/docs/records/) in sequence, click the **explore** button below a worklist. This will create a consistent snapshot of the worklist at the current point-in-time and allow you to navigate through it. You can even send an explore set to another worker using its permalink.
 
 You can use the `[` and `]` keyboard shortcuts to navigate backward and forward through the list, respectively.
 

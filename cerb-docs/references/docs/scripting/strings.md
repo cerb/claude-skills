@@ -51,7 +51,7 @@ in it.
 This text has no leading or trailing whitespace in it.
 ```
 
-\< Variables
+[\< Variables](/docs/scripting/variables/)
 
-Arrays and Objects \>
+[Arrays and Objects \>](/docs/scripting/arrays-objects/)
 

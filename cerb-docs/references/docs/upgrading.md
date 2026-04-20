@@ -7,20 +7,20 @@ tags: ["docs"]
 ---
 If you're using **Cerb Cloud** then we handle upgrades for you already.
 
-- Option 1: Production (Docker)
-- Option 2: Development (Git)
-  - Preparation
-  - Update using Git on a Unix-based server
-  - Dealing with conflicts
-  - Permissions
-    - Unix-based servers
-    - Windows-based servers
+- [Option 1: Production (Docker)](#option-1-production-docker)
+- [Option 2: Development (Git)](#option-2-development-git)
+  - [Preparation](#preparation)
+  - [Update using Git on a Unix-based server](#update-using-git-on-a-unix-based-server)
+  - [Dealing with conflicts](#dealing-with-conflicts)
+  - [Permissions](#permissions)
+    - [Unix-based servers](#unix-based-servers)
+    - [Windows-based servers](#windows-based-servers)
 
-- Finishing the Upgrade
-  - Database schema updates
-  - Community Portals
+- [Finishing the Upgrade](#finishing-the-upgrade)
+  - [Database schema updates](#database-schema-updates)
+  - [Community Portals](#community-portals)
 
-- References
+- [References](#references)
 
 # Option 1: Production (Docker)
 
@@ -43,7 +43,7 @@ For a single container (e.g. Docker Compose) you can use a "fuzzy" tag like `lat
 
 # Option 2: Development (Git)
 
-A source code installation of Cerb is upgraded by using **Git** 1, a distributed version control system. The latest stable build of the project can be found on GitHub. This environment makes it much easier for people to collaborate and share improvements.
+A source code installation of Cerb is upgraded by using **Git** [1](#fn:git), a distributed version control system. The latest stable build of the project can be found on GitHub. This environment makes it much easier for people to collaborate and share improvements.
 
 You can use Git to quickly update your local Cerb files to the latest version. The major advantage of version control is that it will attempt to automatically merge official code improvements with any local configuration and customization you have performed. Git also gives you the ability to list all your changes to any project files, and to easily restore to an official version when desirable.
 
@@ -55,11 +55,11 @@ git --version
 
 If you need to install Git, it's usually available in a package named `git`. The actual package name will depend on your operating system.
 
-If you can't use Git, you really should consider using Cerb Cloud rather than managing it yourself.
+If you can't use Git, you really should consider using [Cerb Cloud](/pricing/) rather than managing it yourself.
 
 ## Preparation
 
-- **Always make a backup** of your Cerb database prior to upgrading. See the chapter on Backups for more information.
+- **Always make a backup** of your Cerb database prior to upgrading. See the chapter on [Backups](/docs/backups/) for more information.
 
 - Change directory to your cerb installation.
 
@@ -230,5 +230,5 @@ If the number is different you should replace the `index.php` file for your comm
 
 # References
 
-1. http://en.wikipedia.org/wiki/Git\_(software))&nbsp;↩
+1. http://en.wikipedia.org/wiki/Git\_(software))&nbsp;[↩](#fnref:git)
 

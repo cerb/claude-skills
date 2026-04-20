@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using array\_sum() and |reduce
 
-You can use array\_sum() and |reduce to calculate the sum or product of an array of numbers and reduce the output to that single result.
+You can use [array\_sum()](/docs/scripting/functions/#array_sum) and [|reduce](/docs/scripting/filters/#reduce) to calculate the sum or product of an array of numbers and reduce the output to that single result.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

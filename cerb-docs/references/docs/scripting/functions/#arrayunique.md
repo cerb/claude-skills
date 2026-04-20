@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_unique
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Return a new array with only the distinct values from the `array` argument.
 

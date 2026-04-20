@@ -5,13 +5,13 @@ url: "https://cerb.ai/workflows/cerb.login.terms_of_use/"
 summary: "This page outlines the 'Worker Login Terms of Use' workflow for Cerb, which mandates that workers accept terms of use before logging in. It details the installation process, which is integrated into Cerb 11.0 and can be enabled through the Cerb interface. The page provides instructions on editing the terms of use snippet and describes the login process where workers must accept the terms to proceed. Additionally, it offers a reference template for creating a custom workflow, emphasizing confidentiality, data access, sharing, security practices, incident reporting, compliance, and potential disciplinary actions for non-compliance. The page also includes technical details for configuring and automating the workflow within Cerb."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Editing the Terms of Use snippet
-  - During a login
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Editing the Terms of Use snippet](#editing-the-terms-of-use-snippet)
+  - [During a login](#during-a-login)
 
-- Reference
+- [Reference](#reference)
 
 # Introduction
 
@@ -19,7 +19,7 @@ This workflow requires acceptance of Terms of Use before a worker can log in.
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Login Terms of Use**.
 

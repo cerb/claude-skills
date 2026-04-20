@@ -11,8 +11,8 @@ Here is an example of using the @optional annotation to conditionally include di
 
 The `gdpr:` key will be removed when the region is not `EU`.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

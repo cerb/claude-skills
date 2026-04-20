@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using dict\_set() function
 
-Here is an example of using the dict\_set() function to set deeply nested keys in dictionaries.
+Here is an example of using the [dict\_set()](/docs/scripting/functions/#dict_set) function to set deeply nested keys in dictionaries.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

@@ -9,7 +9,7 @@ tags: ["solutions", "solutions-automations"]
 
 You can accept any record type and ID as input parameters, then use them to create an expandable record placeholder.
 
-- automation
+- [automation](#)
 
 - 
 ```

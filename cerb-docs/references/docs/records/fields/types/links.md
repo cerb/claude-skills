@@ -11,7 +11,7 @@ The value is an array of `type:id` pairs.
 
 ### Packages
 
-As JSON from packages:
+As JSON from [packages](/docs/packages/):
 
 ```
 { 
@@ -24,14 +24,14 @@ As JSON from packages:
 
 ### Records API
 
-In PUT or POST requests from the API:
+In [PUT](/docs/api/endpoints/records/#update) or [POST](/docs/api/endpoints/records/#create) requests from the [API](/docs/api/):
 
 ```
 &amp;fields[links][]=ticket:123
 &amp;fields[links][]=org:456
 ```
 
-\< Image
+[\< Image](/docs/records/fields/types/image/)
 
-Number \>
+[Number \>](/docs/records/fields/types/number/)
 

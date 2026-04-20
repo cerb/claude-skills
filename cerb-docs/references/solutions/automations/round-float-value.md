@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 Here are examples of rounding methods (round, ceil, floor, and precision control) for floating point numbers in automation scripting.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

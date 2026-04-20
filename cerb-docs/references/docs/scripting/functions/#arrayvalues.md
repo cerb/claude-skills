@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_values
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Return the values from an associative array as a new indexed array. For instance, this can affect the output in JSON encoding by using `[]` rather than `{key:value}`.
 

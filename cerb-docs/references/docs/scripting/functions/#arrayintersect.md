@@ -7,9 +7,9 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_intersect
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
-Returns a new array for all the elements in array1 that are also present in array2. This is the opposite of array\_diff.
+Returns a new array for all the elements in array1 that are also present in array2. This is the opposite of [array\_diff](#array_diff).
 
 ```
 {% set arr1 = ['Apple' , 'Google' , 'Microsoft'] %} {% set arr2 = ['Apple' , 'Microsoft' , 'Cerb'] %} {% set intersect = array_intersect ( arr2 , arr1 ) %}

@@ -5,38 +5,38 @@ url: "https://cerb.ai/docs/dashboards/widgets/chart-kata/"
 summary: "This page provides a comprehensive guide on configuring and utilizing the Chart KATA widget for creating complex, dynamic charts in Cerb. It details the configuration of datasets and chart schemas using a KATA dialect, allowing for mixed visualizations and data from multiple sources. The page outlines various dataset types, including automation, data queries, and manual data, and explains how to define chart elements such as axes, colors, data series, grids, legends, and tooltips. It also includes examples of different chart types, such as timeseries, pie, and donut charts, demonstrating how to visualize data like ticket creation by group or contact methods. The guide is designed to help users effectively leverage the Chart KATA widget for advanced data visualization in their dashboards."
 tags: ["docs"]
 ---
-The **Chart KATA** widget can build complex, dynamic charts with mixed visualizations and datasets from multiple sources. The datasets and chart schema are both defined using a KATA dialect.
+The **Chart KATA** widget can build complex, dynamic charts with mixed visualizations and datasets from multiple sources. The datasets and chart schema are both defined using a [KATA](/docs/kata/) dialect.
 
  
 
-- Configuration
-  - Datasets
-    - automation:
-    - dataQuery:
-    - manual:
+- [Configuration](#configuration)
+  - [Datasets](#datasets)
+    - [automation:](#automation)
+    - [dataQuery:](#dataquery)
+    - [manual:](#manual)
 
-  - Chart
-    - axis:
-      - x:, y:, y2:
+  - [Chart](#chart)
+    - [axis:](#axis)
+      - [x:, y:, y2:](#x-y-y2)
 
-    - color:
-    - data:
-      - series:
-      - type:
+    - [color:](#color)
+    - [data:](#data)
+      - [series:](#series)
+      - [type:](#type)
 
-    - grid:
-      - x:, y:
+    - [grid:](#grid)
+      - [x:, y:](#x-y)
 
-    - legend:
-      - style:table:
+    - [legend:](#legend)
+      - [style:table:](#styletable)
 
-    - tooltip:
+    - [tooltip:](#tooltip)
 
-- Examples
-  - Timeseries: Stacked bar of tickets created this year by group
-  - Timeseries: Line comparison of contact methods
-  - Pie: Tickets created this year by bucket
-  - Donut: Contact methods
+- [Examples](#examples)
+  - [Timeseries: Stacked bar of tickets created this year by group](#timeseries-stacked-bar-of-tickets-created-this-year-by-group)
+  - [Timeseries: Line comparison of contact methods](#timeseries-line-comparison-of-contact-methods)
+  - [Pie: Tickets created this year by bucket](#pie-tickets-created-this-year-by-bucket)
+  - [Donut: Contact methods](#donut-contact-methods)
 
 # Configuration
 
@@ -50,13 +50,13 @@ For instance, a time-series dataset could include a series named `ts` with times
 
 | Type | Description |
 | --- | --- |
-| automation: | Load data from an automation. Almost anything is possible here. |
-| dataQuery: | Load data from a data query. |
-| manual: | Static data. This is primarily useful in interactions where some chart data has already been loaded. |
+| [automation:](#automation) | Load data from an [automation](/docs/automations/). Almost anything is possible here. |
+| [dataQuery:](#dataquery) | Load data from a [data query](/docs/data-queries/). |
+| [manual:](#manual) | Static data. This is primarily useful in [interactions](/docs/interactions/) where some chart data has already been loaded. |
 
 ### automation:
 
-Load series data from a ui.chart.data automation.
+Load series data from a [ui.chart.data](/docs/automations/triggers/ui.chart.data/) automation.
 
 This can synthesize and preprocess chart data from anywhere: third-party APIs, Cerb records, business intelligence tools, etc.
 
@@ -66,7 +66,7 @@ automation/avgInflow: uri: cerb:automation:example.chartData.avgTicketInflows in
 
 ### dataQuery:
 
-Load data from a data query.
+Load data from a [data query](/docs/data-queries/).
 
 ```
 dataQuery/tickets: query@text: type:worklist.subtotals of:ticket by:[created@month,group] query:(created:"this year") format:${format} query_params: format: timeseries
@@ -76,7 +76,7 @@ dataQuery/tickets: query@text: type:worklist.subtotals of:ticket by:[created@mon
 | --- | --- |
 | `cache_secs@int:` | The number of seconds to cache the data query results. Use `0` to disable. |
 | `key_map:` | Assign new names to any series in the dataset (e.g. `yes` -\> `# Outgoing Messages`). This can be an object of keys (old labels) and values (new labels), or `key_map@csv: Old Label 1, New Label 1`. |
-| `query:` | The data query to execute. |
+| `query:` | The [data query](/docs/data-queries/) to execute. |
 | `query_params:` | An optional dictionary of untrusted parameters used in the data query. Reference like `${placeholderKey}`. |
 
 ### manual:
@@ -89,16 +89,16 @@ manual/series0: data: x@csv: 2022-01-01,2022-02-01,2022-03-01,2022-04-01 custom@
 
 ## Chart
 
-A `{{datasets.name}}` placeholder is available for each defined dataset. For instance, a grid: line can be rendered from a dynamically computed value (e.g. average, threshold, goal).
+A `{{datasets.name}}` placeholder is available for each defined dataset. For instance, a [grid:](#grid) line can be rendered from a dynamically computed value (e.g. average, threshold, goal).
 
 | Key |
 | --- |
-| axis: |
-| color: |
-| data: |
-| grid: |
-| legend: |
-| tooltip: |
+| [axis:](#axis) |
+| [color:](#color) |
+| [data:](#data) |
+| [grid:](#grid) |
+| [legend:](#legend) |
+| [tooltip:](#tooltip) |
 
 ```
 data: type: bar series: tickets: name: Tickets x_key: ts series0: name: Custom Series x_key: x y_axis: y2 y_type: line tasks: name: Tasks x_key: ts stacks: 0@csv: tickets 1@csv: tasks 
@@ -176,7 +176,7 @@ Each `series:` key is a dataset name that may contain multiple series.
 | `name:` | A name to prepend to each series in the dataset. |
 | `x_key:` | The series key used for the x-axis. For instance, timestamps on a `timeseries` axis, or labels on a `category` axis. |
 | `y_axis:` | `y` (default) or `y2`. |
-| `y_type:` | An optional type: for this dataset. For instance, you can overlay on `line` trend on a `bar` chart. |
+| `y_type:` | An optional [type:](#type) for this dataset. For instance, you can overlay on `line` trend on a `bar` chart. |
 
 #### type:
 

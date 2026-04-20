@@ -7,7 +7,7 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using api.command:
 
-With email relay, workers can respond to messages from external email clients rather than their web browser.
+With [email relay](/guides/mail/relaying/), workers can respond to messages from external email clients rather than their web browser.
 
 ```
 start: api.command: inputs: name: cerb.commands.email.relay params: message_id@int: 1234 emails@csv: kina@cerb.example, mara@cerb.example output: results

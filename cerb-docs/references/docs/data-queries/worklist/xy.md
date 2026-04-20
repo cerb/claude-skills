@@ -9,10 +9,10 @@ tags: ["docs"]
 
 `worklist.xy` data queries plot two dimensional data to visualize clusters or correlations.
 
-- Inputs
-- Response Formats
-- Examples
-  - Generate a table of the top 10 quickest message response times
+- [Inputs](#inputs)
+- [Response Formats](#response-formats)
+- [Examples](#examples)
+  - [Generate a table of the top 10 quickest message response times](#generate-a-table-of-the-top-10-quickest-message-response-times)
 
 # Inputs
 
@@ -21,9 +21,9 @@ Each `series.*` should provide:
 - `label:` (human-friendly series name for visualizations)
 - `of:` (record type)
 - `x:` field(@year,month,day,hour,minute,second)
-- `x.metric:` (an equation to apply to each x-axis value; 9.1.6 or later)
+- `x.metric:` (an equation to apply to each x-axis value; [9.1.6](/releases/9.1.6/) or later)
 - `y:` (field)
-- `y.metric:` (an equation to apply to each y-axis value; 9.1.6 or later)
+- `y.metric:` (an equation to apply to each y-axis value; [9.1.6](/releases/9.1.6/) or later)
 - `query:` (the query to filter the results for this series)
 - `query.required:` (the required query to filter the results for this series)
 

@@ -7,13 +7,13 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_workflow\_config
 
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 Perform runtime configuration lookups from any feature that supports automation scripting (e.g. automations, workflows, snippets). For instance, you can create a workflow just for sharing values (e.g. API keys) between multiple workflows.
 
 `cerb_workflow_config(name_or_id,key,default)`
 
-| **name\_or\_id** | The name or ID of the workflow. |
+| **name\_or\_id** | The name or ID of the [workflow](/docs/workflows/). |
 | **key** | The optional config key to return. If omitted, all keys/values are returned as a map. |
 | **default** | The optional default value if the key doesn't exist. |
 

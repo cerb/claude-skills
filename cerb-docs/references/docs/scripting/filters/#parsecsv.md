@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## parse\_csv
 
-(Added in 10.2.4)
+(Added in [10.2.4](/releases/10.2.4/))
 
 Parse a document with rows of comma-separated columns. Returns an array of rows with elements for columns.
 

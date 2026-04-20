@@ -5,13 +5,13 @@ url: "https://cerb.ai/solutions/integrations/airtable/"
 summary: "This page provides a step-by-step guide for integrating Cerb with Airtable, allowing users to access Airtable's full API for automations. To begin, log in to the Airtable account and create a Personal Access Token, which is required for authentication. The token can be used to set up the Airtable service in Cerb by navigating to Connected Services, clicking 'Create' and pasting the API key. Examples of actions that can be automated using this integration include listing bases, getting base schema, and listing records from specific tables or projects within an Airtable base."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a Airtable API key
-- Create the Airtable service in Cerb
-- Examples
-  - List bases
-  - Get base schema
-  - List records
+- [Introduction](#introduction)
+- [Get a Airtable API key](#get-a-airtable-api-key)
+- [Create the Airtable service in Cerb](#create-the-airtable-service-in-cerb)
+- [Examples](#examples)
+  - [List bases](#list-bases)
+  - [Get base schema](#get-base-schema)
+  - [List records](#list-records)
 
 # Introduction
 

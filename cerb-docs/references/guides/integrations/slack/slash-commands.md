@@ -9,25 +9,25 @@ tags: ["guides"]
 
 Slack makes it very easy to interact with third-party apps and services using their _slash commands_ feature.
 
-To demonstrate this functionality, we'll add a new chat command named **/cerb** and instruct Slack to send those messages to a webhook1 that triggers automations in Cerb.
+To demonstrate this functionality, we'll add a new chat command named **/cerb** and instruct Slack to send those messages to a webhook[1](#fn:webhook) that triggers automations in Cerb.
 
-- Installation
-  - Requirements
-  - Slack
-  - Cerb
-    - Configure the workflow
-    - Fill the custom field
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Slack](#slack)
+  - [Cerb](#cerb)
+    - [Configure the workflow](#configure-the-workflow)
+    - [Fill the custom field](#fill-the-custom-field)
 
-  - Add the new command in Slack
-  - Test the new /cerb command in Slack
-  - Where to go from here
-  - References
+  - [Add the new command in Slack](#add-the-new-command-in-slack)
+  - [Test the new /cerb command in Slack](#test-the-new-cerb-command-in-slack)
+  - [Where to go from here](#where-to-go-from-here)
+  - [References](#references)
 
 # Installation
 
 ## Requirements
 
-Create a Slack connected account if you haven't already.
+[Create a Slack connected account](/solutions/integrations/slack/) if you haven't already.
 
 ## Slack
 
@@ -53,7 +53,7 @@ workflow: name: wgm.integrations.slack.bot version: 2025-02-26T02:23:08Z descrip
 
 | Field | &nbsp; |
 | --- | --- |
-| **Slack Account:** | A Slack connected account. |
+| **Slack Account:** | A Slack [connected account](/solutions/integrations/slack/). |
 
 Click the **Continue** button twice.
 
@@ -97,9 +97,9 @@ You could modify the automations we created to do anything that automations are 
 
 Using that custom field we made, automations can look up a message sender's worker record. From there, it can perform all sorts of personalized actions using the worker's tasks, calendars, and so on.
 
-You could use our classifiers feature to support natural language in your Slack app. A classifier can convert freeform text into _"intents"_. For instance, instead of only supporting the _"hello"_ command, your app could learn the various ways people _intend_ to **say\_hello**: _hi, hello, what's up?, how are you?, hola, allo, yo, hey, etc_.
+You could use our [classifiers](/docs/classifiers/) feature to support natural language in your Slack app. A classifier can convert freeform text into _"intents"_. For instance, instead of only supporting the _"hello"_ command, your app could learn the various ways people _intend_ to **say\_hello**: _hi, hello, what's up?, how are you?, hola, allo, yo, hey, etc_.
 
 ## References
 
-1. https://en.wikipedia.org/wiki/Webhook&nbsp;↩
+1. https://en.wikipedia.org/wiki/Webhook&nbsp;[↩](#fnref:webhook)
 

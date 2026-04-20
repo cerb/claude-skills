@@ -5,27 +5,27 @@ url: "https://cerb.ai/guides/integrations/salesforce/sync-to-sobjects/"
 summary: "This webpage provides a comprehensive guide on synchronizing Cerb ticket data with Salesforce objects. It outlines the process of configuring the Salesforce service, creating a new custom object in Salesforce for storing Cerb tickets, and adding necessary custom fields. The guide details the steps to build a Salesforce Bot in Cerb, including importing the Salesforce Bot package, modifying its configuration, and setting up recurrent behaviors for ticket synchronization. It also covers testing the synchronization process using a simulator, verifying the data in Salesforce, and enabling the synchronization for regular updates. Additionally, the guide hints at future enhancements for deeper integration between Cerb and Salesforce using Salesforce Canvas and VisualForce. The document is intended for users of Cerb 8.1 or later and suggests testing in a Salesforce development sandbox before production deployment."
 tags: ["guides"]
 ---
-- Introduction
-- Configure the Salesforce service
-- Create a new object in Salesforce
-  - Log into Salesforce
-  - Create a new object for tickets
-  - Add custom fields to the custom object
-  - Write down the API names
+- [Introduction](#introduction)
+- [Configure the Salesforce service](#configure-the-salesforce-service)
+- [Create a new object in Salesforce](#create-a-new-object-in-salesforce)
+  - [Log into Salesforce](#log-into-salesforce)
+  - [Create a new object for tickets](#create-a-new-object-for-tickets)
+  - [Add custom fields to the custom object](#add-custom-fields-to-the-custom-object)
+  - [Write down the API names](#write-down-the-api-names)
 
-- Build Salesforce Bot in Cerb
-  - Import the Salesforce Bot package (if necessary)
-  - Modify the bot's global configuration
-  - Import the recurrent behavior for ticket synchronization
-  - Import the helper behavior to reset synchronization
+- [Build Salesforce Bot in Cerb](#build-salesforce-bot-in-cerb)
+  - [Import the Salesforce Bot package (if necessary)](#import-the-salesforce-bot-package-if-necessary)
+  - [Modify the bot's global configuration](#modify-the-bots-global-configuration)
+  - [Import the recurrent behavior for ticket synchronization](#import-the-recurrent-behavior-for-ticket-synchronization)
+  - [Import the helper behavior to reset synchronization](#import-the-helper-behavior-to-reset-synchronization)
 
-- Test record synchronization
-  - Run the simulator on the sync behavior
-  - Check Salesforce
-  - Turn on synchronization
+- [Test record synchronization](#test-record-synchronization)
+  - [Run the simulator on the sync behavior](#run-the-simulator-on-the-sync-behavior)
+  - [Check Salesforce](#check-salesforce)
+  - [Turn on synchronization](#turn-on-synchronization)
 
-- Next steps
-- References
+- [Next steps](#next-steps)
+- [References](#references)
 
 # Introduction
 
@@ -33,7 +33,7 @@ It's not uncommon for larger companies to use both Cerb and Salesforce for diffe
 
 In the past, a custom plugin was required to perform this synchronization. This was expensive, time-consuming, and complicated. The plugin had to be kept current with recent Cerb changes. If you needed to add new fields to the synchronization, the plugin needed to be modified by a developer and redeployed.
 
-With the introduction of _recurrent behaviors_ in Cerb 8.1, this process has been drastically simplified. You can now build a synchronization behavior entirely in your browser using bots. The behavior can be modified in real-time by anyone with the proper permission within Cerb. The behavior will also automatically be kept current with new versions of Cerb.
+With the introduction of _recurrent behaviors_ in Cerb [8.1](/releases/8.1/), this process has been drastically simplified. You can now build a synchronization behavior entirely in your browser using bots. The behavior can be modified in real-time by anyone with the proper permission within Cerb. The behavior will also automatically be kept current with new versions of Cerb.
 
 This guide will walk you through the process of creating a new custom object in Salesforce, and building a bot in Cerb to manage the ongoing synchronization of recently changed records. We'll send the first batch of ticket records to Salesforce and verify everything is working properly.
 
@@ -47,7 +47,7 @@ You may want to follow this guide in your Salesforce development sandbox before 
 
 Navigate to **Search&nbsp;» Connected Services**.
 
-If you don't have a Salesforce service set up yet, you can configure one here.
+If you don't have a Salesforce service set up yet, you can [configure one here](/solutions/integrations/salesforce/).
 
 # Create a new object in Salesforce
 
@@ -118,7 +118,7 @@ Make a note of the **Namespace Prefix** for your custom object and custom fields
 
 ### Import the Salesforce Bot package (if necessary)
 
-Import the Salesforce Bot package if you haven't already. If you're not sure, check the list on **Search&nbsp;» Bots**.
+Import the [Salesforce Bot](/packages/salesforce-bot/) package if you haven't already. If you're not sure, check the list on **Search&nbsp;» Bots**.
 
 ### Modify the bot's global configuration
 
@@ -333,7 +333,7 @@ Paste the following behavior into the large textbox:
 
 Click the **Save Changes** button.
 
-You'll be prompted to enter your Salesforce connected account.
+You'll be prompted to enter your Salesforce [connected account](/docs/connected-accounts/).
 
 Select the right account from the chooser.
 
@@ -412,7 +412,7 @@ First, the recurrent behavior will **Load sync variables** to determine where it
 
 It will then load up to the next 25 changed tickets.
 
-For each of those tickets, it will send an _upsert_ 1 request to Salesforce's API. This matches ticket records using the **mask** field. If a match exists in Salesforce the fields will be updated. If it doesn't exist the record will be created.
+For each of those tickets, it will send an _upsert_ [1](#fn:salesforce-upsert) request to Salesforce's API. This matches ticket records using the **mask** field. If a match exists in Salesforce the fields will be updated. If it doesn't exist the record will be created.
 
 After sending the changed record data, the bot saves its current progress for the next time it runs.
 
@@ -448,5 +448,5 @@ In the near future, we'll be adding a guide for using Salesforce Canvas and Visu
 
 # References
 
-1. Salesforce: Insert or Update (Upsert) a Record Using an External ID - https://developer.salesforce.com/docs/atlas.en-us.api\_rest.meta/api\_rest/dome\_upsert.htm&nbsp;↩
+1. Salesforce: Insert or Update (Upsert) a Record Using an External ID - https://developer.salesforce.com/docs/atlas.en-us.api\_rest.meta/api\_rest/dome\_upsert.htm&nbsp;[↩](#fnref:salesforce-upsert)
 

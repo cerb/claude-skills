@@ -10,35 +10,35 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | package |
 | **Identifier (ID):** | cerberusweb.contexts.package.library |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `description` | text | A description of this library package's contents |
-| &nbsp; | `image` | image | The profile image, base64-encoded in data URI format |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of this package |
-| **x** | **`package_json`** | text | &nbsp; |
-| **x** | **`point`** | text | The library section containing this package |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
-| **x** | **`uri`** | text | The unique identifier of this package |
+| &nbsp; | `description` | [text](/docs/records/fields/types/text/) | A description of this library package's contents |
+| &nbsp; | `image` | [image](/docs/records/fields/types/image/) | The profile image, base64-encoded in data URI format |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this package |
+| **x** | **`package_json`** | [text](/docs/records/fields/types/text/) | &nbsp; |
+| **x** | **`point`** | [text](/docs/records/fields/types/text/) | The library section containing this package |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
+| **x** | **`uri`** | [text](/docs/records/fields/types/text/) | The unique identifier of this package |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `description` | text | Description |
 | `id` | number | Id |
 | `name` | text | Name |
@@ -47,32 +47,32 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `updated_at` | date | Updated |
 | `uri` | text | Uri |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `links` | links | Links |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in package search queries:
+These [filters](/docs/search/#filters) are available in package [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description:` | text | Description |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Name |
-| `point:` | text | Extension Point |
-| `updated:` | date | Updated |
-| `uri:` | text | Uri |
+| `description:` | [text](/docs/search/#text) | Description |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Name |
+| `point:` | [text](/docs/search/#text) | Extension Point |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `uri:` | [text](/docs/search/#text) | Uri |
 
 ### Worklist Columns
 
-These columns are available on package worklists:
+These columns are available on package [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -83,5 +83,5 @@ These columns are available on package worklists:
 | `p_updated_at` | Updated |
 | `p_uri` | Uri |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

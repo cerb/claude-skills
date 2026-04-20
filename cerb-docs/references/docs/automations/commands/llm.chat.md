@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/automations/commands/llm.chat/"
 summary: "This page describes the `llm.chat` automation command in Cerb, which interfaces with Large Language Models (LLMs) for single-turn chat completions without transcripts, memory, or tools. The command automatically handles authentication and API calls. To use this command, you provide a `system_prompt`, a single message, and the LLM provider configuration. The LLM provider can be one of several options, including Anthropic, Groq, Hugging Face, Ollama, OpenAI, and Together. The `model:` key specifies the model to use, while the `authentication:` key provides a connected account for API authentication. This command is useful for text classification, summarization, and other single-turn AI tasks."
 tags: ["docs", "docs-automations"]
 ---
-The **llm.chat:** automation command interfaces with Large Language Model (LLM) providers for single-turn chat completions without transcripts, memory, or tools.
+The **llm.chat:** [automation](/docs/automations/) command interfaces with Large Language Model (LLM) providers for single-turn chat completions without transcripts, memory, or tools.
 
-(Added in 11.1.3)
+(Added in [11.1.3](/releases/11.1.3/))
 
 Authentication and API calls are automatically handled by the command.
 
@@ -19,18 +19,21 @@ This is useful for text classification, summarization, and other single-turn AI 
 start: llm.chat: output: results inputs: llm: anthropic: model: claude-haiku-4-5 authentication: cerb:connected_account:anthropic system_prompt@text: You are a helpful AI assistant that classifies customer messages as positive, negative, or neutral. Return only the classification. messages: 0: role: user content: Thank you for the quick response! This solved my problem perfectly. on_success: return: classification@key: results:messages:0:content
 ```
 
-- Syntax
-  - inputs:
-    - llm:
-    - system\_prompt:
-    - messages:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [llm:](#llm)
+      - [Gemini reasoning models](#gemini-reasoning-models)
+      - [OpenAI reasoning models](#openai-reasoning-models)
 
-  - output:
+    - [system\_prompt:](#system_prompt)
+    - [messages:](#messages)
 
-- Examples
-  - Text classification
-  - Text summarization
-  - Content generation
+  - [output:](#output)
+
+- [Examples](#examples)
+  - [Text classification](#text-classification)
+  - [Text summarization](#text-summarization)
+  - [Content generation](#content-generation)
 
 # Syntax
 
@@ -55,6 +58,31 @@ The `model:` key is the name of the model to use. This must be a chat model.
 The `authentication:` key is a connected account in URI format (e.g. `cerb:connected_account:name`) for API authentication. This may be omitted for local models like Ollama.
 
 The optional `api_endpoint_url:` key overrides the default endpoint. For instance, this can be used with the `openai:` provider for any compatible API (e.g. SambaNova), or a locally hosted Ollama server.
+
+#### Gemini reasoning models
+
+For Gemini reasoning models, two optional parameters control thinking behavior:
+
+| Key | Values | Description |
+| --- | --- | --- |
+| `thinking_level:` | `minimal`, `low`, `medium`, `high` | Sets the reasoning budget; higher levels use more tokens and increase latency |
+| `thinking_include@bool:` | `yes` / `no` | When `yes`, includes the model's thinking content in the response (useful for debugging) |
+
+```
+llm: gemini: model: gemini-2.5-pro authentication: cerb:connected_account:gemini thinking_level: medium thinking_include@bool: no
+```
+
+#### OpenAI reasoning models
+
+For OpenAI reasoning models (e.g. `o3`, `o4-mini`), the optional `reasoning_effort:` parameter controls how much compute is spent on reasoning:
+
+| Key | Values | Description |
+| --- | --- | --- |
+| `reasoning_effort:` | `none`, `low`, `medium`, `high`, `xhigh` | Sets the reasoning effort; higher levels improve quality at the cost of more tokens and latency |
+
+```
+llm: openai: model: o4-mini authentication: cerb:connected_account:openai reasoning_effort: medium
+```
 
 ### system\_prompt:
 

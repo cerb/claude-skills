@@ -5,14 +5,14 @@ url: "https://cerb.ai/guides/automations/automation.timer/create-recurring-tasks
 summary: "This page provides a guide on creating recurring tasks in Cerb using automation timers and the records API. It includes instructions on importing an example package to set up an automation timer that schedules tasks on a repeating basis, such as daily or weekly. The guide explains how to define schedules using cron expressions and demonstrates how to create task records automatically. It also offers next steps for customizing the automation timer and tasks to fit specific needs, along with references for further understanding of cron expressions."
 tags: ["guides"]
 ---
-- Introduction
-- Import the example package
-- How it works
-  - Scheduling an automation
-  - Creating task records
+- [Introduction](#introduction)
+- [Import the example package](#import-the-example-package)
+- [How it works](#how-it-works)
+  - [Scheduling an automation](#scheduling-an-automation)
+  - [Creating task records](#creating-task-records)
 
-- Next steps
-- References
+- [Next steps](#next-steps)
+- [References](#references)
 
 # Introduction
 
@@ -20,7 +20,7 @@ tags: ["guides"]
 
 Many teams need a way to create the same set of tasks on a repeating schedule (e.g. every day, week, month).
 
-This is very easy to do in Cerb with the introduction of automation timers and the records API.
+This is very easy to do in Cerb with the introduction of [automation timers](/docs/automations/#timers) and the [records API](/docs/records/types/task/).
 
 In this guide, we'll import a sample automation timer and examine how it works.
 
@@ -72,7 +72,7 @@ The following records should be created:
 
 In the import results, click on **Create daily tasks** in the **Automation Timers** section to open its card. You can also find it from **Search&nbsp;» Automation Timers**.
 
-This is an automation timer, so it automatically runs on a given schedule.
+This is an [automation timer](/docs/automations/#timers), so it automatically runs on a given schedule.
 
 Let's look at how to define the schedule.
 
@@ -80,7 +80,7 @@ Click the **Edit** button at the top of the card.
 
  
 
-The **Repeat:** schedules are define as a concise cron expression1 with the format:
+The **Repeat:** schedules are define as a concise cron expression[1](#fn:cron-expression) with the format:
 
 ```
 [minute] [hour] [day of month] [month of year] [day of week]
@@ -112,7 +112,7 @@ Close the automation timer popup by clicking on the **(x)** in the top right.
 
 Now click on the **example.automationTimer.createDailyTasks** automation in the import results and click the **Edit** button at the top.
 
-The automation uses the record.create command to create tasks records.
+The automation uses the [record.create](/docs/automations/commands/record.create/) command to create tasks records.
 
 ```
 start: record.create/coffee: output: new_task inputs: record_type: task fields: title: Get coffee due@date: today 8:30am importance: 90 owner_id@int: 0
@@ -140,5 +140,5 @@ Close the automation editor popups.
 
 # References
 
-1. Wikipedia: CRON expression - https://en.wikipedia.org/wiki/Cron#CRON\_expression&nbsp;↩
+1. Wikipedia: CRON expression - https://en.wikipedia.org/wiki/Cron#CRON\_expression&nbsp;[↩](#fnref:cron-expression)
 

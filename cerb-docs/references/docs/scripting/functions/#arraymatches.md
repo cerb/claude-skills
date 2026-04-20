@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_matches
 
-(Added in 9.6.4)
+(Added in [9.6.4](/releases/9.6.4/))
 
 Compares an array of values to an array of patterns.
 

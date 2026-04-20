@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using metric.increment
 
-Using metric.increment: you can log retroactive or custom values on a metric. This can be useful for backfilling.
+Using [metric.increment:](/docs/automations/commands/metric.increment/) you can log retroactive or custom values on a [metric](/docs/metrics/). This can be useful for backfilling.
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```
@@ -23,7 +23,7 @@ commands: metric.increment: deny/metric_name@bool: {{ inputs.metric_name != 'exa
 
 You can verify the data in **Setup&nbsp;» Developers&nbsp;» Data Query Tester**:
 
-- data query
+- [data query](#)
 
 - 
 ```

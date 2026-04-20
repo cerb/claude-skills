@@ -7,16 +7,16 @@ tags: ["guides"]
 ---
  
 
-- Introduction
-- Configure Entra AD
-  - Create OAuth app for Cerb
-  - Create client secret
-  - Configure optional claims
+- [Introduction](#introduction)
+- [Configure Entra AD](#configure-entra-ad)
+  - [Create OAuth app for Cerb](#create-oauth-app-for-cerb)
+  - [Create client secret](#create-client-secret)
+  - [Configure optional claims](#configure-optional-claims)
 
-- Configure Cerb
-  - Create a connected service for Azure
-  - Configure SSO
-  - Log in
+- [Configure Cerb](#configure-cerb)
+  - [Create a connected service for Azure](#create-a-connected-service-for-azure)
+  - [Configure SSO](#configure-sso)
+  - [Log in](#log-in)
 
 # Introduction
 

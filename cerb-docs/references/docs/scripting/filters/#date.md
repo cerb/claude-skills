@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## date
 
-Use the **date** filter to format a string or variable as a date:
+Use the **date** filter to format a [string](/docs/scripting/#strings) or [variable](/docs/scripting/#variables) as a date:
 
 ```
 {{ 'now' | date ( 'F d, Y h:ia T' ) }} {{ 'tomorrow 5pm' | date ( 'D, d F Y H:i T' ) }} {{ '+2 weeks 08:00' | date ( 'Y-m-d h:ia T' ) }}

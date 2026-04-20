@@ -5,23 +5,23 @@ url: "https://cerb.ai/solutions/integrations/gitlab/"
 summary: "This webpage provides a comprehensive guide on integrating Cerb with GitLab, focusing on authentication methods and automation usage. It details two authentication methods: using a personal access token and OAuth2. The personal access token method involves creating a token in GitLab and setting up a connected service and account in Cerb. The OAuth2 method requires creating an OAuth application in GitLab, setting up a GitLab service in Cerb, and linking the connected account. The guide also explains how to use the connected GitLab account in Cerb automations, providing step-by-step instructions and examples for setting up and testing these integrations."
 tags: ["solutions"]
 ---
-- Introduction
-- GitLab Authentication
-  - Method 1: Personal access token
-    - Create a personal access token at GitLab
-    - Create a connected service in Cerb
-    - Create a connected account in Cerb
+- [Introduction](#introduction)
+- [GitLab Authentication](#gitlab-authentication)
+  - [Method 1: Personal access token](#method-1-personal-access-token)
+    - [Create a personal access token at GitLab](#create-a-personal-access-token-at-gitlab)
+    - [Create a connected service in Cerb](#create-a-connected-service-in-cerb)
+    - [Create a connected account in Cerb](#create-a-connected-account-in-cerb)
 
-  - Method 2: OAuth2
-    - Create an OAuth application at GitLab
-    - Create the GitLab service in Cerb
-    - Link the connected account to GitLab in Cerb
+  - [Method 2: OAuth2](#method-2-oauth2)
+    - [Create an OAuth application at GitLab](#create-an-oauth-application-at-gitlab)
+    - [Create the GitLab service in Cerb](#create-the-gitlab-service-in-cerb)
+    - [Link the connected account to GitLab in Cerb](#link-the-connected-account-to-gitlab-in-cerb)
 
-- Use the connected account in Cerb automations
-  - Search issues
-  - Create issues
+- [Use the connected account in Cerb automations](#use-the-connected-account-in-cerb-automations)
+  - [Search issues](#search-issues)
+  - [Create issues](#create-issues)
 
-- Use the connected account in Cerb workflows
+- [Use the connected account in Cerb workflows](#use-the-connected-account-in-cerb-workflows)
 
 # Introduction
 
@@ -75,7 +75,7 @@ In **Token:** paste the personal access token you generated at GitLab in the fir
 
 Click the **Save Changes** button.
 
-Test the connected account in automations.
+[Test](#use-the-connected-account-in-automations) the connected account in automations.
 
 ## Method 2: OAuth2
 
@@ -130,7 +130,7 @@ Click the **Save Changes** button.
 
 ## Search issues
 
-Create an automation.function automation:
+Create an [automation.function](/docs/automations/triggers/automation.function/) automation:
 
 ```
 inputs: text/repo: type: freeform required@bool: yes text/query: type: freeform required@bool: yes 
@@ -145,7 +145,7 @@ inputs: repo: cerb.ai/example-project query: tempore
 
 ## Create issues
 
-Create an automation.function automation:
+Create an [automation.function](/docs/automations/triggers/automation.function/) automation:
 
 ```
 inputs: text/repo: type: freeform required@bool: yes text/title: type: freeform required@bool: yes text/description: type: freeform required@bool: yes 
@@ -160,5 +160,5 @@ inputs: repo: cerb.ai/example-project title: test issue description: this is a t
 
 # Use the connected account in Cerb workflows
 
-Once created, you can use the connected account with the prebuilt GitLab Issues workflow to search and link GitLab issues to tickets within Cerb.
+Once created, you can use the connected account with the prebuilt [GitLab Issues workflow](/workflows/cerb.integrations.gitlab.issues/) to search and link GitLab issues to tickets within Cerb.
 

@@ -15,11 +15,11 @@ By default, relayed messages are authenticated by checking the mail headers. Cop
 
 Unfortunately, some email applications _"break the Internet"_ by ignoring these many decade old conventions. Common culprits include Microsoft Exchange and some Android or Blackberry mobile devices.
 
-In the event that the worker relay doesn't function properly in your environment, you may disable the built-in authentication. Be careful when doing this! When authentication is disabled, anyone can forge a message From: one of your workers and have it relayed to arbitrary conversations. It is very important that you set up alternative authentication using mail.filter: automations to approve or deny inbound worker replies through the relay.
+In the event that the worker relay doesn't function properly in your environment, you may disable the built-in authentication. Be careful when doing this! When authentication is disabled, anyone can forge a message From: one of your workers and have it relayed to arbitrary conversations. It is very important that you set up alternative authentication using [mail.filter:](/docs/automations/events/mail.filter/) [automations](/docs/automations/) to approve or deny inbound worker replies through the relay.
 
 Many mail servers will reject messages sent from "spoofed" senders. You should leave the From: setting at the default unless you have verified that your mail server allows for spoofed messages.
 
 ## Resources
 
-- Guide: Respond to messages from an external email client
+- [Guide: Respond to messages from an external email client](/guides/mail/relaying/)
 

@@ -5,9 +5,9 @@ url: "https://cerb.ai/guides/mail/encryption/pgp-keypair/"
 summary: "This page provides a comprehensive guide on generating and managing PGP key-pairs for encryption within Cerb. It explains that Cerb has eliminated the need for the GnuPG PHP extension, allowing PGP key-pairs to be generated directly in the browser, which supports various key lengths and multiple user IDs. The guide details the steps for creating a new key-pair, including selecting key length and adding user IDs, and emphasizes the importance of choosing the appropriate key strength based on the sensitivity of the information. Additionally, it covers how to share the public key by copying and distributing it to those who need to send encrypted messages, highlighting that the public key is not confidential and can be shared widely."
 tags: ["guides"]
 ---
-- Introduction
-- Generating a new key-pair
-- Sharing your public key
+- [Introduction](#introduction)
+- [Generating a new key-pair](#generating-a-new-key-pair)
+- [Sharing your public key](#sharing-your-public-key)
 
 # Introduction
 

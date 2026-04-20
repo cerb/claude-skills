@@ -13,9 +13,9 @@ tags: ["docs"]
 
 Download all of the attachments on a record as a single ZIP.
 
-- Extensions
-  - Controller
-  - Profile Script
+- [Extensions](#extensions)
+  - [Controller](#controller)
+  - [Profile Script](#profile-script)
 
 # Extensions
 
@@ -27,5 +27,5 @@ Download all of the attachments on a record as a single ZIP.
 
 | Profile Attachments Download Script | `cerb.legacy.profile.attachments.script` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

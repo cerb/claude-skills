@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using |keys filter
 
-Here is an example of using the |keys filter to get a list of property names from a dictionary.
+Here is an example of using the [|keys](/docs/scripting/filters/#keys) filter to get a list of property names from a dictionary.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

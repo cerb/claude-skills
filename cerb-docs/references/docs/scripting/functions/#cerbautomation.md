@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## cerb\_automation
 
-Invoke a scripting.function automation from any feature that supports scripting.
+Invoke a [scripting.function](/docs/automations/triggers/scripting.function/) automation from any feature that supports [scripting](/docs/scripting/).
 
 The function returns keys for `exit_state:` (`exit`, `return`, `error`) and `return:` (an arbitrary dictionary).
 
@@ -17,7 +17,7 @@ For instance, a snippet could use an automation to dynamically generate content 
 
 `cerb_automation(uri, inputs)`
 
-| **uri** | The URI of an automation record to invoke. It must be of type `scripting.function`. |
+| **uri** | The URI of an [automation](/docs/automations/) record to invoke. It must be of type `scripting.function`. |
 | **inputs** | A key/value dictionary of inputs. The possible keys depend on the function being invoked. |
 
 ```

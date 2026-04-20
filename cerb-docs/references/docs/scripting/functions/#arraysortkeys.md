@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_sort\_keys
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Sort an associative array by its keys rather than its values.
 

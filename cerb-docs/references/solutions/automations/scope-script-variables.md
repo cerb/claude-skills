@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 The with command creates an isolated scope. Array operations performed inside are not visible outside.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
@@ -25,8 +25,8 @@ __return : output : |- Outside scope numbers are: 1,2,3,4,5 Inside scope doubled
 
 Pass variables directly in the with command using a mapping.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
@@ -41,8 +41,8 @@ __return : output : | Inside mapping scope tripled numbers are: 3,6,9,12,15
 
 The with command creates an isolated scope. Array operations performed inside are not visible outside.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
@@ -55,10 +55,10 @@ __return : output : | With only: I am visible, outer value is not accessible.
 
 ## Basic variable scope with isolation
 
-The with command creates an isolated scope. Variables defined inside are not visible in the outer scope.
+The [with](/docs/scripting/commands/#with) command creates an isolated scope. Variables defined inside are not visible in the outer scope.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

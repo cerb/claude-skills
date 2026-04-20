@@ -11,8 +11,8 @@ Here is an example using the repeat: command for iterating through record IDs (u
 
 This approach is more efficient than looping through records directly since it doesn't duplicate the list during iteration.
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

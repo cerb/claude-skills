@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_column
 
-(Added in 9.2.1)
+(Added in [9.2.1](/releases/9.2.1/))
 
 The **array\_column** function extracts a column from the elements of an array:
 

@@ -13,8 +13,8 @@ tags: ["docs"]
 
 Authenticate worker and customer logins via LDAP.
 
-- Extensions
-  - Support Center Login Authenticator
+- [Extensions](#extensions)
+  - [Support Center Login Authenticator](#support-center-login-authenticator)
 
 # Extensions
 
@@ -22,5 +22,5 @@ Authenticate worker and customer logins via LDAP.
 
 | LDAP | `sc.login.auth.ldap` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

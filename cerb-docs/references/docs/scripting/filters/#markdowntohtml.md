@@ -7,9 +7,9 @@ tags: ["docs", "docs-scripting"]
 ---
 ## markdown\_to\_html
 
-(Added in 9.5.4)
+(Added in [9.5.4](/releases/9.5.4/))
 
-Convert Markdown2 formatting to HTML:
+Convert Markdown[2](#fn:markdown) formatting to HTML:
 
 ```
 {% set markdown %}

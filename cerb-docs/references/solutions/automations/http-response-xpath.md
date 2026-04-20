@@ -9,9 +9,9 @@ tags: ["solutions", "solutions-automations"]
 
 Here is an example of making an HTTP GET request and using XPath to extract data from an HTML response.
 
-- automation
-- policy
-- output
+- [automation](#)
+- [policy](#)
+- [output](#)
 
 - 
 ```

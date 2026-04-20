@@ -11,7 +11,7 @@ You can transform and export data directly from Cerb into common formats expecte
 
 In this example we'll export information about PNG image attachments on the past 90 days of tickets.
 
-From **Search&nbsp;» Attachments**, run a search query to filter an attachment worklist.
+From **Search&nbsp;» Attachments**, run a [search query](/docs/search/) to filter an attachment [worklist](/docs/worklists/).
 
 For instance, PNG images attached to messages within tickets created in the past 90 days:
 
@@ -27,7 +27,7 @@ Select an output format in **Export rows as:**. Common formats are CSV or JSONL.
 
 Select the **Build** tab.
 
-You can use Export KATA to define a custom export schema, allowing you to format or generate fields using scripting.
+You can use Export KATA to define a custom export schema, allowing you to format or generate fields using [scripting](/docs/scripting/).
 
 For instance, the following Export KATA includes:
 
@@ -45,11 +45,11 @@ The `value@raw:` annotation is used to delay evaluation of placeholders until ea
 
 Click on the **Export** button to export the worklist results to your desired format using the schema.
 
-You can optionally use the |date filter to convert the date into a human-readable format:
+You can optionally use the [|date](/docs/scripting/filters/#date) filter to convert the date into a human-readable format:
 
 ```
 column/updated: label: Created value@raw: {{ updated|date('Y-m-d H:i:s') }}
 ```
 
-You can find the dictionary placeholders for each record type in the docs.
+You can find the dictionary placeholders for each [record type](/docs/records/types/) in the docs.
 

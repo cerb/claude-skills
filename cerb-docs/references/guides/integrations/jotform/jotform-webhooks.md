@@ -7,18 +7,18 @@ tags: ["guides"]
 ---
 # Introduction
 
-JotForm1 is an interactive form builder for surveys, contact forms, etc.
+JotForm[1](#fn:jotform) is an interactive form builder for surveys, contact forms, etc.
 
 By default it sends new form responses to email. Using webhooks, you can also trigger Cerb bot behaviors when someone fills out the form.
 
 This guide demonstrates how to configure webhooks for integration between JotForm and Cerb.
 
-- Creating the bot in Cerb
-- Understanding how the behavior works
-- Creating a webhook listener in Cerb
-- Sending the webhook from JotForm
-- Testing the behavior
-- References
+- [Creating the bot in Cerb](#creating-the-bot-in-cerb)
+- [Understanding how the behavior works](#understanding-how-the-behavior-works)
+- [Creating a webhook listener in Cerb](#creating-a-webhook-listener-in-cerb)
+- [Sending the webhook from JotForm](#sending-the-webhook-from-jotform)
+- [Testing the behavior](#testing-the-behavior)
+- [References](#references)
 
 # Creating the bot in Cerb
 
@@ -94,7 +94,7 @@ Let's add a webhook listener in Cerb to catch webhooks from JotForm.
 
 You'll need to be an administrator to create a new webhook.
 
-Navigate to **Setup&nbsp;» Services&nbsp;» Webhooks**. If you don't see a _Webhooks_ option in the _Services_ menu then you'll need to enable that plugin.
+Navigate to **Setup&nbsp;» Services&nbsp;» Webhooks**. If you don't see a _Webhooks_ option in the _Services_ menu then you'll need to [enable that plugin](/docs/plugins/#library).
 
 Click the **(+)** above the webhook listeners worklist.
 
@@ -143,7 +143,7 @@ You should see something like the following:
 
  
 
-The comment shows the raw data from your JotForm response in JSON2 format.
+The comment shows the raw data from your JotForm response in JSON[2](#fn:json) format.
 
 By modifying the behavior you imported above, you can do anything with the form submission data: create records like tickets and tasks, send email, forward the data to other APIs, etc.
 
@@ -155,7 +155,7 @@ You may be wondering why you wouldn't just have JotForm send responses to email 
 
 # References
 
-1. JotForm - https://www.jotform.com/&nbsp;↩
+1. JotForm - https://www.jotform.com/&nbsp;[↩](#fnref:jotform)
 
-2. Wikipedia: JSON - https://en.wikipedia.org/wiki/JSON&nbsp;↩
+2. Wikipedia: JSON - https://en.wikipedia.org/wiki/JSON&nbsp;[↩](#fnref:json)
 

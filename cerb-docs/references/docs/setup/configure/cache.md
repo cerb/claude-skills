@@ -15,19 +15,19 @@ We use this approach in many other places as well: groups, buckets, sender addre
 
 By default, Cerb saves cache files to the filesystem in the `./storage/tmp/` directory. The underlying operating system usually caches the contents of these files in memory anyway.
 
-If you experience filesystem I/O bottlenecks, or you want to scale beyond a single web server, you may choose to set up a distributed cache using Redis1, Valkey2, or Memcached3. We support them all.
+If you experience filesystem I/O bottlenecks, or you want to [scale](/docs/scaling/) beyond a single web server, you may choose to set up a distributed cache using Redis[1](#fn:redis), Valkey[2](#fn:valkey), or Memcached[3](#fn:memcached). We support them all.
 
 # See also
 
-- Guide: Scaling with Memcached
-- Guide: Scaling with Redis
-- Guide: Scaling with Valkey
+- Guide: [Scaling with Memcached](/guides/scaling/memcached/)
+- Guide: [Scaling with Redis](/guides/scaling/redis/)
+- Guide: [Scaling with Valkey](/guides/scaling/valkey/)
 
 # References
 
-1. https://redis.io/&nbsp;↩
+1. https://redis.io/&nbsp;[↩](#fnref:redis)
 
-2. https://valkey.io/&nbsp;↩
+2. https://valkey.io/&nbsp;[↩](#fnref:valkey)
 
-3. https://memcached.org/&nbsp;↩
+3. https://memcached.org/&nbsp;[↩](#fnref:memcached)
 

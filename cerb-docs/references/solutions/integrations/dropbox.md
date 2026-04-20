@@ -5,18 +5,18 @@ url: "https://cerb.ai/solutions/integrations/dropbox/"
 summary: "This page provides a comprehensive guide on integrating Cerb with Dropbox. It covers the entire process, starting with creating an app on Dropbox to enable Cerb to connect and use Dropbox's API. The guide details the steps to create a Dropbox service in Cerb, link a connected account to Dropbox, and utilize this connection in bot behaviors within Cerb. It includes instructions for setting up OAuth 2 Redirect URIs, entering necessary credentials, and using the connected account to automate tasks through Dropbox's API using Cerb's bot functionalities."
 tags: ["solutions"]
 ---
-- Introduction
-- Create an app at Dropbox
-- Create the Dropbox service in Cerb
-- Link the connected account to Dropbox in Cerb
-- Use the connected account in automations
-  - Examples
-    - Get current account
-    - Get a list of files in your dropbox
-    - Download a file
-    - Upload a file
+- [Introduction](#introduction)
+- [Create an app at Dropbox](#create-an-app-at-dropbox)
+- [Create the Dropbox service in Cerb](#create-the-dropbox-service-in-cerb)
+- [Link the connected account to Dropbox in Cerb](#link-the-connected-account-to-dropbox-in-cerb)
+- [Use the connected account in automations](#use-the-connected-account-in-automations)
+  - [Examples](#examples)
+    - [Get current account](#get-current-account)
+    - [Get a list of files in your dropbox](#get-a-list-of-files-in-your-dropbox)
+    - [Download a file](#download-a-file)
+    - [Upload a file](#upload-a-file)
 
-  - Workflow
+  - [Workflow](#workflow)
 
 # Introduction
 
@@ -115,5 +115,5 @@ start: set: args: path: /cerb.png mode: add autorename@bool: true mute@bool: fal
 
 ## Workflow
 
-Alternatively, you can import the Dropbox Integration workflow for a working example.
+Alternatively, you can import the [Dropbox Integration](/workflows/wgm.integrations.dropbox) workflow for a working example.
 

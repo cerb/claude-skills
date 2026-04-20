@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 Here is an example of using the |filter modifier with arrow functions to filter array values based on conditions in automation scripting.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

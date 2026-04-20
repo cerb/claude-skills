@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 Here is an example of using the |sort filter with arrow functions to create custom sorting rules.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

@@ -5,18 +5,18 @@ url: "https://cerb.ai/guides/sso/salesforce-openid/"
 summary: "This webpage provides a comprehensive guide on setting up single sign-on (SSO) for Cerb workers using Salesforce as an identity provider through the OpenID Connect (OIDC) standard. It details the steps to configure Salesforce as an OpenID Connect identity provider, including setting up a connected app for Cerb and obtaining necessary OAuth credentials. The guide also explains how to configure Cerb to authenticate with Salesforce by creating an OpenID service and enabling SSO. The process involves associating Salesforce accounts with Cerb worker records and potentially disabling password-based logins for enhanced security. The guide ensures a seamless login experience for users by allowing them to authenticate using their Salesforce credentials."
 tags: ["guides"]
 ---
-- Introduction
-- Configure Salesforce as an OpenID Connect identity provider
-  - Configure your identity provider
-  - Create a connected app for Cerb
-    - Basic Information
-    - API (Enable OAuth Settings)
-    - Copy the OAuth credentials
+- [Introduction](#introduction)
+- [Configure Salesforce as an OpenID Connect identity provider](#configure-salesforce-as-an-openid-connect-identity-provider)
+  - [Configure your identity provider](#configure-your-identity-provider)
+  - [Create a connected app for Cerb](#create-a-connected-app-for-cerb)
+    - [Basic Information](#basic-information)
+    - [API (Enable OAuth Settings)](#api-enable-oauth-settings)
+    - [Copy the OAuth credentials](#copy-the-oauth-credentials)
 
-- Configure Cerb for authentication with Salesforce
-  - Create an OpenID service for Salesforce
-    - Configure SSO
-    - Log in
+- [Configure Cerb for authentication with Salesforce](#configure-cerb-for-authentication-with-salesforce)
+  - [Create an OpenID service for Salesforce](#create-an-openid-service-for-salesforce)
+    - [Configure SSO](#configure-sso)
+    - [Log in](#log-in)
 
 # Introduction
 

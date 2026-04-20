@@ -5,14 +5,14 @@ url: "https://cerb.ai/guides/mail/override-threading/"
 summary: "This guide demonstrates how to use `mail.filter` automations to override email threading behavior by manipulating `In-Reply-To:` and `References:` headers. It provides practical examples for preventing replies to closed tickets from reopening them, which helps maintain clean ticket histories and proper workflow states. The guide includes step-by-step instructions for creating and configuring the necessary automation and event listener, along with explanations of how the process works and why it's useful for support teams."
 tags: ["guides"]
 ---
-- Introduction
-- Preventing replies to closed tickets
-- Creating the automation
-- Configuring the event listener
-- How it works
-- Testing the automation
-- Benefits
-- Conclusion
+- [Introduction](#introduction)
+- [Preventing replies to closed tickets](#preventing-replies-to-closed-tickets)
+- [Creating the automation](#creating-the-automation)
+- [Configuring the event listener](#configuring-the-event-listener)
+- [How it works](#how-it-works)
+- [Testing the automation](#testing-the-automation)
+- [Benefits](#benefits)
+- [Conclusion](#conclusion)
 
 # Introduction
 
@@ -25,7 +25,7 @@ However, there are scenarios where you might want to override this default behav
 - Merging multiple messages from the same sender into a single conversation.
 - Implementing custom threading rules based on specific business requirements.
 
-This guide demonstrates how to use mail.filter automations to control threading behavior by modifying these email headers.
+This guide demonstrates how to use [mail.filter](/docs/automations/events/mail.filter/) automations to control threading behavior by modifying these email headers.
 
 # Preventing replies to closed tickets
 

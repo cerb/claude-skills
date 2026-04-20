@@ -10,30 +10,30 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | sensor |
 | **Identifier (ID):** | cerberusweb.contexts.datacenter.sensor |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| &nbsp; | `metric` | text | The metric's raw value |
-| &nbsp; | `metric_delta` | text | The change in the metric between the last two samples |
-| &nbsp; | `metric_type` | text | The metric's type |
-| **x** | **`name`** | text | The name of this sensor |
-| &nbsp; | `output` | text | The metric's displayed value |
-| &nbsp; | `status` | text | `O` (OK), `W` (Warning), `C` (Critical) |
-| &nbsp; | `tag` | text | A human-friendly nickname for this sensor |
-| &nbsp; | `updated` | timestamp | The date/time when this record was last modified |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| &nbsp; | `metric` | [text](/docs/records/fields/types/text/) | The metric's raw value |
+| &nbsp; | `metric_delta` | [text](/docs/records/fields/types/text/) | The change in the metric between the last two samples |
+| &nbsp; | `metric_type` | [text](/docs/records/fields/types/text/) | The metric's type |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this sensor |
+| &nbsp; | `output` | [text](/docs/records/fields/types/text/) | The metric's displayed value |
+| &nbsp; | `status` | [text](/docs/records/fields/types/text/) | `O` (OK), `W` (Warning), `C` (Critical) |
+| &nbsp; | `tag` | [text](/docs/records/fields/types/text/) | A human-friendly nickname for this sensor |
+| &nbsp; | `updated` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
@@ -48,45 +48,45 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `tag` | text | Tag |
 | `updated` | date | Updated |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
-| `watchers` | watchers | Watchers |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
+| `watchers` | watchers | [Watchers](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in sensor search queries:
+These [filters](/docs/search/#filters) are available in sensor [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `change:` | number | Change |
-| `comments:` | fulltext | Comment Content |
-| `fail.count:` | number | Fail Count |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `isDisabled:` | boolean | Is Disabled |
-| `links:` | links | Record Links |
-| `metric:` | number | Metric |
-| `metricType:` | text | Metric Type |
-| `name:` | text | Name |
-| `output:` | text | Output |
+| `change:` | [number](/docs/search/#numbers) | Change |
+| `comments:` | [fulltext](/docs/search/#fulltext) | Comment Content |
+| `fail.count:` | [number](/docs/search/#numbers) | Fail Count |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `isDisabled:` | [boolean](/docs/search/#booleans) | Is Disabled |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `metric:` | [number](/docs/search/#numbers) | Metric |
+| `metricType:` | [text](/docs/search/#text) | Metric Type |
+| `name:` | [text](/docs/search/#text) | Name |
+| `output:` | [text](/docs/search/#text) | Output |
 | `status:` | virtual | Status |
-| `tag:` | text | Tag |
-| `type:` | text | Type |
-| `updated:` | date | Updated |
-| `watchers:` | watchers | Watchers |
+| `tag:` | [text](/docs/search/#text) | Tag |
+| `type:` | [text](/docs/search/#text) | Type |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `watchers:` | [watchers](/docs/search/#watchers) | Watchers |
 
 ### Worklist Columns
 
-These columns are available on sensor worklists:
+These columns are available on sensor [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `ftcc_content` | Comment Content |
 | `p_extension_id` | Type |
 | `p_fail_count` | Fail Count |
@@ -100,5 +100,5 @@ These columns are available on sensor worklists:
 | `p_tag` | Tag |
 | `p_updated` | Updated |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

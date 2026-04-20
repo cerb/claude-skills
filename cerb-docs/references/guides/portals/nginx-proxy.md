@@ -7,11 +7,11 @@ tags: ["guides"]
 ---
 # Introduction
 
-We provide a simple, PHP-based reverse proxy script for hosting community portals from any web server. You'll find this `index.php` file on the **Installation** tab of your community portal configuration. This is useful for testing; allowing you to serve a community portal from a directory on an existing website, or from the built-in PHP webserver.
+We provide a simple, PHP-based reverse proxy script for hosting [community portals](/docs/portals/) from any web server. You'll find this `index.php` file on the **Installation** tab of your community portal configuration. This is useful for testing; allowing you to serve a community portal from a directory on an existing website, or from the built-in PHP webserver.
 
-However, we highly recommend that you use a production-ready proxy like nginx1 to serve community portals. With this approach you can completely ignore the `index.php` script.
+However, we highly recommend that you use a production-ready proxy like nginx[1](#fn:nginx) to serve community portals. With this approach you can completely ignore the `index.php` script.
 
-If you're a Cerb Cloud subscriber, we include high-availability community portal hosting. This is already handled for you.
+If you're a [Cerb Cloud](/pricing/) subscriber, we include high-availability community portal hosting. This is already handled for you.
 
 # Add a virtual host to Nginx
 
@@ -30,7 +30,7 @@ Modify the variables at the top of the **server** block:
 You'll need to provide your own SSL certificate and private key in ssl\_certificate and ssl\_certificate\_key.
 
 ### Note:
-This guide assumes you have friendly URLs enabled for Cerb. If not, you'll need to modify the rewrite directives, like: 
+This guide assumes you have [friendly URLs](/docs/friendly-urls/) enabled for Cerb. If not, you'll need to modify the rewrite directives, like: 
 - /index.php/resource/$1
 - /index.php/portal/$portal\_code/$1
 
@@ -50,9 +50,9 @@ Open your community portal URL a web browser.
 
 # Related resources
 
-- Create a new Support Center community portal
+- [Create a new Support Center community portal](/guides/portals/support-center/)
 
 # References
 
-1. Nginx - http://nginx.org&nbsp;↩
+1. Nginx - http://nginx.org&nbsp;[↩](#fnref:nginx)
 

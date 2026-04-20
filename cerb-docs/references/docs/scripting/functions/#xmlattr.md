@@ -15,7 +15,7 @@ Return a single attribute from an XML node.
 
 | Name | Notes |
 | --- | --- |
-| `xml_node` | An single XML node, usually from xml\_xpath |
+| `xml_node` | An single XML node, usually from [xml\_xpath](#xml_xpath) |
 | `attr` | The name of an attribute |
 
 **Returns:** A string from the given XML attribute, or `false`.

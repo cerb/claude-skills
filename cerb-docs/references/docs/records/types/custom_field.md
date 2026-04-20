@@ -10,47 +10,47 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | custom\_field |
 | **Identifier (ID):** | cerberusweb.contexts.custom\_field |
 
-- Records API
-  - Types
+- [Records API](#records-api)
+  - [Types](#types)
 
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| **x** | **`context`** | context | The record type to add the field to |
-| &nbsp; | `custom_fieldset_id` | number | The ID of the parent custom fieldset; if any |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of this custom field |
-| &nbsp; | `params` | object | JSON-encoded key/value object |
-| &nbsp; | `pos` | number | Display order; positive integer; `0` is first |
-| **x** | **`type`** | text | See Types below |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
-| **x** | **`uri`** | text | The unique alias for this custom field |
+| **x** | **`context`** | [context](/docs/records/fields/types/context/) | The [record type](/docs/records/#record-type) to add the field to |
+| &nbsp; | `custom_fieldset_id` | [number](/docs/records/fields/types/number/) | The ID of the parent [custom fieldset](/docs/records/types/custom_fieldset/); if any |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this custom field |
+| &nbsp; | `params` | [object](/docs/records/fields/types/object/) | JSON-encoded key/value object |
+| &nbsp; | `pos` | [number](/docs/records/fields/types/number/) | Display order; positive integer; `0` is first |
+| **x** | **`type`** | [text](/docs/records/fields/types/text/) | See [Types](#types) below |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
+| **x** | **`uri`** | [text](/docs/records/fields/types/text/) | The unique alias for this custom field |
 
 #### Types
 
 | Type | ID | Params |
 | --- | --- | --- |
 | Checkbox | `C` | &nbsp; |
-| Currency | `Y` | `currency_id` (record ID of a currency record) |
+| Currency | `Y` | `currency_id` (record ID of a [currency](/docs/records/types/currency/) record) |
 | Date | `E` | &nbsp; |
 | Decimal | `O` | `decimal_at` (number of decimal places; e.g. `4` for 3.1415) |
 | File | `F` | &nbsp; |
 | Files | `I` | &nbsp; |
 | Latitude/Longitude | `cerb.custom_field.geo.point` | &nbsp; |
-| List | `M` | `context` (record type alias) |
+| List | `M` | `context` ([record type](/docs/records/types/) alias) |
 | Multiple Checkboxes | `X` | `options` (one per line, linefeed delimited) |
 | Multiple Lines of Text | `T` | `format` (blank for plaintext, or `markdown`) |
 | Number | `N` | &nbsp; |
 | Picklist | `D` | `options` (one per line, linefeed delimited) |
-| Record Link | `L` | `context` (record type alias) |
-| Record Links | `cerb.custom_field.record.links` | `context` (record type alias) |
+| Record Link | `L` | `context` ([record type](/docs/records/types/) alias) |
+| Record Links | `cerb.custom_field.record.links` | `context` ([record type](/docs/records/types/) alias) |
 | Single Line of Text | `S` | &nbsp; |
 | Slider | `cerb.custom_field.slider` | `value_min`, `value_max` |
 | URL | `U` | &nbsp; |
@@ -58,13 +58,13 @@ These fields are available in the Records API and packages:
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `context` | text | Context |
 | `id` | number | Id |
 | `name` | text | Name |
@@ -75,33 +75,33 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `updated_at` | date | Updated |
 | `uri` | text | Uri |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in custom field search queries:
+These [filters](/docs/search/#filters) are available in custom field [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `context:` | text | Context |
-| `fieldset:` | record | Fieldset |
-| `fieldset.id:` | chooser | Custom Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Name |
-| `pos:` | number | Order |
-| `type:` | text | Type |
-| `updated:` | date | Updated |
-| `uri:` | text | Uri |
+| `context:` | [text](/docs/search/#text) | Context |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `fieldset.id:` | [chooser](/docs/search/#choosers) | [Custom Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Name |
+| `pos:` | [number](/docs/search/#numbers) | Order |
+| `type:` | [text](/docs/search/#text) | Type |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `uri:` | [text](/docs/search/#text) | Uri |
 
 ### Worklist Columns
 
-These columns are available on custom field worklists:
+These columns are available on custom field [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -114,5 +114,5 @@ These columns are available on custom field worklists:
 | `c_updated_at` | Updated |
 | `c_uri` | Uri |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

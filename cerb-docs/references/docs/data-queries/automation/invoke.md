@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
 # automation.invoke
 
-`automation.invoke` queries run a data.query to return custom results. This can be used to integrate with third-party data sources (e.g. APIs).
+`automation.invoke` queries run a [data.query](/docs/automations/triggers/data.query/) to return custom results. This can be used to integrate with third-party data sources (e.g. APIs).
 
 # Inputs
 

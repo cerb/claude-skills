@@ -7,20 +7,20 @@ tags: ["docs"]
 ---
 # platform.extensions
 
-`platform.extensions` data queries return a filterable and pageable list of plugin extensions for a given `point`.
+`platform.extensions` data queries return a filterable and pageable list of plugin [extensions](/docs/records/types/) for a given `point`.
 
 ### Inputs
 
 | Req'd | Key | Notes |
 | --- | --- | --- |
-| **x** | `point:` | An extension point |
+| **x** | `point:` | An [extension point](/docs/records/types/) |
 | &nbsp; | `filter:` | An optional keyword used to filter the results |
 | &nbsp; | `limit:` | The desired number of results per page |
 | &nbsp; | `page:` | The desired starting page (zero-based) |
 
 ### Response Formats
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 ### Examples
 

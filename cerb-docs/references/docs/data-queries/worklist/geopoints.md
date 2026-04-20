@@ -7,23 +7,23 @@ tags: ["docs"]
 ---
 # worklist.geo.points
 
-`worklist.geo.points` data queries returns geolocation data from worklist records.
+`worklist.geo.points` [data queries](/docs/data-queries/) returns geolocation data from worklist records.
 
 ```
 type: worklist.geo.points series.points: ( of: org point: coordinates fields: [name,coordinates] query: (coordinates:!null) ) 
  format: geojson
 ```
 
-- series.\*
-  - of:
-  - point:
-  - fields:
-  - query:
-  - query.required:
+- [series.\*](#series)
+  - [of:](#of)
+  - [point:](#point)
+  - [fields:](#fields)
+  - [query:](#query)
+  - [query.required:](#queryrequired)
 
-- format:
-- Examples
-  - Plot organizations based on a geolocation custom field.
+- [format:](#format)
+- [Examples](#examples)
+  - [Plot organizations based on a geolocation custom field.](#plot-organizations-based-on-a-geolocation-custom-field)
 
 # series.\*
 
@@ -31,7 +31,7 @@ Each `series.*` should provide:
 
 ## of:
 
-The `of:` key specifies the type of records to search.
+The `of:` key specifies the type of [records](/docs/records/) to search.
 
 ```
 of: tickets
@@ -39,7 +39,7 @@ of: tickets
 
 ## point:
 
-The `point:` key specifies the record field containing latitude/longitude data.
+The `point:` key specifies the record [field](/docs/records/fields/) containing latitude/longitude data.
 
 ```
 point: coordinates
@@ -47,7 +47,7 @@ point: coordinates
 
 ## fields:
 
-The `fields:` key specifies the record fields to include with each plotted point.
+The `fields:` key specifies the record [fields](/docs/records/fields/) to include with each plotted point.
 
 ```
 point: coordinates
@@ -55,7 +55,7 @@ point: coordinates
 
 ## query:
 
-The `query:` key specifies a search query for filtering records.
+The `query:` key specifies a [search query](/docs/search/) for filtering records.
 
 ```
 query: (region:Europe)
@@ -63,7 +63,7 @@ query: (region:Europe)
 
 ## query.required:
 
-The `query.required:` key specifies a mandatory search query for filtering records. This should be protected from user-entered filters.
+The `query.required:` key specifies a mandatory [search query](/docs/search/) for filtering records. This should be protected from user-entered filters.
 
 ```
 query.required: (ids:[1,2,3])

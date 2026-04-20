@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
 # Enabling friendly URLs
 
-This is automatically handled for you with Docker installations. You can skip ahead.
+This is automatically handled for you with [Docker](/docs/installation/docker/) installations. You can [skip ahead](/docs/security/).
 
 You may notice that your URLs look a bit ugly with `/index.php/` in every path by default.
 
@@ -23,10 +23,10 @@ Ironically, the default URLs are ugly because Cerb's underlying design is secure
 
 Cerb supports URL rewriting to make the URLs shorter and more user-friendly. This isn't enabled by default because it requires your webserver to support it.
 
-- Enabling friendly URLs
-  - Enabling friendly URLs with Nginx
-  - Enabling friendly URLs with Apache
-  - Enabling friendly URLs with IIS
+- [Enabling friendly URLs](#enabling-friendly-urls)
+  - [Enabling friendly URLs with Nginx](#enabling-friendly-urls-with-nginx)
+  - [Enabling friendly URLs with Apache](#enabling-friendly-urls-with-apache)
+  - [Enabling friendly URLs with IIS](#enabling-friendly-urls-with-iis)
 
 ## Enabling friendly URLs with Nginx
 

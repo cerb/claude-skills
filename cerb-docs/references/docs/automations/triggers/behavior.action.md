@@ -5,21 +5,21 @@ url: "https://cerb.ai/docs/automations/triggers/behavior.action/"
 summary: "This page provides information on the **behavior.action** automations in Cerb, which are executed from legacy bot behaviors. It explains the use of event handler KATA to trigger the first enabled automation. The page details the structure of inputs and outputs for these automations, including how the automation dictionary is initialized with custom input values and how the function returns key/value pairs to the caller, with the possibility of nested keys for returning dictionaries."
 tags: ["docs", "docs-automations"]
 ---
-**behavior.action** automations are executed from legacy bot behaviors.
+**behavior.action** [automations](/docs/automations/) are executed from legacy bot behaviors.
 
-This trigger uses event handler KATA, and the first enabled automation is executed.
+This trigger uses [event handler](/docs/automations/#events) KATA, and the first enabled automation is executed.
 
-- Inputs
-- Outputs
-  - return:
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+  - [return:](#return)
 
 # Inputs
 
-The automation dictionary starts with the following values:
+The automation [dictionary](/docs/automations/#dictionaries) starts with the following values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| `inputs` | dictionary | Custom input values from the caller |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the caller |
 
 # Outputs
 

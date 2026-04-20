@@ -13,11 +13,11 @@ tags: ["docs"]
 
 Organically capture praise or criticism and share it with decision makers. This adds a Feedback tab to the Activity page. You can also capture feedback while reading e-mail by highlighting a quote and clicking 'more' in the toolbar.
 
-- Extensions
-  - Controller
-  - Message Toolbar Item
-  - Record Type
-  - Rest API Controller
+- [Extensions](#extensions)
+  - [Controller](#controller)
+  - [Message Toolbar Item](#message-toolbar-item)
+  - [Record Type](#record-type)
+  - [Rest API Controller](#rest-api-controller)
 
 # Extensions
 
@@ -37,5 +37,5 @@ Organically capture praise or criticism and share it with decision makers. This 
 
 | Feedback | `feedback.rest.controller.feedback` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

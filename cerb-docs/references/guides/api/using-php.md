@@ -5,14 +5,14 @@ url: "https://cerb.ai/guides/api/using-php/"
 summary: "This webpage provides a comprehensive guide on how to get started with the Cerb API using a PHP library. It covers essential steps such as creating an API key-pair, setting up a sample PHP project, and sending requests to the Cerb API. The guide includes detailed instructions on running a search for open tickets, creating a task, and marking the task as completed. It also provides code snippets and expected JSON responses for each action, ensuring users can effectively interact with the Cerb API. The page concludes with a suggestion to consult the API documentation for further exploration of available requests."
 tags: ["guides"]
 ---
-- Introduction
-- Create an API key-pair
-- Create a sample project
-- Send the request to the Cerb API
-- Run a search
-- Create a task
-- Mark the task as completed
-- Next steps
+- [Introduction](#introduction)
+- [Create an API key-pair](#create-an-api-key-pair)
+- [Create a sample project](#create-a-sample-project)
+- [Send the request to the Cerb API](#send-the-request-to-the-cerb-api)
+- [Run a search](#run-a-search)
+- [Create a task](#create-a-task)
+- [Mark the task as completed](#mark-the-task-as-completed)
+- [Next steps](#next-steps)
 
 # Introduction
 
@@ -20,7 +20,7 @@ This step-by-step guide demonstrates how to use Cerb's PHP library to interact w
 
 # Create an API key-pair
 
-If you haven't already, follow these instructions to create an API key-pair.
+If you haven't already, [follow these instructions](/guides/api/configure-plugin/) to create an API key-pair.
 
 If you aren't an administrator, you'll need to have one create a key-pair for you.
 
@@ -30,7 +30,7 @@ If you aren't an administrator, you'll need to have one create a key-pair for yo
 
 Next, we'll create a simple PHP project to send API requests to Cerb.
 
-Download the PHP library and save it as `CerbApi.php`.
+[Download the PHP library](/docs/api/libraries/php/) and save it as `CerbApi.php`.
 
 Let's start with a simple request for your account information.
 
@@ -42,7 +42,7 @@ Create a new `index.php` file with the following content:
 
 You'll need to modify the following constants:
 
-- `CERB_BASE_URL`: Change this to the base URL of your Cerb installation, with `/rest/` appended to the index. If you aren't using friendly URLs then append `/index.php/rest/` instead.
+- `CERB_BASE_URL`: Change this to the base URL of your Cerb installation, with `/rest/` appended to the index. If you aren't using [friendly URLs](/docs/friendly-urls/) then append `/index.php/rest/` instead.
 
 - `CERB_ACCESS_KEY`: This is the public part of your API key-pair. It's sent in API requests to identify you.
 
@@ -220,5 +220,5 @@ You should get back an updated ticket record with the new `status`:
 
 # Next steps
 
-You can refer to the API documentation for a full list of possible requests.
+You can refer to the [API documentation](/docs/api/) for a full list of possible requests.
 

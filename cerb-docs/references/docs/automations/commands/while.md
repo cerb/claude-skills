@@ -15,9 +15,9 @@ start: set: counter: 0 while: if@bool: {{ counter < 5 ? 'yes' }} do: set: counte
 counter: 5
 ```
 
-- Syntax
-  - if:
-  - do:
+- [Syntax](#syntax)
+  - [if:](#if)
+  - [do:](#do)
 
 # Syntax
 
@@ -31,5 +31,5 @@ If `false`, the while-loop terminates.
 
 ### do:
 
-The `do:` key contains any number of commands to repeat.
+The `do:` key contains any number of [commands](/docs/automations/#commands) to repeat.
 

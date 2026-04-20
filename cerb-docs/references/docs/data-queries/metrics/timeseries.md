@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
 # metrics.timeseries
 
-`metrics.timeseries` data queries aggregates metrics statistics over a date range. This can retrieve multiple series each with a different metric and function (avg, sum, min, max, count). A series can also be aggregated or filtered by any combination of metric dimensions.
+`metrics.timeseries` [data queries](/docs/data-queries/) aggregates [metrics](/docs/metrics/) statistics over a date range. This can retrieve multiple series each with a different metric and function (avg, sum, min, max, count). A series can also be aggregated or filtered by any combination of metric [dimensions](/docs/metrics/#dimensions).
 
  
 
@@ -18,18 +18,18 @@ type: metrics.timeseries period: hour range: "-24 hours to now" series.avg: ( la
  timezone: Europe/Berlin format: timeseries
 ```
 
-- period:
-- range:
-- series.\*:
-  - series.\*.query:
+- [period:](#period)
+- [range:](#range)
+- [series.\*:](#series)
+  - [series.\*.query:](#seriesquery)
 
-- timeout:
-- timezone:
-- format:
+- [timeout:](#timeout)
+- [timezone:](#timezone)
+- [format:](#format)
 
 # period:
 
-The period is the metric's level of detail:
+The [period](/docs/metrics/#periods) is the metric's level of detail:
 
 | `minute` | 5-minute statistics (up to the past 24 hours) |
 | `hour` | hourly statistics (up to the past 2 weeks) |
@@ -54,18 +54,18 @@ Each `series.*` series should provide:
 
 | Key | Description |
 | --- | --- |
-| `metric:` | The metric name |
-| `by:` | A comma-separated list of dimension keys to group by |
+| `metric:` | The [metric](/docs/metrics/) name |
+| `by:` | A comma-separated list of [dimension](/docs/metrics/#dimensions) keys to group by |
 | `function:` | `sum`, `min`, `max`, `average`, `samples`, `distinct`, `faceted_average`, `faceted_min`, `faceted_max`. The faceted functions sum samples with different dimensions into a single total. |
 | `label:` | A human-readable label for this series |
 | `missing:` | How to handle missing sample periods: `null` (default), `zero` (set to 0), or `carry` (carry the last sample) |
-| `query:` | An optional query using dimension keys to filter samples. |
+| `query:` | An optional query using [dimension](/docs/metrics/#dimensions) keys to filter samples. |
 
 ### series.\*.query:
 
 Dimension filters can use negation. For instance, `query:(worker_id:![1,2,3])`
 
-Record-based dimension can use deep search filers.
+Record-based dimension can use [deep search filers](/docs/search/).
 
 # timeout:
 

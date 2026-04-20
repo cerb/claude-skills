@@ -5,10 +5,10 @@ url: "https://cerb.ai/solutions/automations/date-comparisons/"
 summary: "This page explains the usage of the `|date('U')` filter in Cerb, which converts human-readable dates to Unix timestamps for easier comparisons. It provides two examples: one showing how to check if a SLA coverage has expired within 2 weeks using an automation rule, and another demonstrating how to return a specific text output based on the expiration status of the SLA coverage."
 tags: ["solutions", "solutions-automations"]
 ---
-The |date filter can convert human-readable dates into Unix timestamps for easier comparisons as a numeric range.
+The [|date](/docs/scripting/filters/#date) filter can convert human-readable dates into Unix timestamps for easier comparisons as a numeric range.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

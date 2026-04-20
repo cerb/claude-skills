@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## base64url\_encode
 
-(Added in 9.1.8)
+(Added in [9.1.8](/releases/9.1.8/))
 
 Encode a string in base64url:
 

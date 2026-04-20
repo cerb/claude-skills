@@ -7,21 +7,21 @@ tags: ["guides"]
 ---
  
 
-- Including records in packages
-  - The record object
-  - Using UIDs
-  - Using \_exclude
-  - Custom fields
-  - Links
-  - Automation events
-  - Toolbars
+- [Including records in packages](#including-records-in-packages)
+  - [The record object](#the-record-object)
+  - [Using UIDs](#using-uids)
+  - [Using \_exclude](#using-_exclude)
+  - [Custom fields](#custom-fields)
+  - [Links](#links)
+  - [Automation events](#automation-events)
+  - [Toolbars](#toolbars)
 
-- Examples
-  - Ticket
+- [Examples](#examples)
+  - [Ticket](#ticket)
 
 # Including records in packages
 
-In the build a new packages guide you learned that a package can include any number of records.
+In the [build a new packages](/guides/packages/building/) guide you learned that a package can include any number of records.
 
 If you wanted to create a new ticket from the API, you would have to create several different records and link them all together: a ticket, a message, a sender, the sender's organization, attachments, comments, etc.
 
@@ -270,7 +270,7 @@ This package creates a new ticket with one message. The message has both plainte
 
 The `group_id` and `bucket_id` keys use special placeholders from the `default` object. You could also set these to specific ID values, or use a prompt to ask for them at import time.
 
-The `created` and `updated` keys use scripting syntax to create a Unix timestamp for the current time.
+The `created` and `updated` keys use [scripting syntax](/docs/scripting/) to create a Unix timestamp for the current time.
 
 You'll notice on keys like `org` and `participants` on the ticket that we're just providing values and not IDs. Cerb will figure out for you if these are new or existing records.
 
@@ -280,6 +280,6 @@ On the HTML attachment we provide text in the `content` key. For the image attac
 
 In the `html_message_id` key on the message we link the attachment for the HTML version of the message. This is optional, and the message will just be in plaintext otherwise.
 
-After you import the package, the ticket looks looks like:
+After you [import the package](/guides/packages/importing/), the ticket looks looks like:
 
  

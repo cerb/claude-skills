@@ -13,5 +13,5 @@ This section configures the _allowlist_ of IPs that are able to access the `/deb
 
 ### Session Expiration
 
-This section determines the lifespan of session cookies. When a session expires, a worker will need to log in again from that particular device.
+This section determines the lifespan of [session](/docs/setup/sessions/) cookies. When a session expires, a worker will need to log in again from that particular device.
 

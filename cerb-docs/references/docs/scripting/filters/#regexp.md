@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## regexp
 
-You can use regular expressions4 with the **regexp** filter to match or extract patterns.
+You can use regular expressions[4](#fn:regexp) with the **regexp** filter to match or extract patterns.
 
 `|regexp(pattern,group)`
 
@@ -25,7 +25,7 @@ Amazon Order #: {{ order_id }}
 Amazon Order #: Z-1234-5678-9
 ```
 
-If you need to escape characters in your regexp pattern, you should use a set block rather than a string:
+If you need to escape characters in your regexp pattern, you should use a [set](/docs/scripting/commands/#set) block rather than a string:
 
 ```
 {% set pattern %}

@@ -5,17 +5,17 @@ url: "https://cerb.ai/workflows/cerb.integrations.deepl.translate/"
 summary: "This webpage provides a comprehensive guide on integrating Cerb with DeepL to facilitate the translation of inbound and outbound email messages. It includes detailed instructions on setting up a DeepL account, creating a connected account in Cerb, importing and configuring the necessary workflow, and utilizing the translation features. The guide covers translating both incoming and outgoing emails, with step-by-step processes for setting up the translation workflow, selecting target languages, and using the translation tools within Cerb's interface. The integration supports a wide range of languages and offers options for both free and production API endpoints."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-  - DeepL
-  - Cerb
-    - Create a DeepL connected account
-    - Import the workflow
-    - Configure the workflow
+- [Introduction](#introduction)
+- [Installation](#installation)
+  - [DeepL](#deepl)
+  - [Cerb](#cerb)
+    - [Create a DeepL connected account](#create-a-deepl-connected-account)
+    - [Import the workflow](#import-the-workflow)
+    - [Configure the workflow](#configure-the-workflow)
 
-- Usage
-  - Translate incoming email messages
-  - Translate outgoing email messages
+- [Usage](#usage)
+  - [Translate incoming email messages](#translate-incoming-email-messages)
+  - [Translate outgoing email messages](#translate-outgoing-email-messages)
 
 # Introduction
 
@@ -62,7 +62,7 @@ Click the **Continue** button.
 | Field | &nbsp; |
 | --- | --- |
 | **API Endpoint:** | Choose between the free or production API endpoints. |
-| **DeepL Account:** | A DeepL connected account. |
+| **DeepL Account:** | A DeepL [connected account](/solutions/integrations/deepl/). |
 
 Click the **Continue** button twice.
 

@@ -31,7 +31,7 @@ You can also reset your password if needed (replace `s3cr3t` below with your new
 UPDATE worker_auth_hash SET pass_hash = SHA1 ( CONCAT ( pass_salt , MD5 ( 's3cr3t' ))) WHERE worker_id = 123 ;
 ```
 
-You then need to clear the server-side cache.
+You then need to [clear the server-side cache](/tips/clear-server-cache/).
 
-If you use Cerb Cloud, contact us to resolve this issue for you.
+If you use Cerb Cloud, [contact us](/help/#email) to resolve this issue for you.
 

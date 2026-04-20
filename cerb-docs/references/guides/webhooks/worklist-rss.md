@@ -9,20 +9,20 @@ tags: ["guides"]
 
 Let's assume that you want to monitor the records in a Cerb worklist from a third-party app or service. You could use the REST API, but that requires worker authentication and custom code that you need to host somewhere.
 
-An alternative, simpler approach is to use a Cerb bot to display any worklist in RSS1 format. Many tools already exist to monitor an RSS feed for new content. Zapier2 can run actions based on new RSS feed items. You can even subscribe to RSS feeds within Outlook.
+An alternative, simpler approach is to use a Cerb bot to display any worklist in RSS[1](#fn:rss) format. Many tools already exist to monitor an RSS feed for new content. Zapier[2](#fn:zapier-rss) can run actions based on new RSS feed items. You can even subscribe to RSS feeds within Outlook.
 
-We'll host this RSS feed on a custom URL in Cerb using a webhook3 listener.
+We'll host this RSS feed on a custom URL in Cerb using a webhook[3](#fn:webhook) listener.
 
-- Enable the Webhooks plugin in Cerb
-- Create the bot behavior in Cerb
-- Create the new webhook in Cerb
-- Subscribe to the RSS feed from your third-party tool
-- Where to go from here
-- References
+- [Enable the Webhooks plugin in Cerb](#enable-the-webhooks-plugin-in-cerb)
+- [Create the bot behavior in Cerb](#create-the-bot-behavior-in-cerb)
+- [Create the new webhook in Cerb](#create-the-new-webhook-in-cerb)
+- [Subscribe to the RSS feed from your third-party tool](#subscribe-to-the-rss-feed-from-your-third-party-tool)
+- [Where to go from here](#where-to-go-from-here)
+- [References](#references)
 
 ## Enable the Webhooks plugin in Cerb
 
-If the webhooks plugin isn't already enabled, install it from the Plugin Library.
+If the webhooks plugin isn't already enabled, install it from the [Plugin Library](/docs/plugins/#library).
 
 ## Create the bot behavior in Cerb
 
@@ -148,7 +148,7 @@ A new webhook will be added to the worklist. You can copy the **URL** to your cl
 
 ## Subscribe to the RSS feed from your third-party tool
 
-Paste your new URL into an RSS reader (or parse it as XML4 from any script). You should see a list of records from the worklist.
+Paste your new URL into an RSS reader (or parse it as XML[4](#fn:xml) from any script). You should see a list of records from the worklist.
 
  
 
@@ -158,11 +158,11 @@ You can repeat this process to create RSS feeds for your notifications, daily ta
 
 ## References
 
-1. https://en.wikipedia.org/wiki/RSS&nbsp;↩
+1. https://en.wikipedia.org/wiki/RSS&nbsp;[↩](#fnref:rss)
 
-2. https://zapier.com/zapbook/rss/&nbsp;↩
+2. https://zapier.com/zapbook/rss/&nbsp;[↩](#fnref:zapier-rss)
 
-3. https://en.wikipedia.org/wiki/Webhook&nbsp;↩
+3. https://en.wikipedia.org/wiki/Webhook&nbsp;[↩](#fnref:webhook)
 
-4. https://en.wikipedia.org/wiki/XML&nbsp;↩
+4. https://en.wikipedia.org/wiki/XML&nbsp;[↩](#fnref:xml)
 

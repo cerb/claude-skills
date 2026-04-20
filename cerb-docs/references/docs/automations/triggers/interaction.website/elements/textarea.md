@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.website/elements/tex
 summary: "This page provides detailed information on the use of the 'textarea' element in website interaction forms within Cerb. It explains the syntax and various configuration options available for the textarea, such as setting a label, making the input required, adding a placeholder, specifying default values, and defining maximum and minimum input lengths. Additionally, it covers the option to truncate input exceeding the maximum length and includes guidance on implementing custom validation scripts to ensure input meets specific criteria. The example provided demonstrates how to require a comment and enforce a minimum character length using conditional logic."
 tags: ["docs", "docs-automations"]
 ---
-In website interactions forms, a **textarea** element displays a multi-line text input without the extra functionality of an editor.
+In [website interactions](/docs/automations/triggers/interaction.website/) forms, a **textarea** element displays a multi-line text input without the extra functionality of an [editor](/docs/automations/triggers/interaction.website/elements/editor/).
 
 ```
 start: await: form: title: Example elements: textarea/prompt_comment: label: Please share your experience:

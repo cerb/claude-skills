@@ -5,21 +5,21 @@ url: "https://cerb.ai/guides/api/using-python/"
 summary: "This webpage provides a comprehensive guide on how to get started with the Cerb API using Python. It includes detailed instructions on creating an OAuth app in Cerb to generate client credentials, setting up OAuth2 variables, and optionally disabling SSL for test environments. The guide explains how to handle token persistence and offers two methods for generating tokens: using a pre-generated token or through 3-legged interactive web authentication. It also covers making requests to the Cerb API and displaying the response. The page concludes with a suggestion to refer to the API documentation for further exploration of possible requests."
 tags: ["guides"]
 ---
-- Introduction
-- Create an OAuth app in Cerb
-- Python code
-  - Set OAuth2 variables
-  - Optionally disable SSL
-  - Imports
-  - Handle token persistence
-  - Generate a token
-    - Option 1: Provide a pre-generated token
-    - Option 2: Generate tokens from 3-legged interactive web auth
+- [Introduction](#introduction)
+- [Create an OAuth app in Cerb](#create-an-oauth-app-in-cerb)
+- [Python code](#python-code)
+  - [Set OAuth2 variables](#set-oauth2-variables)
+  - [Optionally disable SSL](#optionally-disable-ssl)
+  - [Imports](#imports)
+  - [Handle token persistence](#handle-token-persistence)
+  - [Generate a token](#generate-a-token)
+    - [Option 1: Provide a pre-generated token](#option-1-provide-a-pre-generated-token)
+    - [Option 2: Generate tokens from 3-legged interactive web auth](#option-2-generate-tokens-from-3-legged-interactive-web-auth)
 
-  - Make a request to the Cerb API
-    - Display the response
+  - [Make a request to the Cerb API](#make-a-request-to-the-cerb-api)
+    - [Display the response](#display-the-response)
 
-- Next steps
+- [Next steps](#next-steps)
 
 # Introduction
 
@@ -29,7 +29,7 @@ We'll be using the requests-oauthlib library to handle OAuth2 authentication.
 
 # Create an OAuth app in Cerb
 
-In Cerb, create an OAuth app to generate client credentials.
+In Cerb, [create an OAuth app](/docs/api/authentication/) to generate client credentials.
 
 As an admin you can do this from **Search&nbsp;» OAuth Apps&nbsp;» (+)**.
 
@@ -182,5 +182,5 @@ You should see JSON output like:
 
 # Next steps
 
-You can refer to the API documentation for a full list of possible requests.
+You can refer to the [API documentation](/docs/api/) for a full list of possible requests.
 

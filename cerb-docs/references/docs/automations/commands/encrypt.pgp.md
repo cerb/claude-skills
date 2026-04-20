@@ -11,12 +11,12 @@ The **encrypt.pgp:** command encrypts a block of text using one or more PGP publ
 start: encrypt.pgp: output: encrypted_message inputs: message@text: This is a secret message. public_keys: uri: cerb:gpg_public_key:D399DA5BA62A0472 on_success: return: encrypted_message@key: encrypted_message
 ```
 
-- Syntax
-  - inputs:
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -34,19 +34,19 @@ Save the results in this placeholder.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of encrypting the message.
+The [commands](/docs/automations/#commands) to run during simulation instead of encrypting the message.
 
 If omitted, the message is encrypted during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The `output:` placeholder is set to the encrypted message.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

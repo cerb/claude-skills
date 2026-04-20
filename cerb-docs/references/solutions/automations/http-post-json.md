@@ -11,8 +11,8 @@ You can write an HTTP request in KATA and have Cerb format and send it to the se
 
 When using `Content-Type: application/json`, a `body:` dictionary will automatically be encoded as JSON.
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

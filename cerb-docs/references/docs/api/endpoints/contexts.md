@@ -5,16 +5,16 @@ url: "https://cerb.ai/docs/api/endpoints/contexts/"
 summary: "This webpage provides detailed API documentation for Cerb, focusing on managing record types, activity logs, and links. It explains how to retrieve a list of object contexts, including those contributed by plugins, using the GET method. The page also covers how to list and create activity log events, detailing the necessary fields and data formats for creating log entries. Additionally, it describes how to add and remove links between context records using POST requests, with examples illustrating the process for both linking and unlinking records. The documentation is aimed at developers looking to integrate or extend Cerb's functionality through its REST API."
 tags: ["docs"]
 ---
-- Record Types
-  - List
+- [Record Types](#record-types)
+  - [List](#list)
 
-- Activity Log
-  - List Events
-  - Create
+- [Activity Log](#activity-log)
+  - [List Events](#list-events)
+  - [Create](#create)
 
-- Links
-  - Link
-  - Unlink
+- [Links](#links)
+  - [Link](#link)
+  - [Unlink](#unlink)
 
 # Record Types
 
@@ -22,7 +22,7 @@ tags: ["docs"]
 
 **GET /rest/contexts/list.json**
 
-Retrieve a list of object contexts with IDs, names, custom fields and fieldsets. This includes object contexts contributed by plugins.
+Retrieve a list of object contexts with IDs, names, custom fields and fieldsets. This includes object contexts contributed by [plugins](/docs/plugins/).
 
 **Example:**
 
@@ -38,7 +38,7 @@ Authorization: Bearer <token>
 
 **GET /rest/contexts/activity/events.json**
 
-Retrieve a list of activity log event IDs and names, including those contributed by plugins.
+Retrieve a list of activity log event IDs and names, including those contributed by [plugins](/docs/plugins/).
 
 **Example:**
 
@@ -63,7 +63,7 @@ Create an activity log entry.
 
 - The `on` field should be a target record in `context:context_id` format.
 
-- The `activity_point` field contains an activity ID from List Events request above. You can implement new Activity Log events in the `<activity_points>` section of a plugin.xml manifest.
+- The `activity_point` field contains an activity ID from List Events request above. You can implement new Activity Log events in the `<activity_points>` section of a [plugin.xml](/docs/plugins/) manifest.
 
 - The `variables` field should be a JSON encoded array, where the key is a placeholder in the activity log message and the value is the text to substitute.
 

@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_count\_values
 
-(Added in 10.0.4)
+(Added in [10.0.4](/releases/10.0.4/))
 
 The **array\_count\_values** function takes an array of values as input, and returns an array with distinct values as keys and their count of occurrences. This function only works on arrays of strings or numbers.
 

@@ -5,10 +5,10 @@ url: "https://cerb.ai/docs/data-queries/sample/"
 summary: "This page provides examples and details on how to generate sample data queries for different types of data visualizations in Cerb. It covers three main types of data queries: `sample.geo.points`, which returns simulated GeoJSON data for map-based visualizations; `sample.timeseries`, which provides simulated time-series data for visualizations; and `sample.xy`, which generates simulated X/Y data for scatterplots. Each section outlines the necessary inputs for creating these data queries, such as series names, coordinates, labels, and trends, and specifies the default response formats like GeoJSON, timeseries, and scatterplot. The page includes examples for each data type to illustrate how to structure the queries and the kind of data they return."
 tags: ["docs"]
 ---
-- sample.geo.points
-- sample.records
-- sample.timeseries
-- sample.xy
+- [sample.geo.points](#samplegeopoints)
+- [sample.records](#samplerecords)
+- [sample.timeseries](#sampletimeseries)
+- [sample.xy](#samplexy)
 
 # sample.geo.points
 
@@ -36,7 +36,7 @@ type: sample.geo.points series.cities: ( lihue: (name:"Lihue" coordinates:"POINT
 
 # sample.records
 
-`sample.records` data queries return simulated dictionary data. For instance, this can be used to mock data in sheets.
+`sample.records` data queries return simulated dictionary data. For instance, this can be used to mock data in [sheets](/docs/sheets/).
 
 ### Inputs
 
@@ -44,12 +44,12 @@ The `records:()` key is a collection of arbitrary key/value dictionaries.
 
 ### Response Formats
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 ### Examples:
 
-- query
-- response
+- [query](#)
+- [response](#)
 
 - 
 ```

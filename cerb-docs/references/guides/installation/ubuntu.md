@@ -5,31 +5,31 @@ url: "https://cerb.ai/guides/installation/ubuntu/"
 summary: "This is a comprehensive guide for installing Cerb on an Ubuntu 24.04 LTS server. It covers the entire setup process, including provisioning a server using Docker or Amazon EC2, installing necessary packages like PHP 8.3, Nginx, and MySQL, and configuring the MySQL database for Cerb. The guide also details the installation of Cerb itself, setting up Nginx with SSL certificates, creating virtual hosts, and testing the Nginx configuration. Additionally, it includes instructions for enabling friendly URLs and running the Cerb installer, ensuring a complete and secure installation process."
 tags: ["guides"]
 ---
-We do not recommend installing Cerb components on your server directly. Use the Docker instructions as a reference.
+We do not recommend installing Cerb components on your server directly. Use the [Docker instructions](/docs/installation/docker/) as a reference.
 
 # Introduction
 
 This is a comprehensive guide for installing Cerb on an Ubuntu 24.04 LTS server. It covers the entire setup process, including provisioning a server using Docker or Amazon EC2, installing necessary packages like PHP 8.3, Nginx, and MySQL, and configuring the MySQL database for Cerb. The guide also details the installation of Cerb itself, setting up Nginx with SSL certificates, creating virtual hosts, and testing the Nginx configuration. Additionally, it includes instructions for enabling friendly URLs and running the Cerb installer, ensuring a complete and secure installation process.
 
-- Provision an Ubuntu server
-  - Docker
-  - EC2
+- [Provision an Ubuntu server](#provision-an-ubuntu-server)
+  - [Docker](#docker)
+  - [EC2](#ec2)
 
-- Install packages
-- Install MySQL
-- Create the MySQL database
-- Install Cerb
-- Configure Nginx
-  - SSL
-    - Add your SSL certificate
-    - Creating a self-signed SSL certificate
+- [Install packages](#install-packages)
+- [Install MySQL](#install-mysql)
+- [Create the MySQL database](#create-the-mysql-database)
+- [Install Cerb](#install-cerb)
+- [Configure Nginx](#configure-nginx)
+  - [SSL](#ssl)
+    - [Add your SSL certificate](#add-your-ssl-certificate)
+    - [Creating a self-signed SSL certificate](#creating-a-self-signed-ssl-certificate)
 
-  - Add a virtual host
-  - Test Nginx configuration
-  - Restart Nginx and PHP-FPM
+  - [Add a virtual host](#add-a-virtual-host)
+  - [Test Nginx configuration](#test-nginx-configuration)
+  - [Restart Nginx and PHP-FPM](#restart-nginx-and-php-fpm)
 
-- Enable friendly URLs
-- Run the Cerb installer
+- [Enable friendly URLs](#enable-friendly-urls)
+- [Run the Cerb installer](#run-the-cerb-installer)
 
 # Provision an Ubuntu server
 
@@ -41,11 +41,11 @@ If you don't already have a server, you can use Docker or Amazon EC2.
 docker run -it --rm -p 80:80 ubuntu:24.04 /bin/bash
 ```
 
-For local evaluation, development, and testing, you can use the built-in Docker configuration instead.
+For local evaluation, development, and testing, you can use the built-in [Docker](/docs/installation/docker/) configuration instead.
 
 ## EC2
 
-1. Launch an Amazon EC2 instance.
+1. Launch an [Amazon EC2](/guides/installation/ec2/) instance.
 
 2. Connect to your server using SSH:
 
@@ -379,7 +379,7 @@ touch .htaccess
 
 # Run the Cerb installer
 
-Type the hostname of your server into a browser and follow the guided installer.
+Type the hostname of your server into a browser and follow the [guided installer](/docs/installation/#run-the-guided-installer).
 
 If you're installing with Docker, use `127.0.0.1` rather than `localhost` for the database server.
 

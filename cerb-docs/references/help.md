@@ -5,7 +5,7 @@ url: "https://cerb.ai/help/"
 summary: "This page provides contact information and resources for Cerb, including an email address for general inquiries, links to documentation, discussion forums, an issue tracker, and a newsletter archive. It also includes details about automated demos, license updates, and renewals. For sales inquiries, a phone number is provided. Additionally, the mailing address for Webgroup Media, LLC, the company behind Cerb, is listed."
 tags: []
 ---
- 
+[ 
 
  
 ### Email
@@ -13,7 +13,7 @@ tags: []
 
 team@cerb.ai
 
-   
+ ](mailto:team@cerb.ai)  
 
  
 ### AI Agent
@@ -21,7 +21,7 @@ team@cerb.ai
 
 Demos, license updates, and renewals.
 
-   
+  [ 
 
  
 ### Sales
@@ -29,7 +29,7 @@ Demos, license updates, and renewals.
 
 +1 (714) 671-9090
 
-   
+ ](tel:+1.714.671.9090) [ 
 
  
 ### Documentation
@@ -37,7 +37,7 @@ Demos, license updates, and renewals.
 
 Read the Cerb docs.
 
-   
+ ](/docs/home/)  
 
  
 ### Discussion Forums

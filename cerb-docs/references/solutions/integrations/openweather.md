@@ -5,12 +5,12 @@ url: "https://cerb.ai/solutions/integrations/openweather/"
 summary: "This page provides a step-by-step guide for integrating Cerb with OpenWeather, a weather data API service. To start, you need to obtain an OpenWeather API key by logging into your account and copying the default or creating a new one through the 'My API Keys' section. Next, navigate to Cerb's Connected Services, select OpenWeather, paste the API key, and click Create to link the two systems. The guide also includes examples of how to use the integrated service, such as geocoding a location using the OpenWeather API or retrieving current weather data for a specific latitude and longitude."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a OpenWeather API Key.
-- Create the OpenWeather service in Cerb
-- Examples
-  - Geocode a location
-  - Current weather
+- [Introduction](#introduction)
+- [Get a OpenWeather API Key.](#get-a-openweather-api-key)
+- [Create the OpenWeather service in Cerb](#create-the-openweather-service-in-cerb)
+- [Examples](#examples)
+  - [Geocode a location](#geocode-a-location)
+  - [Current weather](#current-weather)
 
 # Introduction
 

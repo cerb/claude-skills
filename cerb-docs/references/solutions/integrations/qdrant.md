@@ -5,18 +5,18 @@ url: "https://cerb.ai/solutions/integrations/qdrant/"
 summary: "This page provides a step-by-step guide for integrating Cerb and Qdrant, an open-source vector database for similarity search. To begin, create a Qdrant Cloud account and cluster, then copy your API key. Next, navigate to the Cerb Connected Services section, click the '+' icon, switch to the 'Build' tab, and create a custom API Key service with your Qdrant base URL and api-key header. The guide provides examples of common operations including creating collections, upserting points, and performing similarity searches."
 tags: ["solutions"]
 ---
-- Introduction
-- Qdrant Cloud vs Self-Hosted
-  - Qdrant Cloud (Recommended)
-  - Self-Hosted with Docker
+- [Introduction](#introduction)
+- [Qdrant Cloud vs Self-Hosted](#qdrant-cloud-vs-self-hosted)
+  - [Qdrant Cloud (Recommended)](#qdrant-cloud-recommended)
+  - [Self-Hosted with Docker](#self-hosted-with-docker)
 
-- Create the Qdrant service in Cerb
-- Examples
-  - Create a collection
-  - List collections
-  - Upsert points
-  - Search for similar vectors
-  - Delete a collection
+- [Create the Qdrant service in Cerb](#create-the-qdrant-service-in-cerb)
+- [Examples](#examples)
+  - [Create a collection](#create-a-collection)
+  - [List collections](#list-collections)
+  - [Upsert points](#upsert-points)
+  - [Search for similar vectors](#search-for-similar-vectors)
+  - [Delete a collection](#delete-a-collection)
 
 # Introduction
 

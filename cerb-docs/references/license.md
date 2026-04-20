@@ -13,13 +13,13 @@ Licensor's copyrights are also protected by international treaties where applica
 
 By using this software, you acknowledge having read this License and agree to be bound thereby.
 
-- Devblocks Public License 1.0 (DPL)
-  - Definitions
-  - Grant of Rights
-  - Governing Law and Venue
-  - Limited Warranty
-  - Disclaimer of Warranties
-  - Limitation of Liability and Remedies
+- [Devblocks Public License 1.0 (DPL)](#devblocks-public-license-10-dpl)
+  - [Definitions](#definitions)
+  - [Grant of Rights](#grant-of-rights)
+  - [Governing Law and Venue](#governing-law-and-venue)
+  - [Limited Warranty](#limited-warranty)
+  - [Disclaimer of Warranties](#disclaimer-of-warranties)
+  - [Limitation of Liability and Remedies](#limitation-of-liability-and-remedies)
 
 ## Definitions
 

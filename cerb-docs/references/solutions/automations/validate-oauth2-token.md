@@ -11,8 +11,8 @@ In a webhook automation you can use the cerb.commands.oauth2.token.validate acti
 
 Create an example OAuth2 token from **Cerb&nbsp;» Setup&nbsp;» Developers&nbsp;» OAuth2 Token Generator**.
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

@@ -10,37 +10,37 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | behavior |
 | **Identifier (ID):** | cerberusweb.contexts.behavior |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| **x** | **`bot_id`** | number | Bot |
-| **x** | **`event_point`** | text | The event of the behavior |
-| &nbsp; | `is_disabled` | boolean | Is this behavior disabled? |
-| &nbsp; | `is_private` | boolean | Is this behavior only visible to the parent bot? |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The behavior's name |
-| &nbsp; | `priority` | number | Any positive number; `0` is highest priority |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
-| &nbsp; | `uri` | text | &nbsp; |
+| **x** | **`bot_id`** | [number](/docs/records/fields/types/number/) | [Bot](/docs/records/types/bot/) |
+| **x** | **`event_point`** | [text](/docs/records/fields/types/text/) | The event of the behavior |
+| &nbsp; | `is_disabled` | [boolean](/docs/records/fields/types/boolean/) | Is this behavior disabled? |
+| &nbsp; | `is_private` | [boolean](/docs/records/fields/types/boolean/) | Is this behavior only visible to the parent bot? |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The behavior's name |
+| &nbsp; | `priority` | [number](/docs/records/fields/types/number/) | Any positive number; `0` is highest priority |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
+| &nbsp; | `uri` | [text](/docs/records/fields/types/text/) | &nbsp; |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
-| `bot_` | record | Bot |
+| `_type` | text | [Record type](/docs/records/types/) alias |
+| `bot_` | record | [Bot](/docs/records/types/bot/) |
 | `bot_owner_` | record | Bot Owner |
 | `event_point` | text | Event |
 | `event_point_name` | text | Event |
@@ -53,45 +53,45 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `updated_at` | date | Updated |
 | `uri` | text | Uri |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
-| `watchers` | watchers | Watchers |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
+| `watchers` | watchers | [Watchers](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in behavior search queries:
+These [filters](/docs/search/#filters) are available in behavior [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `bot:` | record | Bot |
-| `bot.id:` | chooser | Bot |
-| `disabled:` | boolean | Is Disabled |
-| `event:` | text | Event |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Title |
-| `priority:` | number | Priority |
-| `private:` | boolean | Is Private |
-| `updated:` | date | Updated |
-| `uri:` | text | Uri |
-| `usableBy.bot:` | chooser | Usableby Bot |
+| `bot:` | [record](/docs/search/#deep-search) | [Bot](/docs/records/types/bot/) |
+| `bot.id:` | [chooser](/docs/search/#choosers) | [Bot](/docs/records/types/bot/) |
+| `disabled:` | [boolean](/docs/search/#booleans) | Is Disabled |
+| `event:` | [text](/docs/search/#text) | Event |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Title |
+| `priority:` | [number](/docs/search/#numbers) | Priority |
+| `private:` | [boolean](/docs/search/#booleans) | Is Private |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `uri:` | [text](/docs/search/#text) | Uri |
+| `usableBy.bot:` | [chooser](/docs/search/#choosers) | [Usableby Bot](/docs/records/types/bot/) |
 
 ### Worklist Columns
 
-These columns are available on behavior worklists:
+These columns are available on behavior [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
 | `*_has_fieldset` | Fieldset |
 | `*_workers` | Watchers |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `t_bot_id` | Bot |
 | `t_event_point` | Event |
 | `t_id` | Id |
@@ -102,5 +102,5 @@ These columns are available on behavior worklists:
 | `t_updated_at` | Updated |
 | `t_uri` | Uri |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

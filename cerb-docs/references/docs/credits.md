@@ -53,7 +53,7 @@ tags: ["docs"]
 
 - Ace-Diff extends Ace Editor with diff/merging functionality.
 
-- Amazon S3 PHP Class is a PHP library by Donovan Schönknecht for working with Amazon's S31 web service.
+- Amazon S3 PHP Class is a PHP library by Donovan Schönknecht for working with Amazon's S3[1](#fn:s3) web service.
 
 - C3.js is a Javascript charting library built on top of D3.
 
@@ -71,7 +71,7 @@ tags: ["docs"]
 
 - jQuery UI Touch Punch converts mouse-based events in jQuery UI to touch gestures for mobile devices (e.g. tap, slide, drag/drop).
 
-- League\CommonMark is a PHP library for converting lightweight Markdown2 text into HTML.
+- League\CommonMark is a PHP library for converting lightweight Markdown[2](#fn:markdown) text into HTML.
 
 - mtdownling/cron-expression is a PHP library for generating time intervals using Unix crontab syntax.
 
@@ -101,7 +101,7 @@ tags: ["docs"]
 
 # References
 
-1. http://aws.amazon.com/s3/&nbsp;↩
+1. http://aws.amazon.com/s3/&nbsp;[↩](#fnref:s3)
 
-2. http://daringfireball.net/projects/markdown/&nbsp;↩
+2. http://daringfireball.net/projects/markdown/&nbsp;[↩](#fnref:markdown)
 

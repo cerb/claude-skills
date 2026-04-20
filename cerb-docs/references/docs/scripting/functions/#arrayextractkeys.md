@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_extract\_keys
 
-(Added in 9.6.4)
+(Added in [9.6.4](/releases/9.6.4/))
 
 Returns the given keys from all elements of a list.
 

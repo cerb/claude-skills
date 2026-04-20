@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Calculating squares and cubes
 
-Here is an example of using the |map modifier with arrow functions to transform array values.
+Here is an example of using the [|map](/docs/scripting/filters/#map) modifier with arrow functions to transform array values.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

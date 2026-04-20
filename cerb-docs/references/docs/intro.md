@@ -9,15 +9,15 @@ tags: ["docs"]
 
 # What is Cerb?
 
-**Cerb** automates customer service inboxes and workflows. It has continuously evolved for over 23 years based on the feedback of thousands of teams around the world. Cerb is used by everyone from solo founders to 1,000+ person enterprises managing millions of customer requests.
+[**Cerb**](/) automates customer service inboxes and workflows. It has continuously evolved for over 23 years based on the feedback of thousands of teams around the world. Cerb is used by everyone from solo founders to 1,000+ person enterprises managing millions of customer requests.
 
-Cerb integrates with any API-based service. It can automate nearly any repetitive digital workflow with its specialized KATA language and browser-based coding tools. Automations add conditional actions to any event. Interactions extend any toolbar for complex multistep workflows that require user input.
+Cerb integrates with any API-based service. It can automate nearly any repetitive digital workflow with its specialized [KATA](/docs/kata/) language and browser-based coding tools. [Automations](/docs/automations/) add conditional actions to any event. [Interactions](/docs/interactions/) extend any toolbar for complex multistep workflows that require user input.
 
-Teams and individuals can build a personalized "mission control" using highly customizable workspace widgets to stay focused on their most important tasks. Custom records and fields organize of any kind of task (email, calls, social media, orders, survey responses, todo, etc). Pre-built solutions can be easily shared within the community using packages.
+Teams and individuals can build a personalized "[mission control](/docs/dashboards/)" using highly customizable workspace widgets to stay focused on their most important tasks. [Custom records](/docs/records/#custom-records) and [fields](/docs/custom-fields/) organize of any kind of task (email, calls, social media, orders, survey responses, todo, etc). Pre-built solutions can be easily shared within the community using [packages](/docs/packages/).
 
 The most common use case is converting standard POP3/IMAP mailboxes like Gmail or O365 (e.g. support@, team@) into high-volume team-based webmail with automated triage, internal discussions with @mentions, built-in productivity tools, custom actions, reporting, and a shared history.
 
-You can run Cerb in Docker on your own hardware, or in Cerb Cloud as a fully managed service.
+You can run Cerb in Docker on your own hardware, or in [Cerb Cloud](/pricing/) as a fully managed service.
 
 We share 100% of our source code on GitHub. Cerb is free to use for a single seat (no license required). This allows you to maintain an archive of your historical data on the latest version in perpetuity at no ongoing cost. It's your data.
 

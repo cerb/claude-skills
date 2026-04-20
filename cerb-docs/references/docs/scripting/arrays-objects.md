@@ -51,7 +51,7 @@ His name is William.
 
 # Modifying arrays and objects
 
-You can use the dict\_set() function to quickly modify, append, or remove items from an array or object.
+You can use the [dict\_set()](/docs/scripting/functions/#dict_set) function to quickly modify, append, or remove items from an array or object.
 
 You can set deeply nested keys in a single line using dot-notation:
 
@@ -118,7 +118,7 @@ Append to nested arrays:
 
 # Compute the difference of two arrays
 
-The array\_diff() function returns the items in the second array that are not present in the first array:
+The [array\_diff()](/docs/scripting/functions/#array_diff) function returns the items in the second array that are not present in the first array:
 
 ```
 {% set arr1 = ['Apple' , 'Google' , 'Microsoft'] %} {% set arr2 = ['Apple' , 'Microsoft' , 'Cerb'] %} {% set diff = array_diff ( arr2 , arr1 ) %}
@@ -129,7 +129,7 @@ These are new: {{ diff | join ( ', ' ) }}
 These are new: Cerb
 ```
 
-\< Strings
+[\< Strings](/docs/scripting/strings/)
 
-Dates \>
+[Dates \>](/docs/scripting/dates/)
 

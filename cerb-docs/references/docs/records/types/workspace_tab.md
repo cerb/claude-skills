@@ -10,81 +10,81 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | workspace\_tab |
 | **Identifier (ID):** | cerberusweb.contexts.workspace.tab |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| **x** | **`extension_id`** | text | Workspace Tab Type |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of this workspace tab |
-| &nbsp; | `options_kata` | text | &nbsp; |
-| **x** | **`page_id`** | number | The ID of the workspace page containing this tab |
-| &nbsp; | `params` | object | JSON-encoded key/value object |
-| &nbsp; | `pos` | number | The position of this tab on the workspace page; `0` is first |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
+| **x** | **`extension_id`** | [text](/docs/records/fields/types/text/) | [Workspace Tab Type](/docs/plugins/extensions/points/cerberusweb.ui.workspace.tab/) |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this workspace tab |
+| &nbsp; | `options_kata` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| **x** | **`page_id`** | [number](/docs/records/fields/types/number/) | The ID of the [workspace page](/docs/records/types/workspace_page/) containing this tab |
+| &nbsp; | `params` | [object](/docs/records/fields/types/object/) | JSON-encoded key/value object |
+| &nbsp; | `pos` | [number](/docs/records/fields/types/number/) | The position of this tab on the workspace page; `0` is first |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `extension_` | record | Type |
 | `extension_id` | text | Extension Id |
 | `id` | number | Id |
 | `name` | text | Name |
 | `order` | number | Order |
-| `page_` | record | Page |
+| `page_` | record | [Page](/docs/records/types/workspace_page/) |
 | `page_extension_` | record | Page Type |
 | `page_owner_` | record | Page Owner |
 | `updated_at` | date | Updated |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 | `widgets` | records | Widgets |
 | `widgets_data` | hashmap | Widgets Data |
 | `worklists` | records | Worklists |
 
 ### Search Query Fields
 
-These filters are available in workspace tab search queries:
+These [filters](/docs/search/#filters) are available in workspace tab [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Name |
-| `page.id:` | chooser | Workspace Page |
-| `pos:` | number | Order |
-| `type:` | text | Type |
-| `updated:` | date | Updated |
-| `workspace:` | record | Workspace |
-| `workspace.id:` | chooser | Workspace Page |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Name |
+| `page.id:` | [chooser](/docs/search/#choosers) | [Workspace Page](/docs/records/types/workspace_page/) |
+| `pos:` | [number](/docs/search/#numbers) | Order |
+| `type:` | [text](/docs/search/#text) | Type |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `workspace:` | [record](/docs/search/#deep-search) | [Workspace](/docs/records/types/workspace_page/) |
+| `workspace.id:` | [chooser](/docs/search/#choosers) | [Workspace Page](/docs/records/types/workspace_page/) |
 
 ### Worklist Columns
 
-These columns are available on workspace tab worklists:
+These columns are available on workspace tab [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `w_extension_id` | Type |
 | `w_id` | Id |
 | `w_name` | Name |
@@ -92,5 +92,5 @@ These columns are available on workspace tab worklists:
 | `w_updated_at` | Updated |
 | `w_workspace_page_id` | Workspace Page |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

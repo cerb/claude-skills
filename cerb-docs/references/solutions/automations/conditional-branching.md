@@ -9,8 +9,8 @@ Here are examples of different approaches to conditional branching, demonstratin
 
 ## Using a decision block
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
@@ -24,8 +24,8 @@ __return: output: You picked option 2.
 
 ## Using dynamic dictionary keys
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

@@ -5,25 +5,25 @@ url: "https://cerb.ai/docs/automations/commands/kata.parse/"
 summary: "This page provides detailed information on the 'kata.parse' command used in Cerb automations to parse KATA documents with placeholder substitution. It explains the syntax and components involved, such as inputs, outputs, and error handling. The inputs include a KATA document, a dictionary for placeholder values, and an optional validation schema to ensure the document's integrity. The page also describes the types of data that can be used within a KATA document, such as arrays, booleans, lists, objects, and text. Additionally, it outlines the procedures for handling simulation, success, and error scenarios, ensuring robust automation processes."
 tags: ["docs", "docs-automations"]
 ---
-The **kata.parse:** command parses an arbitrary KATA document with placeholder substitution.
+The **kata.parse:** command parses an arbitrary [KATA](/docs/kata/) document with placeholder substitution.
 
 ```
 start: kata.parse: inputs: kata@raw: template@text: Hello {{ name }} ! Thanks for writing to {{ company }} . dict: name: Janey company: Cerb output: results 
    return: output: {{ results.template }}
 ```
 
-- Syntax
-  - inputs:
-    - kata:
-    - dict:
-    - schema:
-      - Keys
-      - types:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [kata:](#kata)
+    - [dict:](#dict)
+    - [schema:](#schema)
+      - [Keys](#keys)
+      - [types:](#types)
 
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -31,7 +31,7 @@ start: kata.parse: inputs: kata@raw: template@text: Hello {{ name }} ! Thanks fo
 
 ### kata:
 
-A KATA document to parse. This will generally use the @raw annotation to prevent placeholders from being substituted by the automation prior to execution.
+A [KATA](/docs/kata/) document to parse. This will generally use the [@raw](/docs/kata/#raw) annotation to prevent placeholders from being substituted by the automation prior to execution.
 
 ### dict:
 
@@ -73,19 +73,19 @@ Save the results in this placeholder.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of parsing the KATA document.
+The [commands](/docs/automations/#commands) to run during simulation instead of parsing the KATA document.
 
 If omitted, the KATA document is parsed during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The `output:` placeholder receives a dictionary with the same structure as the KATA document.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

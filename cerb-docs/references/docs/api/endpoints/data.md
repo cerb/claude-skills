@@ -9,7 +9,7 @@ tags: ["docs"]
 
 **GET /rest/data/query.json**
 
-Run a data query.
+Run a [data query](/docs/data-queries/).
 
 ### Example
 

@@ -11,9 +11,9 @@ Design any support workflow with KATA — a web-based programming language built
 
 https://www.youtube.com/embed/LYuj_E7fpEY
 
-Start free trial See all features
+[Start free trial](/signup/) [See all features](/features/)
 
-11.1.8 See what's new
+[11.1.8 See what's new](/docs/history/)
 
 23+ years of development
 
@@ -46,7 +46,7 @@ docker compose up --build
 
  Open your web browser to `http://localhost/` at the port you configured and accept the self-signed SSL certificate. 
 
-Read the full instructions
+[Read the full instructions](/docs/installation/docker/)
 
 Trusted by teams at
 
@@ -54,7 +54,7 @@ Trusted by teams at
 
 ## Build your support team's ideal workspace
 
- 
+[ ](/docs/tickets/)
 
 - Transform email and social accounts into a team inbox
 - Create personalized shared workspaces
@@ -62,11 +62,11 @@ Trusted by teams at
 - Route work to the right people automatically
 - Track customer satisfaction and SLAs
 
-Learn about shared inboxes
+[Learn about shared inboxes](/docs/tickets/)
 
 ## Automate with a web-based programming language
 
- 
+[ ](/docs/automations/)
 
 - KATA: a purpose-built language for complex workflows
 - Browser-based IDE with step debugger and simulator
@@ -75,11 +75,11 @@ Learn about shared inboxes
 - Integrate with any API, database, or service
 - Secure by design with least-privilege policies
 
-Explore automations
+[Explore automations](/docs/automations/)
 
 ## Build AI agents that take action
 
- 
+[ ](/docs/interactions/)
 
 - Connect to leading language models
 - Grant tools so agents can complete tasks
@@ -87,7 +87,7 @@ Explore automations
 - Draft responses and summarize conversations
 - Deploy agents on any website
 
-Discover AI agents
+[Discover AI agents](/docs/interactions/)
 
 ## What our customers say
 
@@ -103,7 +103,7 @@ Rebecca R., Intake Coordinator, Electronic Frontier Foundation
 
 Hussam AlOkush, Senior Director - Customer Success, Advance Digital Inc.
 
-Read more testimonials
+[Read more testimonials](/clients/)
 
 ## Simple, transparent pricing
 
@@ -119,9 +119,9 @@ $40/seat/month
 
 Fully managed. High availability, automatic backups, global data centers.
 
-View full pricing details
+[View full pricing details](/pricing/)
 ## Build the support workflow your team actually needs
 
 Stop adapting to your software. Start with a platform designed for customization.
 
-Try free in Docker or Cerb Cloud
+[Try free in Docker or Cerb Cloud](/signup/)

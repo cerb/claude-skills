@@ -9,7 +9,7 @@ tags: ["guides"]
 
 JSONL (JSON Lines) is a popular file format for ingesting large amounts of data into analytics or machine learning models.
 
-If you have millions of records in Cerb, it can be inefficient to export them through the API due to rate limits and paging.
+If you have millions of records in Cerb, it can be inefficient to export them through the [API](/docs/api/) due to rate limits and paging.
 
 With access to a local copy of your database (which we can provide from Cerb Cloud), you can export millions of records in a few minutes using SQL and your preferred programming language.
 

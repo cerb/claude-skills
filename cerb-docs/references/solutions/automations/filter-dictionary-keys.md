@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 Here is an example of using the |filter modifier with arrow functions to filter dictionary keys.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

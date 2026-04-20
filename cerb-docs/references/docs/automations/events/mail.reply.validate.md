@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/events/mail.reply.validate/"
 summary: "This page provides detailed information on the `mail.reply.validate` automation events in Cerb, which are used to implement interactive custom validators before replying to emails. These validators function similarly to worker interactions and can be configured to check recent worker activity to prevent duplication of effort. The page explains how interactive validators can allow workers to bypass warnings and proceed with sending emails, unlike non-interactive validators that would require error correction before continuing. It also outlines the structure of the automation event dictionary, including placeholders and outputs, and emphasizes the importance of filtering unnecessary validators to optimize the process."
 tags: ["docs", "docs-automations"]
 ---
-**mail.reply.validate** automation events implement interactive custom validators before replying to email. These automations have the same functionality as worker interactions.
+**mail.reply.validate** [automation](/docs/automations/) [events](/docs/automations/#events) implement interactive custom validators before replying to email. These automations have the same functionality as worker interactions.
 
 For example, checking recent worker activity to avoid duplication of effort.
 
@@ -17,15 +17,15 @@ While the most efficient option is to filter unneeded validators from the event,
 
 # Placeholders
 
-The automation event dictionary starts with the following values:
+The automation event [dictionary](/docs/automations/#dictionaries) starts with the following values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| `caller_name` | string | The caller which started the interaction. |
+| `caller_name` | string | The [caller](#callers) which started the interaction. |
 | `caller_params` | dictionary | Built-in parameters based on the caller type. |
-| `inputs` | dictionary | Custom input values from the caller. |
-| `message_*` | record | The message record. Supports key expansion. |
-| `worker_*` | record | The active worker record. Supports key expansion. |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the caller. |
+| `message_*` | record | The [message](/docs/records/types/message/) record. Supports key expansion. |
+| `worker_*` | record | The active [worker](/docs/records/types/worker/) record. Supports key expansion. |
 
 # Outputs
 
@@ -37,9 +37,9 @@ The automation event dictionary starts with the following values:
 
 Warn if another worker is currently replying to a ticket:
 
-- automation
-- policy
-- event
+- [automation](#)
+- [policy](#)
+- [event](#)
 
 - 
 ```

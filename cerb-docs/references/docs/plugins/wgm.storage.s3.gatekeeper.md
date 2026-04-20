@@ -13,8 +13,8 @@ tags: ["docs"]
 
 This plugin adds a new storage engine for Amazon S3 that doesn't store or expose your AWS account credentials. Instead, it authenticates with a remote gatekeeper script and retrieves a secure, pre-signed URL that is used to perform requests.
 
-- Extensions
-  - Storage Engine
+- [Extensions](#extensions)
+  - [Storage Engine](#storage-engine)
 
 # Extensions
 
@@ -22,5 +22,5 @@ This plugin adds a new storage engine for Amazon S3 that doesn't store or expose
 
 | S3 Gatekeeper | `devblocks.storage.engine.gatekeeper` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

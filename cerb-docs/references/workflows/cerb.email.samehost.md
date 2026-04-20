@@ -5,9 +5,9 @@ url: "https://cerb.ai/workflows/cerb.email.samehost/"
 summary: "This page provides an implementation guide for the 'Find contacts from the same host' workflow in Cerb, which extracts emails from the same hostname and displays a list of matching contacts."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
 
 # Introduction
 

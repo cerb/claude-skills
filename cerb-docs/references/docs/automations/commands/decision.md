@@ -22,5 +22,5 @@ Each outcome must have a unique name.
 | Key | &nbsp; |
 | --- | --- |
 | `if@bool:` | This key should resolve to a `yes` or `no` value to determine whether this outcome is desirable. |
-| `then:` | If this outcome matches, the commands to run. |
+| `then:` | If this outcome matches, the [commands](/docs/automations/#commands) to run. |
 

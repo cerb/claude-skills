@@ -7,22 +7,22 @@ tags: ["docs"]
 ---
 You can think of a **ticket** as a brief project based on a specific question or issue.
 
-The ticket's profile page is a workspace that groups together email correspondence, comments, attachments, etc.
+The ticket's [profile](/docs/profiles/) page is a workspace that groups together email correspondence, comments, attachments, etc.
 
-Each ticket functions like a private mailing list. Any number of contacts may be subscribed to a ticket conversation as **participants**, and they will receive a copy of all outgoing email messages from your team.
+Each ticket functions like a private mailing list. Any number of [contacts](/docs/contacts/) may be subscribed to a ticket conversation as **participants**, and they will receive a copy of all outgoing email messages from your team.
 
-Tickets are sorted into buckets within groups.
+Tickets are sorted into [buckets](/docs/buckets/) within [groups](/docs/groups/).
 
-The worker who is currently responsible for a ticket's completion is its **owner**.
+The [worker](/docs/workers/) who is currently responsible for a ticket's completion is its **owner**.
 
-- Masks
-- Status
-- Importance
-- Response Times
-- Anti-spam
-- Drafts
-- Merge
-- Split
+- [Masks](#masks)
+- [Status](#status)
+- [Importance](#importance)
+- [Response Times](#response-times)
+- [Anti-spam](#anti-spam)
+- [Drafts](#drafts)
+- [Merge](#merge)
+- [Split](#split)
 
  
 
@@ -36,7 +36,7 @@ A contact can provide the first three letters of the mask for quick lookups.
 
 # Status
 
-The **status** of a ticket is always one of the following:
+The **status** of a [ticket](/docs/tickets/) is always one of the following:
 
 - **open**: the conversation needs worker attention.
 - **waiting for reply**: the conversation is on hold pending client action.
@@ -55,7 +55,7 @@ By default, when a ticket is deleted you will have 7 days from its last activity
 
 Ticket priority is determined by the **importance** field. You'll encounter importance as a simple slider where you can nudge it up or down as needed.
 
-The importance field can also be automatically adjusted by automations in response to service level committments, escalations, etc.
+The importance field can also be automatically adjusted by [automations](/docs/automations/) in response to service level committments, escalations, etc.
 
 # Response Times
 
@@ -69,11 +69,11 @@ When a worker responds to a specific client message, Cerb also records the respo
 
 # Anti-spam
 
-Cerb performs a simple statistical analysis of the contents of the first message on new tickets to predict whether a message is spam or not.
+Cerb performs a simple statistical analysis of the contents of the first message on new [tickets](/docs/tickets/) to predict whether a message is spam or not.
 
 The predicted probability of being spam is stored as a **spam score** on the ticket.
 
-By itself, this prediction has no effect on tickets. However, the computed score can be used by automations and workers to filter mail when desirable.
+By itself, this prediction has no effect on tickets. However, the computed score can be used by [automations](/docs/automations/) and [workers](/docs/workers/) to filter mail when desirable.
 
 The spam predictions improve and adapt over time through training. When a worker replies to a client message, Cerb learns to be more approving of similar messages in the future.
 

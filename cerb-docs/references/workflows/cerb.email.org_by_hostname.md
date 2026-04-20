@@ -5,12 +5,12 @@ url: "https://cerb.ai/workflows/cerb.email.org_by_hostname/"
 summary: "This page provides a detailed overview of the 'Sender Org By Hostname' workflow in Cerb, which is designed to automatically assign organizations to new email senders based on their email hostname. It includes sections on introduction, installation, usage, and reference. The workflow is integrated into Cerb version 11.0 and above, and can be enabled through the Cerb interface. The usage section explains how to assign email hostnames to organizations, simplifying processes like Service Level Agreements (SLAs). The reference section offers guidance on customizing the workflow, including changing identifiers and using a domain-based prefix. The page also includes a template for building a custom workflow, detailing the necessary fields, extensions, and automation scripts to facilitate the automatic assignment of organizations to email senders."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Assigning email hostnames to organizations
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Assigning email hostnames to organizations](#assigning-email-hostnames-to-organizations)
 
-- Reference
+- [Reference](#reference)
 
 # Introduction
 
@@ -18,7 +18,7 @@ This workflow automatically assigns organizations to new senders based on their 
 
 # Installation
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Sender Org By Hostname**.
 
@@ -38,7 +38,7 @@ In the **Email Hostnames:** field, click the **(+)** button and add an email hos
 
 Click the **Save Changes** button.
 
-When you receive a message from a new email address at that hostname it will automatically be assigned to the organization. This drastically simplifies workflows like Service Level Agreements (SLAs).
+When you receive a message from a new email address at that hostname it will automatically be assigned to the organization. This drastically simplifies workflows like [Service Level Agreements](/resources/workflows/cerb.sla/) (SLAs).
 
 # Reference
 

@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/guide/developers/dictionaries/"
 summary: "This page explains how Cerb uses dictionaries to represent records, simplifying complex hierarchical data structures into flat key-value pairs. This approach enhances the functionality of various features like automations, toolbars, data queries, and the API by reducing complexity and improving performance. The page details how dictionaries replace tree-based data models, allowing for easier iteration and access to data without recursion. It introduces the concept of 'key expansion,' where only necessary data is loaded on demand, optimizing resource use. The page also describes how Cerb handles linked records through lazy loading, ensuring efficient data retrieval and management."
 tags: ["docs"]
 ---
-Every record in Cerb can be represented as a **dictionary**.
+Every [record](/docs/records/) in Cerb can be represented as a **dictionary**.
 
-Dictionaries are used to power many features, including automations, toolbars, data queries, sheets, snippets, dashboards, worklists, and the API.
+Dictionaries are used to power many features, including [automations](/docs/automations/), [toolbars](/docs/toolbars/), [data queries](/docs/data-queries/), [sheets](/docs/sheets/), [snippets](/docs/snippets/), [dashboards](/docs/dashboards/), [worklists](/docs/worklists/), and the [API](/docs/api/).
 
 A dictionary is a flat list of **keys** and their associated **values**.
 
@@ -74,7 +74,7 @@ The above example as a tree-based object would be:
 
 These relationship trees can become quite complex. You can imagine how tedious it would be to use a model like this in bots:
 
-- To iterate through all the key/value pairs, you would need to use recursion1.
+- To iterate through all the key/value pairs, you would need to use recursion[1](#fn:recursion).
 
 - You have to first check that each parent node exists to access a deeply nested key.
 
@@ -114,7 +114,7 @@ bucket__context : " cerberusweb.contexts.bucket" bucket_id : 6 group__context : 
 
 These keys are placeholders for linked records that are not loaded by default.
 
-When you request a key that needs data from other records, Cerb will automatically _lazy load_ 2 it. We call this process **key expansion**.
+When you request a key that needs data from other records, Cerb will automatically _lazy load_ [2](#fn:lazy-loading) it. We call this process **key expansion**.
 
 For instance, let's assume you wanted the name of the group that the ticket is assigned to. Here's the placeholder for that record:
 
@@ -168,7 +168,7 @@ When working with multiple dictionaries, it's also possible to expand the same k
 
 # References
 
-1. http://en.wikipedia.org/wiki/Recursion\_(computer\_science))&nbsp;↩
+1. http://en.wikipedia.org/wiki/Recursion\_(computer\_science))&nbsp;[↩](#fnref:recursion)
 
-2. http://en.wikipedia.org/wiki/Lazy\_loading&nbsp;↩
+2. http://en.wikipedia.org/wiki/Lazy\_loading&nbsp;[↩](#fnref:lazy-loading)
 

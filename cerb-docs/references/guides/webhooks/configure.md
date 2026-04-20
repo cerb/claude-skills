@@ -5,22 +5,22 @@ url: "https://cerb.ai/guides/webhooks/configure/"
 summary: "This page provides a comprehensive guide on configuring webhooks in Cerb. It covers enabling the webhooks plugin, importing an automation to handle webhooks, creating a webhook, and testing it using a web browser or cURL. The guide explains how webhooks can trigger automations in response to external events from applications like Freshbooks, GitHub, Twilio, and Zapier. It includes detailed steps for setting up and testing webhooks, as well as suggestions for next steps, such as adding new actions or registering the webhook URL with external services. References to Wikipedia articles on webhooks and HTTP POST are also provided for further reading."
 tags: ["guides"]
 ---
-- Introduction
-- Enable the webhooks plugin
-- Import an automation to handle the webhook
-- Create the webhook
-- Test the webhook
-  - Testing in a web browser
-  - Testing with cURL
+- [Introduction](#introduction)
+- [Enable the webhooks plugin](#enable-the-webhooks-plugin)
+- [Import an automation to handle the webhook](#import-an-automation-to-handle-the-webhook)
+- [Create the webhook](#create-the-webhook)
+- [Test the webhook](#test-the-webhook)
+  - [Testing in a web browser](#testing-in-a-web-browser)
+  - [Testing with cURL](#testing-with-curl)
 
-- Next steps
-- References
+- [Next steps](#next-steps)
+- [References](#references)
 
 # Introduction
 
-With Cerb, you can create automations to automatically react to events taking place within the system – a new assignment, a new incoming message, a task being completed, any record changing, etc.
+With Cerb, you can create [automations](/docs/automations/) to automatically react to events taking place within the system – a new assignment, a new incoming message, a task being completed, any record changing, etc.
 
-**Webhooks** 1 provide a way to trigger automations when _external events_ occur in other applications and services.
+**Webhooks** [1](#fn:webhook) provide a way to trigger automations when _external events_ occur in other applications and services.
 
 For instance:
 
@@ -29,7 +29,7 @@ For instance:
 - **Twilio** can trigger a webhook when a new call or text message is received.
 - **Zapier** can trigger a webhook based on hundreds of different events.
 
-A webhook is simply a special URL that accepts an HTTP POST2 with some data when an event occurs.
+A webhook is simply a special URL that accepts an HTTP POST[2](#fn:http-post) with some data when an event occurs.
 
 You can create webhook URLs in Cerb and associate them with specific automations.
 
@@ -129,7 +129,7 @@ You can register the URL with an external app or service so that it automaticall
 
 # References
 
-1. Wikipedia: Webhook - https://en.wikipedia.org/wiki/Webhook&nbsp;↩
+1. Wikipedia: Webhook - https://en.wikipedia.org/wiki/Webhook&nbsp;[↩](#fnref:webhook)
 
-2. Wikipedia: HTTP POST - https://en.wikipedia.org/wiki/POST\_(HTTP))&nbsp;↩
+2. Wikipedia: HTTP POST - https://en.wikipedia.org/wiki/POST\_(HTTP))&nbsp;[↩](#fnref:http-post)
 

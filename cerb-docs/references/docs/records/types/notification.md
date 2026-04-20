@@ -10,27 +10,27 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | notification |
 | **Identifier (ID):** | cerberusweb.contexts.notification |
 
-- Records API
-  - params
+- [Records API](#records-api)
+  - [params](#params)
 
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| **x** | **`activity_point`** | text | The event that triggered the notification (or `custom.other`) |
-| &nbsp; | `created` | timestamp | The date/time when this record was created |
-| &nbsp; | `is_read` | boolean | Has this been read by the worker? |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`params`** | object | A key/value object of notification properties |
-| &nbsp; | `target__context` | context | The record type of the target record |
-| &nbsp; | `target_id` | number | The ID of the target record |
-| **x** | **`worker_id`** | number | The ID of the worker who received the notification |
+| **x** | **`activity_point`** | [text](/docs/records/fields/types/text/) | The event that triggered the notification (or `custom.other`) |
+| &nbsp; | `created` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was created |
+| &nbsp; | `is_read` | [boolean](/docs/records/fields/types/boolean/) | Has this been read by the worker? |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`params`** | [object](/docs/records/fields/types/object/) | A key/value object of notification properties |
+| &nbsp; | `target__context` | [context](/docs/records/fields/types/context/) | The [record type](/docs/records/types/) of the target record |
+| &nbsp; | `target_id` | [number](/docs/records/fields/types/number/) | The ID of the target record |
+| **x** | **`worker_id`** | [number](/docs/records/fields/types/number/) | The ID of the [worker](/docs/records/types/worker/) who received the notification |
 
 #### params
 
@@ -42,15 +42,15 @@ These fields are available in the Records API and packages:
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `activity_point` | text | Activity |
-| `assignee_` | record | Assignee |
+| `assignee_` | record | [Assignee](/docs/records/types/worker/) |
 | `created` | date | Created |
 | `event_json` | text | Event Json |
 | `id` | number | Id |
@@ -60,28 +60,28 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `target_` | record | Target |
 | `url` | text | Url |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `links` | links | Links |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in notification search queries:
+These [filters](/docs/search/#filters) are available in notification [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `activity:` | text | Activity |
-| `created:` | date | Created |
-| `id:` | number | Id |
-| `isRead:` | boolean | Is Read |
-| `worker:` | record | Worker |
-| `worker.id:` | chooser | Worker |
+| `activity:` | [text](/docs/search/#text) | Activity |
+| `created:` | [date](/docs/search/#dates) | Created |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `isRead:` | [boolean](/docs/search/#booleans) | Is Read |
+| `worker:` | [record](/docs/search/#deep-search) | [Worker](/docs/records/types/worker/) |
+| `worker.id:` | [chooser](/docs/search/#choosers) | [Worker](/docs/records/types/worker/) |
 
 ### Worklist Columns
 
-These columns are available on notification worklists:
+These columns are available on notification [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -91,5 +91,5 @@ These columns are available on notification worklists:
 | `we_is_read` | Is Read |
 | `we_worker_id` | Worker |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

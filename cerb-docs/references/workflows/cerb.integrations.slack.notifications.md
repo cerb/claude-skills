@@ -5,17 +5,17 @@ url: "https://cerb.ai/workflows/cerb.integrations.slack.notifications/"
 summary: "This page provides a comprehensive guide on integrating Cerb with Slack to send notifications to Slack channels. It covers the installation process, including the necessary requirements for both Slack and Cerb, and details on configuring the workflow within Cerb. The guide explains how to enable Slack notifications for specific groups, allowing users to receive alerts in designated Slack channels when new messages are received. Additionally, it offers a reference template for building custom Slack notification workflows, complete with configuration details and automation scripts for posting messages to Slack channels."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-  - Requirements
-  - Slack
-  - Cerb
-    - Configure the workflow
+- [Introduction](#introduction)
+- [Installation](#installation)
+  - [Requirements](#requirements)
+  - [Slack](#slack)
+  - [Cerb](#cerb)
+    - [Configure the workflow](#configure-the-workflow)
 
-- Usage
-  - Enabling Slack notifications per group
+- [Usage](#usage)
+  - [Enabling Slack notifications per group](#enabling-slack-notifications-per-group)
 
-- Reference
+- [Reference](#reference)
 
 # Introduction
 
@@ -25,7 +25,7 @@ This workflow integrates Cerb with Slack for sending notifications to channels.
 
 ## Requirements
 
-Create a Slack connected account if you haven't already.
+[Create a Slack connected account](/solutions/integrations/slack/) if you haven't already.
 
 ## Slack
 
@@ -41,7 +41,7 @@ Click **Add** to the right of the **Cerb** app.
 
 ## Cerb
 
-This workflow is built into Cerb 11.0+. It will automatically update.
+This workflow is built into Cerb [11.0+](/releases/11.0/). It will automatically update.
 
 You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Slack Notifications**.
 
@@ -49,7 +49,7 @@ You can enable it from **Search&nbsp;» Workflows&nbsp;» (+)&nbsp;» Slack Noti
 
 | Field | &nbsp; |
 | --- | --- |
-| **Slack Account:** | A Slack connected account. |
+| **Slack Account:** | A Slack [connected account](/solutions/integrations/slack/). |
 
 Click the **Continue** button twice.
 

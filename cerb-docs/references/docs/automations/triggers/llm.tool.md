@@ -5,19 +5,19 @@ url: "https://cerb.ai/docs/automations/triggers/llm.tool/"
 summary: "This page provides an overview of the **llm.tool** feature in Cerb, which allows for the creation of reusable shared functions that can be triggered by AI agents using large language models. It details the structure of inputs and outputs for these functions, explaining that the automation dictionary begins with custom input values from the caller. The page also describes how the function returns key/value pairs to the caller, with the possibility of nesting keys to return dictionaries."
 tags: ["docs", "docs-automations"]
 ---
-**llm.tool** automations are reusable shared tools triggered by the llm.agent: command using large language models.
+**llm.tool** [automations](/docs/automations/) are reusable shared tools triggered by the [llm.agent:](/docs/automations/commands/llm.agent/) command using large language models.
 
 The description and inputs are used by the AI agent to understand how to use the tool.
 
-(Added in 11.1)
+(Added in [11.1](/releases/11.1/))
 
 # Inputs
 
-The automation dictionary starts with the following values:
+The automation [dictionary](/docs/automations/#dictionaries) starts with the following values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| `inputs` | dictionary | Custom input values from the AI agent |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the AI agent |
 
 # Outputs
 
@@ -33,10 +33,10 @@ return: content@text: This is the result of the tool.
 
 ## Search Cerb documentation
 
-- automation
-- policy
-- inputs
-- output
+- [automation](#)
+- [policy](#)
+- [inputs](#)
+- [output](#)
 
 - 
 ```

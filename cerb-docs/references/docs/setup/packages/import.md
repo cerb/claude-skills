@@ -7,5 +7,5 @@ tags: ["docs"]
 ---
  
 
-Administrators can paste packages here to import them.
+Administrators can paste [packages](/docs/packages/) here to import them.
 

@@ -5,21 +5,21 @@ url: "https://cerb.ai/solutions/integrations/azure/"
 summary: "This page provides a detailed guide on integrating Cerb with Office365 by configuring a Microsoft Entra app and setting up Cerb. It includes step-by-step instructions for creating a new app and client secret in Azure, as well as creating a connected service and account in Cerb. The guide is designed to help users automate tasks using Azure APIs with Cerb bots. It concludes with a reference to further steps for authenticating an Office365 mailbox using XOAUTH2."
 tags: ["solutions"]
 ---
-- Introduction
-- Configure an Entra app
-  - Create a new app
-  - Create client secret
+- [Introduction](#introduction)
+- [Configure an Entra app](#configure-an-entra-app)
+  - [Create a new app](#create-a-new-app)
+  - [Create client secret](#create-client-secret)
 
-- Configure Cerb
-  - Create the connected service
-  - Create the connected account
+- [Configure Cerb](#configure-cerb)
+  - [Create the connected service](#create-the-connected-service)
+  - [Create the connected account](#create-the-connected-account)
 
-- Troubleshooting
-  - When linking the connected account I get an "invalid\_client" error
-  - The access token stops working after an hour and isn't refreshed
-  - The connected account stops working after several months
+- [Troubleshooting](#troubleshooting)
+  - [When linking the connected account I get an "invalid\_client" error](#when-linking-the-connected-account-i-get-an-invalid_client-error)
+  - [The access token stops working after an hour and isn't refreshed](#the-access-token-stops-working-after-an-hour-and-isnt-refreshed)
+  - [The connected account stops working after several months](#the-connected-account-stops-working-after-several-months)
 
-- Next steps
+- [Next steps](#next-steps)
 
 # Introduction
 
@@ -103,5 +103,5 @@ The `offline_access` scope is required for Cerb to automatically renew the acces
 
 # Next steps
 
-See: Authenticate an Office365 mailbox using XOAUTH2
+See: [Authenticate an Office365 mailbox using XOAUTH2](/guides/integrations/azure/o365-xoauth/)
 

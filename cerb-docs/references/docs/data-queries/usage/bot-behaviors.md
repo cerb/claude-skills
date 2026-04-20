@@ -9,9 +9,9 @@ tags: ["docs"]
 
 `usage.behaviors` data queries return historical usage data for bot behaviors (e.g. uses, avg. runtime, and total runtime over time).
 
-- Inputs
-- Response Formats
-- Examples
+- [Inputs](#inputs)
+- [Response Formats](#response-formats)
+- [Examples](#examples)
 
 # Inputs
 

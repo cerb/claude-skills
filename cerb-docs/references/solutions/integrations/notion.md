@@ -5,12 +5,12 @@ url: "https://cerb.ai/solutions/integrations/notion/"
 summary: "This page provides a step-by-step guide for integrating Cerb with Notion, a collaborative notebook and planner. To get started, users must log in to their Notion account, create an internal integration on the integrations page, and copy the API key. Then, they navigate to Cerb's connected services section, select 'Notion', paste the API key, and click 'Create'. The guide includes examples of how to use the Notion API for automations in Cerb, such as listing users with a GET request and searching documents with a POST request."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a Notion API Key.
-- Create the Notion service in Cerb
-- Examples
-  - List users
-  - Search
+- [Introduction](#introduction)
+- [Get a Notion API Key.](#get-a-notion-api-key)
+- [Create the Notion service in Cerb](#create-the-notion-service-in-cerb)
+- [Examples](#examples)
+  - [List users](#list-users)
+  - [Search](#search)
 
 # Introduction
 

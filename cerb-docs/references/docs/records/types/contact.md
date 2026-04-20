@@ -10,47 +10,47 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | contact |
 | **Identifier (ID):** | cerberusweb.contexts.contact |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `dob` | text | Date of birth: `YYYY-MM-DD` |
-| &nbsp; | `email` | text | Email address (e.g. `customer@example.com`); alternative to `email_id` |
-| &nbsp; | `email_id` | number | ID of this contact's primary email address |
-| **x** | **`first_name`** | text | Given name |
-| &nbsp; | `gender` | text | Gender: `F` (female), `M` (male), or blank |
-| &nbsp; | `image` | image | The profile image, base64-encoded in data URI format |
-| &nbsp; | `language` | text | Language: `en_US` |
-| &nbsp; | `last_login_at` | timestamp | Date of their last community portal login |
-| &nbsp; | `last_name` | text | Surname |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| &nbsp; | `location` | text | Location (e.g. `Los Angeles, California, USA`) |
-| &nbsp; | `mobile` | text | Mobile number |
-| &nbsp; | `org` | text | Organization (e.g. `Fiaflux Software`); alternative to `org_id` |
-| &nbsp; | `org_id` | number | ID of this contact's organization |
-| &nbsp; | `phone` | text | Phone number |
-| &nbsp; | `timezone` | text | Timezone (e.g. `America/Los_Angeles`) |
-| &nbsp; | `title` | text | Job title / Position |
-| &nbsp; | `username` | text | Username for public display |
+| &nbsp; | `dob` | [text](/docs/records/fields/types/text/) | Date of birth: `YYYY-MM-DD` |
+| &nbsp; | `email` | [text](/docs/records/fields/types/text/) | Email address (e.g. `customer@example.com`); alternative to `email_id` |
+| &nbsp; | `email_id` | [number](/docs/records/fields/types/number/) | ID of this contact's primary [email address](/docs/records/types/address/) |
+| **x** | **`first_name`** | [text](/docs/records/fields/types/text/) | Given name |
+| &nbsp; | `gender` | [text](/docs/records/fields/types/text/) | Gender: `F` (female), `M` (male), or blank |
+| &nbsp; | `image` | [image](/docs/records/fields/types/image/) | The profile image, base64-encoded in data URI format |
+| &nbsp; | `language` | [text](/docs/records/fields/types/text/) | Language: `en_US` |
+| &nbsp; | `last_login_at` | [timestamp](/docs/records/fields/types/timestamp/) | Date of their last [community portal](/docs/portals/) login |
+| &nbsp; | `last_name` | [text](/docs/records/fields/types/text/) | Surname |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| &nbsp; | `location` | [text](/docs/records/fields/types/text/) | Location (e.g. `Los Angeles, California, USA`) |
+| &nbsp; | `mobile` | [text](/docs/records/fields/types/text/) | Mobile number |
+| &nbsp; | `org` | [text](/docs/records/fields/types/text/) | Organization (e.g. `Fiaflux Software`); alternative to `org_id` |
+| &nbsp; | `org_id` | [number](/docs/records/fields/types/number/) | ID of this contact's [organization](/docs/records/types/org/) |
+| &nbsp; | `phone` | [text](/docs/records/fields/types/text/) | Phone number |
+| &nbsp; | `timezone` | [text](/docs/records/fields/types/text/) | Timezone (e.g. `America/Los_Angeles`) |
+| &nbsp; | `title` | [text](/docs/records/fields/types/text/) | Job title / Position |
+| &nbsp; | `username` | [text](/docs/records/fields/types/text/) | Username for public display |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `dob` | text | Date Of Birth |
-| `email_` | record | Email |
+| `email_` | record | [Email](/docs/records/types/address/) |
 | `first_name` | text | First Name |
 | `gender` | text | Gender |
 | `id` | number | Id |
@@ -60,7 +60,7 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `location` | text | Location |
 | `mobile` | text | Mobile |
 | `name` | text | Name |
-| `org_` | record | Org |
+| `org_` | record | [Org](/docs/records/types/org/) |
 | `phone` | text | Phone |
 | `record_url` | text | Record Url |
 | `timezone` | text | Timezone |
@@ -68,51 +68,51 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `updated_at` | date | Updated |
 | `username` | text | Username |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
 | `emails` | records | Email Addresses |
-| `last_recipient_message` | record | Latest Message Received To |
-| `last_sender_message` | record | Latest Message Sent From |
-| `links` | links | Links |
-| `watchers` | watchers | Watchers |
+| `last_recipient_message` | record | Latest [Message](/docs/records/types/message/) Received To |
+| `last_sender_message` | record | Latest [Message](/docs/records/types/message/) Sent From |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
+| `watchers` | watchers | [Watchers](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in contact search queries:
+These [filters](/docs/search/#filters) are available in contact [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
 | `alias:` | virtual | Aliases |
-| `comments:` | fulltext | Comment Content |
-| `created:` | date | Created |
-| `email:` | record | Email |
-| `email.id:` | chooser | Email |
-| `fieldset:` | record | Fieldset |
-| `firstName:` | text | First Name |
-| `gender:` | text | Gender |
-| `id:` | number | Id |
-| `lang:` | text | Language |
-| `lastLogin:` | date | Last Login |
-| `lastName:` | text | Last Name |
-| `links:` | links | Record Links |
-| `mobile:` | text | Mobile |
-| `org:` | record | Org |
-| `org.id:` | chooser | Organization |
-| `phone:` | text | Phone |
-| `timezone:` | text | Timezone |
-| `title:` | text | Title |
-| `updated:` | date | Updated |
-| `username:` | text | Username |
-| `watchers:` | record | Watchers |
+| `comments:` | [fulltext](/docs/search/#fulltext) | Comment Content |
+| `created:` | [date](/docs/search/#dates) | Created |
+| `email:` | [record](/docs/search/#deep-search) | [Email](/docs/records/types/address/) |
+| `email.id:` | [chooser](/docs/search/#choosers) | [Email](/docs/records/types/address/) |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `firstName:` | [text](/docs/search/#text) | First Name |
+| `gender:` | [text](/docs/search/#text) | Gender |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `lang:` | [text](/docs/search/#text) | Language |
+| `lastLogin:` | [date](/docs/search/#dates) | Last Login |
+| `lastName:` | [text](/docs/search/#text) | Last Name |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `mobile:` | [text](/docs/search/#text) | Mobile |
+| `org:` | [record](/docs/search/#deep-search) | [Org](/docs/records/types/org/) |
+| `org.id:` | [chooser](/docs/search/#choosers) | [Organization](/docs/records/types/org/) |
+| `phone:` | [text](/docs/search/#text) | Phone |
+| `timezone:` | [text](/docs/search/#text) | Timezone |
+| `title:` | [text](/docs/search/#text) | Title |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `username:` | [text](/docs/search/#text) | Username |
+| `watchers:` | [record](/docs/search/#deep-search) | [Watchers](/docs/records/types/worker/) |
 
 ### Worklist Columns
 
-These columns are available on contact worklists:
+These columns are available on contact [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -133,7 +133,7 @@ These columns are available on contact worklists:
 | `c_title` | Title |
 | `c_updated_at` | Updated |
 | `c_username` | Username |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

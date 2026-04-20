@@ -5,7 +5,7 @@ url: "https://cerb.ai/tips/estimate-seat-usage/"
 summary: "This page provides tips on estimating seat usage from activity log data. It suggests using data queries to retrieve raw data, such as the number of activity logs by worker over the past week, and offers examples of queries that can be run using the Data Query Tester, including filtering workers by group and showing distinct workers per day."
 tags: ["tips"]
 ---
-You can use a data query to get at raw data like the activity log counts by worker over the past week. This can help you estimate seat usage and if you have the correct ammount.
+You can use a [data query](docs/data-queries/) to get at raw data like the activity log counts by worker over the past week. This can help you estimate seat usage and if you have the correct ammount.
 
 You can add these queries to a chart or run then in the data query tester found in **Setup&nbsp;» Developers&nbsp;» Data Query Tester**:
 

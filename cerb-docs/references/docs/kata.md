@@ -9,7 +9,7 @@ tags: ["docs"]
 
 https://www.youtube.com/embed/6zaCwWaRV2c
 
-KATA was inspired by YAML1 but avoids many of its pitfalls2.
+KATA was inspired by YAML[1](#fn:yaml) but avoids many of its pitfalls[2](#fn:no-yaml).
 
 | Pitfall | YAML | KATA |
 | --- | --- | --- |
@@ -20,36 +20,36 @@ KATA was inspired by YAML1 but avoids many of its pitfalls2.
 | Lists | YAML requires `-` prefixes on list items and is sensitive to indentation. Lists are required for duplicate key names amongst siblings. Mistakes with lists of objects can lead to children being added to the wrong parent. | KATA has `@csv` and `@list` key annotations for text-based lists. Sibling keys can be repeated with unique identifiers and never require list syntax. |
 | Comments | YAML ignores any text following an unquoted `#` character. | KATA only treats indented lines that begin with `#` as a comment. You do not need to escape the character in values. |
 
-- Syntax
-  - Indentation
-  - Root
-  - Key names
-  - Values
-  - Whitespace
-  - Key annotations
-  - Text blocks
-  - Comments
-  - References
+- [Syntax](#syntax)
+  - [Indentation](#indentation)
+  - [Root](#root)
+  - [Key names](#key-names)
+  - [Values](#values)
+  - [Whitespace](#whitespace)
+  - [Key annotations](#key-annotations)
+  - [Text blocks](#text-blocks)
+  - [Comments](#comments)
+  - [References](#references)
 
-- Dictionaries
-- Annotation Reference
-  - base64
-  - bit
-  - bool
-  - csv
-  - date
-  - int
-  - json
-  - kata
-  - key
-  - list
-  - nowrap
-  - raw
-  - ref
-  - text
-  - trim
+- [Dictionaries](#dictionaries)
+- [Annotation Reference](#annotation-reference)
+  - [base64](#base64)
+  - [bit](#bit)
+  - [bool](#bool)
+  - [csv](#csv)
+  - [date](#date)
+  - [int](#int)
+  - [json](#json)
+  - [kata](#kata)
+  - [key](#key)
+  - [list](#list)
+  - [nowrap](#nowrap)
+  - [raw](#raw)
+  - [ref](#ref)
+  - [text](#text)
+  - [trim](#trim)
 
-- Footnotes
+- [Footnotes](#footnotes)
 
 # Syntax
 
@@ -112,7 +112,7 @@ widget/chart: type: chart label: Chart data: ...
 
 KATA does not perform type coercion on key values. It will not unpredictably convert digits to numbers, nor words like `true` or `no` to booleans. All values are treated as text by default.
 
-To manipulate values, a comma-separated list of annotations may be appended to a key name starting with a `@` character. The annotations are processed in order.
+To manipulate values, a comma-separated list of [annotations](#annotation-reference) may be appended to a key name starting with a `@` character. The annotations are processed in order.
 
 ```
 picklist: options: color@csv: red, green, blue multiple@bool: no hidden@bool: {% if has_access %} no {% else %} yes {% endif %}
@@ -189,11 +189,11 @@ picklist: options@list: red green blue
 
 # Dictionaries
 
-Features that use KATA may enable scripting and provide a dictionary of placeholders for dynamic content.
+Features that use KATA may enable [scripting](/docs/scripting/) and provide a [dictionary](/docs/guide/developers/dictionaries/) of placeholders for dynamic content.
 
 Placeholders and scripting may be used in any value and do not require escaping.
 
-Use the @raw annotation to prevent tags from being parsed.
+Use the [@raw](#raw) annotation to prevent tags from being parsed.
 
 ```
 chooser: label: {{ label }} params: record_type: {{ record_type }}
@@ -203,7 +203,7 @@ chooser: label: {{ label }} params: record_type: {{ record_type }}
 
 ### base64
 
-`@base64` converts a key's value from base64-encoded3 text into binary. This is particularly useful for HMAC keys and images.
+`@base64` converts a key's value from base64-encoded[3](#fn:base64) text into binary. This is particularly useful for HMAC keys and images.
 
 ```
 image@base64: QnVzdGVkISBUaGlzIGlzIG5vdCByZWFsbHkgYW4gaW1hZ2Uu
@@ -293,7 +293,7 @@ records@kata: {% for doc in docs %} record/ {{ doc.id }} : name: {{ doc.name }} 
 
 ### key
 
-`@key` sets the value from a dictionary path.
+`@key` sets the value from a [dictionary](#dictionaries) path.
 
 ```
 http_status@key: response.http.status.code
@@ -317,9 +317,9 @@ content@nowrap: This is a _bunch_ of content on several lines that will be treat
 
 ### raw
 
-`@raw` returns a key's text without substituting `{{placeholders}}` or executing bot scripts using the dictionary.
+`@raw` returns a key's text without substituting `{{placeholders}}` or executing [bot scripts](/docs/scripting/) using the [dictionary](#dictionaries).
 
-This is useful for returning templates to other functionality (e.g. sheets).
+This is useful for returning templates to other functionality (e.g. [sheets](/docs/sheets/)).
 
 ```
 template@raw: {{ person }} is {{ title }} at {{ organization }}
@@ -333,7 +333,7 @@ This can target a reference by name (`key@ref: target`) or by path (`key@ref: ta
 
 The annotations of the target key replace the `@ref`, and any remaining annotations apply to the copied content.
 
-See: References
+See: [References](#references)
 
 ```
 event/start@ref: menu 
@@ -368,9 +368,9 @@ content@trim: this has no whitespace
 
 # Footnotes
 
-1. YAML: https://yaml.org&nbsp;↩
+1. YAML: https://yaml.org&nbsp;[↩](#fnref:yaml)
 
-2. NoYAML: https://noyaml.com&nbsp;↩
+2. NoYAML: https://noyaml.com&nbsp;[↩](#fnref:no-yaml)
 
-3. Base64: https://en.wikipedia.org/wiki/Base64&nbsp;↩
+3. Base64: https://en.wikipedia.org/wiki/Base64&nbsp;[↩](#fnref:base64)
 

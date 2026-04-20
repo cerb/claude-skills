@@ -5,40 +5,40 @@ url: "https://cerb.ai/guides/machine-learning/question-answering/faq-bot-chatgpt
 summary: "This webpage provides a comprehensive guide on building a question-answering chatbot using Cerb and ChatGPT, focusing on semantic search and retrieval-augmented generation. It explains the concept of semantic search, the role of large language models (LLMs), and the use of text embeddings to compare text similarity. The guide details the process of connecting to the OpenAI API, creating a chatbot (Beethoven Bot) for answering FAQs, and managing FAQs within Cerb. It also covers importing FAQ data, testing semantic search, and customizing the chatbot. Additionally, it provides instructions for creating a new FAQ bot on a different topic, customizing bot features, and scaling for larger FAQs or high-traffic scenarios using vector databases. The guide is designed for administrators using Cerb 10.4.3 or later and includes practical steps for implementing and testing the chatbot functionality."
 tags: ["guides"]
 ---
-- Introduction
-  - What is semantic search?
-    - Large language models (LLMs)
-    - Text embeddings
-    - Comparing the similarity of text embeddings
-    - Text embeddings as a service
-    - Fine-tuning an LLM for your use case
+- [Introduction](#introduction)
+  - [What is semantic search?](#what-is-semantic-search)
+    - [Large language models (LLMs)](#large-language-models-llms)
+    - [Text embeddings](#text-embeddings)
+    - [Comparing the similarity of text embeddings](#comparing-the-similarity-of-text-embeddings)
+    - [Text embeddings as a service](#text-embeddings-as-a-service)
+    - [Fine-tuning an LLM for your use case](#fine-tuning-an-llm-for-your-use-case)
 
-- Text generation using ChatGPT
-  - Retrieval-augmented generation
+- [Text generation using ChatGPT](#text-generation-using-chatgpt)
+  - [Retrieval-augmented generation](#retrieval-augmented-generation)
 
-- Connecting to the OpenAI API
-  - Create a connected service
-  - Import the OpenAI automations package
-  - Test the embeddings automation
+- [Connecting to the OpenAI API](#connecting-to-the-openai-api)
+  - [Create a connected service](#create-a-connected-service)
+  - [Import the OpenAI automations package](#import-the-openai-automations-package)
+  - [Test the embeddings automation](#test-the-embeddings-automation)
 
-- Create Beethoven Bot
-  - Common automations for all FAQs
-  - Beethoven Bot
+- [Create Beethoven Bot](#create-beethoven-bot)
+  - [Common automations for all FAQs](#common-automations-for-all-faqs)
+  - [Beethoven Bot](#beethoven-bot)
 
-- Managing FAQs in Cerb
-  - Sample FAQ data
-  - Import FAQ entries
-  - Test semantic search
+- [Managing FAQs in Cerb](#managing-faqs-in-cerb)
+  - [Sample FAQ data](#sample-faq-data)
+  - [Import FAQ entries](#import-faq-entries)
+  - [Test semantic search](#test-semantic-search)
 
-- Add a new FAQ bot with your own topic
-  - Add a new topic to the custom field
-  - Use the package to create your new bot
-  - Chat with your bot
-  - Customizing your FAQ bot
-    - Changing your bot image
-    - Changing the global menu item
-    - Disabling text generation
-    - Scaling for large FAQs or busy bots
+- [Add a new FAQ bot with your own topic](#add-a-new-faq-bot-with-your-own-topic)
+  - [Add a new topic to the custom field](#add-a-new-topic-to-the-custom-field)
+  - [Use the package to create your new bot](#use-the-package-to-create-your-new-bot)
+  - [Chat with your bot](#chat-with-your-bot)
+  - [Customizing your FAQ bot](#customizing-your-faq-bot)
+    - [Changing your bot image](#changing-your-bot-image)
+    - [Changing the global menu item](#changing-the-global-menu-item)
+    - [Disabling text generation](#disabling-text-generation)
+    - [Scaling for large FAQs or busy bots](#scaling-for-large-faqs-or-busy-bots)
 
 # Introduction
 
@@ -46,7 +46,7 @@ In this guide we're going to build a chat bot that answers questions from a FAQ 
 
 The goal is for you to create a bot that can answer common questions about your own organization or product. For demonstration purposes, we'll create **Beethoven Bot** to answer questions about music theory.
 
-To follow this guide you will need to be an administrator in Cerb 10.4.3 or later. You can also install a copy of Cerb on your computer using Docker.
+To follow this guide you will need to be an administrator in Cerb [10.4.3](/releases/10.4.3/) or later. You can also [install a copy of Cerb on your computer using Docker](/docs/installation/docker/).
 
  
 
@@ -202,11 +202,11 @@ Paste your API key from: https://platform.openai.com/account/api-keys
 
 Click the **Create** button.
 
-You can now use the OpenAI API from Cerb automations.
+You can now use the OpenAI API from Cerb [automations](/docs/automations/).
 
 ### Import the OpenAI automations package
 
-Here's a package of reference examples for using the OpenAI API.
+Here's a [package](/docs/packages/) of reference examples for using the OpenAI API.
 
 Import it in Cerb from **Setup&nbsp;» Packages&nbsp;» Import**:
 
@@ -275,7 +275,7 @@ Close the automation editor popup by clicking the **x** in the top right.
 
 # Create Beethoven Bot
 
-Let's make the new semantic search FAQ available to workers through an interaction.
+Let's make the new semantic search FAQ available to workers through an [interaction](/docs/interactions/).
 
 ### Common automations for all FAQs
 

@@ -5,23 +5,23 @@ url: "https://cerb.ai/guides/portals/cloudflare-proxy/"
 summary: "This page provides a detailed guide on hosting Cerb community portals using Cloudflare Workers. It introduces Cloudflare's edge computing platform as an alternative to traditional reverse proxy solutions for hosting community portals. The guide includes step-by-step instructions for setting up DNS, configuring Cloudflare Workers, and implementing a custom JavaScript proxy script. It covers domain configuration, Worker deployment, custom domain routing, and portal path mapping. Additionally, it provides the complete Worker script code and instructions for testing the community portal. The page is aimed at users who want to leverage Cloudflare's global CDN and edge computing capabilities to host their community portals efficiently and securely."
 tags: ["guides"]
 ---
-- Introduction
-- Add domain to Cloudflare
-- Configure DNS records
-- Create a Cloudflare Worker
-- Configure the Worker script
-- Add custom domain to Worker
-- Test the community portal
-- Related resources
-- References
+- [Introduction](#introduction)
+- [Add domain to Cloudflare](#add-domain-to-cloudflare)
+- [Configure DNS records](#configure-dns-records)
+- [Create a Cloudflare Worker](#create-a-cloudflare-worker)
+- [Configure the Worker script](#configure-the-worker-script)
+- [Add custom domain to Worker](#add-custom-domain-to-worker)
+- [Test the community portal](#test-the-community-portal)
+- [Related resources](#related-resources)
+- [References](#references)
 
 # Introduction
 
-We provide a simple, PHP-based reverse proxy script for hosting community portals from any web server. You'll find this `index.php` file on the **Installation** tab of your community portal configuration. This is useful for testing; allowing you to serve a community portal from a directory on an existing website, or from the built-in PHP webserver.
+We provide a simple, PHP-based reverse proxy script for hosting [community portals](/docs/portals/) from any web server. You'll find this `index.php` file on the **Installation** tab of your community portal configuration. This is useful for testing; allowing you to serve a community portal from a directory on an existing website, or from the built-in PHP webserver.
 
-However, you can also use Cloudflare Workers1 to serve community portals. This approach leverages Cloudflare's global edge network and provides excellent performance and reliability. With this approach you can completely ignore the `index.php` script.
+However, you can also use Cloudflare Workers[1](#fn:cloudflare-workers) to serve community portals. This approach leverages Cloudflare's global edge network and provides excellent performance and reliability. With this approach you can completely ignore the `index.php` script.
 
-If you're a Cerb Cloud subscriber, we include high-availability community portal hosting. However, using Cloudflare provides their full suite of tools like DDoS protection.
+If you're a [Cerb Cloud](/pricing/) subscriber, we include high-availability community portal hosting. However, using Cloudflare provides their full suite of tools like DDoS protection.
 
 # Add domain to Cloudflare
 
@@ -91,10 +91,10 @@ The Worker will:
 
 # Related resources
 
-- Create a new Support Center community portal
-- Host community portals using Nginx
+- [Create a new Support Center community portal](/guides/portals/support-center/)
+- [Host community portals using Nginx](/guides/portals/nginx-proxy/)
 
 # References
 
-1. Cloudflare Workers - https://workers.cloudflare.com/&nbsp;↩
+1. Cloudflare Workers - https://workers.cloudflare.com/&nbsp;[↩](#fnref:cloudflare-workers)
 

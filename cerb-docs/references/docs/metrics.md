@@ -9,16 +9,16 @@ tags: ["docs"]
 
 **Metrics** aggregate, store, and compute statistics for time-based data.
 
-- Names
-- Types
-- Dimensions
-- Periods
-- Statistics
-- Retention
-- Eventual consistency
-- Built-in metrics
-- Using metrics in reports
-- Using metrics in automations
+- [Names](#names)
+- [Types](#types)
+- [Dimensions](#dimensions)
+- [Periods](#periods)
+- [Statistics](#statistics)
+- [Retention](#retention)
+- [Eventual consistency](#eventual-consistency)
+- [Built-in metrics](#built-in-metrics)
+- [Using metrics in reports](#using-metrics-in-reports)
+- [Using metrics in automations](#using-metrics-in-automations)
 
 # Names
 
@@ -158,7 +158,7 @@ The 5-minute period is a "sliding window" over the trailing 24 hours. When a new
 
 # Eventual consistency
 
-When multiple samples are collected in a short time period, with the same metric and dimensions, they are combined into a single statistics set. This single set is then pushed into a background queue for processing.
+When multiple samples are collected in a short time period, with the same metric and dimensions, they are combined into a single statistics set. This single set is then pushed into a background [queue](/docs/queues/) for processing.
 
 With this approach, you can efficiently collect samples at very high volumes without sacrificing performance.
 
@@ -172,25 +172,25 @@ These metrics are managed automatically by Cerb:
 
 | Metric | Description |
 | --- | --- |
-| cerb.automation.duration | How long automations are executed. Dimensions: `automation_id` and `trigger`. |
-| cerb.automation.invocations | How often automations are executed. Dimensions: `automation_id`, `trigger`, `exit_state`. |
-| cerb.behavior.duration | How long behaviors are executed. Dimensions: `behavior_id` and `event`. |
-| cerb.behavior.invocations | How often behaviors are executed. Dimensions: `behavior_id` and `event`. |
-| cerb.mail.routing.rule.matches | Mail routing rule usage over time. Dimensions: `rule_id` (by ruleset record), `rule_key` (by rule), and `node_key` (by condition). |
-| cerb.mail.transport.deliveries | How many successful messages are sent through a mail transport. Dimensions: `transport_id` and `sender_id` (email address). |
-| cerb.mail.transport.failures | How many unsuccessful messages are attempted through a mail transport. Dimensions: `transport_id` and `sender_id` (email address). |
-| cerb.record.search | How often each worker searches for a given record type. Dimensions: `record_type` and `worker_id`. |
-| cerb.snippet.uses | Snippet usage over time by worker. Dimensions: `snippet_id` and `worker_id`. This replaces the `snippet_use_history` table but imports its data. |
-| cerb.tickets.open | Open ticket counts over time by group and bucket. Dimensions: `group_id` and `bucket_id`. The metric is sampled every 15 minutes. |
-| cerb.tickets.open.elapsed | How long tickets spent in the open status by group and bucket. Dimensions: `group_id` and `bucket_id`. The metric is sampled when an open ticket is moved to a new group/bucket, or an open ticket transitions to a non-open status. |
-| cerb.webhook.invocations | How often webhooks are executed. Dimensions: `webhook_id` and `client_ip`. |
-| cerb.workers.active | Seat usage by workers. Dimensions: `worker_id`. |
+| [cerb.automation.duration](/docs/metrics/automation.duration/) | How long automations are executed. Dimensions: `automation_id` and `trigger`. |
+| [cerb.automation.invocations](/docs/metrics/automation.invocations/) | How often automations are executed. Dimensions: `automation_id`, `trigger`, `exit_state`. |
+| [cerb.behavior.duration](/docs/metrics/behavior.duration/) | How long behaviors are executed. Dimensions: `behavior_id` and `event`. |
+| [cerb.behavior.invocations](/docs/metrics/behavior.invocations/) | How often behaviors are executed. Dimensions: `behavior_id` and `event`. |
+| [cerb.mail.routing.rule.matches](/docs/metrics/mail.routing.rule.matches/) | Mail routing rule usage over time. Dimensions: `rule_id` (by ruleset record), `rule_key` (by rule), and `node_key` (by condition). |
+| [cerb.mail.transport.deliveries](/docs/metrics/mail.transport.deliveries/) | How many successful messages are sent through a mail transport. Dimensions: `transport_id` and `sender_id` (email address). |
+| [cerb.mail.transport.failures](/docs/metrics/mail.transport.failures/) | How many unsuccessful messages are attempted through a mail transport. Dimensions: `transport_id` and `sender_id` (email address). |
+| [cerb.record.search](/docs/metrics/record.search/) | How often each worker searches for a given record type. Dimensions: `record_type` and `worker_id`. |
+| [cerb.snippet.uses](/docs/metrics/snippet.uses/) | Snippet usage over time by worker. Dimensions: `snippet_id` and `worker_id`. This replaces the `snippet_use_history` table but imports its data. |
+| [cerb.tickets.open](/docs/metrics/tickets.open/) | Open ticket counts over time by group and bucket. Dimensions: `group_id` and `bucket_id`. The metric is sampled every 15 minutes. |
+| [cerb.tickets.open.elapsed](/docs/metrics/tickets.open.elapsed/) | How long tickets spent in the open status by group and bucket. Dimensions: `group_id` and `bucket_id`. The metric is sampled when an open ticket is moved to a new group/bucket, or an open ticket transitions to a non-open status. |
+| [cerb.webhook.invocations](/docs/metrics/webhook.invocations/) | How often webhooks are executed. Dimensions: `webhook_id` and `client_ip`. |
+| [cerb.workers.active](/docs/metrics/workers.active/) | Seat usage by workers. Dimensions: `worker_id`. |
 
 # Using metrics in reports
 
-Metrics statistics can be retrieved with metrics.timeseries data queries.
+Metrics statistics can be retrieved with [metrics.timeseries](/docs/data-queries/metrics/timeseries/) [data queries](/docs/data-queries/).
 
 # Using metrics in automations
 
-You can record samples on a metric from automations with the metric.increment command.
+You can record samples on a metric from automations with the [metric.increment](/docs/automations/commands/metric.increment/) command.
 

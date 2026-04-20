@@ -11,9 +11,9 @@ tags: ["guides"]
 
 You can automate all kinds of workflows with bots in Cerb; but sometimes you need to accomplish something that isn't possible with the built-in functionality. Fortunately, with connected accounts and the **Execute HTTP Request** action, your bots can automate nearly anything by interacting with third-party services.
 
-One of the most powerful ways to extend bot automation is with Lambda1 from Amazon Web Services (AWS).
+One of the most powerful ways to extend bot automation is with Lambda[1](#fn:aws-lambda) from Amazon Web Services (AWS).
 
-AWS Lambda is a cloud-based service for building microservices at scale without managing any servers. You can write code in Node.js, Java, or Python, and bundle any third-party libraries. Amazon automatically takes care of deploying, scaling, and load balancing your code across multiple containers2.
+AWS Lambda is a cloud-based service for building microservices at scale without managing any servers. You can write code in Node.js, Java, or Python, and bundle any third-party libraries. Amazon automatically takes care of deploying, scaling, and load balancing your code across multiple containers[2](#fn:aws-containers).
 
 Generally, you send inputs to a Lambda function with an HTTP request to their API. The function does something interesting with those inputs and then returns output.
 
@@ -21,17 +21,17 @@ This simple concept allows you to add countless new capabilities to bots in Cerb
 
 For instance, you can write a Lambda function for taking form data and filling in the editable fields of a PDF file. This can be quickly accomplished using Node.js or Python and the pdftk library. Bots would send form data to the function and receive a download URL for the generated PDF.
 
-We'll demonstrate Lambda integration in this guide by adding DNS3 lookup functionality to a conversational bot.
+We'll demonstrate Lambda integration in this guide by adding DNS[3](#fn:dns) lookup functionality to a conversational bot.
 
-- Configure the Amazon Web Services service in Cerb
-- Log in to Amazon Web Services
-  - Add a new Lambda function
-  - Update your IAM policy
+- [Configure the Amazon Web Services service in Cerb](#configure-the-amazon-web-services-service-in-cerb)
+- [Log in to Amazon Web Services](#log-in-to-amazon-web-services)
+  - [Add a new Lambda function](#add-a-new-lambda-function)
+  - [Update your IAM policy](#update-your-iam-policy)
 
-- Import AWS Lambda Bot in Cerb
-- Test the bot
-- Learn how the bot works
-- References
+- [Import AWS Lambda Bot in Cerb](#import-aws-lambda-bot-in-cerb)
+- [Test the bot](#test-the-bot)
+- [Learn how the bot works](#learn-how-the-bot-works)
+- [References](#references)
 
 # Configure the Amazon Web Services service in Cerb
 
@@ -39,7 +39,7 @@ We'll demonstrate Lambda integration in this guide by adding DNS3 lookup functio
 
 2. Navigate to **Search&nbsp;» Connected Accounts**.
 
-3. If you don't have a connected account for Amazon Web Services yet, you can follow these instructions to create one.
+3. If you don't have a connected account for Amazon Web Services yet, you can [follow these instructions](/solutions/integrations/aws/) to create one.
 
 # Log in to Amazon Web Services
 
@@ -92,7 +92,7 @@ We're going to add access to invoke AWS Lambda functions prefixed with **Cerb**\
 
 Select **Policies** in the navigation on the left.
 
-Find your bot's policy in the list or create a new one. In the earlier instructions we created a policy named **CerbBot**.
+Find your bot's policy in the list or create a new one. In the earlier [instructions](/solutions/integrations/aws/) we created a policy named **CerbBot**.
 
 Click the **Edit Policy** button.
 
@@ -936,9 +936,9 @@ You'll see four behaviors:
 - **DNS conversational behavior** handles the conversation flow with the worker.
 - **Invoke CerbDnsLookup Lambda function** wraps the AWS Lambda API call so it can be reused by any behavior.
 
-Conversational bot functionality is covered in detail here, so we won't dig into the first two behaviors in this guide.
+Conversational bot functionality is covered in detail [here](/packages/chat-bot/), so we won't dig into the first two behaviors in this guide.
 
-Open the card for **DNS conversational behavior**:
+Open the [card](/docs/records/#cards) for **DNS conversational behavior**:
 
  
 
@@ -968,12 +968,12 @@ The behavior only has a single **Invoke CerbDnsLookup Lambda function** action s
 
  
 
-In the **Set custom placeholder** action, we build a JSON4 payload for Lambda and save it as the `request_json` placeholder. We use the `JSON` format to save the placeholder as an object rather than text (i.e. we parse the JSON). This is a really simple object with `mode` and `value` as keys, and the behavior variables as values.
+In the **Set custom placeholder** action, we build a JSON[4](#fn:json) payload for Lambda and save it as the `request_json` placeholder. We use the `JSON` format to save the placeholder as an object rather than text (i.e. we parse the JSON). This is a really simple object with `mode` and `value` as keys, and the behavior variables as values.
 
 In **Execute HTTP Request**, we create a `POST` request to the AWS Lambda API.
 
 - The **URL:** includes the AWS region and function name.
-- In **Request headers:** we set three headers. `Date:` and `X-AMZ-Date:` are used during authorization to combat replay attacks5. The `X-AMZ-Client-Context:` header is optional and we're just setting it to a blank object in Base646 format.
+- In **Request headers:** we set three headers. `Date:` and `X-AMZ-Date:` are used during authorization to combat replay attacks[5](#fn:replay-attack). The `X-AMZ-Client-Context:` header is optional and we're just setting it to a blank object in Base64[6](#fn:base64) format.
 - In **Request body:** we output the `request_json` placeholder in JSON format.
 - In **Authentication:** our AWS connected account is selected to securely authenticate the request.
 - Under **Options:** we prevent the bot from attempting to automatically parse the response by `Content-Type:`.
@@ -986,15 +986,15 @@ That's it! You can copy this behavior to implement other Lambda functions as reu
 
 # References
 
-1. Amazon Web Services: Lambda - https://aws.amazon.com/lambda/&nbsp;↩
+1. Amazon Web Services: Lambda - https://aws.amazon.com/lambda/&nbsp;[↩](#fnref:aws-lambda)
 
-2. Amazon Web Services: What are Containers? - https://aws.amazon.com/containers/&nbsp;↩
+2. Amazon Web Services: What are Containers? - https://aws.amazon.com/containers/&nbsp;[↩](#fnref:aws-containers)
 
-3. Wikipedia: Domain Name System (DNS) - https://en.wikipedia.org/wiki/Domain\_Name\_System&nbsp;↩
+3. Wikipedia: Domain Name System (DNS) - https://en.wikipedia.org/wiki/Domain\_Name\_System&nbsp;[↩](#fnref:dns)
 
-4. Wikipedia: JavaScript Object Notation (JSON) - https://en.wikipedia.org/wiki/JSON&nbsp;↩
+4. Wikipedia: JavaScript Object Notation (JSON) - https://en.wikipedia.org/wiki/JSON&nbsp;[↩](#fnref:json)
 
-5. Wikipedia: Replay attack - https://en.wikipedia.org/wiki/Replay\_attack&nbsp;↩
+5. Wikipedia: Replay attack - https://en.wikipedia.org/wiki/Replay\_attack&nbsp;[↩](#fnref:replay-attack)
 
-6. Wikipedia: Base64 - https://en.wikipedia.org/wiki/Base64&nbsp;↩
+6. Wikipedia: Base64 - https://en.wikipedia.org/wiki/Base64&nbsp;[↩](#fnref:base64)
 

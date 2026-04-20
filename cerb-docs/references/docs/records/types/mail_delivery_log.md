@@ -10,37 +10,37 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | mail\_delivery\_log |
 | **Identifier (ID):** | cerb.contexts.mail.delivery.log |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `created_at` | timestamp | The date/time when this record was created |
-| &nbsp; | `from_id` | number | &nbsp; |
-| &nbsp; | `header_message_id` | text | &nbsp; |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| &nbsp; | `mail_transport_id` | number | &nbsp; |
-| &nbsp; | `status_id` | number | (0-2) |
-| &nbsp; | `status_message` | text | &nbsp; |
-| &nbsp; | `subject` | text | &nbsp; |
-| &nbsp; | `to` | text | &nbsp; |
-| &nbsp; | `type` | text | &nbsp; |
+| &nbsp; | `created_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was created |
+| &nbsp; | `from_id` | [number](/docs/records/fields/types/number/) | &nbsp; |
+| &nbsp; | `header_message_id` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| &nbsp; | `mail_transport_id` | [number](/docs/records/fields/types/number/) | &nbsp; |
+| &nbsp; | `status_id` | [number](/docs/records/fields/types/number/) | (0-2) |
+| &nbsp; | `status_message` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `subject` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `to` | [text](/docs/records/fields/types/text/) | &nbsp; |
+| &nbsp; | `type` | [text](/docs/records/fields/types/text/) | &nbsp; |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `created_at` | date | Created |
 | `header_message_id` | text | Header Message-Id |
 | `id` | number | Id |
@@ -51,44 +51,44 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `to` | text | To |
 | `type` | text | Type |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 | `properties` | object | Properties |
 
 ### Search Query Fields
 
-These filters are available in email delivery log search queries:
+These [filters](/docs/search/#filters) are available in email delivery log [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `created:` | date | Created |
-| `fieldset:` | record | Fieldset |
-| `from:` | record | From |
-| `from.id:` | chooser | From |
-| `header.messageId:` | text | Header Message-Id |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `mailTransport:` | record | Mailtransport |
-| `mailTransport.id:` | chooser | Email Transport |
+| `created:` | [date](/docs/search/#dates) | Created |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `from:` | [record](/docs/search/#deep-search) | [From](/docs/records/types/address/) |
+| `from.id:` | [chooser](/docs/search/#choosers) | [From](/docs/records/types/address/) |
+| `header.messageId:` | [text](/docs/search/#text) | Header Message-Id |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `mailTransport:` | [record](/docs/search/#deep-search) | [Mailtransport](/docs/records/types/mail_transport/) |
+| `mailTransport.id:` | [chooser](/docs/search/#choosers) | [Email Transport](/docs/records/types/mail_transport/) |
 | `status:` | virtual | Status |
-| `status.id:` | number | Status |
-| `subject:` | text | Subject |
-| `to:` | text | To |
-| `type:` | text | Type |
+| `status.id:` | [number](/docs/search/#numbers) | Status |
+| `subject:` | [text](/docs/search/#text) | Subject |
+| `to:` | [text](/docs/search/#text) | To |
+| `type:` | [text](/docs/search/#text) | Type |
 
 ### Worklist Columns
 
-These columns are available on email delivery log worklists:
+These columns are available on email delivery log [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `m_created_at` | Created |
 | `m_from_id` | From |
 | `m_header_message_id` | Header Message-Id |
@@ -100,5 +100,5 @@ These columns are available on email delivery log worklists:
 | `m_to` | To |
 | `m_type` | Type |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

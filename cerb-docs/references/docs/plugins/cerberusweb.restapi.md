@@ -13,11 +13,11 @@ tags: ["docs"]
 
 A RESTful JSON/XML interface for integrating Cerb with other applications and tools.
 
-- Extensions
-  - Controller
-  - Page Section
-  - Record Type
-  - Rest API Controller
+- [Extensions](#extensions)
+  - [Controller](#controller)
+  - [Page Section](#page-section)
+  - [Record Type](#record-type)
+  - [Rest API Controller](#rest-api-controller)
 
 # Extensions
 
@@ -60,5 +60,5 @@ A RESTful JSON/XML interface for integrating Cerb with other applications and to
 | Workers | `cerberusweb.rest.controller.workers` |
 | Workspaces | `cerberusweb.rest.controller.workspaces` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

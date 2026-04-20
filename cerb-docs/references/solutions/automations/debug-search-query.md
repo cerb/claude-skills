@@ -9,9 +9,9 @@ You can use the `cerb.commands.worklist.query.debug` command to view the SQL sta
 
 ## Debug a ticket search query
 
-- automation
-- policy
-- output
+- [automation](#)
+- [policy](#)
+- [output](#)
 
 - 
 ```

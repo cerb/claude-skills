@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.website/elements/sub
 summary: "This page provides information on the 'submit' element used in website interaction forms within Cerb. It explains that the submit element is responsible for displaying 'Continue' and 'Reset' buttons on forms. The submit element is automatically added when an interaction exits in the await state, meaning users do not need to manually add it. An example code snippet is provided to illustrate how the submit element is configured within a form."
 tags: ["docs", "docs-automations"]
 ---
-In website interactions forms, a **submit** element displays the 'Continue' and 'Reset' buttons.
+In [website interactions](/docs/automations/triggers/interaction.website/) forms, a **submit** element displays the 'Continue' and 'Reset' buttons.
 
-This is automatically added when an interaction exits in the await state. You do not need to do it yourself.
+This is automatically added when an interaction exits in the [await state](/docs/automations/#exit-states). You do not need to do it yourself.
 
 ```
 start: await: form: title: Menu elements: submit: continue@bool: yes reset@bool: yes

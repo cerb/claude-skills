@@ -5,15 +5,15 @@ url: "https://cerb.ai/guides/api/configure-plugin/"
 summary: "This page provides a detailed guide on configuring the REST API plugin for Cerb. It covers the steps to enable the API plugin, generate an API key-pair, and view the key-pair. The guide explains how to navigate the Cerb interface to enable the Web Services API plugin, create new API credentials, and manage permissions for API requests. It also includes instructions on how to restrict API access to specific endpoints. Additionally, the page offers a resource link to a Wikipedia article on Representational State Transfer (REST) for further reading."
 tags: ["guides"]
 ---
-- Introduction
-- Enable the API plugin
-- Generate an API key-pair
-- View the key-pair
-- Resources
+- [Introduction](#introduction)
+- [Enable the API plugin](#enable-the-api-plugin)
+- [Generate an API key-pair](#generate-an-api-key-pair)
+- [View the key-pair](#view-the-key-pair)
+- [Resources](#resources)
 
 # Introduction
 
-The REST-based1 Web API provides the ability to remote control Cerb for automation, synchronization, and integration. For example, you can use the API from other applications and services to create tickets, search records, monitor notifications, manage tasks, and run automations.
+The REST-based[1](#fn:rest) [Web API](/docs/api/) provides the ability to remote control Cerb for automation, synchronization, and integration. For example, you can use the API from other applications and services to create tickets, search records, monitor notifications, manage tasks, and run [automations](/docs/automations/).
 
 # Enable the API plugin
 
@@ -53,9 +53,9 @@ The API uses per-application credentials and per-worker permissions to authorize
 
 As an administrator, you can repeat this process to create a key-pair for other workers.
 
-By configure the **Allowed Endpoints** option you can restrict a key-pair to only certain endpoints in the API.
+By configure the **Allowed Endpoints** option you can restrict a key-pair to only certain endpoints [in the API](/docs/api/).
 
 # Resources
 
-1. Wikipedia: Representational State Transfer (REST) - https://en.wikipedia.org/wiki/Representational\_state\_transfer&nbsp;↩
+1. Wikipedia: Representational State Transfer (REST) - https://en.wikipedia.org/wiki/Representational\_state\_transfer&nbsp;[↩](#fnref:rest)
 

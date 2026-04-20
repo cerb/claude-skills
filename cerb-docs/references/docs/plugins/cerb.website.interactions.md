@@ -12,14 +12,14 @@ tags: ["docs"]
 
 Embed customer-facing interactions on any website.
 
-- Extensions
-  - Portal
+- [Extensions](#extensions)
+  - [Portal](#portal)
 
 # Extensions
 
 ### Portal
 
-| **Website Interactions** | `cerb.website.interactions` |
+| [**Website Interactions**](/docs/plugins/extensions/cerb.website.interactions/) | `cerb.website.interactions` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

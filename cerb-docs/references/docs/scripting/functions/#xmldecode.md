@@ -7,9 +7,9 @@ tags: ["docs", "docs-scripting"]
 ---
 ## xml\_decode
 
-You can decode an XML1 string into an XML object with the **xml\_decode** function.
+You can decode an XML[1](#fn:xml) string into an XML object with the **xml\_decode** function.
 
-Use the xml\_xpath function to extract values with XPath2 queries.
+Use the [xml\_xpath](#xml_xpath) function to extract values with XPath[2](#fn:xpath) queries.
 
 `xml_decode(xml_string,namespaces,mode)`
 

@@ -5,32 +5,32 @@ url: "https://cerb.ai/guides/webhooks/custom-api/"
 summary: "This webpage provides a comprehensive guide on building and authenticating a custom API using webhook portals in Cerb. It covers the process of enabling the webhooks plugin, importing the necessary package, and testing the API endpoint using three different authentication methods: API Key, OAuth2 Token, and HMAC Signature. Each method is explained in detail, including how to simulate requests from the automation editor, test using curl, and implement in your application. The guide also discusses the importance of protecting against replay attacks and provides code examples for generating HMAC signatures. Additionally, it offers instructions on extending the custom API by creating automation functions for each endpoint and managing permissions through a policy tab. This resource is ideal for developers looking to integrate Cerb with other applications while ensuring secure and efficient API interactions."
 tags: ["guides"]
 ---
-- Introduction
-- Enable the webhooks plugin
-- Import the package
-- Test the API endpoint
-  - API Key
-    - Simulating from the automation editor
-    - Testing from curl
-    - Implementing in your app
+- [Introduction](#introduction)
+- [Enable the webhooks plugin](#enable-the-webhooks-plugin)
+- [Import the package](#import-the-package)
+- [Test the API endpoint](#test-the-api-endpoint)
+  - [API Key](#api-key)
+    - [Simulating from the automation editor](#simulating-from-the-automation-editor)
+    - [Testing from curl](#testing-from-curl)
+    - [Implementing in your app](#implementing-in-your-app)
 
-  - OAuth2 Token
-  - HMAC Signature
-    - Simulating from the automation editor
-    - Protecting against replay attacks
-    - Implementing in your app
+  - [OAuth2 Token](#oauth2-token)
+  - [HMAC Signature](#hmac-signature)
+    - [Simulating from the automation editor](#simulating-from-the-automation-editor-1)
+    - [Protecting against replay attacks](#protecting-against-replay-attacks)
+    - [Implementing in your app](#implementing-in-your-app-1)
 
-- Extend the custom API
+- [Extend the custom API](#extend-the-custom-api)
 
 # Introduction
 
-In Cerb, you can use automations and webhooks to build a custom API endpoint for your integrations.
+In Cerb, you can use [automations](/docs/automations/) and [webhooks](/docs/webhooks/) to build a custom API endpoint for your integrations.
 
-For instance, you can enrich data by combining multiple data queries into a single request. This moves complexity to Cerb rather than your client-side code.
+For instance, you can enrich data by combining multiple [data queries](/docs/data-queries/) into a single request. This moves complexity to Cerb rather than your client-side code.
 
 There are two ways to receive webhooks in Cerb:
 
-| **Portals** | A portal endpoint that triggers your webhook. This is ideal for a publicly shared endpoint, since you can use a custom domain name to avoid exposing your Cerb URL (e.g. Cloudflare, Nginx). |
+| **Portals** | A [portal](/docs/portals/) endpoint that triggers your webhook. This is ideal for a publicly shared endpoint, since you can use a custom domain name to avoid exposing your Cerb URL (e.g. Cloudflare, Nginx). |
 | **Secret URLs** | A randomly generated URL that triggers your webhook. These are ideal for private, ad-hoc integrations where you just need a URL. |
 
 In this guide we'll use a webhook portal, but either method can be used to build a custom API.
@@ -199,7 +199,7 @@ To make a request to the custom API endpoint from your app, add an `Authorizatio
 
 Cerb can generate access tokens for workers from your app, as well as exchange refresh tokens for a new short-lived access token.
 
-For detailed instructions on creating and using OAuth2 tokens, see the OAuth2 Token Generator guide.
+For detailed instructions on creating and using OAuth2 tokens, see the [OAuth2 Token Generator](/guides/developers/oauth2-token-generator/) guide.
 
 ## HMAC Signature
 
@@ -249,7 +249,7 @@ You should create an `automation.function` automation for each endpoint in your 
 
 Name the automations using the same namespace as your `webhook.respond` automation. For instance: `example.webhookPortal.customApi.ticketsOpen`
 
-In the **Policy** tab of your webhook automation, allow all function: calls to that namespace:
+In the **Policy** tab of your webhook automation, allow all [function:](/docs/automations/commands/function/) calls to that namespace:
 
 ```
 commands: function: deny/uri@bool: {{ uri is not prefixed ('cerb:automation:example.webhookPortal.customApi.') }} allow@bool: yes

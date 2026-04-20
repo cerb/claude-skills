@@ -5,13 +5,13 @@ url: "https://cerb.ai/workflows/cerb.integrations.gitlab.issues/"
 summary: "This page provides a comprehensive guide on integrating Cerb with GitLab for issue tracking. It covers the installation process, including creating a GitLab connected account, importing and configuring the workflow, and setting up necessary fields and automations. The guide also details how to use the integration, such as navigating ticket profiles, linking GitLab issues to tickets, and managing linked issues through the Cerb interface. The integration allows users to search, link, and unlink GitLab issues directly from Cerb, enhancing issue management and collaboration."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-  - Create a GitLab connected account
-  - Import the workflow
-  - Configure the workflow
+- [Introduction](#introduction)
+- [Installation](#installation)
+  - [Create a GitLab connected account](#create-a-gitlab-connected-account)
+  - [Import the workflow](#import-the-workflow)
+  - [Configure the workflow](#configure-the-workflow)
 
-- Usage
+- [Usage](#usage)
 
 # Introduction
 
@@ -21,7 +21,7 @@ This workflow integrates Cerb with GitLab for searching and linking issues to ti
 
 ### Create a GitLab connected account
 
-Create a GitLab connected account if you haven't already.
+[Create a GitLab connected account](/solutions/integrations/gitlab/) if you haven't already.
 
 ### Import the workflow
 
@@ -39,7 +39,7 @@ Click the **Continue** button.
 
 | Field | &nbsp; |
 | --- | --- |
-| **GitLab Account:** | A GitLab connected account. |
+| **GitLab Account:** | A GitLab [connected account](/solutions/integrations/gitlab/). |
 | **GitLab Base URL:** | Defaults to `https://gitlab.com/` for the managed service. Use your own URL if self-hosted. |
 | **GitLab Project Names:** | One full repository name per line (e.g. `example/example-project`). |
 | **Ticket Profile Tab:** | The 'Linked GitLab Issues' profile widget will be added to this ticket profile tab. |

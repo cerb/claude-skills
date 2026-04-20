@@ -5,21 +5,21 @@ url: "https://cerb.ai/guides/developers/ngrok/"
 summary: "This page provides a comprehensive guide on using ngrok to share secure access to a local development environment. It covers the installation process for ngrok on various operating systems, including Mac, Windows, Linux, and FreeBSD, and provides instructions on starting ngrok to create a temporary public URL. The guide explains how to test ngrok by accessing local applications like Cerb through the generated URLs and highlights the benefits of using ngrok for testing webhooks. It also details how to monitor ngrok connections using its web interface, which aids in debugging by allowing inspection and replaying of requests. The page concludes with information on ngrok's free and paid plans, outlining the limitations and benefits of each. References to related tools like BrowserStack and Homebrew are also included."
 tags: ["guides"]
 ---
-- Introduction
-- Install ngrok
-- Start ngrok
-- Test ngrok
-- Monitor ngrok connections
-- Next steps
-- References
+- [Introduction](#introduction)
+- [Install ngrok](#install-ngrok)
+- [Start ngrok](#start-ngrok)
+- [Test ngrok](#test-ngrok)
+- [Monitor ngrok connections](#monitor-ngrok-connections)
+- [Next steps](#next-steps)
+- [References](#references)
 
 # Introduction
 
-We recommend building automations and webhooks in a local development environment before deploying them to production. This allows you to test without risking unexpected changes to your live data.
+We recommend building [automations](/docs/automations/) and [webhooks](/guides/webhooks/configure/) in a [local development environment](/docs/installation/docker/) before deploying them to production. This allows you to test without risking unexpected changes to your live data.
 
-Your development machine may be behind a firewall or assigned a dynamic IP address. This makes it difficult to test functionality like webhooks where a remote server needs to directly access a URL on your machine. It also makes it difficult to use other testing tools like BrowserStack1 that run against a publicly accessible URL.
+Your development machine may be behind a firewall or assigned a dynamic IP address. This makes it difficult to test functionality like webhooks where a remote server needs to directly access a URL on your machine. It also makes it difficult to use other testing tools like BrowserStack[1](#fn:browserstack) that run against a publicly accessible URL.
 
-You can solve these issues with **ngrok** 2 – one of our favorite development tools. You can use ngrok to quickly and easily create a temporary public URL for sharing secure access to your local machine.
+You can solve these issues with **ngrok** [2](#fn:ngrok) – one of our favorite development tools. You can use ngrok to quickly and easily create a temporary public URL for sharing secure access to your local machine.
 
 # Install ngrok
 
@@ -27,7 +27,7 @@ To get started, you'll need to download ngrok from their website and unzip it. I
 
 On Linux, you can usually install ngrok from your package manager (e.g. apt, yum).
 
-On Mac, you can also install ngrok using Homebrew3 (note: you will need to install via `brew install --cask ngrok`).
+On Mac, you can also install ngrok using Homebrew[3](#fn:homebrew) (note: you will need to install via `brew install --cask ngrok`).
 
 # Start ngrok
 
@@ -69,9 +69,9 @@ They offer paid plans to increase these limits, as well as enabling the use of r
 
 # References
 
-1. BrowserStack: Live web-based browser testing - https://www.browserstack.com&nbsp;↩
+1. BrowserStack: Live web-based browser testing - https://www.browserstack.com&nbsp;[↩](#fnref:browserstack)
 
-2. ngrok: Secure tunnels to localhost - https://ngrok.com&nbsp;↩
+2. ngrok: Secure tunnels to localhost - https://ngrok.com&nbsp;[↩](#fnref:ngrok)
 
-3. HomeBrew: The missing package manager for macOS - https://brew.sh&nbsp;↩
+3. HomeBrew: The missing package manager for macOS - https://brew.sh&nbsp;[↩](#fnref:homebrew)
 

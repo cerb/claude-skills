@@ -15,17 +15,17 @@ While you can use an EC2 instance to replace a dedicated server or a virtual mac
 
 If you require high availability and you're not familiar with cloud computing, we strongly recommend using **Cerb Cloud** where we handle everything for you.
 
-- Create an EC2 instance
-  - Choose AMI
-  - Choose Instance Type
-  - Instance Details
-  - Storage
-  - Add Tags
-  - Configure Security Group
-  - Review
+- [Create an EC2 instance](#create-an-ec2-instance)
+  - [Choose AMI](#choose-ami)
+  - [Choose Instance Type](#choose-instance-type)
+  - [Instance Details](#instance-details)
+  - [Storage](#storage)
+  - [Add Tags](#add-tags)
+  - [Configure Security Group](#configure-security-group)
+  - [Review](#review)
 
-- Connect to the EC2 instance with SSH
-- Guides
+- [Connect to the EC2 instance with SSH](#connect-to-the-ec2-instance-with-ssh)
+- [Guides](#guides)
 
 # Create an EC2 instance
 
@@ -59,7 +59,7 @@ For Cerb, the proper instance type depends on many factors:
 - How large your database is
 - If you'll utilize other services, like RDS for the database and EFS for storage
 
-In Cerb Cloud we currently use **t3.medium** instances for our web servers, since we also use auto-scaling, elastic load balancing, Relational Database Service (RDS), and Elastic Filesystem (EFS). We scale by adding more instances rather than increasing the resources on a single instance.
+In [Cerb Cloud](/pricing/) we currently use **t3.medium** instances for our web servers, since we also use auto-scaling, elastic load balancing, Relational Database Service (RDS), and Elastic Filesystem (EFS). We scale by adding more instances rather than increasing the resources on a single instance.
 
 Generally, **m4.large** or **t3.medium** will suit most purposes. You can always scale up your instance type later, so this isn't a decision you're stuck with.
 
@@ -160,5 +160,5 @@ If you're on Windows, you can use PuTTYgen to import a private key.
 
 These guides cover the installation of Cerb and its dependencies:
 
-- Ubuntu
+- [Ubuntu](/guides/installation/ubuntu/)
 

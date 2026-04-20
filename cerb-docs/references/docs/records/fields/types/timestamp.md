@@ -11,7 +11,7 @@ The value is text describing an absolute or relative date.
 
 ### Packages
 
-As JSON from packages:
+As JSON from [packages](/docs/packages/):
 
 #### Relative dates
 
@@ -39,13 +39,13 @@ As JSON from packages:
 
 ### Records API
 
-In PUT or POST requests from the API:
+In [PUT](/docs/api/endpoints/records/#update) or [POST](/docs/api/endpoints/records/#create) requests from the [API](/docs/api/):
 
 ```
 &amp;fields[timestamp]=1550080259
 ```
 
-\< Text
+[\< Text](/docs/records/fields/types/text/)
 
-URL \>
+[URL \>](/docs/records/fields/types/url/)
 

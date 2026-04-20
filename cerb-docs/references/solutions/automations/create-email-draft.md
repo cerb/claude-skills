@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Create a transactional email draft
 
-A `mail.transactional` draft is sent by the system rather than a particular worker. This does not create a ticket record.
+A `mail.transactional` [draft](/docs/records/types/draft/) is sent by the system rather than a particular worker. This does not create a [ticket](/docs/tickets/) record.
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

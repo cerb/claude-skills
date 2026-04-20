@@ -7,24 +7,24 @@ tags: ["docs"]
 ---
 # classifier.prediction
 
-`classifier.prediction` queries return a predicted classification for the given text using the given classifier.
+`classifier.prediction` queries return a predicted [classification](/docs/records/types/classifier_class/) for the given text using the given [classifier](/docs/records/types/classifier/).
 
 For instance, a "Yes/No" classifier would predict `answer.maybe` for the input _"I'm not sure"_.
 
-- Inputs
-- Response Formats
-- Examples
+- [Inputs](#inputs)
+- [Response Formats](#response-formats)
+- [Examples](#examples)
 
 # Inputs
 
-- `classifier:` (a search query of classifier records to include)
+- `classifier:` (a [search query](/docs/search/) of [classifier](/docs/records/types/classifier/#search-query-fields) records to include)
 - `text:` (the text to classify)
 
 # Response Formats
 
 The results can be returned in these formats:
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 # Examples
 

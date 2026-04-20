@@ -13,9 +13,9 @@ Your first self-hosted seat is free forever with no time limit. A license is not
 
 We strongly recommend using one of our **Docker** container examples rather than installing components individually. This simplifies installation and upgrades by ensuring the server requirements are always met. You can upgrade Cerb by simply switching image tags.
 
-If you still need to install Cerb on a bare metal server, use the example Dockerfile as a reference.
+If you still need to [install Cerb on a bare metal server](/docs/installation/self-hosted/), use the example Dockerfile as a reference.
 
-Try Cerb in Docker
+[Try Cerb in Docker](/docs/installation/docker/)
 
 ## Cerb Cloud
 

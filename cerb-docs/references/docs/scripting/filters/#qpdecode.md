@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## qp\_decode
 
-(Added in 11.1.1)
+(Added in [11.1.1](/releases/11.1.1/))
 
 Decode a string in quoted-printable format.
 

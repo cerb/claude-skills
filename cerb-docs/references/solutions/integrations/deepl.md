@@ -5,13 +5,13 @@ url: "https://cerb.ai/solutions/integrations/deepl/"
 summary: "This page provides a step-by-step guide to integrating Cerb and DeepL, allowing users to access DeepL's full API in Cerb automations for translations."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a DeepL API key
-- Create the DeepL service in Cerb
-- Examples
-  - Translate text
+- [Introduction](#introduction)
+- [Get a DeepL API key](#get-a-deepl-api-key)
+- [Create the DeepL service in Cerb](#create-the-deepl-service-in-cerb)
+- [Examples](#examples)
+  - [Translate text](#translate-text)
 
-- More Resources
+- [More Resources](#more-resources)
 
 # Introduction
 
@@ -55,5 +55,5 @@ start: http.request/translate: output: http_response inputs: method: POST url: h
 
 # More Resources
 
-Workflow: Translate (DeepL)
+Workflow: [Translate (DeepL)](/workflows/cerb.integrations.deepl.translate)
 

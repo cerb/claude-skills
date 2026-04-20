@@ -5,26 +5,26 @@ url: "https://cerb.ai/guides/security/squid/"
 summary: "This guide walks you through setting up a Squid proxy server for routing outgoing HTTP connections. It covers creating a Docker-based Squid instance with basic authentication and configuring to use this proxy. The guide includes steps for creating configuration files, running the proxy container, testing the setup, and verifying the integration works correctly."
 tags: ["guides"]
 ---
-- Introduction
-- Requirements
-- Setting Up Squid Proxy
-  - Create Required Directories
-  - Create Squid Configuration Files
-  - Create password file
-  - Run Squid Docker Container
-  - Test proxy with curl
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Setting Up Squid Proxy](#setting-up-squid-proxy)
+  - [Create Required Directories](#create-required-directories)
+  - [Create Squid Configuration Files](#create-squid-configuration-files)
+  - [Create password file](#create-password-file)
+  - [Run Squid Docker Container](#run-squid-docker-container)
+  - [Test proxy with curl](#test-proxy-with-curl)
 
-- Configuring Cerb
-  - Update the configuration file
-    - In production
-    - In Docker
+- [Configuring Cerb](#configuring-cerb)
+  - [Update the configuration file](#update-the-configuration-file)
+    - [In production](#in-production)
+    - [In Docker](#in-docker)
 
-- Verifying Integration
-- References
+- [Verifying Integration](#verifying-integration)
+- [References](#references)
 
 # Introduction
 
-Squid1 is a caching proxy for the Web supporting HTTP, HTTPS, FTP, and more. It reduces bandwidth and improves response times by caching and reusing frequently-requested web pages. When integrated with Cerb, a Squid proxy provides several benefits:
+Squid[1](#fn:squid) is a caching proxy for the Web supporting HTTP, HTTPS, FTP, and more. It reduces bandwidth and improves response times by caching and reusing frequently-requested web pages. When integrated with Cerb, a Squid proxy provides several benefits:
 
 - Bandwidth reduction by caching frequently-requested content.
 - Improved response times for external API calls and web requests.
@@ -116,7 +116,7 @@ For a Docker-based Cerb installation, you need to modify the configuration file 
 
 Let's send an HTTP Get request from Cerb and verify we are routing through our Squid proxy.
 
-We will use an example from automations to make the request.
+We will use an example from [automations](/solutions/automations/http-response-xpath/) to make the request.
 
 We can now monitor the Squid access logs to confirm requests from Cerb are being proxied.
 
@@ -128,5 +128,5 @@ docker exec squid-proxy tail -n 50 /var/log/squid/access.log
 
 # References
 
-1. Squid - https://hub.docker.com/r/ubuntu/squid&nbsp;↩
+1. Squid - https://hub.docker.com/r/ubuntu/squid&nbsp;[↩](#fnref:squid)
 

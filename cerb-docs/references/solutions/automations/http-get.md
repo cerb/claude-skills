@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 You can use http.request: to make a request to any server. Here's an example of a GET request.
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

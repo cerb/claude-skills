@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/automations/commands/llm.embed/"
 summary: "This page describes the `llm.embed` automation command in Cerb, which interfaces with Large Language Models (LLMs) to generate text vector embeddings."
 tags: ["docs", "docs-automations"]
 ---
-The **llm.embed:** automation command interfaces with Large Language Model (LLM) providers to generate text vector embeddings.
+The **llm.embed:** [automation](/docs/automations/) command interfaces with Large Language Model (LLM) providers to generate text vector embeddings.
 
-(Added in 11.1)
+(Added in [11.1](/releases/11.1/))
 
 Authentication and API calls are automatically handled by the command.
 
@@ -17,12 +17,12 @@ You simply provide a list of `texts:` to embed.
 llm.embed: output: results inputs: llm: ollama: api_endpoint_url: http://host.docker.internal:11434 model: nomic-embed-text texts: 0: What is Cerb? 1: Cerb automates customer service inboxes and workflows.
 ```
 
-- Syntax
-  - inputs:
-    - llm:
-    - texts:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+    - [llm:](#llm)
+    - [texts:](#texts)
 
-  - output:
+  - [output:](#output)
 
 # Syntax
 

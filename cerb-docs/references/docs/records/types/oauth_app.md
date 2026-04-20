@@ -10,37 +10,37 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | oauth\_app |
 | **Identifier (ID):** | cerberusweb.contexts.oauth.app |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| &nbsp; | `access_token_ttl` | text | The expiration of the access token (e.g. '1 hour') |
-| **x** | **`callback_url`** | url | The OAuth2 callback URL of the app |
-| **x** | **`client_id`** | text | The client identifier of the app |
-| **x** | **`client_secret`** | text | The client secret of the app |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of this oauth app |
-| &nbsp; | `refresh_token_ttl` | text | The expiration of the refresh token (e.g. '1 month') |
-| &nbsp; | `scopes` | text | The app's available scopes in YAML format |
-| &nbsp; | `updated_at` | timestamp | The date/time when this record was last modified |
-| &nbsp; | `url` | url | The app's URL |
+| &nbsp; | `access_token_ttl` | [text](/docs/records/fields/types/text/) | The expiration of the access token (e.g. '1 hour') |
+| **x** | **`callback_url`** | [url](/docs/records/fields/types/url/) | The OAuth2 callback URL of the app |
+| **x** | **`client_id`** | [text](/docs/records/fields/types/text/) | The client identifier of the app |
+| **x** | **`client_secret`** | [text](/docs/records/fields/types/text/) | The client secret of the app |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of this oauth app |
+| &nbsp; | `refresh_token_ttl` | [text](/docs/records/fields/types/text/) | The expiration of the refresh token (e.g. '1 month') |
+| &nbsp; | `scopes` | [text](/docs/records/fields/types/text/) | The app's available scopes in YAML format |
+| &nbsp; | `updated_at` | [timestamp](/docs/records/fields/types/timestamp/) | The date/time when this record was last modified |
+| &nbsp; | `url` | [url](/docs/records/fields/types/url/) | The app's URL |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
+| `_type` | text | [Record type](/docs/records/types/) alias |
 | `access_token_ttl` | text | Access Token Expires |
 | `callback_url` | text | Callback Url |
 | `client_id` | text | Client Id |
@@ -52,39 +52,39 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `updated_at` | date | Updated |
 | `url` | text | Url |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in oauth app search queries:
+These [filters](/docs/search/#filters) are available in oauth app [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `accessTokenExpires:` | text | Access Token Expires |
-| `callbackUrl:` | text | Callback Url |
-| `clientId:` | text | Client Id |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Name |
-| `refreshTokenExpires:` | text | Refresh Token Expires |
-| `updated:` | date | Updated |
-| `url:` | text | Url |
+| `accessTokenExpires:` | [text](/docs/search/#text) | Access Token Expires |
+| `callbackUrl:` | [text](/docs/search/#text) | Callback Url |
+| `clientId:` | [text](/docs/search/#text) | Client Id |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Name |
+| `refreshTokenExpires:` | [text](/docs/search/#text) | Refresh Token Expires |
+| `updated:` | [date](/docs/search/#dates) | Updated |
+| `url:` | [text](/docs/search/#text) | Url |
 
 ### Worklist Columns
 
-These columns are available on oauth app worklists:
+These columns are available on oauth app [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 | `o_access_token_ttl` | Access Token Expires |
 | `o_callback_url` | Callback Url |
 | `o_client_id` | Client Id |
@@ -95,5 +95,5 @@ These columns are available on oauth app worklists:
 | `o_updated_at` | Updated |
 | `o_url` | Url |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

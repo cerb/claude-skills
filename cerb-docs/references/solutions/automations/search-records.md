@@ -9,8 +9,8 @@ record.search: can be used to load records and make them available to an automat
 
 ## Find open tickets:
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```
@@ -23,8 +23,8 @@ commands: record.search: deny/type@bool: {{ inputs.record_type is not record typ
 
 ## Find workers active within the past 30 minutes:
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

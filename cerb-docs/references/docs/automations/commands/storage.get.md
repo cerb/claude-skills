@@ -17,12 +17,12 @@ Result:
 output: This is the saved value.
 ```
 
-- Syntax
-  - inputs:
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -39,19 +39,19 @@ The optional placeholder to store the result.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of fetching the storage key.
+The [commands](/docs/automations/#commands) to run during simulation instead of fetching the storage key.
 
 If omitted, the storage key is fetched during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The optional `output:` placeholder is set to the value of the storage key.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

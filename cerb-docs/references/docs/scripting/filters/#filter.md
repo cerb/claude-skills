@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## filter
 
-(Added in 10.1.1)
+(Added in [10.1.1](/releases/10.1.1/))
 
 Exclude items from an array using an arrow function.
 

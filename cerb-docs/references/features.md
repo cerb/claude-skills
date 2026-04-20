@@ -7,7 +7,7 @@ tags: []
 ---
 ## Shared Inboxes
 
- 
+[ ](/docs/tickets/)
 
 - Transform any email or social account into a team inbox
 - Handle thousands of issues per day
@@ -18,11 +18,11 @@ tags: []
 - Bulk update and reply to multiple related conversations at once
 - Enforce service level agreements and track customer satisfaction
 
-Learn about shared inboxes
+[Learn about shared inboxes](/docs/tickets/)
 
 ## Collaborative Workspaces
 
- 
+[ ](/docs/workspaces/)
 
 - Fully customize dashboards and pages with tabs and widgets
 - Filter and manipulate data with powerful search and data queries
@@ -30,11 +30,11 @@ Learn about shared inboxes
 - Bring your own data with custom records and fields
 - Monitor new activity on watched records with notifications
 
-Explore workspaces
+[Explore workspaces](/docs/workspaces/)
 
 ## AI Agents
 
- 
+[ ](/docs/interactions/)
 
 - Create conversational agents to assist workers and clients
 - Integrate with state-of-the-art language models from multiple providers
@@ -43,11 +43,11 @@ Explore workspaces
 - Transition seamlessly between chat and form-based interactions
 - Deploy agents on any website
 
-Discover AI agents
+[Discover AI agents](/docs/interactions/)
 
 ## Automations
 
- 
+[ ](/docs/automations/)
 
 - Code from your browser with an integrated editor and debugger
 - Build rapidly with KATA -- our high-level automation language
@@ -56,11 +56,11 @@ Discover AI agents
 - Integrate with any web-based API
 - No programming experience required -- we'll help you learn
 
-Explore automations
+[Explore automations](/docs/automations/)
 
 ## Workflow Templates
 
- 
+[ ](/docs/workflows/)
 
 - Build new features using Cerb's toolkit
 - Group related records and configuration into a workflow
@@ -69,11 +69,11 @@ Explore automations
 - Enable pre-built workflows to save time
 - Collaborate with us to build exactly what you need
 
-Learn about workflows
+[Learn about workflows](/docs/workflows/)
 
 ## Endless Integrations
 
- 
+[ ](/solutions/#integrations)
 
 - Use pre-configured connected services or create your own
 - Auth with OAuth, API keys, bearer tokens, HTTP basic, AWS, and more
@@ -83,10 +83,10 @@ Learn about workflows
 - Create customer-facing tools with community portals
 - Extend core functionality with plugins
 
-Browse integrations
+[Browse integrations](/solutions/#integrations)
 
 ### Automate support your way
 
 Start building today — no credit card required.
 
-Get Started Free
+[Get Started Free](/signup/)

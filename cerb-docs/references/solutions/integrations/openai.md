@@ -5,19 +5,19 @@ url: "https://cerb.ai/solutions/integrations/openai/"
 summary: "This page provides a comprehensive guide on integrating Cerb with OpenAI, enabling the use of OpenAI's API within Cerb automations. It includes detailed instructions on configuring both OpenAI and Cerb. For OpenAI, it covers creating a project and generating an API key. For Cerb, it explains how to connect to OpenAI using the API key. Additionally, the page references related resources, such as a guide on building a question-answering chatbot with Cerb and ChatGPT."
 tags: ["solutions"]
 ---
-- Introduction
-- Configuration
-  - OpenAI
-    - Create a project
-    - Create an API key
+- [Introduction](#introduction)
+- [Configuration](#configuration)
+  - [OpenAI](#openai)
+    - [Create a project](#create-a-project)
+    - [Create an API key](#create-an-api-key)
 
-  - Cerb
+  - [Cerb](#cerb)
 
-- Examples
-  - Create chat completion
-  - Generate text embeddings
+- [Examples](#examples)
+  - [Create chat completion](#create-chat-completion)
+  - [Generate text embeddings](#generate-text-embeddings)
 
-- Related Resources
+- [Related Resources](#related-resources)
 
 # Introduction
 
@@ -79,5 +79,5 @@ start: http.request/embeddings: output: http_response inputs: method: POST url: 
 
 # Related Resources
 
-- Guide: Build a question answering chat bot with Cerb and ChatGPT
+- [Guide: Build a question answering chat bot with Cerb and ChatGPT](/guides/machine-learning/question-answering/faq-bot-chatgpt/)
 

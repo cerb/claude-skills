@@ -9,7 +9,7 @@ With the **Support Center** portal your clients can:
 
 - Start new conversations from contact forms
 - Edit their profile data
-- Review their ticket history
+- Review their [ticket](/docs/tickets/) history
 - Read recent announcements from your blog
 - Search knowledgebase articles
 - …and more
@@ -18,5 +18,5 @@ With the **Support Center** portal your clients can:
 
 ### Resources
 
-- Guide: Create a new Support Center community portal
+- [Guide: Create a new Support Center community portal](/guides/portals/support-center/)
 

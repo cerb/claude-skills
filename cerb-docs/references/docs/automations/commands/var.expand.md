@@ -18,11 +18,11 @@ Result:
 owners : ' [#ANB-75367-518] Always use HTML mode on replies' : Kina Halpue
 ```
 
-- Syntax
-  - inputs:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -30,22 +30,22 @@ owners : ' [#ANB-75367-518] Always use HTML mode on replies' : Kina Halpue
 
 | Key | Req'd | &nbsp; |
 | --- | --- | --- |
-| `key:` | &nbsp; | The key path to expand, delimited with colons (`:`). This must be a dictionary or an array of dictionaries. When omitted, key expansion happens in the root dictionary |
+| `key:` | &nbsp; | The [key path](/docs/automations/#dictionaries) to expand, delimited with colons (`:`). This must be a dictionary or an array of dictionaries. When omitted, key expansion happens in the root dictionary |
 | `paths:` | **x** | The paths to expand at the given dictionary keys. |
 
 ## on\_simulate:
 
-The commands to run during simulation instead of expanding the key.
+The [commands](/docs/automations/#commands) to run during simulation instead of expanding the key.
 
 If omitted, the value is appended during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

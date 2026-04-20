@@ -5,12 +5,12 @@ url: "https://cerb.ai/solutions/integrations/facebook/"
 summary: "This page provides a comprehensive guide on integrating Facebook with Cerb. It outlines the steps to create a Facebook app, set up a Facebook service in Cerb, and link a connected account to Facebook. The guide also details how to create connected accounts for Facebook Pages and utilize these accounts in bot behaviors within Cerb. By following these instructions, users can leverage Facebook's full API to automate tasks using Cerb's bot functionalities."
 tags: ["solutions"]
 ---
-- Introduction
-- Create an app at Facebook
-- Create the Facebook service in Cerb
-- Link the connected account to Facebook in Cerb
-- Create connected accounts for Facebook Pages
-- Use the connected account in bot behaviors
+- [Introduction](#introduction)
+- [Create an app at Facebook](#create-an-app-at-facebook)
+- [Create the Facebook service in Cerb](#create-the-facebook-service-in-cerb)
+- [Link the connected account to Facebook in Cerb](#link-the-connected-account-to-facebook-in-cerb)
+- [Create connected accounts for Facebook Pages](#create-connected-accounts-for-facebook-pages)
+- [Use the connected account in bot behaviors](#use-the-connected-account-in-bot-behaviors)
 
 # Introduction
 
@@ -83,5 +83,5 @@ You can repeat the steps in this section for all of your Facebook pages.
 
 You can use the connected account you just created to access Facebook's Graph API from bot behaviors in Cerb. This is typically accomplished using the **Execute HTTP Request** action from a bot, and selecting the connected account in the **Authentication:** section.
 
-You can import the Facebook Page Bot package for a working example.
+You can import the [Facebook Page Bot](/packages/facebook-page-bot/) package for a working example.
 

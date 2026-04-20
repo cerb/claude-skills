@@ -5,15 +5,15 @@ url: "https://cerb.ai/guides/scaling/memcached/"
 summary: "This guide provides instructions for configuring Memcached as a caching solution using Docker containers. Learn how to set up a basic Memcached container and configure Cerb to use it through the Memcached interface for improved application performance."
 tags: ["guides"]
 ---
-- Introduction
-- Requirements
-- Local Development Setup
-- Verifying the Connection
-- References
+- [Introduction](#introduction)
+- [Requirements](#requirements)
+- [Local Development Setup](#local-development-setup)
+- [Verifying the Connection](#verifying-the-connection)
+- [References](#references)
 
 # Introduction
 
-Memcached1 is a high-performance distributed memory caching system that serves as a powerful caching solution for Cerb. While Cerb's default filesystem caching works well for single-server setups, Memcached enables you to scale your deployment across multiple servers while significantly reducing database query traffic. By caching frequently accessed but infrequently changed content (like worker data, groups, and bucket information), Memcached helps optimize your application's performance. This guide will walk you through configuring Memcached for caching in Cerb using Docker containers.
+Memcached[1](#fn:memcached) is a high-performance distributed memory caching system that serves as a powerful [caching](/docs/setup/configure/cache/) solution for Cerb. While Cerb's default filesystem caching works well for single-server setups, Memcached enables you to scale your deployment across multiple servers while significantly reducing database query traffic. By caching frequently accessed but infrequently changed content (like worker data, groups, and bucket information), Memcached helps optimize your application's performance. This guide will walk you through configuring Memcached for caching in Cerb using Docker containers.
 
 # Requirements
 
@@ -55,5 +55,5 @@ You should receive a response showing various Memcached statistics, indicating t
 
 # References
 
-1. Memcached: dockerhub - https://hub.docker.com/\_/memcached&nbsp;↩
+1. Memcached: dockerhub - https://hub.docker.com/\_/memcached&nbsp;[↩](#fnref:memcached)
 

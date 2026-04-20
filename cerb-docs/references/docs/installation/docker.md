@@ -5,18 +5,18 @@ url: "https://cerb.ai/docs/installation/docker/"
 summary: "This page provides a comprehensive guide on launching Cerb using Docker for local evaluation, development, and testing. It details the setup process, including installing Docker, starting containers with Docker Compose, and accessing the Cerb installer via a web browser. The guide also covers updating Cerb, changing the web server port, connecting to the MySQL console, and managing containers, including pausing, resuming, and deleting them. Additionally, it explains how to edit code with immediate reflection in the containers, making it a useful resource for developers working with Cerb in a Docker environment."
 tags: ["docs"]
 ---
-- Install Docker
-- Launch Cerb
-  - Option 1: Docker Hub (Production)
-    - Running the scheduler in the container from the host
+- [Install Docker](#install-docker)
+- [Launch Cerb](#launch-cerb)
+  - [Option 1: Docker Hub (Production)](#option-1-docker-hub-production)
+    - [Running the scheduler in the container from the host](#running-the-scheduler-in-the-container-from-the-host)
 
-  - Option 2: GitHub (Development, Testing)
-    - Starting local containers with Docker Compose
-    - Updating Cerb
-    - Changing the web server port
-    - Connecting to the MySQL console
-    - Stopping the containers
-    - Deleting containers
+  - [Option 2: GitHub (Development, Testing)](#option-2-github-development-testing)
+    - [Starting local containers with Docker Compose](#starting-local-containers-with-docker-compose)
+    - [Updating Cerb](#updating-cerb)
+    - [Changing the web server port](#changing-the-web-server-port)
+    - [Connecting to the MySQL console](#connecting-to-the-mysql-console)
+    - [Stopping the containers](#stopping-the-containers)
+    - [Deleting containers](#deleting-containers)
 
 https://www.youtube.com/embed/NkKUDS6oicw
 
@@ -146,7 +146,7 @@ To delete the containers and their data, use the command:
 docker compose down --volumes
 ```
 
-\< Installation
+[\< Installation](/docs/installation/)
 
-Guided Installer \>
+[Guided Installer \>](/docs/guided-installer/)
 

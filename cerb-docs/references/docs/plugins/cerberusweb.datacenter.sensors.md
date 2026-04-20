@@ -13,15 +13,15 @@ tags: ["docs"]
 
 This plugin adds flexible Sensor objects that can be used for network and server monitoring, operational intelligence, etc.
 
-- Extensions
-  - Bot Event
-  - Page Section
-  - Page Type
-  - Record Type
-  - Rest API Controller
-  - Scheduled Job
-  - Sensor Type
-  - Workspace Widget Datasource
+- [Extensions](#extensions)
+  - [Bot Event](#bot-event)
+  - [Page Section](#page-section)
+  - [Page Type](#page-type)
+  - [Record Type](#record-type)
+  - [Rest API Controller](#rest-api-controller)
+  - [Scheduled Job](#scheduled-job)
+  - [Sensor Type](#sensor-type)
+  - [Workspace Widget Datasource](#workspace-widget-datasource)
 
 # Extensions
 
@@ -57,7 +57,7 @@ This plugin adds flexible Sensor objects that can be used for network and server
 
 ### Workspace Widget Datasource
 
-| **Sensor** | `cerberusweb.datacenter.sensor.widget.datasource` |
+| [**Sensor**](/docs/plugins/extensions/cerberusweb.datacenter.sensor.widget.datasource/) | `cerberusweb.datacenter.sensor.widget.datasource` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

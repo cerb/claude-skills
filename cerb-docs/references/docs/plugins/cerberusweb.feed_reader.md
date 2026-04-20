@@ -13,12 +13,12 @@ tags: ["docs"]
 
 This plugin adds new records for Feeds and Feed Items. These can be used to share monitoring duties on RSS/Atom feeds: moderate blog comments, audit wiki changes, read new forum posts, track vendor announcements, etc.
 
-- Extensions
-  - Bot Event
-  - Event Listener
-  - Page Section
-  - Record Type
-  - Scheduled Job
+- [Extensions](#extensions)
+  - [Bot Event](#bot-event)
+  - [Event Listener](#event-listener)
+  - [Page Section](#page-section)
+  - [Record Type](#record-type)
+  - [Scheduled Job](#scheduled-job)
 
 # Extensions
 
@@ -44,5 +44,5 @@ This plugin adds new records for Feeds and Feed Items. These can be used to shar
 
 | Feeds Cron | `feeds.cron` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

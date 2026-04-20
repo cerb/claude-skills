@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 Adding a dash `-` to opening or closing scripting tags will trim leading or trailing whitespace.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
@@ -25,8 +25,8 @@ __return: output: This text has no leading or trailing whitespace in it.
 
 The `|spaceless` filter removes whitespace between HTML tags.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
@@ -41,8 +41,8 @@ __return: output: <div><p>This has extra space</p><p>between tags</p></div>
 
 For larger blocks of HTML, you can use the apply spaceless approach.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

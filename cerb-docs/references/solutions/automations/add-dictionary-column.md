@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using |merge filter
 
-The |merge filter combines two arrays or objects. We can use it in |map to add new columns to dictionaries.
+The [|merge](/docs/scripting/filters/#merge) filter combines two arrays or objects. We can use it in [|map](/docs/scripting/filters/#map) to add new columns to dictionaries.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

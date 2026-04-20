@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## array\_fill\_keys
 
-(Added in 10.0)
+(Added in [10.0](/releases/10.0/))
 
 Create an array with the given keys, each set to the default value.
 

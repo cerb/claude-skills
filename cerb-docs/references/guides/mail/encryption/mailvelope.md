@@ -5,17 +5,17 @@ url: "https://cerb.ai/guides/mail/encryption/mailvelope/"
 summary: "This webpage provides a comprehensive guide on using Mailvelope, a browser extension, to decrypt encrypted emails within Cerb, a platform that supports OpenPGP for secure email communication. It outlines the steps for installing Mailvelope, generating encryption keys, and configuring Cerb as an email provider. The guide emphasizes the importance of security, advising against storing private keys without passphrases on public servers due to potential risks. It suggests best practices for handling sensitive information, such as using separate encryption keys for shared mailboxes and individual workers. The page also details the process of sending and decrypting encrypted messages in Cerb, ensuring that only authorized workers can access the decrypted content."
 tags: ["guides"]
 ---
-- Introduction
-- Install the Mailvelope browser extension
-- Generate encryption keys
-- Enable Cerb as an email provider
-- Send an encrypted message to Cerb
-- Decrypting messages in Cerb
-- References
+- [Introduction](#introduction)
+- [Install the Mailvelope browser extension](#install-the-mailvelope-browser-extension)
+- [Generate encryption keys](#generate-encryption-keys)
+- [Enable Cerb as an email provider](#enable-cerb-as-an-email-provider)
+- [Send an encrypted message to Cerb](#send-an-encrypted-message-to-cerb)
+- [Decrypting messages in Cerb](#decrypting-messages-in-cerb)
+- [References](#references)
 
 # Introduction
 
-Cerb 8.1 includes support for sending and receiving encrypted email using OpenPGP.
+Cerb [8.1](/releases/8.1/) includes support for [sending and receiving encrypted email using OpenPGP](/blog/2017/08/16/Encrypted-email/).
 
 Workers can send encrypted messages by using the recipients' public keys, without relying on an extra encryption application or key server. Cerb stores an unencrypted copy of sent messages in the history for other workers to read. This improves security for recipients, without requiring workers to do anything different.
 
@@ -27,7 +27,7 @@ We only recommend configuring automatic decryption if you understand these risks
 
 If your private key is compromised (i.e. stolen by a malicious actor through a vulnerability on your server) then a third-party can impersonate you by _signing_ messages or files with your key, and they can decrypt any encrypted content associated with that key (which Cerb will have already done in the database).
 
-To reduce the potential damage if your server-side private key is compromised, you can use a separate private key with only subkeys that have reduced privileges and can be revoked, while keeping your master private key offline. However, the stolen subkey can still be used to decrypt anything that was encrypted for that key prior to you revoking it.
+To reduce the potential damage if your server-side private key is compromised, you can use a separate private key with only [subkeys](/guides/mail/gpg-setup-on-mac/) that have reduced privileges and can be revoked, while keeping your master private key offline. However, the stolen subkey can still be used to decrypt anything that was encrypted for that key prior to you revoking it.
 
 For this reason, if you plan to configure automatic decryption with a server-side private key, we **highly** recommend that you use a separate encryption key pair for shared mailboxes like `support@example.com`, using only decryption subkeys, with each worker also having their own private key that is never shared with anyone.
 
@@ -35,7 +35,7 @@ If you deal with sensitive client information (e.g. authentication, financial, m
 
 The more secure option in these scenarios is to leave messages encrypted in Cerb's database and message history. Even if your server or database was compromised by a malicious actor, this sensitive information would remain encrypted in a secure way. To read a message, authorized workers would decrypt it within their browser with their own secret copy of the private key using a strong passphrase.
 
-Mailvelope1 is an open-source browser extension for Chrome and Firefox that simplifies this process. When enabled for a web-based application like Cerb, it can detect encrypted messages displayed in the browser and help decrypt them in a temporary way.
+Mailvelope[1](#fn:mailvelope) is an open-source browser extension for Chrome and Firefox that simplifies this process. When enabled for a web-based application like Cerb, it can detect encrypted messages displayed in the browser and help decrypt them in a temporary way.
 
 This approach allows you to receive encrypted messages in a shared mailbox that are only readable by specific workers – determined ahead of time, and specified through their public keys by the sender.
 
@@ -134,5 +134,5 @@ When you close the card popup or profile page, the message remains encrypted in 
 
 # References
 
-1. Mailvelope - https://www.mailvelope.com/en&nbsp;↩
+1. Mailvelope - https://www.mailvelope.com/en&nbsp;[↩](#fnref:mailvelope)
 

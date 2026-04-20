@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## dns\_host\_by\_ip
 
-(Added in 10.2.6)
+(Added in [10.2.6](/releases/10.2.6/))
 
 Resolve a hostname from an IP. If a name can't be resolved for a valid IP, the IP is returned. If an invalid IP is provided, the result is an empty string.
 

@@ -9,7 +9,7 @@ Here are examples of using regular expressions to extract matching text in autom
 
 ## Matching a single capture group
 
-The pattern is a KATA key.
+The pattern is a [KATA](/docs/kata/) key.
 
 ```
 start: set: text: Your Amazon Order #Z-1234-5678-9 has shipped! pattern: /Amazon Order #([A-Z0-9\-]+)/ return: order_id: {{ text|regexp(pattern, 1) }}
@@ -26,7 +26,7 @@ In the first argument, we're giving the pattern `/Amazon Order #([A-Z0-9\-]+)/`:
 
 ## Setting the pattern as a variable
 
-The pattern is a scripting variable.
+The pattern is a [scripting](/docs/scripting/) variable.
 
 ```
 start: set: mask@text: {% set text = "The ticket mask that I am looking for is: KRN-69622-357 something else" %} {% set pattern %}/[A-Z]{3}-\d{5}-\d{3}/{% endset %} {{ text|regexp(pattern) }}   
@@ -43,10 +43,10 @@ start: set: text: (123,456) pattern: /^\((\d+),(\d+)\)$/ return: x@int: {{ text|
 
 ## Returning all matches for all capture groups
 
-Use the regexp\_match\_all() function to return multiple capture groups for all matches.
+Use the [regexp\_match\_all()](/docs/scripting/functions/#regexp_match_all) function to return multiple capture groups for all matches.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

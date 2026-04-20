@@ -13,8 +13,8 @@ tags: ["docs"]
 
 This plugin automatically sends an email to workers if they have received new notifications. It sends digests, so if you receive 100 new assignments you'll only receive a single email about them.
 
-- Extensions
-  - Scheduled Job
+- [Extensions](#extensions)
+  - [Scheduled Job](#scheduled-job)
 
 # Extensions
 
@@ -22,5 +22,5 @@ This plugin automatically sends an email to workers if they have received new no
 
 | Notifications Emailer | `wgm.notifications.emailer.cron` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

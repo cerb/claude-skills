@@ -7,43 +7,43 @@ tags: ["docs"]
 ---
  
 
-**Search queries** are a text-based language for filtering records. They are efficient, expressive, and automation-friendly.
+**Search queries** are a text-based language for filtering [records](/docs/records/). They are efficient, expressive, and automation-friendly.
 
-- Searching records
-- Filters
-  - Text
-  - Fulltext
-  - Numbers
-  - Booleans
-  - Dates
-    - Advanced
+- [Searching records](#searching-records)
+- [Filters](#filters)
+  - [Text](#text)
+  - [Fulltext](#fulltext)
+  - [Numbers](#numbers)
+  - [Booleans](#booleans)
+  - [Dates](#dates)
+    - [Advanced](#advanced)
 
-  - Nullness
-  - Choosers
-  - Links
-  - Watchers
+  - [Nullness](#nullness)
+  - [Choosers](#choosers)
+  - [Links](#links)
+  - [Watchers](#watchers)
 
-- Autocompletion
-- Deep Search
-  - Deep search
-  - Multiple deep searches
-  - Deeper search
-  - Negation
+- [Autocompletion](#autocompletion)
+- [Deep Search](#deep-search)
+  - [Deep search](#deep-search-1)
+  - [Multiple deep searches](#multiple-deep-searches)
+  - [Deeper search](#deeper-search)
+  - [Negation](#negation-2)
 
-- Boolean Groups
-  - AND
-  - OR
-  - NOT
-  - Multiple boolean filter groups
+- [Boolean Groups](#boolean-groups)
+  - [AND](#and)
+  - [OR](#or)
+  - [NOT](#not)
+  - [Multiple boolean filter groups](#multiple-boolean-filter-groups)
 
-- Sorting
-  - Sort ascending
-  - Sort descending
-  - Nested sorting
+- [Sorting](#sorting)
+  - [Sort ascending](#sort-ascending)
+  - [Sort descending](#sort-descending)
+  - [Nested sorting](#nested-sorting)
 
-Using queries, search functionality is consistent between automations, worklists, data queries, and API requests.
+Using queries, search functionality is consistent between [automations](/docs/automations/), [worklists](/docs/worklists/), [data queries](/docs/data-queries/), and [API requests](/docs/api/endpoints/records/#search).
 
-As text, queries can be built dynamically using automation scripting syntax. They also simplify many complex operations that would otherwise be tedious (or impossible) to automate or represent with web-based forms.
+As text, queries can be built dynamically using [automation scripting](/docs/scripting/) syntax. They also simplify many complex operations that would otherwise be tedious (or impossible) to automate or represent with web-based forms.
 
 To give you an idea of what you can do with queries, here's an example query that returns open tickets in the Sales or Support group that are less than a month old:
 
@@ -55,7 +55,7 @@ In the following sections we'll cover query syntax and advanced functionality.
 
 ### Searching records
 
-You can use the global search menu to filter any record type:
+You can use the global search menu to filter any [record type](/docs/records/types/):
 
  
 
@@ -71,7 +71,7 @@ The possible **expressions** depend on the type of filter:
 
 ## Text
 
-These expressions can be used on text-based filters.
+These expressions can be used on text-based [filters](/docs/search/#filters).
 
 #### Term
 
@@ -115,9 +115,9 @@ status: !open
 
 ## Fulltext
 
-Many records provide a default **full-text** filter that's used when you type an expression without specifying a filter.
+Many records provide a default **full-text** [filter](/docs/search/#filters) that's used when you type an expression without specifying a filter.
 
-This is a more efficient way to search records with a large amount of text (e.g. email messages, comments).
+This is a more efficient way to search [records](/docs/records/) with a large amount of text (e.g. email messages, comments).
 
 #### Terms
 
@@ -137,7 +137,7 @@ Enter text within quotes to search for exact phrases:
 
 #### Mixing terms and phrases
 
-(Added in 10.1)
+(Added in [10.1](/releases/10.1/))
 
 ```
 content: ("an exact phrase" other terms)
@@ -145,7 +145,7 @@ content: ("an exact phrase" other terms)
 
 #### Negation
 
-(Added in 10.1)
+(Added in [10.1](/releases/10.1/))
 
 ```
 text: !(not these words)
@@ -153,7 +153,7 @@ text: !(not these words)
 
 ## Numbers
 
-These expressions can be used on numeric filters.
+These expressions can be used on numeric [filters](/docs/search/#filters).
 
 #### Equal
 
@@ -205,7 +205,7 @@ importance: [0,50,75]
 
 ## Booleans
 
-These expressions can be used on boolean filters.
+These expressions can be used on boolean [filters](/docs/search/#filters).
 
 #### True
 
@@ -233,7 +233,7 @@ isAdmin: n
 
 ## Dates
 
-These expressions can be used on date-based filters.
+These expressions can be used on date-based [filters](/docs/search/#filters).
 
 #### Since
 
@@ -281,7 +281,7 @@ created: "big bang to first day of this month"
 
 #### Advanced
 
-Since: 9.6
+Since: [9.6](/releases/9.6/)
 
 Date-based filters may use an optional advanced parameterized expression, with the format:
 
@@ -305,9 +305,9 @@ The `times:` option accepts a comma-delimited list of time ranges to include for
 
 ## Nullness
 
-You can match records by having, or not having, any value for a particular filter.
+You can match records by having, or not having, any value for a particular [filter](/docs/search/#filters).
 
-This is particularly useful for custom fields.
+This is particularly useful for [custom fields](/docs/custom-fields/).
 
 #### Null
 
@@ -327,11 +327,11 @@ checkbox: !null
 
 ## Choosers
 
-**Chooser** filters match fields that contain record IDs.
+**Chooser** [filters](/docs/search/#filters) match fields that contain [record](/docs/records/) IDs.
 
 By convention, these filter names usually have an `.id` suffix (e.g. `bucket.id:`).
 
-Chooser filters support all numeric expressions.
+Chooser filters support all [numeric](/docs/search/#numbers) expressions.
 
 #### ID
 
@@ -351,11 +351,11 @@ group.id: [1,2,3]
 
 ## Links
 
-These expressions can be used on link filters.
+These expressions can be used on link [filters](/docs/search/#filters).
 
 #### Link to record type
 
-To filter by records with a link to a specific other record type, use its alias as the expression:
+To filter by records with a link to a specific other [record type](/docs/records/types/), use its alias as the expression:
 
 ```
 links: ticket
@@ -363,9 +363,9 @@ links: ticket
 
 #### Deep search by links
 
-You can also use deep search to filter records based on any property of linked records.
+You can also use [deep search](/docs/search/#deep-search) to filter records based on any property of linked records.
 
-Append the record type alias to `links` following a period (`.`), then the expression can be any search query for that record type:
+Append the [record type alias](/docs/records/types/) to `links` following a period (`.`), then the expression can be any [search query](/docs/search/) for that record type:
 
 ```
 links.ticket: (mask:a*)
@@ -373,7 +373,7 @@ links.ticket: (mask:a*)
 
 ## Watchers
 
-These expressions can be used on watcher filters.
+These expressions can be used on watcher [filters](/docs/search/#filters).
 
 #### Names
 
@@ -425,9 +425,9 @@ You can also manually open the suggestion menu with the `<Control> + <Space>` ke
 
 # Deep Search
 
-Some filters represent links between related records.
+Some [filters](/docs/search/#filters) represent [links](/docs/records/links/) between related [records](/docs/records/).
 
-The expression for these filters is another search query based on the linked record type.
+The expression for these filters is another [search query](/docs/search/) based on the linked record type.
 
 We refer to this as **deep searching** because you can chain these searches to any depth.
 
@@ -453,7 +453,7 @@ You can perform multiple deep searches at once:
 owner: (gender:f) group: (name:[support,sales]) org: (sla.plan:!null)
 ```
 
-The above example returns records owned by a female worker, in the _Support_ or _Sales_ group, from an organization with any service level agreement (a custom fieldset picklist).
+The above example returns records owned by a female worker, in the _Support_ or _Sales_ group, from an organization with any service level agreement (a [custom fieldset](/docs/custom-fieldsets/) picklist).
 
 ### Deeper search
 
@@ -479,7 +479,7 @@ The above example returns records that are in a group whose name **doesn't** sta
 
 # Boolean Groups
 
-You can group filters into `AND` and `OR` (boolean) sets.
+You can group [filters](/docs/search/#filters) into `AND` and `OR` (boolean) sets.
 
 ### AND
 
@@ -525,7 +525,7 @@ You can mix boolean filter groups by using parentheses (`()`):
 
 The above example will return **both**"PNGs larger than 100KB" and "JPEGs smaller than 100KB".
 
-A special `sort:` filter is available on every record type.
+A special `sort:` [filter](/docs/search/#filters) is available on every record type.
 
 # Sorting
 

@@ -5,24 +5,24 @@ url: "https://cerb.ai/guides/portals/support-center/"
 summary: "This page provides a comprehensive guide on setting up a new Support Center community portal in Cerb. It covers the installation of the Support Center plugin, the creation of a new community portal, and the configuration of the Support Center, including branding and module setup. The guide concludes with instructions on deploying the Support Center, ensuring that users can effectively manage customer interactions through announcements, knowledgebase searches, contact forms, profile management, and ticket history reviews."
 tags: ["guides"]
 ---
-- Introduction
-- Install the Support Center plugin
-- Create a new community portal
-- Configure the Support Center
-  - Branding
-  - Modules
+- [Introduction](#introduction)
+- [Install the Support Center plugin](#install-the-support-center-plugin)
+- [Create a new community portal](#create-a-new-community-portal)
+- [Configure the Support Center](#configure-the-support-center)
+  - [Branding](#branding)
+  - [Modules](#modules)
 
-- Deploy the Support Center
+- [Deploy the Support Center](#deploy-the-support-center)
 
 # Introduction
 
-The most popular community portal is the **Support Center**. This provides a place for customers to read recent announcements, search your knowledgebase, fill out contact forms, edit their profile, and review their ticket history.
+The most popular [community portal](/docs/portals/) is the **Support Center**. This provides a place for customers to read recent announcements, search your knowledgebase, fill out contact forms, edit their profile, and review their [ticket](/docs/tickets/) history.
 
  
 
 # Install the Support Center plugin
 
-First, make sure that the necessary plugin is enabled.
+First, make sure that the necessary [plugin](/docs/plugins/) is enabled.
 
 Navigate to **Setup&nbsp;» Configure&nbsp;» Plugins&nbsp;» Installed**.
 

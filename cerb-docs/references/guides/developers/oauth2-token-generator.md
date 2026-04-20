@@ -5,22 +5,22 @@ url: "https://cerb.ai/guides/developers/oauth2-token-generator/"
 summary: "This page provides a comprehensive guide on using the OAuth2 Token Generator tool for creating OAuth2 access and refresh tokens. It covers how to generate tokens with specific scopes and expiration times, and explains how these tokens can be used for API testing and development."
 tags: ["guides"]
 ---
-- Introduction
-- Prerequisites
-- Generating an OAuth2 token
-- Simulating from the automation editor
-- Testing from curl
-- Implementing in your app
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Generating an OAuth2 token](#generating-an-oauth2-token)
+- [Simulating from the automation editor](#simulating-from-the-automation-editor)
+- [Testing from curl](#testing-from-curl)
+- [Implementing in your app](#implementing-in-your-app)
 
 # Introduction
 
 The OAuth2 Token Generator allows administrators to create access tokens for API authentication. These tokens provide secure access to Cerb's API with specific worker permissions and scopes. While OAuth2 typically requires implementing a complete authentication flow, the token generator provides a simpler way to create tokens directly.
 
-For detailed information about Cerb's OAuth2 authentication system, see the API Authentication documentation. If you're building custom integrations, you may also want to review:
+For detailed information about Cerb's OAuth2 authentication system, see the [API Authentication documentation](/docs/api/authentication/). If you're building custom integrations, you may also want to review:
 
-- OAuth2 Token Validation example - Examples of validating tokens in webhook automations.
+- [OAuth2 Token Validation example](/solutions/automations/validate-oauth2-token/) - Examples of validating tokens in webhook automations.
 
-- Custom API guide - Build and authenticate APIs using webhook portals.
+- [Custom API guide](/guides/webhooks/custom-api/) - Build and authenticate APIs using webhook portals.
 
 # Prerequisites
 

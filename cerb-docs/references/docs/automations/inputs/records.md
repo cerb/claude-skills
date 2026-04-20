@@ -15,7 +15,7 @@ The value should be an array of record IDs (`123`) or URIs (`cerb:record_type:re
 
 ### record\_type:
 
-record types
+[record types](/docs/records/types/)
 
 ### default:
 

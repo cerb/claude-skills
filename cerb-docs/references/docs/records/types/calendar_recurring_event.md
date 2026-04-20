@@ -10,38 +10,38 @@ tags: ["docs", "docs-records-types"]
 | **Alias (uri):** | calendar\_recurring\_event |
 | **Identifier (ID):** | cerberusweb.contexts.calendar\_event.recurring |
 
-- Records API
-- Dictionary Placeholders
-- Search Query Fields
-- Worklist Columns
+- [Records API](#records-api)
+- [Dictionary Placeholders](#dictionary-placeholders)
+- [Search Query Fields](#search-query-fields)
+- [Worklist Columns](#worklist-columns)
 
 ### Records API
 
-These fields are available in the Records API and packages:
+These fields are available in the [Records API](/docs/api/endpoints/records/) and [packages](/docs/packages/):
 
 | Req'd | Field | Type | Notes |
 | --- | --- | --- | --- |
-| **x** | **`calendar_id`** | number | The parent calendar of this event |
-| &nbsp; | `event_end` | text | The end date/time of the event |
-| &nbsp; | `event_start` | text | The start date/time of the event |
-| &nbsp; | `is_available` | boolean | `true` for available; `false` for busy |
-| &nbsp; | `links` | links | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
-| **x** | **`name`** | text | The name of the event |
-| **x** | **`patterns`** | text | One pattern per line |
-| &nbsp; | `recur_end` | timestamp | The end date/time of the recurring range |
-| &nbsp; | `recur_start` | timestamp | The start date/time of the recurring range |
-| &nbsp; | `tz` | text | The timezone of the recurring event (e.g. `America/Los_Angeles`) |
+| **x** | **`calendar_id`** | [number](/docs/records/fields/types/number/) | The parent [calendar](/docs/records/types/calendar/) of this event |
+| &nbsp; | `event_end` | [text](/docs/records/fields/types/text/) | The end date/time of the event |
+| &nbsp; | `event_start` | [text](/docs/records/fields/types/text/) | The start date/time of the event |
+| &nbsp; | `is_available` | [boolean](/docs/records/fields/types/boolean/) | `true` for available; `false` for busy |
+| &nbsp; | `links` | [links](/docs/records/fields/types/links/) | An array of record `type:id` tuples to link to. Prefix with `-` to unlink. |
+| **x** | **`name`** | [text](/docs/records/fields/types/text/) | The name of the event |
+| **x** | **`patterns`** | [text](/docs/records/fields/types/text/) | One pattern per line |
+| &nbsp; | `recur_end` | [timestamp](/docs/records/fields/types/timestamp/) | The end date/time of the recurring range |
+| &nbsp; | `recur_start` | [timestamp](/docs/records/fields/types/timestamp/) | The start date/time of the recurring range |
+| &nbsp; | `tz` | [text](/docs/records/fields/types/text/) | The timezone of the recurring event (e.g. `America/Los_Angeles`) |
 
 ### Dictionary Placeholders
 
-These placeholders are available in dictionaries for automations, snippets, and API responses:
+These [placeholders](/docs/scripting/variables/#placeholders) are available in [dictionaries](/docs/guide/developers/dictionaries/) for [automations](/docs/automations/), [snippets](/docs/snippets/), and [API](/docs/api/) responses:
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `_context` | text | Record type extension ID |
+| `_context` | text | [Record type](/docs/records/types/) extension ID |
 | `_label` | text | Label |
-| `_type` | text | Record type alias |
-| `calendar_` | record | Calendar |
+| `_type` | text | [Record type](/docs/records/types/) alias |
+| `calendar_` | record | [Calendar](/docs/records/types/calendar/) |
 | `calendar_owner_` | record | Calendar Owner |
 | `event_end` | text | End |
 | `event_start` | text | Start |
@@ -54,35 +54,35 @@ These placeholders are available in dictionaries for automations, snippets, and 
 | `recur_start` | text | Recur Start |
 | `tz` | text | Timezone |
 
-These optional placeholders are also available with **key expansion** in dictionaries and the API:
+These optional placeholders are also available with **key expansion** in [dictionaries](/docs/guide/developers/dictionaries/#key-expansion) and the [API](/docs/api/responses/#expanding-keys-in-api-requests):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `comment_count` | number | Comment count on the record |
-| `comments` | comments | Comments |
-| `custom_<id>` | mixed | Custom Fields |
-| `links` | links | Links |
-| `watchers` | watchers | Watchers |
+| `comment_count` | number | [Comment](/docs/records/types/comments/) count on the record |
+| `comments` | comments | [Comments](/docs/guide/developers/dictionaries/#key-expansion) |
+| `custom_<id>` | mixed | [Custom Fields](/docs/guide/developers/dictionaries/#key-expansion) |
+| `links` | links | [Links](/docs/guide/developers/dictionaries/#key-expansion) |
+| `watchers` | watchers | [Watchers](/docs/guide/developers/dictionaries/#key-expansion) |
 
 ### Search Query Fields
 
-These filters are available in calendar recurring event search queries:
+These [filters](/docs/search/#filters) are available in calendar recurring event [search queries](/docs/search/):
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `calendar:` | record | Calendar |
-| `calendar.id:` | chooser | Calendar |
-| `fieldset:` | record | Fieldset |
-| `id:` | number | Id |
-| `links:` | links | Record Links |
-| `name:` | text | Event Name |
-| `status:` | boolean | Is Available |
-| `timezone:` | text | Timezone |
-| `watchers:` | record | Watchers |
+| `calendar:` | [record](/docs/search/#deep-search) | [Calendar](/docs/records/types/calendar/) |
+| `calendar.id:` | [chooser](/docs/search/#choosers) | [Calendar](/docs/records/types/calendar/) |
+| `fieldset:` | [record](/docs/search/#deep-search) | [Fieldset](/docs/records/types/custom_fieldset/) |
+| `id:` | [number](/docs/search/#numbers) | Id |
+| `links:` | [links](/docs/search/#links) | Record Links |
+| `name:` | [text](/docs/search/#text) | Event Name |
+| `status:` | [boolean](/docs/search/#booleans) | Is Available |
+| `timezone:` | [text](/docs/search/#text) | Timezone |
+| `watchers:` | [record](/docs/search/#deep-search) | [Watchers](/docs/records/types/worker/) |
 
 ### Worklist Columns
 
-These columns are available on calendar recurring event worklists:
+These columns are available on calendar recurring event [worklists](/docs/worklists/):
 
 | Column | Description |
 | --- | --- |
@@ -96,7 +96,7 @@ These columns are available on calendar recurring event worklists:
 | `c_recur_end` | Recur End |
 | `c_recur_start` | Recur Start |
 | `c_tz` | Timezone |
-| `cf_<id>` | Custom Field |
+| `cf_<id>` | [Custom Field](/docs/records/types/custom_field/) |
 
-\< Record Types
+[\< Record Types](/docs/records/types/)
 

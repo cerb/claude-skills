@@ -9,7 +9,7 @@ tags: ["solutions", "solutions-automations"]
 
 You can't use scripting in a KATA key, but if you want to set a dynamic key name, you can do so with var.set:
 
-- automation
+- [automation](#)
 
 - 
 ```
@@ -20,7 +20,7 @@ start: var.set/random: inputs: key: random_ {{ random_string(6) }} value: {{ ran
 
 This approach can also be used if you want a key name that isn't valid in KATA, such as a `:` or `@`.
 
-- automation
+- [automation](#)
 
 - 
 ```
@@ -31,7 +31,7 @@ start: var.set/email: inputs: key@text: customer@cerb.example value: allow
 
 You can also use the `delimiter:` field to change the delimiter from the standard `:` if necessary. This allows you to use `:` in a key name.
 
-- automation
+- [automation](#)
 
 - 
 ```

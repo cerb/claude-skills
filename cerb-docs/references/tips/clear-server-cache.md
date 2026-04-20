@@ -9,13 +9,13 @@ You're probably familiar with the file cache in your web browser. It saves a tem
 
 Cerb uses a similar cache on the web server to speed up expensive operations like database queries.
 
-You usually don't have to think about the cache. When you modify records or upgrade, Cerb automatically clears the appropriate caches for you.
+You usually don't have to think about the cache. When you modify records or [upgrade](/docs/upgrading/), Cerb automatically clears the appropriate caches for you.
 
 However, if you modify the database directly then you'll need to clear the cache yourself.
 
 ### Flushing the cache
 
-1. Click on the logo in the top left while logged into Cerb.
+1. Click on the [logo](/docs/guide/workers/user-interface/#logo) in the top left while logged into Cerb.
 
 2. Append `update` to the URL in your browser and press `<ENTER>`.
 

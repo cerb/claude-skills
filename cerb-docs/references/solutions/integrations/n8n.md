@@ -5,12 +5,12 @@ url: "https://cerb.ai/solutions/integrations/n8n/"
 summary: "This guide provides a step-by-step tutorial on integrating Cerb with n8n workflows. It covers the creation of a custom Cerb workflow that utilizes n8n as an external service."
 tags: ["solutions"]
 ---
-- Introduction
-- Create an Access Token in Cerb
-- Create Cerb Credential in n8n
-- Examples
-  - In n8n
-  - In Cerb
+- [Introduction](#introduction)
+- [Create an Access Token in Cerb](#create-an-access-token-in-cerb)
+- [Create Cerb Credential in n8n](#create-cerb-credential-in-n8n)
+- [Examples](#examples)
+  - [In n8n](#in-n8n)
+  - [In Cerb](#in-cerb)
 
 # Introduction
 

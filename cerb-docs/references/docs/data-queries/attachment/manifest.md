@@ -15,7 +15,7 @@ tags: ["docs"]
 | --- | --- |
 | `filter:` | An optional pattern to match on returned paths and files. (e.g. `*.png`, `/example/path/*`) |
 | `format:` | Must be `dictionaries` (default) or omitted |
-| `id:` | The `id` of an attachment record to inspect (must be an archive) |
+| `id:` | The `id` of an [attachment](/docs/records/types/attachment/) record to inspect (must be an archive) |
 | `limit:` | The number of file paths to return (defaults to `1000`) |
 | `offset:` | The file path to start returning from (defaults to `0`) |
 
@@ -23,7 +23,7 @@ tags: ["docs"]
 
 The results can be returned in these formats:
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 # Examples
 

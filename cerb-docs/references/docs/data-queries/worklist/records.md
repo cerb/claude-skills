@@ -7,26 +7,26 @@ tags: ["docs"]
 ---
 # worklist.records
 
-`worklist.records` data queries retrieve record dictionaries with a search query.
+`worklist.records` [data queries](/docs/data-queries/) retrieve record dictionaries with a [search query](/docs/search/).
 
 ```
 type: worklist.records of: ticket expand: [group_,custom_] query: ( status: open limit: 10 sort: -updated ) 
  format: dictionaries
 ```
 
-- of:
-- query:
-- query.required:
-- expand:
-- page:
-- timeout:
-- format:
-- Examples
-  - Return a stacked bar chart of tickets by owner by status
+- [of:](#of)
+- [query:](#query)
+- [query.required:](#queryrequired)
+- [expand:](#expand)
+- [page:](#page)
+- [timeout:](#timeout)
+- [format:](#format)
+- [Examples](#examples)
+  - [Return a stacked bar chart of tickets by owner by status](#return-a-stacked-bar-chart-of-tickets-by-owner-by-status)
 
 # of:
 
-The `of:` key specifies the type of records to retrieve.
+The `of:` key specifies the type of [records](/docs/records/) to retrieve.
 
 ```
 of: ticket
@@ -34,11 +34,11 @@ of: ticket
 
 # query:
 
-The `query:` key specifies the query for filtering the results.
+The `query:` key specifies the [query](/docs/search/) for filtering the results.
 
 # query.required:
 
-The `query.required:` key specifies the required query for filtering the results. This is used to set the scope and should never contain placeholders with user input.
+The `query.required:` key specifies the required [query](/docs/search/) for filtering the results. This is used to set the scope and should never contain placeholders with user input.
 
 # expand:
 
@@ -50,7 +50,7 @@ expand: [custom_,group_,owner_]
 
 # page:
 
-The `page:` key specifies the page to return. Pages numbering is zero-based. This is used by functionality like sheets.
+The `page:` key specifies the page to return. Pages numbering is zero-based. This is used by functionality like [sheets](/docs/sheets/).
 
 # timeout:
 
@@ -60,7 +60,7 @@ The time limit of the query in milliseconds (0-60000). Default: `20000`.
 
 The worklist results can be returned in these formats:
 
-- **dictionaries** (default) returns a table-based format suitable for sheets and API results.
+- **dictionaries** (default) returns a table-based format suitable for [sheets](/docs/sheets/) and API results.
 
 # Examples
 

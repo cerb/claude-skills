@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 The file.write: command can create a ZIP archive with files from arbitrary text, temporary automation resources, or existing file attachments. You can then use record.create: to create an attachment to link to other records like tickets, messages, etc.
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

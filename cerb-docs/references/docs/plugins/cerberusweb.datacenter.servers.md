@@ -13,14 +13,14 @@ tags: ["docs"]
 
 This plugin adds Server objects that can be used to manage datacenter assets.
 
-- Extensions
-  - Bot Action
-  - Bot Event
-  - Event Listener
-  - Page Section
-  - Page Type
-  - Record Type
-  - Rest API Controller
+- [Extensions](#extensions)
+  - [Bot Action](#bot-action)
+  - [Bot Event](#bot-event)
+  - [Event Listener](#event-listener)
+  - [Page Section](#page-section)
+  - [Page Type](#page-type)
+  - [Record Type](#record-type)
+  - [Rest API Controller](#rest-api-controller)
 
 # Extensions
 
@@ -52,5 +52,5 @@ This plugin adds Server objects that can be used to manage datacenter assets.
 
 | Servers | `cerberusweb.datacenter.servers.rest` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

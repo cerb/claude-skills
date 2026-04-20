@@ -17,12 +17,12 @@ Result:
 output: Kina Halpue
 ```
 
-- Syntax
-  - inputs:
-  - output:
-  - on\_simulate:
-  - on\_success:
-  - on\_error:
+- [Syntax](#syntax)
+  - [inputs:](#inputs)
+  - [output:](#output)
+  - [on\_simulate:](#on_simulate)
+  - [on\_success:](#on_success)
+  - [on\_error:](#on_error)
 
 # Syntax
 
@@ -30,7 +30,7 @@ output: Kina Halpue
 
 | Key | Req'd | &nbsp; |
 | --- | --- | --- |
-| `key:` | **x** | The key path of the value to set, delimited with colons (`:`). |
+| `key:` | **x** | The [key path](/docs/automations/#dictionaries) of the value to set, delimited with colons (`:`). |
 | `value:` | **x** | The value to set. |
 | `delimiter:` | &nbsp; | An optional delimiter to use in `key:` paths. |
 
@@ -40,19 +40,19 @@ The optional placeholder to store the result.
 
 ## on\_simulate:
 
-The commands to run during simulation instead of setting the value.
+The [commands](/docs/automations/#commands) to run during simulation instead of setting the value.
 
 If omitted, the value is set during simulation.
 
 ## on\_success:
 
-The commands to run on success.
+The [commands](/docs/automations/#commands) to run on success.
 
 The optional `output:` placeholder is set to the new value.
 
 ## on\_error:
 
-The commands to run on failure. If omitted, the automation exits in the `error` state.
+The [commands](/docs/automations/#commands) to run on failure. If omitted, the automation exits in the `error` [state](/docs/automations/#exit-states).
 
 The `output:` placeholder receives a dictionary with these keys:
 

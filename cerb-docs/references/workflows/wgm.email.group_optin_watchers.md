@@ -5,10 +5,10 @@ url: "https://cerb.ai/workflows/wgm.email.group_optin_watchers/"
 summary: "This page provides detailed information about the 'Group (Opt-In) Watchers' workflow in Cerb, which automatically adds all workers watching a group as watchers of the ticket when a ticket is moved to (or created in) that group. It includes sections on introduction, installation, usage, and reference. The workflow can be created on Cerb version 11.0 and above. The usage section explains how those workers who are watching a group are automatically added as ticket watchers when a ticket is moved to (or created in) that group. The reference section offers guidance on creating a custom group (opt-in) watchers workflow using the provided template, with instructions on modifying the workflow identifier to suit individual needs. The page also includes a sample workflow script and details on the requirements and configuration for implementing the group (opt-in) watchers feature."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Testing with imported message
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Testing with imported message](#testing-with-imported-message)
 
 # Introduction
 

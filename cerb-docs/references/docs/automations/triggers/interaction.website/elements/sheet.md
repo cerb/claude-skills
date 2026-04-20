@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.website/elements/she
 summary: "This page provides detailed information on the 'sheet' element used in website interaction forms within Cerb. It explains how a sheet element can display a schema using either static or dynamic data, with options for single or multiple selections. The page outlines the syntax for various attributes such as labels, required fields, data sources, limits, pagination, filtering, default selections, and schema definitions. It also covers the use of synthesized data and custom validation scripts to ensure data integrity. The document includes examples of how to configure these elements, emphasizing the flexibility and customization available for creating interactive forms."
 tags: ["docs", "docs-automations"]
 ---
-In website interactions forms, a **sheet** element displays a sheet schema using static or dynamic data.
+In [website interactions](/docs/automations/triggers/interaction.website/) forms, a **sheet** element displays a [sheet](/docs/sheets/) schema using static or dynamic data.
 
 Selection prompt can be set to 'single' or 'multiple'.
 
@@ -39,7 +39,7 @@ If user input is required on this element use a value of `yes`. Otherwise, omit.
 
 A sheet element can display an array of dictionaries as a dataset.
 
-Alternatively, a ui.sheet.data automation can fetch a dynamic dataset.
+Alternatively, a [ui.sheet.data](/docs/automations/triggers/ui.sheet.data/) automation can fetch a dynamic dataset.
 
 ```
 start: await: form: elements: sheet/prompt_workers: label: Workers: required@bool: yes data: automation: uri: cerb:automation:cerb.data.records inputs: record_type: worker query_required@text: isDisabled:n limit: 5 schema: layout: headings@bool: no paging@bool: no filtering@bool: yes columns: selection/id: params: mode: multiple card/_label: params: bold@bool: yes image@bool: yes
@@ -71,7 +71,7 @@ The optional selected dataset item(s) by default.
 
 ### schema:
 
-A sheet schema defining the column types to display for each dataset item.
+A [sheet](/docs/sheets/) schema defining the column types to display for each dataset item.
 
 Selection is managed by a `selection:` column in the sheet.
 

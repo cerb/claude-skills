@@ -7,35 +7,35 @@ tags: ["docs"]
 ---
 # worklist.subtotals
 
-`worklist.subtotals` data queries run aggregate functions to categorize matching worklist records.
+`worklist.subtotals` [data queries](/docs/data-queries/) run aggregate functions to categorize matching worklist records.
 
 ```
 type: worklist.subtotals of: tickets by: [created@month,group] format: timeseries
 ```
 
-- of:
-- by:
-  - Nested subtotals
-  - Aggregate functions
-  - Date histograms
-  - Links
-  - Limits
-  - Limit ordering
+- [of:](#of)
+- [by:](#by)
+  - [Nested subtotals](#nested-subtotals)
+  - [Aggregate functions](#aggregate-functions)
+  - [Date histograms](#date-histograms)
+  - [Links](#links)
+  - [Limits](#limits)
+  - [Limit ordering](#limit-ordering)
 
-- timeout:
-- timezone:
-- metric:
-  - Mathematical operations
-  - Filters
+- [timeout:](#timeout)
+- [timezone:](#timezone)
+- [metric:](#metric)
+  - [Mathematical operations](#mathematical-operations)
+  - [Filters](#filters)
 
-- group:
-- format:
-- Examples
-  - Return a stacked bar chart of tickets by owner by status
+- [group:](#group)
+- [format:](#format)
+- [Examples](#examples)
+  - [Return a stacked bar chart of tickets by owner by status](#return-a-stacked-bar-chart-of-tickets-by-owner-by-status)
 
 # of:
 
-The `of:` key specifies the type of records to subtotal.
+The `of:` key specifies the type of [records](/docs/records/) to subtotal.
 
 ```
 of: tickets
@@ -43,7 +43,7 @@ of: tickets
 
 # by:
 
-The `by:` key specifies which record fields to subtotal by.
+The `by:` key specifies which record [fields](/docs/records/#fields) to subtotal by.
 
 ### Nested subtotals
 
@@ -70,7 +70,7 @@ The `count` function is the default when no preference is given, and it can be t
 
 The other functions may only be used against numeric fields. For example, you can't average _group names_, but you can average _response times_.
 
-As of 9.0.7 the desired function is appended to the `by:` key following a period (`.`):
+As of [9.0.7](/releases/9.0.7/) the desired function is appended to the `by:` key following a period (`.`):
 
 ```
 by.avg: [worker,responseTime]
@@ -148,7 +148,7 @@ The time limit of the query in milliseconds (0-60000). Default: `20000`.
 
 # timezone:
 
-(Available in 10.2.0 or later)
+(Available in [10.2.0](/releases/10.2/) or later)
 
 The `timezone:` key generates date labels in the given timezone location for bins like `by:[created@day]`.
 
@@ -158,7 +158,7 @@ If omitted, this defaults to the timezone of the current worker or the server.
 
 # metric:
 
-(Available in 9.0.7 or later)
+(Available in [9.0.7](/releases/9.0.7/) or later)
 
 The `metric:` key lets you specify an arbitrary **equation** to modify the calculated value for each row in the results.
 
@@ -184,11 +184,11 @@ metric: "(x+2)*100"
 
 ### Filters
 
-Numeric filters from bot scripting can be appended to a result following a pipe (`|`) character.
+Numeric [filters](/docs/scripting/filters/) from [bot scripting](/docs/scripting/) can be appended to a result following a pipe (`|`) character.
 
-- abs
-- number\_format
-- round
+- [abs](/docs/scripting/filters/#abs)
+- [number\_format](/docs/scripting/filters/#number_format)
+- [round](/docs/scripting/filters/#round)
 
 ```
 metric: "(x/4.33)|round"
@@ -196,7 +196,7 @@ metric: "(x/4.33)|round"
 
 # group:
 
-(Available in 9.0.7 or later)
+(Available in [9.0.7](/releases/9.0.7/) or later)
 
 Occasionally you may need to treat nested subtotals as _"samples"_ and calculate statistics using them.
 
@@ -225,7 +225,7 @@ The available functions are:
 - `min`
 - `max`
 
-Like the by field, the function is appended to the `group` key following a period (`.`).
+Like the [by](#by) field, the function is appended to the `group` key following a period (`.`).
 
 # format:
 

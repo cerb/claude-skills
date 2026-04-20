@@ -5,10 +5,10 @@ url: "https://cerb.ai/guides/developers/testing-inbound-email/"
 summary: "This guide demonstrates how to test email processing using the mail import tool. It provides a complete example message with HTML content and attachments that you can use to verify how your system handles different types of email content. The guide includes steps for importing messages, verifying ticket creation, and checking attachment handling, making it easy to test email-related features without affecting your production environment."
 tags: ["guides"]
 ---
-- Introduction
-- Understanding MIME Format
-- Testing Inbound Email
-- Verifying Results
+- [Introduction](#introduction)
+- [Understanding MIME Format](#understanding-mime-format)
+- [Testing Inbound Email](#testing-inbound-email)
+- [Verifying Results](#verifying-results)
 
 # Introduction
 

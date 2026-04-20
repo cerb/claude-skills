@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
  
 
-The Workers tab provides you with a pageable and filterable worklist of all the workers you have in Cerb. From here you can view, manage, and add new workers. You can also click any entry in the list to go to its profile page.
+The Workers tab provides you with a pageable and filterable worklist of all the [workers](/docs/workers/) you have in Cerb. From here you can view, manage, and add new workers. You can also click any entry in the list to go to its profile page.
 
 The same info and functionality can be accessed from **Search**&nbsp;» **Workers**.
 

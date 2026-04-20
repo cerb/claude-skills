@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Creating and iterating random placeholders
 
-Here is an example of using the cerb\_placeholders\_list() function to iterate through placeholders with unknown keys. The optional first argument is a prefix filter.
+Here is an example of using the [cerb\_placeholders\_list()](/docs/scripting/functions/#cerb_placeholders_list) function to iterate through placeholders with unknown keys. The optional first argument is a prefix filter.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

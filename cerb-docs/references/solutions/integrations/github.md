@@ -5,24 +5,24 @@ url: "https://cerb.ai/solutions/integrations/github/"
 summary: "This page provides a comprehensive guide on integrating Cerb with GitHub, enabling the use of GitHub's API through Cerb's bots for automation purposes. It outlines the steps to create an OAuth application on GitHub, including registering a new application and obtaining the necessary Client ID and Client Secret. The guide then details how to create a GitHub service within Cerb, link a connected account to GitHub, and utilize this connection in bot behaviors. The process involves using the 'Execute HTTP Request' action in bots and selecting the connected account for authentication, with an option to import a GitHub Bot package for practical implementation."
 tags: ["solutions"]
 ---
-- Introduction
-- GitHub Authentication
-  - Method 1: Personal access token
-    - Create a personal access token at GitHub
-    - Create a connected service in Cerb
-    - Create a connected account in Cerb
+- [Introduction](#introduction)
+- [GitHub Authentication](#github-authentication)
+  - [Method 1: Personal access token](#method-1-personal-access-token)
+    - [Create a personal access token at GitHub](#create-a-personal-access-token-at-github)
+    - [Create a connected service in Cerb](#create-a-connected-service-in-cerb)
+    - [Create a connected account in Cerb](#create-a-connected-account-in-cerb)
 
-  - Method 2: OAuth2
-    - Create an OAuth application at GitHub
-    - Create the GitHub service in Cerb
-    - Link the connected account to GitHub in Cerb
+  - [Method 2: OAuth2](#method-2-oauth2)
+    - [Create an OAuth application at GitHub](#create-an-oauth-application-at-github)
+    - [Create the GitHub service in Cerb](#create-the-github-service-in-cerb)
+    - [Link the connected account to GitHub in Cerb](#link-the-connected-account-to-github-in-cerb)
 
-- Use the connected account in automations
-  - Examples
-    - Get a list of repositories
+- [Use the connected account in automations](#use-the-connected-account-in-automations)
+  - [Examples](#examples)
+    - [Get a list of repositories](#get-a-list-of-repositories)
 
-  - Create issue
-  - Workflow
+  - [Create issue](#create-issue)
+  - [Workflow](#workflow)
 
 # Introduction
 
@@ -78,7 +78,7 @@ In **Token:** paste the personal access token you generated at GitHub in the fir
 
 Click the **Save Changes** button.
 
-Test the connected account in automations.
+[Test](#use-the-connected-account-in-automations) the connected account in automations.
 
 ## Method 2: OAuth2
 
@@ -129,7 +129,7 @@ Review the GitHub OAuth documentation additionally if needed.
 
 # Use the connected account in automations
 
-You can use the connected account you just created to access GitHub's API within automations in Cerb. This is typically accomplished using the http.request: command and using the connected account in the `authentication` field.
+You can use the connected account you just created to access GitHub's API within automations in Cerb. This is typically accomplished using the [http.request:](/docs/automations/commands/http.request/) command and using the connected account in the `authentication` field.
 
 ## Examples
 
@@ -147,5 +147,5 @@ start: http.request/createissue: output: http_response inputs: method: POST url:
 
 ## Workflow
 
-Alternatively, you can import the GitHub Issues workflow for a working example.
+Alternatively, you can import the [GitHub Issues](/workflows/wgm.integrations.github/) workflow for a working example.
 

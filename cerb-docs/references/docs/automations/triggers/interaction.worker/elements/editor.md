@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker/elements/edit
 summary: "This page provides detailed information on the 'editor' element used in interaction web forms within Cerb. It describes how the editor element functions as a code editor with features like syntax highlighting, autocompletion, and a customizable toolbar. The page outlines various configuration options for the editor, including setting a label, specifying the syntax language (such as cerb_query, HTML, JSON, Markdown, text, or YAML), and defining default text. It also covers options for displaying line numbers, setting the editor to read-only, and requiring user input. Additionally, the page explains how to add a toolbar for worker interactions and how to implement custom validation scripts to ensure input meets specific criteria."
 tags: ["docs", "docs-automations"]
 ---
-In interaction web forms, an **editor** element displays a code editor with syntax highlighting, autocompletion, and a custom toolbar.
+In [interaction](/docs/automations/triggers/interaction.worker/) web forms, an **editor** element displays a code editor with syntax highlighting, autocompletion, and a custom toolbar.
 
 ```
 start: await: form: title: Editor Example elements: editor/prompt_query: label: Data query: syntax: cerb_query readonly@bool: no default@text: type:worklist.records of:ticket query:( status:o limit:10 ) format:dictionaries
@@ -25,12 +25,14 @@ The language for syntax highlighting and autocompletion.
 
 | Language | &nbsp; |
 | --- | --- |
-| `cerb_query` | Cerb data query language |
+| `cerb_query` | Cerb [data query](/docs/data-queries/) language |
 | `html` | HTML (Hypertext Markup Language) |
 | `json` | JSON (JavaScript Object Notation) |
 | `markdown` | Markdown |
 | `text` | Plain text |
 | `yaml` | YAML (YAML Ain't Markup Language) |
+
+When `syntax: markdown` is set, workers can paste images from the clipboard directly into the editor. The image is automatically uploaded as an [automation resource](/docs/records/types/automation_resource/) and an internal URL is inserted at the cursor. The URL can be post-processed in automation scripting to retrieve the underlying resource by token.
 
 ### default:
 
@@ -58,7 +60,7 @@ If user input is required on this element use a value of `yes`. Otherwise, omit.
 
 ### toolbar:
 
-An optional toolbar to display above the editor. This triggers worker interactions.
+An optional [toolbar](/docs/toolbars/) to display above the editor. This triggers [worker interactions](/docs/automations/triggers/interaction.worker/).
 
 Interactions started from this toolbar will have a caller of `cerb.toolbar.interaction.worker.await.editor` with these `caller_params`:
 

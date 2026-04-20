@@ -13,8 +13,8 @@ tags: ["docs"]
 
 Adds a "move to" shortcut to the top of ticket profiles.
 
-- Extensions
-  - Profile Script
+- [Extensions](#extensions)
+  - [Profile Script](#profile-script)
 
 # Extensions
 
@@ -22,5 +22,5 @@ Adds a "move to" shortcut to the top of ticket profiles.
 
 | Ticket Profile Move To Script | `cerb.profile.ticket.moveto.script` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

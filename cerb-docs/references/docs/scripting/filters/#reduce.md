@@ -7,7 +7,7 @@ tags: ["docs", "docs-scripting"]
 ---
 ## reduce
 
-(Added in 10.1.1)
+(Added in [10.1.1](/releases/10.1.1/))
 
 Reduce an array of items into a single output value.
 

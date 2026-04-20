@@ -5,34 +5,34 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker/"
 summary: "This page provides a comprehensive overview of the 'interaction.worker' automations in Cerb, which are designed to facilitate conversational processes that can pause to collect additional input, such as through web-based forms or external events. It details the structure and functionality of these interactions, including inputs, outputs, and the various states like await:form, await:draft, await:duration, await:interaction, and await:record. The page also explains how interactions are initiated by callers, such as toolbars and built-in features like project boards and sheets, and how they return results to the caller. The document emphasizes the modularity and reusability of these interactions, allowing them to be easily integrated and customized within different components of Cerb."
 tags: ["docs", "docs-automations"]
 ---
-**interaction.worker** automations are conversational processes that can pause between steps to collect additional input, such as web-based forms or other external events.
+**interaction.worker** [automations](/docs/automations/) are [conversational](/docs/interactions/) processes that can [pause](/docs/automations/#continuations) between steps to collect additional input, such as web-based forms or other external events.
 
 An interaction continues to the next step once additional input is received.
 
 The most common source of additional input is a web-based form with multiple fields.
 
-- Inputs
-- Outputs
-  - await:form:
-  - await:draft:
-  - await:duration:
-  - await:interaction:
-  - await:record:
-  - return:
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+  - [await:form:](#awaitform)
+  - [await:draft:](#awaitdraft)
+  - [await:duration:](#awaitduration)
+  - [await:interaction:](#awaitinteraction)
+  - [await:record:](#awaitrecord)
+  - [return:](#return)
 
-- Callers
-  - Toolbars
-  - Built-in
-    - Interactions
-    - Project boards
-    - Sheets
-    - Internal
+- [Callers](#callers)
+  - [Toolbars](#toolbars)
+  - [Built-in](#built-in)
+    - [Interactions](#interactions)
+    - [Project boards](#project-boards)
+    - [Sheets](#sheets)
+    - [Internal](#internal)
 
  
 
-These interactions are started by a caller in response to a worker action within Cerb. The caller is usually a customizable toolbar, but it could be any interface component or feature (e.g. buttons, links, images).
+These interactions are started by a [caller](#callers) in response to a worker action within Cerb. The caller is usually a customizable [toolbar](/docs/toolbars/), but it could be any interface component or feature (e.g. buttons, links, images).
 
-At its conclusion, an interaction returns a dictionary and exit state to the caller, which is then responsible for acting on the results.
+At its conclusion, an interaction returns a [dictionary](/docs/automations/#dictionaries) and [exit state](/docs/automations/#exit-states) to the caller, which is then responsible for acting on the results.
 
 Each caller provides its own inputs, as well as the possible responses it accepts.
 
@@ -44,19 +44,19 @@ For instance, an interaction may be started from a toolbar in the email reply ed
 
 # Inputs
 
-An interaction automation dictionary starts with the following input values:
+An interaction automation [dictionary](/docs/automations/#dictionaries) starts with the following input values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| `caller_name` | string | The caller which started the interaction. |
+| `caller_name` | string | The [caller](#callers) which started the interaction. |
 | `caller_params` | dictionary | Built-in parameters based on the caller type. |
 | `client_browser_name` | string | The client browser name (e.g. Safari). |
 | `client_browser_platform` | string | The client browser platform (e.g. Macintosh). |
 | `client_browser_version` | string | The client browser version. |
 | `client_ip` | string | The client IP address. |
 | `client_url` | string | The client browser URL for the current page. |
-| `inputs` | dictionary | Custom input values from the caller. |
-| `worker_*` | record | The active worker record. Supports key expansion. |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the caller. |
+| `worker_*` | record | The active [worker](/docs/records/types/worker/) record. Supports key expansion. |
 
 # Outputs
 
@@ -82,20 +82,20 @@ A form can be created with any combination of the following element types:
 
 | Element | &nbsp; |
 | --- | --- |
-| **audio:** | Play an audio file |
-| **chart:** | Render an interactive data visualization |
-| **chooser:** | A search popup for selecting records |
-| **editor:** | A code editor with syntax highlighting, autocompletion, and a custom toolbar |
-| **fileDownload:** | File download prompt |
-| **fileUpload:** | File upload prompt |
-| **llmTranscript:** | AI agent chat transcript |
-| **map:** | Interactive map |
-| **query:** | Search query prompt with autocompletion |
-| **say:** | Block of text or Markdown |
-| **sheet:** | Sheet with row selection |
-| **submit:** | Continue to next step |
-| **text:** | Text input with data types |
-| **textarea:** | Multiple lines of text |
+| [**audio:**](/docs/automations/triggers/interaction.worker/elements/audio/) | Play an audio file |
+| [**chart:**](/docs/automations/triggers/interaction.worker/elements/chart/) | Render an interactive data visualization |
+| [**chooser:**](/docs/automations/triggers/interaction.worker/elements/chooser/) | A search popup for selecting records |
+| [**editor:**](/docs/automations/triggers/interaction.worker/elements/editor/) | A code editor with syntax highlighting, autocompletion, and a custom toolbar |
+| [**fileDownload:**](/docs/automations/triggers/interaction.worker/elements/fileDownload/) | File download prompt |
+| [**fileUpload:**](/docs/automations/triggers/interaction.worker/elements/fileUpload/) | File upload prompt |
+| [**llmTranscript:**](/docs/automations/triggers/interaction.worker/elements/llmTranscript/) | AI agent chat transcript |
+| [**map:**](/docs/automations/triggers/interaction.worker/elements/map/) | Interactive [map](/docs/maps/) |
+| [**query:**](/docs/automations/triggers/interaction.worker/elements/query/) | [Search query](/docs/search/) prompt with autocompletion |
+| [**say:**](/docs/automations/triggers/interaction.worker/elements/say/) | Block of text or Markdown |
+| [**sheet:**](/docs/automations/triggers/interaction.worker/elements/sheet/) | [Sheet](/docs/sheets/) with row selection |
+| [**submit:**](/docs/automations/triggers/interaction.worker/elements/submit/) | Continue to next step |
+| [**text:**](/docs/automations/triggers/interaction.worker/elements/text/) | Text input with data types |
+| [**textarea:**](/docs/automations/triggers/interaction.worker/elements/textarea/) | Multiple lines of text |
 
 When the interaction suspends in the `await` state, a `submit:` element is automatically appended to the form if one doesn't already exist.
 
@@ -111,14 +111,14 @@ When suspending in the `await:draft:` state, the interaction opens the email edi
 
 ### uri:
 
-The `uri:` parameter specifies a compose or reply draft to resume (by ID or token). An automation can create a draft record prior to this step.
+The `uri:` parameter specifies a compose or reply [draft](/docs/records/types/draft/) to resume (by ID or token). An automation can create a draft record prior to this step.
 
 ### output:
 
 An optional `output:` parameter has the following keys:
 
 | `status` | One of: `compose.sent`, `compose.draft`, `compose.discard`, `reply.sent`, `reply.draft`, `reply.discard` |
-| `record` | The dictionary of the record. For `.sent` this will be a message. For `.draft` it will be a draft. |
+| `record` | The dictionary of the record. For `.sent` this will be a [message](/docs/records/types/message/). For `.draft` it will be a [draft](/docs/records/types/draft/). |
 
 This allows the interaction to make decisions based on those outcomes.
 
@@ -167,7 +167,7 @@ This makes interactions much more modular and reusable.
 
 ### uri:
 
-The `uri:` parameter specifies the delegate automation. This must use the interaction.worker trigger.
+The `uri:` parameter specifies the delegate [automation](/docs/records/types/automation/). This must use the [interaction.worker](/docs/automations/triggers/interaction.worker/) trigger.
 
 ### output:
 
@@ -205,7 +205,7 @@ inputs: text/record_type: type: record_type required@bool: yes record/column: re
 
 When the interaction concludes in the `return` state, it returns any number of key/value pairs to the caller. Keys may be nested to return dictionaries.
 
-Each caller has a set of expected return keys to control its behavior.
+Each [caller](#callers) has a set of expected return keys to control its behavior.
 
 ```
 return: key1: value1 key2: value2 ...
@@ -232,12 +232,12 @@ An interaction receives different inputs and expects different outputs depending
 
 | Toolbar | &nbsp; |
 | --- | --- |
-| **global.menu** | Global interactions from the floating icon in the lower right |
-| **mail.compose** | Composing new email messages |
-| **mail.read** | Reading email messages |
-| **mail.reply** | Replying to email messages |
-| **record.card** | Viewing a record card popup |
-| **record.profile** | Viewing a record profile page |
+| [**global.menu**](/docs/toolbars/interactions/global.menu/) | Global interactions from the floating icon in the lower right |
+| [**mail.compose**](/docs/toolbars/interactions/mail.compose/) | Composing new email messages |
+| [**mail.read**](/docs/toolbars/interactions/mail.read/) | Reading email messages |
+| [**mail.reply**](/docs/toolbars/interactions/mail.reply/) | Replying to email messages |
+| [**record.card**](/docs/toolbars/interactions/record.card/) | Viewing a record card popup |
+| [**record.profile**](/docs/toolbars/interactions/record.profile/) | Viewing a record profile page |
 
 ## Built-in
 
@@ -245,31 +245,31 @@ An interaction receives different inputs and expects different outputs depending
 
 | Caller | &nbsp; |
 | --- | --- |
-| **cerb.toolbar.cardWidget.interactions** | Interactions toolbar in card widgets |
-| **cerb.toolbar.profileWidget.interactions** | Interactions toolbar in profile widgets |
-| **cerb.toolbar.workspaceWidget.interactions** | Interactions toolbar in workspace widgets |
+| [**cerb.toolbar.cardWidget.interactions**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.cardWidget.interactions/) | Interactions [toolbar](/docs/toolbars/) in [card widgets](/docs/records/types/card_widget/) |
+| [**cerb.toolbar.profileWidget.interactions**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.profileWidget.interactions/) | Interactions [toolbar](/docs/toolbars/) in [profile widgets](/docs/records/types/profile_widget/) |
+| [**cerb.toolbar.workspaceWidget.interactions**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.workspaceWidget.interactions/) | Interactions [toolbar](/docs/toolbars/) in [workspace widgets](/docs/records/types/workspace_widget/) |
 
 ### Project boards
 
 | Caller | &nbsp; |
 | --- | --- |
-| **cerb.toolbar.projectBoardColumn** | Project board column toolbar |
+| [**cerb.toolbar.projectBoardColumn**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.projectBoardColumn/) | [Project board](/docs/project-boards/) column [toolbar](/docs/toolbars/) |
 
 ### Sheets
 
 | Caller | &nbsp; |
 | --- | --- |
-| **cerb.toolbar.automation.interaction.worker.await.sheet** | Sheet prompt toolbar in an interaction |
-| **cerb.toolbar.cardWidget.sheet** | Sheet toolbar in card widgets |
-| **cerb.toolbar.profileWidget.sheet** | Sheet toolbar in profile widgets |
+| [**cerb.toolbar.automation.interaction.worker.await.sheet**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.automation.interaction.worker.await.sheet/) | [Sheet prompt](/docs/automations/triggers/interaction.worker/elements/sheet/) toolbar in an [interaction](/docs/interactions/) |
+| [**cerb.toolbar.cardWidget.sheet**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.cardWidget.sheet/) | [Sheet](/docs/sheets/) toolbar in [card widgets](/docs/records/types/card_widget/) |
+| [**cerb.toolbar.profileWidget.sheet**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.profileWidget.sheet/) | [Sheet](/docs/sheets/) toolbar in [profile widgets](/docs/records/types/profile_widget/) |
 
 ### Internal
 
 | Caller | &nbsp; |
 | --- | --- |
-| **cerb.toolbar.editor.automation.script** | Automation script editor toolbar |
-| **cerb.toolbar.editor.automation.trigger** | Automation editor trigger chooser |
-| **cerb.toolbar.eventHandlers.editor** | Automation event handlers editor toolbar |
-| **cerb.toolbar.editor** | Toolbar editor |
-| **cerb.toolbar.editor.map** | Map editor toolbar |
+| [**cerb.toolbar.editor.automation.script**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.editor.automation.script/) | [Automation](/docs/automations/) script editor toolbar |
+| [**cerb.toolbar.editor.automation.trigger**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.editor.automation.trigger/) | [Automation](/docs/automations/) editor trigger chooser |
+| [**cerb.toolbar.eventHandlers.editor**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.eventHandlers.editor/) | [Automation](/docs/automations/) event handlers editor toolbar |
+| [**cerb.toolbar.editor**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.editor/) | [Toolbar](/docs/toolbars/) editor |
+| [**cerb.toolbar.editor.map**](/docs/automations/triggers/interaction.worker/callers/cerb.toolbar.editor.map/) | Map editor toolbar |
 

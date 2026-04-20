@@ -7,68 +7,68 @@ tags: ["docs", "docs-scripting"]
 ---
 These functions are available in bot scripts and snippets:
 
-- array\_column
-- array\_combine
-- array\_count\_values
-- array\_diff
-- array\_extract\_keys
-- array\_fill\_keys
-- array\_intersect
-- array\_matches
-- array\_sort\_keys
-- array\_unique
-- array\_values
-- attribute
-- cerb\_automation
-- cerb\_avatar\_image
-- cerb\_avatar\_url
-- cerb\_calendar\_get\_relative\_date
-- cerb\_calendar\_time\_elapsed
-- cerb\_current\_worker
-- cerb\_extract\_uris
-- cerb\_file\_url
-- cerb\_has\_priv
-- cerb\_placeholders\_list
-- cerb\_plugin\_enabled
-- cerb\_record\_readable
-- cerb\_record\_writeable
-- cerb\_url
-- cerb\_workflow\_config
-- cerb\_workflow\_resources
-- clamp\_float
-- clamp\_int
-- cycle
-- date
-- date\_lerp
-- dict\_set
-- dict\_unset
-- dns\_get\_record
-- dns\_host\_by\_ip
-- json\_decode
-- jsonpath\_set
-- kata\_parse
-- max
-- min
-- random
-- random\_string
-- range
-- regexp\_match\_all
-- shuffle
-- validate\_email
-- validate\_number
-- vobject\_parse
-- xml\_attr
-- xml\_attrs
-- xml\_decode
-- xml\_encode
-- xml\_xpath
-- xml\_xpath\_ns
-- xml\_xpath\_remove
-- References
+- [array\_column](#array_column)
+- [array\_combine](#array_combine)
+- [array\_count\_values](#array_count_values)
+- [array\_diff](#array_diff)
+- [array\_extract\_keys](#array_extract_keys)
+- [array\_fill\_keys](#array_fill_keys)
+- [array\_intersect](#array_intersect)
+- [array\_matches](#array_matches)
+- [array\_sort\_keys](#array_sort_keys)
+- [array\_unique](#array_unique)
+- [array\_values](#array_values)
+- [attribute](#attribute)
+- [cerb\_automation](#cerb_automation)
+- [cerb\_avatar\_image](#cerb_avatar_image)
+- [cerb\_avatar\_url](#cerb_avatar_url)
+- [cerb\_calendar\_get\_relative\_date](#cerb_calendar_get_relative_date)
+- [cerb\_calendar\_time\_elapsed](#cerb_calendar_time_elapsed)
+- [cerb\_current\_worker](#cerb_current_worker)
+- [cerb\_extract\_uris](#cerb_extract_uris)
+- [cerb\_file\_url](#cerb_file_url)
+- [cerb\_has\_priv](#cerb_has_priv)
+- [cerb\_placeholders\_list](#cerb_placeholders_list)
+- [cerb\_plugin\_enabled](#cerb_plugin_enabled)
+- [cerb\_record\_readable](#cerb_record_readable)
+- [cerb\_record\_writeable](#cerb_record_writeable)
+- [cerb\_url](#cerb_url)
+- [cerb\_workflow\_config](#cerb_workflow_config)
+- [cerb\_workflow\_resources](#cerb_workflow_resources)
+- [clamp\_float](#clamp_float)
+- [clamp\_int](#clamp_int)
+- [cycle](#cycle)
+- [date](#date)
+- [date\_lerp](#date_lerp)
+- [dict\_set](#dict_set)
+- [dict\_unset](#dict_unset)
+- [dns\_get\_record](#dns_get_record)
+- [dns\_host\_by\_ip](#dns_host_by_ip)
+- [json\_decode](#json_decode)
+- [jsonpath\_set](#jsonpath_set)
+- [kata\_parse](#kata_parse)
+- [max](#max)
+- [min](#min)
+- [random](#random)
+- [random\_string](#random_string)
+- [range](#range)
+- [regexp\_match\_all](#regexp_match_all)
+- [shuffle](#shuffle)
+- [validate\_email](#validate_email)
+- [validate\_number](#validate_number)
+- [vobject\_parse](#vobject_parse)
+- [xml\_attr](#xml_attr)
+- [xml\_attrs](#xml_attrs)
+- [xml\_decode](#xml_decode)
+- [xml\_encode](#xml_encode)
+- [xml\_xpath](#xml_xpath)
+- [xml\_xpath\_ns](#xml_xpath_ns)
+- [xml\_xpath\_remove](#xml_xpath_remove)
+- [References](#references)
 
 ## array\_column
 
-(Added in 9.2.1)
+(Added in [9.2.1](/releases/9.2.1/))
 
 The **array\_column** function extracts a column from the elements of an array:
 
@@ -83,7 +83,7 @@ The email addresses are: kina@cerb.example, milo@cerb.example, janey@cerb.exampl
 
 ## array\_combine
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 The **array\_combine** function creates a new array with the given `keys` and `values`:
 
@@ -97,7 +97,7 @@ Janey Youve can be reached at janey@cerb.example
 
 ## array\_count\_values
 
-(Added in 10.0.4)
+(Added in [10.0.4](/releases/10.0.4/))
 
 The **array\_count\_values** function takes an array of values as input, and returns an array with distinct values as keys and their count of occurrences. This function only works on arrays of strings or numbers.
 
@@ -128,7 +128,7 @@ These are new: Cerb
 
 ## array\_extract\_keys
 
-(Added in 9.6.4)
+(Added in [9.6.4](/releases/9.6.4/))
 
 Returns the given keys from all elements of a list.
 
@@ -146,7 +146,7 @@ customer@cerb.example,"Automating email replies",open
 
 ## array\_fill\_keys
 
-(Added in 10.0)
+(Added in [10.0](/releases/10.0/))
 
 Create an array with the given keys, each set to the default value.
 
@@ -162,9 +162,9 @@ Create an array with the given keys, each set to the default value.
 
 ## array\_intersect
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
-Returns a new array for all the elements in array1 that are also present in array2. This is the opposite of array\_diff.
+Returns a new array for all the elements in array1 that are also present in array2. This is the opposite of [array\_diff](#array_diff).
 
 ```
 {% set arr1 = ['Apple' , 'Google' , 'Microsoft'] %} {% set arr2 = ['Apple' , 'Microsoft' , 'Cerb'] %} {% set intersect = array_intersect ( arr2 , arr1 ) %}
@@ -177,7 +177,7 @@ These are in both: Apple, Microsoft
 
 ## array\_matches
 
-(Added in 9.6.4)
+(Added in [9.6.4](/releases/9.6.4/))
 
 Compares an array of values to an array of patterns.
 
@@ -192,7 +192,7 @@ Matches: sales@cerb.example
 
 ## array\_sort\_keys
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Sort an associative array by its keys rather than its values.
 
@@ -206,7 +206,7 @@ a,m,z
 
 ## array\_unique
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Return a new array with only the distinct values from the `array` argument.
 
@@ -221,7 +221,7 @@ Unique values 1,2,3,4,5,6
 
 ## array\_values
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Return the values from an associative array as a new indexed array. For instance, this can affect the output in JSON encoding by using `[]` rather than `{key:value}`.
 
@@ -247,7 +247,7 @@ Customer Support Supervisor
 
 ## cerb\_automation
 
-Invoke a scripting.function automation from any feature that supports scripting.
+Invoke a [scripting.function](/docs/automations/triggers/scripting.function/) automation from any feature that supports [scripting](/docs/scripting/).
 
 The function returns keys for `exit_state:` (`exit`, `return`, `error`) and `return:` (an arbitrary dictionary).
 
@@ -257,7 +257,7 @@ For instance, a snippet could use an automation to dynamically generate content 
 
 `cerb_automation(uri, inputs)`
 
-| **uri** | The URI of an automation record to invoke. It must be of type `scripting.function`. |
+| **uri** | The URI of an [automation](/docs/automations/) record to invoke. It must be of type `scripting.function`. |
 | **inputs** | A key/value dictionary of inputs. The possible keys depend on the function being invoked. |
 
 ```
@@ -300,13 +300,13 @@ https://cerb.example/avatars/worker/1?v=1513212702
 
 ## cerb\_calendar\_get\_relative\_date
 
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 Calculate a future timestamp using calendar availability. For instance, this can be used for SLAs to generate a due date like "+4 business hours".
 
 `cerb_calendar_get_relative_date(calendar,rel_date,now)`
 
-| **calendar** | The ID of the calendar to use for determining availability. |
+| **calendar** | The ID of the [calendar](/docs/records/types/calendar/) to use for determining availability. |
 | **date\_rel** | The time increment (e.g. "+2 hours"). |
 | **now** | An optional starting date/time. |
 
@@ -322,13 +322,13 @@ Due: Mon, 21 Oct 2024 09:00:00 -0700
 
 ## cerb\_calendar\_time\_elapsed
 
-(Added in 10.1.1)
+(Added in [10.1.1](/releases/10.1.1/))
 
 Calculate the time elapsed (in seconds) between two dates using calendar availability.
 
 `cerb_calendar_time_elapsed(calendar,date_from,date_to)`
 
-| **calendar** | The ID of the calendar to use for determining availability. |
+| **calendar** | The ID of the [calendar](/docs/records/types/calendar/) to use for determining availability. |
 | **date\_from** | The starting date/time. |
 | **date\_to** | The ending date/time. |
 
@@ -342,7 +342,7 @@ Calculate the time elapsed (in seconds) between two dates using calendar availab
 
 ## cerb\_current\_worker
 
-(Added in 10.4.14)
+(Added in [10.4.14](/releases/10.4.14/))
 
 Return a dictionary for the currently logged in worker. This returns an empty dictionary when used outside a browser session.
 
@@ -360,11 +360,11 @@ Hello Kina!
 
 ## cerb\_extract\_uris
 
-(Added in 9.5.3)
+(Added in [9.5.3](/releases/9.5.3/))
 
 Return an array of URLs found in HTML content, along with metadata (e.g. tag, attributes, URI parts).
 
-In the response, URLs are replaced with `tokens` in the `template` which can be modified with the |replace filter.
+In the response, URLs are replaced with `tokens` in the `template` which can be modified with the [|replace](/docs/scripting/filters/#replace) filter.
 
 For instance, this function can be used to rewrite all links in an email template for click tracking.
 
@@ -436,7 +436,7 @@ https://cerb.example/files/1/original_message.html
 
 ## cerb\_has\_priv
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Returns a boolean depending on whether the given actor has the given privilege among their roles. If no actor is given, the current worker is assumed. This allows bot functionality, snippets, and widgets, to adapt based on worker permissions. This is particularly useful in HTML-based profile widgets.
 
@@ -452,7 +452,7 @@ Worker #1 has permission to create tickets.
 
 ## cerb\_placeholders\_list
 
-Return an object with every placeholder in the current behavior.
+Return an [object](/docs/scripting/arrays-objects/) with every placeholder in the current behavior.
 
 `cerb_placeholders_list(extract, prefix)`
 
@@ -494,7 +494,7 @@ Return an object with every placeholder in the current behavior.
 
 ## cerb\_plugin\_enabled
 
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 Test if a Cerb plugin is installed and enabled.
 
@@ -502,7 +502,7 @@ For instance, this can be used to make dashboard tabs or widgets conditional on 
 
 `cerb_plugin_enabled(plugin_id)`
 
-| **plugin\_id** | The name or ID of the workflow. |
+| **plugin\_id** | The name or ID of the [workflow](/docs/workflows/). |
 
 ```
 {{ cerb_plugin_enabled ( 'cerb.classifiers' ) }}
@@ -514,7 +514,7 @@ For instance, this can be used to make dashboard tabs or widgets conditional on 
 
 ## cerb\_record\_readable
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Returns a boolean if the given actor has read access to the given record. If no actor is provided then the current worker is assumed. This allows bots and widgets to adapt based on record permissions. For instance, an HTML widget on a profile dashboard could only show a button to workers who can modify the record.
 
@@ -530,7 +530,7 @@ Worker #1 can read ticket #123.
 
 ## cerb\_record\_writeable
 
-(Added in 9.0)
+(Added in [9.0](/releases/9.0/))
 
 Returns a boolean if the given actor has write access to the given record. If no actor is provided then the current worker is assumed. This allows bots and widgets to adapt based on record permissions. For instance, an HTML widget on a profile dashboard could only show a button to workers who can modify the record.
 
@@ -560,13 +560,13 @@ https://cerb.example/profiles/ticket/5
 
 ## cerb\_workflow\_config
 
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 Perform runtime configuration lookups from any feature that supports automation scripting (e.g. automations, workflows, snippets). For instance, you can create a workflow just for sharing values (e.g. API keys) between multiple workflows.
 
 `cerb_workflow_config(name_or_id,key,default)`
 
-| **name\_or\_id** | The name or ID of the workflow. |
+| **name\_or\_id** | The name or ID of the [workflow](/docs/workflows/). |
 | **key** | The optional config key to return. If omitted, all keys/values are returned as a map. |
 | **default** | The optional default value if the key doesn't exist. |
 
@@ -580,13 +580,13 @@ sup3rs3cr3t
 
 ## cerb\_workflow\_resources
 
-(Added in 11.0)
+(Added in [11.0](/releases/11.0/))
 
 Perform runtime resource lookups and return a map of workflow resources and their local record IDs. This is useful from automations, event listeners, and toolbars.
 
 `cerb_workflow_resources(name_or_id)`
 
-| **name\_or\_id** | The name or ID of the workflow. |
+| **name\_or\_id** | The name or ID of the [workflow](/docs/workflows/). |
 
 ```
 {{ cerb_workflow_resources ( 'example.workflow' | json_encode }}
@@ -644,7 +644,7 @@ Round-robin through a sequence.
 
 ## date
 
-Create a date object for use with the date\_modify filter.
+Create a date object for use with the [date\_modify](/docs/scripting/filters/#date_modify) filter.
 
 ```
 {% set d = date ( '1-Jan-2018 10:00am' ) %} {{ d | date_modify ( '+2 hours' ) | date ( 'F d, Y g:ia' ) }}
@@ -789,7 +789,7 @@ You can unset deeply nested keys in a single line using dot-notation:
 
 ## dns\_get\_record
 
-(Added in 10.2.6)
+(Added in [10.2.6](/releases/10.2.6/))
 
 Resolve DNS records by hostname and type. This enables workflows like verifying domain ownership via TXT records, validating SPF/DKIM, verifying MX servers, etc.
 
@@ -823,7 +823,7 @@ Resolve DNS records by hostname and type. This enables workflows like verifying 
 
 ## dns\_host\_by\_ip
 
-(Added in 10.2.6)
+(Added in [10.2.6](/releases/10.2.6/))
 
 Resolve a hostname from an IP. If a name can't be resolved for a valid IP, the IP is returned. If an invalid IP is provided, the result is an empty string.
 
@@ -854,11 +854,11 @@ Customer: Joe Customer
 Order #: 12345
 ```
 
-This returns an object.
+This returns an [object](/docs/scripting/arrays-objects/).
 
 ## jsonpath\_set
 
-This is nearly identical to dict\_set.
+This is nearly identical to [dict\_set](#dict_set).
 
 ```
 {% set json_string = "{\"name\":\"Joe Customer\",\"order_id\":12345}" %} {% set json = json_decode ( json_string ) %} {% set json = jsonpath_set ( json , 'order_id' , '67890' ) %} {{ json.order_id }}
@@ -1177,7 +1177,7 @@ Return a single attribute from an XML node.
 
 | Name | Notes |
 | --- | --- |
-| `xml_node` | An single XML node, usually from xml\_xpath |
+| `xml_node` | An single XML node, usually from [xml\_xpath](#xml_xpath) |
 | `attr` | The name of an attribute |
 
 **Returns:** A string from the given XML attribute, or `false`.
@@ -1201,7 +1201,7 @@ Return all attributes from an XML node.
 
 | Name | Notes |
 | --- | --- |
-| `xml_node` | An single XML node, usually from xml\_xpath |
+| `xml_node` | An single XML node, usually from [xml\_xpath](#xml_xpath) |
 
 **Returns:** An array of attribute keys and values.
 
@@ -1217,9 +1217,9 @@ Return all attributes from an XML node.
 
 ## xml\_decode
 
-You can decode an XML1 string into an XML object with the **xml\_decode** function.
+You can decode an XML[1](#fn:xml) string into an XML object with the **xml\_decode** function.
 
-Use the xml\_xpath function to extract values with XPath2 queries.
+Use the [xml\_xpath](#xml_xpath) function to extract values with XPath[2](#fn:xpath) queries.
 
 `xml_decode(xml_string,namespaces,mode)`
 
@@ -1253,7 +1253,7 @@ You can encode an object as XML with the **xml\_encode** function:
 
 ## xml\_xpath
 
-Use the **xml\_xpath** function to extract values with XPath2 queries:
+Use the **xml\_xpath** function to extract values with XPath[2](#fn:xpath) queries:
 
 ```
 {% set string_of_xml = " < response > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {% set client_id = xml_xpath ( xml , '//client_id' ) | first %} {% set invoice_id = xml_xpath ( xml , '//invoice_id' ) | first %}
@@ -1287,8 +1287,8 @@ Remove elements from an XML document with an XPath query.
 
 `xml_xpath_remove(xml,path)`
 
-- **xml**: An XML object created by xml\_decode.
-- **path**: The XPath query to match elements for removal.
+- **xml**: An XML object created by [xml\_decode](#xml_decode).
+- **path**: The [XPath](#xml_xpath) query to match elements for removal.
 
 ```
 {% set string_of_xml = " < response > < client_id > 1 </ client_id > < invoice_id > 123 </ invoice_id > </ response > " - %} {% set xml = xml_decode ( string_of_xml ) %} {% set xml = xml_xpath_remove ( xml , '//invoice_id' ) %} {{ xml_encode ( xml ) }}
@@ -1301,13 +1301,13 @@ Remove elements from an XML document with an XPath query.
 </response>
 ```
 
-\< Commands
+[\< Commands](/docs/scripting/commands/)
 
-Filters \>
+[Filters \>](/docs/scripting/filters/)
 
 # References
 
-1. Wikipedia: XML - https://en.wikipedia.org/wiki/XML&nbsp;↩
+1. Wikipedia: XML - https://en.wikipedia.org/wiki/XML&nbsp;[↩](#fnref:xml)
 
-2. Wikipedia: XPath - https://en.wikipedia.org/wiki/XPath&nbsp;↩&nbsp;↩2
+2. Wikipedia: XPath - https://en.wikipedia.org/wiki/XPath&nbsp;[↩](#fnref:xpath)&nbsp;[↩2](#fnref:xpath:1)
 

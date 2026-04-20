@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 Sometimes you don't want a placeholder to be evaluated in a literal value. You can do this with the @raw annotation. This is particularly useful in sheets.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

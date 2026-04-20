@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/scripting/variables/"
 summary: "This page provides a comprehensive guide on using variables in scripting for automations, specifically within the context of Cerb. It explains how variables can be used to customize outputs based on different inputs, such as personalizing messages with a user's first name. The page details how to create variables using the set command, the concept of variable scope, and the use of placeholders as pre-set variables. It also covers modifying variable values with filters, including changing text to uppercase and setting default values for empty variables. Additionally, it explains how to stack multiple filters to process variable values in sequence."
 tags: ["docs", "docs-scripting"]
 ---
-Let's assume that you want to change the output of an automation depending on who you are talking to.
+Let's assume that you want to change the output of an [automation](/docs/automations/) depending on who you are talking to.
 
 This can be accomplished with **variables**. A variable is a special token that is substituted with the current value of a particular piece of information.
 
@@ -25,7 +25,7 @@ A variable is indicated by a pair of double curly braces around the variable's n
 
 # Creating variables
 
-You can make your own variables in a template using the set command:
+You can make your own variables in a template using the [set](/docs/scripting/commands/#set) command:
 
 ```
 {% set name = "Kina" %} {% set quantity = 5 %} {{ name }} has {{ quantity }} gold stars.
@@ -39,15 +39,15 @@ Variables are temporary. When you define a new variable in one action, it can't 
 
 # Placeholders
 
-**Placeholders** are special variables that are already set for you. For instance, in an automation the event inputs are placeholders.
+**Placeholders** are special variables that are already set for you. For instance, in an [automation](/docs/automations/) the event inputs are placeholders.
 
 # Modifying variables with filters
 
-The value of a variable may be modified by appending filters with a pipe (`|`) character.
+The value of a variable may be modified by appending [filters](/docs/scripting/filters/) with a pipe (`|`) character.
 
 When editing actions on a bot behavior, the possible filters are automatically suggested when you type `|` after a variable name.
 
-For example, we can use the upper filter to display a variable's value in uppercase:
+For example, we can use the [upper](/docs/scripting/filters/#upper) filter to display a variable's value in uppercase:
 
 ```
 Hi, {{ first_name | upper }}!
@@ -59,7 +59,7 @@ Hi, KINA!
 
 # Default values
 
-You can use the default filter to give a default value to empty variables:
+You can use the [default](/docs/scripting/filters/#default) filter to give a default value to empty variables:
 
 ```
 {% set name = '' %}
@@ -83,7 +83,7 @@ Hi, {{ first_name | default ( 'there' ) | upper }}!
 Hi, THERE!
 ```
 
-\< Scripting
+[\< Scripting](/docs/scripting/)
 
-Strings \>
+[Strings \>](/docs/scripting/strings/)
 

@@ -13,28 +13,28 @@ tags: ["docs"]
 
 The core functionality of Cerb.
 
-- Extensions
-  - Bot Action
-  - Bot Event
-  - Calendar Datasource
-  - Connected Service Provider
-  - Controller
-  - Custom Field Type
-  - Event Listener
-  - Http Request Listener
-  - Mail Transport Type
-  - Page Section
-  - Page Type
-  - Profile Tab Type
-  - Profile Widget Type
-  - Record Type
-  - Scheduled Job
-  - Search Schema
-  - Storage Schema
-  - Workspace Page Type
-  - Workspace Tab Type
-  - Workspace Widget Datasource
-  - Workspace Widget Type
+- [Extensions](#extensions)
+  - [Bot Action](#bot-action)
+  - [Bot Event](#bot-event)
+  - [Calendar Datasource](#calendar-datasource)
+  - [Connected Service Provider](#connected-service-provider)
+  - [Controller](#controller)
+  - [Custom Field Type](#custom-field-type)
+  - [Event Listener](#event-listener)
+  - [Http Request Listener](#http-request-listener)
+  - [Mail Transport Type](#mail-transport-type)
+  - [Page Section](#page-section)
+  - [Page Type](#page-type)
+  - [Profile Tab Type](#profile-tab-type)
+  - [Profile Widget Type](#profile-widget-type)
+  - [Record Type](#record-type)
+  - [Scheduled Job](#scheduled-job)
+  - [Search Schema](#search-schema)
+  - [Storage Schema](#storage-schema)
+  - [Workspace Page Type](#workspace-page-type)
+  - [Workspace Tab Type](#workspace-tab-type)
+  - [Workspace Widget Datasource](#workspace-widget-datasource)
+  - [Workspace Widget Type](#workspace-widget-type)
 
 # Extensions
 
@@ -112,16 +112,16 @@ The core functionality of Cerb.
 
 ### Connected Service Provider
 
-| **Amazon Web Services** | `cerb.service.provider.aws` |
-| **Cerb API (Legacy Signatures)** | `cerb.service.provider.cerb.api.legacy` |
-| **Facebook Pages** | `wgm.facebook.pages.service.provider` |
-| **HTTP Basic Authentication** | `cerb.service.provider.http.basic` |
-| **LDAP** | `cerb.service.provider.ldap` |
-| **OAuth1 Provider** | `cerb.service.provider.oauth1` |
-| **OAuth2 Provider** | `cerb.service.provider.oauth2` |
-| **OpenID Connect Identity Provider** | `cerb.service.provider.oidc` |
-| **SAML Identity Provider** | `cerb.service.provider.saml.idp` |
-| **Token Bearer** | `cerb.service.provider.token.bearer` |
+| [**Amazon Web Services**](/docs/plugins/extensions/cerb.service.provider.aws/) | `cerb.service.provider.aws` |
+| [**Cerb API (Legacy Signatures)**](/docs/plugins/extensions/cerb.service.provider.cerb.api.legacy/) | `cerb.service.provider.cerb.api.legacy` |
+| [**Facebook Pages**](/docs/plugins/extensions/wgm.facebook.pages.service.provider/) | `wgm.facebook.pages.service.provider` |
+| [**HTTP Basic Authentication**](/docs/plugins/extensions/cerb.service.provider.http.basic/) | `cerb.service.provider.http.basic` |
+| [**LDAP**](/docs/plugins/extensions/cerb.service.provider.ldap/) | `cerb.service.provider.ldap` |
+| [**OAuth1 Provider**](/docs/plugins/extensions/cerb.service.provider.oauth1/) | `cerb.service.provider.oauth1` |
+| [**OAuth2 Provider**](/docs/plugins/extensions/cerb.service.provider.oauth2/) | `cerb.service.provider.oauth2` |
+| [**OpenID Connect Identity Provider**](/docs/plugins/extensions/cerb.service.provider.oidc/) | `cerb.service.provider.oidc` |
+| [**SAML Identity Provider**](/docs/plugins/extensions/cerb.service.provider.saml.idp/) | `cerb.service.provider.saml.idp` |
+| [**Token Bearer**](/docs/plugins/extensions/cerb.service.provider.token.bearer/) | `cerb.service.provider.token.bearer` |
 
 ### Controller
 
@@ -140,7 +140,7 @@ The core functionality of Cerb.
 
 ### Custom Field Type
 
-| **Latitude/Longitude** | `cerb.custom_field.geo.point` |
+| [**Latitude/Longitude**](/docs/plugins/extensions/cerb.custom_field.geo.point/) | `cerb.custom_field.geo.point` |
 
 ### Event Listener
 
@@ -153,8 +153,8 @@ The core functionality of Cerb.
 
 ### Mail Transport Type
 
-| **Null** | `core.mail.transport.null` |
-| **SMTP** | `core.mail.transport.smtp` |
+| [**Null**](/docs/plugins/extensions/core.mail.transport.null/) | `core.mail.transport.null` |
+| [**SMTP**](/docs/plugins/extensions/core.mail.transport.smtp/) | `core.mail.transport.smtp` |
 
 ### Page Section
 
@@ -256,33 +256,33 @@ The core functionality of Cerb.
 
 ### Profile Tab Type
 
-| **Dashboard** | `cerb.profile.tab.dashboard` |
-| **Portal Configure** | `cerb.profile.tab.portal.config` |
-| **Portal Deploy** | `cerb.profile.tab.portal.deploy` |
-| **Worker Settings** | `cerb.profile.tab.worker.settings` |
+| [**Dashboard**](/docs/plugins/extensions/cerb.profile.tab.dashboard/) | `cerb.profile.tab.dashboard` |
+| [**Portal Configure**](/docs/plugins/extensions/cerb.profile.tab.portal.config/) | `cerb.profile.tab.portal.config` |
+| [**Portal Deploy**](/docs/plugins/extensions/cerb.profile.tab.portal.deploy/) | `cerb.profile.tab.portal.deploy` |
+| [**Worker Settings**](/docs/plugins/extensions/cerb.profile.tab.worker.settings/) | `cerb.profile.tab.worker.settings` |
 
 ### Profile Widget Type
 
-| **Behavior Tree** | `cerb.profile.tab.widget.behavior.tree` |
-| **Calendar Availability** | `cerb.profile.tab.widget.calendar.availability` |
-| **Calendar** | `cerb.profile.tab.widget.calendar` |
-| **Chart: Categories** | `cerb.profile.tab.widget.chart.categories` |
-| **Chart: Pie** | `cerb.profile.tab.widget.chart.pie` |
-| **Chart: Scatterplot** | `cerb.profile.tab.widget.chart.scatterplot` |
-| **Chart: Table** | `cerb.profile.tab.widget.chart.table` |
-| **Chart: Time Series** | `cerb.profile.tab.widget.chart.time_series` |
-| **Comments** | `cerb.profile.tab.widget.comments` |
-| **Custom** | `cerb.profile.tab.widget.bot` |
-| **Data Query Visualization** | `cerb.profile.tab.widget.visualization` |
-| **Form Interaction** | `cerb.profile.tab.widget.form_interaction` |
-| **HTML/Javascript** | `cerb.profile.tab.widget.html` |
-| **Map: Geo Points** | `cerb.profile.tab.widget.map.geopoints` |
-| **Record Fields** | `cerb.profile.tab.widget.fields` |
-| **Responsibilities** | `cerb.profile.tab.widget.responsibilities` |
-| **Sheet** | `cerb.profile.tab.widget.sheet` |
-| **Ticket Conversation** | `cerb.profile.tab.widget.ticket.convo` |
-| **Ticket Spam Analysis** | `cerb.profile.tab.widget.ticket.spam_analysis` |
-| **Worklist** | `cerb.profile.tab.widget.worklist` |
+| [**Behavior Tree**](/docs/plugins/extensions/cerb.profile.tab.widget.behavior.tree/) | `cerb.profile.tab.widget.behavior.tree` |
+| [**Calendar Availability**](/docs/plugins/extensions/cerb.profile.tab.widget.calendar.availability/) | `cerb.profile.tab.widget.calendar.availability` |
+| [**Calendar**](/docs/plugins/extensions/cerb.profile.tab.widget.calendar/) | `cerb.profile.tab.widget.calendar` |
+| [**Chart: Categories**](/docs/plugins/extensions/cerb.profile.tab.widget.chart.categories/) | `cerb.profile.tab.widget.chart.categories` |
+| [**Chart: Pie**](/docs/plugins/extensions/cerb.profile.tab.widget.chart.pie/) | `cerb.profile.tab.widget.chart.pie` |
+| [**Chart: Scatterplot**](/docs/plugins/extensions/cerb.profile.tab.widget.chart.scatterplot/) | `cerb.profile.tab.widget.chart.scatterplot` |
+| [**Chart: Table**](/docs/plugins/extensions/cerb.profile.tab.widget.chart.table/) | `cerb.profile.tab.widget.chart.table` |
+| [**Chart: Time Series**](/docs/plugins/extensions/cerb.profile.tab.widget.chart.time_series/) | `cerb.profile.tab.widget.chart.time_series` |
+| [**Comments**](/docs/plugins/extensions/cerb.profile.tab.widget.comments/) | `cerb.profile.tab.widget.comments` |
+| [**Custom**](/docs/plugins/extensions/cerb.profile.tab.widget.bot/) | `cerb.profile.tab.widget.bot` |
+| [**Data Query Visualization**](/docs/plugins/extensions/cerb.profile.tab.widget.visualization/) | `cerb.profile.tab.widget.visualization` |
+| [**Form Interaction**](/docs/plugins/extensions/cerb.profile.tab.widget.form_interaction/) | `cerb.profile.tab.widget.form_interaction` |
+| [**HTML/Javascript**](/docs/plugins/extensions/cerb.profile.tab.widget.html/) | `cerb.profile.tab.widget.html` |
+| [**Map: Geo Points**](/docs/plugins/extensions/cerb.profile.tab.widget.map.geopoints/) | `cerb.profile.tab.widget.map.geopoints` |
+| [**Record Fields**](/docs/plugins/extensions/cerb.profile.tab.widget.fields/) | `cerb.profile.tab.widget.fields` |
+| [**Responsibilities**](/docs/plugins/extensions/cerb.profile.tab.widget.responsibilities/) | `cerb.profile.tab.widget.responsibilities` |
+| [**Sheet**](/docs/plugins/extensions/cerb.profile.tab.widget.sheet/) | `cerb.profile.tab.widget.sheet` |
+| [**Ticket Conversation**](/docs/plugins/extensions/cerb.profile.tab.widget.ticket.convo/) | `cerb.profile.tab.widget.ticket.convo` |
+| [**Ticket Spam Analysis**](/docs/plugins/extensions/cerb.profile.tab.widget.ticket.spam_analysis/) | `cerb.profile.tab.widget.ticket.spam_analysis` |
+| [**Worklist**](/docs/plugins/extensions/cerb.profile.tab.widget.worklist/) | `cerb.profile.tab.widget.worklist` |
 
 ### Record Type
 
@@ -371,46 +371,46 @@ The core functionality of Cerb.
 
 ### Workspace Page Type
 
-| **Workspace** | `core.workspace.page.workspace` |
+| [**Workspace**](/docs/plugins/extensions/core.workspace.page.workspace/) | `core.workspace.page.workspace` |
 
 ### Workspace Tab Type
 
-| **Dashboard** | `core.workspace.tab.dashboard` |
-| **Worklists** | `core.workspace.tab.worklists` |
+| [**Dashboard**](/docs/plugins/extensions/core.workspace.tab.dashboard/) | `core.workspace.tab.dashboard` |
+| [**Worklists**](/docs/plugins/extensions/core.workspace.tab.worklists/) | `core.workspace.tab.worklists` |
 
 ### Workspace Widget Datasource
 
-| **Bot Behavior** | `core.workspace.widget.datasource.bot` |
-| **Data Query** | `cerb.workspace.widget.datasource.data_query` |
-| **Manual Input** | `core.workspace.widget.datasource.manual` |
-| **URL** | `core.workspace.widget.datasource.url` |
-| **Worklist (Metric)** | `core.workspace.widget.datasource.worklist.metric` |
-| **Worklist (Series)** | `core.workspace.widget.datasource.worklist.series` |
+| [**Bot Behavior**](/docs/plugins/extensions/core.workspace.widget.datasource.bot/) | `core.workspace.widget.datasource.bot` |
+| [**Data Query**](/docs/plugins/extensions/cerb.workspace.widget.datasource.data_query/) | `cerb.workspace.widget.datasource.data_query` |
+| [**Manual Input**](/docs/plugins/extensions/core.workspace.widget.datasource.manual/) | `core.workspace.widget.datasource.manual` |
+| [**URL**](/docs/plugins/extensions/core.workspace.widget.datasource.url/) | `core.workspace.widget.datasource.url` |
+| [**Worklist (Metric)**](/docs/plugins/extensions/core.workspace.widget.datasource.worklist.metric/) | `core.workspace.widget.datasource.worklist.metric` |
+| [**Worklist (Series)**](/docs/plugins/extensions/core.workspace.widget.datasource.worklist.series/) | `core.workspace.widget.datasource.worklist.series` |
 
 ### Workspace Widget Type
 
-| **(Deprecated) HTML/Javascript** | `core.workspace.widget.custom_html` |
-| **(Deprecated) Line/Bar Chart** | `core.workspace.widget.chart` |
-| **(Deprecated) Pie Chart** | `core.workspace.widget.pie_chart` |
-| **(Deprecated) Scatterplot** | `core.workspace.widget.scatterplot` |
-| **(Deprecated) Subtotals** | `core.workspace.widget.subtotals` |
-| **Bot Behavior Tree** | `cerb.workspace.widget.behavior.tree` |
-| **Bot Custom Widget** | `core.workspace.widget.bot` |
-| **Calendar** | `core.workspace.widget.calendar` |
-| **Chart: Categories** | `cerb.workspace.widget.chart.categories` |
-| **Chart: Pie** | `cerb.workspace.widget.chart.pie` |
-| **Chart: Scatterplot** | `cerb.workspace.widget.chart.scatterplot` |
-| **Chart: Table** | `cerb.workspace.widget.chart.table` |
-| **Chart: Time Series** | `cerb.workspace.widget.chart.timeseries` |
-| **Clock** | `core.workspace.widget.clock` |
-| **Countdown** | `core.workspace.widget.countdown` |
-| **Counter** | `core.workspace.widget.counter` |
-| **Form Interaction** | `core.workspace.widget.form_interaction` |
-| **Gauge** | `core.workspace.widget.gauge` |
-| **Map: Geo Points** | `cerb.workspace.widget.map.geopoints` |
-| **Record Fields** | `core.workspace.widget.record.fields` |
-| **Sheet** | `core.workspace.widget.sheet` |
-| **Worklist** | `core.workspace.widget.worklist` |
+| [**(Deprecated) HTML/Javascript**](/docs/plugins/extensions/core.workspace.widget.custom_html/) | `core.workspace.widget.custom_html` |
+| [**(Deprecated) Line/Bar Chart**](/docs/plugins/extensions/core.workspace.widget.chart/) | `core.workspace.widget.chart` |
+| [**(Deprecated) Pie Chart**](/docs/plugins/extensions/core.workspace.widget.pie_chart/) | `core.workspace.widget.pie_chart` |
+| [**(Deprecated) Scatterplot**](/docs/plugins/extensions/core.workspace.widget.scatterplot/) | `core.workspace.widget.scatterplot` |
+| [**(Deprecated) Subtotals**](/docs/plugins/extensions/core.workspace.widget.subtotals/) | `core.workspace.widget.subtotals` |
+| [**Bot Behavior Tree**](/docs/plugins/extensions/cerb.workspace.widget.behavior.tree/) | `cerb.workspace.widget.behavior.tree` |
+| [**Bot Custom Widget**](/docs/plugins/extensions/core.workspace.widget.bot/) | `core.workspace.widget.bot` |
+| [**Calendar**](/docs/plugins/extensions/core.workspace.widget.calendar/) | `core.workspace.widget.calendar` |
+| [**Chart: Categories**](/docs/plugins/extensions/cerb.workspace.widget.chart.categories/) | `cerb.workspace.widget.chart.categories` |
+| [**Chart: Pie**](/docs/plugins/extensions/cerb.workspace.widget.chart.pie/) | `cerb.workspace.widget.chart.pie` |
+| [**Chart: Scatterplot**](/docs/plugins/extensions/cerb.workspace.widget.chart.scatterplot/) | `cerb.workspace.widget.chart.scatterplot` |
+| [**Chart: Table**](/docs/plugins/extensions/cerb.workspace.widget.chart.table/) | `cerb.workspace.widget.chart.table` |
+| [**Chart: Time Series**](/docs/plugins/extensions/cerb.workspace.widget.chart.timeseries/) | `cerb.workspace.widget.chart.timeseries` |
+| [**Clock**](/docs/plugins/extensions/core.workspace.widget.clock/) | `core.workspace.widget.clock` |
+| [**Countdown**](/docs/plugins/extensions/core.workspace.widget.countdown/) | `core.workspace.widget.countdown` |
+| [**Counter**](/docs/plugins/extensions/core.workspace.widget.counter/) | `core.workspace.widget.counter` |
+| [**Form Interaction**](/docs/plugins/extensions/core.workspace.widget.form_interaction/) | `core.workspace.widget.form_interaction` |
+| [**Gauge**](/docs/plugins/extensions/core.workspace.widget.gauge/) | `core.workspace.widget.gauge` |
+| [**Map: Geo Points**](/docs/plugins/extensions/cerb.workspace.widget.map.geopoints/) | `cerb.workspace.widget.map.geopoints` |
+| [**Record Fields**](/docs/plugins/extensions/core.workspace.widget.record.fields/) | `core.workspace.widget.record.fields` |
+| [**Sheet**](/docs/plugins/extensions/core.workspace.widget.sheet/) | `core.workspace.widget.sheet` |
+| [**Worklist**](/docs/plugins/extensions/core.workspace.widget.worklist/) | `core.workspace.widget.worklist` |
 
-\< Plugins
+[\< Plugins](/docs/plugins/#plugins)
 

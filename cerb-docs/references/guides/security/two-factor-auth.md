@@ -5,14 +5,14 @@ url: "https://cerb.ai/guides/security/two-factor-auth/"
 summary: "This page provides a comprehensive guide on configuring two-factor authentication (2FA) for Cerb to enhance account security. It emphasizes the importance of multi-factor authentication in protecting against cybercrime and outlines best practices for password management. The guide details the process of setting up 2FA, including configuring policies, using popular TOTP apps like 1Password, Google Authenticator, and Authy, and enabling the 'remember trusted devices' feature. It also covers the steps for logging in with 2FA and the benefits of using 1Password for generating one-time passwords. The page underscores the critical role of 2FA in safeguarding online accounts and provides references for further reading on password strength and authentication methods."
 tags: ["guides"]
 ---
-- Introduction
-- Configuring the two-factor authentication policy
-- Setting up two-factor authentication
-- Configuring 1Password to generate one-time passwords
-- Logging in with two-factor authentication
-  - Remembering trusted devices
+- [Introduction](#introduction)
+- [Configuring the two-factor authentication policy](#configuring-the-two-factor-authentication-policy)
+- [Setting up two-factor authentication](#setting-up-two-factor-authentication)
+- [Configuring 1Password to generate one-time passwords](#configuring-1password-to-generate-one-time-passwords)
+- [Logging in with two-factor authentication](#logging-in-with-two-factor-authentication)
+  - [Remembering trusted devices](#remembering-trusted-devices)
 
-- References
+- [References](#references)
 
 # Introduction
 
@@ -20,15 +20,15 @@ A common target of cybercrime is authentication details for online accounts – 
 
 You should already be following the best practices for passwords, including:
 
-- Use high entropy passwords1. That's a fancy way of saying your password should be something difficult for computers to guess – even when there are many machines working together for a significant amount of time. Don't use dictionary words, family member names, important dates, etc.
+- Use high entropy passwords[1](#fn:xkcd-passwords). That's a fancy way of saying your password should be something difficult for computers to guess – even when there are many machines working together for a significant amount of time. Don't use dictionary words, family member names, important dates, etc.
 - Don't reuse passwords between accounts. Otherwise, if one account is compromised then they all are vulnerable.
-- Use an encrypted password manager2 that is routinely security audited. This helps you generate strong passwords without having to remember them. You'll have access to your passwords on multiple devices, and through browser plugins.
+- Use an encrypted password manager[2](#fn:password-manager) that is routinely security audited. This helps you generate strong passwords without having to remember them. You'll have access to your passwords on multiple devices, and through browser plugins.
 
 Even when you follow these guidelines, it is possible for your password to be disclosed if an app or service itself is compromised, or if you're tricked into entering your password into a fake form (i.e. "phishing").
 
 That's where an additional best practice becomes critically important:
 
-- Use **multi-factor authentication (MFA)** 3.
+- Use **multi-factor authentication (MFA)** [3](#fn:2fa).
 
 Multi-factor authentication means proving your identity with multiple methods ("factors"), which significantly increases the difficulty for someone trying to break into your accounts.
 
@@ -46,11 +46,11 @@ While some services deliver TOTP codes to your mobile device through SMS rather 
 
 We highly recommend securing your online accounts with two-factor authentication wherever possible. This certainly includes Cerb, where we provide built-in support for two-factor authentication.
 
-One popular mobile app for generating TOTP codes is Google Authenticator4. It's available for both iOS and Android devices.
+One popular mobile app for generating TOTP codes is Google Authenticator[4](#fn:google-auth). It's available for both iOS and Android devices.
 
-Another is Authy5 from Twilio. It's available for iOS and Android mobile devices, Windows/Mac computers, and the Chrome browser.
+Another is Authy[5](#fn:authy) from Twilio. It's available for iOS and Android mobile devices, Windows/Mac computers, and the Chrome browser.
 
-Our favorite is 1Password6, which we use as a personal password manager, team-based password manager, and TOTP generator.
+Our favorite is 1Password[6](#fn:1password), which we use as a personal password manager, team-based password manager, and TOTP generator.
 
 In this guide, we'll walk through the process of linking Cerb to several different popular TOTP apps to improve the security of worker accounts.
 
@@ -60,7 +60,7 @@ In this guide, we'll walk through the process of linking Cerb to several differe
 
 By default, two-factor authentication is optional and workers can enable it in from their account settings.
 
-Alternatively, administrators may require that all workers (or any subset of them) use two-factor authentication. We highly recommend this, and it can be quickly enabled with bulk update on a worklist of worker records.
+Alternatively, administrators may require that all workers (or any subset of them) use two-factor authentication. We highly recommend this, and it can be quickly enabled with bulk update on a [worklist](/docs/worklists/) of worker records.
 
 Administrators may also determine if workers are able use the "remember this trusted device" feature, and for how long. This is configured in **Setup&nbsp;» Security&nbsp;» Authentication**.
 
@@ -78,7 +78,7 @@ The worker now has a choice of which app they want to use for creating one-time 
 - Authy
 - Google Authenticator
 
-If using **1Password** (our recommendation), jump ahead to the Setting up 1Password to generate one-time passwords section below.
+If using **1Password** (our recommendation), jump ahead to the [Setting up 1Password to generate one-time passwords](#setting-up-1password-to-generate-one-time-passwords) section below.
 
 For **Google Authenticator** and **Authy**, after installing the respective app on your smartphone, open it and follow the app's instructions to setup a new account.
 
@@ -118,15 +118,15 @@ The "remember trusted devices" feature is implemented with an encrypted browser 
 
 # References
 
-1. XKCD: Password strength - https://xkcd.com/936/&nbsp;↩
+1. XKCD: Password strength - https://xkcd.com/936/&nbsp;[↩](#fnref:xkcd-passwords)
 
-2. Wikipedia: Password manager - https://en.wikipedia.org/wiki/Password\_manager&nbsp;↩
+2. Wikipedia: Password manager - https://en.wikipedia.org/wiki/Password\_manager&nbsp;[↩](#fnref:password-manager)
 
-3. Wikipedia: Multi-factor authentication - https://en.wikipedia.org/wiki/Multi-factor\_authentication&nbsp;↩
+3. Wikipedia: Multi-factor authentication - https://en.wikipedia.org/wiki/Multi-factor\_authentication&nbsp;[↩](#fnref:2fa)
 
-4. Google Authenticator - http://m.google.com/authenticator&nbsp;↩
+4. Google Authenticator - http://m.google.com/authenticator&nbsp;[↩](#fnref:google-auth)
 
-5. Authy - https://authy.com&nbsp;↩
+5. Authy - https://authy.com&nbsp;[↩](#fnref:authy)
 
-6. 1Password - https://1password.com&nbsp;↩
+6. 1Password - https://1password.com&nbsp;[↩](#fnref:1password)
 

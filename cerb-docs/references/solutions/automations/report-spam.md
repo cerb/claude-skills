@@ -7,8 +7,8 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using api.command:
 
-- automation
-- policy
+- [automation](#)
+- [policy](#)
 
 - 
 ```

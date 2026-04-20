@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 Here's an example of using `array_combine()` to create a dictionary from separate key and value lists.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

@@ -5,21 +5,21 @@ url: "https://cerb.ai/docs/automations/triggers/automation.function/"
 summary: "This page provides an overview of the **automation.function** feature in Cerb, which allows for the creation of reusable shared functions that can be triggered by other automations. It details the structure of inputs and outputs for these functions, explaining that the automation dictionary begins with custom input values from the caller. The page also describes how the function returns key/value pairs to the caller, with the possibility of nesting keys to return dictionaries."
 tags: ["docs", "docs-automations"]
 ---
-**automation.function** automations are reusable shared functions triggered by other automations.
+**automation.function** [automations](/docs/automations/) are reusable shared functions triggered by other automations.
 
-- Inputs
-- Outputs
-  - return:
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+  - [return:](#return)
 
-- Example
+- [Example](#example)
 
 # Inputs
 
-The automation dictionary starts with the following values:
+The automation [dictionary](/docs/automations/#dictionaries) starts with the following values:
 
 | Key | Type | Notes |
 | --- | --- | --- |
-| `inputs` | dictionary | Custom input values from the caller |
+| `inputs` | dictionary | [Custom input](/docs/automations/#inputs) values from the caller |
 
 # Outputs
 
@@ -35,10 +35,10 @@ return: key1: value1 key2: value2 ...
 
 Calling a function to translate text:
 
-- interaction
-- interaction policy
-- function
-- function policy
+- [interaction](#)
+- [interaction policy](#)
+- [function](#)
+- [function policy](#)
 
 - 
 ```

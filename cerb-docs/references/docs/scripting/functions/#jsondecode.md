@@ -20,4 +20,4 @@ Customer: Joe Customer
 Order #: 12345
 ```
 
-This returns an object.
+This returns an [object](/docs/scripting/arrays-objects/).

@@ -7,9 +7,9 @@ tags: ["docs"]
 ---
  
 
-A **session** is created each time a worker logs in from a particular device.
+A **session** is created each time a [worker](/docs/workers/) logs in from a particular device.
 
-In this section you'll see a worklist of active and idle sessions, along with IP address and browser information.
+In this section you'll see a [worklist](/docs/worklists/) of active and idle sessions, along with IP address and browser information.
 
 You can select a session and click on the _Delete_ button to force a session to expire.
 

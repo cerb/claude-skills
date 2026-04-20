@@ -19,7 +19,7 @@ Your SLA coverage has expired.
 Your SLA coverage is active.
 ```
 
-\< Dates
+[\< Dates](/docs/scripting/dates/)
 
-Operators \>
+[Operators \>](/docs/scripting/operators/)
 

@@ -7,12 +7,12 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Using |markdown\_to\_html filter
 
-Here is an example of using the |markdown\_to\_html filter to convert Markdown content into HTML format.
+Here is an example of using the [|markdown\_to\_html](/docs/scripting/filters/#markdown_to_html) filter to convert Markdown content into HTML format.
 
 The `is_untrusted` parameter sanitizes HTML output (e.g. script blocks and images).
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

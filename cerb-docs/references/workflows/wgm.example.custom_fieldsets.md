@@ -5,10 +5,10 @@ url: "https://cerb.ai/workflows/wgm.example.custom_fieldsets/"
 summary: "This page provides a comprehensive guide on creating and using a custom fieldset in Cerb, which includes examples of every custom field type. It covers the introduction, installation, and usage of the custom fieldset, making it particularly useful for evaluation, development, and testing purposes. The installation section provides detailed instructions on how to set up the custom fieldset using KATA, specifying the necessary fields and parameters for each custom field type, such as checkbox, currency, date, decimal, file, list, number, picklist, record link, text, URL, and worker. The usage section explains how to add the custom fieldset to any ticket record, allowing users to experiment with different field types."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-  - Using the custom fieldset
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [Using the custom fieldset](#using-the-custom-fieldset)
 
 # Introduction
 

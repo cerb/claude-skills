@@ -5,10 +5,10 @@ url: "https://cerb.ai/docs/api/records/activity-log/"
 summary: "This page provides detailed examples of how to interact with the activity log in Cerb through its REST API. It includes instructions on retrieving an activity log record by its ID, searching for activity log entries related to a specific record, and creating a new activity log entry. Each example includes the necessary HTTP requests and expected JSON responses, demonstrating how to authenticate and format data for these operations. The page is a practical guide for developers looking to manage activity logs programmatically within the Cerb platform."
 tags: ["docs"]
 ---
-- Examples
-  - Get an activity log record by ID
-  - Search activity log entries on a specific record
-  - Create an activity log entry
+- [Examples](#examples)
+  - [Get an activity log record by ID](#get-an-activity-log-record-by-id)
+  - [Search activity log entries on a specific record](#search-activity-log-entries-on-a-specific-record)
+  - [Create an activity log entry](#create-an-activity-log-entry)
 
 # Examples
 
@@ -17,7 +17,7 @@ tags: ["docs"]
 **Request:**
 
 ```
-GET /rest/records/activity_log/1.json?expand=custom_&show_meta=0 HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Sat, 18 Apr 2026 04:12:55 America Host : cerb.example Content-Type : application/x-www-form-urlencoded; charset=utf-8
+GET /rest/records/activity_log/1.json?expand=custom_&show_meta=0 HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Mon, 20 Apr 2026 20:20:47 America Host : cerb.example Content-Type : application/x-www-form-urlencoded; charset=utf-8
 ```
 
 **Response:**
@@ -45,7 +45,7 @@ GET /rest/records/activity_log/1.json?expand=custom_&show_meta=0 HTTP / 1.1 Cerb
 **Request:**
 
 ```
-GET /rest/records/activity_log/search.json?q=activity:worker.logged_in&show_meta=0 HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Sat, 18 Apr 2026 04:12:55 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
+GET /rest/records/activity_log/search.json?q=activity:worker.logged_in&show_meta=0 HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Mon, 20 Apr 2026 20:20:47 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
 ```
 
 **Response:**
@@ -81,7 +81,7 @@ GET /rest/records/activity_log/search.json?q=activity:worker.logged_in&show_meta
 **Request:**
 
 ```
-POST /rest/records/activity_log/create.json?show_meta=0 HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Sat, 18 Apr 2026 04:12:55 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
+POST /rest/records/activity_log/create.json?show_meta=0 HTTP / 1.1 Cerb-Auth : XXXX:XXXX Date : Mon, 20 Apr 2026 20:20:47 America Content-Type : application/x-www-form-urlencoded; charset=utf-8 Host : cerb.example
 ```
 
 ```

@@ -5,7 +5,7 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker/elements/llmT
 summary: "This page provides information on the 'llmTranscript' interaction form element used in Cerb's web forms."
 tags: ["docs", "docs-automations"]
 ---
-In worker interaction web forms, an **llmTranscript** element displays an llm.agent: chat transcript.
+In [worker interaction](/docs/automations/triggers/interaction.worker/) web forms, an **llmTranscript** element displays an [llm.agent:](/docs/automations/commands/llm.agent/) chat transcript.
 
 ```
 start: # ... Run llm.agent:
@@ -18,7 +18,7 @@ start: # ... Run llm.agent:
 
 ### session\_id:
 
-The transcript ID to display. This can be retrieved from llm.agent: output.
+The transcript ID to display. This can be retrieved from [llm.agent:](/docs/automations/commands/llm.agent/) output.
 
 ### tool\_labels:
 

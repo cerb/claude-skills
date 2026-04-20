@@ -5,11 +5,11 @@ url: "https://cerb.ai/solutions/integrations/linkup/"
 summary: "This page provides a step-by-step guide for integrating Cerb with Linkup, a search tool. To begin, log in to your Linkup account and obtain an API key, which is then used to create a new connected service in Cerb's Search settings. The process involves navigating to the Connected Services list, clicking the 'Create' button, and pasting the API key into the specified field. Once created, the Linkup service can be used as an LLM tool for semantic search when needed, utilizing the full API through a custom function that can be configured in Cerb's workflow editor, such as by making a POST request to the Linkup API with specific parameters like query text and depth settings."
 tags: ["solutions"]
 ---
-- Introduction
-- Get a Linkup API Key.
-- Create the Linkup service in Cerb
-- Examples
-  - Search
+- [Introduction](#introduction)
+- [Get a Linkup API Key.](#get-a-linkup-api-key)
+- [Create the Linkup service in Cerb](#create-the-linkup-service-in-cerb)
+- [Examples](#examples)
+  - [Search](#search)
 
 # Introduction
 

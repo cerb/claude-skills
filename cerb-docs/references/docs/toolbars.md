@@ -7,21 +7,21 @@ tags: ["docs"]
 ---
 https://www.youtube.com/embed/XGI7FInREps
 
-A **toolbar** is a collection of **interactions** and **menus**.
+A **toolbar** is a collection of [**interactions**](/docs/interactions/) and **menus**.
 
 Top-level toolbar items are displayed as **buttons**. Items within a menu are displayed as **links**.
 
-- KATA
-  - interaction:
-  - menu:
+- [KATA](#kata)
+  - [interaction:](#interaction)
+  - [menu:](#menu)
 
-- Records
+- [Records](#records)
 
  
 
 # KATA
 
-Toolbars are configured using a KATA dialect, which can pass custom input to the interaction using placeholders (current worker, record, etc).
+Toolbars are configured using a [KATA](/docs/kata/) dialect, which can pass custom [input](/docs/automations/#inputs) to the interaction using placeholders (current worker, record, etc).
 
 ### interaction:
 
@@ -35,10 +35,10 @@ interaction/participants: label: Participants badge: {{ record_participants|leng
 
 | Req'd | Key | &nbsp; |
 | --- | --- | --- |
-| **x** | `uri:` | The URI of the interaction.worker automation to start when clicked. |
-| &nbsp; | `inputs:` | The optional inputs dictionary for the interaction. |
+| **x** | `uri:` | The URI of the [interaction.worker](/docs/automations/triggers/interaction.worker/) [automation](/docs/automations/) to start when clicked. |
+| &nbsp; | `inputs:` | The optional [inputs](/docs/automations/#inputs) dictionary for the interaction. |
 | &nbsp; | `label:` | The label to describe the interaction in buttons and menu links. This may be omitted if an icon is provided. |
-| &nbsp; | `icon:` | The optional icon to display in buttons and menu links. This can be in addition to, or instead of, the label. |
+| &nbsp; | `icon:` | The optional [icon](/docs/developers/icons/) to display in buttons and menu links. This can be in addition to, or instead of, the label. |
 | &nbsp; | `tooltip:` | If a button only has an icon and not a label, the tooltip can show a label when hovering over it. |
 | &nbsp; | `keyboard:` | An alternative keyboard shortcut to start the interaction (e.g. `Ctrl+Shift+K`) |
 | &nbsp; | `badge:` | The optional counter to display on buttons. |
@@ -58,9 +58,9 @@ menu/moreMenu: icon: more tooltip: More items: menu/tools: label: Tools items: i
 | Req'd | Key | &nbsp; |
 | --- | --- | --- |
 | **x** | `label:` | The label to describe the menu in buttons and menu links. This may be omitted if an icon is provided. |
-| &nbsp; | `icon:` | The optional icon to display in buttons and menu links. This can be in addition to, or instead of, the label. |
-| **x** | `items:` | A list of menu and interaction items. |
-| &nbsp; | `default:` | Display a "split" menu button. Clicking on the left-side immediately runs this default interaction by name. Clicking on the right-side opens a menu of alternative options. |
+| &nbsp; | `icon:` | The optional [icon](/docs/developers/icons/) to display in buttons and menu links. This can be in addition to, or instead of, the label. |
+| **x** | `items:` | A list of [menu](#menu) and [interaction](#interaction) items. |
+| &nbsp; | `default:` | Display a "split" menu button. Clicking on the left-side immediately runs this default [interaction](#interaction) by name. Clicking on the right-side opens a menu of alternative options. |
 
 # Records
 
@@ -68,16 +68,16 @@ Toolbars can be configured from **Search&nbsp;» Toolbars**.
 
 | Toolbar | &nbsp; |
 | --- | --- |
-| automation.editor | Editing an automation |
-| comment.editor | Editing a comment |
-| draft.read | Reading a draft message |
-| global.menu | Global interactions from the floating icon in the lower right |
-| global.search | Searching from the top right of any page |
-| mail.compose | Composing new email messages |
-| mail.read | Reading email messages |
-| mail.reply | Replying to email messages |
-| record.card | Viewing a record card popup |
-| record.profile | Viewing a record profile page |
-| record.profile.image.editor | Editing a record profile image |
-| records.worklist | Viewing a worklist of records |
+| [automation.editor](/docs/toolbars/interactions/automation.editor/) | Editing an automation |
+| [comment.editor](/docs/toolbars/interactions/comment.editor/) | Editing a comment |
+| [draft.read](/docs/toolbars/interactions/draft.read/) | Reading a draft message |
+| [global.menu](/docs/toolbars/interactions/global.menu/) | Global interactions from the floating icon in the lower right |
+| [global.search](/docs/toolbars/interactions/global.search/) | Searching from the top right of any page |
+| [mail.compose](/docs/toolbars/interactions/mail.compose/) | Composing new email messages |
+| [mail.read](/docs/toolbars/interactions/mail.read/) | Reading email messages |
+| [mail.reply](/docs/toolbars/interactions/mail.reply/) | Replying to email messages |
+| [record.card](/docs/toolbars/interactions/record.card/) | Viewing a record card popup |
+| [record.profile](/docs/toolbars/interactions/record.profile/) | Viewing a record profile page |
+| [record.profile.image.editor](/docs/toolbars/interactions/record.profile.image.editor/) | Editing a record profile image |
+| [records.worklist](/docs/toolbars/interactions/records.worklist/) | Viewing a worklist of records |
 

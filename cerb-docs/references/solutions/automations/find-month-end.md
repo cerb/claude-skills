@@ -7,10 +7,10 @@ tags: ["solutions", "solutions-automations"]
 ---
 ## Finding last day of each month
 
-Here is an example of using the date() function to create date objects and the |date\_modify filter to find the last day of each month in a given year.
+Here is an example of using the [date()](/docs/scripting/functions/#date) function to create date objects and the [|date\_modify](/docs/scripting/filters/#date_modify) filter to find the last day of each month in a given year.
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```

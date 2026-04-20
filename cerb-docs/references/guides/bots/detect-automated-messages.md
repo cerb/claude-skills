@@ -5,19 +5,19 @@ url: "https://cerb.ai/guides/bots/detect-automated-messages/"
 summary: "This page provides a comprehensive guide on detecting automated messages in Cerb to prevent unnecessary auto-replies and potential mail loops. It explains the importance of identifying automated responses, such as 'Out of Office' messages, and outlines how to import and implement a reusable bot behavior to check for common headers indicating an auto-reply. The guide includes detailed instructions on importing the behavior, understanding its decision tree, and integrating it with other bots to ensure they do not respond to automated messages. Additionally, it references RFC-3834 for best practices in handling automatic email responses."
 tags: ["guides"]
 ---
-- Introduction
-- Importing the behavior
-- Understanding how the behavior works
-- Using the behavior from another bot
-- References
+- [Introduction](#introduction)
+- [Importing the behavior](#importing-the-behavior)
+- [Understanding how the behavior works](#understanding-how-the-behavior-works)
+- [Using the behavior from another bot](#using-the-behavior-from-another-bot)
+- [References](#references)
 
 # Introduction
 
-One of the most common bot behaviors in Cerb is sending an automatic reply back to the sender of a new message. This is a good practice, because it confirms your receipt of a client's message, and it lets them know what to expect in terms of your support hours, SLA obligations, etc.
+One of the most common bot behaviors in Cerb is [sending an automatic reply](/guides/bots/send-automatic-replies/) back to the sender of a new message. This is a good practice, because it confirms your receipt of a client's message, and it lets them know what to expect in terms of your support hours, SLA obligations, etc.
 
 However, on occasion, a new message that you just received is itself an automatic reply from somewhere else. You should avoid sending an automatic reply back to it. At best, it's pointless and won't be read by a human. At worst, two misbehaving bots can endlessly send auto-replies back and forth to each other, creating a _mail loop_.
 
-RFC-38341 recommends that all automated responses contain a header like `Auto-Submitted: auto-replied` so they can be easily identified, and you should include that header in any automated messages that your bots send.
+RFC-3834[1](#fn:rfc-3834) recommends that all automated responses contain a header like `Auto-Submitted: auto-replied` so they can be easily identified, and you should include that header in any automated messages that your bots send.
 
 You can also check the `Auto-Submitted:` header on incoming mail to identify automated messages, but different mail senders also indicate this in other ways.
 
@@ -27,7 +27,7 @@ If you're sending automatic replies from various bots (e.g. per group), then the
 
 This example should catch most automatic responses, but you can continue to expand on it to meet your own needs. Feel free to share your improvements in the comments at the bottom of the page.
 
-In Cerb 8.0+ you can import the Auto-Reply Bot package instead.
+In Cerb 8.0+ you can [import the Auto-Reply Bot package](/packages/auto-reply-bot/) instead.
 
 # Importing the behavior
 
@@ -458,7 +458,7 @@ Click the **Save Changes** button.
 
 # Understanding how the behavior works
 
-If you open the new behavior's card, you'll see the following decision tree:
+If you open the new behavior's [card](/docs/cards/), you'll see the following decision tree:
 
  
 
@@ -496,5 +496,5 @@ That's it! You can repeat these last few steps on your other auto-reply bots.
 
 # References
 
-1. IETF: RFC-3834: Automatic Email Responses - https://tools.ietf.org/html/rfc3834&nbsp;↩
+1. IETF: RFC-3834: Automatic Email Responses - https://tools.ietf.org/html/rfc3834&nbsp;[↩](#fnref:rfc-3834)
 

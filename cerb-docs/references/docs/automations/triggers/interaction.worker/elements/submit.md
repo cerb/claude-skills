@@ -5,9 +5,9 @@ url: "https://cerb.ai/docs/automations/triggers/interaction.worker/elements/subm
 summary: "This page provides detailed information on the 'submit' element in interaction web forms within Cerb. It explains how the 'submit' element automatically adds 'Continue' and 'Reset' buttons when an interaction exits in the await state, eliminating the need for manual addition. The page also covers the customization of buttons, allowing for custom labels, icons, styles, and values, with options for multiple 'continue' buttons for different actions like yes/no or allow/deny. It describes how to conditionally hide buttons and outlines the default behavior when custom buttons are not specified. Additionally, it discusses alternative button styles to visually distinguish between primary and secondary options."
 tags: ["docs", "docs-automations"]
 ---
-In interaction web forms, a **submit** element displays the 'Continue' and 'Reset' buttons.
+In [interaction](/docs/automations/triggers/interaction.worker/) web forms, a **submit** element displays the 'Continue' and 'Reset' buttons.
 
-This is automatically added when an interaction exits in the await state. You do not need to do it yourself.
+This is automatically added when an interaction exits in the [await state](/docs/automations/#exit-states). You do not need to do it yourself.
 
 ```
 start: await: form: elements:

@@ -5,7 +5,7 @@ url: "https://cerb.ai/solutions/automations/parse-vobject/"
 summary: "This page explains how to parse VObject attachments using the `file.read:` and `vobject_parse()` functions in Cerb. It provides an example of parsing an iCal event invitation and returns it as a JSON object for use in automations, such as extracting the event details like summary, organizer, and start date."
 tags: ["solutions", "solutions-automations"]
 ---
-You can use the file.read: automation command and vobject\_parse() scripting function to parse the content of VObject files return them as a JSON object. This can be useful if you are sent an iCal event invite or VCard contact.
+You can use the [file.read:](/docs/automations/commands/file.read/) automation command and [vobject\_parse()](/docs/scripting/functions/#vobject_parse) scripting function to parse the content of VObject files return them as a JSON object. This can be useful if you are sent an iCal event invite or VCard contact.
 
 For example, if you are sent this iCal event:
 
@@ -27,9 +27,9 @@ END:VCALENDAR
 
 You can parse it as follows:
 
-- automation
-- output
-- policy
+- [automation](#)
+- [output](#)
+- [policy](#)
 
 - 
 ```

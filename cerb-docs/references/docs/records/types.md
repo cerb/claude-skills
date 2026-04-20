@@ -5,98 +5,98 @@ url: "https://cerb.ai/docs/records/types/"
 summary: "This page provides a comprehensive reference for the various record types available in Cerb, including both built-in and plugin-provided types. It details the aliases and corresponding records, which are essential for building automations, search queries, data queries, or interacting with the API. The built-in record types cover a wide range of functionalities such as activity logs, email management, automation, calendars, contacts, and more. Additionally, plugin-provided record types extend the system's capabilities with features like calls, classifications, knowledgebase management, and time tracking. This reference is crucial for developers and users looking to customize and extend Cerb's functionality."
 tags: ["docs"]
 ---
-Cerb includes many built-in record types. You can create your own custom record types, and new types may also be introduced by plugins.
+Cerb includes many built-in [record](/docs/records/) types. You can create your own [custom record types](/docs/records/#custom-records), and new types may also be introduced by [plugins](/docs/plugins/).
 
-This reference can be used when building automations, search queries, data queries, or working with the API.
+This reference can be used when building [automations](/docs/automations/), [search queries](/docs/search/), [data queries](/docs/data-queries/), or working with the [API](/docs/api/).
 
 # Built-in record types
 
 | Alias | Record |
 | --- | --- |
-| `activity_log` | Activity Logs |
-| `address` | Email Addresses |
-| `attachment` | Attachments |
-| `automation` | Automations |
-| `automation_event` | Automation Events |
-| `automation_event_listener` | Automation Event Listeners |
-| `automation_resource` | Automation Resources |
-| `automation_timer` | Automation Timers |
-| `behavior` | Behaviors |
-| `bot` | Bots |
-| `bucket` | Buckets |
-| `calendar_event` | Calendar Events |
-| `calendar_recurring_event` | Calendar Recurring Events |
-| `calendar` | Calendars |
-| `card_widget` | Card Widget |
-| `comment` | Comments |
-| `community_portal` | Community Portals |
-| `connected_account` | Connected Accounts |
-| `connected_service` | Connected Services |
-| `contact` | Contacts |
-| `currency` | Currencies |
-| `custom_field` | Custom Fields |
-| `custom_fieldset` | Custom Fieldsets |
-| `custom_record` | Custom Records |
-| `draft` | Drafts |
-| `email_signature` | Email Signatures |
-| `file_bundle` | File Bundles |
-| `gpg_public_key` | Public Keys |
-| `gpg_private_key` | Private Keys |
-| `group` | Groups |
-| `html_template` | Email Templates |
-| `mail_transport` | Email Transports |
-| `mailbox` | Email Mailboxes |
-| `mail_delivery_log` | Email Delivery Log |
-| `mail_inbound_log` | Email Inbound Log |
-| `mail_routing_rule` | Email Routing Rule |
-| `message` | Email Messages |
-| `metric` | Metrics |
-| `notification` | Notifications |
-| `oauth_app` | OAuth Apps |
-| `org` | Organizations |
-| `package` | Packages |
-| `profile_tab` | Profile Tabs |
-| `profile_widget` | Profile Widgets |
-| `project_board_column` | Project Board Columns |
-| `project_board` | Project Boards |
-| `queue` | Queues |
-| `reminder` | Reminders |
-| `resource` | Resources |
-| `role` | Roles |
-| `saved_search` | Saved Searches |
-| `scheduled_behavior` | Scheduled Behaviors |
-| `snippet` | Snippets |
-| `task` | Tasks |
-| `ticket` | Tickets |
-| `toolbar` | Toolbars |
-| `toolbar_section` | Toolbar Sections |
-| `webhook_listener` | Webhooks |
-| `worker` | Workers |
-| `workflow` | Workflows |
-| `workspace_list` | Workspace Worklists |
-| `workspace_page` | Workspace Pages |
-| `workspace_tab` | Workspace Tabs |
-| `workspace_widget` | Workspace Widgets |
+| `activity_log` | [Activity Logs](/docs/records/types/activity_log/) |
+| `address` | [Email Addresses](/docs/records/types/address/) |
+| `attachment` | [Attachments](/docs/records/types/attachment/) |
+| `automation` | [Automations](/docs/records/types/automation/) |
+| `automation_event` | [Automation Events](/docs/records/types/automation_event/) |
+| `automation_event_listener` | [Automation Event Listeners](/docs/records/types/automation_event_listener/) |
+| `automation_resource` | [Automation Resources](/docs/records/types/automation_resource/) |
+| `automation_timer` | [Automation Timers](/docs/records/types/automation_timer/) |
+| `behavior` | [Behaviors](/docs/records/types/behavior/) |
+| `bot` | [Bots](/docs/records/types/bot/) |
+| `bucket` | [Buckets](/docs/records/types/bucket/) |
+| `calendar_event` | [Calendar Events](/docs/records/types/calendar_event/) |
+| `calendar_recurring_event` | [Calendar Recurring Events](/docs/records/types/calendar_recurring_event/) |
+| `calendar` | [Calendars](/docs/records/types/calendar/) |
+| `card_widget` | [Card Widget](/docs/records/types/card_widget/) |
+| `comment` | [Comments](/docs/records/types/comment/) |
+| `community_portal` | [Community Portals](/docs/records/types/community_portal/) |
+| `connected_account` | [Connected Accounts](/docs/records/types/connected_account/) |
+| `connected_service` | [Connected Services](/docs/records/types/connected_service/) |
+| `contact` | [Contacts](/docs/records/types/contact/) |
+| `currency` | [Currencies](/docs/records/types/currency/) |
+| `custom_field` | [Custom Fields](/docs/records/types/custom_field/) |
+| `custom_fieldset` | [Custom Fieldsets](/docs/records/types/custom_fieldset/) |
+| `custom_record` | [Custom Records](/docs/records/types/custom_record/) |
+| `draft` | [Drafts](/docs/records/types/draft/) |
+| `email_signature` | [Email Signatures](/docs/records/types/email_signature/) |
+| `file_bundle` | [File Bundles](/docs/records/types/file_bundle/) |
+| `gpg_public_key` | [Public Keys](/docs/records/types/gpg_public_key/) |
+| `gpg_private_key` | [Private Keys](/docs/records/types/gpg_private_key/) |
+| `group` | [Groups](/docs/records/types/group/) |
+| `html_template` | [Email Templates](/docs/records/types/html_template/) |
+| `mail_transport` | [Email Transports](/docs/records/types/mail_transport/) |
+| `mailbox` | [Email Mailboxes](/docs/records/types/mailbox/) |
+| `mail_delivery_log` | [Email Delivery Log](/docs/records/types/mail_delivery_log/) |
+| `mail_inbound_log` | [Email Inbound Log](/docs/records/types/mail_inbound_log/) |
+| `mail_routing_rule` | [Email Routing Rule](/docs/records/types/mail_routing_rule/) |
+| `message` | [Email Messages](/docs/records/types/message/) |
+| `metric` | [Metrics](/docs/records/types/metric/) |
+| `notification` | [Notifications](/docs/records/types/notification/) |
+| `oauth_app` | [OAuth Apps](/docs/records/types/oauth_app/) |
+| `org` | [Organizations](/docs/records/types/org/) |
+| `package` | [Packages](/docs/records/types/package/) |
+| `profile_tab` | [Profile Tabs](/docs/records/types/profile_tab/) |
+| `profile_widget` | [Profile Widgets](/docs/records/types/profile_widget/) |
+| `project_board_column` | [Project Board Columns](/docs/records/types/project_board_column/) |
+| `project_board` | [Project Boards](/docs/records/types/project_board/) |
+| `queue` | [Queues](/docs/records/types/queue/) |
+| `reminder` | [Reminders](/docs/records/types/reminder/) |
+| `resource` | [Resources](/docs/records/types/resource/) |
+| `role` | [Roles](/docs/records/types/role/) |
+| `saved_search` | [Saved Searches](/docs/records/types/saved_search/) |
+| `scheduled_behavior` | [Scheduled Behaviors](/docs/records/types/scheduled_behavior/) |
+| `snippet` | [Snippets](/docs/records/types/snippet/) |
+| `task` | [Tasks](/docs/records/types/task/) |
+| `ticket` | [Tickets](/docs/records/types/ticket/) |
+| `toolbar` | [Toolbars](/docs/records/types/toolbar/) |
+| `toolbar_section` | [Toolbar Sections](/docs/records/types/toolbar_section/) |
+| `webhook_listener` | [Webhooks](/docs/records/types/webhook_listener/) |
+| `worker` | [Workers](/docs/records/types/worker/) |
+| `workflow` | [Workflows](/docs/records/types/workflow/) |
+| `workspace_list` | [Workspace Worklists](/docs/records/types/workspace_list/) |
+| `workspace_page` | [Workspace Pages](/docs/records/types/workspace_page/) |
+| `workspace_tab` | [Workspace Tabs](/docs/records/types/workspace_tab/) |
+| `workspace_widget` | [Workspace Widgets](/docs/records/types/workspace_widget/) |
 
 # Plugin-provided record types
 
 | Alias | Record |
 | --- | --- |
-| `call` | Calls |
-| `classifier_class` | Classifications |
-| `classifier_entity` | Classifier Entities |
-| `classifier_example` | Classifier Examples |
-| `classifier` | Classifiers |
-| `domain` | Domains |
-| `feed_item` | Feed Items |
-| `feed` | Feeds |
-| `feedback` | Feedback |
-| `kb_article` | Knowledgebase Articles |
-| `kb_category` | Knowledgebase Categories |
-| `opportunity` | Opportunities |
-| `sensor` | Sensors |
-| `server` | Servers |
-| `time_entry` | Time Tracking Entries |
-| `timetracking_activity` | Time Tracking Activities |
-| `webapi_credentials` | Web API Keys |
+| `call` | [Calls](/docs/records/types/call/) |
+| `classifier_class` | [Classifications](/docs/records/types/classifier_class/) |
+| `classifier_entity` | [Classifier Entities](/docs/records/types/classifier_entity/) |
+| `classifier_example` | [Classifier Examples](/docs/records/types/classifier_example/) |
+| `classifier` | [Classifiers](/docs/records/types/classifier/) |
+| `domain` | [Domains](/docs/records/types/domain/) |
+| `feed_item` | [Feed Items](/docs/records/types/feed_item/) |
+| `feed` | [Feeds](/docs/records/types/feed/) |
+| `feedback` | [Feedback](/docs/records/types/feedback/) |
+| `kb_article` | [Knowledgebase Articles](/docs/records/types/kb_article/) |
+| `kb_category` | [Knowledgebase Categories](/docs/records/types/kb_category/) |
+| `opportunity` | [Opportunities](/docs/records/types/opportunity/) |
+| `sensor` | [Sensors](/docs/records/types/sensor/) |
+| `server` | [Servers](/docs/records/types/server/) |
+| `time_entry` | [Time Tracking Entries](/docs/records/types/time_entry/) |
+| `timetracking_activity` | [Time Tracking Activities](/docs/records/types/timetracking_activity/) |
+| `webapi_credentials` | [Web API Keys](/docs/records/types/webapi_credentials/) |
 

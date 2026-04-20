@@ -7,7 +7,7 @@ tags: ["docs"]
 ---
 ## Tutorial
 
-Cerb includes a built-in 'Tutorial' workflow that manages a workspace page with detailed descriptions and examples of Cerb features.
+Cerb includes a built-in 'Tutorial' [workflow](/docs/workflows/) that manages a workspace page with detailed descriptions and examples of Cerb features.
 
 The tutorial is installed automatically on new instances. It is automatically updated for new versions.
 

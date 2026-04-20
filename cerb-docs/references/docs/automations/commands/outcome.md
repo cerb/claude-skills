@@ -10,7 +10,7 @@ The **outcome:** command makes a sequence of commands conditional. Each outcome 
 | Key | &nbsp; |
 | --- | --- |
 | `if@bool:` | This key should resolve to a `yes` or `no` value to determine whether this outcome is desirable. |
-| `then:` | If this outcome matches, the commands to run. |
+| `then:` | If this outcome matches, the [commands](/docs/automations/#commands) to run. |
 
 # Syntax
 
@@ -18,5 +18,5 @@ The **outcome:** command makes a sequence of commands conditional. Each outcome 
 start: outcome/weekend: if@bool: {{ 'now'|date('l') in ['Saturday','Sunday'] }} then: return: output: It is the weekend.
 ```
 
-Multiple outcomes can be grouped in a decision command. The first matching outcome is used.
+Multiple outcomes can be grouped in a [decision](/docs/automations/commands/decision/) command. The first matching outcome is used.
 

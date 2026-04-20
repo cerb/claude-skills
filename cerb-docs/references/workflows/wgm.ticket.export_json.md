@@ -5,10 +5,10 @@ url: "https://cerb.ai/workflows/wgm.ticket.export_json/"
 summary: "This page provides detailed information about the 'Export Ticket to JSON' workflow in Cerb, which adds a toolbar button to ticket profiles for exporting the ticket, its messages, and comments to a downloadable JSON file. It includes sections on introduction, installation, usage, and reference. The workflow is compatible with Cerb version 11.0 and above. The exported JSON includes ticket metadata, all messages with headers and attachments, and all comments. The file is generated as a temporary download that expires after 15 minutes."
 tags: ["workflows"]
 ---
-- Introduction
-- Installation
-- Usage
-- Reference
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Reference](#reference)
 
 # Introduction
 

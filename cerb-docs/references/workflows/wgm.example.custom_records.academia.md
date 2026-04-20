@@ -5,9 +5,9 @@ url: "https://cerb.ai/workflows/wgm.example.custom_records.academia/"
 summary: "This page provides a comprehensive guide on implementing custom records for academic institutions using Cerb. It includes an introduction to the package, which covers records for courses, instructors, rooms, and students, and details the process of importing the workflow. The guide offers step-by-step instructions on how to update templates and input workflow KATA for setting up custom records, such as course details including name, code, instructor, room, and schedule. Additionally, it explains how to modify fields and add new records through the Cerb interface, making it a useful resource for evaluating, testing, or developing academic workflows."
 tags: ["workflows"]
 ---
-- Introduction
-- Importing the workflow
-- Usage
+- [Introduction](#introduction)
+- [Importing the workflow](#importing-the-workflow)
+- [Usage](#usage)
 
 # Introduction
 

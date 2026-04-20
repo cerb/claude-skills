@@ -9,8 +9,8 @@ tags: ["solutions", "solutions-automations"]
 
 This automation generates an array of 10 random numbers between 0 and 100 (inclusive).
 
-- automation
-- output
+- [automation](#)
+- [output](#)
 
 - 
 ```
