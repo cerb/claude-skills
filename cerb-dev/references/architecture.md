@@ -97,3 +97,22 @@ Uses Smarty 4.x. Common paths under `features/cerberusweb.core/templates/`:
 - Output: `features/cerberusweb.core/resources/css/cerb.css`
 
 Compile: `composer cache-clear` rebuilds assets, or run the SCSS compiler directly.
+
+## Common PHP Utilities
+
+### Random password / token generation
+
+```php
+CerberusApplication::generatePassword($length=8, $chars="ABCDEFGHJKLMNPQRSTUVWXYZ123456789")
+```
+
+Defined in `api/Application.class.php`. Generates a random string from the given charset.  
+Default charset already excludes ambiguous chars (0/O, I). Use this instead of writing custom random-string loops.
+
+```php
+// 8-char uppercase alphanumeric token (default)
+$token = CerberusApplication::generatePassword(8);
+
+// 10-char lowercase hex
+$token = CerberusApplication::generatePassword(10, "abcdef0123456789");
+```
