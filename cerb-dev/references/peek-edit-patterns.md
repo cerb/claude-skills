@@ -78,6 +78,40 @@ Template checks become simple `isset` calls:
 {if isset($active['bar:baz'])}checked="checked"{/if}
 ```
 
+## Radio-Toggled Fieldset Sections
+
+For forms with mutually exclusive modes (e.g. "Create new" vs. "Import existing"), put a radio inside each `<fieldset>`'s `<legend>` and toggle the body visibility on change. Use `{$uid = uniqid()}` to avoid ID collisions when the form may appear multiple times on a page.
+
+```smarty
+{$uid = uniqid()}
+<fieldset class="peek black">
+    <legend><label><input type="radio" name="params[mode]" class="mode-radio-{$uid}" value="create" checked> Create new</label></legend>
+    <div class="mode-body-{$uid}-create">
+        ... fields for create ...
+    </div>
+</fieldset>
+
+<fieldset class="peek black">
+    <legend><label><input type="radio" name="params[mode]" class="mode-radio-{$uid}" value="import"> Import existing</label></legend>
+    <div class="mode-body-{$uid}-import cerb-hidden">
+        ... fields for import ...
+    </div>
+</fieldset>
+
+<script nonce="{DevblocksPlatform::getRequestNonce()}" type="text/javascript">
+$(function() {
+    $('.mode-radio-{$uid}').on('change', function() {
+        let is_import = ('import' === $(this).val());
+        $('.mode-body-{$uid}-create').toggleClass('cerb-hidden', is_import);
+        $('.mode-body-{$uid}-import').toggleClass('cerb-hidden', !is_import);
+    });
+});
+</script>
+```
+
+- Use `.cerb-hidden` (not `style="display:none"`) for the initially hidden body — consistent with platform conventions and toggled cleanly with `.toggleClass('cerb-hidden', condition)`.
+- Only show create/import fieldsets when `$record->id == 0` (new record); on edit, show only the current state.
+
 ## Space-Delimited Value Lists (OAuth-Style)
 
 For fields that store a set of string tokens (e.g., access scopes, feature flags), a space-delimited string is simple and interoperable:
