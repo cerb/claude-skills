@@ -48,6 +48,44 @@ $popup.one('popup_close', function() { /* reload or refresh */ });
 
 **Rule:** if the popup renders a form that writes data (regenerate codes, delete record, save settings, etc.), the popup request itself must be POST — not GET with a query string URL. A plain URL string always results in a GET request.
 
+### Connected Service Provider AJAX Actions
+
+Service providers can expose AJAX actions via `handleActionForService(string $action)`. Call them from a template using `genericAjaxPost` with a `FormData` targeting the service's `invoke` endpoint:
+
+```javascript
+let formData = new FormData();
+formData.set('c', 'profiles');
+formData.set('a', 'invoke');
+formData.set('module', 'connected_service');
+formData.set('action', 'invoke');
+formData.set('service_action', 'myAction');   // dispatched to handleActionForService()
+formData.set('id', '{$service->extension_id}'); // extension ID, not record ID
+
+genericAjaxPost(formData, '', '', function(json) { ... });
+```
+
+In the provider PHP class:
+```php
+function handleActionForService(string $action) {
+    switch($action) {
+        case 'myAction':
+            return $this->_connectedServiceAction_myAction();
+    }
+    return false; // 404 if unhandled
+}
+
+private function _connectedServiceAction_myAction() {
+    if('POST' != DevblocksPlatform::getHttpMethod())
+        DevblocksPlatform::dieWithHttpError(null, 405);
+
+    DevblocksPlatform::services()->http()->setHeader('Content-Type', 'application/json; charset=utf-8');
+    // ... do work ...
+    echo json_encode(['result' => 'value']);
+}
+```
+
+The action can receive additional POST fields (e.g. an account ID) by adding more `formData.set()` calls and reading them with `DevblocksPlatform::importGPC($_POST['field'] ?? null, ...)`.
+
 ## Notification Boxes
 
 Use these CSS classes for inline messages — never plain `<p>` or custom styles:
