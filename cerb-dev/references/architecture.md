@@ -100,6 +100,17 @@ Compile: `composer cache-clear` rebuilds assets, or run the SCSS compiler direct
 
 ## Common PHP Utilities
 
+### Temporary files
+
+```php
+$fp   = DevblocksPlatform::getTempFile();          // returns a writable file pointer
+$path = DevblocksPlatform::getTempFileInfo($fp);   // returns the filesystem path
+```
+
+- Uses `APP_TEMP_PATH` (correct for distributed/shared-storage installs — never use `sys_get_temp_dir()` or `tempnam()` directly).
+- Devblocks auto-deletes these files at request end; no manual `unlink()` needed.
+- Write with `fwrite($fp, $content)` or `file_put_contents($path, $content)` (close handle first if passing path to an external tool like OpenSSL).
+
 ### Random password / token generation
 
 ```php
