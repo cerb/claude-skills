@@ -46,6 +46,14 @@ record_query_params:
   group_id: 5
 ```
 
+## Related Skills
+
+These skills are always installed alongside this one:
+
+- `/cerb-automations` — write or modify Cerb automations (KATA, commands, triggers, events)
+- `/cerb-docs` — look up Cerb documentation, features, configuration, integrations
+- `/cerb-dev` — make changes to the Cerb PHP/MySQL codebase (new record types, extensions, migrations)
+
 ## Output Format
 
 - **Record type:** state the target record type

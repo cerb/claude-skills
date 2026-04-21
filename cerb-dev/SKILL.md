@@ -38,17 +38,13 @@ cd install/docker && docker compose up   # Start local dev environment
 docker exec -it cerb-mysql-1 mysql -u root -p cerb   # Connect to MySQL (password: s3cr3t)
 ```
 
-## Cerb Documentation
+## Related Skills
 
-Search and fetch Cerb docs using one of these methods (in order of preference):
+These skills are always installed alongside this one:
 
-1. **MCP tools** (`mcp__claude_ai_Cerb__search_documents`, `mcp__claude_ai_Cerb__fetch_documents`): Use when available.
-2. **Docs API** (no auth required):
-   ```bash
-   curl --silent -X POST "https://api.cerb.cloud/docs/search" -H "Content-Type: application/json" -d '{"query":"your search query here"}'
-   curl --silent "https://api.cerb.cloud/docs/fetch/index,pricing"
-   ```
-3. **WebFetch**: Fetch `https://cerb.ai/docs/{path}/` directly.
+- `/cerb-docs` — look up Cerb documentation, features, configuration, integrations
+- `/cerb-automations` — write or modify Cerb automations (KATA, commands, triggers, events)
+- `/cerb-search` — build search queries for any record type
 
 ## Reference Files
 

@@ -63,6 +63,12 @@ Always include `--label "ai-proposed"`. The title must start with `Docs gap:` so
 
 If `gh` is not authenticated, surface the gap in conversation and suggest the user visit https://github.com/cerb/cerb.github.io/issues/new to file it manually.
 
+## Never Edit Reference Files Directly
+
+The `references/` directory is auto-generated from the official Cerb documentation at `https://cerb.ai/docs/`. **Do not edit any file under `references/` by hand** — changes will be overwritten the next time the fetch tool runs.
+
+To improve or correct documentation: use the Doc Gaps workflow above to file an issue on `cerb/cerb.github.io`. That is the authoritative source.
+
 ## Updating the Reference Files
 
 Run the fetch tool to pull the latest docs from cerb.ai:
@@ -72,6 +78,14 @@ python3 cerb-docs/tools/fetch-docs.py --clean
 # or from a local JSONL snapshot:
 python3 cerb-docs/tools/fetch-docs.py --input /path/to/search.jsonl --clean
 ```
+
+## Related Skills
+
+These skills are always installed alongside this one:
+
+- `/cerb-automations` — write or modify Cerb automations (KATA, commands, triggers, events)
+- `/cerb-dev` — make changes to the Cerb PHP/MySQL codebase (new record types, extensions, migrations)
+- `/cerb-search` — build search queries for any record type
 
 ## Directory Structure
 

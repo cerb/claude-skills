@@ -34,9 +34,9 @@ Fields marked with a `*` are required when creating a new record.
 
 ## Search Queries
 
-For search query construction, invoke the `/cerb-search` skill if installed — it is a dedicated specialist with the full field reference for every record type.
+For search query construction, invoke `/cerb-search` — it is a dedicated specialist with the full field reference for every record type.
 
-If `/cerb-search` is not available, fall back to `references/search-queries.md` for filter types, operators, deep search syntax, boolean groups, sorting, query parameters, and per-record-type field listings.
+Fall back to `references/search-queries.md` for filter types, operators, deep search syntax, boolean groups, sorting, query parameters, and per-record-type field listings.
 
 ## Toolbars
 
@@ -57,24 +57,15 @@ See `references/workflows.md` for the workflow KATA schema including:
 
 ## Cerb Documentation
 
-The official Cerb documentation is at `https://cerb.ai/docs/`. You can fetch individual pages with WebFetch (e.g. `https://cerb.ai/docs/records/types/draft`).
+For Cerb documentation, invoke `/cerb-docs` — it has 1011 local reference pages and knows how to search and fetch from the live docs when needed.
 
-Search and fetch Cerb docs using one of these methods (in order of preference):
+## Related Skills
 
-1. **MCP tools** (`mcp__claude_ai_Cerb__search_documents`, `mcp__claude_ai_Cerb__fetch_documents`): Use when available. Users can add the MCP server URL `https://api.cerb.cloud/docs/mcp` in Claude Desktop or Claude Code settings.
+These skills are always installed alongside this one:
 
-2. **Docs API** (no auth required, fallback when MCP is unavailable):
-   ```bash
-   # Semantic search
-   curl --silent -X POST "https://api.cerb.cloud/docs/search" -H "Content-Type: application/json" -d '{"query":"your search query here"}'
-
-   # Fetch pages as LLM-friendly Markdown (comma-separated doc IDs from search results)
-   curl --silent "https://api.cerb.cloud/docs/fetch/index,pricing"
-   ```
-
-3. **WebFetch**: Fetch individual HTML pages directly (e.g. `https://cerb.ai/docs/records/types/draft`).
-
-Use these when the local reference files don't cover a topic or you need to verify current behavior.
+- `/cerb-docs` — look up Cerb documentation, features, configuration, integrations
+- `/cerb-dev` — make changes to the Cerb PHP/MySQL codebase (new record types, extensions, migrations)
+- `/cerb-search` — build search queries for any record type
 
 ## Reference Files
 
