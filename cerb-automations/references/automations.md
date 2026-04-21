@@ -1296,6 +1296,7 @@ start:
 | `cerb.commands.email.spam.train` | Train ticket as spam |
 | `cerb.commands.oauth2.token.validate` | Validate OAuth2 tokens |
 | `cerb.commands.worklist.explorer.create`  | Create dynamic explore set |
+| `cerb.commands.worklist.query.debug` | Debug worklist queries |
 | `cerb.commands.worklist.search` | Worklist configuration and search |
 
 Handlers: `on_simulate:`, `on_success:`, `on_error:`.
