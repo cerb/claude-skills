@@ -1747,12 +1747,10 @@ commands:
     deny/method@bool: {{inputs.method != 'GET'}}
     allow@bool: yes
   record.create:
-    allow/tasks@bool:
-      {{inputs.record_type|context_alias == 'task' ? 'yes'}}
+    deny/type@bool: {{inputs.record_type is not record type ('task')}}
+    allow@bool: yes
   record.get:
     allow: yes
-  all:
-    deny: yes
 ```
 
 **Exception-based:**
@@ -1776,7 +1774,7 @@ commands:
 1. Each command entry can ONLY have `allow` and `deny` child keys (with optional `/name` identifiers)
 2. A rule evaluating to `no` is skipped (failed allow ≠ deny)
 3. Rules tested sequentially until explicit `allow: yes` or `deny: yes`
-4. If no rules match, default is `deny: yes`
+4. If no rules match, default is `deny: yes` — this is the implicit default, so `all: deny: yes` is redundant and can be omitted
 5. `all:` matches any unmatched command
 
 ### Time Limits
