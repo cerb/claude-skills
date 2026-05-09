@@ -67,7 +67,7 @@ Dispatch to the appropriate count helper per field type.
 function getSubtotalCounts($column) {
     $counts = [];
     $fields = $this->getFields();
-    $context = CerberusContexts::CONTEXT_MY_RECORD;
+    $context = Context_MyRecord::ID;
 
     if(!array_key_exists($column, $fields))
         return [];
@@ -84,33 +84,15 @@ function getSubtotalCounts($column) {
             $counts = $this->_getSubtotalCountForStringColumn($context, $column);
             break;
 
-        // String column with a label map — translate IDs/codes to display names
+        // String/numeric column with a label map (status enum, foreign key, etc.)
+        // The 5th arg ('value') is the default — omit it unless doSetCriteria reads a different $_POST key
         case SearchFields_MyRecord::STATUS:
+        case SearchFields_MyRecord::QUEUE_ID:
+        case SearchFields_MyRecord::WORKER_ID:
             $label_map = function(array $values) use ($column) {
                 return SearchFields_MyRecord::getLabelsForKeyValues($column, $values);
             };
-            $counts = $this->_getSubtotalCountForStringColumn($context, $column, $label_map, 'in', 'options[]');
-            break;
-
-        // Worker foreign key — use DictionaryDelegate for display labels, handle 0 (nobody)
-        case SearchFields_MyRecord::OWNER_ID:
-            $label_map = function(array $values) {
-                $models = DAO_Worker::getIds($values);
-                $dicts = DevblocksDictionaryDelegate::getDictionariesFromModels($models, CerberusContexts::CONTEXT_WORKER);
-                $map = array_column(DevblocksPlatform::objectsToArrays($dicts), '_label', 'id');
-                if(in_array(0, $values))
-                    $map[0] = DevblocksPlatform::translate('common.nobody');
-                return $map;
-            };
-            $counts = $this->_getSubtotalCountForStringColumn($context, $column, $label_map, 'in', 'worker_id');
-            break;
-
-        // Numeric foreign key (non-worker record)
-        case SearchFields_MyRecord::ORG_ID:
-            $label_map = function(array $values) use ($column) {
-                return SearchFields_MyRecord::getLabelsForKeyValues($column, $values);
-            };
-            $counts = $this->_getSubtotalCountForNumberColumn($context, $column, $label_map, 'in', 'context_id[]');
+            $counts = $this->_getSubtotalCountForStringColumn($context, $column, $label_map, 'in');
             break;
 
         default:
@@ -131,17 +113,27 @@ function getSubtotalCounts($column) {
 | Method | Use when |
 |---|---|
 | `_getSubtotalCountForBooleanColumn($context, $column)` | Boolean 0/1 fields |
-| `_getSubtotalCountForStringColumn($context, $column)` | Plain strings where the value is also the label (IP, user agent, etc.) |
-| `_getSubtotalCountForStringColumn($context, $column, $label_map, 'in', 'param[]')` | String/VARCHAR columns that need label lookup |
-| `_getSubtotalCountForNumberColumn($context, $column, $label_map, 'in', 'param[]')` | Numeric foreign keys |
+| `_getSubtotalCountForStringColumn($context, $column)` | Plain strings where the value is also the label |
+| `_getSubtotalCountForStringColumn($context, $column, $label_map, 'in')` | String/numeric columns needing label lookup |
 | `_getSubtotalCountForCustomColumn($context, $column)` | Custom fields (`cf_*`) |
-| `_getSubtotalCountForVirtualField($context, $column)` | Virtual search fields (`*_`) |
+| `_getSubtotalCountForVirtualField($context, $column)` | Standard virtual fields (`*_`) |
 
-**`param` name conventions** (4th arg to string/number helpers):
-- `worker_id` — worker foreign key
-- `context_id[]` — generic record foreign key
-- `options` — enum/status codes
-- `value[]` — generic values
+## The 5th Argument: POST key routing
+
+**Critical:** The 5th arg to `_getSubtotalCountForStringColumn` / `_getSubtotalCountForNumberColumn` is the `$_POST` key name that `doSetCriteria` reads when a subtotal item is clicked. Get it wrong and clicking a subtotal silently sets a null filter.
+
+The default is `'value'`, which is what `_internalAction_addFilter` reads: `$value = DevblocksPlatform::importGPC($_POST['value'] ?? null)`. This is correct for **all simple fields** that call `new DevblocksSearchCriteria($field, $oper, $value)` in `doSetCriteria`.
+
+Only use a different key when `doSetCriteria` explicitly reads a different `$_POST` field:
+
+| 5th arg | When to use |
+|---|---|
+| *(omit / default `'value'`)* | `doSetCriteria` uses `new DevblocksSearchCriteria($field, $oper, $value)` — covers status enums, foreign key IDs, plain strings |
+| `'worker_id[]'` | `doSetCriteria` calls `_doSetCriteriaWorker($field, $oper)`, which reads `$_POST['worker_id']` |
+| `'options[]'` | `doSetCriteria` reads `$_POST['options']` (used for `VIRTUAL_HAS_FIELDSET`) |
+| `'context_link[]'` | Context link filters |
+
+In practice, for a record with status, queue, and worker fields where all three cases just do `new DevblocksSearchCriteria(...)`, all three should omit the 5th arg (use default `'value'`).
 
 ## Label Map Patterns
 
@@ -152,7 +144,17 @@ $label_map = function(array $values) use ($column) {
 };
 ```
 
-**Worker inline** (preferred for worker fields — uses `DevblocksDictionaryDelegate` for display labels, handles 0/"nobody"):
+**Status enum** (all labels known upfront — `getLabelsForKeyValues` ignores `$values`):
+```php
+case self::STATUS_ID:
+    return [
+        MyStatus::RUNNING->value => 'Running',
+        MyStatus::PAUSED->value  => 'Paused',
+        MyStatus::DONE->value    => 'Done',
+    ];
+```
+
+**Worker inline** (uses `DevblocksDictionaryDelegate` for display name, handles 0/"nobody"):
 ```php
 $label_map = function(array $values) {
     $models = DAO_Worker::getIds($values);
@@ -162,28 +164,17 @@ $label_map = function(array $values) {
         $map[0] = DevblocksPlatform::translate('common.nobody');
     return $map;
 };
-$counts = $this->_getSubtotalCountForStringColumn($context, $column, $label_map, 'in', 'worker_id');
-```
-
-**Other record inline** (when `getLabelsForKeyValues` doesn't cover it):
-```php
-$label_map = function($ids) {
-    $rows = DAO_Address::getIds($ids);
-    return array_column(DevblocksPlatform::objectsToArrays($rows), 'email', 'id');
-};
 ```
 
 ## Records Without a Context Extension
 
-System records like `devblocks_session` have no registered `Extension_DevblocksContext`, so the standard `_getSubtotalDataForColumn` (which uses `Extension_DevblocksContext::get($context)` to find the DAO class) returns `[]` and all subtotals silently produce empty results.
+System records like `devblocks_session` have no registered `Extension_DevblocksContext`, so the standard `_getSubtotalDataForColumn` returns `[]` and all subtotals silently produce empty results.
 
-**Fix:** Override `_getSubtotalDataForColumn` in the `View_` class to call the DAO directly, then pass `null` as `$context` to the count helpers (they only pass it through to the data method, which you've already overridden).
+**Fix:** Override `_getSubtotalDataForColumn` in the `View_` class to call the DAO directly, then pass `null` as `$context` to the count helpers.
 
 ```php
-// devblocks_session has no context extension, so bypass the context lookup
 protected function _getSubtotalDataForColumn($context, $field_key) {
     $db = DevblocksPlatform::services()->database();
-
     $fields = $this->getFields();
     $columns = $this->view_columns;
     $params = $this->getParams();
@@ -192,27 +183,20 @@ protected function _getSubtotalDataForColumn($context, $field_key) {
         $columns[] = $field_key;
 
     $query_parts = DAO_MyRecord::getSearchQueryComponents(
-        $columns,
-        $params,
-        $this->renderSortBy,
-        $this->renderSortAsc
+        $columns, $params, $this->renderSortBy, $this->renderSortAsc
     );
-
-    $join_sql = $query_parts['join'];
-    $where_sql = $query_parts['where'];
 
     $sql = sprintf("SELECT %s.%s as label, count(*) as hits ",
             $db->escape($fields[$field_key]->db_table),
             $db->escape($fields[$field_key]->db_column)
         ).
-        $join_sql.
-        $where_sql.
+        $query_parts['join'].
+        $query_parts['where'].
         sprintf("GROUP BY %s.%s ",
             $db->escape($fields[$field_key]->db_table),
             $db->escape($fields[$field_key]->db_column)
         ).
-        "ORDER BY hits DESC ".
-        "LIMIT 0,250 ";
+        "ORDER BY hits DESC LIMIT 0,250 ";
 
     try {
         $results = $db->GetArrayReader($sql, 15000);
@@ -226,7 +210,7 @@ protected function _getSubtotalDataForColumn($context, $field_key) {
 
 In `getSubtotalCounts`, pass `null` for `$context`:
 ```php
-$counts = $this->_getSubtotalCountForStringColumn(null, $column, $label_map, 'in', 'worker_id[]');
+$counts = $this->_getSubtotalCountForStringColumn(null, $column, $label_map, 'in');
 ```
 
 ## Field Selection Guidelines

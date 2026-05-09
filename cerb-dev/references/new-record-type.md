@@ -205,8 +205,16 @@ $validation
 ### In `SearchFields_*`:
 The `getWhereSQL()` switch may need custom cases for non-standard filter types.
 
+For **linked record fields** (e.g., `queue_id`, `worker_id`, `group_id`), add virtual deep-search constants and handle them in `getWhereSQL()`. See `references/worklist-quick-search.md` for the full pattern.
+
 ### In `View_*::getQuickSearchFields()`:
 Add entries for any extra fields beyond `id`, `name`, `updated`, `fieldset`, `watchers`.
+
+For linked record fields, use `TYPE_VIRTUAL` with `VIRTUAL_*_SEARCH` constants rather than `TYPE_NUMBER` — this enables name-based search instead of raw ID matching. See `references/worklist-quick-search.md`.
+
+Also implement `getParamFromQuickSearchFieldTokens()` cases for any virtual fields, `renderVirtualCriteria()` for filter chip display, and `renderCriteriaParam()` to show record names instead of numeric IDs for linked fields.
+
+For **subtotals**, see `references/worklist-subtotals.md` — in particular the `value_key` routing rules: the default `'value'` is correct for nearly all fields; only use a different key when `doSetCriteria` explicitly reads a different `$_POST` field.
 
 ### In `Context_*::getContext()`:
 Add token labels, types, and values for any extra fields:

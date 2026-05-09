@@ -56,7 +56,8 @@ These skills are always installed alongside this one:
 - `references/adding-dao-fields.md` — adding fields to an existing DAO/model/context
 - `references/peek-edit-patterns.md` — Smarty gotchas, checkbox groups, dynamic rows, flat lookup sets
 - `references/ui-conventions.md` — JS/UI rules: AJAX helpers (`genericAjaxGet/Post/Popup`), confirmation dialogs (`confirmPopup()`, never `confirm()`)
-- `references/worklist-subtotals.md` — adding IAbstractView_Subtotals to View_ classes
+- `references/worklist-subtotals.md` — adding IAbstractView_Subtotals to View_ classes; correct value_key routing for subtotal click-to-filter
+- `references/worklist-quick-search.md` — IAbstractView_QuickSearch: TYPE_VIRTUAL deep-search for linked records, renderVirtualCriteria, renderCriteriaParam label display
 - `references/rerun-patch.md` — how to force a database patch to re-run in development
 - `references/metrics.md` — registering and incrementing metrics
 - `references/database-schema.md` — canonical schema reference (`cerb.schema.kata`), column name lookups, common table timestamp columns
