@@ -165,3 +165,100 @@ policy:
       deny/type@bool: {{inputs.record_type is not record type ('draft')}}
       allow@bool: yes
 ```
+
+---
+
+## Modifying Drafts Before the Editor Opens (mail.draft trigger)
+
+The `cerb.trigger.mail.draft` trigger fires when a worker opens a new or resumed draft. Use it to pre-populate or modify draft content before the editor is shown.
+
+### Inputs
+
+| Key | Description |
+|-|-|
+| `draft_*` | The draft record (supports key expansion). Includes `draft_type`, `draft_ticket_id`, `draft_ticket_*`, `draft_params.*`, etc. |
+| `is_resumed` | `true` if the draft was resumed from a saved state, `false` if newly created |
+
+### Return
+
+Return a `draft: params:` dict with any fields to override. Only the keys you return are modified; omitted keys are unchanged.
+
+```
+return:
+  draft:
+    params:
+      content: {{modified_content}}
+```
+
+### Accessing ticket and group context
+
+From within a `mail.draft` automation, use the `draft_ticket_` prefix to access the ticket record, and `draft_ticket_group_` to access the ticket's group (including its custom fields):
+
+```
+draft_ticket_id                               # ticket ID
+draft_ticket_group_reply_snippet_enabled      # group custom field (checkbox)
+draft_ticket_group_reply_snippet_id           # group custom field (record link ID)
+draft_ticket_group_reply_snippet_content      # linked snippet's content field
+```
+
+### Injecting content above #signature
+
+Use `|replace` to insert text above the `#signature` marker in the draft content:
+
+```
+return:
+  draft:
+    params:
+      content: {{draft_params.content|replace({"#signature": rendered_snippet ~ "\n\n#signature"})}}
+```
+
+If no `#signature` is present in the content, `|replace` is a no-op.
+
+### Full example: group-configured snippet injection
+
+```
+start:
+  outcome/skip:
+    if@bool:
+      {{
+        is_resumed
+        or draft_type != 'ticket.reply'
+        or not draft_ticket_group_reply_snippet_enabled
+        or not draft_ticket_group_reply_snippet_id
+      }}
+    then:
+      return:
+
+  kata.parse:
+    output: results
+    inputs:
+      kata:
+        template: {{draft_ticket_group_reply_snippet_content}}
+      dict@json:
+        {% do draft_ticket_ %}
+        {{cerb_placeholders_list('draft_ticket_', '')|json_encode}}
+
+  return:
+    draft:
+      params:
+        content: {{draft_params.content|replace({"#signature": results.template ~ "\n\n#signature"})}}
+```
+
+### Event listener guard
+
+Use the `disabled@bool` condition on the event listener to skip the automation entirely when prerequisites aren't met (avoids loading the automation at all):
+
+```
+event_kata@raw:
+  automation/replySnippet:
+    uri: cerb:automation:cerb.replySnippet.mailDraft
+    disabled@bool:
+      {{
+        is_resumed
+        or draft_type != 'ticket.reply'
+        or not draft_ticket_group_reply_snippet_enabled
+        or not draft_ticket_group_reply_snippet_id
+      }}
+```
+
+Mirror this same condition as the first `outcome/skip:` inside the automation itself as a safety net.

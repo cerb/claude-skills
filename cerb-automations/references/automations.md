@@ -979,6 +979,26 @@ start:
 
 Handlers: `on_simulate:`, `on_success:`, `on_error:`.
 
+**Rendering a runtime record value (e.g. snippet content) with placeholder substitution:**
+
+Use `kata:` without `@raw` when the template comes from a record field at runtime (e.g. a snippet's `content` field). The outer `{{...}}` is evaluated first to retrieve the field value; kata.parse then substitutes placeholders inside that value using `dict`.
+
+Use `cerb_placeholders_list(prefix, strip)` to build the dict from the current automation context. The `{% do prefix_ %}` tag forces lazy expansion of nested dictionary keys before the list is built.
+
+```
+kata.parse:
+  output: results
+  inputs:
+    kata:
+      template: {{draft_ticket_group_reply_snippet_content}}
+    dict@json:
+      {% do draft_ticket_ %}
+      {{cerb_placeholders_list('draft_ticket_', '')|json_encode}}
+# results.template contains the rendered snippet text
+```
+
+`cerb_placeholders_list(extract, prefix)` — `extract` is the dictionary key prefix to expand; `prefix` is stripped from keys in the returned dict. Passing `''` as prefix returns keys like `mask`, `subject` so snippets can use `{{mask}}`, `{{subject}}` directly.
+
 ---
 
 ### LLM Commands

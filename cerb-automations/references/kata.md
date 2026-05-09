@@ -577,7 +577,7 @@ Tests use `is` / `is not` operators and return boolean values:
 | `cerb_extract_uris` | `cerb_extract_uris(html)` | Return array of URLs found in HTML with metadata |
 | `cerb_file_url` | `cerb_file_url(id)` | Get download link for attachment ID |
 | `cerb_has_priv` | `cerb_has_priv(privilege, actor_type, actor_id)` | Check if actor has privilege |
-| `cerb_placeholders_list` | `cerb_placeholders_list(extract, prefix)` | Return all placeholders in current behavior |
+| `cerb_placeholders_list` | `cerb_placeholders_list(extract, prefix)` | Return all placeholders in current behavior. `extract` is the key prefix to expand; `prefix` is stripped from the returned keys. Use `{% do extract_ %}` before calling to force lazy expansion of nested keys. Example: `{% do draft_ticket_ %}` then `cerb_placeholders_list('draft_ticket_', '')` returns `{mask: ..., subject: ...}` so snippet templates can use `{{mask}}`, `{{subject}}` directly. |
 | `cerb_plugin_enabled` | `cerb_plugin_enabled(plugin_id)` | Test if plugin is installed and enabled |
 | `cerb_record_readable` | `cerb_record_readable(record_type, record_id, actor_type, actor_id)`  | Check read access |
 | `cerb_record_writeable` | `cerb_record_writeable(record_type, record_id, actor_type, actor_id)` | Check write access |
