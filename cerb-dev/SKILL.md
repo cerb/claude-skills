@@ -62,6 +62,7 @@ These skills are always installed alongside this one:
 - `references/database-schema.md` — canonical schema reference (`cerb.schema.kata`), column name lookups, common table timestamp columns
 - `references/security.md` — security conventions: never use $_REQUEST, always enforce POST method before reading $_POST, CSRF protection, input sanitization via importGPC()
 - `references/validation.md` — field validation: types, string modifiers, `->addValidator()`, `->addFormatter()`, available validators (`email`, `url`, `contextId`, etc.), surfacing errors in JSON responses
+- `references/bot-behaviors.md` — deprecated bot behavior system (still widely used by large clients): package JSON format, all 42 event types, all conditions (universal + event-specific) with exact param keys, all actions with exact param keys, decision tree node types, behavior variables
 
 ## Tools
 
