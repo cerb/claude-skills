@@ -8,6 +8,10 @@
 - **Bracket notation with special characters works** — `{if isset($map['a:b'])}` is valid; special characters inside string literals don't affect Smarty's parser.
 - **Pre-compute everything in PHP** — derive all template state (lookups, flags, nested structures) in `renderPeekPopup`. Keep Smarty logic to simple `isset`/`{if}` checks.
 - **`DevblocksPlatform::services()` is allowed in templates** — many existing templates call it directly.
+- **Don't use `Context_*::ID` in templates** — Smarty 4 logs `"Using unregistered static method ... in a template is deprecated"` for any class not registered via `Smarty::registerClass`. Per-record context classes (`Context_QueueJob`, `Context_Ticket`, etc.) are not registered. Approved alternatives:
+    - Use `CerberusContexts::CONTEXT_*` constants for core record types (`CerberusContexts` is pre-registered for static template access) — e.g., `{$peek_context = CerberusContexts::CONTEXT_QUEUE_JOB}`.
+    - Hardcode the context ID string for non-core or new contexts — e.g., `data-context="cerb.contexts.queue.job"`.
+  Reserve `Context_*::ID` for PHP files only.
 
 ## Checkbox Groups with Parent/Child Dependency
 
