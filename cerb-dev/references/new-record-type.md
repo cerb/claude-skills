@@ -88,6 +88,8 @@ Then register it in the patch file's dispatch array at the top.
 
 ## Step 3: Add plugin.xml Entries
 
+**IMPORTANT: Never abbreviate the `options` or `acl` param blocks.** Copy the full list from the generator output. Omitting `workspace` silently breaks the Search nav popup for that record type. Only remove options that genuinely don't apply (e.g. `create` for programmatic-only records), and document why.
+
 ### In `<class_loader>`:
 
 ```xml
