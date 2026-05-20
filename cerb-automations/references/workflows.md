@@ -102,6 +102,26 @@ Each record is defined with a record type and unique key (e.g. `task/newTask:`).
 | `fields:` | A list of record fields to update |
 | `updatePolicy:` | Optional comma-separated list of `fields` to update on subsequent changes after creation. If omitted, all fields are set on creation and changes. If included and blank, fields are created but not updated (preserves user-level changes) |
 
+### Object field format
+
+When a record field is an object (e.g. `params:` on a card widget, `event_kata:` listener, etc.), write it as indented KATA — **not** as an inline JSON string.
+
+**Correct:**
+```
+fields:
+  params:
+    context: cerberusweb.contexts.org
+    label: Organization
+```
+
+**Wrong:**
+```
+fields:
+  params: {"context":"cerberusweb.contexts.org","label":"Organization"}
+```
+
+Indented KATA is consistent with the rest of the workflow format, plays nicely with diffs, and avoids quoting-escape headaches.
+
 ---
 
 ## Placeholders
