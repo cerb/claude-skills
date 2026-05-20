@@ -58,6 +58,7 @@ These skills are always installed alongside this one:
 - `references/ui-conventions.md` — JS/UI rules: AJAX helpers (`genericAjaxGet/Post/Popup`), confirmation dialogs (`confirmPopup()`, never `confirm()`)
 - `references/worklist-subtotals.md` — adding IAbstractView_Subtotals to View_ classes; correct value_key routing for subtotal click-to-filter
 - `references/worklist-quick-search.md` — IAbstractView_QuickSearch: TYPE_VIRTUAL deep-search for linked records, renderVirtualCriteria, renderCriteriaParam label display
+- `references/queue-system.md` — Extension_QueueConsumer, publish() shutdown semantics, GET_LOCK exactly-once completion hook, INSERT...SELECT bulk producer pattern, queue_job_chunk staging
 - `references/rerun-patch.md` — how to force a database patch to re-run in development
 - `references/metrics.md` — registering and incrementing metrics
 - `references/database-schema.md` — canonical schema reference (`cerb.schema.kata`), column name lookups, common table timestamp columns
