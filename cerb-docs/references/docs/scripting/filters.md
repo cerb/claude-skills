@@ -75,7 +75,10 @@ These filters are available in bot scripts and snippets:
 - [stat](#stat)
 - [str\_pos](#str_pos)
 - [str\_sub](#str_sub)
+- [strip\_data\_uris](#strip_data_uris)
 - [strip\_lines](#strip_lines)
+- [strip\_pem\_blocks](#strip_pem_blocks)
+- [strip\_url\_querystrings](#strip_url_querystrings)
 - [striptags](#striptags)
 - [title](#title)
 - [tokenize](#tokenize)
@@ -1438,6 +1441,23 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZ
 HI
 ```
 
+## strip\_data\_uris
+
+Remove the base64-encoded content from data URIs in a text block. This is particularly useful when sanitizing text for indexing by a custom [search index](/docs/records/types/search_index/), where the encoded payload contributes noise rather than searchable terms.
+
+`|strip_data_uris`
+
+```
+{% set html %}
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA...">
+{% endset %}
+{{html|strip_data_uris}}
+```
+
+```
+<img src="data:image/png;base64,">
+```
+
 ## strip\_lines
 
 Remove lines in a text block that begin with one of the given `prefixes`.
@@ -1456,6 +1476,49 @@ This is the original message
 
 ```
 This is the original message
+```
+
+## strip\_pem\_blocks
+
+Remove PEM-formatted blocks like PGP signatures, public keys, and SSL certificates from a block of text. This is particularly useful when sanitizing text for indexing by a custom [search index](/docs/records/types/search_index/), where the long base64 payloads contribute noise rather than searchable terms.
+
+`|strip_pem_blocks`
+
+```
+{% set message %}
+Hello,
+
+Here is my reply.
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCAAdFiEE...
+-----END PGP SIGNATURE-----
+{% endset %}
+{{message|strip_pem_blocks}}
+```
+
+```
+Hello,
+
+Here is my reply.
+```
+
+## strip\_url\_querystrings
+
+Remove the query string portion from URLs in a text block. This is particularly useful when sanitizing text for indexing by a custom [search index](/docs/records/types/search_index/), where tracking parameters and session IDs add noise.
+
+`|strip_url_querystrings`
+
+```
+{% set text %}
+Check out https://example.com/page?utm_source=email&utm_campaign=q4 for details.
+{% endset %}
+{{text|strip_url_querystrings}}
+```
+
+```
+Check out https://example.com/page for details.
 ```
 
 ## striptags

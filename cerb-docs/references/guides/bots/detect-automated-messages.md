@@ -27,7 +27,7 @@ If you're sending automatic replies from various bots (e.g. per group), then the
 
 This example should catch most automatic responses, but you can continue to expand on it to meet your own needs. Feel free to share your improvements in the comments at the bottom of the page.
 
-In Cerb 8.0+ you can [import the Auto-Reply Bot package](/packages/auto-reply-bot/) instead.
+In Cerb 11.0+ you can use the built-in [Auto Responder workflow](/workflows/cerb.auto_responder/) instead.
 
 # Importing the behavior
 

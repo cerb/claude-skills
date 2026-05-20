@@ -5,6 +5,22 @@ url: "https://cerb.ai/docs/history/"
 summary: "This page provides a comprehensive release history for Cerb, detailing updates and improvements from December 2012 to November 2024. It includes both feature upgrades and maintenance updates, highlighting the number of improvements in each release. The document tracks the evolution of Cerb through various versions, showcasing significant platform upgrades and regular maintenance updates aimed at enhancing functionality and performance. Notable releases include major platform upgrades such as version 10.0 in April 2021 with 216 improvements and version 9.0 in August 2018 with 175 improvements, reflecting Cerb's ongoing commitment to development and user experience enhancement."
 tags: ["docs"]
 ---
+## May 2026
+
+[ 
+
+ 
+
+### In Development: 11.2
+feature upgrade 86 improvements
+ ](/releases/11.2/) [ 
+
+ 
+
+### 11.1.9
+maintenance update 11 improvements
+ ](/releases/11.1.9/)
+
 ## April 2026
 
 [ 

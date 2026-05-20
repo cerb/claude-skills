@@ -286,6 +286,10 @@ This guide explains how to reliably sync record changes from Cerb to...
 ## Scaling
 
 [ 
+Database read/write splitting
+ 
+How to configure database read replicas to reduce primary load and improve...
+ ](/guides/scaling/database-read-write-splitting/) [ 
 Memcached
  
 How to set up Memcached caching to improve performance and scalability.

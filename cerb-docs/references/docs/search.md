@@ -23,6 +23,7 @@ tags: ["docs"]
   - [Links](#links)
   - [Watchers](#watchers)
 
+- [Search indexes](#search-indexes)
 - [Autocompletion](#autocompletion)
 - [Deep Search](#deep-search)
   - [Deep search](#deep-search-1)
@@ -414,6 +415,61 @@ To filter for records watched by specific worker IDs, enter a comma-separated li
 ```
 watchers:1,2,3
 ```
+
+# Search indexes
+
+(Added in [11.2](/releases/11.2/))
+
+A [search index](/docs/records/types/search_index/) is a configurable, plugin-driven index over a specific [record type](/docs/records/types/) – backed by a search extension (local full-text, TF-IDF, BM25, vector embeddings, Elasticsearch, Qdrant, Pinecone, etc.).
+
+Each search index defines:
+
+- A **record type** the index applies to
+- A **filter query** that constrains which records are indexed (e.g. open tickets updated in the last year)
+- A **content template** that formats the indexable text per record (e.g. `{{title}} {{content}}`)
+- A **priority** that controls autocompletion ordering and default-filter behavior
+
+Indexes are managed from the search index [worklist](/docs/worklists/) (see [Search Index records](/docs/records/types/search_index/)).
+
+#### Using a search index in a query
+
+Each search index exposes a `filter:` keyword in queries on its record type. For instance, a search index named `by_title` on tickets adds:
+
+```
+title:(urgent bug)
+```
+
+When a search index has **priority `0`**, it overrides the default filter when a query is typed without an explicit `filter:`. For example, the default ticket search could be routed to a `by_part_number` index instead of the built-in name search.
+
+#### Wildcards
+
+Append `*` to a term to match any token in the vocabulary starting with that prefix. The expansion is combined with `OR`:
+
+```
+title:(11.1* release*)
+```
+
+Matches `11.1.6 released`, `11.1 release`, etc.
+
+#### Stemming
+
+Append `~` to a term to fuzzy-match its stem against the vocabulary. The expansion is combined with `OR`:
+
+```
+docs:(automate~)
+```
+
+Expands to `automate`, `automates`, `automation`, `automating`, `automated`, etc.
+
+#### Limiting and ranking results
+
+The `top:` parameter limits results to the highest-scoring matches:
+
+```
+docs:(queue parallel top:10)
+```
+
+Scores are computed using TF-IDF (or the strategy provided by the extension). Field-level boosting can be configured per search index via the content template (e.g. weight a document's title higher than its body).
 
 # Autocompletion
 

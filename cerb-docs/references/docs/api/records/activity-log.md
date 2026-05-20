@@ -19,7 +19,7 @@ tags: ["docs"]
 ```
 GET /rest/records/activity_log/1.json?expand=custom_&show_meta=0 HTTP/1.1
 Cerb-Auth: XXXX:XXXX
-Date: Mon, 20 Apr 2026 20:41:55 America
+Date: Wed, 20 May 2026 01:13:04 America
 Host: cerb.example
 Content-Type: application/x-www-form-urlencoded; charset=utf-8
 ```
@@ -51,7 +51,7 @@ Content-Type: application/x-www-form-urlencoded; charset=utf-8
 ```
 GET /rest/records/activity_log/search.json?q=activity:worker.logged_in&show_meta=0 HTTP/1.1
 Cerb-Auth: XXXX:XXXX
-Date: Mon, 20 Apr 2026 20:41:55 America
+Date: Wed, 20 May 2026 01:13:04 America
 Content-Type: application/x-www-form-urlencoded; charset=utf-8
 Host: cerb.example
 ```
@@ -91,7 +91,7 @@ Host: cerb.example
 ```
 POST /rest/records/activity_log/create.json?show_meta=0 HTTP/1.1
 Cerb-Auth: XXXX:XXXX
-Date: Mon, 20 Apr 2026 20:41:55 America
+Date: Wed, 20 May 2026 01:13:04 America
 Content-Type: application/x-www-form-urlencoded; charset=utf-8
 Host: cerb.example
 ```

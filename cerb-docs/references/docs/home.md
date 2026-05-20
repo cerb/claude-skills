@@ -296,7 +296,7 @@ This page provides a list of API endpoints available in Cerb, covering...
 [ 
 Release History
  
-Cerb has 23 years worth of incremental improvements from community feedback.
+Cerb has 24 years worth of incremental improvements from community feedback.
  ](/docs/history/) [ 
 Philosophy
  

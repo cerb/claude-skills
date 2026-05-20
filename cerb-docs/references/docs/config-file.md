@@ -34,8 +34,12 @@ The following variables are required to set up Cerb.
 | --- | --- | --- |
 | `APP_DB_READER_HOST` | (disabled) | Database reader endpoint for read/write splitting |
 | `APP_HOSTNAME` | &nbsp; | Override server hostname (e.g. `support.example.com`) |
+| `APP_QUEUE_CONCURRENCY_SLOTS` | 5 | Max concurrent worker-initiated [queue jobs](/docs/queues/#concurrency-slots) ([11.2](/releases/11.2/)+) |
+| `APP_SECURITY_ALLOW_ADMIN_SESSION_TOKEN` | true | Allow admin sessions to authenticate `/cron` and `/update`. When `false`, those endpoints always require a [service token](/docs/records/types/service_token/). ([11.2](/releases/11.2/)+) |
+| `APP_SERVICE_TOKEN` | &nbsp; | Master [service token](/docs/records/types/service_token/) for `/cron`, `/debug`, `/update` ([11.2](/releases/11.2/)+) |
+| `APP_SERVICE_TOKEN_SCOPE` | `cron update` | Space-separated scopes restricting the master service token (e.g. `cron:* update`) ([11.2](/releases/11.2/)+) |
 | `APP_STORAGE_PATH` | /storage | Override storage directory (e.g. `/mnt/storage`) |
-| `AUTHORIZED_IPS_DEFAULTS` | &nbsp; | Comma-separated list of IPv4 prefixes that can access `/cron` and `/update` without a session |
+| `AUTHORIZED_IPS_DEFAULTS` | &nbsp; | Comma-separated list of IPv4 prefixes that can access `/cron` and `/update` without a session. **Deprecated in [11.2](/releases/11.2/)** – use [service tokens](/docs/records/types/service_token/) instead. |
 | `DEVBLOCKS_REWRITE` | `file_exists('.htaccess')` | Rewrite `/index.php/` in URLs to `/` |
 | `DEVBLOCKS_HTTP_PROXY` | (disabled) | SOCKS proxy server (e.g. `http://user:pass@localhost:8888`) |
 | `DEVELOPMENT_MODE` | false | Enable developer mode and disable template caching |
@@ -97,7 +101,6 @@ The following variables are required to set up Cerb.
 | `DEVBLOCKS_STORAGE_ENGINE_PREVENT_CHANGE` | false | Hide storage config in Setup |
 | `DEVELOPMENT_ARCHIVE_PARSER_MSGSOURCE` | false | Store a copy of all pre-parsed email in `./storage/archive/` |
 | `DEVELOPMENT_MODE_ALLOW_CSRF` | false | Disable CSRF protections |
-| `DEVELOPMENT_MODE_ALLOW_DEBUG` | false | Enable the `/debug` endpoint |
 | `DEVELOPMENT_MODE_QUERIES` | false | Display executed database queries per request |
 | `DEVELOPMENT_MODE_SECURITY_SCAN` | false | Suppress excessive warnings during a vulnerability scan |
 | `LANG_CHARSET_CODE` | utf8 | Browser character set |

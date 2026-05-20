@@ -34,7 +34,7 @@ Before you begin, verify you have:
 Copy the `cerb-package-exporter.php` script to a directory on your server:
 
 ```
-curl -O "https://raw.githubusercontent.com/cerb/cerb-release/v11.0/install/extras/impex/cerb-package-exporter.php"
+curl -O "https://raw.githubusercontent.com/cerb/cerb-release/v11.2/install/extras/impex/cerb-package-exporter.php"
 ```
 
 # Configuration
