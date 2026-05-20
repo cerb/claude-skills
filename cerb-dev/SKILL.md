@@ -64,7 +64,10 @@ These skills are always installed alongside this one:
 - `references/security.md` — security conventions: never use $_REQUEST, always enforce POST method before reading $_POST, CSRF protection, input sanitization via importGPC()
 - `references/validation.md` — field validation: types, string modifiers, `->addValidator()`, `->addFormatter()`, available validators (`email`, `url`, `contextId`, etc.), surfacing errors in JSON responses
 - `references/bot-behaviors.md` — deprecated bot behavior system (still widely used by large clients): package JSON format, all 42 event types, all conditions (universal + event-specific) with exact param keys, all actions with exact param keys, decision tree node types, behavior variables
+- `references/baseline-sql.md` — rebuild `install/sql/cerb_base_tables.sql` and `cerb_base_rows.sql` from a fresh Docker install; the timestamp/charset/AUTO_INCREMENT normalization passes
 
 ## Tools
 
 - `tools/gen-dao.py` — Python generator for new record type boilerplate. Key options: `--table`, `--fields` (SQL column definitions), `--plugin-id`, `--acl-write all|admin`, `--output-dir`. Fields are alphabetized automatically.
+- `tools/dump-baseline-tables.sh <container_id>` — dump + normalize the schema DDL for `install/sql/cerb_base_tables.sql`. Optional `--user`/`--pass`/`--db` (default `cerb`/`s3cr3t`/`cerb`).
+- `tools/dump-baseline-rows.sh <container_id>` — dump + normalize seed rows for `install/sql/cerb_base_rows.sql`, rewriting hard-coded Unix timestamps to `UNIX_TIMESTAMP()`. Same optional flags as above.
