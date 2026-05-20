@@ -109,6 +109,23 @@ For rows of action buttons (download, print, copy, etc.), use `div.cerb-code-edi
 </div>
 ```
 
+## Worklist Toolbar Button Order
+
+In worklist view templates (`templates/records/types/{type}/view.tpl` and equivalents), the toolbar buttons below the worklist follow a fixed convention:
+
+1. Custom toolbar items from `{$view->getToolbar()}` (via `view_toolbar.tpl`)
+2. **Explore** (`action-explore`)
+3. **Bulk update** (`action-bulkupdate` with `data-cerb-worklist-action-bulk="<module>"`)
+
+```smarty
+{$view_toolbar = $view->getToolbar()}
+{include file="devblocks:cerberusweb.core::internal/views/view_toolbar.tpl" view_toolbar=$view_toolbar}
+{if !$view_toolbar['explore']}<button type="button" class="action-always-show action-explore"><span class="glyphicons glyphicons-compass"></span> {'common.explore'|devblocks_translate|lower}</button>{/if}
+{if $active_worker->hasPriv("contexts.{$view_context}.update.bulk")}<button data-cerb-worklist-action-bulk="<module>" type="button" class="action-always-show action-bulkupdate"><span class="glyphicons glyphicons-folder-closed"></span> {'common.bulk_update'|devblocks_translate|lower}</button>{/if}
+```
+
+Explore is the more common action and comes first; bulk update is more destructive/scoped and sits at the end. Mirror the existing ordering in `tickets/view.tpl`, `tasks/view.tpl`, `contacts/addresses/view.tpl`, `mail/queue/view.tpl`, etc. Don't place the bulk button before explore.
+
 ## Silent Actions — Feedback Notifications
 
 When an action has no visible result (copy to clipboard, silent save, etc.), always show a brief notification so the user knows it worked. Use `Devblocks.createAlert()`:
@@ -143,7 +160,75 @@ Prefer `.cerb-hidden` over `disabled` when the intent is progressive disclosure 
 
 ## Variable Declarations
 
-Always use `let` (or `const`) — never `var`. Old code still uses `var` and is being updated incrementally, but all new code must use `let`/`const`.
+Always use `let` (or `const`) — never `var`. Default to `const`; only switch to `let` when the binding is actually reassigned. Old code still uses `var` and is being updated incrementally — write new/edited code with `const`/`let` even when surrounding legacy code in the same file uses `var`. Don't introduce `var` to "match the style" — the legacy usages are paying down on their own schedule.
+
+## No Unregistered Static Method Calls in Smarty Templates
+
+Don't call static methods on classes that aren't registered with Smarty (e.g., `Extension_AutomationTrigger::get(...)`, `DAO_Foo::getById(...)`) directly inside `.tpl` files. Cerb logs a `[16384]` deprecation: *"Using unregistered static method ... in a template is deprecated and will be removed in a future release. Use Smarty::registerClass to explicitly register a class for access."*
+
+Smarty is tightening its security defaults; unregistered static access is on the path to removal. Registering every class on every template touchpoint is noisy — pre-resolving in PHP is the consistent fix.
+
+**Bad:**
+```smarty
+{$trigger = Extension_AutomationTrigger::get($trigger_id)}
+{$trigger->name}
+```
+
+**Good:** resolve in PHP and `$tpl->assign()` the result.
+```php
+// In the controller / extension renderConfig / page section
+$trigger = Extension_AutomationTrigger::get($trigger_id);
+$tpl->assign('trigger', $trigger);
+```
+```smarty
+{$trigger->name}
+```
+
+**Tolerated patterns** (not deprecated):
+
+- Instance-chain method calls: `DevblocksPlatform::services()->...`
+- Class constant reads: `CerberusContexts::CONTEXT_X`
+
+The trigger is specifically *unregistered static method calls*. If you encounter this warning in another template you touch, hoist that specific call into PHP rather than calling `Smarty::registerClass()`.
+
+## Peek Triggers Require Explicit Binding
+
+Anchors with `class="cerb-peek-trigger"` open a record's peek popup when clicked. The binding is **not delegated** — each template that emits this markup must wire the click handler explicitly:
+
+```js
+$container.find('.cerb-peek-trigger').cerbPeekTrigger();
+```
+
+Required attributes on the anchor:
+```html
+<a class="cerb-peek-trigger"
+   data-context="cerberusweb.contexts.attachment"
+   data-context-id="{$attachment->id}"
+   data-profile-url="{devblocks_url}c=files&id={$attachment->id}{/devblocks_url}">
+   <b>{$attachment->name|escape}</b>
+</a>
+```
+
+`data-context` and `data-context-id` are required. `data-profile-url` is optional (used for shift/cmd-click to open the profile in a new tab). `data-edit="1"` opens the peek directly in edit mode. Other supported attributes: `data-layer`, `data-width`.
+
+Templates that include sub-templates which emit peek-triggers still need to do their own binding — the include doesn't magically wire its children. Card widget templates, marquee outputs, and sheet renders all follow this rule. View `border.tpl`, `sheets/render.tpl`, `peek_edit.tpl` for canonical examples.
+
+## Reusable Attachment List
+
+For "show attachments linked to this record" UIs, include `internal/attachments/list.tpl` rather than rolling your own list:
+
+```smarty
+{include file="devblocks:cerberusweb.core::internal/attachments/list.tpl"
+    context="{CerberusContexts::CONTEXT_MY_RECORD}"
+    context_id=$model->id
+    attachments=$attachments}
+```
+
+If `$attachments` is omitted, the template runs `DAO_Attachment::getByContextIds($context, $context_id)` itself. Pass it explicitly when you've already loaded them.
+
+Renders as a `bubbles`-styled list: paperclip glyph, name + size + mime type, peek-trigger anchor, kebab menu with **Download** and **Open in browser** actions. The template self-binds its own peek-trigger and menu handlers — you don't need to add anything.
+
+Used by `internal/comments/comment.tpl`, `display/modules/conversation/draft.tpl`, `display/modules/conversation/message.tpl` for canonical examples.
 
 ## Confirmation Dialogs
 
