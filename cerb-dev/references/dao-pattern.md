@@ -51,6 +51,52 @@ Updates trigger events automatically:
 - `DevblocksPlatform::markContextChanged($context, $ids)` — after update
 - Event: `dao.{table_name}.update`
 
+## Delete Cascade — What Happens Automatically
+
+A `DAO_X::delete()` should bracket its actual `DELETE FROM x_table` with:
+
+```php
+parent::_deleteAbstractBefore($context, $ids);
+// ... your DELETE ...
+parent::_deleteAbstractAfter($context, $ids);
+```
+
+`_deleteAbstractAfter` fires the `context.delete` event. The platform listener (`_handleContextDelete` in `features/cerberusweb.core/api/listeners.classes.php`) then **automatically** cleans up these cross-cutting tables for the deleted context+ids:
+
+| Table | Purpose |
+|---|---|
+| `attachment_link` | File attachments linked to the record |
+| `calendar` | Calendars owned by the record |
+| `comment` | Comments on the record (and where it's the owner) |
+| `context_activity_log` | Activity log entries about the record |
+| `context_alias` | Aliases for the record |
+| `context_avatar` | Avatar/image for the record |
+| `context_link` | Manual record-to-record links |
+| `context_merge_history` | Merge history rows |
+| `custom_fieldset` | Custom fieldsets owned by, or referenced via, the record |
+| `custom_field_value` | Custom field values on the record |
+| `email_signature` | Signatures owned by the record |
+| `mail_html_template` | HTML templates owned by the record |
+| `notification` | Notifications about the record |
+| `context_scheduled_behavior` | Scheduled behaviors on the record |
+| `snippet` | Snippets owned by the record |
+| `bot` | Bots owned by the record |
+| `workspace_page` | Workspace pages owned by the record |
+
+**Don't add explicit cleanup calls for any of these in your `delete()` method** — they'll run twice. The abstract handler covers them as long as you call `_deleteAbstractAfter`.
+
+You only need explicit cleanup for tables that are **not** keyed by `(context, context_id)` or **not** universal — e.g. `queue_message.job_id`, `queue_job_chunk.job_id`, plugin-specific tables that reference your record by some other column. Those need their own `DAO_OtherThing::deleteByXIds($ids)` calls inside your `delete()`.
+
+## Attachment Lifecycle
+
+Linking an attachment to a record via:
+```php
+DAO_Attachment::addLinks($context, $context_id, $attachment_ids);
+```
+…grants download access to anyone who can `Context_X::isReadableByActor` the linked record. `Context_Attachment::isDownloadableByActor` walks every `attachment_link` row and approves if the worker can read **any** linked context. Use this instead of session hacks (e.g. the legacy `$_SESSION['view_export_file_id']`).
+
+When deleting a parent record, the abstract delete cascade (above) removes the `attachment_link` rows automatically. The orphan-files maint job then purges attachments with no remaining links after 24h. So the right pattern is **never delete the attachment directly** — drop the link and let maint handle it.
+
 ## Form Handling Pattern
 
 ```php
