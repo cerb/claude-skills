@@ -70,29 +70,78 @@ api.command/example:
 
 ## Card Widgets
 
+Card widgets render inside the peek popup of a record. They're configurable per record-type by an admin and seeded via patches (`INSERT INTO card_widget (record_type, extension_id, ...)`).
+
 Extend `Extension_CardWidget` and implement:
-- `renderConfig(Model_CardWidget $widget)` — render config form
-- `saveConfig(Model_CardWidget $widget)` — save config from POST
-- `render(Model_CardWidget $widget, $dict)` — render the widget
+- `render(Model_CardWidget $widget, $context, $context_id)` — render the widget
+- `invoke(string $action, Model_CardWidget $widget)` — handle AJAX actions from the rendered widget
+- `renderConfig(Model_CardWidget $widget)` — render the admin config form
+- `invokeConfig($action, Model_CardWidget $widget)` — handle config form actions
 
 ```php
 class CardWidget_MyWidget extends Extension_CardWidget {
-    function render(Model_CardWidget $widget, $dict) {
+    const ID = 'cerb.card.widget.my_widget';
+
+    function render(Model_CardWidget $widget, $context, $context_id) {
         $tpl = DevblocksPlatform::services()->template();
         $tpl->assign('widget', $widget);
-        $tpl->display('...');
+        $tpl->display('devblocks:my.plugin::cards/my_widget/render.tpl');
     }
 }
 ```
 
-`plugin.xml` registration:
+`plugin.xml` registration (point `cerb.card.widget`):
 ```xml
-<extension point="cerberusweb.cards.widget">
+<extension point="cerb.card.widget">
     <id>cerb.card.widget.my_widget</id>
     <name>My Widget</name>
-    <class><file>api/App.php</file><name>CardWidget_MyWidget</name></class>
+    <class><file>api/cards/widgets/my_widget.php</file><name>CardWidget_MyWidget</name></class>
 </extension>
 ```
+
+### Card vs Profile Widgets — same logic, two extensions
+
+Most widgets ship as **both** a card widget and a profile widget so they work in both the peek popup and the full profile-page dashboard. They typically share a `Cerb\Records\MyWidget` helper class with the actual logic, plus paired template directories:
+
+```
+api/cards/widgets/my_widget.php          → CardWidget_MyWidget
+api/profiles/widgets/my_widget.php       → ProfileWidget_MyWidget
+api/Records/MyWidget.php                 → shared logic
+templates/internal/cards/widgets/my_widget/render.tpl
+templates/internal/profiles/widgets/my_widget/render.tpl
+```
+
+The two extensions are usually thin wrappers around the same render — the only template difference is `#cardWidget{$widget->getUniqueId(...)}` vs `#profileWidget{$widget->id}` for the container ID.
+
+See `profile-widgets.md` for the profile-specific configuration pattern (`contexts` param, ticket/record chooser, placeholder resolution).
+
+### Widget Self-Refresh Events
+
+A widget can request a re-render of itself or of every other widget on the same card.
+
+```js
+// One widget — server re-renders the named widget into its content slot
+$popup.triggerHandler($.Event('cerb-widget-refresh', { widget_id: {$widget->id} }));
+
+// All widgets on the card
+$popup.triggerHandler($.Event('cerb-widgets-refresh', { widget_ids: [] }));
+
+// Specific list
+$popup.triggerHandler($.Event('cerb-widgets-refresh', { widget_ids: [42, 43] }));
+```
+
+Listeners live in `templates/internal/cards/card.tpl` (`$popup.on('cerb-widget-refresh', …)` / `$popup.on('cerb-widgets-refresh', …)`).
+
+From inside a widget render template, get `$popup` via:
+```js
+const $popup = genericAjaxPopupFind($widget);
+```
+
+Use this when widget state changes outside the widget itself — e.g. the Monitor widget polls a queue job and fires `cerb-widget-refresh` when the job transitions to DONE so the widget redraws (revealing a download list, removing controls, etc.).
+
+### Render Lifecycle
+
+When a widget refreshes, the framework swaps the widget's `.cerb-card-widget--content` HTML via `$widget.html(html)`. Per-render JS bindings (peek triggers, button handlers, listeners) must run inside the widget template's `$(function(){...})` block — they get re-attached every refresh because they reference newly-created DOM. Stash long-lived state on `$widget.data(...)` if you need to survive a refresh; see `queue_job_monitor/render.tpl` for the "generation guard" pattern that cancels stale callbacks across refreshes.
 
 ## Cron Jobs
 
