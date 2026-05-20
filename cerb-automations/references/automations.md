@@ -1773,6 +1773,16 @@ commands:
     allow: yes
 ```
 
+**Anti-pattern — don't try to express the type guard as a positive `allow/...@bool` with a ternary:**
+```
+# WRONG — does not work
+commands:
+  record.update:
+    allow/ticket@bool:
+      {{inputs.record_type == 'ticket' ? 'yes'}}
+```
+The deny-first idiom (`deny/type@bool: {{inputs.X is not record type ('Y')}}` followed by `allow@bool: yes`) is the only correct form. Use the Twig `is not record type ()` test rather than equality on `inputs.record_type`.
+
 **Exception-based:**
 ```
 commands:
