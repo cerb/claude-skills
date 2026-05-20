@@ -868,7 +868,7 @@ def gen_context(table: str, fields: dict, plugin_id: str = 'cerberusweb.core', a
 
     if acl_write == 'admin':
         is_writeable_body = "\t\treturn self::_isWriteableOnlyByAdmin($models, $actor);"
-        is_writeable_sig  = "static function isWriteableByActor($models, $actor) : bool {"
+        is_writeable_sig  = "static function isWriteableByActor($models, $actor) {"
         peek_acl_check = (
             "\n\t\t\t// ACL\n"
             "\t\t\tif(!$active_worker->is_superuser)\n"
@@ -1476,7 +1476,7 @@ def gen_profile_section(table: str, acl_write: str = 'all') -> str:
     \t\tPage_Profiles::renderProfile($context, $context_id, $stack);
     \t}}
 
-    \tfunction handleActionForPage(string $action, string $scope=null) {{
+    \tfunction handleActionForPage(string $action, ?string $scope=null) {{
     \t\tif('profileAction' == $scope) {{
     \t\t\tswitch($action) {{
     \t\t\t\tcase 'savePeekJson':
