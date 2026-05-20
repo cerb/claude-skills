@@ -34,6 +34,18 @@ Never use `--no-verify` workarounds or skip the method check. If a form action n
 
 On the JavaScript side, popup dialogs that trigger data-modifying actions must also use POST. Pass a `FormData` object to `genericAjaxPopup()` instead of a URL string — a plain URL string always produces a GET. See `ui-conventions.md` for the pattern.
 
+## HTTP Response Headers — Never Use `header()`
+
+Always use the platform's HTTP service to set response headers:
+
+```php
+DevblocksPlatform::services()->http()->setHeader('Content-Type', 'application/json; charset=utf-8');
+```
+
+**Never call PHP's built-in `header()` directly.** A stray newline or attacker-controlled value in either argument can smuggle additional headers (CRLF injection: `Set-Cookie`, `Location` redirects, response splitting). The platform service centralizes header writes with the appropriate scrubbing and ordering with the response body.
+
+To find legitimate precedents: `grep -rn 'services()->http()->setHeader' features/ libs/`.
+
 ## Input Sanitization
 
 Use `DevblocksPlatform::importGPC()` for all user input:
