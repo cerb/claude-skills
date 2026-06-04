@@ -67,9 +67,26 @@ Maps PHP class names to source files. Classes are autoloaded on demand.
         <param key="dao_class" value="DAO_MyRecord"/>
         <!-- Optional: show in search, worklist, etc. -->
         <param key="show_in_setup" value="1"/>
+        <param key="options">
+            <value>
+                <data key="avatars" />
+                <data key="cards" />
+                <data key="comments" />
+                <data key="custom_fields" />
+                <data key="links" />
+                <data key="records" />
+                <data key="search" />
+                <data key="watchers" />
+                <data key="workspace" />
+            </value>
+        </param>
     </params>
 </extension>
 ```
+
+**Options** are feature toggles read by core templates via `$context_ext->hasOption('foo')`. Common keys: `avatars` (gates the 75×75 image header in `card.tpl`/`profile.tpl`), `cards` (record peek cards), `comments`, `custom_fields`, `links`, `records`, `search`, `watchers`, `va_variable`, `workspace`. Omit options your record type doesn't support — extra options can light up dead UI.
+
+> **After any plugin.xml edit, hit `/update` in the browser** (or run the Devblocks update CLI) to reload the manifest cache. `composer cache-clear` alone clears Smarty/compiled-template caches but does *not* reload plugin manifests, so newly added options / class loader entries / extensions won't be visible until `/update`.
 
 ### cerberusweb.page — UI Pages
 
