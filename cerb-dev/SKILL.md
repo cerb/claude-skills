@@ -50,18 +50,27 @@ These skills are always installed alongside this one:
 ## Reference Files
 
 - `references/architecture.md` — directory layout, plugin structure, naming conventions, context system, extension points, template paths, CSS/SCSS
-- `references/dao-pattern.md` — DAO class structure, database operations, events/deltas, form handling pattern, migration patch authoring
+- `references/dao-pattern.md` — DAO class structure, standard `getContext()` tokens (`_label`, `_image_url`, `record_url`), database operations, events/deltas, form handling, migration patches
 - `references/extensions.md` — card widget, cron job, and search index extension patterns
-- `references/plugin-xml.md` — plugin.xml manifest structure, extension points, class loaders
+- `references/automation-triggers.md` — registering a new automation trigger/event (4 spots: trigger class, plugin.xml, patch INSERT, base_rows.sql) and the per-record-type `record.bulkUpdate` bulk-popup wiring via `Cerb\Records\BulkUpdate` (getMenuItems / handleBulkPost / createJob + `bulk_automations.tpl` include)
+- `references/automation-commands.md` — adding a new top-level automation command/action (8 spots: Action class, ActionNode registry, grammar list, `cerberus.js` ×2, the two `_CerbApplication_KataSchemas` schemas `automation()`/`automationPolicy()`, `Extension_AutomationTrigger::getAutocompleteSuggestionsArray()`, +optional asset-automation build interaction) and the simpler `api.command:` sub-command pattern (`Extension_AutomationApiCommand` + plugin.xml, no framework edits)
+- `references/plugin-xml.md` — plugin.xml manifest, extension points, class loaders, **options block** (`avatars`, `cards`, `comments`, etc.), and the **`/update` requirement** after edits
 - `references/new-record-type.md` — complete guide for creating a new record type
 - `references/adding-dao-fields.md` — adding fields to an existing DAO/model/context
-- `references/peek-edit-patterns.md` — Smarty gotchas, checkbox groups, dynamic rows, flat lookup sets
-- `references/ui-conventions.md` — JS/UI rules: AJAX helpers (`genericAjaxGet/Post/Popup`), confirmation dialogs (`confirmPopup()`, never `confirm()`)
+- `references/peek-edit-patterns.md` — Smarty gotchas, checkbox groups, dynamic rows, flat lookup sets, avatar save via `upsertWithImage`
+- `references/avatars.md` — context avatars: plugin.xml `avatars` option, `_image_url` token, `DAO_ContextAvatar::upsertWithImage`, `Controller_Avatars::renderMonogram` for fallbacks, anonymous endpoints
+- `references/login-flow.md` — `Page_Login` state machine, `clearAllAssign()` gotcha, forced dark mode for login, CSRF fail-closed pattern, `getErrorMessage` codes
+- `references/scss-build.md` — `cerb.css` is generated from SCSS; build command (`sass --no-source-map cerb.scss …`); inline-SVG mixin pattern; custom-button native-chrome reset
+- `references/ui-conventions.md` — JS/UI rules: AJAX helpers (`genericAjaxGet/Post/Popup`), confirmation dialogs (`confirmPopup()`, never `confirm()`), custom-button reset pattern
+- `references/cerb-ui.md` — the `cerb-ui-*` design system (CSS + plain-JS `CerbUI.*` components): build/loading (dev raw source vs prod minified `cerb-ui.js`, `composer build-js`/`dist`), naming + token conventions, chart `data-value*`/`data-text*` namespaces + palettes, component inventory (Page/Header/Panel/Chip/Toggle/Distbar/Legend); **live examples = the UI Reference gallery**, not this doc
 - `references/worklist-subtotals.md` — adding IAbstractView_Subtotals to View_ classes; correct value_key routing for subtotal click-to-filter
 - `references/worklist-quick-search.md` — IAbstractView_QuickSearch: TYPE_VIRTUAL deep-search for linked records, renderVirtualCriteria, renderCriteriaParam label display
 - `references/worklist-internals.md` — getSearchQueryComponents/getPrimaryKey/getParamsQuery for building batch SQL against a worklist filter without paging
 - `references/view-marquee.md` — marqueeAppend (visit-bound), setMarqueeContextCreated/Imported helpers, the cerb-peek-trigger binding gotcha
 - `references/queue-system.md` — Extension_QueueConsumer, publish() shutdown semantics, GET_LOCK exactly-once completion hook, INSERT...SELECT bulk producer pattern, queue_job_chunk staging
+- `references/migration-patch.md` — patch conventions: platform vs feature patches, idempotency, **prefer raw `$db` SQL over `DAO_` CRUD** (events/validation/drift) with the import-helper exceptions, **writing blobs to storage from a patch**, reimporting automations/packages
+- `references/record-changeset.md` — `record_changeset` field version history: `DAO_RecordChangeset::create`, the **superuser-only diff viewer** (usable as an admin-only blob store), and the **database storage engine table format** (`storage_<namespace>`, raw chunked blobs) incl. hand-writing a changeset in pure SQL from a patch
+- `references/support-center.md` — Support Center portal: **no-browser-editable-Smarty policy** (Twig=untrusted, Smarty=chrome), `DAO_CommunityToolProperty` per-portal settings, config-tab render/save, `usermeet.sc.controller` endpoints, `parseMarkdown`, and the portal-readable-by-all-workers ACL gotcha
 - `references/rerun-patch.md` — how to force a database patch to re-run in development
 - `references/metrics.md` — registering and incrementing metrics
 - `references/database-schema.md` — canonical schema reference (`cerb.schema.kata`), column name lookups, common table timestamp columns
