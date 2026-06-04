@@ -41,3 +41,43 @@ The `params` field on a custom_field record is a JSON-encoded object with type-s
 | Type | Param | Description |
 |---|---|---|
 | `T` (multi-line text) | `format` | `markdown` to enable Markdown rendering |
+
+## List custom fields (type `M`)
+
+List CFs hold multiple string values per record. A few important properties to keep in mind:
+
+**Read shape**: With `record_expand: customfields`, a list CF appears as a flat array of strings under its URI:
+
+```
+{{ssl_cert.letsEncrypt_challengeTokens}}  → ["example.com:abc", "www.example.com:def"]
+```
+
+Iterate or `|filter` directly.
+
+**Write shape**: Accept either an array (preferred for full replacement) or a single string. Delta updates prefix entries with `-` to remove:
+
+```
+record.update:
+  inputs:
+    fields:
+      colors:
+        - red
+        - blue
+      # ...or to delta-edit:
+      # colors: ['-red', 'green']  → remove red, add green
+```
+
+**Gotchas — list CFs are sets, not sequences:**
+
+1. **Order is not preserved.** The DAO reads values from `custom_field_stringvalue` with no `ORDER BY` clause. Order on read happens to often match insertion in practice but is not guaranteed across UI re-saves, replication, index rebuilds, or server restarts. **Do not rely on list CF order matching some parallel ordered field** (e.g. you cannot store challenge tokens in the same order as `name` + `alternativeNames` and index by position).
+
+2. **Duplicate values collapse.** Internal storage uses the value itself as the array key (`$ptr[$field_id][$field_value] = $field_value`), so two identical entries silently merge into one. If you need to allow duplicate underlying data, encode something distinguishing into each entry (e.g. `domain:token` instead of bare `token`).
+
+3. **Lookups are by content, not position.** Match entries by filtering on a prefix or substring rather than indexing. Idiomatic pattern:
+
+   ```
+   set:
+     matches@list: {{my_list_cf|filter(v => v starts with key ~ ':')|join("\n")}}
+   ```
+
+If you genuinely need an ordered collection of records, use linked records (a separate record type with a `pos` field) rather than a list CF.
