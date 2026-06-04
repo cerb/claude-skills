@@ -205,6 +205,31 @@ data@text,json:
   {"key": "value"}
 ```
 
+### Storing Twig arrays in `set:`
+
+Annotations parse *text*. When the right-hand side of a `set:` is a Twig expression that produces an array (e.g. from `|filter`, `|map`, `|values`, or a `customfields`-expanded list CF), the annotation must match what the rendered text actually looks like:
+
+- **`@json`** requires the text to already be JSON-encoded. For Twig array values, pipe through `|json_encode` first:
+  ```
+  set:
+    tokens@json: {{some_array|json_encode}}
+  ```
+  Writing `tokens@json: {{some_array}}` without `|json_encode` is broken — Twig stringifies the array (often as `Array`) and `@json` fails to parse it. `@json` is the most general option and handles nested objects, mixed types, and strings containing newlines or commas.
+
+- **`@list`** is the simplest annotation for a flat list of strings with no embedded newlines:
+  ```
+  set:
+    tokens@list: {{some_array|join("\n")}}
+  ```
+
+- **`@csv`** suits short flat lists of strings with no embedded commas:
+  ```
+  set:
+    tags@csv: {{some_array|join(",")}}
+  ```
+
+Pick the lightest annotation that fits: `@list`/`@csv` for plain string lists, `@json` for anything richer.
+
 ---
 
 ## Scripting
