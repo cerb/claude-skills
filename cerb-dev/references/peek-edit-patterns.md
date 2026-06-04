@@ -116,6 +116,29 @@ $(function() {
 - Use `.cerb-hidden` (not `style="display:none"`) for the initially hidden body — consistent with platform conventions and toggled cleanly with `.toggleClass('cerb-hidden', condition)`.
 - Only show create/import fieldsets when `$record->id == 0` (new record); on edit, show only the current state.
 
+## Saving the Avatar from peek_edit
+
+The peek template wires the chooser button:
+
+```smarty
+<img class="cerb-avatar" src="{devblocks_url}c=avatars&context=my_record&context_id={$model->id}{/devblocks_url}?v={$model->updated_at}" style="height:50px;width:50px;">
+<button type="button" class="cerb-avatar-chooser" data-context="{CerberusContexts::CONTEXT_MY_RECORD}" data-context-id="{$model->id}">{'common.edit'|devblocks_translate|capitalize}</button>
+<input type="hidden" name="avatar_image">
+
+{* in popup_open *}
+ajax.chooserAvatar($popup.find('button.cerb-avatar-chooser'), $popup.find('img.cerb-avatar'));
+```
+
+…but **the template wiring alone doesn't persist anything** — the chooser only stuffs a data URL into the hidden `avatar_image` input. The profile action must read it and save:
+
+```php
+// In _profileAction_savePeekJson, after the record exists and params are set
+$avatar_image = DevblocksPlatform::importGPC($_POST['avatar_image'] ?? null, 'string', '');
+DAO_ContextAvatar::upsertWithImage(CerberusContexts::CONTEXT_MY_RECORD, $id, $avatar_image);
+```
+
+Empty string = no change; data URL = replace; sentinel = remove. Verify this call exists when adding a `<button class="cerb-avatar-chooser">` to a new peek — easy to forget and silently no-op.
+
 ## Space-Delimited Value Lists (OAuth-Style)
 
 For fields that store a set of string tokens (e.g., access scopes, feature flags), a space-delimited string is simple and interoperable:
