@@ -182,3 +182,23 @@ Extend `Extension_SearchIndex` and implement:
     <class><file>api/App.php</file><name>SearchIndex_MyBackend</name></class>
 </extension>
 ```
+
+### Creating a `search_index` record (in a migration)
+
+A search index is a **record** in the `search_index` table (not a `plugin.xml`
+extension), so it's created/seeded from a migration patch. Key columns:
+
+| Column | Notes |
+| --- | --- |
+| `name` | Human label (e.g. `Knowledgebase Articles`). |
+| `uri` | Stable slug. **May only contain lowercase letters, numbers, and dots** (`DevblocksPlatform::strAlphaNum($uri, '.')`, max 128 chars, unique). **No underscores, uppercase, or spaces** — e.g. use `kb.articles`, not `kb_articles`. Validator: `DAO_SearchIndex::getFields()` in `features/cerberusweb.core/api/dao/search_index.php`. |
+| `record_type` | The target context **alias** (e.g. `kb_article`), matched by `DAO_SearchIndex::getByRecordType()`. |
+| `record_filter` | The quick-search field key auto-injected on worklists by `_appendFieldsFromRecordTypeSearchIndexes()` (e.g. `record_filter='content'` → `content:` filter). |
+| `extension_id` | Backend, e.g. `cerb.search.index.fulltext`. |
+| `extension_params_json` | `{"record_query": "...", "content": "{{token templates}}"}`. |
+
+When seeding from a patch, guard for idempotency on `record_type` + `record_filter`
+(**not** `uri`), and bump the patch revision to re-run. See `migration-patch.md`
+and `rerun-patch.md`. The KB conversion block in `patches/11.x/11.2.0.php` is a
+working reference (creates the index, checkpoints `devblocks_registry`, enqueues a
+backfill reindex job on the `cerb.search.index` queue).
