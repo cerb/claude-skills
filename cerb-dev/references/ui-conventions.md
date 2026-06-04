@@ -104,8 +104,8 @@ For rows of action buttons (download, print, copy, etc.), use `div.cerb-code-edi
 
 ```html
 <div class="cerb-code-editor-toolbar">
-    <button type="button" class="cerb-code-editor-toolbar-button" title="Download"><span class="glyphicons glyphicons-download"></span></button>
-    <button type="button" class="cerb-code-editor-toolbar-button" title="Print"><span class="glyphicons glyphicons-print"></span></button>
+    <button type="button" class="cerb-code-editor-toolbar-button" title="Download"><span class="cerb-icons cerb-icon-cloud-download"></span></button>
+    <button type="button" class="cerb-code-editor-toolbar-button" title="Print"><span class="cerb-icons cerb-icon-print"></span></button>
 </div>
 ```
 
@@ -120,8 +120,8 @@ In worklist view templates (`templates/records/types/{type}/view.tpl` and equiva
 ```smarty
 {$view_toolbar = $view->getToolbar()}
 {include file="devblocks:cerberusweb.core::internal/views/view_toolbar.tpl" view_toolbar=$view_toolbar}
-{if !$view_toolbar['explore']}<button type="button" class="action-always-show action-explore"><span class="glyphicons glyphicons-compass"></span> {'common.explore'|devblocks_translate|lower}</button>{/if}
-{if $active_worker->hasPriv("contexts.{$view_context}.update.bulk")}<button data-cerb-worklist-action-bulk="<module>" type="button" class="action-always-show action-bulkupdate"><span class="glyphicons glyphicons-folder-closed"></span> {'common.bulk_update'|devblocks_translate|lower}</button>{/if}
+{if !$view_toolbar['explore']}<button type="button" class="action-always-show action-explore"><span class="cerb-icons cerb-icon-compass"></span> {'common.explore'|devblocks_translate|lower}</button>{/if}
+{if $active_worker->hasPriv("contexts.{$view_context}.update.bulk")}<button data-cerb-worklist-action-bulk="<module>" type="button" class="action-always-show action-bulkupdate"><span class="cerb-icons cerb-icon-folder"></span> {'common.bulk_update'|devblocks_translate|lower}</button>{/if}
 ```
 
 Explore is the more common action and comes first; bulk update is more destructive/scoped and sits at the end. Mirror the existing ordering in `tickets/view.tpl`, `tasks/view.tpl`, `contacts/addresses/view.tpl`, `mail/queue/view.tpl`, etc. Don't place the bulk button before explore.

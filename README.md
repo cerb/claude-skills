@@ -19,6 +19,7 @@ git clone https://github.com/cerb/claude-skills.git /tmp/cerb-skills
 cp -r /tmp/cerb-skills/cerb-automations .claude/skills/cerb-automations
 cp -r /tmp/cerb-skills/cerb-dev .claude/skills/cerb-dev
 cp -r /tmp/cerb-skills/cerb-search .claude/skills/cerb-search
+ln -s ~/claude-skills/cerb-icons .claude/skills/cerb-icons
 ```
 
 Restart Claude Code or start a new session. The skills will be automatically discovered.
@@ -137,6 +138,22 @@ Construct Cerb search queries for any record type.
 - `search-queries.md` — complete search query syntax, all operators, and filter fields for every record type
 
 > **Note:** `cerb-search` shares its reference data with `cerb-automations`. If installing skills individually rather than cloning the full repo, install both together to avoid duplication drift.
+
+### cerb-icons
+
+Design SVG icons for Cerb's custom SCSS icon set.
+
+**Trigger:** `/cerb-icons` or when the user asks to create, edit, or add icons to the Cerb icon map.
+
+**Capabilities:**
+
+- Author icon geometry for Cerb's `mask-image`-based icon system, where geometry (opaque shape vs. transparent gap) carries all visual distinction — color comes from the button's CSS text color
+- Match Cerb's icon style families (line, filled-solid, compass, punched-disc) and the 24×24 viewBox / stroke conventions
+- Add icons to both `cerb-icons.scss` and `reference_icons.php` (kept alphabetized) and rebuild the CSS
+
+**Reference files included:**
+
+- `icon-design.md` — design reference: common techniques, icon-by-icon notes, and style-anchor samples
 
 ## Cerb Documentation
 
