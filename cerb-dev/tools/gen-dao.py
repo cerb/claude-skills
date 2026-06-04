@@ -1198,11 +1198,11 @@ def gen_peek_edit_tpl(table: str, plugin_id: str) -> str:
 
     <div class="buttons" style="margin-top:10px;">
     \t{{if $model->id}}
-    \t\t<button type="button" class="save"><span class="glyphicons glyphicons-circle-ok"></span> {{'common.save_changes'|devblocks_translate|capitalize}}</button>
-    \t\t<button type="button" class="save-continue"><span class="glyphicons glyphicons-circle-arrow-right"></span> {{'common.save_and_continue'|devblocks_translate|capitalize}}</button>
-    \t\t{{if $active_worker->hasPriv("contexts.{{$peek_context}}.delete")}}<button type="button" class="delete-prompt"><span class="glyphicons glyphicons-circle-remove"></span> {{'common.delete'|devblocks_translate|capitalize}}</button>{{/if}}
+    \t\t<button type="button" class="save"><span class="cerb-icons cerb-icon-circle-ok"></span> {{'common.save_changes'|devblocks_translate|capitalize}}</button>
+    \t\t<button type="button" class="save-continue"><span class="cerb-icons cerb-icon-circle-arrow-right"></span> {{'common.save_and_continue'|devblocks_translate|capitalize}}</button>
+    \t\t{{if $active_worker->hasPriv("contexts.{{$peek_context}}.delete")}}<button type="button" class="delete-prompt"><span class="cerb-icons cerb-icon-circle-remove"></span> {{'common.delete'|devblocks_translate|capitalize}}</button>{{/if}}
     \t{{else}}
-    \t\t<button type="button" class="save"><span class="glyphicons glyphicons-circle-plus"></span> {{'common.create'|devblocks_translate|capitalize}}</button>
+    \t\t<button type="button" class="save"><span class="cerb-icons cerb-icon-circle-plus"></span> {{'common.create'|devblocks_translate|capitalize}}</button>
     \t{{/if}}
     </div>
 
@@ -1255,13 +1255,12 @@ def gen_view_tpl(table: str, plugin_id: str, acl_write: str = 'all') -> str:
     \t<tr>
     \t\t<td nowrap="nowrap"><span class="title">{{$view->name}}</span></td>
     \t\t<td nowrap="nowrap" align="right" class="title-toolbar">
-    \t\t\t{add_button_guard}<a title="{{'common.add'|devblocks_translate|capitalize}}" class="minimal peek cerb-peek-trigger" data-context="{{$view_context}}" data-context-id="0"><span class="glyphicons glyphicons-circle-plus"></span></a>{{/if}}
-    \t\t\t<a data-cerb-worklist-icon-search title="{{'common.search'|devblocks_translate|capitalize}}" class="minimal"><span class="glyphicons glyphicons-search"></span></a>
-    \t\t\t<a data-cerb-worklist-icon-customize title="{{'common.customize'|devblocks_translate|capitalize}}" class="minimal"><span class="glyphicons glyphicons-cogwheel"></span></a>
-    \t\t\t<a data-cerb-worklist-icon-subtotals title="{{'common.subtotals'|devblocks_translate|capitalize}}" class="minimal"><span class="glyphicons glyphicons-signal"></span></a>
-    \t\t\t{{if $active_worker->hasPriv("contexts.{{$view_context}}.export")}}<a data-cerb-worklist-icon-export title="{{'common.export'|devblocks_translate|capitalize}}" class="minimal"><span class="glyphicons glyphicons-file-export"></span></a>{{/if}}
-    \t\t\t<a data-cerb-worklist-icon-copy title="{{'common.copy'|devblocks_translate|capitalize}}"><span class="glyphicons glyphicons-duplicate"></span></a>
-    \t\t\t<a data-cerb-worklist-icon-refresh title="{{'common.refresh'|devblocks_translate|capitalize}}" class="minimal"><span class="glyphicons glyphicons-refresh"></span></a>
+    \t\t\t{add_button_guard}<a title="{{'common.add'|devblocks_translate|capitalize}}" class="minimal peek cerb-peek-trigger" data-context="{{$view_context}}" data-context-id="0"><span class="cerb-icons cerb-icon-circle-plus"></span></a>{{/if}}
+    \t\t\t<a data-cerb-worklist-icon-search title="{{'common.search'|devblocks_translate|capitalize}}" class="minimal"><span class="cerb-icons cerb-icon-search"></span></a>
+    \t\t\t<a data-cerb-worklist-icon-customize title="{{'common.customize'|devblocks_translate|capitalize}}" class="minimal"><span class="cerb-icons cerb-icon-gear"></span></a>
+    \t\t\t<a data-cerb-worklist-icon-subtotals title="{{'common.subtotals'|devblocks_translate|capitalize}}" class="minimal"><span class="cerb-icons cerb-icon-signal"></span></a>
+    \t\t\t{{if $active_worker->hasPriv("contexts.{{$view_context}}.export")}}<a data-cerb-worklist-icon-export title="{{'common.export'|devblocks_translate|capitalize}}" class="minimal"><span class="cerb-icons cerb-icon-file-export"></span></a>{{/if}}
+    \t\t\t<a data-cerb-worklist-icon-refresh title="{{'common.refresh'|devblocks_translate|capitalize}}" class="minimal"><span class="cerb-icons cerb-icon-refresh"></span></a>
     \t\t\t<input type="checkbox" class="select-all">
     \t\t</td>
     \t</tr>
@@ -1284,7 +1283,7 @@ def gen_view_tpl(table: str, plugin_id: str, acl_write: str = 'all') -> str:
     \t<tr>
     \t\t{{if !array_key_exists('disable_watchers', $view->options) || !$view->options.disable_watchers}}
     \t\t<th class="no-sort" style="text-align:center;width:40px;padding-left:0;padding-right:0;" title="{{'common.watchers'|devblocks_translate|capitalize}}">
-    \t\t\t<span class="glyphicons glyphicons-eye-open"></span>
+    \t\t\t<span class="cerb-icons cerb-icon-eye-open"></span>
     \t\t</th>
     \t\t{{/if}}
     \t\t{{foreach from=$view->view_columns item=header name=headers}}
@@ -1295,7 +1294,7 @@ def gen_view_tpl(table: str, plugin_id: str, acl_write: str = 'all') -> str:
     \t\t\t\t<a style="text-decoration:none;">{{$view_fields.$header->db_label|capitalize}}</a>
     \t\t\t{{/if}}
     \t\t\t{{if $header==$view->renderSortBy}}
-    \t\t\t\t<span class="glyphicons {{if $view->renderSortAsc}}glyphicons-sort-by-attributes{{else}}glyphicons-sort-by-attributes-alt{{/if}}" style="font-size:14px;{{if array_key_exists('disable_sorting', $view->options) && $view->options.disable_sorting}}color:rgb(80,80,80);{{else}}color:rgb(39,123,213);{{/if}}"></span>
+    \t\t\t\t<span class="cerb-icons {{if $view->renderSortAsc}}cerb-icon-sort-asc{{else}}cerb-icon-sort-desc{{/if}}" style="font-size:14px;{{if array_key_exists('disable_sorting', $view->options) && $view->options.disable_sorting}}color:rgb(80,80,80);{{else}}color:rgb(39,123,213);{{/if}}"></span>
     \t\t\t{{/if}}
     \t\t\t</th>
     \t\t{{/foreach}}
@@ -1322,7 +1321,7 @@ def gen_view_tpl(table: str, plugin_id: str, acl_write: str = 'all') -> str:
     \t\t\t<td>
     \t\t\t\t<input type="checkbox" name="row_id[]" value="{{$result.{fp}_id}}" style="display:none;">
     \t\t\t\t<a href="{{devblocks_url}}c=profiles&type={table}&id={{$result.{fp}_id}}-{{$result.{fp}_name|devblocks_permalink}}{{/devblocks_url}}" class="subject">{{$result.{fp}_name}}</a>
-    \t\t\t\t<button type="button" class="peek cerb-peek-trigger" data-context="{{$view_context}}" data-context-id="{{$result.{fp}_id}}"><span class="glyphicons glyphicons-new-window-alt"></span></button>
+    \t\t\t\t<button type="button" class="peek cerb-peek-trigger" data-context="{{$view_context}}" data-context-id="{{$result.{fp}_id}}"><span class="cerb-icons cerb-icon-new-window"></span></button>
     \t\t\t</td>
     \t\t\t{{elseif in_array($column, ["{fp}_created_at", "{fp}_updated_at"])}}
     \t\t\t\t<td>
@@ -1346,7 +1345,7 @@ def gen_view_tpl(table: str, plugin_id: str, acl_write: str = 'all') -> str:
     \t<div style="float:left;" id="{{$view->id}}_actions">
     \t\t{{$view_toolbar = $view->getToolbar()}}
     \t\t{{include file="devblocks:cerberusweb.core::internal/views/view_toolbar.tpl" view_toolbar=$view_toolbar}}
-    \t\t{{if !$view_toolbar['explore']}}<button type="button" class="action-always-show action-explore"><span class="glyphicons glyphicons-compass"></span> {{'common.explore'|devblocks_translate|lower}}</button>{{/if}}
+    \t\t{{if !$view_toolbar['explore']}}<button type="button" class="action-always-show action-explore"><span class="cerb-icons cerb-icon-compass"></span> {{'common.explore'|devblocks_translate|lower}}</button>{{/if}}
     \t</div>
     </div>
     {{/if}}
