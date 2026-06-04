@@ -8,17 +8,18 @@ Skills are installed by placing them in the `.claude/skills/` directory of your 
 
 ### Claude Code (CLI / Web)
 
-From your project root:
+Clone the repository once to a shared location, then symlink the skills you want into each project. This lets multiple projects share the same set of skills — pull once and every project is up to date.
 
 ```bash
-# Clone into your project's skills directory
-git clone https://github.com/cerb/claude-skills.git .claude/skills
+# Clone the repository once to a shared location
+git clone https://github.com/cerb/claude-skills.git ~/claude-skills
 
-# Or, if .claude/skills/ already exists, clone and copy the skill directories
-git clone https://github.com/cerb/claude-skills.git /tmp/cerb-skills
-cp -r /tmp/cerb-skills/cerb-automations .claude/skills/cerb-automations
-cp -r /tmp/cerb-skills/cerb-dev .claude/skills/cerb-dev
-cp -r /tmp/cerb-skills/cerb-search .claude/skills/cerb-search
+# From your project root, symlink the skill directories you want
+mkdir -p .claude/skills
+ln -s ~/claude-skills/cerb-automations .claude/skills/cerb-automations
+ln -s ~/claude-skills/cerb-dev .claude/skills/cerb-dev
+ln -s ~/claude-skills/cerb-search .claude/skills/cerb-search
+ln -s ~/claude-skills/cerb-docs .claude/skills/cerb-docs
 ln -s ~/claude-skills/cerb-icons .claude/skills/cerb-icons
 ```
 
