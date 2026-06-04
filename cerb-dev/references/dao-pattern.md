@@ -28,6 +28,29 @@ Associated classes per record type:
 - `View_RecordType` — worklist view (`C4_AbstractView`)
 - `Context_RecordType` — record type context (permissions, cards, URLs)
 
+## Standard `getContext()` Token Values
+
+`Context_X::getContext()` populates `$token_values` for placeholder expansion, mention chips, card render, and the framework's general "give me this record" lookup. Always include these alongside whatever record-specific fields you add:
+
+```php
+$url_writer = DevblocksPlatform::services()->url();
+
+$token_values['_loaded'] = true;
+$token_values['_label'] = $record->name;
+$token_values['_image_url'] = $url_writer->writeNoProxy(
+    sprintf('c=avatars&ctx=%s&id=%d', 'my_record', $record->id), true
+) . '?v=' . $record->updated_at;
+$token_values['id'] = $record->id;
+$token_values['name'] = $record->name;
+$token_values['updated_at'] = $record->updated_at;
+// ...record-specific fields...
+$token_values['record_url'] = $url_writer->writeNoProxy(
+    sprintf("c=profiles&type=my_record&id=%d-%s", $record->id, DevblocksPlatform::strToPermalink($record->name)), true
+);
+```
+
+`_image_url` is the canonical handle for the record's avatar — without it, downstream UI that wants to show the record's image has nothing to render. See `references/avatars.md` for the full avatar system (plugin.xml `avatars` option, peek-save `upsertWithImage` call, monogram fallback).
+
 ## Database Operations
 
 ```php
