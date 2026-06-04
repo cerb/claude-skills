@@ -126,6 +126,31 @@ In worklist view templates (`templates/records/types/{type}/view.tpl` and equiva
 
 Explore is the more common action and comes first; bulk update is more destructive/scoped and sits at the end. Mirror the existing ordering in `tickets/view.tpl`, `tasks/view.tpl`, `contacts/addresses/view.tpl`, `mail/queue/view.tpl`, etc. Don't place the bulk button before explore.
 
+## Worklist Inline Toggle / Disabling Row Selection
+
+**Gotcha:** the shared `internal/views/view_common_jquery_ui.tpl` binds a TBODY click handler that grabs
+`input:checkbox:first` in the row to drive row-selection. If you put an inline control checkbox in the row
+(e.g. a `.cerb-toggle-switch`), it becomes that first checkbox, so **clicking the row hijacks your toggle**.
+
+To make a worklist toggle-only with no row selection at all:
+- Remove the `.select-all` checkbox from the toolbar and the hidden `<input name="row_id[]">` from each row.
+- Drop `cursor:pointer` from `<tbody>`.
+- In the view's own `$(function(){})` — which runs *after* the included common JS, since the include
+  precedes it in the template — unbind the selection/hover handlers:
+  ```js
+  $frm.find('table.worklistBody tbody').off('click').off('mouseenter mouseleave');
+  ```
+
+**Inline AJAX toggle:** POST via `genericAjaxPost(formData, '', '', cb)` to a page-section
+`handleActionForPage` action; flip the switch optimistically, then revert it and call
+`Devblocks.createAlertError(...)` when `json.status === false`.
+
+**Forced column on the *right*** of the 4-row rowspan worklist layout (the watchers column in
+`tickets/view.tpl` is the canonical *left*-side example): put the `<th>` last in the header row; in the
+first body `<tr>`, after the flush-left icon cell, add a spacer
+`<td colspan="{$smarty.foreach.headers.total}"></td>` then the `rowspan="4"` control cell, so it lands in
+the far-right grid column. See `configuration/section/plugins/view.tpl`.
+
 ## Silent Actions — Feedback Notifications
 
 When an action has no visible result (copy to clipboard, silent save, etc.), always show a brief notification so the user knows it worked. Use `Devblocks.createAlert()`:
