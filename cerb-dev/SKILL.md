@@ -32,6 +32,7 @@ Quick summary:
 ## Common Commands
 
 ```bash
+composer build-css            # Rebuild cerb.css from SCSS sources
 composer cache-clear          # Clear template/cache files
 composer test                 # Run platform tests
 cd install/docker && docker compose up   # Start local dev environment

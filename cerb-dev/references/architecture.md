@@ -94,9 +94,9 @@ Uses Smarty 4.x. Common paths under `features/cerberusweb.core/templates/`:
 
 - Source: `install/extras/developers/css/cerb.css/cerb.scss`
 - Partials: `install/extras/developers/css/cerb.css/layout/*.scss`
-- Output: `features/cerberusweb.core/resources/css/cerb.css`
+- Output: `features/cerberusweb.core/resources/css/cerb.css` (**generated — never hand-edit**)
 
-Compile: `composer cache-clear` rebuilds assets, or run the SCSS compiler directly.
+Compile: `composer build-css` (then `composer cache-clear` so cache-busted asset URLs refresh). See `references/scss-build.md` for partial layout, the inline-SVG icon mixin, and the button-reset pattern that survives Cerb's base `BUTTON:hover` color override.
 
 ## Common PHP Utilities
 
