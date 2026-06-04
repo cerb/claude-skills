@@ -82,6 +82,10 @@ Create and modify Cerb automations, workflows, and event listeners using KATA sy
 - `guide-record-changed.md` — building `record.changed` event automations
 - `guide-custom-fields.md` — working with custom fields in automations
 
+**Agents included:**
+
+- `cerb-search-queries.md` — specialist for constructing Cerb search queries
+
 ---
 
 ### cerb-dev
@@ -102,20 +106,60 @@ Work on Cerb core and plugin code using the Devblocks PHP framework.
 
 **Reference files included:**
 
+*Architecture & framework*
+
 - `architecture.md` — directory layout, plugin structure, naming conventions, context system, extension points, template paths
-- `dao-pattern.md` — DAO class structure, database operations, events/deltas, form handling, migration patch authoring
-- `extensions.md` — card widget, cron job, and search index extension patterns
 - `plugin-xml.md` — plugin.xml manifest structure, extension points, class loaders
+- `extensions.md` — card widget, cron job, and search index extension patterns
+- `caching-patterns.md` — Devblocks cache layer usage and invalidation
+- `security.md` — security conventions (output escaping, response headers, CSRF, privileges)
+- `validation.md` — field validation rules and error handling
+
+*Records, DAOs & database*
+
+- `dao-pattern.md` — DAO class structure, database operations, events/deltas, form handling, migration patch authoring
 - `new-record-type.md` — complete step-by-step guide for creating a new record type
 - `adding-dao-fields.md` — adding fields to an existing DAO/model/context
-- `peek-edit-patterns.md` — Smarty gotchas, checkbox groups, dynamic rows, flat lookup sets
-- `worklist-subtotals.md` — adding subtotals to View_ classes
-- `metrics.md` — registering and incrementing metrics
+- `migration-patch.md` — writing database migration patches
 - `rerun-patch.md` — forcing a database patch to re-run in development
+- `database-schema.md` — database schema reference
+- `baseline-sql.md` — rebuilding the installer baseline SQL
+- `record-changeset.md` — record changesets (field version history) and the DB storage engine
+- `activity-log.md` — activity log reference
+
+*Worklists & UI*
+
+- `worklist-internals.md` — worklist (View_) internals reference
+- `worklist-subtotals.md` — adding subtotals to View_ classes
+- `worklist-quick-search.md` — quick search and virtual deep-search fields
+- `view-marquee.md` — view marquee reference
+- `peek-edit-patterns.md` — Smarty gotchas, checkbox groups, dynamic rows, flat lookup sets
+- `profile-widgets.md` — profile widget reference
+- `ui-conventions.md` — toolbar ordering, template gotchas, binding conventions
+- `cerb-ui.md` — the cerb-ui design system
+- `avatars.md` — context avatars
+- `scss-build.md` — source layout and SCSS build process
+
+*Automations & bots*
+
+- `automation-triggers.md` — automation triggers and `record.bulkUpdate` bulk wiring
+- `automation-commands.md` — automation commands and `api.command:` sub-commands
+- `automation-dict.md` — automation dictionary (Dict) architecture
+- `bot-behaviors.md` — bot behaviors (Virtual Attendants)
+- `queue-system.md` — queue system reference
+- `metrics.md` — registering and incrementing metrics
+
+*Email, auth & portals*
+
+- `outbound-email-model.md` — outbound email model (`Model_DevblocksOutboundEmail`)
+- `login-flow.md` — login flow internals
+- `support-center.md` — Support Center portal plumbing
 
 **Tools included:**
 
 - `tools/gen-dao.py` — Python generator that writes all PHP and Smarty boilerplate for a new record type from a table name and field list
+- `tools/dump-baseline-tables.sh` — dump installer baseline table schemas
+- `tools/dump-baseline-rows.sh` — dump installer baseline table rows
 
 ---
 
@@ -139,6 +183,30 @@ Construct Cerb search queries for any record type.
 - `search-queries.md` — complete search query syntax, all operators, and filter fields for every record type
 
 > **Note:** `cerb-search` shares its reference data with `cerb-automations`. If installing skills individually rather than cloning the full repo, install both together to avoid duplication drift.
+
+---
+
+### cerb-docs
+
+Look up Cerb documentation locally, without web access.
+
+**Trigger:** `/cerb-docs` or when the user asks about Cerb features, configuration, automations, APIs, integrations, or any Cerb topic.
+
+**Capabilities:**
+
+- Search 1000+ Cerb documentation pages stored as local Markdown files (grep the references directory, then read matches)
+- Cover the full docs tree: guides, API endpoints/libraries, automation commands/triggers/events, record types, scripting functions/filters, data queries, setup, release notes, tips, workflows, and integration solutions
+- Propose new or improved documentation via GitHub issues when a question can't be answered from the local references
+
+**Reference files included:**
+
+- `references/` — the complete Cerb documentation set as Markdown, organized to mirror the docs site (`docs/`, `guides/`, `releases/`, `solutions/`, `tips/`, `workflows/`, etc.), each file with YAML frontmatter (`id`, `title`, `url`, `summary`, `tags`)
+
+**Tools included:**
+
+- `tools/fetch-docs.py` — fetch/refresh documentation pages from the Cerb docs source
+
+---
 
 ### cerb-icons
 
