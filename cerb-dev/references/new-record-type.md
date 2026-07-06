@@ -205,6 +205,14 @@ $validation
 ### In `SearchFields_*`:
 The `getWhereSQL()` switch may need custom cases for non-standard filter types.
 
+**Column type hints (`_getFields()`):** the 5th `DevblocksSearchField` arg is the column type — it drives the type-hint
+icon in the worklist "Customize columns" UI (via `C4_AbstractView::getColumnDisplayMeta()`). The generator infers it
+from the SQL type (id/`*_id`/numeric → `TYPE_NUMBER`, varchar → `TYPE_SINGLE_LINE`, `*_at`/`*_date` → `TYPE_DATE`,
+`tinyint(1)`/`is_*`/`has_*` → `TYPE_CHECKBOX`, `text` → `TYPE_MULTI_LINE`, `*_json` blobs → `null`). **Never leave a
+real column's type `null`** — that renders a meaningless gray tag. After generating, fix any field the heuristic got
+wrong so it matches the same field's type in `Context_*::getContext()`'s `$token_types` (the source of truth); leave
+`_json` blobs and virtual (`'*'`) fields `null`.
+
 For **linked record fields** (e.g., `queue_id`, `worker_id`, `group_id`), add virtual deep-search constants and handle them in `getWhereSQL()`. See `references/worklist-quick-search.md` for the full pattern.
 
 ### In `View_*::getQuickSearchFields()`:
