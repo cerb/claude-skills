@@ -1610,6 +1610,12 @@ Custom logic for next record in dynamic explore sets.
 
 **Await:explore: output:** `title`, `url`, `label`, `toolbar` (interaction definitions).
 
+The explore chrome is a top-window banner + toolbar wrapping the target `url` in an **iframe**. `explore_page` is an opaque token *your* automation interprets — a toolbar button returns it (via `cerb.interaction.echo` or its own automation) and the explorer re-submits, resuming the paused `await:explore:`. Wrap the render + `await` in a `while:` loop so each resume re-renders (see the `await:` resume-after-suspension note above; `cerb.quickstart` and `cerb.auto_dispatcher` are the reference workflows).
+
+**Explore toolbar buttons are full `interaction.worker` automations — they can `await:form:`.** A button's `uri:` can point at any interaction; when that interaction pauses in `await:form:`, the form renders as a popup over the explorer chrome, and control returns to the button when it concludes. This is how a button runs a mini-flow (e.g. a confirm/reason prompt, or per-step help) without leaving explore mode. If the button's interaction returns `explore_page`, the explorer pages; if not, it stays put. (`cerb.auto_dispatcher`'s `Next` and `cerb.quickstart`'s `Help` both do this.)
+
+**A returned `callout:` resolves its `selector` against the top window, NOT the iframe.** `Devblocks.interactionWorkerPostActions` runs `$(selector)` in the document that invoked the interaction — for an explore toolbar that's the banner chrome, so a selector meant for the *page* (inside the iframe) won't match. To point POIs at page content, the explorer `done` handler re-runs the callout through the **frame's own `Devblocks`** (`$explorerFrame[0].contentWindow.Devblocks.interactionWorkerPostActions({return:{callout}})`), which resolves the selector in that document and positions the tooltip in native frame coordinates. So a step can `return: callout: { selector, message }` and it anchors inside the tour page — selectors are per-page (depend on each page's DOM). (The shared handler skips a callout whose selector matches nothing, so the top-window pass is a safe no-op.)
+
 ---
 
 ## Events
