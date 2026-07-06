@@ -83,3 +83,4 @@ These skills are always installed alongside this one:
 - `references/guide-drafts.md` -- creating draft records to send email (transactional, compose, reply, forward)
 - `references/guide-record-changed.md` -- record.changed event automations (filtering, detecting field changes, complete workflow example)
 - `references/guide-custom-fields.md` -- setting and reading custom field values in automations
+- `references/guide-legacy-interactions.md` -- legacy behavior worker interactions (form + chat prompt actions), packaging legacy behaviors, `{{{uid.x}}}` cross-refs, binding to the global menu (chat registrar chain, form toolbar section + behavior URI)
