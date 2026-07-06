@@ -269,6 +269,7 @@ case SearchFields_MyRecord::VIRTUAL_STATUS:
 | Filter by name/search across linked record (`queue:(name:foo)`) | `TYPE_VIRTUAL` with `VIRTUAL_*_SEARCH` |
 | Boolean or timestamp field | `TYPE_CHECKBOX` / `TYPE_DATE` on the real column |
 | Fieldset membership | `TYPE_VIRTUAL` with `VIRTUAL_HAS_FIELDSET` (standard; included by generator) |
+| Parameterized metric/aggregate group (`activity:(runs:>100 duration.avg:>2s since:..)`) | `TYPE_VIRTUAL` + custom `case` parser + a `getMetricFilterMap()` series map (see "Parameterized metric filter" below) |
 
 For linked records that users interact with by name (queues, workers, groups, orgs), always expose **both**:
 - The ID field as `TYPE_NUMBER` with a chooser example (for programmatic / precise filtering)
@@ -287,3 +288,110 @@ Example — expose both for queue:
     'examples' => [['type' => 'chooser', 'context' => CerberusContexts::CONTEXT_QUEUE, 'q' => '']],
 ],
 ```
+
+## Parameterized metric filter (`usage:`/`activity:`/`records:`)
+
+A field that takes a **self-parsed `(...)` group** of metric thresholds + a date range, e.g.
+`usage:(runs:>100 duration.avg:>2s since:"-2 weeks")` — filter a worklist by its metric data. **The filter
+key is each worklist's own choice** (automations `usage:`, queues `activity:`, search indexes `records:`,
+…); the backend resolver in `DAO_MetricValue` is name-neutral and shared across **11 worklists** today.
+Resolution runs through the `metrics.subtotals` data query (one range aggregate per threshold → PHP compare
+→ AND-intersect → matching raw dimension values). See `metrics.md` and `worklist-sparklines.md`.
+
+### The series map — `SearchFields_X::getMetricFilterMap()` (single source of truth)
+
+One static method per worklist returns the threshold vocabulary; it is the **single source** consumed by
+the SQL filter, the parse-time validator, AND the autocomplete. Build each row with the helper
+`DAO_MetricValue::metricFilterSeries($metric, $type, $extra)` — **one row per series**, never per function:
+
+```php
+static function getMetricFilterMap() : array {
+    return [
+        'runs'     => DAO_MetricValue::metricFilterSeries('cerb.automation.invocations', 'counter'),
+        'errors'   => DAO_MetricValue::metricFilterSeries('cerb.automation.invocations', 'counter', ['query' => ['exit_state' => 'error']]),
+        'duration' => DAO_MetricValue::metricFilterSeries('cerb.automation.duration', 'counter', ['unit' => 'ms', 'default' => 'avg']),
+    ];
+}
+```
+
+- **`$type` (`counter`|`gauge`)** picks the valid aggregate set + default (`METRIC_FILTER_FUNCTIONS`):
+  counter → `[sum,count,avg,max,min]` (default **sum**); gauge → `[avg,max,min,count]` (default **avg**, no
+  `sum` — summing snapshots is meaningless). A bare `runs:` uses `functions[0]`; `runs.max:` selects another.
+- **`$extra['query']`** pins a *second* dimension while still grouping by the anchor dimension — this is how
+  `errors` slices `cerb.automation.invocations` by `exit_state=error`, and how queue `done`/`failed` slice by
+  `status_id`. The whole filter stays anchored to one grouping dimension.
+- **`$extra['unit'=>'ms']`** makes values parse as **durations** (`500ms`/`2s`/`5m`/`1h`/`1000d` → ms; a
+  bare number stays ms). A *timer counter* like `duration` (stored as a counter: `sum`=total runtime,
+  `avg`=mean) keeps the counter set but adds `'default'=>'avg'` so bare `duration:`=mean while `duration.sum:`
+  (total) survives.
+- **Function names are the `metrics.subtotals` ones** (`sum/count/avg/min/max`). There, `avg` =
+  `SUM(sum)/SUM(samples)` — the weighted/faceted average for the grouped dimension, and it matches the
+  sparkline's short legend labels. The verbose `faceted_average/faceted_min/faceted_max` exist **only** in
+  `metrics.timeseries` (sparklines), not subtotals — don't use them here.
+
+### The shared resolver (`DAO_MetricValue`)
+
+| method | when | returns |
+|---|---|---|
+| `getDimensionValuesByMetricQuery($inner, $map, $dimension, $tz?)` | SQL time (`getWhereSQL`) | `?array`: **null** = invalid filter, `[]` = matched nothing, `array` = matching raw dim values |
+| `validateMetricQuery($inner, $map, &$error)` | parse time (DB-free) | `bool`; on false sets `$error` with a human hint |
+| `getMetricFilterSubkeySuggestions($map)` | autocomplete | the in-parens `()` sub-key suggestions |
+
+All three delegate to the private `_parseMetricQuery` so SQL/validation/autocomplete can never disagree.
+**Invalid input fails loud, not silent**: any unknown series, stray/keyless token, unparseable value, or
+unknown `series.function` → `null` → `getWhereSQL` emits **`0=1`** (match nothing). Empty group / range-only
+is valid ("ran in range" = primary series `count > 0`); a legitimately-empty result (`errors:>0`, no errors)
+returns `[]` → `0=1` with **no** warning. Range defaults to all-time when no `since`/`until`.
+
+### Per-worklist wiring (the ~6 edits)
+
+1. **`SearchFields_X`**: `const VIRTUAL_USAGE='*_usage';` + a hidden `_getFields()` entry; `getMetricFilterMap()`; a `_getWhereSQLFrom…Filter` that calls the resolver.
+   ```php
+   // getWhereSQL() case — BOTH invalid paths return 0=1 (fail loud), not 1=1
+   case self::VIRTUAL_USAGE:
+       if($param->operator != DevblocksSearchCriteria::OPER_CUSTOM || !is_string($param->value)) return '0=1';
+       $matches = DAO_MetricValue::getDimensionValuesByMetricQuery($param->value, self::getMetricFilterMap(),
+           'automation_id', CerberusApplication::getActiveWorker()?->timezone ?: null);
+       if(is_null($matches)) return '0=1';                       // invalid criteria
+       $ids = array_filter(array_map('intval', $matches));
+       return $ids ? sprintf('%s IN (%s)', self::getPrimaryKey(), implode(',', $ids)) : '0=1';
+   ```
+2. **View `getParamFromQuickSearchFieldTokens`**: `case 'usage': return DevblocksSearchCriteria::getVirtualQuickSearchParamFromTokens($field, $tokens, SearchFields_X::VIRTUAL_USAGE);` (captures the `(...)` group as one `OPER_CUSTOM` raw string).
+3. **View `getQuickSearchMetricFilterMap($field_key)`** — override the base no-op to return the map for this field's key. **This one hook drives both the marquee hint and the autocomplete** (below), so no other autocomplete/validation code is needed:
+   ```php
+   function getQuickSearchMetricFilterMap(string $field_key) : ?array {
+       return $field_key == 'usage' ? SearchFields_X::getMetricFilterMap() : null;
+   }
+   ```
+4. **View `getQuickSearchFields`**: declare the field `TYPE_VIRTUAL` with `options.param_key` only — **no `examples`** (the `()` autocomplete supersedes them).
+5. **View ctor**: `addColumnsHidden([SearchFields_X::VIRTUAL_USAGE])` (search-only, never a column).
+6. **`renderVirtualCriteria`**: echo a chip label for `VIRTUAL_USAGE`.
+
+When the dimension ≠ the row record, map the matched values in `getWhereSQL`: Automation filters
+`automation.id IN (dimValues)` (values ARE automation ids); Automation Event maps `trigger` extension_ids
+via `automation_event.id IN (SELECT id FROM automation_event WHERE extension_id IN (…))`.
+
+### User-facing hint (marquee) — already wired centrally
+
+`C4_AbstractView::getParamsFromQuickSearch()`'s parse walk calls `validateMetricQuery` for any field whose
+`getQuickSearchMetricFilterMap($key)` is non-null; on failure it sets `$error`, and the existing
+`addParamsWithQuickSearch` path does `addParams([false])` (match nothing) **and**
+`C4_AbstractView::marqueeAppend($this->id, $error)` → a dismissible banner via `view_marquee.tpl`. Messages
+come from the resolver (`_parseMetricQuery`): unknown series lists the valid keys; `duration.bogus` →
+"`duration` has no `bogus` function. Try: avg, sum, …"; bad duration/number values get a format hint.
+
+### In-parens autocomplete — the `field:()` group-scope feature
+
+Driven generically off the same `getQuickSearchMetricFilterMap` hook in
+`C4_AbstractView::getQueryAutocompleteSuggestions()`: it sets the top-level snippet `usage:(${1})` (open the
+group), populates `$suggestions['usage:()']` from `getMetricFilterSubkeySuggestions($map)` (each series +
+every `series.function` + `since:`/`until:`), and drops the flat value bucket. The client
+(`resources/js/cerb-ui/searchquery.js`) computes `scopeKey = path.join('')` from the cursor — inside
+`usage:(` that's `'usage:()'` — and the tokenizer (`/[A-Za-z0-9_.]+:/`) treats dotted keys like
+`duration.avg:` as one field, so it re-scopes cleanly after each pick. The `date` filter (`case 'date'` in
+`getQueryAutocompleteSuggestions`, ~line 2387) is the precedent for the `'<field>:()'` sub-key bucket;
+nested paren scopes (`field:subkey:()`) also work but aren't used here (functions are dotted, listed flat).
+
+> Don't reach for `TYPE_DATE` for these — it's only for real date columns. (`created:`'s
+> `getDateParamFromTokens` in `libs/devblocks/api/Model.php` is still a fine model for *parsing* a
+> `(since: until: …)` group, and the metric filter reuses `since`/`until` as reserved range keys.)
