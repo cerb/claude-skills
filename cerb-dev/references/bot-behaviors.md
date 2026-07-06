@@ -388,6 +388,58 @@ Evaluates a Twig template, compares result to a value.
 
 ---
 
+## Surfacing worker interactions (binding & launch)
+
+The two worker-interaction styles bind to a toolbar / the global menu **differently**. Launch is routed
+by `PageSection_ProfilesAutomation::_profileAction_startInteraction()`
+(`features/cerberusweb.core/api/uri/profiles/automation.php`):
+
+- `interaction_uri` (numeric id, behavior `uri`, or `cerb:behavior:<id-or-uri>`) → `getByUri`/`get` →
+  **`startBotInteractionAsFormBehavior()`** — used for `event.form.interaction.worker`.
+- `behavior_id` POST field (emitted by legacy `behavior/` toolbar items) →
+  **`startBotInteractionAsConvoBehavior()`** — requires `event.interaction.chat.worker`; that opener then
+  `switch_behavior`s to an `event.message.chat.worker` behavior. **A form behavior launched this way 404s.**
+
+**Chat = a 3-behavior chain, auto-injected into the global menu** (`Toolbar_GlobalMenu::getInteractionsMenu`
+→ `Event_GetInteractionsForWorker::getInteractionsByPointAndWorker('global', …)`):
+1. Registrar (`event.interactions.get.worker`, event param `listen_points: global`) → `return_interaction`
+   → the opener's id.
+2. Opener (`event.interaction.chat.worker`) → `switch_behavior` → the message behavior.
+3. Message (`event.message.chat.worker`) — holds the prompts.
+
+The registrar result is cached per point for 900s (`interactions_<point>`); saving a registrar clears it.
+
+**Form = a toolbar section + a behavior URI** (NOT auto-injected). Add an `interaction/` item whose `uri`
+is the behavior — a **record URI is a first-class interaction binding**, consistent with how many DAOs
+implement `getByUri()` + resolve the record in `renderPeekPopup`:
+
+```
+interaction/myForm:
+  label: My Form
+  icon: form
+  uri: cerb:behavior:my_behavior_uri   # or cerb:behavior:<id>
+```
+
+Package it via a top-level `toolbars: [{ toolbar: "global.menu", kata: "…" }]` (import is additive — it
+appends a `DAO_ToolbarSection`, never overwrites). Behavior URIs are **alphanumeric + underscore only —
+no dots** (unlike dotted automation names).
+
+Gotchas (both bit us, both code-level):
+- **`DevblocksUiToolbar::enforceCallerPolicy()`** hides an `interaction/` item whose `uri` doesn't resolve
+  to an automation. To let a `cerb:behavior:` uri through, it must recognize the behavior (else the item is
+  silently dropped from the menu). Behavior visibility is enforced at launch (readability), not by an
+  automation caller policy.
+- **`getByUri` prefix inconsistency:** `DAO_Automation::getByUri()` strips the `cerb:` prefix (via
+  `parseURI`/`getByUris`); **`DAO_TriggerEvent::getByUri()` matches the stored uri verbatim** (no strip).
+  When resolving a `cerb:behavior:x` reference, `parseURI()` to the bare token **first**, then branch
+  numeric-id (`get`) vs uri (`getByUri`) — don't `is_numeric()` the still-prefixed string.
+
+The Setup → Developers → Toolbars overview (`config/toolbars.php`) parses raw KATA (keeps the `cerb:`
+prefix, unlike the runtime parser) and resolves each item to a clickable `{context, id, url}` peek — same
+pattern automation-event bindings use.
+
+---
+
 ## All Event Types
 
 | Event key | Label |
