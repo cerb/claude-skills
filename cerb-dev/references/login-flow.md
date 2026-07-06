@@ -84,6 +84,29 @@ Order matters: clear `login.state`, wipe `$_SESSION`, regenerate the session ID 
 
 Codes used by the platform: `auth.failed`, `auth.expired`, `account.disabled`, `account.locked`, `confirm.failed`, `confirm.invalid`, `email.invalid`, `email.unavailable`, `mfa.failed`, `password.invalid`, `password.mismatch`, `seats.limit`, `session.expired`. Unknown codes fall back to `$_SESSION['worker.auth.failed.error']` if set, else "An unexpected error occurred."
 
+## MFA / TOTP QR Code — the otpauth Key URI
+
+`totp_setup.tpl` (first-login enrollment) and the worker Security tab (`.../worker/settings/tabs/security.tpl`)
+render the TOTP secret as a QR via **`CerbUI.QrCode`** (the clean-room SVG component that replaced
+`jquery.qrcode` — see `references/cerb-ui.md`). The QR **payload is not a plain URL** — it's the
+**otpauth Key URI** (the Google Authenticator format that 1Password / Authy / Google Authenticator parse):
+
+```
+otpauth://totp/{ISSUER}:{ACCOUNT}?secret={BASE32}&issuer={ISSUER}[&algorithm=SHA1&digits=6&period=30]
+```
+
+Cerb emits `otpauth://totp/Cerb:{$seed_name|escape:'url'}?secret={$seed}&issuer=Cerb` where `$seed_name` is the
+worker email (assigned in `login.php`) and `$seed` is the Base32 secret. Two must-haves learned from testing:
+- **Include `&issuer=Cerb`** (matching the `Cerb:` label prefix). Some clients require it, and it's what makes a
+  1Password/Authenticator entry show a clean "Cerb" name instead of a bare account.
+- **URL-encode the account** (`|escape:'url'`) — it doubles as JS-string safety since the URI sits in a
+  double-quoted JS string.
+- `algorithm`/`digits`/`period` are optional; Cerb uses the SHA1/6/30 defaults, so they're omitted.
+
+Both call sites drop the old `hasCanvasSupport`/`render:'table'` fallback (SVG is universal) and guard with
+`if(window.CerbUI && CerbUI.QrCode)`. `cerb-ui.js` **is** loaded on these pages (login sub-templates render
+inside `border.tpl` → `header.tpl` → `cerb_ui_scripts.tpl`).
+
 ## JS Click Handler — Visual Feedback Before Submit
 
 The login form's Sign-in JS calls `$submit.attr('disabled', 'disabled')` immediately, then `$frm.submit()`. If the button's default state is mostly invisible (e.g. transparent with hover-only orange), the user sees no flash to confirm Enter triggered submit. Focus the button first, defer the click one tick so the focus state paints:
