@@ -72,7 +72,7 @@ These skills are always installed alongside this one:
 - `references/record-changeset.md` — `record_changeset` field version history: `DAO_RecordChangeset::create`, the **superuser-only diff viewer** (usable as an admin-only blob store), and the **database storage engine table format** (`storage_<namespace>`, raw chunked blobs) incl. hand-writing a changeset in pure SQL from a patch
 - `references/support-center.md` — Support Center portal: **no-browser-editable-Smarty policy** (Twig=untrusted, Smarty=chrome), `DAO_CommunityToolProperty` per-portal settings, config-tab render/save, `usermeet.sc.controller` endpoints, `parseMarkdown`, and the portal-readable-by-all-workers ACL gotcha
 - `references/rerun-patch.md` — how to force a database patch to re-run in development
-- `references/metrics.md` — registering and incrementing metrics
+- `references/metrics.md` — registering and incrementing metrics; the two metric **data queries** (`metrics.timeseries` for charts, `metrics.subtotals` for flat range aggregates / threshold filters / tables); the **dimension storage gotcha** (`dimN_value_id` = literal id for record/number dims, `metric_dimension.id` for text/extension dims)
 - `references/database-schema.md` — canonical schema reference (`cerb.schema.kata`), column name lookups, common table timestamp columns
 - `references/security.md` — security conventions: never use $_REQUEST, always enforce POST method before reading $_POST, CSRF protection, input sanitization via importGPC()
 - `references/validation.md` — field validation: types, string modifiers, `->addValidator()`, `->addFormatter()`, available validators (`email`, `url`, `contextId`, etc.), surfacing errors in JSON responses
