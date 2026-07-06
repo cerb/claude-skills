@@ -71,8 +71,9 @@ while($row = mysqli_fetch_assoc($rs)) { ... }
 
 Updates trigger events automatically:
 - `CerberusContexts::checkpointChanges($context, $ids)` — before update
-- `DevblocksPlatform::markContextChanged($context, $ids)` — after update
-- Event: `dao.{table_name}.update`
+- `DevblocksPlatform::markContextChanged($context, $ids)` — after update (drives change tracking + automation triggers)
+
+The legacy `dao.{table_name}.update` framework event was removed in 11.2 — nothing listened for it (no `devblocks.listener.event` extension registered a `dao.*` id). Don't reintroduce it in DAO `update()` methods; react to changes via `markContextChanged()` / automation triggers instead.
 
 ## Delete Cascade — What Happens Automatically
 
