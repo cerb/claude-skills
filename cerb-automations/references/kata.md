@@ -251,6 +251,23 @@ Annotations parse *text*. When the right-hand side of a `set:` is a Twig express
 
 Pick the lightest annotation that fits: `@list`/`@csv` for plain string lists, `@json` for anything richer.
 
+**For a *static* array of objects, write it as native KATA — don't hand-build a Twig `|json_encode` literal.** Numeric sibling keys (`0:`, `1:`, `2:`, …) build a sequential array, and each entry's children are plain KATA keys:
+
+```
+set/steps:
+  steps:
+    0:
+      title: Welcome
+      url@text:
+      label: Start here.
+    1:
+      title: Configure branding
+      url: c=config&a=branding
+      label: Upload your logo and set your colors.
+```
+
+This is equivalent to `steps@json: {{[{'title':'Welcome',...}, ...]|json_encode}}` but far more readable and diff-friendly, needs no quoting/escaping, and lets each field use its own annotation (e.g. `url@text:` to force an empty string). Downstream Twig treats it as a normal list — `{{steps|length}}`, `{{steps[i]}}`, `{% for s in steps %}` all work. Reserve the `|json_encode` form for arrays that are *computed* at runtime (from `|map`, `|filter`, a CF-expanded list, etc.).
+
 ---
 
 ## Scripting
