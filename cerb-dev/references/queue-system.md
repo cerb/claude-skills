@@ -175,7 +175,11 @@ Chunks deleted at completion. InnoDB reuses freed pages — no `OPTIMIZE TABLE` 
 
 `Cron_BackgroundQueue` (every minute, 25s budget) polls `queue_message` for available work, groups by queue, shuffles for fairness, and dispatches via `$queue_extension->processQueueMessages()`. Excludes the `cerb.queue.consumer.manual` queue (UI-only).
 
-Stalled in-flight messages aren't currently reaped — a TODO in `DAO_QueueMessage`. If a consumer crashes mid-batch, those messages stay `IN_FLIGHT` until manually reset.
+## Claims, Retries, and Reaping
+
+`dequeue()` claims messages by setting `status_id=IN_FLIGHT`, a random `claim_id` (binary(16), returned by-ref to the consumer), and `claimed_at`. A failure reported before the queue's `retry_max` is exhausted returns the message to `AVAILABLE` with `claim_id=NULL`, `retry_count+1`, and an exponential backoff via `available_at` (`_DevblocksQueueService::getRetryBackoffSecs()` spreads `retry_max` attempts across the queue's `retry_window_secs`); after that it goes terminal `FAILED`.
+
+Stalled claims are reaped: a message `IN_FLIGHT` longer than its queue's `claim_window_secs` (default 3600; 0 = never reap) is treated exactly like a reported failure. `Cron_BackgroundQueue::run()` calls `_DevblocksQueueService::reapStalledMessages()` every minute (covers manual queues too): it feeds `DAO_QueueMessage::getStalled()` models through the normal `reportFailure()` path — metrics, per-job log entry, retry backoff or terminal FAILED, job sync + finalization — and flushes immediately via `publish()`. The claim window is the consumer's completion deadline; size it generously above the slowest expected batch.
 
 ## Existing Internal Queues
 
