@@ -294,6 +294,31 @@ Supported by triggers: `automation.timer`, `interaction.worker`, `interaction.we
 
 The returned dictionary structure varies by trigger (e.g., `form:` for interactions, `until@date:` for timers).
 
+**Resume continues *after* the `await`, not from `start:`.** This is the single most common `await` mistake. When the automation resumes from a continuation, execution picks up at the point right after the `await` that suspended it — the commands *above* the `await` (any `set:`, `record.search:`, etc. in `start:`) do **not** re-run. Their results are still available because the whole working dictionary was snapshotted into the continuation, but the code itself is not re-executed.
+
+So a step-through / paging UI that renders one item per `await` must put the `await` **inside a `while:` loop**, or the second interaction falls off the end of the script and returns nothing:
+
+```
+start:
+  # Runs ONCE — persists in the continuation dict across resumes.
+  set/items:
+    items:
+      0: {...}
+      1: {...}
+
+  # Each resume loops back to here and re-renders for the updated page.
+  while:
+    if@bool: {{(page|default(1)) <= (items|length)}}
+    do:
+      set/current:
+        n@int: {{page|default(1)}}
+        current@json: {{items[n - 1]|default(items[0])|json_encode}}
+      await/step:
+        # ...render current; a toolbar button returns the next `page`...
+```
+
+Without the loop, the first `await` renders fine, but on the next input the script resumes past the `await`, finds no more commands, ends with an empty return, and the UI shows nothing (in explore mode, "End of results"). Build the source list *before* the loop; only the per-item render + `await` go inside it. See `interaction.worker.explore` and the `cerb.quickstart` / `cerb.auto_dispatcher` workflows for the full pattern.
+
 ---
 
 ### Flow Control Commands
