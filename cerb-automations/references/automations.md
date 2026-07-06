@@ -1435,6 +1435,8 @@ Conversational processes with workers that pause between steps to collect input.
 
 **Inputs:** `caller_name`, `caller_params`, `client_browser_*`, `client_ip`, `client_url`, `inputs`, `worker_*`.
 
+The current worker is already in scope as `worker_*` placeholders — use them directly (e.g. `{{worker_is_superuser}}`, `{{worker_id}}`, `{{worker_email}}`) rather than calling `cerb_current_worker()`.
+
 **Await states:**
 
 | Type | Description |
