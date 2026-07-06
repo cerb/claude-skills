@@ -98,6 +98,60 @@ Use these CSS classes for inline messages — never plain `<p>` or custom styles
 <div class="help-box">Each code can be used once as a login fallback.</div>
 ```
 
+## Reusable Status / Toggle Components
+
+Both defined in `layout/cerb-styles.scss` (rebuild with `composer build-css`).
+
+**`.cerb-toggle-switch`** — an animated on/off switch: a `<label>` wrapping a hidden checkbox plus a
+`<span class="cerb-toggle-slider">`. Green when checked, gray when off; the knob slides on toggle; dimmed +
+`not-allowed` when the input is `disabled`.
+
+```html
+<label class="cerb-toggle-switch">
+    <input type="checkbox" data-plugin-id="{$id}" {if $enabled}checked="checked"{/if} {if !$ok}disabled="disabled"{/if}>
+    <span class="cerb-toggle-slider"></span>
+</label>
+```
+
+For error toasts, `Devblocks.createAlertError(msg)` is the shorthand (equivalent to
+`Devblocks.createAlert(msg, 'error', 0)` — `duration 0` = sticky, unlike `createAlert`'s 2500ms auto-dismiss).
+
+**Floating alerts are the ONLY error-display mechanism — don't render errors into a page container.** The legacy
+`Devblocks.showError($target, msg)` (which injected a `cerb-ui-panel--alert` box into a `<div class="status">` /
+`<div class="output">` inside the popup) is **removed**. On an AJAX failure (`json.status === false` / `json.error`),
+call `Devblocks.createAlertError(json.error)` — no target element. Don't add a `<div class="status">`/`.output`
+error container to a new peek/popup; it's dead markup. To clear a prior error before a retry, use
+`Devblocks.clearAlerts()` (empties the global `#cerb-alerts` toast stack) — **not** `$container.html('')`, which
+cleared the old inline box.
+
+## cerb-ui Forms — auto-styled controls + component opt-out
+
+A `class="cerb-ui-form"` auto-styles **every descendant** `input`/`textarea`/`select` (chrome + a blue
+`:focus` outline). It's a *descendant* rule on purpose — so a control nested in a layout wrapper (e.g. a
+`cerb-u-flex` "[input] milliseconds" row) is still styled. Two consequences:
+
+- **A component that embeds its own `<input>` inherits the form chrome when it sits in a form** (a peek),
+  but not in the gallery (no form ancestor). `RecordChooser`/`ContextChooser` are the live case — their
+  seamless input would otherwise pick up the form's border/background + blue focus outline. The component
+  **opts out** with a reset in `_form.scss`:
+  ```scss
+  .cerb-ui-form input.cerb-ui-record-chooser--input,
+  .cerb-ui-form input.cerb-ui-record-chooser--input:focus { border:0; padding:0; background:none; outline:none; }
+  ```
+  Same specificity as the form's type-qualified rule (`input.<class>` ≡ `input[type]`), declared **later**
+  in the file → it wins. **Don't** re-scope the form rule to `--field > input` to "fix" the leak — that
+  breaks the legit flex-wrapped-control pattern (and the chooser is a `--field` descendant anyway).
+
+- **Split a `cerb-ui-form--row` unevenly** with `cerb-u-flex-{1..4}` on the fields (the `--row > field` rule
+  uses `:where()` so the utility wins): `cerb-u-flex-1` + `cerb-u-flex-2` = a third + two-thirds; three
+  `cerb-u-flex-1` = thirds. Default (no utility) is equal width, responsive.
+  ```html
+  <div class="cerb-ui-form--row">
+      <div class="cerb-ui-form--field cerb-u-flex-1">…</div>
+      <div class="cerb-ui-form--field cerb-u-flex-2">…</div>
+  </div>
+  ```
+
 ## Inline Toolbars
 
 For rows of action buttons (download, print, copy, etc.), use `div.cerb-code-editor-toolbar` with `button.cerb-code-editor-toolbar-button`:
@@ -257,18 +311,19 @@ Used by `internal/comments/comment.tpl`, `display/modules/conversation/draft.tpl
 
 ## Confirmation Dialogs
 
-**Never use the browser-native `confirm()`.** Always use `confirmPopup()` from `libs/devblocks/resources/js/devblocks.js`:
+**Never use the browser-native `confirm()`** — it blocks the main thread, is unstyled, and is unusable in some iframes.
+
+**For new code, use `CerbUI.Confirm`** (`features/cerberusweb.core/resources/js/cerb-ui/confirm.js`) — the design-system modal, built on `CerbUI.Dialog`. It's forced-modal (no ×/minimize/resize/drag, Escape ignored, always above other dialogs), with Cancel/OK buttons whose labels are customizable; title and body default when omitted:
 
 ```javascript
-confirmPopup(
-    'Title',          // dialog title (default: 'Confirm')
-    'Are you sure?',  // message body
-    function() {      // OK callback
-        // proceed
-    },
-    function() {      // optional Cancel callback
-    }
-);
+CerbUI.Confirm.open({
+    title:       'Discard changes',   // default 'Confirm'
+    body:        'Are you sure?',      // default 'Are you sure?' (string or DOM node)
+    confirmText: 'OK',                 // default 'OK'
+    cancelText:  'Cancel',             // default 'Cancel'
+    onConfirm:   function() { /* proceed */ },
+    onCancel:    function() { /* optional */ },
+});
 ```
 
-`confirm()` blocks the browser's main thread, is unstyled, and cannot be used inside iframes on some browsers. `confirmPopup()` is the platform-standard modal.
+**Legacy:** `confirmPopup(title, content, okCb, cancelCb)` (in `libs/devblocks/resources/js/devblocks.js`) is the old jQuery-UI modal. It still works and is used by many existing templates, but is slated for replacement by `CerbUI.Confirm` — don't reach for it in new code.

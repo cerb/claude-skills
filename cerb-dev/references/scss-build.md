@@ -95,6 +95,50 @@ Browsers' native `<button>` chrome (especially Safari's gradient on `:active`) b
 }
 ```
 
-Important: `layout/cerb-base.scss` defines a base `BUTTON:hover` that sets `color: var(--cerb-color-button-icon--hover)` (which resolves to blue in dark mode). If your custom hover state only overrides `background` and not `color`, the text will flash blue. Always set both.
-
 For `:disabled`, set `background` explicitly — `opacity: 0.6` alone on a colored button over a contrasting card surface can read as "almost white" in the brief moment between click and navigation.
+
+## Legacy global button hover hijacks `<button>` color AND background
+
+Two global rules apply to **every** `<button>` on the page — including `CerbUI.*` buttons — and will
+quietly override a filled button's hover unless that button's own `:hover` wins on specificity. A custom
+button that doesn't account for both gets the classic failures: text flashes blue, or the fill goes
+**white-on-white** (only visible in light mode; in dark mode it just looks muddy, so test both).
+
+- `layout/cerb-base.scss` base **`BUTTON:hover`** (specificity `0,1,1`) sets
+  `background: linear-gradient(…)` **and** `color: var(--cerb-color-button-icon--hover)` (blue in dark).
+  Because `background` is the **shorthand**, it resets `background-color` to transparent — so a hover that
+  only sets `background-image` leaves the fill transparent → the page shows through (white on a light page).
+- `layout/cerb-icons.scss` **`button:has(> span.cerb-icons):hover`** (specificity `0,2,2`) sets
+  `color: var(--cerb-color-button-icon--hover)` (blue) — this is the higher bar to clear for any button
+  that contains a `cerb-icons` glyph.
+
+**Rule for a filled CerbUI button's `:hover`:** explicitly assert **both** `background-color` (or the full
+`background`) **and** `color`. If the button contains an icon, add a `&:hover:has(> span.cerb-icons)` variant
+for the color so it out-specifies `0,2,2` (a plain `.foo:hover` at `0,1,1`/`0,2,0` loses to it). A subtle,
+theme-aware highlight that survives both modes is a `currentColor`/title-text overlay layered over the
+re-asserted `background-color` — **not** `filter: brightness()`, which darkens (muddy purple in dark mode):
+
+```scss
+.cerb-ui-foo:hover {
+    background-color: var(--cerb-color-…-background);     // re-assert: beats BUTTON:hover's transparent reset
+    background-image: linear-gradient(                    // theme-aware lighten overlay
+        color-mix(in srgb, var(--cerb-color-…-text) 14%, transparent),
+        color-mix(in srgb, var(--cerb-color-…-text) 14%, transparent));
+}
+.cerb-ui-foo:hover:has(> span.cerb-icons) {               // out-specify the 0,2,2 icon-hover blue
+    color: var(--cerb-color-…-text);
+}
+```
+
+Worked examples: `layout/cerb-ui/_switcher.scss` (`.cerb-ui-switcher button`) and `layout/cerb-ui/_dialog.scss`
+(`.cerb-ui-dialog-tray`). The toolbar's mixin solves the same problem by baking the hover color into
+`cerb-ui-toolbar-button` (see `cerb-ui-toolbar.md` → "Hover specificity gotcha").
+
+## Global `BUTTON { height: 2.4em }` clips/bloats content `<button>`s
+
+The same base stylesheet also gives **every** `<button>` a fixed **`height: 2.4em`**. That's fine for chrome
+buttons (nav/save/toggle) but **clips a multi-line button and bloats a compact one**. Any element you render
+as a `<button>` for click semantics but that isn't a chrome button — a two-line header (weekday + big date), a
+list row, a "+N more", a caption — must reset **`height: auto`** or its content overflows the fixed box (a
+calendar day-column header's number spilled onto the grid line below it). Buttons whose height you set inline
+from JS are exempt (inline wins). Group the resets: `.cerb-ui-x--legend-item, .cerb-ui-x--row, … { height: auto; }`.
