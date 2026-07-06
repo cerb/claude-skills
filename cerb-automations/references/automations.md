@@ -327,6 +327,8 @@ A conditional sequence of commands used inside `decision:`. Each outcome require
 | `if@bool:` | Boolean condition. Expected: `yes` or `no` (empty/absent = no match) |
 | `then:` | Command sequence to execute when condition matches |
 
+**Do not add `@raw` to `if:` (or any condition) inside a workflow/automation template.** When the automation body is stored in a `@raw` block (`script@raw:`, `event_kata@raw:`, `policy_kata@raw:`), the whole document is already held raw and its `{{...}}` placeholders are evaluated later at runtime. Writing `if@raw,bool:` re-marks the value as raw a second time, so the `{{...}}` is never evaluated — the condition doesn't work. Always use plain `if@bool: {{...}}`.
+
 #### repeat:
 
 Iterates an array and executes commands for each value.
@@ -974,6 +976,8 @@ start:
 | `kata@raw:` | Yes | KATA document (use `@raw` to prevent premature substitution) |
 | `dict:` | No | Dictionary for placeholder replacement |
 | `schema:` | No | Validation schema |
+
+**On `@raw`:** it stores a value verbatim so a *later* pass evaluates the placeholders — the right tool for wrapping an automation inside a workflow (`script@raw:`, `event_kata@raw:`, `policy_kata@raw:`), a sheet column definition revisited per row, or a `kata.parse` input as above. Don't over-apply it, and never stack it inside an already-raw block: everything under a `@raw` document is already deferred, so re-annotating an inner key with `@raw` marks it raw a second time and its `{{...}}` are returned as literal text that never evaluate. The classic bug is `if@raw,bool: {{...}}` inside a workflow-wrapped automation — the condition silently never matches. Inside a raw block use normal annotations only (`if@bool:`, `set:`, etc.). See `kata.md` → "When to use `@raw`".
 
 **Schema keys:** `multiple@bool:`, `required@bool:`, `types:` (array, bool, list, object, text).
 

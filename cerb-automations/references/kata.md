@@ -216,6 +216,16 @@ data@text,json:
   {"key": "value"}
 ```
 
+### When to use `@raw` (and when not to)
+
+`@raw` stores a value's text verbatim, deferring placeholder/Twig evaluation to some later pass instead of substituting it now. Use it only when a downstream step is meant to evaluate the placeholders:
+
+- **Wrapping an automation inside a workflow** — the automation body (`script@raw:`, `event_kata@raw:`, `policy_kata@raw:`) is stored raw so its `{{...}}` run at trigger time, not when the workflow is parsed.
+- **A sheet column definition that's revisited per row** — the cell template is held raw so each row's `{{...}}` renders against that row's data.
+- **`kata.parse` input** — `kata@raw:` prevents premature substitution so `kata.parse` can render the template against its own `dict:`.
+
+**Don't over-apply it — and never stack it inside an already-raw block.** Once a document lives in a `@raw` block, everything under it is already deferred; re-annotating an inner key with `@raw` marks it raw a *second* time, so its `{{...}}` are returned as literal text and never evaluate. The classic bug is `if@raw,bool: {{...}}` inside a workflow-wrapped automation — the condition silently never matches. Inside a raw block, write conditions and values with their normal annotations only (`if@bool:`, `set:`, etc.).
+
 ### Storing Twig arrays in `set:`
 
 Annotations parse *text*. When the right-hand side of a `set:` is a Twig expression that produces an array (e.g. from `|filter`, `|map`, `|values`, or a `customfields`-expanded list CF), the annotation must match what the rendered text actually looks like:
