@@ -176,7 +176,7 @@ Closed Bézier path forming a tapered comma shape: starts at a single point (tai
 
 ## Reference samples (style anchors)
 
-A hand-picked sample per pattern family and technique — the concrete style anchor for new icons. Each entry is **inner geometry only**; it renders inside the wrapper from the **Outer template** in `../SKILL.md`. For the full, current inventory, read the source files (`cerb-icons.scss` and `reference_icons.php`) — they are the source of truth for *which* icons exist.
+A hand-picked sample per pattern family and technique — the concrete style anchor for new icons. Each entry is **inner geometry only**; it renders inside the wrapper from the **Outer template** in `../SKILL.md`. For the full, current inventory, read the source files (`cerb-icons.scss` and the `getCerbIcons()` name list in `libs/devblocks/api/services/ui.php`) — they are the source of truth for *which* icons exist.
 
 ```scss
 // Line icon (inherits fill:none, stroke 2). stroke-width override via <g>.

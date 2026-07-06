@@ -1,6 +1,6 @@
 ---
 name: cerb-icons
-description: Design SVG icons for Cerb's custom SCSS icon set. Use when creating, editing, or adding icons to the Cerb icon map (cerb-icons.scss / reference_icons.php), or designing mask-image SVG geometry in Cerb's style (line, filled-solid, compass, or punched-disc families).
+description: Design SVG icons for Cerb's custom SCSS icon set. Use when creating, editing, or adding icons to the Cerb icon map (cerb-icons.scss / the getCerbIcons() name list in libs/devblocks/api/services/ui.php), or designing mask-image SVG geometry in Cerb's style (line, filled-solid, compass, or punched-disc families).
 ---
 
 # Cerb SVG Icons
@@ -40,12 +40,12 @@ Your geometry inherits:
 An icon isn't done until it's in **both** files (kept **alphabetized** in each) and the CSS is rebuilt:
 
 1. **`install/extras/developers/css/cerb.css/layout/cerb-icons.scss`** — add the geometry to the `$icons` Sass map (this is the actual icon).
-2. **`features/cerberusweb.core/api/uri/config/reference_icons.php`** — add the icon's **name** to the `getCerbIcons()` array (drives the Setup → Developers → Icons preview page).
+2. **`libs/devblocks/api/services/ui.php`** — add the icon's **name** to the `$icons` array in the `getCerbIcons()` method (the canonical name list; drives the Setup → Developers → Icons preview page, KATA icon autocomplete, sheet `icon()` cells, and the `ui_icons` data query).
 3. Run **`composer build-css`** at the repo root. It compiles the SCSS into the live `features/cerberusweb.core/resources/css/cerb.css`; each icon becomes the class `.cerb-icon-<name>`.
 
 **SCSS alignment convention:** 2-space indent, then `name:` padded with spaces so the opening value quote lands at a fixed column (~column 21). Names longer than that column (e.g. `circle-question-mark:`) just get a single space before the quote.
 
-The `$icons` map + `getCerbIcons()` are the **source of truth for which icons exist**. This skill carries representative samples for *style*, not the full inventory — read those two files for the current list.
+The `$icons` map (in `cerb-icons.scss`) + the `getCerbIcons()` name list (in `libs/devblocks/api/services/ui.php`) are the **source of truth for which icons exist**. This skill carries representative samples for *style*, not the full inventory — read those two files for the current list.
 
 ## The four pattern families
 
