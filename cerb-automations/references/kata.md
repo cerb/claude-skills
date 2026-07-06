@@ -89,6 +89,17 @@ picklist/color:
 
 The identifier (after `/`) can contain letters, numbers, and underscores. It becomes part of the key path.
 
+**This applies to repeated automation commands too.** Because keys must be unique among siblings, you cannot list two `set:` (or two of any command) in a row under the same parent — the second silently clobbers the first. Give each a unique alias:
+
+```
+set/init:
+  var_count: 0
+set/increment:
+  var_count: {{var_count + 1}}
+```
+
+The alias is only for uniqueness; it does not change the command that runs (`set/init` is still the `set` command). Do the same for repeated `await:`, `return:`, `run:`, etc.
+
 ### Values
 
 Text values follow the colon on the same line. Multiple colons in values do not require escaping:
