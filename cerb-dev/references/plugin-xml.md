@@ -64,6 +64,7 @@ Maps PHP class names to source files. Classes are autoloaded on demand.
     </class>
     <params>
         <param key="alias" value="my_record"/>
+        <param key="icon" value="collection"/>
         <param key="dao_class" value="DAO_MyRecord"/>
         <!-- Optional: show in search, worklist, etc. -->
         <param key="show_in_setup" value="1"/>
@@ -85,6 +86,8 @@ Maps PHP class names to source files. Classes are autoloaded on demand.
 ```
 
 **Options** are feature toggles read by core templates via `$context_ext->hasOption('foo')`. Common keys: `avatars` (gates the 75×75 image header in `card.tpl`/`profile.tpl`), `cards` (record peek cards), `comments`, `custom_fields`, `links`, `records`, `search`, `watchers`, `va_variable`, `workspace`. Omit options your record type doesn't support — extra options can light up dead UI.
+
+**Icon** (`<param key="icon" value="<cerb-icons name>"/>`) gives the record type a canonical glyph, read via `Extension_DevblocksContext::getIcon()` (`params['icon'] ?? 'circle'`; instance method, so `getByAlias($alias, true)`). Every built-in context carries one; consumers: the KATA `record_type:` autocomplete, Setup → Records (sidebar + section headers), and the global search menu. Custom record types are dynamic contexts built in `Extension_DevblocksContext::getAll()` — they default to `collection` and read a per-record override from `params['icon']` (picked with `CerbUI.IconPicker` in the custom-record peek, sanitized against `getCerbIcons()` on save). The name list + SVG geometry live in `getCerbIcons()` (`libs/devblocks/api/services/ui.php`) + `cerb-icons.scss` (`composer build-css`) — see the `cerb-icons` skill.
 
 > **After any plugin.xml edit, hit `/update` in the browser** (or run the Devblocks update CLI) to reload the manifest cache. `composer cache-clear` alone clears Smarty/compiled-template caches but does *not* reload plugin manifests, so newly added options / class loader entries / extensions won't be visible until `/update`.
 
