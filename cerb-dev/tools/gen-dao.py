@@ -67,6 +67,23 @@ def profile_property(fname: str, sql_type: str, table: str) -> str:
     )
 
 
+def searchfield_type(fname: str, sql_type: str) -> str:
+    """Return the 5th DevblocksSearchField arg: a Model_CustomField::TYPE_* constant,
+    or the literal 'null' for JSON blob columns (not searchable; usually hidden).
+    Drives the worklist 'Customize columns' type-hint icon."""
+    if fname.endswith('_json'):
+        return 'null'
+    if fname.startswith(('is_', 'has_')) or sql_type.lower().startswith(('tinyint(1)', 'bit')):
+        return 'Model_CustomField::TYPE_CHECKBOX'
+    if fname.endswith(('_at', '_date')):
+        return 'Model_CustomField::TYPE_DATE'
+    if fname == 'id' or fname.endswith('_id') or is_int_field(sql_type):
+        return 'Model_CustomField::TYPE_NUMBER'
+    if sql_type.lower().split('(')[0] in ('text', 'mediumtext', 'longtext', 'blob'):
+        return 'Model_CustomField::TYPE_MULTI_LINE'
+    return 'Model_CustomField::TYPE_SINGLE_LINE'
+
+
 def criteria_type(fname: str, sql_type: str) -> str:
     """Return 'date', 'number', or 'string' for use in doSetCriteria() cases."""
     if fname.endswith('_at'):
@@ -243,16 +260,6 @@ def gen_dao(table: str, fields: dict, plugin_id: str, acl_write: str = 'all') ->
     \t\t\tparent::_update($batch_ids, '{table}', $fields);
 
     \t\t\tif($check_deltas) {{
-    \t\t\t\t$eventMgr = DevblocksPlatform::services()->event();
-    \t\t\t\t$eventMgr->trigger(
-    \t\t\t\t\tnew Model_DevblocksEvent(
-    \t\t\t\t\t\t'dao.{table}.update',
-    \t\t\t\t\t\t[
-    \t\t\t\t\t\t\t'fields' => $fields,
-    \t\t\t\t\t\t]
-    \t\t\t\t\t)
-    \t\t\t\t);
-
     \t\t\t\tDevblocksPlatform::markContextChanged($context, $batch_ids);
     \t\t\t}}
     \t\t}}
@@ -430,8 +437,8 @@ def gen_search_fields(table: str, fields: dict) -> str:
     )
 
     search_field_entries = '\n'.join(
-        f"\t\t\tself::{f.upper()} => new DevblocksSearchField(self::{f.upper()}, '{table}', '{f}', $translate->_('{_COMMON_TRANSLATIONS.get(f, f'{translate_key}.{f}')}'), null, true),"
-        for f in fields
+        f"\t\t\tself::{f.upper()} => new DevblocksSearchField(self::{f.upper()}, '{table}', '{f}', $translate->_('{_COMMON_TRANSLATIONS.get(f, f'{translate_key}.{f}')}'), {searchfield_type(f, ftype)}, true),"
+        for f, ftype in fields.items()
     )
 
     _key_methods = []
